@@ -439,8 +439,7 @@ body::after {
   margin-left: 2px; margin-right: 2px;
 }
 
-/* ── UNIT NODE (timeline card) ─────────────────────────────────────────── */
-/* ACTIVE / AVAILABLE UNITS vs LOCKED / COMING-SOON — clearly different */
+/* ── UNIT NODE (timeline card) — all cards equal, all live ────────────── */
 .unit-node {
   flex-shrink: 0; width: 152px;
   background: var(--bg2); border: 1px solid var(--border);
@@ -459,37 +458,16 @@ body::after {
 }
 .unit-node.completed::after  { border-color: var(--green);  background: var(--green); }
 .unit-node.inprogress::after { border-color: var(--teal2);  background: var(--teal); }
-.unit-node.available::after  { border-color: var(--amber2); background: var(--bg2); }
+.unit-node.available::after  { border-color: var(--amber2); }
+.unit-node.locked::after     { border-color: var(--border2); }
 
-/* ── ACTIVE states (available / in-progress / completed) ── */
-.unit-node.available  { border-color: var(--amber2); }
-.unit-node.inprogress { border-color: var(--teal); }
+/* hover + selected — same for all */
+.unit-node:hover   { border-color: var(--amber2); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+.unit-node.selected{ border-color: var(--amber)!important; box-shadow: 0 0 22px rgba(232,160,32,0.4)!important; transform: translateY(-4px)!important; }
+
+/* status border tints (subtle, not dramatic) */
 .unit-node.completed  { border-color: var(--green); }
-
-.unit-node.available:hover,
-.unit-node.inprogress:hover  { border-color:var(--amber); transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.5); }
-.unit-node.completed:hover   { transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,0.4); }
-.unit-node.selected          { border-color:var(--amber)!important; box-shadow:0 0 22px rgba(232,160,32,0.4)!important; transform:translateY(-4px)!important; }
-
-/* ── LOCKED / COMING SOON — visually dim and distinct ── */
-/* LOCKED: greyscale, low opacity, still clickable to show coming-soon preview */
-.unit-node.locked {
-  opacity: 0.32;
-  cursor: default;
-  filter: grayscale(0.7);
-}
-.unit-node.locked:hover {
-  /* very subtle lift to signal clickability */
-  transform: translateY(-1px);
-  opacity: 0.42;
-  box-shadow: none;
-  border-color: var(--border);
-}
-
-/* available art area gets a subtle amber glow on active units */
-.unit-node.available  .unit-node-art,
-.unit-node.inprogress .unit-node-art { background: rgba(232,160,32,0.04); }
-.unit-node.locked     .unit-node-art { background: rgba(0,0,0,0.5); }
+.unit-node.inprogress { border-color: var(--teal); }
 
 /* era color accent strip */
 .unit-node-strip { height:3px; width:100%; }
@@ -795,13 +773,22 @@ body::after {
   <div class="course-subtitle">A Playable Journey Through U.S. History</div>
   <div class="course-badge">10th Grade · U.S. History · Florida EOC Aligned</div>
 
+  <!-- Both buttons always visible — Continue is disabled until a profile exists -->
   <div style="display:flex; flex-direction:column; align-items:center; gap:10px; max-width:320px; margin:0 auto;">
-    <button class="btn full" onclick="startNewProfile()"><span>Begin Your Journey →</span></button>
-    <button class="btn full" id="btn-continue-title" onclick="enterShell()" style="display:none; border-color:var(--teal2); color:var(--teal2);"><span>Continue Course</span></button>
+    <button class="btn full" onclick="startNewProfile()"><span>New Journey →</span></button>
+    <button class="btn full" id="btn-continue-title" onclick="enterShell()"
+      style="border-color:var(--teal2); color:var(--teal2);">
+      <span>Continue Course</span>
+    </button>
+    <div id="continue-note" style="font-family:var(--dm); font-size:9px; color:var(--text3);
+      letter-spacing:0.5px; min-height:14px; text-align:center;"></div>
   </div>
 
-  <div style="margin-top:2rem; font-family:var(--dm); font-size:9px; color:var(--text3); letter-spacing:1px;">
-    CREATED BY JOSHUA OLSON &nbsp;·&nbsp; FLORIDA EOC ALIGNED
+  <!-- Copyright footer -->
+  <div style="margin-top:2.5rem; font-family:var(--dm); font-size:9px; color:var(--text3);
+    letter-spacing:1px; line-height:2; text-align:center;">
+    CREATED BY JOSHUA OLSON &nbsp;·&nbsp; FLORIDA EOC ALIGNED<br>
+    <span style="opacity:0.6;">© 2026 Joshua Olson · All Rights Reserved</span>
   </div>
 </div>
 
@@ -877,20 +864,7 @@ body::after {
         </div>
       </div>
 
-      <!-- PART 2 / PART 7: Active units callout — students know immediately what they can play -->
-      <div style="background:rgba(232,160,32,0.06); border:1px solid var(--amber2);
-           padding:12px 18px; margin-bottom:20px; display:flex; align-items:center;
-           gap:14px; flex-wrap:wrap;">
-        <div style="font-family:var(--bebas); font-size:11px; color:var(--amber2);
-             letter-spacing:3px; flex-shrink:0;">▶ PLAY NOW</div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <!-- Active game quick-launch chips — generated from UNIT_DATA by JS -->
-          <div id="active-unit-chips"></div>
-        </div>
-        <div style="font-family:var(--dm); font-size:9px; color:var(--text3); margin-left:auto; flex-shrink:0;">
-          Dimmed units = coming soon
-        </div>
-      </div>
+      <!-- Timeline units are rendered by JS into the scroll container below -->
 
       <!-- Timeline units are rendered by JS below -->
       <!-- TIMELINE SECTION: horizontal scroll with minimap -->
@@ -1547,13 +1521,28 @@ window.addEventListener('load', () => {
 });
 
 function initApp() {
+  // Always show the title screen — both buttons always visible.
+  // Continue button is enabled only if a profile already exists.
+  const ts = document.getElementById('title-screen');
+  ts.style.display = 'flex';
+  ts.classList.add('active');
+  drawTitleArt();
+
+  const continueBtn  = document.getElementById('btn-continue-title');
+  const continueNote = document.getElementById('continue-note');
+
   if (STATE.setupDone) {
-    enterShell();
+    // Profile exists — continue is fully active
+    continueBtn.style.opacity  = '1';
+    continueBtn.style.cursor   = 'pointer';
+    continueBtn.disabled       = false;
+    if (continueNote) continueNote.textContent = `Welcome back, ${STATE.name || 'Historian'}.`;
   } else {
-    const ts = document.getElementById('title-screen');
-    ts.style.display = 'flex';
-    ts.classList.add('active');
-    drawTitleArt();
+    // No profile yet — continue is visually dimmed, click nudges to New Journey
+    continueBtn.style.opacity  = '0.3';
+    continueBtn.style.cursor   = 'default';
+    continueBtn.disabled       = true;
+    if (continueNote) continueNote.textContent = 'No saved profile — start a New Journey first.';
   }
 }
 
@@ -1655,33 +1644,13 @@ function enterShell() {
   const shell = document.getElementById('shell');
   shell.style.display = 'flex';
   updateHUD();
-  buildActiveChips();
   showView('timeline');
-  // renderTimeline after layout so clientWidth values are available
   requestAnimationFrame(() => {
     renderTimeline();
     renderProfileView();
     renderStoryView();
     renderBadgeGrid();
   });
-}
-
-// PART 2 / 7: Build the quick-launch chips for active units in the callout banner
-function buildActiveChips() {
-  const container = document.getElementById('active-unit-chips');
-  if (!container) return;
-  container.style.display = 'flex';
-  container.style.gap = '8px';
-  container.style.flexWrap = 'wrap';
-  container.innerHTML = UNIT_DATA.filter(u => u.url).map(u => `
-    <button onclick="openPreview('${u.id}')"
-      style="font-family:var(--bebas);font-size:12px;letter-spacing:1.5px;
-        background:rgba(232,160,32,0.08);border:1.5px solid var(--amber2);
-        color:var(--amber);padding:5px 14px;cursor:pointer;transition:all 0.15s;"
-      onmouseover="this.style.background='rgba(232,160,32,0.18)'"
-      onmouseout="this.style.background='rgba(232,160,32,0.08)'">
-      ${u.icon} ${u.num} — ${u.title}
-    </button>`).join('');
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -1788,23 +1757,10 @@ function renderTimeline() {
 
       const stripColor = unit.eraColor || '#2e2118';
 
-      // ── ACTIVE vs LOCKED visual treatment ──────────────────────────────
-      // Active nodes: brighter icon, amber dot, play-ready appearance
-      // Locked nodes: lock overlay, greyed out, no hover pointer
-      const isActive   = (status === 'available' || status === 'inprogress' || status === 'completed');
-      const lockBadge  = status === 'locked'
-        ? `<div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:18px;opacity:0.5;">🔒</div>`
-        : '';
-      const playBadge  = status === 'available'
-        ? `<div style="position:absolute;top:5px;right:6px;font-family:var(--dm);font-size:7px;letter-spacing:1px;color:var(--amber3);background:rgba(232,160,32,0.12);border:1px solid rgba(232,160,32,0.3);padding:2px 5px;">PLAY</div>`
-        : '';
-      const iconOpacity = isActive ? '1' : '0.4';
-
       node.innerHTML = `
         <div class="unit-node-strip" style="background:${stripColor};"></div>
         <div class="unit-node-art">
-          ${lockBadge}${playBadge}
-          <div class="unit-node-icon" style="opacity:${iconOpacity};">${unit.icon}</div>
+          <div class="unit-node-icon">${unit.icon}</div>
           <div class="unit-node-year-stamp">${unit.years.split('–')[0].trim()}</div>
         </div>
         <div class="unit-node-body">
@@ -1984,7 +1940,7 @@ function statusClass(s) {
   return { available:'status-available', locked:'status-locked', completed:'status-completed', inprogress:'status-inprogress' }[s] || 'status-coming';
 }
 function statusLabel(s) {
-  return { available:'▶ Available Now', locked:'Coming Soon', completed:'✓ Completed', inprogress:'In Progress' }[s] || 'Coming Soon';
+  return { available:'Available', locked:'Coming Soon', completed:'✓ Completed', inprogress:'In Progress' }[s] || 'Coming Soon';
 }
 
 // ══════════════════════════════════════════════════════════════════════════
