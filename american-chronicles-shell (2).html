@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>American Chronicles — U.S. History Course Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!--
+================================================================================
+  AMERICAN CHRONICLES — MASTER COURSE SHELL
+  U.S. History · 10th Grade · EOC-Aligned
+  Created by Joshua Olson
+
+  ── HOW TO ADD / UPDATE UNIT URLs ────────────────────────────────────────────
+  Scroll to the <script> block and find the UNIT_DATA array.
+  Each unit object has a `url` field. Set it to the standalone game's URL.
+  Example:  url: 'https://yoursite.com/unit6a.html'
+  Units with url: null will show a "Coming Soon" state instead of a launch btn.
+  ─────────────────────────────────────────────────────────────────────────────
+
+  STRUCTURE:
+    1. UNIT_DATA array       — all unit metadata + URLs in one place
+    2. CSS / DESIGN SYSTEM   — matches existing game files exactly
+    3. LANDING SCREEN        — title / entry animation
+    4. PROFILE AREA          — player name, avatar, course-wide progress
+    5. MAIN HUB              — horizontal timeline + preview panel
+    6. THEME TRACKER         — five recurring history themes
+    7. PREVIEW PANEL         — unit detail, mini-map, continuity, launch btn
+    8. JAVASCRIPT            — state, interactivity, transitions
+================================================================================
+-->
+
+<style>
+/* ── DESIGN TOKENS (matches existing game files) ─────────────────────────── */
+:root {
+  --bg:     #0d0a08;
+  --bg2:    #14100d;
+  --bg3:    #1c1510;
+  --panel:  #201812;
+  --border: #2e2118;
+  --border2:#3d2e1e;
+  --amber:  #e8a020;
+  --amber2: #c07818;
+  --amber3: #f8c850;
+  --red:    #c03030;
+  --red2:   #e04040;
+  --green:  #2a7a3a;
+  --green2: #38a050;
+  --blue:   #2850a0;
+  --blue2:  #4878d0;
+  --teal:   #208878;
+  --teal2:  #2aaa98;
+  --purple: #6040a0;
+  --purple2:#8060c8;
+  --text:   #f0e8d8;
+  --text2:  #a09080;
+  --text3:  #584840;
+  --cream:  #f5ead8;
+
+  --bebas:   'Bebas Neue', sans-serif;
+  --playfair:'Playfair Display', serif;
+  --crimson: 'Crimson Text', serif;
+  --dm:      'DM Sans', sans-serif;
+}
+
+/* ── RESET & BASE ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--crimson);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(ellipse at 15% 10%, rgba(232,160,32,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 90%, rgba(192,48,48,0.04) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(40,80,160,0.04) 0%, transparent 70%);
+}
+
+/* noise overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9998; opacity: 0.55;
+}
+/* scanline */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.018) 3px, rgba(0,0,0,0.018) 4px);
+  pointer-events: none; z-index: 9999;
+}
+
+/* ── ANIMATIONS ───────────────────────────────────────────────────────────── */
+@keyframes fadeIn    { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideUp   { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideIn   { from { opacity:0; transform:translateX(30px); } to { opacity:1; transform:translateX(0); } }
+@keyframes pop       { 0%{transform:scale(0.5);opacity:0;} 70%{transform:scale(1.08);} 100%{transform:scale(1);opacity:1;} }
+@keyframes glowPulse { 0%,100%{box-shadow:0 0 15px rgba(232,160,32,0.25);} 50%{box-shadow:0 0 45px rgba(232,160,32,0.65);} }
+@keyframes shimmer   { 0%{background-position:200% center;} 100%{background-position:-200% center;} }
+@keyframes march     { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-3px);} }
+@keyframes pulse     { 0%,100%{opacity:1;} 50%{opacity:0.6;} }
+@keyframes connectorFlow { 0%{stroke-dashoffset:1000;} 100%{stroke-dashoffset:0;} }
+
+/* ── SCREENS ──────────────────────────────────────────────────────────────── */
+.screen { display:none; }
+.screen.active { display:block; animation: fadeIn 0.4s ease; }
+
+/* ── BUTTONS (exact match to game files) ─────────────────────────────────── */
+.btn {
+  font-family: var(--bebas); font-size:15px; letter-spacing:2px;
+  background: transparent; border: 1.5px solid var(--amber);
+  color: var(--amber); padding: 12px 28px; cursor: pointer;
+  transition: all 0.2s; display: inline-block;
+  position: relative; overflow: hidden; text-transform: uppercase;
+}
+.btn::before {
+  content:''; position:absolute; inset:0; background:var(--amber);
+  transform:scaleX(0); transform-origin:left; transition:transform 0.2s; z-index:0;
+}
+.btn:hover { color:var(--bg); box-shadow:0 0 25px rgba(232,160,32,0.4); }
+.btn:hover::before { transform:scaleX(1); }
+.btn span { position:relative; z-index:1; }
+.btn:active { transform:scale(0.97); }
+.btn.full { display:block; width:100%; text-align:center; }
+.btn.sm { font-size:11px; padding:8px 18px; }
+.btn.xs { font-size:10px; padding:6px 14px; }
+.btn.green  { border-color:var(--green2); color:var(--green2); }
+.btn.green::before { background:var(--green2); }
+.btn.green:hover { color:#fff; }
+.btn.blue   { border-color:var(--blue2); color:var(--blue2); }
+.btn.blue::before { background:var(--blue2); }
+.btn.blue:hover { color:#fff; }
+.btn.teal   { border-color:var(--teal2); color:var(--teal2); }
+.btn.teal::before { background:var(--teal2); }
+.btn.teal:hover { color:#fff; }
+.btn:disabled { opacity:0.25; cursor:not-allowed; pointer-events:none; }
+
+/* ── SECTION HEADING (exact match) ───────────────────────────────────────── */
+.section-head {
+  font-family:var(--bebas); font-size:18px; letter-spacing:2px; color:var(--amber);
+  border-bottom:1px solid var(--border2); padding-bottom:6px; margin-bottom:14px;
+  display:flex; align-items:center; gap:10px;
+}
+.section-head::before {
+  content:''; display:block; width:3px; height:18px; background:var(--amber);
+}
+
+/* ── SCROLLBAR ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--border2); border-radius:2px; }
+::-webkit-scrollbar-thumb:hover { background:var(--amber2); }
+
+/* ── NOTIFICATION ─────────────────────────────────────────────────────────── */
+.notif {
+  position:fixed; top:80px; left:50%; transform:translateX(-50%);
+  background:var(--panel); border:1px solid var(--amber2); padding:10px 20px;
+  font-family:var(--dm); font-size:11px; color:var(--amber); z-index:10000;
+  animation: pop 0.3s, fadeIn 2.5s 0.8s forwards reverse;
+  white-space:nowrap; pointer-events:none;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LOADING SCREEN
+═══════════════════════════════════════════════════════════════════════════ */
+#loading-screen {
+  position:fixed; inset:0; background:var(--bg);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  z-index:9000; transition:opacity 0.6s;
+}
+.loading-seal {
+  width:90px; height:90px; border:2px solid var(--amber2); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:44px;
+  margin-bottom:20px; animation: glowPulse 2s infinite;
+  background: radial-gradient(circle, rgba(232,160,32,0.08), transparent 70%);
+}
+.loading-title {
+  font-family:var(--bebas); font-size:32px; color:var(--amber); letter-spacing:5px; margin-bottom:4px;
+}
+.loading-sub {
+  font-family:var(--playfair); font-size:13px; color:var(--text2); font-style:italic; margin-bottom:24px;
+}
+.loading-bar-wrap { width:220px; height:2px; background:var(--border2); }
+.loading-bar-fill { height:100%; background:linear-gradient(90deg,var(--amber2),var(--amber3)); transition:width 0.3s; width:0%; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LANDING / TITLE SCREEN
+═══════════════════════════════════════════════════════════════════════════ */
+#title-screen {
+  min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center; padding:2rem 1rem;
+}
+.title-banner {
+  position:relative; width:100%; max-width:700px; height:220px;
+  overflow:hidden; border:1px solid var(--border2); margin-bottom:2rem;
+}
+.course-logo {
+  font-family:var(--bebas); font-size:clamp(44px,8vw,72px);
+  color:var(--amber); letter-spacing:6px;
+  text-shadow:0 0 60px rgba(232,160,32,0.45), 4px 4px 0 rgba(0,0,0,0.6);
+  line-height:1; margin-bottom:6px;
+}
+.course-subtitle {
+  font-family:var(--playfair); font-size:16px; color:var(--text2);
+  font-style:italic; margin-bottom:8px; letter-spacing:1px;
+}
+.course-badge {
+  display:inline-block; background:rgba(232,160,32,0.08);
+  border:1px solid var(--amber2); color:var(--amber);
+  font-family:var(--dm); font-size:9px; padding:5px 14px;
+  letter-spacing:2px; margin-bottom:1.8rem; text-transform:uppercase;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PROFILE / CHARACTER SETUP
+═══════════════════════════════════════════════════════════════════════════ */
+#profile-setup {
+  max-width:500px; margin:0 auto; padding:1.5rem 1rem;
+}
+.char-preview-block {
+  text-align:center; margin-bottom:1.5rem; padding:24px 20px;
+  background:var(--bg2); border:1px solid var(--border);
+}
+.char-avatar-lg { width:90px; height:90px; margin:0 auto 12px; }
+.char-name-disp { font-family:var(--playfair); font-size:20px; color:var(--cream); font-style:italic; }
+.char-rank-disp { font-family:var(--dm); font-size:11px; color:var(--teal); letter-spacing:1px; margin-top:3px; }
+.avatar-grid { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+.avatar-opt {
+  flex:1 1 calc(25% - 8px); min-width:70px; aspect-ratio:1;
+  background:var(--bg2); border:1.5px solid var(--border);
+  cursor:pointer; transition:all 0.15s;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:4px; padding:8px 4px;
+}
+.avatar-opt:hover { border-color:var(--amber2); }
+.avatar-opt.selected {
+  border-color:var(--amber); background:rgba(232,160,32,0.08);
+  box-shadow:0 0 14px rgba(232,160,32,0.25);
+}
+.avatar-opt-icon { font-size:30px; }
+.avatar-opt-label { font-family:var(--dm); font-size:8px; color:var(--text2); text-align:center; }
+.name-input {
+  font-family:var(--playfair); font-size:16px; font-style:italic;
+  background:var(--bg2); border:1.5px solid var(--border2);
+  color:var(--cream); padding:12px 16px; width:100%; outline:none;
+  margin-bottom:10px; transition:border-color 0.2s;
+}
+.name-input:focus { border-color:var(--amber); }
+.name-input::placeholder { color:var(--text3); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MAIN SHELL LAYOUT
+═══════════════════════════════════════════════════════════════════════════ */
+#shell {
+  display:none; min-height:100vh; flex-direction:column;
+}
+#shell.active { display:flex; }
+
+/* TOP HUD BAR */
+/* ── COURSE HUD (top sticky bar) ─────────────────────────────────────── */
+#course-hud {
+  background:linear-gradient(180deg, rgba(13,10,8,0.98), rgba(20,16,13,0.95));
+  border-bottom:1px solid var(--border2);
+  padding:10px 20px; position:sticky; top:0; z-index:300;
+  backdrop-filter:blur(12px);
+}
+.hud-inner { display:flex; align-items:center; gap:14px; max-width:1200px; margin:0 auto; }
+.hud-avatar-wrap { width:44px; height:44px; cursor:pointer; flex-shrink:0; }
+.hud-info { flex:1; min-width:0; }
+.hud-player-name { font-family:var(--playfair); font-size:13px; color:var(--amber); font-style:italic; }
+.hud-player-rank { font-family:var(--dm); font-size:10px; color:var(--text2); }
+.hud-xp-wrap { height:3px; background:rgba(255,255,255,0.06); margin-top:4px; border-radius:2px; overflow:hidden; }
+.hud-xp-fill { height:100%; background:linear-gradient(90deg,var(--amber2),var(--amber3)); transition:width 0.6s; }
+.hud-stats { display:flex; gap:16px; flex-shrink:0; }
+.hud-stat { font-family:var(--dm); font-size:8px; color:var(--text3); text-align:center; letter-spacing:1px; }
+.hud-stat span { display:block; font-family:var(--bebas); font-size:16px; color:var(--amber); margin-top:1px; }
+.hud-nav { display:flex; gap:6px; flex-shrink:0; }
+.hud-nav-btn {
+  font-family:var(--dm); font-size:9px; padding:5px 10px; cursor:pointer;
+  background:transparent; border:1px solid var(--border2); color:var(--text3);
+  transition:all 0.15s; letter-spacing:0.5px;
+}
+.hud-nav-btn:hover { border-color:var(--amber2); color:var(--amber); }
+.hud-nav-btn.active { border-color:var(--amber); color:var(--amber); background:rgba(232,160,32,0.06); }
+
+/* SHELL BODY */
+.shell-body { flex:1; display:grid; grid-template-columns:1fr; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   TIMELINE VIEW
+═══════════════════════════════════════════════════════════════════════════ */
+#view-timeline {
+  padding:24px 20px 40px;
+  max-width:1200px; margin:0 auto; width:100%;
+}
+
+/* Course intro banner */
+.course-intro {
+  background:var(--bg2); border:1px solid var(--border2);
+  border-left:3px solid var(--amber);
+  padding:18px 20px; margin-bottom:28px;
+  display:flex; align-items:center; gap:16px;
+}
+.course-intro-text { flex:1; }
+.course-intro-label { font-family:var(--bebas); font-size:11px; color:var(--text3); letter-spacing:3px; margin-bottom:4px; }
+.course-intro-q { font-family:var(--playfair); font-size:17px; color:var(--cream); font-style:italic; line-height:1.4; }
+.course-intro-sub { font-family:var(--dm); font-size:10px; color:var(--text2); margin-top:6px; }
+
+/* ── HORIZONTAL SCROLL TIMELINE ────────────────────────────────────────── */
+
+/* outer wrapper — full width, clips overflow */
+#timeline-scroll-outer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border2);
+  background: var(--bg2);
+  user-select: none;
+}
+
+/* the year-ruler strip at top */
+#timeline-ruler {
+  position: sticky; left: 0; top: 0;
+  width: 100%; height: 28px; z-index: 20;
+  background: linear-gradient(180deg, rgba(13,10,8,0.98), rgba(20,16,13,0.9));
+  border-bottom: 1px solid var(--border2);
+  pointer-events: none;
+  overflow: hidden;
+}
+#timeline-ruler-inner {
+  position: absolute; top: 0; left: 0;
+  height: 100%; display: flex; align-items: center;
+  transition: transform 0.05s linear;
+  will-change: transform;
+}
+.ruler-tick {
+  position: absolute; top: 0; bottom: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  padding-bottom: 4px;
+}
+.ruler-tick-line { width: 1px; background: var(--border2); flex: 1; margin-bottom: 2px; }
+.ruler-tick.major .ruler-tick-line { background: var(--border2); }
+.ruler-tick-label {
+  font-family: var(--bebas); font-size: 9px; color: var(--text3);
+  letter-spacing: 1px; white-space: nowrap;
+}
+.ruler-tick.major .ruler-tick-label { color: var(--text2); font-size: 10px; }
+
+/* the scrollable track */
+#timeline-track {
+  overflow-x: auto; overflow-y: hidden;
+  padding: 0 0 12px;
+  cursor: grab;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+  /* extra padding so last card doesn't hug edge */
+  padding-right: 80px;
+}
+#timeline-track:active { cursor: grabbing; }
+#timeline-track::-webkit-scrollbar { height: 4px; }
+#timeline-track::-webkit-scrollbar-track { background: transparent; }
+#timeline-track::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+#timeline-track::-webkit-scrollbar-thumb:hover { background: var(--amber2); }
+
+/* inner row — all units in a single horizontal line */
+#timeline-inner {
+  display: flex; align-items: flex-start;
+  padding: 40px 40px 0 40px;
+  position: relative;
+  /* width is set by JS based on content */
+}
+
+/* the continuous spine line */
+#timeline-spine {
+  position: absolute;
+  top: 88px;   /* vertically centered on node midpoints */
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0px, var(--border) 40px, var(--border) calc(100% - 80px), transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+/* completed portion of spine (animated via JS) */
+#timeline-spine-fill {
+  position: absolute;
+  top: 88px; left: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--amber2), var(--amber3));
+  width: 0;
+  transition: width 0.8s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* era section label — floats above the spine */
+.era-section-label {
+  position: absolute;
+  top: 8px;
+  font-family: var(--bebas); font-size: 10px; letter-spacing: 3px;
+  color: var(--text3); white-space: nowrap;
+  padding: 0 10px;
+  z-index: 5;
+}
+.era-section-line {
+  position: absolute;
+  top: 22px; height: 1px;
+  background: var(--border);
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* connector between nodes (arrow on spine) */
+.tl-connector {
+  width: 36px; flex-shrink: 0;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: calc(72px - 2px); /* aligns with spine */
+  position: relative; z-index: 2;
+}
+.tl-connector-arrow {
+  width: 36px; height: 10px; position: relative; overflow: visible;
+}
+.tl-connector-arrow::after {
+  content: '';
+  position: absolute; right: -1px; top: 50%; transform: translateY(-50%);
+  border-left: 7px solid var(--border); border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+.tl-connector.done .tl-connector-arrow::after { border-left-color: var(--amber2); }
+
+/* era separator on the spine */
+.era-divider {
+  width: 2px; height: 18px; background: var(--border2); flex-shrink: 0;
+  align-self: flex-end; margin-bottom: calc(72px - 9px);
+  position: relative; z-index: 2;
+  margin-left: 2px; margin-right: 2px;
+}
+
+/* ── UNIT NODE (timeline card) ─────────────────────────────────────────── */
+/* ACTIVE / AVAILABLE UNITS vs LOCKED / COMING-SOON — clearly different */
+.unit-node {
+  flex-shrink: 0; width: 152px;
+  background: var(--bg2); border: 1px solid var(--border);
+  cursor: pointer; transition: all 0.2s;
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column;
+  z-index: 2;
+}
+/* spine dot */
+.unit-node::after {
+  content: '';
+  position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--bg2); border: 2px solid var(--border2);
+  z-index: 3;
+}
+.unit-node.completed::after  { border-color: var(--green);  background: var(--green); }
+.unit-node.inprogress::after { border-color: var(--teal2);  background: var(--teal); }
+.unit-node.available::after  { border-color: var(--amber2); background: var(--bg2); }
+
+/* ── ACTIVE states (available / in-progress / completed) ── */
+.unit-node.available  { border-color: var(--amber2); }
+.unit-node.inprogress { border-color: var(--teal); }
+.unit-node.completed  { border-color: var(--green); }
+
+.unit-node.available:hover,
+.unit-node.inprogress:hover  { border-color:var(--amber); transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.5); }
+.unit-node.completed:hover   { transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,0.4); }
+.unit-node.selected          { border-color:var(--amber)!important; box-shadow:0 0 22px rgba(232,160,32,0.4)!important; transform:translateY(-4px)!important; }
+
+/* ── LOCKED / COMING SOON — visually dim and distinct ── */
+/* LOCKED: greyscale, low opacity, still clickable to show coming-soon preview */
+.unit-node.locked {
+  opacity: 0.32;
+  cursor: default;
+  filter: grayscale(0.7);
+}
+.unit-node.locked:hover {
+  /* very subtle lift to signal clickability */
+  transform: translateY(-1px);
+  opacity: 0.42;
+  box-shadow: none;
+  border-color: var(--border);
+}
+
+/* available art area gets a subtle amber glow on active units */
+.unit-node.available  .unit-node-art,
+.unit-node.inprogress .unit-node-art { background: rgba(232,160,32,0.04); }
+.unit-node.locked     .unit-node-art { background: rgba(0,0,0,0.5); }
+
+/* era color accent strip */
+.unit-node-strip { height:3px; width:100%; }
+
+.unit-node-art {
+  width:100%; height:72px; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.3); position:relative; overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.unit-node-icon { font-size:32px; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.6)); }
+.unit-node-year-stamp {
+  position:absolute; bottom:4px; right:6px;
+  font-family:var(--bebas); font-size:10px; color:rgba(240,232,216,0.35); letter-spacing:1px;
+}
+.unit-node-body { padding:10px 10px 12px; flex:1; display:flex; flex-direction:column; }
+.unit-node-num { font-family:var(--dm); font-size:8px; color:var(--text3); letter-spacing:2px; margin-bottom:2px; }
+.unit-node-title { font-family:var(--playfair); font-size:12px; color:var(--cream); line-height:1.3; margin-bottom:6px; flex:1; }
+/* ── STATUS TAGS ── active units glow, locked units are quiet ── */
+.unit-node-status {
+  font-family: var(--dm); font-size: 8px; padding: 3px 8px; border: 1px solid;
+  display: inline-block; align-self: flex-start; letter-spacing: 0.5px;
+}
+/* ACTIVE — amber glow, clear CTA */
+.status-available {
+  color: var(--amber3); border-color: var(--amber);
+  background: rgba(232,160,32,0.14);
+  font-weight: 600;
+  box-shadow: 0 0 8px rgba(232,160,32,0.2);
+}
+/* LOCKED / COMING SOON — quiet, no emphasis */
+.status-locked    { color: var(--text3); border-color: var(--border); }
+.status-coming    { color: var(--text3); border-color: var(--border); font-style: italic; }
+/* COMPLETED — green confirmation */
+.status-completed { color: var(--green2); border-color: var(--green); background: rgba(56,160,80,0.08); }
+/* IN PROGRESS — teal */
+.status-inprogress{ color: var(--teal2); border-color: var(--teal); background: rgba(32,136,120,0.08); }
+
+/* progress strip at bottom of node */
+.unit-node-progress { height:2px; background:rgba(255,255,255,0.04); }
+.unit-node-progress-fill { height:100%; background:var(--amber2); transition:width 0.5s; }
+
+/* ── TIMELINE MINIMAP NAVIGATOR ─────────────────────────────────────────── */
+#timeline-minimap {
+  height: 40px; background: var(--bg); border-top: 1px solid var(--border2);
+  padding: 8px 40px; display: flex; align-items: center; gap: 8px;
+  position: relative;
+}
+.minimap-track {
+  flex: 1; height: 6px; background: var(--border); border-radius: 3px;
+  position: relative; cursor: pointer; overflow: hidden;
+}
+.minimap-track-fill {
+  height: 100%; background: linear-gradient(90deg, var(--amber2), var(--amber3));
+  border-radius: 3px; transition: width 0.3s;
+}
+.minimap-viewport {
+  position: absolute; top: -2px; bottom: -2px;
+  background: rgba(232,160,32,0.18); border: 1px solid var(--amber2);
+  border-radius: 2px; transition: left 0.05s, width 0.05s;
+  pointer-events: none;
+}
+.minimap-label {
+  font-family: var(--dm); font-size: 8px; color: var(--text3);
+  letter-spacing: 1px; white-space: nowrap; flex-shrink: 0;
+}
+.minimap-era-pip {
+  position: absolute; top: -1px; width: 2px; height: 8px; border-radius: 1px;
+  opacity: 0.5;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PREVIEW PANEL (right side / slide-in overlay)
+═══════════════════════════════════════════════════════════════════════════ */
+#preview-panel {
+  display:none; position:fixed; top:0; right:0; bottom:0;
+  width:min(480px, 100vw); background:var(--bg2);
+  border-left:1px solid var(--border2); z-index:400;
+  overflow-y:auto; flex-direction:column;
+  box-shadow:-8px 0 40px rgba(0,0,0,0.6);
+}
+#preview-panel.open { display:flex; animation:slideIn 0.3s ease; }
+
+.preview-close {
+  position:absolute; top:14px; right:14px; z-index:10;
+  font-family:var(--dm); font-size:9px; padding:6px 12px;
+  background:var(--bg3); border:1px solid var(--border2); color:var(--text3);
+  cursor:pointer; transition:all 0.15s;
+}
+.preview-close:hover { border-color:var(--amber); color:var(--amber); }
+
+/* hero art strip */
+.preview-hero {
+  width:100%; height:160px; position:relative; overflow:hidden;
+  flex-shrink:0; border-bottom:1px solid var(--border2);
+}
+.preview-hero-gradient {
+  position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(13,10,8,0.3) 0%, transparent 60%, rgba(13,10,8,0.5) 100%);
+}
+.preview-hero-caption {
+  position:absolute; bottom:0; left:0; right:0;
+  background:linear-gradient(to top, rgba(13,10,8,0.97) 0%, transparent 100%);
+  padding:28px 18px 14px;
+}
+.preview-unit-num { font-family:var(--bebas); font-size:11px; color:var(--text3); letter-spacing:3px; margin-bottom:2px; }
+.preview-unit-title { font-family:var(--playfair); font-size:22px; color:var(--cream); font-weight:700; line-height:1.2; }
+.preview-years { font-family:var(--crimson); font-size:13px; color:var(--amber); font-style:italic; margin-top:2px; }
+
+/* preview body */
+/* PART 4: clean layout — consistent spacing, no crowding */
+.preview-body { padding:16px 18px 24px; flex:1; display:flex; flex-direction:column; gap:14px; }
+
+/* status badge row */
+.preview-status-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.preview-status-badge {
+  font-family:var(--bebas); font-size:11px; letter-spacing:2px; padding:4px 12px; border:1.5px solid;
+}
+/* active status badge inherits status color */
+.preview-status-badge.status-available  { color:var(--amber3); border-color:var(--amber); background:rgba(232,160,32,0.1); }
+.preview-status-badge.status-completed  { color:var(--green2); border-color:var(--green); background:rgba(56,160,80,0.08); }
+.preview-status-badge.status-inprogress { color:var(--teal2);  border-color:var(--teal);  background:rgba(32,136,120,0.08);}
+.preview-status-badge.status-locked     { color:var(--text3);  border-color:var(--border);}
+.preview-status-badge.status-coming     { color:var(--text3);  border-color:var(--border); font-style:italic; }
+
+/* section micro-labels */
+.pv-section-label {
+  font-family: var(--bebas); font-size: 10px; color: var(--text3);
+  letter-spacing: 3px; margin-bottom: 7px; display: block;
+}
+
+/* description */
+.preview-desc {
+  font-family:var(--crimson); font-size:15px; line-height:1.65; color:var(--text);
+}
+
+/* topics list */
+.preview-topics { display:flex; flex-wrap:wrap; gap:5px; }
+.topic-tag {
+  font-family:var(--dm); font-size:9px; padding:3px 9px;
+  background:var(--bg3); border:1px solid var(--border2);
+  color:var(--text2); letter-spacing:0.5px;
+}
+
+/* themes strip */
+.preview-themes { display:flex; gap:7px; flex-wrap:wrap; }
+.theme-chip {
+  font-family:var(--dm); font-size:9px; padding:4px 10px; border:1px solid; letter-spacing:0.5px;
+  display:flex; align-items:center; gap:5px;
+}
+.theme-chip.power    { color:#d07860; border-color:rgba(208,120,90,0.4);  background:rgba(208,120,90,0.06); }
+.theme-chip.freedom  { color:#70b0e0; border-color:rgba(112,176,224,0.4); background:rgba(112,176,224,0.06); }
+.theme-chip.economy  { color:#80c880; border-color:rgba(128,200,128,0.4); background:rgba(128,200,128,0.06); }
+.theme-chip.conflict { color:#e07070; border-color:rgba(224,112,112,0.4); background:rgba(224,112,112,0.06); }
+.theme-chip.identity { color:#b890d8; border-color:rgba(184,144,216,0.4); background:rgba(184,144,216,0.06); }
+
+/* ── MINI MAP ──────────────────────────────────────────────────────────── */
+/* PART 5: Simple and symbolic map container */
+.preview-map-wrap {
+  background: var(--bg3); border: 1px solid var(--border); padding: 10px 12px; position: relative;
+}
+.mini-map-svg { width: 100%; height: auto; display: block; }
+
+/* ── CONTINUITY / CHANGE ───────────────────────────────────────────────── */
+.continuity-block {
+  background:var(--bg3); border:1px solid var(--border);
+  border-left:3px solid var(--amber2); padding:14px 14px 14px 16px;
+}
+.continuity-label { font-family:var(--bebas); font-size:10px; color:var(--text3); letter-spacing:3px; margin-bottom:10px; }
+.continuity-row { display:flex; gap:8px; margin-bottom:8px; align-items:flex-start; }
+.continuity-row:last-child { margin-bottom:0; }
+.continuity-icon { font-size:14px; flex-shrink:0; margin-top:1px; }
+.continuity-item-label { font-family:var(--dm); font-size:8px; color:var(--text3); letter-spacing:1px; margin-bottom:1px; text-transform:uppercase; }
+.continuity-item-text { font-family:var(--crimson); font-size:14px; color:var(--text2); line-height:1.4; font-style:italic; }
+
+/* launch area */
+/* PART 1: Launch button sits at bottom of panel with clear breathing room */
+.preview-launch {
+  margin-top: 4px;
+  padding-bottom: 8px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   PROFILE VIEW
+═══════════════════════════════════════════════════════════════════════════ */
+#view-profile { padding:24px 20px 40px; max-width:700px; margin:0 auto; width:100%; }
+
+.profile-hero {
+  background:var(--bg2); border:1px solid var(--border2);
+  padding:24px; margin-bottom:20px; display:flex; align-items:center; gap:20px;
+}
+.profile-avatar-lg { width:80px; height:80px; flex-shrink:0; }
+.profile-name { font-family:var(--playfair); font-size:22px; color:var(--cream); font-style:italic; }
+.profile-rank { font-family:var(--dm); font-size:11px; color:var(--teal); letter-spacing:1px; margin:3px 0 10px; }
+.profile-xp-label { font-family:var(--dm); font-size:9px; color:var(--text3); letter-spacing:1px; margin-bottom:4px; }
+.profile-xp-bar { height:5px; background:rgba(255,255,255,0.05); border-radius:2px; overflow:hidden; }
+.profile-xp-fill { height:100%; background:linear-gradient(90deg,var(--amber2),var(--amber3)); border-radius:2px; }
+
+/* stats grid */
+.stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:20px; }
+.stat-card { background:var(--bg2); border:1px solid var(--border); padding:14px; text-align:center; }
+.stat-val { font-family:var(--bebas); font-size:28px; color:var(--amber); letter-spacing:1px; }
+.stat-lbl { font-family:var(--dm); font-size:8px; color:var(--text3); letter-spacing:1px; text-transform:uppercase; margin-top:2px; }
+
+/* theme progress bars */
+.theme-progress-list { display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+.theme-progress-row { display:flex; align-items:center; gap:10px; }
+.theme-progress-name { font-family:var(--dm); font-size:10px; color:var(--text2); width:120px; flex-shrink:0; letter-spacing:0.5px; }
+.theme-progress-bar { flex:1; height:5px; background:rgba(255,255,255,0.05); border-radius:2px; overflow:hidden; }
+.theme-progress-fill { height:100%; border-radius:2px; transition:width 0.6s; }
+.theme-progress-pct { font-family:var(--bebas); font-size:12px; width:32px; text-align:right; flex-shrink:0; }
+
+/* badges */
+.badge-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.badge-item {
+  background:var(--bg2); border:1px solid var(--border);
+  padding:12px 6px; text-align:center; transition:border-color 0.2s;
+}
+.badge-item.earned { border-color:var(--amber2); }
+.badge-item-icon { font-size:26px; margin-bottom:5px; }
+.badge-item-name { font-family:var(--dm); font-size:7px; color:var(--text2); line-height:1.3; }
+.badge-item:not(.earned) { opacity:0.25; filter:grayscale(1); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   STORY SO FAR VIEW
+═══════════════════════════════════════════════════════════════════════════ */
+#view-story { padding:24px 20px 40px; max-width:760px; margin:0 auto; width:100%; }
+
+.story-so-far-placeholder {
+  background:var(--bg2); border:1px dashed var(--border2);
+  padding:40px 28px; text-align:center; margin-bottom:20px;
+}
+.ssf-icon { font-size:48px; margin-bottom:12px; opacity:0.5; }
+.ssf-title { font-family:var(--bebas); font-size:22px; color:var(--text3); letter-spacing:3px; margin-bottom:8px; }
+.ssf-desc { font-family:var(--crimson); font-size:15px; color:var(--text3); font-style:italic; line-height:1.6; max-width:400px; margin:0 auto; }
+
+.completed-unit-entry {
+  background:var(--bg2); border:1px solid var(--border);
+  border-left:3px solid var(--green); padding:16px 18px;
+  margin-bottom:10px; display:flex; gap:14px; align-items:flex-start;
+}
+.cue-icon { font-size:28px; flex-shrink:0; margin-top:2px; }
+.cue-unit { font-family:var(--dm); font-size:9px; color:var(--text3); letter-spacing:2px; margin-bottom:2px; }
+.cue-title { font-family:var(--playfair); font-size:15px; color:var(--cream); margin-bottom:4px; }
+.cue-change { font-family:var(--crimson); font-size:14px; color:var(--text2); font-style:italic; line-height:1.5; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   OVERLAY (full-screen modal)
+═══════════════════════════════════════════════════════════════════════════ */
+.overlay {
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,0.94);
+  z-index:500; overflow-y:auto; padding:20px;
+}
+.overlay.show { display:block; animation:fadeIn 0.2s; }
+.overlay-header {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:16px; position:sticky; top:0;
+  background:rgba(13,10,8,0.97); padding:10px 0; border-bottom:1px solid var(--border2); z-index:10;
+}
+.overlay-title { font-family:var(--bebas); font-size:22px; color:var(--amber); letter-spacing:2px; }
+.overlay-close {
+  font-family:var(--dm); font-size:10px; background:var(--bg3);
+  border:1px solid var(--border2); color:var(--text2); padding:7px 14px;
+  cursor:pointer; transition:all 0.2s;
+}
+.overlay-close:hover { border-color:var(--amber); color:var(--amber); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .hud-stats { display:none; }
+  .hud-nav-btn span.label { display:none; }
+  .stat-grid { grid-template-columns:repeat(2,1fr); }
+  .badge-grid { grid-template-columns:repeat(3,1fr); }
+  #preview-panel { width:100vw; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     LOADING SCREEN
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="loading-screen">
+  <div class="loading-seal">🏛️</div>
+  <div class="loading-title">AMERICAN CHRONICLES</div>
+  <div class="loading-sub">Preparing the full course experience…</div>
+  <div class="loading-bar-wrap">
+    <div id="loading-bar" class="loading-bar-fill"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     TITLE / LANDING SCREEN
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="title-screen" class="screen" style="min-height:100vh; display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:2rem 1rem;">
+
+  <!-- hero art banner -->
+  <div class="title-banner" id="title-art"></div>
+
+  <div class="course-logo">American Chronicles</div>
+  <div class="course-subtitle">A Playable Journey Through U.S. History</div>
+  <div class="course-badge">10th Grade · U.S. History · Florida EOC Aligned</div>
+
+  <div style="display:flex; flex-direction:column; align-items:center; gap:10px; max-width:320px; margin:0 auto;">
+    <button class="btn full" onclick="startNewProfile()"><span>Begin Your Journey →</span></button>
+    <button class="btn full" id="btn-continue-title" onclick="enterShell()" style="display:none; border-color:var(--teal2); color:var(--teal2);"><span>Continue Course</span></button>
+  </div>
+
+  <div style="margin-top:2rem; font-family:var(--dm); font-size:9px; color:var(--text3); letter-spacing:1px;">
+    CREATED BY JOSHUA OLSON &nbsp;·&nbsp; FLORIDA EOC ALIGNED
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PROFILE SETUP SCREEN
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="profile-setup-screen" class="screen" style="padding:2rem 1rem; max-width:500px; margin:0 auto; display:none;">
+  <div class="section-head" style="margin-bottom:20px;">Create Your Profile</div>
+
+  <!-- preview -->
+  <div class="char-preview-block">
+    <div class="char-avatar-lg" id="setup-preview-avatar"></div>
+    <div class="char-name-disp" id="setup-preview-name">Historian</div>
+    <div class="char-rank-disp">Curious Citizen · Starting the Journey</div>
+  </div>
+
+  <!-- avatar selection -->
+  <div class="section-head" style="font-size:13px; margin-bottom:10px;">Choose Your Look</div>
+  <div class="avatar-grid" id="avatar-grid"></div>
+
+  <!-- name input -->
+  <div class="section-head" style="font-size:13px; margin:14px 0 8px;">Your Name</div>
+  <input type="text" class="name-input" id="name-input" placeholder="Enter your name…" maxlength="24" oninput="updateSetupPreview()">
+
+  <button class="btn full green" onclick="confirmProfile()" style="margin-top:16px;"><span>Enter American Chronicles →</span></button>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     MAIN SHELL
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="shell">
+
+  <!-- ── TOP HUD ──────────────────────────────────────────────────────── -->
+  <!-- SHELL HEADER / PROFILE AREA -->
+  <div id="course-hud">
+    <div class="hud-inner">
+      <div class="hud-avatar-wrap" id="hud-avatar" onclick="showView('profile')" title="View Profile"></div>
+      <div class="hud-info">
+        <div class="hud-player-name" id="hud-name">Historian</div>
+        <div class="hud-player-rank" id="hud-rank">Curious Citizen</div>
+        <div class="hud-xp-wrap"><div class="hud-xp-fill" id="hud-xp" style="width:0%"></div></div>
+      </div>
+      <div class="hud-stats">
+        <div class="hud-stat">UNITS<span id="hud-units">0</span></div>
+        <div class="hud-stat">BADGES<span id="hud-badges">0</span></div>
+        <div class="hud-stat">PROGRESS<span id="hud-pct">0%</span></div>
+      </div>
+      <div class="hud-nav">
+        <button class="hud-nav-btn active" id="nav-timeline" onclick="showView('timeline')"><span class="label">Timeline</span> 🗺</button>
+        <button class="hud-nav-btn" id="nav-profile"   onclick="showView('profile')"><span class="label">Profile</span> 👤</button>
+        <button class="hud-nav-btn" id="nav-story"     onclick="showView('story')"><span class="label">Story So Far</span> 📜</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── VIEWS ────────────────────────────────────────────────────────── -->
+  <div class="shell-body">
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         TIMELINE VIEW
+    ════════════════════════════════════════════════════════════════════ -->
+    <!-- TIMELINE SECTION -->
+    <div id="view-timeline" style="display:block; padding: 24px 20px 40px; max-width:1200px; margin:0 auto; width:100%;">
+
+      <!-- course framing question -->
+      <div class="course-intro">
+        <div style="font-size:36px; flex-shrink:0;">🏛️</div>
+        <div class="course-intro-text">
+          <div class="course-intro-label">Overarching Course Question</div>
+          <div class="course-intro-q">"What does it mean to be an American — and who gets to decide?"</div>
+          <div class="course-intro-sub">Scroll the timeline left to right through 150 years of American history. Click any unit to preview and launch. Drag or use the minimap below to navigate.</div>
+        </div>
+      </div>
+
+      <!-- PART 2 / PART 7: Active units callout — students know immediately what they can play -->
+      <div style="background:rgba(232,160,32,0.06); border:1px solid var(--amber2);
+           padding:12px 18px; margin-bottom:20px; display:flex; align-items:center;
+           gap:14px; flex-wrap:wrap;">
+        <div style="font-family:var(--bebas); font-size:11px; color:var(--amber2);
+             letter-spacing:3px; flex-shrink:0;">▶ PLAY NOW</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <!-- Active game quick-launch chips — generated from UNIT_DATA by JS -->
+          <div id="active-unit-chips"></div>
+        </div>
+        <div style="font-family:var(--dm); font-size:9px; color:var(--text3); margin-left:auto; flex-shrink:0;">
+          Dimmed units = coming soon
+        </div>
+      </div>
+
+      <!-- Timeline units are rendered by JS below -->
+      <!-- TIMELINE SECTION: horizontal scroll with minimap -->
+      <div id="timeline-scroll-outer">
+        <!-- year ruler (scrolls with track via JS transform) -->
+        <div id="timeline-ruler"><div id="timeline-ruler-inner"></div></div>
+        <!-- main scrollable track -->
+        <div id="timeline-track">
+          <div id="timeline-inner">
+            <div id="timeline-spine"></div>
+            <div id="timeline-spine-fill"></div>
+            <!-- unit nodes injected by renderTimeline() -->
+          </div>
+        </div>
+        <!-- minimap navigator -->
+        <div id="timeline-minimap">
+          <div class="minimap-label" id="mm-era-label">1861</div>
+          <div class="minimap-track" id="minimap-track">
+            <div class="minimap-track-fill" id="minimap-fill" style="width:0%"></div>
+            <div class="minimap-viewport" id="minimap-viewport"></div>
+          </div>
+          <div class="minimap-label" id="mm-pct">0%</div>
+        </div>
+      </div>
+
+      <!-- theme tracker strip -->
+      <!-- THEME TRACKER SECTION -->
+      <div style="background:var(--bg2); border:1px solid var(--border2); padding:18px; margin-top:28px;">
+        <div class="section-head" style="margin-bottom:14px;">Five Recurring Themes</div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:8px;">
+          <div class="theme-chip power"    style="padding:10px 12px; font-size:10px; flex-direction:column; align-items:flex-start; gap:3px;">
+            <span style="font-size:18px;">⚖️</span>
+            <strong>Power</strong>
+            <span style="font-size:8px; opacity:0.8; font-family:var(--crimson); font-style:italic;">Who rules, who resists</span>
+          </div>
+          <div class="theme-chip freedom"  style="padding:10px 12px; font-size:10px; flex-direction:column; align-items:flex-start; gap:3px;">
+            <span style="font-size:18px;">🗽</span>
+            <strong>Freedom &amp; Rights</strong>
+            <span style="font-size:8px; opacity:0.8; font-family:var(--crimson); font-style:italic;">Expanding or denying liberty</span>
+          </div>
+          <div class="theme-chip economy"  style="padding:10px 12px; font-size:10px; flex-direction:column; align-items:flex-start; gap:3px;">
+            <span style="font-size:18px;">⚙️</span>
+            <strong>Economy &amp; Work</strong>
+            <span style="font-size:8px; opacity:0.8; font-family:var(--crimson); font-style:italic;">Labor, industry, wealth</span>
+          </div>
+          <div class="theme-chip conflict"  style="padding:10px 12px; font-size:10px; flex-direction:column; align-items:flex-start; gap:3px;">
+            <span style="font-size:18px;">⚔️</span>
+            <strong>Conflict &amp; Change</strong>
+            <span style="font-size:8px; opacity:0.8; font-family:var(--crimson); font-style:italic;">Wars, reform, upheaval</span>
+          </div>
+          <div class="theme-chip identity"  style="padding:10px 12px; font-size:10px; flex-direction:column; align-items:flex-start; gap:3px;">
+            <span style="font-size:18px;">🌎</span>
+            <strong>American Identity</strong>
+            <span style="font-size:8px; opacity:0.8; font-family:var(--crimson); font-style:italic;">Who we are becoming</span>
+          </div>
+        </div>
+        <div style="font-family:var(--dm); font-size:9px; color:var(--text3); margin-top:12px; line-height:1.5;">
+          These five themes connect every unit. As you complete units, your theme mastery grows — visible on your Profile.
+        </div>
+      </div>
+
+    </div><!-- end #view-timeline -->
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         PROFILE VIEW
+    ════════════════════════════════════════════════════════════════════ -->
+    <!-- PROFILE / PROGRESS SECTION -->
+    <div id="view-profile" style="display:none; padding:24px 20px 40px; max-width:700px; margin:0 auto; width:100%;">
+      <div class="section-head">Your Profile</div>
+
+      <!-- profile hero card -->
+      <div class="profile-hero">
+        <div class="profile-avatar-lg" id="profile-avatar-lg"></div>
+        <div style="flex:1;">
+          <div class="profile-name" id="profile-name-disp">Historian</div>
+          <div class="profile-rank" id="profile-rank-disp">Curious Citizen</div>
+          <div class="profile-xp-label">Course Progress</div>
+          <div class="profile-xp-bar"><div class="profile-xp-fill" id="profile-xp-fill" style="width:0%"></div></div>
+          <div style="font-family:var(--dm); font-size:9px; color:var(--text3); margin-top:4px;" id="profile-xp-text">0 of 13 units</div>
+        </div>
+      </div>
+
+      <!-- PART 6: Progress note — honest about separate-game tracking -->
+      <div style="background:var(--bg2); border:1px solid var(--border); border-left:3px solid var(--amber2);
+           padding:12px 14px; margin-bottom:16px; font-family:var(--dm); font-size:10px;
+           color:var(--text2); line-height:1.6;">
+        <strong style="color:var(--amber2); font-size:9px; letter-spacing:1px; text-transform:uppercase;">About Progress Tracking</strong><br>
+        Unit games open in separate tabs. Your progress here updates when you return to this hub.
+        Theme mastery reflects units you've marked complete in this session.
+      </div>
+
+      <!-- stats -->
+      <div class="stat-grid" id="profile-stat-grid">
+        <div class="stat-card"><div class="stat-val" id="ps-units">0</div><div class="stat-lbl">Units Complete</div></div>
+        <div class="stat-card"><div class="stat-val" id="ps-badges">0</div><div class="stat-lbl">Badges Earned</div></div>
+        <div class="stat-card"><div class="stat-val" id="ps-available">4</div><div class="stat-lbl">Units Available</div></div>
+        <div class="stat-card"><div class="stat-val" id="ps-total">13</div><div class="stat-lbl">Total in Course</div></div>
+      </div>
+
+      <!-- theme mastery -->
+      <div class="section-head" style="font-size:14px;">Theme Mastery</div>
+      <!-- THEME PROGRESS SECTION -->
+      <div class="theme-progress-list">
+        <div class="theme-progress-row">
+          <div class="theme-progress-name">⚖️ Power</div>
+          <div class="theme-progress-bar"><div class="theme-progress-fill" id="tp-power" style="width:0%; background:var(--red2);"></div></div>
+          <div class="theme-progress-pct" id="tp-power-pct" style="color:var(--red2);">0%</div>
+        </div>
+        <div class="theme-progress-row">
+          <div class="theme-progress-name">🗽 Freedom &amp; Rights</div>
+          <div class="theme-progress-bar"><div class="theme-progress-fill" id="tp-freedom" style="width:0%; background:var(--blue2);"></div></div>
+          <div class="theme-progress-pct" id="tp-freedom-pct" style="color:var(--blue2);">0%</div>
+        </div>
+        <div class="theme-progress-row">
+          <div class="theme-progress-name">⚙️ Economy &amp; Work</div>
+          <div class="theme-progress-bar"><div class="theme-progress-fill" id="tp-economy" style="width:0%; background:var(--green2);"></div></div>
+          <div class="theme-progress-pct" id="tp-economy-pct" style="color:var(--green2);">0%</div>
+        </div>
+        <div class="theme-progress-row">
+          <div class="theme-progress-name">⚔️ Conflict &amp; Change</div>
+          <div class="theme-progress-bar"><div class="theme-progress-fill" id="tp-conflict" style="width:0%; background:var(--amber2);"></div></div>
+          <div class="theme-progress-pct" id="tp-conflict-pct" style="color:var(--amber2);">0%</div>
+        </div>
+        <div class="theme-progress-row">
+          <div class="theme-progress-name">🌎 American Identity</div>
+          <div class="theme-progress-bar"><div class="theme-progress-fill" id="tp-identity" style="width:0%; background:var(--purple2);"></div></div>
+          <div class="theme-progress-pct" id="tp-identity-pct" style="color:var(--purple2);">0%</div>
+        </div>
+      </div>
+
+      <!-- badges -->
+      <div class="section-head" style="font-size:14px; margin-top:8px;">Badges</div>
+      <div class="badge-grid" id="badge-grid"></div>
+
+      <!-- manual unit completion (since games are separate tabs) -->
+      <div class="section-head" style="font-size:14px; margin-top:20px;">Mark Units Complete</div>
+      <div style="font-family:var(--dm); font-size:10px; color:var(--text2); margin-bottom:12px; line-height:1.6;">
+        Finished a unit game? Mark it complete here to update your theme mastery and earn badges.
+      </div>
+      <div id="manual-complete-list" style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+
+      <button class="btn sm" onclick="resetProfile()"
+        style="margin-top:24px; border-color:var(--border2); color:var(--text3); font-size:9px;">
+        <span>↺ Reset Profile</span>
+      </button>
+    </div><!-- end #view-profile -->
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         STORY SO FAR VIEW
+    ════════════════════════════════════════════════════════════════════ -->
+    <!-- CONTINUITY / CHANGE SECTION — "THE AMERICAN STORY SO FAR" -->
+    <div id="view-story" style="display:none;">
+      <div class="section-head">The American Story So Far</div>
+      <div style="font-family:var(--crimson); font-size:15px; color:var(--text2); font-style:italic; line-height:1.6; margin-bottom:20px;">
+        History is not a series of separate events — it is one long, tangled story.
+        As you complete each unit, the chapters of that story appear here, connected by the threads of continuity and change.
+      </div>
+      <div id="story-entries"></div>
+      <div id="story-placeholder" class="story-so-far-placeholder">
+        <div class="ssf-icon">📜</div>
+        <div class="ssf-title">Your Story Awaits</div>
+        <div class="ssf-desc">Complete your first unit to begin building the connected American story. Each unit adds a chapter showing what changed, what continued, and what new problem emerged.</div>
+      </div>
+    </div><!-- end #view-story -->
+
+  </div><!-- end .shell-body -->
+</div><!-- end #shell -->
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     PREVIEW PANEL (slide-in from right)
+═══════════════════════════════════════════════════════════════════════════ -->
+<!-- UNIT PREVIEW PANEL -->
+<div id="preview-panel">
+  <button class="preview-close" onclick="closePreview()">✕ Close</button>
+
+  <!-- hero art -->
+  <div class="preview-hero" id="preview-hero">
+    <div id="preview-hero-art"></div>
+    <div class="preview-hero-gradient"></div>
+    <div class="preview-hero-caption">
+      <div class="preview-unit-num" id="pv-unit-num">Unit 1</div>
+      <div class="preview-unit-title" id="pv-title">Unit Title</div>
+      <div class="preview-years" id="pv-years">1865 – 1877</div>
+    </div>
+  </div>
+
+  <div class="preview-body">
+
+    <!-- status -->
+    <div class="preview-status-row">
+      <div class="preview-status-badge" id="pv-status-badge">AVAILABLE</div>
+    </div>
+
+    <!-- UNIT DESCRIPTION -->
+    <div class="preview-desc" id="pv-desc"></div>
+
+    <!-- UNIT TOPICS -->
+    <div>
+      <span class="pv-section-label">MAIN TOPICS</span>
+      <div class="preview-topics" id="pv-topics"></div>
+    </div>
+
+    <!-- UNIT THEMES (max 3) -->
+    <div>
+      <span class="pv-section-label">DOMINANT THEMES</span>
+      <div class="preview-themes" id="pv-themes"></div>
+    </div>
+
+    <!-- MINI MAP AREA — simple and symbolic -->
+    <div class="preview-map-wrap">
+      <span class="pv-section-label" style="color:var(--text3);">KEY GEOGRAPHY</span>
+      <div id="pv-map"></div>
+    </div>
+
+    <!-- CONTINUITY / CHANGE SUMMARY -->
+    <div class="continuity-block">
+      <div class="continuity-label">CONTINUITY &amp; CHANGE</div>
+      <div class="continuity-row">
+        <div class="continuity-icon">🔄</div>
+        <div>
+          <div class="continuity-item-label">What Changed</div>
+          <div class="continuity-item-text" id="pv-changed"></div>
+        </div>
+      </div>
+      <div class="continuity-row">
+        <div class="continuity-icon">⚓</div>
+        <div>
+          <div class="continuity-item-label">What Continued</div>
+          <div class="continuity-item-text" id="pv-continued"></div>
+        </div>
+      </div>
+      <div class="continuity-row">
+        <div class="continuity-icon">❓</div>
+        <div>
+          <div class="continuity-item-label">New Question Emerged</div>
+          <div class="continuity-item-text" id="pv-emerged"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAUNCH / INTEGRATION — real URLs for active units, coming-soon for locked -->
+    <div class="preview-launch" id="pv-launch-area"></div>
+
+  </div><!-- end .preview-body -->
+</div><!-- end #preview-panel -->
+
+<!-- backdrop -->
+<div id="preview-backdrop" onclick="closePreview()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:399;"></div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════════════════════ -->
+<script>
+'use strict';
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  ██╗   ██╗███╗   ██╗██╗████████╗    ██████╗  █████╗ ████████╗ █████╗
+//  ██║   ██║████╗  ██║██║╚══██╔══╝    ██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗
+//  ██║   ██║██╔██╗ ██║██║   ██║       ██║  ██║███████║   ██║   ███████║
+//  ██║   ██║██║╚██╗██║██║   ██║       ██║  ██║██╔══██║   ██║   ██╔══██║
+//  ╚██████╔╝██║ ╚████║██║   ██║       ██████╔╝██║  ██║   ██║   ██║  ██║
+//   ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝       ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝
+//
+//  TO ADD / UPDATE A UNIT URL:
+//  Find the unit object below and set its `url` field.
+//  Example:  url: 'https://yoursite.com/unit6a.html'
+//  null  = "Coming Soon" (no launch button shown)
+//  ''    = same as null
+// ═══════════════════════════════════════════════════════════════════════════
+
+const UNIT_DATA = [
+  // ── ERA 1: Reconstruction ──────────────────────────────────────────────
+  {
+    id: 'unit1',
+    num: 'Unit 1',
+    title: 'Civil War & Reconstruction',
+    years: '1861 – 1877',
+    icon: '⚔️',
+    era: 'Reconstruction Era',
+    eraColor: '#8b4513',  // saddle brown
+    status: 'locked',     // locked | available | inprogress | completed
+    progress: 0,          // 0–100
+    url: null,            // ← PASTE URL HERE when ready
+    desc: 'The Union torn apart and stitched back together. Reconstruction promised freedom and equality for formerly enslaved Americans — but powerful forces worked to undo those promises almost immediately.',
+    topics: ['Civil War causes','13th, 14th, 15th Amendments','Freedmen\'s Bureau','Radical Reconstruction','Sharecropping','Compromise of 1877'],
+    themes: ['conflict','freedom','power','identity'],
+    mapLabel: 'Reconstructed South',
+    mapRegions: ['southeast'],
+    changed: 'Slavery abolished; formerly enslaved people gain citizenship and voting rights through constitutional amendments.',
+    continued: 'White supremacist resistance; economic dependence of freedpeople; federal reluctance to enforce civil rights.',
+    emerged: 'How do you rebuild a nation while confronting deep injustice — and what happens when you stop trying?',
+    badgeEarned: null,
+  },
+  // ── ERA 2: Gilded Age & Reform ─────────────────────────────────────────
+  {
+    id: 'unit2a',
+    num: 'Unit 2A',
+    title: 'The American West & Industrial Growth',
+    years: '1865 – 1900',
+    icon: '🚂',
+    era: 'Gilded Age',
+    eraColor: '#8b6914',
+    status: 'locked',
+    progress: 0,
+    url: null,
+    desc: 'Railroads knit the continent together. Industrialists built empires. Native peoples were displaced and dispossessed. The West became a myth and a wound at the same time.',
+    topics: ['Transcontinental Railroad','Robber Barons','Native American displacement','Homestead Act','Populist Movement','Social Darwinism'],
+    themes: ['economy','conflict','power','identity'],
+    mapLabel: 'Western Expansion',
+    mapRegions: ['west','plains'],
+    changed: 'Industrial capitalism transforms the American economy; the continental frontier "closes."',
+    continued: 'Racial and class inequality; exploitation of labor and land; federal power over western territories.',
+    emerged: 'Can capitalism produce prosperity for all — or does industrial power inevitably concentrate in too few hands?',
+    badgeEarned: null,
+  },
+  {
+    id: 'unit2b',
+    num: 'Unit 2B',
+    title: 'The Progressive Era',
+    years: '1890 – 1920',
+    icon: '📰',
+    era: 'Gilded Age',
+    eraColor: '#8b6914',
+    status: 'locked',
+    progress: 0,
+    url: null,
+    desc: 'Journalists exposed the rot. Reformers demanded change. Women organized for suffrage. The federal government, for the first time, began to regulate the power of big business.',
+    topics: ['Muckrakers','Trust-busting','19th Amendment','Child labor laws','NAACP founding','Initiative & Referendum'],
+    themes: ['freedom','power','economy','identity'],
+    mapLabel: 'Reform Movements Nationwide',
+    mapRegions: ['northeast','midwest'],
+    changed: 'Federal government expands to regulate industry; women gain the vote in 1920.',
+    continued: 'Racial segregation largely untouched by progressive reform; economic inequality persists.',
+    emerged: 'Who gets included in "the public good" — and who gets left out of Progressive reform?',
+    badgeEarned: null,
+  },
+  // ── ERA 3: Empire & War ────────────────────────────────────────────────
+  {
+    id: 'unit3a',
+    num: 'Unit 3A',
+    title: 'American Expansion & Emerging Global Power',
+    years: '1898 – 1914',
+    icon: '🌐',
+    era: 'Age of Empire',
+    eraColor: '#2a4a6a',
+    status: 'locked',
+    progress: 0,
+    url: null,
+    desc: 'The United States looked beyond its borders. The Spanish-American War made America a colonial power overnight. Debates raged about what kind of nation America wanted to become.',
+    topics: ['Spanish-American War','Philippine-American War','Monroe Doctrine','Panama Canal','Dollar Diplomacy','Anti-Imperialism'],
+    themes: ['power','identity','conflict','freedom'],
+    mapLabel: 'U.S. Empire & Influence',
+    mapRegions: ['caribbean','pacific'],
+    changed: 'U.S. acquires overseas territories; formally enters global power competition.',
+    continued: 'Racial hierarchy exported alongside American expansion; economic motives driving foreign policy.',
+    emerged: 'Can a nation founded on self-determination justify empire — and what does expansion do to American identity?',
+    badgeEarned: null,
+  },
+  {
+    id: 'unit3b',
+    num: 'Unit 3B',
+    title: 'World War I & Its Aftermath',
+    years: '1914 – 1920',
+    icon: '💨',
+    era: 'Age of Empire',
+    eraColor: '#2a4a6a',
+    status: 'locked',
+    progress: 0,
+    url: null,
+    desc: 'The "War to End All Wars" shattered the old order. America entered late but pivotally. Wilson\'s idealism collided with the bitter realities of the peace — and the Senate said no.',
+    topics: ['Causes of WWI','Zimmermann Telegram','Selective Service Act','Espionage Act','Wilson\'s 14 Points','Treaty of Versailles','Senate rejection'],
+    themes: ['conflict','power','freedom','identity'],
+    mapLabel: 'Western Front & Europe',
+    mapRegions: ['europe'],
+    changed: 'European empires collapse; new nations emerge; U.S. emerges as economic superpower.',
+    continued: 'U.S. isolationist impulses; racial discrimination in the military; labor unrest at home.',
+    emerged: 'When America rejects the League of Nations, what responsibility does a powerful nation have to the world?',
+    badgeEarned: null,
+  },
+  // ── ERA 4: Twenties & Depression ──────────────────────────────────────
+  {
+    id: 'unit4a',
+    num: 'Unit 4A',
+    title: 'Cultural Conflict & the Roaring 20s',
+    years: '1920 – 1929',
+    icon: '🎷',
+    era: 'Boom & Bust',
+    eraColor: '#5a3a0a',
+    status: 'locked',
+    progress: 0,
+    url: null,
+    desc: 'A decade of dazzling prosperity and deep contradiction. Jazz, flappers, and the Harlem Renaissance transformed culture while nativism, the KKK, and Prohibition exposed a nation at war with itself.',
+    topics: ['Prohibition','Harlem Renaissance','Nativism & Immigration Acts','Scopes Trial','KKK Revival','Mass Consumerism','Stock Market speculation'],
+    themes: ['identity','freedom','conflict','economy'],
+    mapLabel: 'Urban America & Cultural Centers',
+    mapRegions: ['northeast','south'],
+    changed: 'Mass consumer culture emerges; African American cultural power rises in northern cities.',
+    continued: 'Racial violence and white supremacy; economic inequality beneath the surface prosperity.',
+    emerged: 'As America modernizes, who defines American identity — and who gets excluded from it?',
+    badgeEarned: null,
+  },
+  {
+    id: 'unit4b',
+    num: 'Unit 4B',
+    title: 'The Great Depression & New Deal',
+    years: '1929 – 1941',
+    icon: '🌾',
+    era: 'Boom & Bust',
+    eraColor: '#5a3a0a',
+    status: 'locked',
+    progress: 0,
+    url: null,
+    desc: 'The economy collapsed. Millions lost everything. FDR\'s New Deal reshaped the relationship between government and citizens — forever changing what Americans expected Washington to do.',
+    topics: ['Stock Market Crash','Hoover\'s response','New Deal programs','Dust Bowl','Labor movement','Court-packing plan','Legacy debate'],
+    themes: ['economy','power','freedom','identity'],
+    mapLabel: 'Great Plains & Industrial Centers',
+    mapRegions: ['plains','midwest'],
+    changed: 'Federal government becomes guarantor of economic security; labor unions gain legal protection.',
+    continued: 'Racial exclusion baked into New Deal programs; fundamental capitalist structure left intact.',
+    emerged: 'How much should government intervene in the economy — and who benefits, and who is left out?',
+    badgeEarned: null,
+  },
+  // ── ERA 5: WWII & Cold War ─────────────────────────────────────────────
+  {
+    id: 'unit5a',
+    num: 'Unit 5A',
+    title: 'World War II',
+    years: '1939 – 1945',
+    icon: '🎖️',
+    era: 'WWII & Cold War',
+    eraColor: '#2a3a1a',
+    status: 'locked',
+    progress: 0,
+    url: null,
+    desc: 'America enters the war after Pearl Harbor and fights on two fronts. A Double V Campaign at home. The Holocaust. The atomic bomb. The world after 1945 will never be the same.',
+    topics: ['Causes of WWII','Pearl Harbor','Home Front','Japanese internment','Holocaust','D-Day','Manhattan Project','Hiroshima & Nagasaki'],
+    themes: ['conflict','freedom','power','identity'],
+    mapLabel: 'European & Pacific Theaters',
+    mapRegions: ['europe','pacific'],
+    changed: 'European colonialism weakened; U.S. and USSR emerge as superpowers; nuclear age begins.',
+    continued: 'Racial segregation in the U.S. military; colonial empires persist even as fascism falls.',
+    emerged: 'When does the ends justify the means in war — and what are the moral costs of total victory?',
+    badgeEarned: null,
+  },
+  {
+    id: 'unit5b',
+    num: 'Unit 5B',
+    title: 'The Cold War',
+    years: '1945 – 1963',
+    icon: '☢️',
+    era: 'WWII & Cold War',
+    eraColor: '#2a3a1a',
+    status: 'locked',
+    progress: 0,
+    url: null,
+    desc: 'Two superpowers. One world on the edge. The Truman Doctrine, Korea, McCarthy, the arms race, the space race — and the ever-present shadow of nuclear annihilation.',
+    topics: ['Truman Doctrine','Marshall Plan','NATO','Korean War','McCarthyism','Nuclear arms race','Sputnik','Cuban Missile Crisis'],
+    themes: ['conflict','power','freedom','identity'],
+    mapLabel: 'Cold War Flashpoints',
+    mapRegions: ['europe','korea','cuba'],
+    changed: 'Permanent military buildup; government power over dissent expands; superpower competition shapes every corner of globe.',
+    continued: 'Racial inequality at home contrasts with "freedom vs. communism" rhetoric abroad.',
+    emerged: 'How do you protect freedom through institutions that restrict it — and what are the costs of permanent war readiness?',
+    badgeEarned: null,
+  },
+  // ── ERA 6: Civil Rights & Kennedy Era (ACTIVE GAMES) ─────────────────
+  // ── REAL URL ADDED: Unit 6 — Chronicles of Change ─────────────────────
+  {
+    id: 'unit6',
+    num: 'Unit 6',
+    title: 'Chronicles of Change',
+    years: '1954 – 1965',
+    icon: '✊',
+    era: 'Civil Rights Era',
+    eraColor: '#7a2010',
+    status: 'available',   // ACTIVE — live game link below
+    progress: 0,
+    url: 'https://olsonjoshua-code.github.io/civil-rights-chronicles/',  // ← LIVE URL
+    desc: 'From the Montgomery Bus Boycott to the Voting Rights Act, the Civil Rights Movement forced America to confront the contradiction at its heart. Students, churches, lawyers, and ordinary people changed history.',
+    topics: ['Brown v. Board','Montgomery Bus Boycott','Sit-ins & SNCC','Freedom Rides','Birmingham Campaign','March on Washington','Civil Rights Act 1964','Voting Rights Act 1965'],
+    themes: ['freedom','conflict','power','identity'],
+    mapLabel: 'Civil Rights South',
+    mapRegions: ['southeast'],
+    changed: 'Legal segregation dismantled; voting rights enforced; federal government commits to equality.',
+    continued: 'Economic inequality; residential segregation; white resistance to integration.',
+    emerged: 'When legal equality is won, what remains — and what is the next phase of the freedom struggle?',
+    badgeEarned: '✊',
+  },
+  // ── REAL URL ADDED: Unit 7A — Camelot ─────────────────────────────────
+  {
+    id: 'unit7a',
+    num: 'Unit 7A',
+    title: 'Camelot',
+    years: '1961 – 1968',
+    icon: '🕊️',
+    era: 'Civil Rights Era',
+    eraColor: '#7a2010',
+    status: 'available',   // ACTIVE — live game link below
+    progress: 0,
+    url: 'https://olsonjoshua-code.github.io/camelot/',  // ← LIVE URL
+    desc: 'The Kennedy years and their violent end. A decade of hope, assassination, and fracture. The Great Society expands federal power even as the nation tears itself apart over race, Vietnam, and leadership.',
+    topics: ['Kennedy presidency','New Frontier','Cuban Missile Crisis','JFK assassination','LBJ & Great Society','Malcolm X & Black Power','1968 assassinations','Democratic Convention'],
+    themes: ['power','conflict','identity','freedom'],
+    mapLabel: 'Cold War & Domestic Crisis',
+    mapRegions: ['national','cuba'],
+    changed: 'Great Society expands social safety net; counter-culture challenges mainstream America.',
+    continued: 'Cold War logic drives foreign policy; racial inequality persists despite legislation.',
+    emerged: 'When the leaders of a movement are killed, how does a nation hold onto hope — and what comes next?',
+    badgeEarned: '🕊️',
+  },
+  // ── ERA 7: Vietnam & Watergate (ACTIVE GAME) ──────────────────────────
+  // ── REAL URL ADDED: Unit 7B — Napalm Dawn ─────────────────────────────
+  {
+    id: 'unit7b',
+    num: 'Unit 7B',
+    title: 'Napalm Dawn',
+    years: '1965 – 1975',
+    icon: '🪖',
+    era: 'Vietnam & Watergate',
+    eraColor: '#1a2a1a',
+    status: 'available',   // ACTIVE — live game link below
+    progress: 0,
+    url: 'https://olsonjoshua-code.github.io/Napalm-Dawn/',  // ← LIVE URL
+    desc: 'America\'s longest war — and its first televised defeat. Vietnam divided the country like no conflict since the Civil War. Nixon\'s presidency ended in disgrace, shaking American trust in government to its foundation.',
+    topics: ['Gulf of Tonkin','Escalation','Anti-war movement','My Lai Massacre','Tet Offensive','Nixon Doctrine','Watergate','26th Amendment'],
+    themes: ['conflict','power','freedom','identity'],
+    mapLabel: 'Southeast Asia',
+    mapRegions: ['vietnam','cambodia'],
+    changed: 'U.S. withdraws from Vietnam; Nixon resigns; War Powers Act limits presidential power.',
+    continued: 'Cold War containment policy; public distrust of government outlasts specific scandals.',
+    emerged: 'When a government lies to its people repeatedly, how can democratic trust ever be rebuilt?',
+    badgeEarned: '🪖',
+  },
+  // ── ERA 8: Modern America (ACTIVE GAME) ───────────────────────────────
+  // ── REAL URL ADDED: Unit 8 — Modern America ───────────────────────────
+  {
+    id: 'unit8',
+    num: 'Unit 8',
+    title: 'Modern America',
+    years: '1980 – Present',
+    icon: '🗽',
+    era: 'Contemporary America',
+    eraColor: '#1a1a3a',
+    status: 'available',   // ACTIVE — live game link below
+    progress: 0,
+    url: 'https://olsonjoshua-code.github.io/Modern-America/',  // ← LIVE URL
+    desc: 'Reagan\'s revolution, the fall of the Soviet Union, the culture wars, 9/11, the financial crisis, social media, and a deeply divided nation still trying to answer what it means to be American.',
+    topics: ['Reagan Revolution','Iran-Contra','End of Cold War','1990s prosperity','9/11 & War on Terror','Iraq War','Great Recession','Obama presidency','Polarization'],
+    themes: ['power','identity','economy','conflict'],
+    mapLabel: 'Post-Cold War World',
+    mapRegions: ['national','middleeast'],
+    changed: 'U.S. becomes sole superpower after 1991; digital revolution transforms every aspect of life.',
+    continued: 'Economic inequality; racial tension; partisan polarization; questions of national identity.',
+    emerged: 'In a world where America is the dominant power, what are its responsibilities — at home and abroad?',
+    badgeEarned: '🗽',
+  },
+];
+
+// ── ERA GROUPING (for timeline display) ─────────────────────────────────
+const ERAS = [
+  { name:'Reconstruction Era',    years:'1861 – 1877', units:['unit1'] },
+  { name:'Gilded Age & Reform',   years:'1865 – 1920', units:['unit2a','unit2b'] },
+  { name:'Empire & World War I',  years:'1898 – 1920', units:['unit3a','unit3b'] },
+  { name:'Boom, Bust & New Deal', years:'1920 – 1941', units:['unit4a','unit4b'] },
+  { name:'WWII & Cold War',       years:'1939 – 1963', units:['unit5a','unit5b'] },
+  { name:'Civil Rights Era',      years:'1954 – 1968', units:['unit6','unit7a'] },
+  { name:'Vietnam & Watergate',   years:'1965 – 1975', units:['unit7b'] },
+  { name:'Contemporary America',  years:'1980 – Present', units:['unit8'] },
+];
+
+// ── AVATARS ──────────────────────────────────────────────────────────────
+const AVATARS = [
+  { id:'scholar',  icon:'🧑‍🎓', label:'Scholar'   },
+  { id:'rebel',    icon:'✊',   label:'Activist'  },
+  { id:'soldier',  icon:'🪖',   label:'Soldier'   },
+  { id:'reporter', icon:'📰',   label:'Reporter'  },
+  { id:'pioneer',  icon:'🤠',   label:'Pioneer'   },
+  { id:'diplomat', icon:'🎩',   label:'Diplomat'  },
+  { id:'worker',   icon:'⚙️',   label:'Worker'    },
+  { id:'artist',   icon:'🎷',   label:'Artist'    },
+];
+
+// ── RANKS ────────────────────────────────────────────────────────────────
+const RANKS = [
+  { min:0,  label:'Curious Citizen'     },
+  { min:1,  label:'History Apprentice'  },
+  { min:3,  label:'Era Explorer'        },
+  { min:5,  label:'Chronicle Keeper'    },
+  { min:8,  label:'American Archivist'  },
+  { min:11, label:'Master Historian'    },
+];
+
+// ── BADGES ───────────────────────────────────────────────────────────────
+const BADGES = [
+  { id:'first_unit',   icon:'🌟', name:'First Chapter',        desc:'Complete your first unit' },
+  { id:'civil_rights', icon:'✊', name:'Chronicle of Change',   desc:'Complete Unit 6A' },
+  { id:'camelot',      icon:'🕊️', name:'Camelot',               desc:'Complete Unit 6B' },
+  { id:'napalm',       icon:'🪖', name:'Napalm Dawn',           desc:'Complete Unit 7A' },
+  { id:'modern',       icon:'🗽', name:'Modern America',        desc:'Complete Unit 8'  },
+  { id:'half_course',  icon:'🏅', name:'Halfway Through',       desc:'Complete 6+ units' },
+  { id:'full_course',  icon:'🏛️', name:'Full American Chronicle',desc:'Complete all 13 units' },
+  { id:'all_themes',   icon:'⭐', name:'Theme Master',          desc:'Engage all 5 themes' },
+];
+
+// ══════════════════════════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════════════════════════
+let STATE = {
+  name: '',
+  avatar: 'scholar',
+  unitsCompleted: [],
+  unitsInProgress: [],
+  badgesEarned: [],
+  themeProgress: { power:0, freedom:0, economy:0, conflict:0, identity:0 },
+  totalScore: 0,
+  setupDone: false,
+};
+
+function saveState() {
+  try { localStorage.setItem('ac_shell_state', JSON.stringify(STATE)); } catch(e){}
+}
+function loadState() {
+  try {
+    const raw = localStorage.getItem('ac_shell_state');
+    if (raw) STATE = { ...STATE, ...JSON.parse(raw) };
+  } catch(e){}
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  LOADING
+// ══════════════════════════════════════════════════════════════════════════
+window.addEventListener('load', () => {
+  loadState();
+  const bar = document.getElementById('loading-bar');
+  let pct = 0;
+  const iv = setInterval(() => {
+    pct += Math.random() * 22 + 8;
+    bar.style.width = Math.min(pct, 95) + '%';
+    if (pct >= 95) {
+      clearInterval(iv);
+      bar.style.width = '100%';
+      setTimeout(() => {
+        const ls = document.getElementById('loading-screen');
+        ls.style.opacity = '0';
+        setTimeout(() => {
+          ls.style.display = 'none';
+          initApp();
+        }, 600);
+      }, 300);
+    }
+  }, 100);
+});
+
+function initApp() {
+  if (STATE.setupDone) {
+    enterShell();
+  } else {
+    const ts = document.getElementById('title-screen');
+    ts.style.display = 'flex';
+    ts.classList.add('active');
+    drawTitleArt();
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  TITLE SCREEN ART
+// ══════════════════════════════════════════════════════════════════════════
+function drawTitleArt() {
+  const el = document.getElementById('title-art');
+  el.innerHTML = `
+    <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#050302"/>
+          <stop offset="100%" stop-color="#1c1208"/>
+        </linearGradient>
+        <radialGradient id="glow" cx="50%" cy="60%" r="50%">
+          <stop offset="0%" stop-color="rgba(232,160,32,0.18)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <rect width="640" height="200" fill="url(#sky)"/>
+      <rect width="640" height="200" fill="url(#glow)"/>
+      <!-- stars -->
+      ${Array.from({length:80},(_,i)=>`<circle cx="${Math.sin(i*137.5)*300+320}" cy="${Math.cos(i*97)*80+60}" r="${i%5===0?1.2:0.6}" fill="rgba(245,234,216,${0.1+Math.random()*0.4})"/>`).join('')}
+      <!-- timeline base line -->
+      <line x1="40" y1="145" x2="600" y2="145" stroke="#3d2e1e" stroke-width="1"/>
+      <!-- era nodes on the mini-timeline -->
+      ${[60,130,210,290,370,440,510,575].map((x,i)=>`
+        <circle cx="${x}" cy="145" r="5" fill="#0d0a08" stroke="${['#8b4513','#8b6914','#2a4a6a','#5a3a0a','#2a3a1a','#5a1a0a','#1a2a1a','#1a1a3a'][i]}" stroke-width="1.5"/>
+        <line x1="${x+6}" y1="145" x2="${[60,130,210,290,370,440,510,575][i+1]||599}" y2="145" stroke="#2e2118" stroke-width="1"/>
+      `).join('')}
+      <!-- Capitol silhouette -->
+      <g transform="translate(280,40)" opacity="0.18">
+        <rect x="-4" y="50" width="8" height="60" fill="#e8a020"/>
+        <polygon points="-4,50 4,50 0,20" fill="#e8a020"/>
+        <rect x="-20" y="70" width="40" height="40" fill="#e8a020"/>
+        <rect x="-35" y="85" width="70" height="25" fill="#e8a020"/>
+      </g>
+      <!-- label -->
+      <text x="320" y="185" font-family="'Bebas Neue',sans-serif" font-size="10" fill="rgba(232,160,32,0.4)" text-anchor="middle" letter-spacing="4">1861 ── AMERICAN CHRONICLES ── PRESENT</text>
+    </svg>`;
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  PROFILE SETUP
+// ══════════════════════════════════════════════════════════════════════════
+function startNewProfile() {
+  document.getElementById('title-screen').classList.remove('active');
+  document.getElementById('title-screen').style.display = 'none';
+  const ps = document.getElementById('profile-setup-screen');
+  ps.style.display = 'block';
+  ps.classList.add('active');
+  buildAvatarGrid();
+  updateSetupPreview();
+}
+
+function buildAvatarGrid() {
+  const grid = document.getElementById('avatar-grid');
+  grid.innerHTML = AVATARS.map(a => `
+    <div class="avatar-opt ${STATE.avatar===a.id?'selected':''}" onclick="selectAvatar('${a.id}')">
+      <div class="avatar-opt-icon">${a.icon}</div>
+      <div class="avatar-opt-label">${a.label}</div>
+    </div>
+  `).join('');
+}
+
+function selectAvatar(id) {
+  STATE.avatar = id;
+  document.querySelectorAll('.avatar-opt').forEach(el => {
+    el.classList.toggle('selected', el.querySelector('.avatar-opt-icon').textContent === AVATARS.find(a=>a.id===id).icon);
+  });
+  updateSetupPreview();
+}
+
+function updateSetupPreview() {
+  const av = AVATARS.find(a=>a.id===STATE.avatar)||AVATARS[0];
+  const nameVal = document.getElementById('name-input').value.trim() || 'Historian';
+  document.getElementById('setup-preview-avatar').innerHTML = `<div style="font-size:60px;line-height:1;text-align:center;">${av.icon}</div>`;
+  document.getElementById('setup-preview-name').textContent = nameVal;
+}
+
+function confirmProfile() {
+  const nameVal = document.getElementById('name-input').value.trim();
+  if (!nameVal) { alert('Please enter your name.'); return; }
+  STATE.name = nameVal;
+  STATE.setupDone = true;
+  saveState();
+  document.getElementById('profile-setup-screen').classList.remove('active');
+  document.getElementById('profile-setup-screen').style.display = 'none';
+  enterShell();
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  SHELL ENTRY
+// ══════════════════════════════════════════════════════════════════════════
+function enterShell() {
+  document.getElementById('title-screen').style.display = 'none';
+  document.getElementById('profile-setup-screen').style.display = 'none';
+  const shell = document.getElementById('shell');
+  shell.style.display = 'flex';
+  updateHUD();
+  buildActiveChips();
+  showView('timeline');
+  // renderTimeline after layout so clientWidth values are available
+  requestAnimationFrame(() => {
+    renderTimeline();
+    renderProfileView();
+    renderStoryView();
+    renderBadgeGrid();
+  });
+}
+
+// PART 2 / 7: Build the quick-launch chips for active units in the callout banner
+function buildActiveChips() {
+  const container = document.getElementById('active-unit-chips');
+  if (!container) return;
+  container.style.display = 'flex';
+  container.style.gap = '8px';
+  container.style.flexWrap = 'wrap';
+  container.innerHTML = UNIT_DATA.filter(u => u.url).map(u => `
+    <button onclick="openPreview('${u.id}')"
+      style="font-family:var(--bebas);font-size:12px;letter-spacing:1.5px;
+        background:rgba(232,160,32,0.08);border:1.5px solid var(--amber2);
+        color:var(--amber);padding:5px 14px;cursor:pointer;transition:all 0.15s;"
+      onmouseover="this.style.background='rgba(232,160,32,0.18)'"
+      onmouseout="this.style.background='rgba(232,160,32,0.08)'">
+      ${u.icon} ${u.num} — ${u.title}
+    </button>`).join('');
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  HUD UPDATE
+// ══════════════════════════════════════════════════════════════════════════
+function getRank() {
+  const n = STATE.unitsCompleted.length;
+  let rank = RANKS[0];
+  for (const r of RANKS) { if (n >= r.min) rank = r; }
+  return rank.label;
+}
+
+function updateHUD() {
+  const av = AVATARS.find(a=>a.id===STATE.avatar)||AVATARS[0];
+  document.getElementById('hud-avatar').innerHTML = `<div style="font-size:36px;line-height:44px;text-align:center;">${av.icon}</div>`;
+  document.getElementById('hud-name').textContent = STATE.name || 'Historian';
+  document.getElementById('hud-rank').textContent = getRank();
+  const pct = Math.round((STATE.unitsCompleted.length / UNIT_DATA.length) * 100);
+  document.getElementById('hud-xp').style.width = pct + '%';
+  document.getElementById('hud-units').textContent = STATE.unitsCompleted.length;
+  document.getElementById('hud-badges').textContent = STATE.badgesEarned.length;
+  document.getElementById('hud-pct').textContent = pct + '%';
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  VIEW SWITCHING
+// ══════════════════════════════════════════════════════════════════════════
+function showView(view) {
+  ['timeline','profile','story'].forEach(v => {
+    document.getElementById('view-'+v).style.display = v===view ? 'block' : 'none';
+    document.getElementById('nav-'+v)?.classList.toggle('active', v===view);
+  });
+  closePreview();
+  if (view === 'timeline') {
+    requestAnimationFrame(() => {
+      const track = document.getElementById('timeline-track');
+      if (track) track.dispatchEvent(new Event('scroll'));
+    });
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  TIMELINE RENDER
+// ══════════════════════════════════════════════════════════════════════════
+function getUnitStatus(unit) {
+  if (STATE.unitsCompleted.includes(unit.id)) return 'completed';
+  if (STATE.unitsInProgress.includes(unit.id)) return 'inprogress';
+  return unit.status;
+}
+
+function renderTimeline() {
+  const inner = document.getElementById('timeline-inner');
+  if (!inner) return;
+
+  // clear everything except spine elements
+  inner.querySelectorAll('.unit-node,.tl-connector,.era-divider,.era-section-label,.era-section-line')
+       .forEach(el => el.remove());
+
+  // build a flat ordered list with era boundaries
+  const NODE_W    = 152;  // card width px
+  const CONN_W    = 36;   // connector width px
+  const DIV_W     = 6;    // era divider width px
+  const PAD       = 40;   // left/right padding of #timeline-inner
+
+  let x = PAD;  // running x position
+  let firstEra  = true;
+  let completedX = PAD; // how far the amber spine extends
+
+  ERAS.forEach((era, eraIdx) => {
+    const eraUnits = era.units.map(uid => UNIT_DATA.find(u => u.id === uid)).filter(Boolean);
+
+    // era section label (absolute over inner)
+    const eraLabel = document.createElement('div');
+    eraLabel.className = 'era-section-label';
+    eraLabel.style.left = x + 'px';
+    eraLabel.textContent = era.name.toUpperCase() + ' · ' + era.years;
+    inner.appendChild(eraLabel);
+
+    // era divider (not before first)
+    if (!firstEra) {
+      const div = document.createElement('div');
+      div.className = 'era-divider';
+      inner.appendChild(div);
+      x += DIV_W + 4;
+    }
+    firstEra = false;
+
+    eraUnits.forEach((unit, idx) => {
+      // connector between units within same era
+      if (idx > 0) {
+        const conn = document.createElement('div');
+        const prevStatus = getUnitStatus(eraUnits[idx-1]);
+        conn.className = 'tl-connector' + (prevStatus==='completed' ? ' done' : '');
+        conn.innerHTML = '<div class="tl-connector-arrow"></div>';
+        inner.appendChild(conn);
+        x += CONN_W;
+      }
+
+      const status = getUnitStatus(unit);
+      const node = document.createElement('div');
+      node.className = `unit-node ${status}`;
+      node.setAttribute('data-unit-id', unit.id);
+      node.onclick = () => openPreview(unit.id);
+
+      const stripColor = unit.eraColor || '#2e2118';
+
+      // ── ACTIVE vs LOCKED visual treatment ──────────────────────────────
+      // Active nodes: brighter icon, amber dot, play-ready appearance
+      // Locked nodes: lock overlay, greyed out, no hover pointer
+      const isActive   = (status === 'available' || status === 'inprogress' || status === 'completed');
+      const lockBadge  = status === 'locked'
+        ? `<div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:18px;opacity:0.5;">🔒</div>`
+        : '';
+      const playBadge  = status === 'available'
+        ? `<div style="position:absolute;top:5px;right:6px;font-family:var(--dm);font-size:7px;letter-spacing:1px;color:var(--amber3);background:rgba(232,160,32,0.12);border:1px solid rgba(232,160,32,0.3);padding:2px 5px;">PLAY</div>`
+        : '';
+      const iconOpacity = isActive ? '1' : '0.4';
+
+      node.innerHTML = `
+        <div class="unit-node-strip" style="background:${stripColor};"></div>
+        <div class="unit-node-art">
+          ${lockBadge}${playBadge}
+          <div class="unit-node-icon" style="opacity:${iconOpacity};">${unit.icon}</div>
+          <div class="unit-node-year-stamp">${unit.years.split('–')[0].trim()}</div>
+        </div>
+        <div class="unit-node-body">
+          <div class="unit-node-num">${unit.num}</div>
+          <div class="unit-node-title">${unit.title}</div>
+          <div class="unit-node-status ${statusClass(status)}">${statusLabel(status)}</div>
+        </div>
+        <div class="unit-node-progress">
+          <div class="unit-node-progress-fill" style="width:${unit.progress||0}%"></div>
+        </div>`;
+      inner.appendChild(node);
+
+      // track completed spine length
+      if (status === 'completed') completedX = x + NODE_W;
+      x += NODE_W;
+    });
+
+    // gap between eras
+    x += 24;
+  });
+
+  // set inner width so it scrolls properly
+  inner.style.width = (x + PAD) + 'px';
+
+  // update spine fill
+  const spineFill = document.getElementById('timeline-spine-fill');
+  if (spineFill) spineFill.style.width = Math.max(0, completedX - PAD) + 'px';
+
+  // build ruler ticks
+  buildRuler(x + PAD);
+
+  // init drag + sync
+  initTimelineDrag();
+  initMinimap(x + PAD);
+}
+
+// ── YEAR RULER ────────────────────────────────────────────────────────────
+function buildRuler(totalWidth) {
+  const rulerInner = document.getElementById('timeline-ruler-inner');
+  if (!rulerInner) return;
+  rulerInner.innerHTML = '';
+  rulerInner.style.width = totalWidth + 'px';
+
+  // place era year labels at each era's approximate x position
+  // Use unit years as anchors
+  const YEAR_MARKS = [
+    { year:'1861', x:40  },
+    { year:'1877', x:188 },
+    { year:'1890', x:240 },
+    { year:'1900', x:310 },
+    { year:'1914', x:410 },
+    { year:'1920', x:475 },
+    { year:'1929', x:560 },
+    { year:'1939', x:650 },
+    { year:'1945', x:730 },
+    { year:'1954', x:820 },
+    { year:'1963', x:920 },
+    { year:'1965', x:1010},
+    { year:'1975', x:1100},
+    { year:'1980', x:1160},
+    { year:'Present', x:1270},
+  ];
+
+  YEAR_MARKS.forEach(m => {
+    const tick = document.createElement('div');
+    tick.className = 'ruler-tick major';
+    tick.style.left = m.x + 'px';
+    tick.innerHTML = `<div class="ruler-tick-line"></div><div class="ruler-tick-label">${m.year}</div>`;
+    rulerInner.appendChild(tick);
+  });
+}
+
+// ── DRAG TO PAN ───────────────────────────────────────────────────────────
+function initTimelineDrag() {
+  const track = document.getElementById('timeline-track');
+  if (!track || track._dragInit) return;
+  track._dragInit = true;
+
+  let isDown = false, startX, scrollStart;
+
+  track.addEventListener('mousedown', e => {
+    isDown = true;
+    startX = e.pageX - track.offsetLeft;
+    scrollStart = track.scrollLeft;
+    track.style.cursor = 'grabbing';
+  });
+  window.addEventListener('mouseup', () => { isDown = false; track.style.cursor = 'grab'; });
+  track.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = scrollStart - (x - startX);
+  });
+
+  // wheel → horizontal scroll
+  track.addEventListener('wheel', e => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      track.scrollLeft += e.deltaY * 1.2;
+    }
+  }, { passive: false });
+
+  // touch support
+  let touchStart;
+  track.addEventListener('touchstart', e => { touchStart = e.touches[0].clientX; });
+  track.addEventListener('touchmove', e => {
+    if (!touchStart) return;
+    const dx = touchStart - e.touches[0].clientX;
+    track.scrollLeft += dx;
+    touchStart = e.touches[0].clientX;
+  });
+}
+
+// ── MINIMAP SYNC ──────────────────────────────────────────────────────────
+function initMinimap(totalWidth) {
+  const track     = document.getElementById('timeline-track');
+  const mmTrack   = document.getElementById('minimap-track');
+  const mmVP      = document.getElementById('minimap-viewport');
+  const mmFill    = document.getElementById('minimap-fill');
+  const mmLabel   = document.getElementById('mm-era-label');
+  const mmPct     = document.getElementById('mm-pct');
+  if (!track || !mmTrack) return;
+
+  // era pip markers on minimap
+  mmTrack.querySelectorAll('.minimap-era-pip').forEach(el => el.remove());
+  const eraBoundaries = [0, 14, 24, 37, 49, 61, 73, 85]; // rough % positions per era
+  const eraColors = ERAS.map((_, i) => ['#8b4513','#8b6914','#2a4a6a','#5a3a0a','#2a3a1a','#5a1a0a','#1a2a1a','#1a1a3a'][i]);
+  eraBoundaries.forEach((pct, i) => {
+    const pip = document.createElement('div');
+    pip.className = 'minimap-era-pip';
+    pip.style.left = pct + '%';
+    pip.style.background = eraColors[i] || '#3d2e1e';
+    mmTrack.appendChild(pip);
+  });
+
+  function updateMinimap() {
+    const viewW     = track.clientWidth;
+    const scrollMax = track.scrollWidth - viewW;
+    const scrollPct = scrollMax > 0 ? track.scrollLeft / scrollMax : 0;
+
+    // viewport indicator
+    const trackW    = mmTrack.clientWidth;
+    const vpW       = Math.max(20, (viewW / track.scrollWidth) * trackW);
+    const vpLeft    = scrollPct * (trackW - vpW);
+    mmVP.style.width = vpW + 'px';
+    mmVP.style.left  = vpLeft + 'px';
+
+    // completed fill
+    const completedPct = Math.round((STATE.unitsCompleted.length / UNIT_DATA.length) * 100);
+    mmFill.style.width = completedPct + '%';
+
+    // current era label
+    const scrollFrac = track.scrollLeft / (track.scrollWidth || 1);
+    const eraIdx = Math.min(ERAS.length-1, Math.floor(scrollFrac * ERAS.length));
+    mmLabel.textContent = ERAS[eraIdx]?.years?.split('–')[0]?.trim() || '1861';
+    mmPct.textContent = Math.round(scrollPct * 100) + '%';
+
+    // sync ruler
+    const rulerInner = document.getElementById('timeline-ruler-inner');
+    if (rulerInner) rulerInner.style.transform = `translateX(-${track.scrollLeft}px)`;
+  }
+
+  track.addEventListener('scroll', updateMinimap, { passive: true });
+
+  // click minimap to jump
+  mmTrack.addEventListener('click', e => {
+    const rect = mmTrack.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    const scrollMax = track.scrollWidth - track.clientWidth;
+    track.scrollTo({ left: pct * scrollMax, behavior: 'smooth' });
+  });
+
+  updateMinimap();
+}
+
+function statusClass(s) {
+  return { available:'status-available', locked:'status-locked', completed:'status-completed', inprogress:'status-inprogress' }[s] || 'status-coming';
+}
+function statusLabel(s) {
+  return { available:'▶ Available Now', locked:'Coming Soon', completed:'✓ Completed', inprogress:'In Progress' }[s] || 'Coming Soon';
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  PREVIEW PANEL
+// ══════════════════════════════════════════════════════════════════════════
+const THEME_LABELS = {
+  power:    '⚖️ Power',
+  freedom:  '🗽 Freedom & Rights',
+  economy:  '⚙️ Economy & Work',
+  conflict: '⚔️ Conflict & Change',
+  identity: '🌎 American Identity'
+};
+
+// ── PREVIEW PANEL OPEN ────────────────────────────────────────────────────
+// All units open the preview (locked units show a Coming Soon state).
+// Active units show the full launch button with the real URL.
+function openPreview(unitId) {
+  const unit = UNIT_DATA.find(u => u.id === unitId);
+  if (!unit) return;
+
+  const status = getUnitStatus(unit);
+
+  // populate core fields
+  document.getElementById('pv-unit-num').textContent  = unit.num;
+  document.getElementById('pv-title').textContent     = unit.title;
+  document.getElementById('pv-years').textContent     = unit.years;
+  document.getElementById('pv-desc').textContent      = unit.desc;
+  document.getElementById('pv-changed').textContent   = unit.changed;
+  document.getElementById('pv-continued').textContent = unit.continued;
+  document.getElementById('pv-emerged').textContent   = unit.emerged;
+
+  // hero art — era colour gradient + big icon watermark
+  const hero = document.getElementById('preview-hero');
+  hero.style.background = `linear-gradient(135deg, ${unit.eraColor}55 0%, #0d0a08 100%)`;
+  document.getElementById('preview-hero-art').innerHTML =
+    `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;opacity:0.12;">${unit.icon}</div>`;
+
+  // status badge
+  const badge = document.getElementById('pv-status-badge');
+  badge.textContent = statusLabel(status).toUpperCase();
+  badge.className = 'preview-status-badge ' + statusClass(status);
+
+  // topics — show all for active, first 4 for locked
+  const topicsToShow = status === 'locked' ? unit.topics.slice(0, 4) : unit.topics;
+  document.getElementById('pv-topics').innerHTML =
+    topicsToShow.map(t => `<span class="topic-tag">${t}</span>`).join('') +
+    (status === 'locked' && unit.topics.length > 4
+      ? `<span class="topic-tag" style="font-style:italic;opacity:0.5;">+${unit.topics.length-4} more</span>`
+      : '');
+
+  // themes — show first 3 only (max 2-3 as spec'd)
+  // PART 4: limit to 3 dominant themes for clarity
+  document.getElementById('pv-themes').innerHTML = unit.themes.slice(0,3).map(t =>
+    `<span class="theme-chip ${t}">${THEME_LABELS[t]||t}</span>`).join('');
+
+  // mini map
+  document.getElementById('pv-map').innerHTML = buildMiniMap(unit);
+
+  // launch area
+  buildLaunchArea(unit, status);
+
+  // show panel
+  document.getElementById('preview-panel').classList.add('open');
+  document.getElementById('preview-backdrop').style.display = 'block';
+
+  // highlight node on timeline
+  document.querySelectorAll('.unit-node').forEach(n => n.classList.remove('selected'));
+  document.querySelector(`[data-unit-id="${unitId}"]`)?.classList.add('selected');
+}
+
+function closePreview() {
+  document.getElementById('preview-panel').classList.remove('open');
+  document.getElementById('preview-backdrop').style.display = 'none';
+  document.querySelectorAll('.unit-node').forEach(n => n.classList.remove('selected'));
+}
+
+// ── LAUNCH AREA BUILDER ───────────────────────────────────────────────────
+// PART 1: Real URLs are set in UNIT_DATA above. This function renders the
+// correct launch state based on unit status and whether a URL is present.
+function buildLaunchArea(unit, status) {
+  const area = document.getElementById('pv-launch-area');
+
+  if (status === 'locked') {
+    // ── COMING SOON — no button, just a note ───────────────────────────
+    area.innerHTML = `
+      <div style="background:var(--bg3); border:1px dashed var(--border2); padding:18px; text-align:center;">
+        <div style="font-size:28px; margin-bottom:8px; opacity:0.4;">🔒</div>
+        <div style="font-family:var(--bebas); font-size:14px; color:var(--text3); letter-spacing:3px; margin-bottom:6px;">COMING SOON</div>
+        <div style="font-family:var(--crimson); font-size:14px; color:var(--text3); font-style:italic; line-height:1.5;">
+          This unit game is in development. Check back as the course grows.
+        </div>
+      </div>`;
+
+  } else if (status === 'completed') {
+    // ── COMPLETED — replay option ───────────────────────────────────────
+    area.innerHTML = `
+      <div style="text-align:center; padding:10px 0 6px;">
+        <div style="font-size:30px; margin-bottom:6px;">✅</div>
+        <div style="font-family:var(--bebas); font-size:14px; color:var(--green2); letter-spacing:2px;">Unit Completed</div>
+      </div>
+      ${unit.url
+        ? `<a href="${unit.url}" target="_blank" rel="noopener" style="text-decoration:none;">
+             <button class="btn full green" style="margin-top:8px;"><span>↺ Replay ${unit.num}</span></button>
+           </a>`
+        : ''}`;
+
+  } else if (unit.url) {
+    // ── ACTIVE WITH REAL URL — main launch button ───────────────────────
+    // PART 1: Opens the real standalone game in a new tab
+    area.innerHTML = `
+      <a href="${unit.url}" target="_blank" rel="noopener" style="text-decoration:none; display:block;">
+        <button class="btn full" style="font-size:17px; padding:18px 28px; letter-spacing:3px;
+          box-shadow:0 0 30px rgba(232,160,32,0.25); border-width:2px;">
+          <span>▶&nbsp; Launch ${unit.num}</span>
+        </button>
+      </a>
+      <div style="font-family:var(--dm); font-size:9px; color:var(--text3); text-align:center; margin-top:8px; line-height:1.6;">
+        Opens in a new tab
+        <span style="display:block; color:var(--border2); margin-top:2px; font-size:8px; word-break:break-all;">${unit.url}</span>
+      </div>`;
+
+  } else {
+    // ── NO URL YET — placeholder for future games ───────────────────────
+    area.innerHTML = `
+      <div style="background:var(--bg3); border:1px dashed var(--border2); padding:18px; text-align:center;">
+        <div style="font-family:var(--bebas); font-size:12px; color:var(--text3); letter-spacing:3px; margin-bottom:4px;">URL NOT YET ASSIGNED</div>
+        <div style="font-family:var(--dm); font-size:9px; color:var(--text3); line-height:1.6;">
+          Set the <code style="background:var(--bg2); padding:1px 4px; font-size:8px;">url</code> field
+          in <code style="background:var(--bg2); padding:1px 4px; font-size:8px;">UNIT_DATA</code> to enable launch.
+        </div>
+      </div>`;
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  MINI MAP SVG BUILDER
+//  PART 5: Simple and symbolic — labeled highlight regions only.
+//  No detailed geography. Supports learning without distraction.
+// ══════════════════════════════════════════════════════════════════════════
+function buildMiniMap(unit) {
+  const color = unit.eraColor || '#3d2e1e';
+
+  // Region definitions: [path, labelX, labelY, displayName]
+  const regionDefs = {
+    southeast: { p:'M335,158 L390,155 L392,192 L352,198 L328,182 Z',       lx:358, ly:178, n:'Deep South'        },
+    northeast: { p:'M372,86  L422,82  L426,118 L378,123 Z',                lx:398, ly:103, n:'Northeast'         },
+    midwest:   { p:'M255,108 L338,106 L342,152 L258,155 Z',                lx:296, ly:132, n:'Midwest'           },
+    plains:    { p:'M198,106 L258,104 L262,162 L202,165 Z',                lx:228, ly:136, n:'Great Plains'      },
+    west:      { p:'M82,82  L194,78  L198,172 L84,175 Z',                  lx:138, ly:128, n:'Western U.S.'      },
+    south:     { p:'M210,152 L338,150 L342,195 L212,198 Z',                lx:272, ly:175, n:'American South'    },
+    national:  { p:'M82,80  L430,76  L434,208 L80,212 Z',                  lx:256, ly:144, n:'United States'     },
+    europe:    null,
+    pacific:   null,
+    vietnam:   null,
+    cambodia:  null,
+    korea:     null,
+    cuba:      null,
+    caribbean: null,
+    middleeast:null,
+  };
+
+  const highlights = (unit.mapRegions || [])
+    .map(r => regionDefs[r])
+    .filter(Boolean)
+    .map(r => `
+      <path d="${r.p}" fill="${color}" fill-opacity="0.5" stroke="${color}" stroke-width="1.5" stroke-opacity="0.8"/>
+      <text x="${r.lx}" y="${r.ly}" font-family="'DM Sans',sans-serif" font-size="7.5"
+        fill="rgba(245,234,216,0.75)" text-anchor="middle" font-weight="600">${r.n}</text>`)
+    .join('');
+
+  // Non-US regions: show as text note below map
+  const nonUS = (unit.mapRegions || []).filter(r => !regionDefs[r] || regionDefs[r] === null);
+  const nonUSLabels = {
+    europe:'Europe', pacific:'Pacific Theater', vietnam:'Vietnam', cambodia:'Cambodia',
+    korea:'Korean Peninsula', cuba:'Cuba / Caribbean', caribbean:'Caribbean',
+    middleeast:'Middle East',
+  };
+  const noteItems = nonUS.map(r => nonUSLabels[r] || r).join(' · ');
+
+  return `
+    <svg viewBox="0 55 520 160" class="mini-map-svg" xmlns="http://www.w3.org/2000/svg">
+      <!-- U.S. outline (simplified but recognizable) -->
+      <path d="M82,82 L152,73 L202,68 L262,65 L322,67 L382,72 L432,82 L440,102 L444,132 L438,165 L418,184 L390,196 L350,204 L300,207 L250,204 L200,196 L158,183 L118,168 L90,148 L80,124 Z"
+        fill="#14100d" stroke="#2e2118" stroke-width="1.5"/>
+      <!-- Florida -->
+      <path d="M340,178 L352,200 L347,218 L337,224 L330,208 L333,192 Z"
+        fill="#14100d" stroke="#2e2118" stroke-width="1"/>
+      <!-- Great Lakes (subtle) -->
+      <ellipse cx="297" cy="103" rx="20" ry="9" fill="#0d0a08" opacity="0.6"/>
+      <!-- Region highlights + labels -->
+      ${highlights}
+      <!-- Non-US geography note -->
+      ${noteItems
+        ? `<text x="260" y="228" font-family="'DM Sans',sans-serif" font-size="8"
+             fill="rgba(160,144,128,0.65)" text-anchor="middle">Also: ${noteItems}</text>`
+        : ''}
+    </svg>`;
+}
+// ══════════════════════════════════════════════════════════════════════════
+//  PROFILE VIEW
+//  PART 6: Progress is visual / session-based. No broken save logic.
+//  Manual completion buttons let students mark units done after playing.
+// ══════════════════════════════════════════════════════════════════════════
+function renderProfileView() {
+  const av = AVATARS.find(a => a.id === STATE.avatar) || AVATARS[0];
+  document.getElementById('profile-avatar-lg').innerHTML =
+    `<div style="font-size:60px;line-height:80px;text-align:center;">${av.icon}</div>`;
+  document.getElementById('profile-name-disp').textContent = STATE.name || 'Historian';
+  document.getElementById('profile-rank-disp').textContent = getRank();
+
+  const total = UNIT_DATA.length;
+  const done  = STATE.unitsCompleted.length;
+  const pct   = Math.round((done / total) * 100);
+  document.getElementById('profile-xp-fill').style.width = pct + '%';
+  document.getElementById('profile-xp-text').textContent = `${done} of ${total} units complete`;
+
+  // stats — honest counts
+  document.getElementById('ps-units').textContent     = done;
+  document.getElementById('ps-badges').textContent    = STATE.badgesEarned.length;
+  document.getElementById('ps-available').textContent = UNIT_DATA.filter(u => u.url).length;
+  document.getElementById('ps-total').textContent     = total;
+
+  // theme progress: each completed unit contributes its themes
+  const themeScores = { power:0, freedom:0, economy:0, conflict:0, identity:0 };
+  const themeMax    = { power:0, freedom:0, economy:0, conflict:0, identity:0 };
+  UNIT_DATA.forEach(u => {
+    u.themes.forEach(t => {
+      if (themeMax[t] !== undefined) {
+        themeMax[t]++;
+        if (STATE.unitsCompleted.includes(u.id)) themeScores[t]++;
+      }
+    });
+  });
+  Object.keys(themeScores).forEach(t => {
+    const p = themeMax[t] > 0 ? Math.round((themeScores[t] / themeMax[t]) * 100) : 0;
+    const bar = document.getElementById(`tp-${t}`);
+    const lbl = document.getElementById(`tp-${t}-pct`);
+    if (bar) bar.style.width = p + '%';
+    if (lbl) lbl.textContent = p + '%';
+  });
+
+  // manual completion list — only active units (those with a url)
+  const list = document.getElementById('manual-complete-list');
+  if (list) {
+    list.innerHTML = UNIT_DATA.filter(u => u.url).map(u => {
+      const isDone = STATE.unitsCompleted.includes(u.id);
+      return `
+        <button onclick="toggleComplete('${u.id}')"
+          style="font-family:var(--dm);font-size:9px;letter-spacing:0.5px;
+            padding:7px 12px;cursor:pointer;transition:all 0.15s;
+            background:${isDone ? 'rgba(56,160,80,0.1)' : 'var(--bg3)'};
+            border:1px solid ${isDone ? 'var(--green)' : 'var(--border2)'};
+            color:${isDone ? 'var(--green2)' : 'var(--text2)'};">
+          ${isDone ? '✓' : '○'} ${u.num} — ${u.title}
+        </button>`;
+    }).join('');
+  }
+}
+
+// toggle a unit's completed state manually (for students returning from external game)
+function toggleComplete(unitId) {
+  if (STATE.unitsCompleted.includes(unitId)) {
+    STATE.unitsCompleted = STATE.unitsCompleted.filter(id => id !== unitId);
+  } else {
+    markUnitComplete(unitId);
+    return; // markUnitComplete calls renderProfileView itself
+  }
+  saveState();
+  updateHUD();
+  renderTimeline();
+  renderProfileView();
+  renderStoryView();
+  renderBadgeGrid();
+}
+
+function renderBadgeGrid() {
+  const grid = document.getElementById('badge-grid');
+  grid.innerHTML = BADGES.map(b => `
+    <div class="badge-item ${STATE.badgesEarned.includes(b.id)?'earned':''}">
+      <div class="badge-item-icon">${b.icon}</div>
+      <div class="badge-item-name">${b.name}</div>
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  STORY SO FAR VIEW
+// ══════════════════════════════════════════════════════════════════════════
+function renderStoryView() {
+  const entries = document.getElementById('story-entries');
+  const placeholder = document.getElementById('story-placeholder');
+  const completed = UNIT_DATA.filter(u => STATE.unitsCompleted.includes(u.id));
+
+  if (completed.length === 0) {
+    entries.innerHTML = '';
+    placeholder.style.display = 'block';
+  } else {
+    placeholder.style.display = 'none';
+    entries.innerHTML = completed.map(u => `
+      <div class="completed-unit-entry">
+        <div class="cue-icon">${u.icon}</div>
+        <div>
+          <div class="cue-unit">${u.num} · ${u.years}</div>
+          <div class="cue-title">${u.title}</div>
+          <div class="cue-change">
+            <strong style="font-family:var(--dm);font-size:9px;color:var(--text3);letter-spacing:1px;">WHAT CHANGED:</strong>
+            ${u.changed}
+          </div>
+          <div class="cue-change" style="margin-top:6px;">
+            <strong style="font-family:var(--dm);font-size:9px;color:var(--text3);letter-spacing:1px;">WHAT CONTINUED:</strong>
+            ${u.continued}
+          </div>
+          <div class="cue-change" style="margin-top:6px;">
+            <strong style="font-family:var(--dm);font-size:9px;color:var(--text3);letter-spacing:1px;">NEW QUESTION:</strong>
+            ${u.emerged}
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+//  MARK UNIT COMPLETE (call this from unit games via postMessage or URL param)
+// ══════════════════════════════════════════════════════════════════════════
+function markUnitComplete(unitId) {
+  if (!STATE.unitsCompleted.includes(unitId)) {
+    STATE.unitsCompleted.push(unitId);
+  }
+  STATE.unitsInProgress = STATE.unitsInProgress.filter(id => id !== unitId);
+
+  // award badges
+  if (STATE.unitsCompleted.length >= 1 && !STATE.badgesEarned.includes('first_unit')) STATE.badgesEarned.push('first_unit');
+  if (unitId === 'unit6'  && !STATE.badgesEarned.includes('civil_rights')) STATE.badgesEarned.push('civil_rights');
+  if (unitId === 'unit7a' && !STATE.badgesEarned.includes('camelot'))      STATE.badgesEarned.push('camelot');
+  if (unitId === 'unit7b' && !STATE.badgesEarned.includes('napalm'))       STATE.badgesEarned.push('napalm');
+  if (unitId === 'unit8'  && !STATE.badgesEarned.includes('modern'))       STATE.badgesEarned.push('modern');
+  if (STATE.unitsCompleted.length >= 6  && !STATE.badgesEarned.includes('half_course'))  STATE.badgesEarned.push('half_course');
+  if (STATE.unitsCompleted.length >= 13 && !STATE.badgesEarned.includes('full_course'))  STATE.badgesEarned.push('full_course');
+
+  saveState();
+  updateHUD();
+  renderTimeline();
+  renderProfileView();
+  renderStoryView();
+  renderBadgeGrid();
+}
+
+// ── postMessage listener (unit games can send { type:'unitComplete', unitId:'unit6a' })
+window.addEventListener('message', e => {
+  if (e.data && e.data.type === 'unitComplete' && e.data.unitId) {
+    markUnitComplete(e.data.unitId);
+  }
+});
+
+// ── URL param check on load (e.g. shell.html?complete=unit6a)
+(function checkCompletionParam() {
+  const params = new URLSearchParams(window.location.search);
+  const cid = params.get('complete');
+  if (cid && UNIT_DATA.find(u=>u.id===cid)) {
+    loadState();
+    markUnitComplete(cid);
+  }
+})();
+
+// ══════════════════════════════════════════════════════════════════════════
+//  RESET
+// ══════════════════════════════════════════════════════════════════════════
+function resetProfile() {
+  if (!confirm('Reset your entire course profile? This cannot be undone.')) return;
+  localStorage.removeItem('ac_shell_state');
+  location.reload();
+}
+
+</script>
+</body>
+</html>
