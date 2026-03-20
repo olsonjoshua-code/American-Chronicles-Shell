@@ -782,6 +782,26 @@ body::after {
     </button>
     <div id="continue-note" style="font-family:var(--dm); font-size:9px; color:var(--text3);
       letter-spacing:0.5px; min-height:14px; text-align:center;"></div>
+
+    <!-- Teacher login toggle — same pattern as unit games -->
+    <div id="teacher-login-box" style="display:none; width:100%; margin-top:4px;">
+      <input id="teacher-code-input" type="password" maxlength="16"
+        style="font-family:var(--bebas);font-size:16px;letter-spacing:3px;
+          background:var(--bg2);border:1.5px solid var(--teal);color:var(--cream);
+          padding:10px 14px;width:100%;outline:none;text-align:center;
+          text-transform:uppercase;margin-bottom:6px;"
+        placeholder="ENTER CODE"
+        onkeydown="if(event.key==='Enter') submitTeacherCode()">
+      <button class="btn full teal" onclick="submitTeacherCode()"><span>Login as Teacher</span></button>
+      <div id="teacher-code-err"
+        style="font-family:var(--dm);font-size:10px;color:var(--red2);min-height:14px;margin-top:4px;text-align:center;"></div>
+    </div>
+
+    <button class="btn full"
+      style="border-color:var(--teal);color:var(--teal);font-size:11px;margin-top:4px;"
+      onclick="toggleTeacherBox()">
+      <span id="teacher-toggle-label">Teacher Login</span>
+    </button>
   </div>
 
   <!-- Copyright footer -->
@@ -798,11 +818,11 @@ body::after {
 <div id="profile-setup-screen" class="screen" style="padding:2rem 1rem; max-width:500px; margin:0 auto; display:none;">
   <div class="section-head" style="margin-bottom:20px;">Create Your Profile</div>
 
-  <!-- preview -->
+  <!-- live preview -->
   <div class="char-preview-block">
     <div class="char-avatar-lg" id="setup-preview-avatar"></div>
     <div class="char-name-disp" id="setup-preview-name">Historian</div>
-    <div class="char-rank-disp">Curious Citizen · Starting the Journey</div>
+    <div class="char-rank-disp" id="setup-preview-sub">Curious Citizen · Choose your period below</div>
   </div>
 
   <!-- avatar selection -->
@@ -811,9 +831,36 @@ body::after {
 
   <!-- name input -->
   <div class="section-head" style="font-size:13px; margin:14px 0 8px;">Your Name</div>
-  <input type="text" class="name-input" id="name-input" placeholder="Enter your name…" maxlength="24" oninput="updateSetupPreview()">
+  <input type="text" class="name-input" id="name-input"
+    placeholder="Enter your name…" maxlength="24" oninput="updateSetupPreview()">
 
-  <button class="btn full green" onclick="confirmProfile()" style="margin-top:16px;"><span>Enter American Chronicles →</span></button>
+  <!-- class period picker -->
+  <div class="section-head" style="font-size:13px; margin:14px 0 8px;">Class Period</div>
+  <div id="period-grid" style="display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-bottom:4px;">
+    <!-- periods 1–7 rendered by JS -->
+  </div>
+  <div style="font-family:var(--dm); font-size:9px; color:var(--text3); margin-top:4px;">
+    Select your class period so your teacher can find your progress.
+  </div>
+
+  <!-- confirm button -->
+  <button class="btn full green" onclick="confirmProfile()" style="margin-top:20px;">
+    <span>Enter American Chronicles →</span>
+  </button>
+
+  <!-- guest option — separator + button -->
+  <div style="display:flex; align-items:center; gap:10px; margin:16px 0 4px;">
+    <div style="flex:1; height:1px; background:var(--border2);"></div>
+    <div style="font-family:var(--dm); font-size:9px; color:var(--text3); letter-spacing:1px; flex-shrink:0;">OR</div>
+    <div style="flex:1; height:1px; background:var(--border2);"></div>
+  </div>
+  <button class="btn full" onclick="enterAsGuest()"
+    style="border-color:var(--border2); color:var(--text2); font-size:12px;">
+    <span>Play as Guest</span>
+  </button>
+  <div style="font-family:var(--dm); font-size:9px; color:var(--text3); text-align:center; margin-top:6px; line-height:1.5;">
+    Guest progress is not saved between sessions.
+  </div>
 </div>
 
 
@@ -841,6 +888,12 @@ body::after {
         <button class="hud-nav-btn active" id="nav-timeline" onclick="showView('timeline')"><span class="label">Timeline</span> 🗺</button>
         <button class="hud-nav-btn" id="nav-profile"   onclick="showView('profile')"><span class="label">Profile</span> 👤</button>
         <button class="hud-nav-btn" id="nav-story"     onclick="showView('story')"><span class="label">Story So Far</span> 📜</button>
+        <!-- Teacher dashboard nav — only visible when teacher is logged in -->
+        <button class="hud-nav-btn" id="nav-teacher"
+          onclick="showView('teacher')"
+          style="display:none; border-color:var(--teal); color:var(--teal);">
+          <span class="label">Dashboard</span> 📊
+        </button>
       </div>
     </div>
   </div>
@@ -1030,6 +1083,93 @@ body::after {
       </div>
     </div><!-- end #view-story -->
 
+    <!-- ═══════════════════════════════════════════════════════════════
+         TEACHER DASHBOARD VIEW
+         Only visible after teacher login. Session-only, never stored.
+    ════════════════════════════════════════════════════════════════════ -->
+    <div id="view-teacher" style="display:none; padding:24px 20px 60px; max-width:900px; margin:0 auto; width:100%;">
+
+      <!-- header -->
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+        <div>
+          <div class="section-head" style="margin-bottom:4px;">Teacher Dashboard</div>
+          <div style="font-family:var(--dm); font-size:10px; color:var(--text3);">
+            Session only — this view is not visible to students.
+          </div>
+        </div>
+        <button class="btn sm" onclick="teacherLogout()"
+          style="border-color:var(--red2); color:var(--red2); font-size:10px;">
+          <span>Log Out</span>
+        </button>
+      </div>
+
+      <!-- live unit links panel -->
+      <div style="background:var(--bg2); border:1px solid var(--border2); padding:18px; margin-bottom:16px;">
+        <div class="section-head" style="font-size:14px; margin-bottom:14px;">Live Unit Games</div>
+        <div style="font-family:var(--dm); font-size:10px; color:var(--text2); margin-bottom:14px; line-height:1.6;">
+          These units have active game links. Click to open each game in a new tab.
+          Units without a URL are listed below as coming soon.
+        </div>
+        <div id="teacher-unit-list"></div>
+      </div>
+
+      <!-- coming soon units -->
+      <div style="background:var(--bg2); border:1px solid var(--border2); padding:18px; margin-bottom:16px;">
+        <div class="section-head" style="font-size:14px; margin-bottom:14px;">Units in Development</div>
+        <div id="teacher-coming-list"
+          style="display:flex; flex-wrap:wrap; gap:8px;"></div>
+      </div>
+
+      <!-- leaderboard info panel -->
+      <div style="background:var(--bg2); border:1px solid var(--border2); padding:18px; margin-bottom:16px;">
+        <div class="section-head" style="font-size:14px; margin-bottom:10px;">Leaderboards &amp; Score Data</div>
+        <div style="background:var(--bg3); border:1px solid var(--border); border-left:3px solid var(--amber2);
+          padding:14px 16px; font-family:var(--dm); font-size:10px; color:var(--text2); line-height:1.8;">
+          <strong style="color:var(--amber2); display:block; margin-bottom:6px;">How scoring currently works</strong>
+          Each unit game maintains its own leaderboard inside its own file.
+          Because games open in separate browser tabs, their score data lives inside each game's storage independently.<br><br>
+          <strong style="color:var(--amber2); display:block; margin-bottom:6px;">What's coming</strong>
+          When the game files are updated to share a common profile key with this shell,
+          scores and completion data will flow back here automatically — powering a real class leaderboard below.<br><br>
+          <strong style="color:var(--amber2); display:block; margin-bottom:6px;">For now</strong>
+          Open each unit game directly and use its built-in leaderboard and teacher dashboard
+          while the integration is built.
+        </div>
+        <!-- Leaderboard placeholder — ready for future data -->
+        <div style="margin-top:16px;">
+          <div style="font-family:var(--bebas); font-size:11px; color:var(--text3); letter-spacing:3px; margin-bottom:10px;">CLASS LEADERBOARD — COMING SOON</div>
+          <div id="teacher-leaderboard-placeholder"
+            style="background:var(--bg3); border:1px dashed var(--border2); padding:24px; text-align:center;">
+            <div style="font-size:32px; opacity:0.3; margin-bottom:8px;">🏆</div>
+            <div style="font-family:var(--crimson); font-size:14px; color:var(--text3); font-style:italic;">
+              Leaderboard data will appear here once game files are connected to the shared profile system.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- class roster -->
+      <div style="background:var(--bg2); border:1px solid var(--border2); padding:18px;">
+        <div class="section-head" style="font-size:14px; margin-bottom:10px;">Class Roster Notes</div>
+        <div style="font-family:var(--dm); font-size:10px; color:var(--text2); margin-bottom:10px; line-height:1.6;">
+          Use this area to track student progress manually or paste in class notes.
+          This text is saved locally in your browser.
+        </div>
+        <textarea id="teacher-roster-notes"
+          oninput="saveRosterNotes()"
+          placeholder="Paste class list, period notes, or student progress here…"
+          style="width:100%; min-height:140px; background:var(--bg3); border:1px solid var(--border2);
+            color:var(--text); font-family:var(--crimson); font-size:14px; line-height:1.6;
+            padding:12px; outline:none; resize:vertical; transition:border-color 0.2s;"
+          onfocus="this.style.borderColor='var(--teal)'"
+          onblur="this.style.borderColor='var(--border2)'"></textarea>
+        <div style="font-family:var(--dm); font-size:9px; color:var(--text3); margin-top:6px;">
+          Auto-saved to this browser.
+        </div>
+      </div>
+
+    </div><!-- end #view-teacher -->
+
   </div><!-- end .shell-body -->
 </div><!-- end #shell -->
 
@@ -1123,18 +1263,17 @@ body::after {
 'use strict';
 
 // ═══════════════════════════════════════════════════════════════════════════
-//  ██╗   ██╗███╗   ██╗██╗████████╗    ██████╗  █████╗ ████████╗ █████╗
-//  ██║   ██║████╗  ██║██║╚══██╔══╝    ██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗
-//  ██║   ██║██╔██╗ ██║██║   ██║       ██║  ██║███████║   ██║   ███████║
-//  ██║   ██║██║╚██╗██║██║   ██║       ██║  ██║██╔══██║   ██║   ██╔══██║
-//  ╚██████╔╝██║ ╚████║██║   ██║       ██████╔╝██║  ██║   ██║   ██║  ██║
-//   ╚═════╝ ╚═╝  ╚═══╝╚═╝   ╚═╝       ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝
 //
-//  TO ADD / UPDATE A UNIT URL:
-//  Find the unit object below and set its `url` field.
-//  Example:  url: 'https://yoursite.com/unit6a.html'
-//  null  = "Coming Soon" (no launch button shown)
-//  ''    = same as null
+//  ── TEACHER PASSWORD ─────────────────────────────────────────────────────
+//  Type it in any case — uppercase, lowercase, mixed — all work.
+const TEACHER_PASSWORD = 'olson219';
+//  ─────────────────────────────────────────────────────────────────────────
+
+// Session-only teacher flag (never saved to localStorage)
+let IS_TEACHER = false;
+
+//  TO ADD / UPDATE A UNIT URL: find the unit object and set its `url` field.
+//  null = "Coming Soon" (no launch button shown)
 // ═══════════════════════════════════════════════════════════════════════════
 
 const UNIT_DATA = [
@@ -1477,6 +1616,8 @@ const BADGES = [
 let STATE = {
   name: '',
   avatar: 'scholar',
+  period: '',        // class period (1–7)
+  isGuest: false,    // true if playing as guest
   unitsCompleted: [],
   unitsInProgress: [],
   badgesEarned: [],
@@ -1596,6 +1737,7 @@ function startNewProfile() {
   ps.style.display = 'block';
   ps.classList.add('active');
   buildAvatarGrid();
+  buildPeriodGrid();
   updateSetupPreview();
 }
 
@@ -1609,6 +1751,28 @@ function buildAvatarGrid() {
   `).join('');
 }
 
+function buildPeriodGrid() {
+  const grid = document.getElementById('period-grid');
+  if (!grid) return;
+  grid.innerHTML = [1,2,3,4,5,6,7].map(p => `
+    <div onclick="selectPeriod(${p})" id="period-btn-${p}"
+      style="background:var(--bg2); border:1.5px solid ${STATE.period==p?'var(--amber)':'var(--border2)'};
+        color:${STATE.period==p?'var(--amber)':'var(--text2)'};
+        font-family:var(--bebas); font-size:20px; letter-spacing:1px;
+        padding:10px 4px; text-align:center; cursor:pointer;
+        transition:all 0.15s;
+        box-shadow:${STATE.period==p?'0 0 12px rgba(232,160,32,0.25)':'none'};
+        background:${STATE.period==p?'rgba(232,160,32,0.08)':'var(--bg2)'};">
+      ${p}
+    </div>`).join('');
+}
+
+function selectPeriod(p) {
+  STATE.period = p;
+  buildPeriodGrid();
+  updateSetupPreview();
+}
+
 function selectAvatar(id) {
   STATE.avatar = id;
   document.querySelectorAll('.avatar-opt').forEach(el => {
@@ -1618,18 +1782,43 @@ function selectAvatar(id) {
 }
 
 function updateSetupPreview() {
-  const av = AVATARS.find(a=>a.id===STATE.avatar)||AVATARS[0];
+  const av      = AVATARS.find(a=>a.id===STATE.avatar)||AVATARS[0];
   const nameVal = document.getElementById('name-input').value.trim() || 'Historian';
-  document.getElementById('setup-preview-avatar').innerHTML = `<div style="font-size:60px;line-height:1;text-align:center;">${av.icon}</div>`;
+  const perStr  = STATE.period ? `Period ${STATE.period}` : 'Choose your period below';
+  document.getElementById('setup-preview-avatar').innerHTML =
+    `<div style="font-size:60px;line-height:1;text-align:center;">${av.icon}</div>`;
   document.getElementById('setup-preview-name').textContent = nameVal;
+  const sub = document.getElementById('setup-preview-sub');
+  if (sub) sub.textContent = `Curious Citizen · ${perStr}`;
 }
 
 function confirmProfile() {
   const nameVal = document.getElementById('name-input').value.trim();
-  if (!nameVal) { alert('Please enter your name.'); return; }
-  STATE.name = nameVal;
+  if (!nameVal) {
+    alert('Please enter your name.');
+    document.getElementById('name-input').focus();
+    return;
+  }
+  if (!STATE.period) {
+    alert('Please select your class period.');
+    return;
+  }
+  STATE.name      = nameVal;
+  STATE.isGuest   = false;
   STATE.setupDone = true;
   saveState();
+  document.getElementById('profile-setup-screen').classList.remove('active');
+  document.getElementById('profile-setup-screen').style.display = 'none';
+  enterShell();
+}
+
+// Guest entry — no name, no period, no save
+function enterAsGuest() {
+  STATE.name      = 'Guest';
+  STATE.avatar    = 'scholar';
+  STATE.period    = '';
+  STATE.isGuest   = true;
+  STATE.setupDone = false; // don't persist guest sessions
   document.getElementById('profile-setup-screen').classList.remove('active');
   document.getElementById('profile-setup-screen').style.display = 'none';
   enterShell();
@@ -1644,7 +1833,13 @@ function enterShell() {
   const shell = document.getElementById('shell');
   shell.style.display = 'flex';
   updateHUD();
-  showView('timeline');
+  // If teacher just logged in, activate teacher mode and go straight to dashboard
+  if (IS_TEACHER) {
+    enterTeacherMode();
+    showView('teacher');
+  } else {
+    showView('timeline');
+  }
   requestAnimationFrame(() => {
     renderTimeline();
     renderProfileView();
@@ -1665,23 +1860,35 @@ function getRank() {
 
 function updateHUD() {
   const av = AVATARS.find(a=>a.id===STATE.avatar)||AVATARS[0];
-  document.getElementById('hud-avatar').innerHTML = `<div style="font-size:36px;line-height:44px;text-align:center;">${av.icon}</div>`;
-  document.getElementById('hud-name').textContent = STATE.name || 'Historian';
-  document.getElementById('hud-rank').textContent = getRank();
+  document.getElementById('hud-avatar').innerHTML =
+    `<div style="font-size:36px;line-height:44px;text-align:center;">${av.icon}</div>`;
+
+  // Name — show Guest label if guest
+  document.getElementById('hud-name').textContent =
+    STATE.isGuest ? '👤 Guest' : (STATE.name || 'Historian');
+
+  // Rank line — include period if set, or Guest tag
+  const rankLine = STATE.isGuest
+    ? 'Guest Session · Progress not saved'
+    : `${getRank()}${STATE.period ? ' · Period ' + STATE.period : ''}`;
+  document.getElementById('hud-rank').textContent = rankLine;
+
   const pct = Math.round((STATE.unitsCompleted.length / UNIT_DATA.length) * 100);
-  document.getElementById('hud-xp').style.width = pct + '%';
-  document.getElementById('hud-units').textContent = STATE.unitsCompleted.length;
+  document.getElementById('hud-xp').style.width    = pct + '%';
+  document.getElementById('hud-units').textContent  = STATE.unitsCompleted.length;
   document.getElementById('hud-badges').textContent = STATE.badgesEarned.length;
-  document.getElementById('hud-pct').textContent = pct + '%';
+  document.getElementById('hud-pct').textContent    = pct + '%';
 }
 
 // ══════════════════════════════════════════════════════════════════════════
 //  VIEW SWITCHING
 // ══════════════════════════════════════════════════════════════════════════
 function showView(view) {
-  ['timeline','profile','story'].forEach(v => {
-    document.getElementById('view-'+v).style.display = v===view ? 'block' : 'none';
-    document.getElementById('nav-'+v)?.classList.toggle('active', v===view);
+  ['timeline','profile','story','teacher'].forEach(v => {
+    const el = document.getElementById('view-'+v);
+    if (el) el.style.display = v === view ? 'block' : 'none';
+    const btn = document.getElementById('nav-'+v);
+    if (btn) btn.classList.toggle('active', v === view);
   });
   closePreview();
   if (view === 'timeline') {
@@ -1690,6 +1897,7 @@ function showView(view) {
       if (track) track.dispatchEvent(new Event('scroll'));
     });
   }
+  if (view === 'teacher') renderTeacherDashboard();
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -2148,8 +2356,11 @@ function renderProfileView() {
   const av = AVATARS.find(a => a.id === STATE.avatar) || AVATARS[0];
   document.getElementById('profile-avatar-lg').innerHTML =
     `<div style="font-size:60px;line-height:80px;text-align:center;">${av.icon}</div>`;
-  document.getElementById('profile-name-disp').textContent = STATE.name || 'Historian';
-  document.getElementById('profile-rank-disp').textContent = getRank();
+  document.getElementById('profile-name-disp').textContent =
+    STATE.isGuest ? '👤 Guest Session' : (STATE.name || 'Historian');
+  document.getElementById('profile-rank-disp').textContent =
+    STATE.isGuest ? 'Progress not saved between sessions'
+    : `${getRank()}${STATE.period ? ' · Period ' + STATE.period : ''}`;
 
   const total = UNIT_DATA.length;
   const done  = STATE.unitsCompleted.length;
@@ -2305,6 +2516,110 @@ window.addEventListener('message', e => {
     markUnitComplete(cid);
   }
 })();
+
+// ══════════════════════════════════════════════════════════════════════════
+//  TEACHER LOGIN / DASHBOARD
+// ══════════════════════════════════════════════════════════════════════════
+
+function toggleTeacherBox() {
+  const box   = document.getElementById('teacher-login-box');
+  const label = document.getElementById('teacher-toggle-label');
+  const open  = box.style.display === 'none' || box.style.display === '';
+  box.style.display = open ? 'block' : 'none';
+  label.textContent = open ? 'Cancel' : 'Teacher Login';
+  if (open) {
+    document.getElementById('teacher-code-input').focus();
+    document.getElementById('teacher-code-err').textContent = '';
+  }
+}
+
+function submitTeacherCode() {
+  const input = document.getElementById('teacher-code-input');
+  const err   = document.getElementById('teacher-code-err');
+  // Compare both sides lowercased so typing works regardless of case
+  const val   = input.value.trim().toLowerCase();
+
+  if (val === TEACHER_PASSWORD.toLowerCase()) {
+    IS_TEACHER = true;
+    input.value = '';
+    document.getElementById('teacher-login-box').style.display = 'none';
+    document.getElementById('teacher-toggle-label').textContent = 'Teacher Login';
+    // Enter shell in teacher mode
+    enterShell();
+  } else {
+    err.textContent = 'Incorrect code. Try again.';
+    input.value = '';
+    input.focus();
+    // Brief red flash on input border
+    input.style.borderColor = 'var(--red2)';
+    setTimeout(() => { input.style.borderColor = 'var(--teal)'; }, 1000);
+  }
+}
+
+function enterTeacherMode() {
+  // Reveal teacher nav button in HUD
+  const btn = document.getElementById('nav-teacher');
+  if (btn) btn.style.display = 'inline-flex';
+  // Update HUD to show teacher identity
+  const nameEl = document.getElementById('hud-name');
+  if (nameEl) nameEl.textContent = '📊 Teacher View';
+  const rankEl = document.getElementById('hud-rank');
+  if (rankEl) rankEl.textContent = 'American Chronicles · Instructor';
+}
+
+function teacherLogout() {
+  IS_TEACHER = false;
+  const btn = document.getElementById('nav-teacher');
+  if (btn) btn.style.display = 'none';
+  updateHUD();
+  showView('timeline');
+}
+
+function renderTeacherDashboard() {
+  // Unit list — active games
+  const liveList = document.getElementById('teacher-unit-list');
+  const comingList = document.getElementById('teacher-coming-list');
+  if (!liveList) return;
+
+  const liveUnits   = UNIT_DATA.filter(u => u.url);
+  const comingUnits = UNIT_DATA.filter(u => !u.url);
+
+  liveList.innerHTML = liveUnits.map(u => `
+    <div style="display:flex; align-items:center; gap:12px; padding:10px 0;
+      border-bottom:1px solid var(--border); flex-wrap:wrap;">
+      <div style="font-size:22px; flex-shrink:0;">${u.icon}</div>
+      <div style="flex:1; min-width:160px;">
+        <div style="font-family:var(--playfair); font-size:13px; color:var(--cream);">${u.num} — ${u.title}</div>
+        <div style="font-family:var(--dm); font-size:9px; color:var(--text3);">${u.years}</div>
+      </div>
+      <a href="${u.url}" target="_blank" rel="noopener" style="text-decoration:none; flex-shrink:0;">
+        <button class="btn xs teal"><span>▶ Open Game</span></button>
+      </a>
+      <div style="font-family:var(--dm); font-size:8px; color:var(--border2);
+        word-break:break-all; width:100%; margin-top:2px; padding-left:34px;">
+        ${u.url}
+      </div>
+    </div>`).join('');
+
+  comingList.innerHTML = comingUnits.map(u => `
+    <div style="font-family:var(--dm); font-size:9px; color:var(--text3);
+      border:1px solid var(--border); padding:5px 10px; display:flex; align-items:center; gap:6px;">
+      ${u.icon} ${u.num} — ${u.title}
+    </div>`).join('');
+
+  // Restore roster notes
+  const notes = document.getElementById('teacher-roster-notes');
+  if (notes) {
+    try { notes.value = localStorage.getItem('ac_teacher_notes') || ''; } catch(e){}
+  }
+}
+
+function saveRosterNotes() {
+  try {
+    const val = document.getElementById('teacher-roster-notes').value;
+    localStorage.setItem('ac_teacher_notes', val);
+  } catch(e){}
+}
 
 // ══════════════════════════════════════════════════════════════════════════
 //  RESET
