@@ -343,6 +343,7 @@ body::before{content:'';position:fixed;inset:0;
       <div class="hud-stats">
         <div class="hud-stat">UNITS<span id="hstat-units">0</span></div>
         <div class="hud-stat">TROPHIES<span id="hstat-trophies">0</span></div>
+        <div class="hud-stat">EOC<span id="hstat-eoc">—</span></div>
         <div class="hud-stat">DONE<span id="hstat-pct">0%</span></div>
       </div>
       <div class="hud-nav">
@@ -436,7 +437,7 @@ body::before{content:'';position:fixed;inset:0;
         <div class="stat-card"><div class="stat-val" id="ps-units">0</div><div class="stat-lbl">Units Done</div></div>
         <div class="stat-card"><div class="stat-val" id="ps-trophies">0</div><div class="stat-lbl">Trophies</div></div>
         <div class="stat-card"><div class="stat-val" id="ps-cards">0</div><div class="stat-lbl">Cards</div></div>
-        <div class="stat-card"><div class="stat-val">13</div><div class="stat-lbl">Total Units</div></div>
+        <div class="stat-card"><div class="stat-val" id="ps-eoc" style="font-size:20px">—</div><div class="stat-lbl">EOC Rating</div></div>
       </div>
       <div class="sh" style="font-size:14px">Theme Mastery</div>
       <div style="margin-bottom:16px">
@@ -1182,6 +1183,23 @@ function checkUnlocks(){
 }
 
 // ── HUD ───────────────────────────────────────────────
+// EOC Rating helpers — same /15 bands as individual games
+function shellEOCLevel(score15){
+  if(score15>=12)return{level:5,label:'Level 5',color:'var(--green2)'};
+  if(score15>=10)return{level:4,label:'Level 4',color:'var(--teal2)'};
+  if(score15>=8) return{level:3,label:'Level 3',color:'var(--amber)'};
+  if(score15>=6) return{level:2,label:'Level 2',color:'var(--amber2)'};
+  return{level:1,label:'Level 1',color:'var(--red2)'};
+}
+function calcCumulativeEOC(){
+  // Average best_accuracy across all completed units, mapped to /15
+  if(!_trophyData.length)return null;
+  const completed=_trophyData.filter(r=>r.best_accuracy>=60);
+  if(!completed.length)return null;
+  const avgAcc=completed.reduce((a,r)=>a+(r.best_accuracy||0),0)/completed.length;
+  return Math.round((avgAcc/100)*15);
+}
+
 function updateHUD(){
   const ch=getChar(S.avatar);
   document.getElementById('hud-avatar').innerHTML=ch.svg().replace(/width="\d+"/,'width="44"').replace(/height="\d+"/,'height="44"');
@@ -1192,6 +1210,13 @@ function updateHUD(){
   document.getElementById('hstat-units').textContent=S.unitsCompleted.length;
   document.getElementById('hstat-trophies').textContent=S.badgesEarned.length;
   document.getElementById('hstat-pct').textContent=pct+'%';
+  // EOC Rating in HUD
+  const eocEl=document.getElementById('hstat-eoc');
+  if(eocEl){
+    const sc=calcCumulativeEOC();
+    if(sc!==null){const lvl=shellEOCLevel(sc);eocEl.textContent='L'+lvl.level;eocEl.style.color=lvl.color;}
+    else{eocEl.textContent='—';eocEl.style.color='';}
+  }
 }
 
 // ── VIEWS ─────────────────────────────────────────────
@@ -1469,8 +1494,26 @@ function refreshProfile(){
   document.getElementById('prof-rank').textContent=S.isGuest?'Progress not saved':`${getRank()}${S.period?' · Period '+S.period:''}`;
   const done=S.unitsCompleted.length,total=UNIT_DATA.length,pct=Math.round((done/total)*100);
   document.getElementById('prof-bar').style.width=pct+'%';document.getElementById('prof-bar-lbl').textContent=`${done} of ${total} units complete`;
-  document.getElementById('ps-units').textContent=done;document.getElementById('ps-trophies').textContent=S.badgesEarned.length;
+  document.getElementById('ps-units').textContent=done;
+  document.getElementById('ps-trophies').textContent=S.badgesEarned.length;
   document.getElementById('ps-cards').textContent=_trophyData.reduce((a,r)=>a+(r.cards||0),0);
+
+  // Cumulative EOC Rating
+  const eocSc=calcCumulativeEOC();
+  const eocEl=document.getElementById('ps-eoc');
+  if(eocEl){
+    if(eocSc!==null){
+      const lvl=shellEOCLevel(eocSc);
+      eocEl.textContent='L'+lvl.level;
+      eocEl.style.color=lvl.color;
+      eocEl.title=lvl.label+' — '+eocSc+'/15 avg across '+_trophyData.filter(r=>r.best_accuracy>=60).length+' units';
+    } else {
+      eocEl.textContent='—';
+      eocEl.style.color='';
+      eocEl.title='Complete a unit game to see your EOC rating';
+    }
+  }
+
   const ts={power:0,freedom:0,economy:0,conflict:0,identity:0},tm={power:0,freedom:0,economy:0,conflict:0,identity:0};
   UNIT_DATA.forEach(u=>u.themes.forEach(t=>{if(tm[t]!==undefined){tm[t]++;if(S.unitsCompleted.includes(u.id))ts[t]++;}}));
   Object.keys(ts).forEach(t=>{const p=tm[t]>0?Math.round(ts[t]/tm[t]*100):0;const b=document.getElementById('tp-'+t),l=document.getElementById('tp-'+t+'-p');if(b)b.style.width=p+'%';if(l)l.textContent=p+'%';});
