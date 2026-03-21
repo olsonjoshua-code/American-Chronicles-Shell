@@ -1367,14 +1367,14 @@ const UNIT_DATA = [
   {
     id: 'unit3b',
     num: 'Unit 3B',
-    title: 'World War I & Its Aftermath',
+    title: 'Into the Trenches',
     years: '1914 – 1920',
     icon: '💨',
     era: 'Age of Empire',
     eraColor: '#2a4a6a',
     status: 'available',
     progress: 0,
-    url: null,
+    url: 'https://olsonjoshua-code.github.io/into-the-trenches-wwi/',  // ← LIVE URL
     desc: 'The "War to End All Wars" shattered the old order. America entered late but pivotally. Wilson\'s idealism collided with the bitter realities of the peace — and the Senate said no.',
     topics: ['Causes of WWI','Zimmermann Telegram','Selective Service Act','Espionage Act','Wilson\'s 14 Points','Treaty of Versailles','Senate rejection'],
     themes: ['conflict','power','freedom','identity'],
@@ -1383,7 +1383,7 @@ const UNIT_DATA = [
     changed: 'European empires collapse; new nations emerge; U.S. emerges as economic superpower.',
     continued: 'U.S. isolationist impulses; racial discrimination in the military; labor unrest at home.',
     emerged: 'When America rejects the League of Nations, what responsibility does a powerful nation have to the world?',
-    badgeEarned: null,
+    badgeEarned: '💨',
   },
   // ── ERA 4: Twenties & Depression ──────────────────────────────────────
   {
@@ -1606,6 +1606,7 @@ const BADGES = [
   { id:'arsenal',      icon:'🎖️', name:'Arsenal of Democracy',    desc:'Complete Unit 5A' },
   { id:'iron_curtain', icon:'☢️', name:'Iron Curtain',             desc:'Complete Unit 5B' },
   { id:'empire',       icon:'🌐', name:'Empire Rising',            desc:'Complete Unit 3A' },
+  { id:'trenches',     icon:'💨', name:'Into the Trenches',        desc:'Complete Unit 3B' },
   { id:'civil_rights', icon:'✊', name:'Chronicle of Change',   desc:'Complete Unit 6' },
   { id:'camelot',      icon:'🕊️', name:'Camelot',               desc:'Complete Unit 6B' },
   { id:'napalm',       icon:'🪖', name:'Napalm Dawn',           desc:'Complete Unit 7A' },
@@ -2492,6 +2493,7 @@ function markUnitComplete(unitId) {
   // award badges
   if (STATE.unitsCompleted.length >= 1 && !STATE.badgesEarned.includes('first_unit')) STATE.badgesEarned.push('first_unit');
   if (unitId === 'unit3a' && !STATE.badgesEarned.includes('empire'))        STATE.badgesEarned.push('empire');
+  if (unitId === 'unit3b' && !STATE.badgesEarned.includes('trenches'))      STATE.badgesEarned.push('trenches');
   if (unitId === 'unit4a' && !STATE.badgesEarned.includes('boom'))          STATE.badgesEarned.push('boom');
   if (unitId === 'unit4b' && !STATE.badgesEarned.includes('crash'))         STATE.badgesEarned.push('crash');
   if (unitId === 'unit5a' && !STATE.badgesEarned.includes('arsenal'))       STATE.badgesEarned.push('arsenal');
