@@ -1453,14 +1453,14 @@ const UNIT_DATA = [
   {
     id: 'unit5b',
     num: 'Unit 5B',
-    title: 'The Cold War',
+    title: 'Iron Curtain',
     years: '1945 – 1963',
     icon: '☢️',
     era: 'WWII & Cold War',
     eraColor: '#2a3a1a',
-    status: 'locked',
+    status: 'available',
     progress: 0,
-    url: null,
+    url: 'https://olsonjoshua-code.github.io/Iron-Curtain/',  // ← LIVE URL — update if repo name differs
     desc: 'Two superpowers. One world on the edge. The Truman Doctrine, Korea, McCarthy, the arms race, the space race — and the ever-present shadow of nuclear annihilation.',
     topics: ['Truman Doctrine','Marshall Plan','NATO','Korean War','McCarthyism','Nuclear arms race','Sputnik','Cuban Missile Crisis'],
     themes: ['conflict','power','freedom','identity'],
@@ -1469,7 +1469,7 @@ const UNIT_DATA = [
     changed: 'Permanent military buildup; government power over dissent expands; superpower competition shapes every corner of globe.',
     continued: 'Racial inequality at home contrasts with "freedom vs. communism" rhetoric abroad.',
     emerged: 'How do you protect freedom through institutions that restrict it — and what are the costs of permanent war readiness?',
-    badgeEarned: null,
+    badgeEarned: '☢️',
   },
   // ── ERA 6: Civil Rights & Kennedy Era (ACTIVE GAMES) ─────────────────
   // ── REAL URL ADDED: Unit 6 — Chronicles of Change ─────────────────────
@@ -1601,7 +1601,8 @@ const RANKS = [
 // ── BADGES ───────────────────────────────────────────────────────────────
 const BADGES = [
   { id:'first_unit',   icon:'🌟', name:'First Chapter',        desc:'Complete your first unit' },
-  { id:'civil_rights', icon:'✊', name:'Chronicle of Change',   desc:'Complete Unit 6A' },
+  { id:'iron_curtain', icon:'☢️', name:'Iron Curtain',          desc:'Complete Unit 5B' },
+  { id:'civil_rights', icon:'✊', name:'Chronicle of Change',   desc:'Complete Unit 6' },
   { id:'camelot',      icon:'🕊️', name:'Camelot',               desc:'Complete Unit 6B' },
   { id:'napalm',       icon:'🪖', name:'Napalm Dawn',           desc:'Complete Unit 7A' },
   { id:'modern',       icon:'🗽', name:'Modern America',        desc:'Complete Unit 8'  },
@@ -2486,6 +2487,7 @@ function markUnitComplete(unitId) {
 
   // award badges
   if (STATE.unitsCompleted.length >= 1 && !STATE.badgesEarned.includes('first_unit')) STATE.badgesEarned.push('first_unit');
+  if (unitId === 'unit5b' && !STATE.badgesEarned.includes('iron_curtain'))  STATE.badgesEarned.push('iron_curtain');
   if (unitId === 'unit6'  && !STATE.badgesEarned.includes('civil_rights')) STATE.badgesEarned.push('civil_rights');
   if (unitId === 'unit7a' && !STATE.badgesEarned.includes('camelot'))      STATE.badgesEarned.push('camelot');
   if (unitId === 'unit7b' && !STATE.badgesEarned.includes('napalm'))       STATE.badgesEarned.push('napalm');
