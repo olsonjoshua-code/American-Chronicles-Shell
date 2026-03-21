@@ -1303,14 +1303,14 @@ const UNIT_DATA = [
   {
     id: 'unit2a',
     num: 'Unit 2A',
-    title: 'The American West & Industrial Growth',
+    title: 'Boomtown Nation',
     years: '1865 – 1900',
     icon: '🚂',
     era: 'Gilded Age',
     eraColor: '#8b6914',
     status: 'available',
     progress: 0,
-    url: null,
+    url: 'https://olsonjoshua-code.github.io/boomtown-nation/',  // ← LIVE URL
     desc: 'Railroads knit the continent together. Industrialists built empires. Native peoples were displaced and dispossessed. The West became a myth and a wound at the same time.',
     topics: ['Transcontinental Railroad','Robber Barons','Native American displacement','Homestead Act','Populist Movement','Social Darwinism'],
     themes: ['economy','conflict','power','identity'],
@@ -1319,7 +1319,7 @@ const UNIT_DATA = [
     changed: 'Industrial capitalism transforms the American economy; the continental frontier "closes."',
     continued: 'Racial and class inequality; exploitation of labor and land; federal power over western territories.',
     emerged: 'Can capitalism produce prosperity for all — or does industrial power inevitably concentrate in too few hands?',
-    badgeEarned: null,
+    badgeEarned: '🚂',
   },
   {
     id: 'unit2b',
@@ -1601,6 +1601,7 @@ const RANKS = [
 // ── BADGES ───────────────────────────────────────────────────────────────
 const BADGES = [
   { id:'first_unit',   icon:'🌟', name:'First Chapter',           desc:'Complete your first unit' },
+  { id:'boomtown',     icon:'🚂', name:'Boomtown Nation',          desc:'Complete Unit 2A' },
   { id:'boom',         icon:'🎷', name:'Boom or Bust',             desc:'Complete Unit 4A' },
   { id:'crash',        icon:'🌾', name:'Crash & Recovery',         desc:'Complete Unit 4B' },
   { id:'arsenal',      icon:'🎖️', name:'Arsenal of Democracy',    desc:'Complete Unit 5A' },
@@ -2492,6 +2493,7 @@ function markUnitComplete(unitId) {
 
   // award badges
   if (STATE.unitsCompleted.length >= 1 && !STATE.badgesEarned.includes('first_unit')) STATE.badgesEarned.push('first_unit');
+  if (unitId === 'unit2a' && !STATE.badgesEarned.includes('boomtown'))      STATE.badgesEarned.push('boomtown');
   if (unitId === 'unit3a' && !STATE.badgesEarned.includes('empire'))        STATE.badgesEarned.push('empire');
   if (unitId === 'unit3b' && !STATE.badgesEarned.includes('trenches'))      STATE.badgesEarned.push('trenches');
   if (unitId === 'unit4a' && !STATE.badgesEarned.includes('boom'))          STATE.badgesEarned.push('boom');
