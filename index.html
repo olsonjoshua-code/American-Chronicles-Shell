@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>American Chronicles — U.S. History Course Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+DisAplaAy:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0d0a08;--bg2:#14100d;--bg3:#1c1510;--panel:#201812;
@@ -1379,11 +1379,7 @@ let _shellLBDeleteUnlocked=false;
 function shellUnlockLBDelete(){
   const pw=prompt('Enter teacher code to unlock delete controls:');
   if(!pw)return;
-  let valid=false;
-  for(const t of Object.values(TEACHERS||{})){if(pw===t.teacherCode){valid=true;break;}}
-  // Also check olson219 directly
-  if(pw.toLowerCase()==='olson219')valid=true;
-  if(!valid){notify('Incorrect code');return;}
+  if(pw.toLowerCase()!==TEACHER_PWD.toLowerCase()){notify('Incorrect code');return;}
   _shellLBDeleteUnlocked=true;
   const btn=document.getElementById('shell-lb-unlock');
   if(btn){btn.textContent='Unlocked';btn.style.borderColor='var(--gold)';btn.style.color='var(--gold)';}
