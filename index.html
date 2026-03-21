@@ -370,7 +370,7 @@ body::after {
 /* inner row — all units in a single horizontal line */
 #timeline-inner {
   display: flex; align-items: flex-start;
-  padding: 50px 40px 0 40px;
+  padding: 34px 40px 0 40px;
   position: relative;
   /* width is set by JS based on content */
 }
@@ -378,7 +378,7 @@ body::after {
 /* the continuous spine line */
 #timeline-spine {
   position: absolute;
-  top: 98px;   /* vertically centered on node midpoints */
+  top: 88px;   /* vertically centered on node midpoints */
   left: 0; right: 0;
   height: 2px;
   background: linear-gradient(90deg, transparent 0px, var(--border) 40px, var(--border) calc(100% - 80px), transparent 100%);
@@ -388,7 +388,7 @@ body::after {
 /* completed portion of spine (animated via JS) */
 #timeline-spine-fill {
   position: absolute;
-  top: 88px; left: 40px;
+  top: 78px; left: 40px;
   height: 2px;
   background: linear-gradient(90deg, var(--amber2), var(--amber3));
   width: 0;
@@ -397,14 +397,19 @@ body::after {
   z-index: 1;
 }
 
-/* era section label — floats above the spine */
-.era-section-label {
+/* era band — colored strip spanning the era's cards */
+.era-band {
   position: absolute;
-  top: 8px;
-  font-family: var(--bebas); font-size: 10px; letter-spacing: 3px;
-  color: var(--text3); white-space: nowrap;
+  top: 4px;
+  height: 22px;
+  display: flex; align-items: center;
   padding: 0 10px;
+  border-radius: 2px;
   z-index: 5;
+  font-family: var(--bebas); font-size: 9px; letter-spacing: 2px;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+  pointer-events: none;
 }
 .era-section-line {
   position: absolute;
@@ -1324,14 +1329,15 @@ const UNIT_DATA = [
   {
     id: 'unit2b',
     num: 'Unit 2B',
-    title: 'The Progressive Era',
+    title: 'Age of Reform',
     years: '1890 – 1920',
     icon: '📰',
     era: 'Gilded Age',
     eraColor: '#8b6914',
     status: 'available',
     progress: 0,
-    url: null,
+    url: 'https://olsonjoshua-code.github.io/age-of-reform/',  // ← LIVE URL
+    comingSoonLabel: 'The Progressive Era',
     desc: 'Journalists exposed the rot. Reformers demanded change. Women organized for suffrage. The federal government, for the first time, began to regulate the power of big business.',
     topics: ['Muckrakers','Trust-busting','19th Amendment','Child labor laws','NAACP founding','Initiative & Referendum'],
     themes: ['freedom','power','economy','identity'],
@@ -1603,6 +1609,7 @@ const BADGES = [
   { id:'first_unit',   icon:'🌟', name:'First Chapter',           desc:'Complete your first unit' },
   { id:'house_divided',icon:'⚔️', name:'A House Divided',          desc:'Complete Unit 1' },
   { id:'boomtown',     icon:'🚂', name:'Boomtown Nation',          desc:'Complete Unit 2A' },
+  { id:'reform',       icon:'📰', name:'Age of Reform',            desc:'Complete Unit 2B' },
   { id:'boom',         icon:'🎷', name:'Boom or Bust',             desc:'Complete Unit 4A' },
   { id:'crash',        icon:'🌾', name:'Crash & Recovery',         desc:'Complete Unit 4B' },
   { id:'arsenal',      icon:'🎖️', name:'Arsenal of Democracy',    desc:'Complete Unit 5A' },
@@ -1923,7 +1930,7 @@ function renderTimeline() {
   if (!inner) return;
 
   // clear everything except spine elements
-  inner.querySelectorAll('.unit-node,.tl-connector,.era-divider,.era-section-label,.era-section-line')
+  inner.querySelectorAll('.unit-node,.tl-connector,.era-divider,.era-band,.era-section-line')
        .forEach(el => el.remove());
 
   // build a flat ordered list with era boundaries
@@ -1938,16 +1945,7 @@ function renderTimeline() {
 
   ERAS.forEach((era, eraIdx) => {
     const eraUnits = era.units.map(uid => UNIT_DATA.find(u => u.id === uid)).filter(Boolean);
-
-    // era section label — place AFTER accounting for divider so it doesn't overlap
-    const labelX = firstEra ? x : x + DIV_W + 4;
-    const eraLabel = document.createElement('div');
-    eraLabel.className = 'era-section-label';
-    eraLabel.style.left = labelX + 'px';
-    // stagger label row for dense eras to prevent overlap
-    eraLabel.style.top = (eraIdx % 2 === 0) ? '6px' : '20px';
-    eraLabel.textContent = era.name.toUpperCase() + ' · ' + era.years;
-    inner.appendChild(eraLabel);
+    if (!eraUnits.length) return;
 
     // era divider (not before first)
     if (!firstEra) {
@@ -1957,6 +1955,9 @@ function renderTimeline() {
       x += DIV_W + 4;
     }
     firstEra = false;
+
+    // record era start x for the band
+    const eraStartX = x;
 
     eraUnits.forEach((unit, idx) => {
       // connector between units within same era
@@ -1997,6 +1998,18 @@ function renderTimeline() {
       if (status === 'completed') completedX = x + NODE_W;
       x += NODE_W;
     });
+
+    // era band — spans from eraStartX to current x with era color
+    const eraColor = eraUnits[0]?.eraColor || '#2e2118';
+    const bandWidth = x - eraStartX;
+    const band = document.createElement('div');
+    band.className = 'era-band';
+    band.style.left   = eraStartX + 'px';
+    band.style.width  = bandWidth + 'px';
+    band.style.background = eraColor + 'cc'; // era color at ~80% opacity
+    band.style.borderBottom = `2px solid ${eraColor}`;
+    band.textContent  = era.name.toUpperCase() + ' · ' + era.years;
+    inner.appendChild(band);
 
     // gap between eras
     x += 24;
@@ -2164,7 +2177,7 @@ function statusClass(s) {
   return { available:'status-available', locked:'status-locked', completed:'status-completed', inprogress:'status-inprogress' }[s] || 'status-coming';
 }
 function statusLabel(s) {
-  return { available:'', locked:'Coming Soon', completed:'✓ Completed', inprogress:'In Progress' }[s] || 'Coming Soon';
+  return { available:'', locked:'', completed:'✓ Completed', inprogress:'In Progress' }[s] || '';
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -2289,13 +2302,13 @@ function buildLaunchArea(unit, status) {
       </div>`;
 
   } else {
-    // ── NO URL YET — placeholder for future games ───────────────────────
+    // ── NO URL YET — show topic-specific label instead of generic placeholder ──
+    const topicLabel = unit.comingSoonLabel || unit.title;
     area.innerHTML = `
       <div style="background:var(--bg3); border:1px dashed var(--border2); padding:18px; text-align:center;">
-        <div style="font-family:var(--bebas); font-size:12px; color:var(--text3); letter-spacing:3px; margin-bottom:4px;">URL NOT YET ASSIGNED</div>
-        <div style="font-family:var(--dm); font-size:9px; color:var(--text3); line-height:1.6;">
-          Set the <code style="background:var(--bg2); padding:1px 4px; font-size:8px;">url</code> field
-          in <code style="background:var(--bg2); padding:1px 4px; font-size:8px;">UNIT_DATA</code> to enable launch.
+        <div style="font-family:var(--bebas); font-size:16px; color:var(--amber2); letter-spacing:3px; margin-bottom:6px;">${topicLabel}</div>
+        <div style="font-family:var(--crimson); font-size:13px; color:var(--text3); font-style:italic; line-height:1.5;">
+          Game in development — check back as the course grows.
         </div>
       </div>`;
   }
@@ -2505,6 +2518,7 @@ function markUnitComplete(unitId) {
   if (STATE.unitsCompleted.length >= 1 && !STATE.badgesEarned.includes('first_unit')) STATE.badgesEarned.push('first_unit');
   if (unitId === 'unit1'  && !STATE.badgesEarned.includes('house_divided'))  STATE.badgesEarned.push('house_divided');
   if (unitId === 'unit2a' && !STATE.badgesEarned.includes('boomtown'))       STATE.badgesEarned.push('boomtown');
+  if (unitId === 'unit2b' && !STATE.badgesEarned.includes('reform'))         STATE.badgesEarned.push('reform');
   if (unitId === 'unit3a' && !STATE.badgesEarned.includes('empire'))        STATE.badgesEarned.push('empire');
   if (unitId === 'unit3b' && !STATE.badgesEarned.includes('trenches'))      STATE.badgesEarned.push('trenches');
   if (unitId === 'unit4a' && !STATE.badgesEarned.includes('boom'))          STATE.badgesEarned.push('boom');
