@@ -1346,14 +1346,14 @@ const UNIT_DATA = [
   {
     id: 'unit3a',
     num: 'Unit 3A',
-    title: 'American Expansion & Emerging Global Power',
+    title: 'Empire Rising',
     years: '1898 – 1914',
     icon: '🌐',
     era: 'Age of Empire',
     eraColor: '#2a4a6a',
     status: 'available',
     progress: 0,
-    url: null,
+    url: 'https://olsonjoshua-code.github.io/empire-rising/',  // ← LIVE URL
     desc: 'The United States looked beyond its borders. The Spanish-American War made America a colonial power overnight. Debates raged about what kind of nation America wanted to become.',
     topics: ['Spanish-American War','Philippine-American War','Monroe Doctrine','Panama Canal','Dollar Diplomacy','Anti-Imperialism'],
     themes: ['power','identity','conflict','freedom'],
@@ -1362,7 +1362,7 @@ const UNIT_DATA = [
     changed: 'U.S. acquires overseas territories; formally enters global power competition.',
     continued: 'Racial hierarchy exported alongside American expansion; economic motives driving foreign policy.',
     emerged: 'Can a nation founded on self-determination justify empire — and what does expansion do to American identity?',
-    badgeEarned: null,
+    badgeEarned: '🌐',
   },
   {
     id: 'unit3b',
@@ -1605,6 +1605,7 @@ const BADGES = [
   { id:'crash',        icon:'🌾', name:'Crash & Recovery',         desc:'Complete Unit 4B' },
   { id:'arsenal',      icon:'🎖️', name:'Arsenal of Democracy',    desc:'Complete Unit 5A' },
   { id:'iron_curtain', icon:'☢️', name:'Iron Curtain',             desc:'Complete Unit 5B' },
+  { id:'empire',       icon:'🌐', name:'Empire Rising',            desc:'Complete Unit 3A' },
   { id:'civil_rights', icon:'✊', name:'Chronicle of Change',   desc:'Complete Unit 6' },
   { id:'camelot',      icon:'🕊️', name:'Camelot',               desc:'Complete Unit 6B' },
   { id:'napalm',       icon:'🪖', name:'Napalm Dawn',           desc:'Complete Unit 7A' },
@@ -2490,6 +2491,7 @@ function markUnitComplete(unitId) {
 
   // award badges
   if (STATE.unitsCompleted.length >= 1 && !STATE.badgesEarned.includes('first_unit')) STATE.badgesEarned.push('first_unit');
+  if (unitId === 'unit3a' && !STATE.badgesEarned.includes('empire'))        STATE.badgesEarned.push('empire');
   if (unitId === 'unit4a' && !STATE.badgesEarned.includes('boom'))          STATE.badgesEarned.push('boom');
   if (unitId === 'unit4b' && !STATE.badgesEarned.includes('crash'))         STATE.badgesEarned.push('crash');
   if (unitId === 'unit5a' && !STATE.badgesEarned.includes('arsenal'))       STATE.badgesEarned.push('arsenal');
