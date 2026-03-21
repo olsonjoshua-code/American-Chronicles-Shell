@@ -1410,14 +1410,14 @@ const UNIT_DATA = [
   {
     id: 'unit4b',
     num: 'Unit 4B',
-    title: 'The Great Depression & New Deal',
+    title: 'Crash & Recovery',
     years: '1929 – 1941',
     icon: '🌾',
     era: 'Boom & Bust',
     eraColor: '#5a3a0a',
     status: 'available',
     progress: 0,
-    url: null,
+    url: 'https://olsonjoshua-code.github.io/crash-and-recovery/',  // ← LIVE URL — update if repo name differs
     desc: 'The economy collapsed. Millions lost everything. FDR\'s New Deal reshaped the relationship between government and citizens — forever changing what Americans expected Washington to do.',
     topics: ['Stock Market Crash','Hoover\'s response','New Deal programs','Dust Bowl','Labor movement','Court-packing plan','Legacy debate'],
     themes: ['economy','power','freedom','identity'],
@@ -1426,20 +1426,20 @@ const UNIT_DATA = [
     changed: 'Federal government becomes guarantor of economic security; labor unions gain legal protection.',
     continued: 'Racial exclusion baked into New Deal programs; fundamental capitalist structure left intact.',
     emerged: 'How much should government intervene in the economy — and who benefits, and who is left out?',
-    badgeEarned: null,
+    badgeEarned: '🌾',
   },
   // ── ERA 5: WWII & Cold War ─────────────────────────────────────────────
   {
     id: 'unit5a',
     num: 'Unit 5A',
-    title: 'World War II',
+    title: 'Arsenal of Democracy',
     years: '1939 – 1945',
     icon: '🎖️',
     era: 'WWII & Cold War',
     eraColor: '#2a3a1a',
     status: 'available',
     progress: 0,
-    url: null,
+    url: 'https://olsonjoshua-code.github.io/arsenal_of_democracy_wwii/',  // ← LIVE URL — update if repo name differs
     desc: 'America enters the war after Pearl Harbor and fights on two fronts. A Double V Campaign at home. The Holocaust. The atomic bomb. The world after 1945 will never be the same.',
     topics: ['Causes of WWII','Pearl Harbor','Home Front','Japanese internment','Holocaust','D-Day','Manhattan Project','Hiroshima & Nagasaki'],
     themes: ['conflict','freedom','power','identity'],
@@ -1448,7 +1448,7 @@ const UNIT_DATA = [
     changed: 'European colonialism weakened; U.S. and USSR emerge as superpowers; nuclear age begins.',
     continued: 'Racial segregation in the U.S. military; colonial empires persist even as fascism falls.',
     emerged: 'When does the ends justify the means in war — and what are the moral costs of total victory?',
-    badgeEarned: null,
+    badgeEarned: '🎖️',
   },
   {
     id: 'unit5b',
@@ -1460,7 +1460,7 @@ const UNIT_DATA = [
     eraColor: '#2a3a1a',
     status: 'available',
     progress: 0,
-    url: 'https://olsonjoshua-code.github.io/Iron-Curtain/',  // ← LIVE URL — update if repo name differs
+    url: 'https://olsonjoshua-code.github.io/iron-curtain/',  // ← LIVE URL
     desc: 'Two superpowers. One world on the edge. The Truman Doctrine, Korea, McCarthy, the arms race, the space race — and the ever-present shadow of nuclear annihilation.',
     topics: ['Truman Doctrine','Marshall Plan','NATO','Korean War','McCarthyism','Nuclear arms race','Sputnik','Cuban Missile Crisis'],
     themes: ['conflict','power','freedom','identity'],
@@ -1600,8 +1600,10 @@ const RANKS = [
 
 // ── BADGES ───────────────────────────────────────────────────────────────
 const BADGES = [
-  { id:'first_unit',   icon:'🌟', name:'First Chapter',        desc:'Complete your first unit' },
-  { id:'iron_curtain', icon:'☢️', name:'Iron Curtain',          desc:'Complete Unit 5B' },
+  { id:'first_unit',   icon:'🌟', name:'First Chapter',           desc:'Complete your first unit' },
+  { id:'crash',        icon:'🌾', name:'Crash & Recovery',         desc:'Complete Unit 4B' },
+  { id:'arsenal',      icon:'🎖️', name:'Arsenal of Democracy',    desc:'Complete Unit 5A' },
+  { id:'iron_curtain', icon:'☢️', name:'Iron Curtain',             desc:'Complete Unit 5B' },
   { id:'civil_rights', icon:'✊', name:'Chronicle of Change',   desc:'Complete Unit 6' },
   { id:'camelot',      icon:'🕊️', name:'Camelot',               desc:'Complete Unit 6B' },
   { id:'napalm',       icon:'🪖', name:'Napalm Dawn',           desc:'Complete Unit 7A' },
@@ -2487,7 +2489,9 @@ function markUnitComplete(unitId) {
 
   // award badges
   if (STATE.unitsCompleted.length >= 1 && !STATE.badgesEarned.includes('first_unit')) STATE.badgesEarned.push('first_unit');
-  if (unitId === 'unit5b' && !STATE.badgesEarned.includes('iron_curtain'))  STATE.badgesEarned.push('iron_curtain');
+  if (unitId === 'unit4b' && !STATE.badgesEarned.includes('crash'))         STATE.badgesEarned.push('crash');
+  if (unitId === 'unit5a' && !STATE.badgesEarned.includes('arsenal'))       STATE.badgesEarned.push('arsenal');
+  if (unitId === 'unit5b' && !STATE.badgesEarned.includes('iron_curtain')) STATE.badgesEarned.push('iron_curtain');
   if (unitId === 'unit6'  && !STATE.badgesEarned.includes('civil_rights')) STATE.badgesEarned.push('civil_rights');
   if (unitId === 'unit7a' && !STATE.badgesEarned.includes('camelot'))      STATE.badgesEarned.push('camelot');
   if (unitId === 'unit7b' && !STATE.badgesEarned.includes('napalm'))       STATE.badgesEarned.push('napalm');
