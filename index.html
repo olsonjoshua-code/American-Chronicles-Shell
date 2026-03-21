@@ -1618,6 +1618,7 @@ let STATE = {
   avatar: 'scholar',
   period: '',        // class period (1–7)
   isGuest: false,    // true if playing as guest
+  isTeacher: false,  // true if logged in as teacher — passed to games via localStorage
   unitsCompleted: [],
   unitsInProgress: [],
   badgesEarned: [],
@@ -2536,21 +2537,24 @@ function toggleTeacherBox() {
 function submitTeacherCode() {
   const input = document.getElementById('teacher-code-input');
   const err   = document.getElementById('teacher-code-err');
-  // Compare both sides lowercased so typing works regardless of case
   const val   = input.value.trim().toLowerCase();
 
   if (val === TEACHER_PASSWORD.toLowerCase()) {
     IS_TEACHER = true;
+    // Write teacher flag into the shared state so connected games know
+    // this is a teacher session and skip their own character creation
+    STATE.name      = STATE.name || 'Mr. Olson';
+    STATE.isTeacher = true;
+    STATE.setupDone = true;
+    saveState();
     input.value = '';
     document.getElementById('teacher-login-box').style.display = 'none';
     document.getElementById('teacher-toggle-label').textContent = 'Teacher Login';
-    // Enter shell in teacher mode
     enterShell();
   } else {
     err.textContent = 'Incorrect code. Try again.';
     input.value = '';
     input.focus();
-    // Brief red flash on input border
     input.style.borderColor = 'var(--red2)';
     setTimeout(() => { input.style.borderColor = 'var(--teal)'; }, 1000);
   }
@@ -2569,6 +2573,8 @@ function enterTeacherMode() {
 
 function teacherLogout() {
   IS_TEACHER = false;
+  STATE.isTeacher = false;
+  saveState();
   const btn = document.getElementById('nav-teacher');
   if (btn) btn.style.display = 'none';
   updateHUD();
