@@ -1389,14 +1389,14 @@ const UNIT_DATA = [
   {
     id: 'unit4a',
     num: 'Unit 4A',
-    title: 'Cultural Conflict & the Roaring 20s',
+    title: 'Boom or Bust',
     years: '1920 – 1929',
     icon: '🎷',
     era: 'Boom & Bust',
     eraColor: '#5a3a0a',
     status: 'available',
     progress: 0,
-    url: null,
+    url: 'https://olsonjoshua-code.github.io/boom-or-bust/',  // ← LIVE URL
     desc: 'A decade of dazzling prosperity and deep contradiction. Jazz, flappers, and the Harlem Renaissance transformed culture while nativism, the KKK, and Prohibition exposed a nation at war with itself.',
     topics: ['Prohibition','Harlem Renaissance','Nativism & Immigration Acts','Scopes Trial','KKK Revival','Mass Consumerism','Stock Market speculation'],
     themes: ['identity','freedom','conflict','economy'],
@@ -1405,7 +1405,7 @@ const UNIT_DATA = [
     changed: 'Mass consumer culture emerges; African American cultural power rises in northern cities.',
     continued: 'Racial violence and white supremacy; economic inequality beneath the surface prosperity.',
     emerged: 'As America modernizes, who defines American identity — and who gets excluded from it?',
-    badgeEarned: null,
+    badgeEarned: '🎷',
   },
   {
     id: 'unit4b',
@@ -1601,6 +1601,7 @@ const RANKS = [
 // ── BADGES ───────────────────────────────────────────────────────────────
 const BADGES = [
   { id:'first_unit',   icon:'🌟', name:'First Chapter',           desc:'Complete your first unit' },
+  { id:'boom',         icon:'🎷', name:'Boom or Bust',             desc:'Complete Unit 4A' },
   { id:'crash',        icon:'🌾', name:'Crash & Recovery',         desc:'Complete Unit 4B' },
   { id:'arsenal',      icon:'🎖️', name:'Arsenal of Democracy',    desc:'Complete Unit 5A' },
   { id:'iron_curtain', icon:'☢️', name:'Iron Curtain',             desc:'Complete Unit 5B' },
@@ -2489,6 +2490,7 @@ function markUnitComplete(unitId) {
 
   // award badges
   if (STATE.unitsCompleted.length >= 1 && !STATE.badgesEarned.includes('first_unit')) STATE.badgesEarned.push('first_unit');
+  if (unitId === 'unit4a' && !STATE.badgesEarned.includes('boom'))          STATE.badgesEarned.push('boom');
   if (unitId === 'unit4b' && !STATE.badgesEarned.includes('crash'))         STATE.badgesEarned.push('crash');
   if (unitId === 'unit5a' && !STATE.badgesEarned.includes('arsenal'))       STATE.badgesEarned.push('arsenal');
   if (unitId === 'unit5b' && !STATE.badgesEarned.includes('iron_curtain')) STATE.badgesEarned.push('iron_curtain');
