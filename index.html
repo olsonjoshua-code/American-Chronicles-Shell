@@ -370,7 +370,7 @@ body::after {
 /* inner row — all units in a single horizontal line */
 #timeline-inner {
   display: flex; align-items: flex-start;
-  padding: 40px 40px 0 40px;
+  padding: 50px 40px 0 40px;
   position: relative;
   /* width is set by JS based on content */
 }
@@ -378,7 +378,7 @@ body::after {
 /* the continuous spine line */
 #timeline-spine {
   position: absolute;
-  top: 88px;   /* vertically centered on node midpoints */
+  top: 98px;   /* vertically centered on node midpoints */
   left: 0; right: 0;
   height: 2px;
   background: linear-gradient(90deg, transparent 0px, var(--border) 40px, var(--border) calc(100% - 80px), transparent 100%);
@@ -1196,7 +1196,7 @@ body::after {
 
     <!-- status -->
     <div class="preview-status-row">
-      <div class="preview-status-badge" id="pv-status-badge">AVAILABLE</div>
+      <div class="preview-status-badge" id="pv-status-badge"></div>
     </div>
 
     <!-- UNIT DESCRIPTION -->
@@ -1939,10 +1939,13 @@ function renderTimeline() {
   ERAS.forEach((era, eraIdx) => {
     const eraUnits = era.units.map(uid => UNIT_DATA.find(u => u.id === uid)).filter(Boolean);
 
-    // era section label (absolute over inner)
+    // era section label — place AFTER accounting for divider so it doesn't overlap
+    const labelX = firstEra ? x : x + DIV_W + 4;
     const eraLabel = document.createElement('div');
     eraLabel.className = 'era-section-label';
-    eraLabel.style.left = x + 'px';
+    eraLabel.style.left = labelX + 'px';
+    // stagger label row for dense eras to prevent overlap
+    eraLabel.style.top = (eraIdx % 2 === 0) ? '6px' : '20px';
     eraLabel.textContent = era.name.toUpperCase() + ' · ' + era.years;
     inner.appendChild(eraLabel);
 
@@ -1983,7 +1986,7 @@ function renderTimeline() {
         <div class="unit-node-body">
           <div class="unit-node-num">${unit.num}</div>
           <div class="unit-node-title">${unit.title}</div>
-          <div class="unit-node-status ${statusClass(status)}">${statusLabel(status)}</div>
+          <div class="unit-node-status ${statusClass(status)}" style="${!statusLabel(status)?'display:none':''}">${statusLabel(status)}</div>
         </div>
         <div class="unit-node-progress">
           <div class="unit-node-progress-fill" style="width:${unit.progress||0}%"></div>
@@ -2133,7 +2136,11 @@ function initMinimap(totalWidth) {
     const scrollFrac = track.scrollLeft / (track.scrollWidth || 1);
     const eraIdx = Math.min(ERAS.length-1, Math.floor(scrollFrac * ERAS.length));
     mmLabel.textContent = ERAS[eraIdx]?.years?.split('–')[0]?.trim() || '1861';
-    mmPct.textContent = Math.round(scrollPct * 100) + '%';
+    // right label: show approximate year based on scroll position
+    const TIMELINE_START = 1861;
+    const TIMELINE_END   = 2025;
+    const approxYear = Math.round(TIMELINE_START + scrollPct * (TIMELINE_END - TIMELINE_START));
+    mmPct.textContent = approxYear === TIMELINE_START ? '' : approxYear >= TIMELINE_END ? 'Present' : approxYear;
 
     // sync ruler
     const rulerInner = document.getElementById('timeline-ruler-inner');
@@ -2157,7 +2164,7 @@ function statusClass(s) {
   return { available:'status-available', locked:'status-locked', completed:'status-completed', inprogress:'status-inprogress' }[s] || 'status-coming';
 }
 function statusLabel(s) {
-  return { available:'Available', locked:'Coming Soon', completed:'✓ Completed', inprogress:'In Progress' }[s] || 'Coming Soon';
+  return { available:'', locked:'Coming Soon', completed:'✓ Completed', inprogress:'In Progress' }[s] || 'Coming Soon';
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -2195,10 +2202,12 @@ function openPreview(unitId) {
   document.getElementById('preview-hero-art').innerHTML =
     `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;opacity:0.12;">${unit.icon}</div>`;
 
-  // status badge
+  // status badge — hide for available units, show for all others
   const badge = document.getElementById('pv-status-badge');
-  badge.textContent = statusLabel(status).toUpperCase();
+  const label = statusLabel(status).toUpperCase();
+  badge.textContent = label;
   badge.className = 'preview-status-badge ' + statusClass(status);
+  badge.style.display = label ? 'inline-block' : 'none';
 
   // topics — show all for active, first 4 for locked
   const topicsToShow = status === 'locked' ? unit.topics.slice(0, 4) : unit.topics;
