@@ -1281,14 +1281,14 @@ const UNIT_DATA = [
   {
     id: 'unit1',
     num: 'Unit 1',
-    title: 'Civil War & Reconstruction',
+    title: 'A House Divided',
     years: '1861 – 1877',
     icon: '⚔️',
     era: 'Reconstruction Era',
-    eraColor: '#8b4513',  // saddle brown
-    status: 'available',     // locked | available | inprogress | completed
-    progress: 0,          // 0–100
-    url: null,            // ← PASTE URL HERE when ready
+    eraColor: '#8b4513',
+    status: 'available',
+    progress: 0,
+    url: 'https://olsonjoshua-code.github.io/house-divided/',  // ← LIVE URL
     desc: 'The Union torn apart and stitched back together. Reconstruction promised freedom and equality for formerly enslaved Americans — but powerful forces worked to undo those promises almost immediately.',
     topics: ['Civil War causes','13th, 14th, 15th Amendments','Freedmen\'s Bureau','Radical Reconstruction','Sharecropping','Compromise of 1877'],
     themes: ['conflict','freedom','power','identity'],
@@ -1297,7 +1297,7 @@ const UNIT_DATA = [
     changed: 'Slavery abolished; formerly enslaved people gain citizenship and voting rights through constitutional amendments.',
     continued: 'White supremacist resistance; economic dependence of freedpeople; federal reluctance to enforce civil rights.',
     emerged: 'How do you rebuild a nation while confronting deep injustice — and what happens when you stop trying?',
-    badgeEarned: null,
+    badgeEarned: '⚔️',
   },
   // ── ERA 2: Gilded Age & Reform ─────────────────────────────────────────
   {
@@ -1601,6 +1601,7 @@ const RANKS = [
 // ── BADGES ───────────────────────────────────────────────────────────────
 const BADGES = [
   { id:'first_unit',   icon:'🌟', name:'First Chapter',           desc:'Complete your first unit' },
+  { id:'house_divided',icon:'⚔️', name:'A House Divided',          desc:'Complete Unit 1' },
   { id:'boomtown',     icon:'🚂', name:'Boomtown Nation',          desc:'Complete Unit 2A' },
   { id:'boom',         icon:'🎷', name:'Boom or Bust',             desc:'Complete Unit 4A' },
   { id:'crash',        icon:'🌾', name:'Crash & Recovery',         desc:'Complete Unit 4B' },
@@ -2493,7 +2494,8 @@ function markUnitComplete(unitId) {
 
   // award badges
   if (STATE.unitsCompleted.length >= 1 && !STATE.badgesEarned.includes('first_unit')) STATE.badgesEarned.push('first_unit');
-  if (unitId === 'unit2a' && !STATE.badgesEarned.includes('boomtown'))      STATE.badgesEarned.push('boomtown');
+  if (unitId === 'unit1'  && !STATE.badgesEarned.includes('house_divided'))  STATE.badgesEarned.push('house_divided');
+  if (unitId === 'unit2a' && !STATE.badgesEarned.includes('boomtown'))       STATE.badgesEarned.push('boomtown');
   if (unitId === 'unit3a' && !STATE.badgesEarned.includes('empire'))        STATE.badgesEarned.push('empire');
   if (unitId === 'unit3b' && !STATE.badgesEarned.includes('trenches'))      STATE.badgesEarned.push('trenches');
   if (unitId === 'unit4a' && !STATE.badgesEarned.includes('boom'))          STATE.badgesEarned.push('boom');
