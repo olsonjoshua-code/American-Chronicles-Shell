@@ -351,6 +351,33 @@ body::after {
 }
 .ruler-tick.major .ruler-tick-label { color: var(--text2); font-size: 10px; }
 
+/* era label row — sits between ruler and cards, scrolls in sync */
+#era-row {
+  overflow: hidden;
+  height: 26px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border2);
+  position: relative;
+}
+#era-row-inner {
+  display: flex;
+  height: 100%;
+  position: absolute; top: 0; left: 0;
+  transition: transform 0.05s linear;
+  will-change: transform;
+}
+.era-row-segment {
+  display: flex; align-items: center;
+  padding: 0 12px;
+  flex-shrink: 0;
+  font-family: var(--bebas); font-size: 9px; letter-spacing: 2px;
+  color: rgba(255,255,255,0.75);
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  box-sizing: border-box;
+}
+
 /* the scrollable track */
 #timeline-track {
   overflow-x: auto; overflow-y: hidden;
@@ -370,7 +397,7 @@ body::after {
 /* inner row — all units in a single horizontal line */
 #timeline-inner {
   display: flex; align-items: flex-start;
-  padding: 34px 40px 0 40px;
+  padding: 16px 40px 0 40px;
   position: relative;
   /* width is set by JS based on content */
 }
@@ -378,7 +405,7 @@ body::after {
 /* the continuous spine line */
 #timeline-spine {
   position: absolute;
-  top: 88px;   /* vertically centered on node midpoints */
+  top: 72px;   /* vertically centered on node midpoints */
   left: 0; right: 0;
   height: 2px;
   background: linear-gradient(90deg, transparent 0px, var(--border) 40px, var(--border) calc(100% - 80px), transparent 100%);
@@ -388,7 +415,7 @@ body::after {
 /* completed portion of spine (animated via JS) */
 #timeline-spine-fill {
   position: absolute;
-  top: 78px; left: 40px;
+  top: 62px; left: 40px;
   height: 2px;
   background: linear-gradient(90deg, var(--amber2), var(--amber3));
   width: 0;
@@ -397,20 +424,7 @@ body::after {
   z-index: 1;
 }
 
-/* era band — colored strip spanning the era's cards */
-.era-band {
-  position: absolute;
-  top: 4px;
-  height: 22px;
-  display: flex; align-items: center;
-  padding: 0 10px;
-  border-radius: 2px;
-  z-index: 5;
-  font-family: var(--bebas); font-size: 9px; letter-spacing: 2px;
-  color: rgba(255,255,255,0.7);
-  white-space: nowrap;
-  pointer-events: none;
-}
+/* era-section-line (kept for potential future use) */
 .era-section-line {
   position: absolute;
   top: 22px; height: 1px;
@@ -929,6 +943,8 @@ body::after {
       <div id="timeline-scroll-outer">
         <!-- year ruler (scrolls with track via JS transform) -->
         <div id="timeline-ruler"><div id="timeline-ruler-inner"></div></div>
+        <!-- era label row — fixed height strip between ruler and cards -->
+        <div id="era-row"><div id="era-row-inner"></div></div>
         <!-- main scrollable track -->
         <div id="timeline-track">
           <div id="timeline-inner">
@@ -1930,7 +1946,7 @@ function renderTimeline() {
   if (!inner) return;
 
   // clear everything except spine elements
-  inner.querySelectorAll('.unit-node,.tl-connector,.era-divider,.era-band,.era-section-line')
+  inner.querySelectorAll('.unit-node,.tl-connector,.era-divider,.era-section-line')
        .forEach(el => el.remove());
 
   // build a flat ordered list with era boundaries
@@ -1942,6 +1958,8 @@ function renderTimeline() {
   let x = PAD;  // running x position
   let firstEra  = true;
   let completedX = PAD; // how far the amber spine extends
+
+  let eraSegments = []; // collect for era-row building
 
   ERAS.forEach((era, eraIdx) => {
     const eraUnits = era.units.map(uid => UNIT_DATA.find(u => u.id === uid)).filter(Boolean);
@@ -1956,7 +1974,7 @@ function renderTimeline() {
     }
     firstEra = false;
 
-    // record era start x for the band
+    // record era start x for the era-row segment
     const eraStartX = x;
 
     eraUnits.forEach((unit, idx) => {
@@ -1994,26 +2012,43 @@ function renderTimeline() {
         </div>`;
       inner.appendChild(node);
 
-      // track completed spine length
       if (status === 'completed') completedX = x + NODE_W;
       x += NODE_W;
     });
 
-    // era band — spans from eraStartX to current x with era color
-    const eraColor = eraUnits[0]?.eraColor || '#2e2118';
-    const bandWidth = x - eraStartX;
-    const band = document.createElement('div');
-    band.className = 'era-band';
-    band.style.left   = eraStartX + 'px';
-    band.style.width  = bandWidth + 'px';
-    band.style.background = eraColor + 'cc'; // era color at ~80% opacity
-    band.style.borderBottom = `2px solid ${eraColor}`;
-    band.textContent  = era.name.toUpperCase() + ' · ' + era.years;
-    inner.appendChild(band);
+    // store segment info for era-row
+    eraSegments.push({
+      name: era.name, years: era.years,
+      width: x - eraStartX,
+      color: eraUnits[0]?.eraColor || '#2e2118'
+    });
 
-    // gap between eras
-    x += 24;
+    x += 24; // gap between eras
   });
+
+  // ── BUILD ERA ROW ──────────────────────────────────────────────────────
+  const eraRowInner = document.getElementById('era-row-inner');
+  if (eraRowInner) {
+    eraRowInner.innerHTML = '';
+    eraRowInner.style.width = (x + PAD) + 'px';
+    // left spacer matching timeline-inner's PAD
+    const spacer = document.createElement('div');
+    spacer.style.cssText = `width:${PAD}px; flex-shrink:0;`;
+    eraRowInner.appendChild(spacer);
+    eraSegments.forEach(seg => {
+      const el = document.createElement('div');
+      el.className = 'era-row-segment';
+      el.style.width = seg.width + 'px';
+      el.style.background = seg.color + 'ee';
+      el.style.borderLeft = `3px solid ${seg.color}`;
+      el.textContent = seg.name.toUpperCase() + ' · ' + seg.years;
+      eraRowInner.appendChild(el);
+      // gap spacer between eras
+      const gap = document.createElement('div');
+      gap.style.cssText = 'width:30px; flex-shrink:0;';
+      eraRowInner.appendChild(gap);
+    });
+  }
 
   // set inner width so it scrolls properly
   inner.style.width = (x + PAD) + 'px';
@@ -2155,9 +2190,11 @@ function initMinimap(totalWidth) {
     const approxYear = Math.round(TIMELINE_START + scrollPct * (TIMELINE_END - TIMELINE_START));
     mmPct.textContent = approxYear === TIMELINE_START ? '' : approxYear >= TIMELINE_END ? 'Present' : approxYear;
 
-    // sync ruler
+    // sync ruler and era-row to track scroll
     const rulerInner = document.getElementById('timeline-ruler-inner');
     if (rulerInner) rulerInner.style.transform = `translateX(-${track.scrollLeft}px)`;
+    const eraRowInner = document.getElementById('era-row-inner');
+    if (eraRowInner) eraRowInner.style.transform = `translateX(-${track.scrollLeft}px)`;
   }
 
   track.addEventListener('scroll', updateMinimap, { passive: true });
