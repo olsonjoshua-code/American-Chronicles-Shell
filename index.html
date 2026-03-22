@@ -436,13 +436,13 @@ body::before{content:'';position:fixed;inset:0;
       </div>
 
       <!-- midterm checkpoint -->
-      <div id="midterm-card" style="margin-top:14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(40,80,160,.18) 0%,rgba(20,16,13,.95) 60%);border:1.5px solid var(--blue2);padding:10px 16px;display:flex;align-items:center;gap:12px;transition:all .2s" onmouseenter="this.style.boxShadow='0 0 30px rgba(72,120,208,.35)';this.style.borderColor='#6aa0ff'" onmouseleave="this.style.boxShadow='none';this.style.borderColor='var(--blue2)'">
+      <div id="midterm-card" onclick="openPreview('eoc_midterm')" style="margin-top:14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(40,80,160,.18) 0%,rgba(20,16,13,.95) 60%);border:1.5px solid var(--blue2);padding:10px 16px;display:flex;align-items:center;gap:12px;transition:all .2s" onmouseenter="this.style.boxShadow='0 0 30px rgba(72,120,208,.35)';this.style.borderColor='#6aa0ff'" onmouseleave="this.style.boxShadow='none';this.style.borderColor='var(--blue2)'">
         <div style="font-size:22px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(72,120,208,.5))">📋</div>
         <div style="flex:1;min-width:0">
           <div style="font-family:var(--bebas);font-size:9px;color:var(--blue2);letter-spacing:3px">MIDTERM CHECKPOINT</div>
           <div style="font-family:var(--playfair);font-size:13px;color:var(--cream)">Cumulative Review — Units 1–4</div>
         </div>
-        <span class="unit-status us-play" style="flex-shrink:0;font-size:8px;animation:glowPulse 2.5s infinite">▶ Play Now</span>
+        <span id="midterm-card-status" class="unit-status us-play" style="flex-shrink:0;font-size:8px;animation:glowPulse 2.5s infinite">▶ Play Now</span>
         <div style="position:absolute;top:0;right:0;width:120px;height:100%;background:linear-gradient(90deg,transparent,rgba(72,120,208,.05));pointer-events:none"></div>
       </div>
     </div>
@@ -1354,7 +1354,7 @@ function renderTitleArt(){
 function toggleTeacherBox(){const b=document.getElementById('teacher-box'),l=document.getElementById('teacher-toggle-lbl');const open=b.style.display!=='block';b.style.display=open?'block':'none';l.textContent=open?'Cancel':'Teacher Login';if(open)document.getElementById('teacher-input').focus();}
 function submitTeacher(){const inp=document.getElementById('teacher-input'),err=document.getElementById('teacher-err');if(inp.value.trim().toLowerCase()===TEACHER_PWD){IS_TEACHER=true;S.isTeacher=true;S.name=S.name||'Mr. Olson';S.setupDone=true;saveS();inp.value='';document.getElementById('teacher-box').style.display='none';enterShell();}else{err.textContent='Incorrect code.';inp.value='';}}
 function startNewProfile(){document.getElementById('title-screen').style.display='none';const ss=document.getElementById('setup-screen');ss.style.display='block';buildStarterGrid();buildPeriodGrid();previewSetup();}
-function enterShell(){document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name){syncFromSupabase().then(()=>openWelcome());}else{setTimeout(()=>openWelcome(),600);}}}else{if(!S.isGuest&&S.name)syncFromSupabase();}}
+function enterShell(){document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name){syncFromSupabase().then(()=>openWelcome());}else{setTimeout(()=>openWelcome(),600);}}}else{if(!S.isGuest&&S.name)syncFromSupabase();}}
 
 // ── SETUP ─────────────────────────────────────────────
 const STARTERS=CHARS.filter(c=>c.unlockMethod==='free');
@@ -1379,7 +1379,7 @@ async function syncFromSupabase(){
   let changed=false;
   rows.forEach(r=>{if(!S.unitsCompleted.includes(r.unit_id)&&r.best_accuracy>=60){S.unitsCompleted.push(r.unit_id);changed=true;}});
   awardBadges();checkUnlocks();
-  if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();}
+  if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();}
 }
 
 function awardBadges(){
@@ -1461,6 +1461,26 @@ function showView(v){
 
 // ── TIMELINE ──────────────────────────────────────────
 function unitStatus(id){return S.unitsCompleted.includes(id)?'done':'avail';}
+function refreshMidtermCard(){
+  const el=document.getElementById('midterm-card');
+  const st=document.getElementById('midterm-card-status');
+  if(!el||!st)return;
+  const done=S.unitsCompleted.includes('eoc_midterm');
+  if(done){
+    st.className='unit-status us-done';
+    st.style.animation='none';
+    st.textContent='\u2713 Completed';
+    el.style.borderColor='var(--green2)';
+    el.style.background='linear-gradient(135deg,rgba(42,122,58,.18) 0%,rgba(20,16,13,.95) 60%)';
+  } else {
+    st.className='unit-status us-play';
+    st.style.animation='glowPulse 2.5s infinite';
+    st.textContent='\u25b6 Play Now';
+    el.style.borderColor='var(--blue2)';
+    el.style.background='linear-gradient(135deg,rgba(40,80,160,.18) 0%,rgba(20,16,13,.95) 60%)';
+  }
+}
+
 
 function renderTimeline(){
   const inner=document.getElementById('tl-inner');if(!inner)return;
@@ -1493,6 +1513,7 @@ function renderTimeline(){
   if(ebi){ebi.innerHTML='';ebi.style.width=(x+PAD)+'px';const sp=document.createElement('div');sp.style.cssText=`width:${PAD}px;flex-shrink:0`;ebi.appendChild(sp);
     eraSegs.forEach(s=>{const el=document.createElement('div');el.className='era-seg';el.style.cssText=`width:${s.endX-s.startX+20}px;background:${s.color}ee;border-left:3px solid ${s.color}`;el.textContent=s.name.toUpperCase()+' · '+s.years;ebi.appendChild(el);});}
   initDrag();initMinimap(x+PAD);
+  refreshMidtermCard();
 }
 
 function initDrag(){const t=document.getElementById('tl-track');if(!t||t._d)return;t._d=true;let down=false,sx,sl;t.addEventListener('mousedown',e=>{down=true;sx=e.pageX-t.offsetLeft;sl=t.scrollLeft;t.style.cursor='grabbing';});window.addEventListener('mouseup',()=>{down=false;if(t)t.style.cursor='grab';});t.addEventListener('mousemove',e=>{if(!down)return;e.preventDefault();t.scrollLeft=sl-(e.pageX-t.offsetLeft-sx);});t.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){e.preventDefault();t.scrollLeft+=e.deltaY*1.2;}},{passive:false});let ts;t.addEventListener('touchstart',e=>{ts=e.touches[0].clientX;});t.addEventListener('touchmove',e=>{if(!ts)return;t.scrollLeft+=ts-e.touches[0].clientX;ts=e.touches[0].clientX;});}
