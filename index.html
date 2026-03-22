@@ -1200,6 +1200,7 @@ function getRank(){const n=S.unitsCompleted.length;let r=RANKS[0];for(const rk o
 // ── LOADING ───────────────────────────────────────────
 window.addEventListener('load',()=>{
   loadS();
+  awardBadges(); // ensure badgesEarned is consistent with unitsCompleted from localStorage
   const bar=document.getElementById('ld-bar');let p=0;
   const iv=setInterval(()=>{p+=Math.random()*22+8;bar.style.width=Math.min(p,96)+'%';
     if(p>=96){clearInterval(iv);bar.style.width='100%';setTimeout(()=>{const ls=document.getElementById('loading-screen');ls.style.opacity='0';setTimeout(()=>{ls.style.display='none';boot();},500);},280);}
@@ -1256,8 +1257,8 @@ async function syncFromSupabase(){
   _trophyData=rows;
   let changed=false;
   rows.forEach(r=>{if(!S.unitsCompleted.includes(r.unit_id)&&r.best_accuracy>=60){S.unitsCompleted.push(r.unit_id);changed=true;}});
-  if(changed){awardBadges();checkUnlocks();saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();}
-  else{checkUnlocks();}
+  awardBadges();checkUnlocks();
+  if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();}
 }
 
 function awardBadges(){
