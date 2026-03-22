@@ -488,7 +488,7 @@ body::before{content:'';position:fixed;inset:0;
           <div style="font-family:var(--dm);font-size:10px;color:var(--teal);letter-spacing:1px;margin:2px 0 9px" id="prof-rank">Curious Citizen</div>
           <div style="font-family:var(--dm);font-size:8px;color:var(--text3);letter-spacing:1px;margin-bottom:4px">Course Progress</div>
           <div style="height:4px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden"><div style="height:100%;background:linear-gradient(90deg,var(--amber2),var(--amber3));border-radius:2px;transition:width .6s" id="prof-bar"></div></div>
-          <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-top:4px" id="prof-bar-lbl">0 of 13 units</div>
+          <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-top:4px" id="prof-bar-lbl">0 of 19 units</div>
         </div>
       </div>
       <div class="stat-grid">
@@ -992,7 +992,120 @@ function eraTrophyScene(unitId, c, tier){
         <line x1="0" y1="72" x2="100" y2="72" stroke="${col}" stroke-width=".6" opacity=".25"/>
       </g>
       <text x="50" y="87" font-family="'Bebas Neue',serif" font-size="9" fill="${col}" opacity=".45" text-anchor="middle" letter-spacing="2">1980–PRESENT</text>`,
-  };
+
+    theme_power:`
+      <rect width="100" height="90" fill="${col2}18"/>
+      <!-- scales of justice -->
+      <g opacity="${g?.45:.72}" transform="translate(28,8)">
+        <line x1="22" y1="8" x2="22" y2="55" stroke="${col}" stroke-width="1.5"/>
+        <line x1="4" y1="18" x2="40" y2="18" stroke="${col}" stroke-width="1.2"/>
+        <line x1="4" y1="18" x2="10" y2="34" stroke="${col}" stroke-width=".9"/>
+        <line x1="40" y1="18" x2="34" y2="34" stroke="${col}" stroke-width=".9"/>
+        <ellipse cx="10" cy="35" rx="8" ry="3" fill="${col}" opacity=".5"/>
+        <ellipse cx="34" cy="35" rx="8" ry="3" fill="${col}" opacity=".5"/>
+        <rect x="18" y="55" width="8" height="3" fill="${col}" opacity=".6"/>
+        <line x1="10" y1="55" x2="34" y2="55" stroke="${col}" stroke-width="1"/>
+      </g>
+      <!-- columns -->
+      <rect x="8"  y="55" width="5" height="25" fill="${col}" opacity=".25"/>
+      <rect x="87" y="55" width="5" height="25" fill="${col}" opacity=".25"/>
+      <line x1="0" y1="80" x2="100" y2="80" stroke="${col}" stroke-width=".7" opacity=".3"/>
+      <text x="50" y="88" font-family="'Bebas Neue',serif" font-size="9" fill="${col}" opacity=".45" text-anchor="middle" letter-spacing="2">POWER</text>`,
+
+    theme_freedom:`
+      <rect width="100" height="90" fill="${col2}18"/>
+      <!-- torch -->
+      <g opacity="${g?.45:.72}" transform="translate(38,4)">
+        <rect x="9" y="38" width="6" height="28" rx="1" fill="${col}"/>
+        <ellipse cx="12" cy="37" rx="5" ry="4" fill="${col}" opacity=".7"/>
+        <!-- flame -->
+        <path d="M12 36 Q8 28 12 20 Q16 28 12 36Z" fill="${col}" opacity=".8"/>
+        <path d="M12 34 Q9 28 12 24 Q15 28 12 34Z" fill="${col}" opacity=".5"/>
+        <!-- rays -->
+        <line x1="12" y1="18" x2="12" y2="10" stroke="${col}" stroke-width=".8" opacity=".4"/>
+        <line x1="6"  y1="20" x2="2"  y2="14" stroke="${col}" stroke-width=".8" opacity=".3"/>
+        <line x1="18" y1="20" x2="22" y2="14" stroke="${col}" stroke-width=".8" opacity=".3"/>
+      </g>
+      <!-- broken chain links bottom -->
+      <path d="M20 76 Q24 70 28 76 Q32 82 36 76" fill="none" stroke="${col}" stroke-width="1.5" opacity=".4"/>
+      <path d="M36 76 Q40 70 44 76" fill="none" stroke="${col}" stroke-width="1.5" opacity=".25"/>
+      <line x1="44" y1="73" x2="55" y2="73" stroke="${col}" stroke-width=".7" opacity=".2" stroke-dasharray="2,3"/>
+      <line x1="0" y1="82" x2="100" y2="82" stroke="${col}" stroke-width=".6" opacity=".2"/>
+      <text x="50" y="89" font-family="'Bebas Neue',serif" font-size="9" fill="${col}" opacity=".45" text-anchor="middle" letter-spacing="2">FREEDOM</text>`,
+
+    theme_economy:`
+      <rect width="100" height="90" fill="${col2}18"/>
+      <!-- gear -->
+      <g opacity="${g?.45:.65}" transform="translate(32,10)">
+        <circle cx="18" cy="22" r="11" fill="none" stroke="${col}" stroke-width="2.5"/>
+        <circle cx="18" cy="22" r="5"  fill="${col}" opacity=".5"/>
+        ${[0,45,90,135,180,225,270,315].map((a,i)=>`<rect x="16" y="${22-16}" width="4" height="6" rx="1" fill="${col}" transform="rotate(${a},18,22)" opacity=".7"/>`).join('')}
+      </g>
+      <!-- rising bar chart -->
+      <rect x="12" y="65" width="8"  height="15" fill="${col}" opacity=".35"/>
+      <rect x="24" y="55" width="8"  height="25" fill="${col}" opacity=".4"/>
+      <rect x="36" y="45" width="8"  height="35" fill="${col}" opacity=".45"/>
+      <rect x="48" y="38" width="8"  height="42" fill="${col}" opacity=".5"/>
+      <rect x="60" y="50" width="8"  height="30" fill="${col}" opacity=".4"/>
+      <rect x="72" y="42" width="8"  height="38" fill="${col}" opacity=".45"/>
+      <line x1="8" y1="80" x2="92"  y2="80"     stroke="${col}" stroke-width=".8" opacity=".3"/>
+      <text x="50" y="89" font-family="'Bebas Neue',serif" font-size="9" fill="${col}" opacity=".45" text-anchor="middle" letter-spacing="2">ECONOMY</text>`,
+
+    theme_conflict:`
+      <rect width="100" height="90" fill="${col2}18"/>
+      <!-- crossed swords -->
+      <g opacity="${g?.45:.7}">
+        <line x1="20" y1="15" x2="80" y2="70" stroke="${col}" stroke-width="2.5"/>
+        <polygon points="20,15 15,22 25,22" fill="${col}" opacity=".8"/>
+        <rect x="76" y="66" width="8" height="4" rx="1" fill="${col}" transform="rotate(45,80,68)" opacity=".7"/>
+        <line x1="80" y1="15" x2="20" y2="70" stroke="${col}" stroke-width="2.5"/>
+        <polygon points="80,15 75,22 85,22" fill="${col}" opacity=".8"/>
+        <rect x="16" y="66" width="8" height="4" rx="1" fill="${col}" transform="rotate(-45,20,68)" opacity=".7"/>
+        <!-- guard crosspieces -->
+        <line x1="38" y1="33" x2="50" y2="25" stroke="${col}" stroke-width="2" opacity=".55"/>
+        <line x1="50" y1="33" x2="62" y2="25" stroke="${col}" stroke-width="2" opacity=".55"/>
+      </g>
+      <!-- olive branch hint -->
+      <path d="M42 72 Q50 65 58 72 Q66 79 74 72" fill="none" stroke="${col}" stroke-width=".9" opacity=".3"/>
+      <text x="50" y="88" font-family="'Bebas Neue',serif" font-size="9" fill="${col}" opacity=".45" text-anchor="middle" letter-spacing="2">CONFLICT</text>`,
+
+    theme_identity:`
+      <rect width="100" height="90" fill="${col2}18"/>
+      <!-- diverse silhouettes -->
+      <g opacity="${g?.45:.7}">
+        ${[14,28,42,56,70,84].map((x,i)=>{
+          const h=[30,36,28,34,32,30][i];
+          const hy=44-h;
+          return `<circle cx="${x}" cy="${hy-4}" r="${3+i%2}" fill="${col}" opacity="${.5+i*.04}"/>
+                  <rect x="${x-4}" y="${hy}" width="8" height="${h}" rx="1" fill="${col}" opacity="${.45+i*.04}"/>`;
+        }).join('')}
+      </g>
+      <!-- stars scattered above -->
+      <text x="20"  y="20" font-size="7"  fill="${col}" opacity=".3">★</text>
+      <text x="50"  y="14" font-size="10" fill="${col}" opacity=".35">★</text>
+      <text x="78"  y="20" font-size="7"  fill="${col}" opacity=".3">★</text>
+      <line x1="0" y1="78" x2="100" y2="78" stroke="${col}" stroke-width=".6" opacity=".25"/>
+      <text x="50" y="88" font-family="'Bebas Neue',serif" font-size="9" fill="${col}" opacity=".45" text-anchor="middle" letter-spacing="2">IDENTITY</text>`,
+
+    eoc_midterm:`
+      <rect width="100" height="90" fill="${col2}18"/>
+      <!-- document / scroll -->
+      <g opacity="${g?.45:.7}" transform="translate(28,8)">
+        <rect x="2" y="5" width="40" height="52" rx="2" fill="${col}" opacity=".18" stroke="${col}" stroke-width="1.2"/>
+        <rect x="2" y="5" width="40" height="10" rx="2" fill="${col}" opacity=".35"/>
+        <!-- text lines -->
+        <line x1="8"  y1="22" x2="36" y2="22" stroke="${col}" stroke-width="1"   opacity=".5"/>
+        <line x1="8"  y1="29" x2="36" y2="29" stroke="${col}" stroke-width=".8"  opacity=".4"/>
+        <line x1="8"  y1="36" x2="28" y2="36" stroke="${col}" stroke-width=".8"  opacity=".4"/>
+        <line x1="8"  y1="43" x2="36" y2="43" stroke="${col}" stroke-width=".8"  opacity=".35"/>
+        <!-- checkmarks -->
+        <path d="M10 49 L13 52 L18 46" fill="none" stroke="${col}" stroke-width="1.2" opacity=".6"/>
+        <path d="M24 49 L27 52 L32 46" fill="none" stroke="${col}" stroke-width="1.2" opacity=".6"/>
+      </g>
+      <!-- star / seal -->
+      <polygon points="50,62 52,68 58,68 53,72 55,78 50,74 45,78 47,72 42,68 48,68" fill="${col}" opacity=".3"/>
+      <text x="50" y="89" font-family="'Bebas Neue',serif" font-size="9" fill="${col}" opacity=".45" text-anchor="middle" letter-spacing="2">EOC REVIEW</text>`,
+    };
   return scenes[unitId]||scenes.unit1;
 }
 
@@ -1011,6 +1124,12 @@ const UNIT_DATA=[
   {id:'unit7a',num:'Unit 7A',title:'Camelot',years:'1961–1968',icon:'🕊️',eraColor:'#7a2010',url:'https://olsonjoshua-code.github.io/camelot/',desc:'The Kennedy years and their violent end.',topics:['Kennedy presidency','Cuban Missile Crisis','JFK assassination','LBJ & Great Society','Black Power'],themes:['power','conflict','identity','freedom'],changed:'Great Society expands social safety net.',continued:'Cold War logic drives foreign policy.',emerged:'When the leaders of a movement are killed, how does a nation hold onto hope?'},
   {id:'unit7b',num:'Unit 7B',title:'Napalm Dawn',years:'1965–1975',icon:'🪖',eraColor:'#1a2a1a',url:'https://olsonjoshua-code.github.io/Napalm-Dawn/',desc:"America's longest war — and its first televised defeat.",topics:['Gulf of Tonkin','Anti-war movement','My Lai Massacre','Tet Offensive','Watergate'],themes:['conflict','power','freedom','identity'],changed:'U.S. withdraws from Vietnam; Nixon resigns.',continued:'Public distrust of government outlasts specific scandals.',emerged:'When a government lies to its people, how can trust be rebuilt?'},
   {id:'unit8', num:'Unit 8', title:'Modern America',years:'1980–Present',icon:'🗽',eraColor:'#1a1a3a',url:'https://olsonjoshua-code.github.io/Modern-America/',desc:"Reagan's revolution, 9/11, and a deeply divided nation.",topics:['Reagan Revolution','End of Cold War','9/11 & War on Terror','Great Recession','Obama presidency'],themes:['power','identity','economy','conflict'],changed:'U.S. becomes sole superpower after 1991.',continued:'Economic inequality; racial tension; partisan polarization.',emerged:'What responsibilities does the dominant world power have?'},
+  {id:'theme_power',   num:'Theme: Power',    title:'Balance of Power',    years:'1861–Present',icon:'⚖️',eraColor:'#d07860',url:'https://olsonjoshua-code.github.io/Balance-of-Power/',    desc:'Trace the struggle over who holds power across all of U.S. history.',topics:['Federal vs. state power','Executive overreach','Checks & balances','Civil rights legislation','Protest & resistance'],themes:['power'],changed:'The balance of power has shifted repeatedly between federal, state, and popular forces.',continued:'Tension between concentrated power and democratic accountability.',emerged:'Who ultimately holds power in a democracy — and how is it won or lost?'},
+  {id:'theme_freedom', num:'Theme: Freedom',  title:'Promise of Liberty',  years:'1861–Present',icon:'🗽',eraColor:'#70b0e0',url:'https://olsonjoshua-code.github.io/Promise-of-Liberty/',  desc:'Follow the expanding and contracting meaning of freedom across American history.',topics:['Emancipation','Suffrage','Civil liberties','Cold War dissent','Modern civil rights'],themes:['freedom'],changed:'Each era expanded or redefined who freedom applies to.',continued:'The gap between the promise and the reality of liberty.',emerged:'Is freedom a destination — or a direction?'},
+  {id:'theme_economy', num:'Theme: Economy',  title:'Engines of Change',   years:'1861–Present',icon:'⚙️',eraColor:'#80c880',url:'https://olsonjoshua-code.github.io/Engines-of-Change/',   desc:'Track how economic systems, labor, and industry have driven and disrupted American life.',topics:['Industrialization','Labor movement','New Deal','Postwar boom','Globalization'],themes:['economy'],changed:'The economy transformed from agrarian to industrial to postindustrial.',continued:'Persistent inequality alongside overall growth.',emerged:'Who benefits when the economy grows — and who gets left behind?'},
+  {id:'theme_conflict',num:'Theme: Conflict', title:'Conflict & Change',   years:'1861–Present',icon:'⚔️',eraColor:'#e07070',url:'https://olsonjoshua-code.github.io/Conflict-Change/',      desc:'Examine how wars, reform movements, and upheaval have shaped the nation.',topics:['Civil War','WWI & WWII','Cold War','Civil Rights struggle','Vietnam & beyond'],themes:['conflict'],changed:"Each major conflict redefined America's role at home and abroad.",continued:'Violence and resistance as engines of change.',emerged:'Can lasting change come without conflict?'},
+  {id:'theme_identity',num:'Theme: Identity', title:'We the People',       years:'1861–Present',icon:'🌎',eraColor:'#b890d8',url:'https://olsonjoshua-code.github.io/We-the-People/',        desc:'Explore how American identity has been defined, contested, and reimagined across eras.',topics:['Immigration','Nativism','Cultural movements','Pluralism','National mythology'],themes:['identity'],changed:'The definition of “American” has been continuously renegotiated.',continued:'Tension between e pluribus unum and exclusion.',emerged:'Who gets to be American — and who decides?'},
+  {id:'eoc_midterm',  num:'EOC Review',      title:'Cumulative EOC Review',years:'1861–Present',icon:'📋',eraColor:'#4878d0',url:'https://olsonjoshua-code.github.io/EOC-Review/',           desc:'A cumulative end-of-course review drawing questions from all units and themes.',topics:['All eras','All themes','Document analysis','Causation','Continuity & change'],themes:['power','freedom','economy','conflict','identity'],changed:'Your understanding of U.S. history — tested across the full arc.',continued:'The recurring questions that define the American story.',emerged:'How do all the pieces connect?'},
 ];
 const ERAS=[
   {name:'Reconstruction Era',years:'1861–1877',units:['unit1'],color:'#8b4513'},
@@ -1021,6 +1140,8 @@ const ERAS=[
   {name:'Civil Rights Era',years:'1954–1968',units:['unit6','unit7a'],color:'#7a2010'},
   {name:'Vietnam & Watergate',years:'1965–1975',units:['unit7b'],color:'#1a2a1a'},
   {name:'Contemporary America',years:'1980–Present',units:['unit8'],color:'#1a1a3a'},
+  {name:'Five Recurring Themes',years:'1861–Present',units:['theme_power','theme_freedom','theme_economy','theme_conflict','theme_identity'],color:'#6040a0'},
+  {name:'EOC Review',years:'1861–Present',units:['eoc_midterm'],color:'#2850a0'},
 ];
 
 // ── CHARACTER DATABASE ─────────────────────────────────
@@ -1262,11 +1383,11 @@ async function syncFromSupabase(){
 }
 
 function awardBadges(){
-  const bmap={unit1:'unit1',unit2a:'unit2a',unit2b:'unit2b',unit3a:'unit3a',unit3b:'unit3b',unit4a:'unit4a',unit4b:'unit4b',unit5a:'unit5a',unit5b:'unit5b',unit6:'unit6',unit7a:'unit7a',unit7b:'unit7b',unit8:'unit8'};
+  const bmap={unit1:'unit1',unit2a:'unit2a',unit2b:'unit2b',unit3a:'unit3a',unit3b:'unit3b',unit4a:'unit4a',unit4b:'unit4b',unit5a:'unit5a',unit5b:'unit5b',unit6:'unit6',unit7a:'unit7a',unit7b:'unit7b',unit8:'unit8',theme_power:'theme_power',theme_freedom:'theme_freedom',theme_economy:'theme_economy',theme_conflict:'theme_conflict',theme_identity:'theme_identity',eoc_midterm:'eoc_midterm'};
   S.unitsCompleted.forEach(uid=>{const b=bmap[uid];if(b&&!S.badgesEarned.includes(b))S.badgesEarned.push(b);});
   if(S.unitsCompleted.length>=1&&!S.badgesEarned.includes('first_unit'))S.badgesEarned.push('first_unit');
   if(S.unitsCompleted.length>=6&&!S.badgesEarned.includes('half'))S.badgesEarned.push('half');
-  if(S.unitsCompleted.length>=13&&!S.badgesEarned.includes('full'))S.badgesEarned.push('full');
+  if(S.unitsCompleted.length>=19&&!S.badgesEarned.includes('full'))S.badgesEarned.push('full');
 }
 
 function checkUnlocks(){
@@ -1276,7 +1397,7 @@ function checkUnlocks(){
     if(S.unlocked.includes(ch.id)||ch.unlockMethod==='teacher')return;
     if(ch.unlockMethod==='free'){if(!S.unlocked.includes(ch.id))S.unlocked.push(ch.id);return;}
     if(ch.unlockMethod==='teacher')return;
-    // Special: Mr. Olson unlocks when student earns Gold or better on ALL 13 units
+    // Special: Mr. Olson unlocks when student earns Gold or better on ALL 19 units
     if(ch.id==='mr_olson'){
       const allGold=UNIT_DATA.every(u=>{const r=rmap[u.id];return r&&r.best_accuracy>=90;});
       if(allGold){S.unlocked.push(ch.id);notify('🏛️ You unlocked a secret character — check the Special tab!');}
@@ -1605,7 +1726,7 @@ function renderCharGrid(){
         <div style="width:68px;height:68px;margin:0 auto;border-radius:50%;background:var(--bg3);border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:28px">❓</div>
         <div class="char-name">???</div>
         <div class="char-cat-lbl">Special</div>
-        <div class="char-unlock-hint" style="font-size:9px">🔓 Earn Gold on all 13 units</div>
+        <div class="char-unlock-hint" style="font-size:9px">🔓 Earn Gold on all 19 units</div>
       </div>`;
     }
     const isEquipped=S.avatar===ch.id;
@@ -1634,7 +1755,7 @@ function refreshProfile(){
   const done=S.unitsCompleted.length,total=UNIT_DATA.length,pct=Math.round((done/total)*100);
   document.getElementById('prof-bar').style.width=pct+'%';document.getElementById('prof-bar-lbl').textContent=`${done} of ${total} units complete`;
   document.getElementById('ps-units').textContent=done;
-  document.getElementById('ps-trophies').textContent=S.badgesEarned.length;
+  document.getElementById('ps-trophies').textContent=_trophyData.filter(r=>r.best_accuracy>=60).length;
   document.getElementById('ps-cards').textContent=_trophyData.reduce((a,r)=>a+(r.cards||0),0);
 
   // Cumulative EOC Rating
