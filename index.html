@@ -78,7 +78,7 @@ body::before{content:'';position:fixed;inset:0;
 /* ── HUD ── */
 #shell{display:none;min-height:100vh;flex-direction:column}
 #shell.active{display:flex}
-#hud{background:linear-gradient(180deg,rgba(13,10,8,.98),rgba(20,16,13,.95));border-bottom:1px solid var(--border2);padding:10px 20px;position:sticky;top:0;z-index:300;backdrop-filter:blur(12px)}
+#hud{background:linear-gradient(180deg,rgba(13,10,8,.98),rgba(20,16,13,.95));border-bottom:1px solid var(--border2);padding:7px 20px;position:sticky;top:0;z-index:300;backdrop-filter:blur(12px)}
 .hud-inner{display:flex;align-items:center;gap:14px;max-width:1200px;margin:0 auto}
 .hud-avatar{width:44px;height:44px;cursor:pointer;flex-shrink:0}
 .hud-info{flex:1;min-width:0}
@@ -94,12 +94,12 @@ body::before{content:'';position:fixed;inset:0;
 .nav-btn:hover{border-color:var(--amber2);color:var(--amber)}.nav-btn.active{border-color:var(--amber);color:var(--amber);background:rgba(232,160,32,.06)}
 
 /* ── VIEWS ── */
-.view{display:none;padding:24px 20px 56px;max-width:1200px;margin:0 auto;width:100%}
+.view{display:none;padding:14px 20px 40px;max-width:1200px;margin:0 auto;width:100%}
 .view.active{display:block;animation:fadeIn .35s ease}
 
 /* ── TIMELINE ── */
-.course-intro{background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--amber);padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:16px}
-.course-q{font-family:var(--playfair);font-size:16px;color:var(--cream);font-style:italic;line-height:1.4}
+.course-intro{background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--amber);padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;gap:14px}
+.course-q{font-family:var(--playfair);font-size:14px;color:var(--cream);font-style:italic;line-height:1.4}
 #tl-outer{border:1px solid var(--border2);background:var(--bg2);user-select:none;position:relative;overflow:hidden}
 #era-bar{height:24px;background:var(--bg2);border-bottom:1px solid var(--border2);position:relative;overflow:hidden}
 #era-bar-inner{display:flex;height:100%;position:absolute;top:0;left:0;will-change:transform;transition:transform .05s linear}
@@ -107,16 +107,16 @@ body::before{content:'';position:fixed;inset:0;
 #tl-track{overflow-x:auto;overflow-y:hidden;cursor:grab;padding-bottom:8px}
 #tl-track:active{cursor:grabbing}
 #tl-track::-webkit-scrollbar{height:4px}::-webkit-scrollbar-thumb{background:var(--border2)}
-#tl-inner{display:flex;align-items:flex-start;padding:14px 40px 0;position:relative;min-height:200px}
-#tl-spine{position:absolute;top:72px;left:0;right:0;height:2px;background:var(--border);pointer-events:none;z-index:0}
-#tl-spine-done{position:absolute;top:72px;left:40px;height:2px;background:linear-gradient(90deg,var(--amber2),var(--amber3));width:0;transition:width .8s;pointer-events:none;z-index:1}
-.tl-conn{width:32px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:calc(72px - 1px);position:relative;z-index:2}
-.tl-conn-line{width:32px;height:2px;background:var(--border);position:relative}
+#tl-inner{display:flex;align-items:flex-start;padding:10px 40px 0;position:relative;min-height:160px}
+#tl-spine{position:absolute;top:57px;left:0;right:0;height:2px;background:var(--border);pointer-events:none;z-index:0}
+#tl-spine-done{position:absolute;top:57px;left:40px;height:2px;background:linear-gradient(90deg,var(--amber2),var(--amber3));width:0;transition:width .8s;pointer-events:none;z-index:1}
+.tl-conn{width:28px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:calc(57px - 1px);position:relative;z-index:2}
+.tl-conn-line{width:28px;height:2px;background:var(--border);position:relative}
 .tl-conn-line::after{content:'';position:absolute;right:-1px;top:50%;transform:translateY(-50%);border-left:6px solid var(--border);border-top:3px solid transparent;border-bottom:3px solid transparent}
 .tl-conn.done .tl-conn-line{background:var(--amber2)}.tl-conn.done .tl-conn-line::after{border-left-color:var(--amber2)}
-.tl-div{width:2px;height:14px;background:var(--border2);flex-shrink:0;align-self:flex-end;margin-bottom:calc(72px - 7px);position:relative;z-index:2}
+.tl-div{width:2px;height:12px;background:var(--border2);flex-shrink:0;align-self:flex-end;margin-bottom:calc(57px - 6px);position:relative;z-index:2}
 
-.unit-card{flex-shrink:0;width:148px;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:all .2s;position:relative;overflow:hidden;display:flex;flex-direction:column;z-index:2}
+.unit-card{flex-shrink:0;width:126px;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:all .2s;position:relative;overflow:hidden;display:flex;flex-direction:column;z-index:2}
 .unit-card::after{content:'';position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;background:var(--bg2);border:2px solid var(--border2);z-index:3}
 .unit-card.done::after{border-color:var(--green);background:var(--green)}
 .unit-card.inprogress::after{border-color:var(--teal2)}
@@ -124,17 +124,19 @@ body::before{content:'';position:fixed;inset:0;
 .unit-card.selected{border-color:var(--amber)!important;box-shadow:0 0 20px rgba(232,160,32,.4)!important;transform:translateY(-4px)!important}
 .unit-card.done{border-color:var(--green)}
 .unit-card-strip{height:3px;width:100%}
-.unit-card-art{width:100%;height:70px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
-.unit-card-icon{font-size:30px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))}
-.unit-card-year{position:absolute;bottom:3px;right:5px;font-family:var(--bebas);font-size:9px;color:rgba(240,232,216,.3);letter-spacing:1px}
-.unit-card-body{padding:9px 9px 11px;flex:1;display:flex;flex-direction:column}
-.unit-card-num{font-family:var(--dm);font-size:8px;color:var(--text3);letter-spacing:2px;margin-bottom:2px}
-.unit-card-title{font-family:var(--playfair);font-size:11px;color:var(--cream);line-height:1.3;flex:1;margin-bottom:5px}
+.unit-card-art{width:100%;height:54px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.unit-card-icon{font-size:24px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))}
+.unit-card-year{position:absolute;bottom:2px;right:4px;font-family:var(--bebas);font-size:8px;color:rgba(240,232,216,.3);letter-spacing:1px}
+.unit-card-body{padding:7px 7px 28px;flex:1;display:flex;flex-direction:column;position:relative}
+.unit-card-num{font-family:var(--dm);font-size:7px;color:var(--text3);letter-spacing:2px;margin-bottom:2px}
+.unit-card-title{font-family:var(--playfair);font-size:10px;color:var(--cream);line-height:1.3}
+.unit-card-status-row{position:absolute;bottom:5px;left:7px}
 .unit-card-prog{height:2px;background:rgba(255,255,255,.04)}
 .unit-card-prog-fill{height:100%;background:var(--amber2);transition:width .5s}
-.unit-status{font-family:var(--dm);font-size:8px;padding:2px 7px;border:1px solid;display:inline-block;align-self:flex-start;letter-spacing:.5px;margin-bottom:4px}
+.unit-status{font-family:var(--dm);font-size:7px;padding:2px 6px;border:1px solid;display:inline-block;align-self:flex-start;letter-spacing:.5px;margin-bottom:3px}
 .us-done{color:var(--green2);border-color:var(--green);background:rgba(56,160,80,.08)}
 .us-avail{color:var(--amber3);border-color:var(--amber);background:rgba(232,160,32,.12)}
+.us-play{color:var(--amber);border-color:var(--amber2);background:rgba(232,160,32,.1);animation:glowPulse 2.5s infinite}
 
 /* minimap */
 #tl-minimap{height:36px;border-top:1px solid var(--border2);display:flex;align-items:center;gap:8px;padding:0 40px;background:var(--bg)}
@@ -251,6 +253,27 @@ body::before{content:'';position:fixed;inset:0;
 .pv-desc{font-family:var(--crimson);font-size:14px;line-height:1.65;color:var(--text)}
 .topic-tag{font-family:var(--dm);font-size:8px;padding:3px 8px;background:var(--bg3);border:1px solid var(--border2);color:var(--text2)}
 .theme-chip{font-family:var(--dm);font-size:9px;padding:3px 9px;border:1px solid;display:inline-flex;align-items:center;gap:4px;margin:2px}
+.theme-link{cursor:pointer;transition:all .2s;position:relative;height:100px;justify-content:flex-start!important}
+.theme-link:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.5);opacity:1!important}
+.theme-link:active{transform:translateY(-1px)}
+.theme-link .theme-badge-anchor{position:absolute;bottom:9px;left:11px}
+
+/* ── ONBOARDING MODAL ── */
+#onboard-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+#onboard-box{background:var(--bg2);border:1px solid var(--border2);max-width:480px;width:100%;position:relative;animation:floatIn .3s ease both}
+#onboard-progress{display:flex;gap:5px;padding:16px 20px 0}
+.ob-pip{flex:1;height:3px;background:var(--border2);transition:background .3s}
+.ob-pip.done{background:var(--amber)}
+#onboard-body{padding:24px 24px 20px}
+.ob-icon{font-size:38px;margin-bottom:12px}
+.ob-title{font-family:var(--bebas);font-size:22px;letter-spacing:2px;color:var(--amber);margin-bottom:8px}
+.ob-text{font-family:var(--dm);font-size:13px;color:var(--text2);line-height:1.7}
+.ob-text strong{color:var(--cream)}
+#onboard-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-top:1px solid var(--border)}
+.ob-step{font-family:var(--bebas);font-size:11px;color:var(--text3);letter-spacing:2px}
+.ob-btns{display:flex;gap:8px}
+#help-btn{position:fixed;bottom:70px;right:16px;z-index:800;font-family:var(--bebas);font-size:12px;letter-spacing:2px;background:var(--bg2);border:1px solid var(--border2);color:var(--text3);padding:7px 14px;cursor:pointer;transition:all .2s}
+#help-btn:hover{border-color:var(--amber);color:var(--amber)}
 .tc-power{color:#d07860;border-color:rgba(208,120,90,.4);background:rgba(208,120,90,.06)}
 .tc-freedom{color:#70b0e0;border-color:rgba(112,176,224,.4);background:rgba(112,176,224,.06)}
 .tc-economy{color:#80c880;border-color:rgba(128,200,128,.4);background:rgba(128,200,128,.06)}
@@ -380,15 +403,47 @@ body::before{content:'';position:fixed;inset:0;
         </div>
       </div>
       <!-- themes -->
-      <div style="background:var(--bg2);border:1px solid var(--border2);padding:16px;margin-top:24px">
-        <div class="sh" style="margin-bottom:12px">Five Recurring Themes</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px">
-          <div class="theme-chip tc-power" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px"><span style="font-size:16px">⚖️</span><strong>Power</strong><span style="font-size:8px;opacity:.8;font-style:italic">Who rules, who resists</span></div>
-          <div class="theme-chip tc-freedom" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px"><span style="font-size:16px">🗽</span><strong>Freedom & Rights</strong><span style="font-size:8px;opacity:.8;font-style:italic">Expanding or denying liberty</span></div>
-          <div class="theme-chip tc-economy" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px"><span style="font-size:16px">⚙️</span><strong>Economy & Work</strong><span style="font-size:8px;opacity:.8;font-style:italic">Labor, industry, wealth</span></div>
-          <div class="theme-chip tc-conflict" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px"><span style="font-size:16px">⚔️</span><strong>Conflict & Change</strong><span style="font-size:8px;opacity:.8;font-style:italic">Wars, reform, upheaval</span></div>
-          <div class="theme-chip tc-identity" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px"><span style="font-size:16px">🌎</span><strong>American Identity</strong><span style="font-size:8px;opacity:.8;font-style:italic">Who we are becoming</span></div>
+      <div style="background:var(--bg2);border:1px solid var(--border2);padding:10px 14px;margin-top:14px">
+        <div class="sh" style="margin-bottom:4px">Five Recurring Themes</div>
+        <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:12px;letter-spacing:.5px">Cross-era campaigns — trace a theme across all of U.S. history</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px;align-items:stretch">
+          <a href="#" class="theme-chip tc-power theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none">
+            <span style="font-size:16px">⚖️</span><strong>Power</strong>
+            <span style="font-size:8px;opacity:.8;font-style:italic">Who rules, who resists</span>
+            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Play Now</span></span>
+          </a>
+          <a href="#" class="theme-chip tc-freedom theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none">
+            <span style="font-size:16px">🗽</span><strong>Freedom &amp; Rights</strong>
+            <span style="font-size:8px;opacity:.8;font-style:italic">Expanding or denying liberty</span>
+            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Play Now</span></span>
+          </a>
+          <a href="#" class="theme-chip tc-economy theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none">
+            <span style="font-size:16px">⚙️</span><strong>Economy &amp; Work</strong>
+            <span style="font-size:8px;opacity:.8;font-style:italic">Labor, industry, wealth</span>
+            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Play Now</span></span>
+          </a>
+          <a href="#" class="theme-chip tc-conflict theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none">
+            <span style="font-size:16px">⚔️</span><strong>Conflict &amp; Change</strong>
+            <span style="font-size:8px;opacity:.8;font-style:italic">Wars, reform, upheaval</span>
+            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Play Now</span></span>
+          </a>
+          <a href="#" class="theme-chip tc-identity theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none">
+            <span style="font-size:16px">🌎</span><strong>American Identity</strong>
+            <span style="font-size:8px;opacity:.8;font-style:italic">Who we are becoming</span>
+            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Play Now</span></span>
+          </a>
         </div>
+      </div>
+
+      <!-- midterm checkpoint -->
+      <div id="midterm-card" style="margin-top:14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(40,80,160,.18) 0%,rgba(20,16,13,.95) 60%);border:1.5px solid var(--blue2);padding:10px 16px;display:flex;align-items:center;gap:12px;transition:all .2s" onmouseenter="this.style.boxShadow='0 0 30px rgba(72,120,208,.35)';this.style.borderColor='#6aa0ff'" onmouseleave="this.style.boxShadow='none';this.style.borderColor='var(--blue2)'">
+        <div style="font-size:22px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(72,120,208,.5))">📋</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-family:var(--bebas);font-size:9px;color:var(--blue2);letter-spacing:3px">MIDTERM CHECKPOINT</div>
+          <div style="font-family:var(--playfair);font-size:13px;color:var(--cream)">Cumulative Review — Units 1–4</div>
+        </div>
+        <span class="unit-status us-play" style="flex-shrink:0;font-size:8px;animation:glowPulse 2.5s infinite">▶ Play Now</span>
+        <div style="position:absolute;top:0;right:0;width:120px;height:100%;background:linear-gradient(90deg,transparent,rgba(72,120,208,.05));pointer-events:none"></div>
       </div>
     </div>
 
@@ -509,6 +564,53 @@ body::before{content:'';position:fixed;inset:0;
   </div>
 </div>
 <div id="pv-backdrop" onclick="closePreview()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:399"></div>
+
+<!-- HELP BUTTON -->
+<button id="help-btn" onclick="openOnboarding()" title="How to use this course hub">❓ HELP</button>
+
+<!-- WELCOME BACK CARD -->
+<div id="welcome-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:8900;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(5px);cursor:pointer" onclick="closeWelcome()">
+  <div id="welcome-box" style="background:var(--bg2);border:1px solid var(--border2);max-width:420px;width:100%;animation:floatIn .35s ease both;cursor:default" onclick="event.stopPropagation()">
+    <div id="welcome-hero" style="padding:22px 24px 16px;border-bottom:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div id="welcome-avatar" style="flex-shrink:0"></div>
+        <div>
+          <div style="font-family:var(--bebas);font-size:9px;color:var(--text3);letter-spacing:3px;margin-bottom:3px" id="welcome-greeting-lbl">WELCOME BACK</div>
+          <div style="font-family:var(--playfair);font-size:20px;color:var(--cream)" id="welcome-name"></div>
+          <div style="font-family:var(--dm);font-size:10px;color:var(--amber);margin-top:2px" id="welcome-rank"></div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:18px 24px">
+      <div style="font-family:var(--bebas);font-size:9px;color:var(--text3);letter-spacing:3px;margin-bottom:12px">YOUR PROGRESS</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px" id="welcome-stats"></div>
+      <div id="welcome-last" style="font-family:var(--dm);font-size:10px;color:var(--text3);margin-bottom:16px;min-height:14px"></div>
+      <div style="width:100%;background:rgba(255,255,255,.04);height:4px;border-radius:2px;overflow:hidden;margin-bottom:5px">
+        <div id="welcome-prog-bar" style="height:100%;background:var(--amber2);border-radius:2px;transition:width .8s ease"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-family:var(--bebas);font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:18px">
+        <span>COURSE PROGRESS</span><span id="welcome-prog-pct">0%</span>
+      </div>
+      <button class="btn full" onclick="closeWelcome()"><span>Enter the Hub ✊</span></button>
+      <div style="font-family:var(--dm);font-size:9px;color:var(--text3);text-align:center;margin-top:8px">or click anywhere outside to continue</div>
+    </div>
+  </div>
+</div>
+
+<!-- ONBOARDING MODAL -->
+<div id="onboard-overlay" style="display:none">
+  <div id="onboard-box">
+    <div id="onboard-progress"></div>
+    <div id="onboard-body"></div>
+    <div id="onboard-nav">
+      <span class="ob-step" id="ob-step-lbl"></span>
+      <div class="ob-btns">
+        <button class="btn sm" id="ob-back" onclick="obNav(-1)"><span>← Back</span></button>
+        <button class="btn sm" id="ob-next" onclick="obNav(1)"><span>Next →</span></button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 'use strict';
@@ -905,7 +1007,7 @@ const UNIT_DATA=[
   {id:'unit4b',num:'Unit 4B',title:'Crash & Recovery',years:'1929–1941',icon:'🌾',eraColor:'#5a3a0a',url:'https://olsonjoshua-code.github.io/crash-and-recovery/',desc:'The economy collapsed. FDR\'s New Deal reshaped what Americans expected Washington to do.',topics:['Stock Market Crash','Hoover\'s response','New Deal','Dust Bowl','Labor movement'],themes:['economy','power','freedom','identity'],changed:'Federal government becomes guarantor of economic security.',continued:'Racial exclusion baked into New Deal programs.',emerged:'How much should government intervene in the economy?'},
   {id:'unit5a',num:'Unit 5A',title:'Arsenal of Democracy',years:'1939–1945',icon:'🎖️',eraColor:'#2a3a1a',url:'https://olsonjoshua-code.github.io/Arsenal-of-Democracy/',desc:'America enters the war after Pearl Harbor and fights on two fronts.',topics:['Causes of WWII','Pearl Harbor','Home Front','Japanese internment','Holocaust','Manhattan Project'],themes:['conflict','freedom','power','identity'],changed:'U.S. and USSR emerge as superpowers; nuclear age begins.',continued:'Racial segregation in the military.',emerged:'When does the end justify the means in war?'},
   {id:'unit5b',num:'Unit 5B',title:'Iron Curtain',years:'1945–1963',icon:'☢️',eraColor:'#2a3a1a',url:'https://olsonjoshua-code.github.io/iron-curtain/',desc:'Two superpowers. One world on the edge.',topics:['Truman Doctrine','Marshall Plan','Korean War','McCarthyism','Cuban Missile Crisis'],themes:['conflict','power','freedom','identity'],changed:'Permanent military buildup; government power over dissent expands.',continued:'Racial inequality at home contrasts with freedom rhetoric.',emerged:'How do you protect freedom through institutions that restrict it?'},
-  {id:'unit6', num:'Unit 6', title:'Chronicles of Change',years:'1954–1965',icon:'✊',eraColor:'#7a2010',url:'https://olsonjoshua-code.github.io/civil-rights-chronicles/',desc:'The Civil Rights Movement forced America to confront the contradiction at its heart.',topics:['Brown v. Board','Montgomery Bus Boycott','Sit-ins & SNCC','Freedom Rides','Civil Rights Act 1964','Voting Rights Act 1965'],themes:['freedom','conflict','power','identity'],changed:'Legal segregation dismantled; voting rights enforced.',continued:'Economic inequality; residential segregation.',emerged:'When legal equality is won, what remains?'},
+  {id:'unit6', num:'Unit 6', title:'Chronicles of Change',years:'1954–1965',icon:'✊',eraColor:'#7a2010',url:'https://olsonjoshua-code.github.io/chronicles-of-change/',desc:'The Civil Rights Movement forced America to confront the contradiction at its heart.',topics:['Brown v. Board','Montgomery Bus Boycott','Sit-ins & SNCC','Freedom Rides','Civil Rights Act 1964','Voting Rights Act 1965'],themes:['freedom','conflict','power','identity'],changed:'Legal segregation dismantled; voting rights enforced.',continued:'Economic inequality; residential segregation.',emerged:'When legal equality is won, what remains?'},
   {id:'unit7a',num:'Unit 7A',title:'Camelot',years:'1961–1968',icon:'🕊️',eraColor:'#7a2010',url:'https://olsonjoshua-code.github.io/camelot/',desc:'The Kennedy years and their violent end.',topics:['Kennedy presidency','Cuban Missile Crisis','JFK assassination','LBJ & Great Society','Black Power'],themes:['power','conflict','identity','freedom'],changed:'Great Society expands social safety net.',continued:'Cold War logic drives foreign policy.',emerged:'When the leaders of a movement are killed, how does a nation hold onto hope?'},
   {id:'unit7b',num:'Unit 7B',title:'Napalm Dawn',years:'1965–1975',icon:'🪖',eraColor:'#1a2a1a',url:'https://olsonjoshua-code.github.io/Napalm-Dawn/',desc:"America's longest war — and its first televised defeat.",topics:['Gulf of Tonkin','Anti-war movement','My Lai Massacre','Tet Offensive','Watergate'],themes:['conflict','power','freedom','identity'],changed:'U.S. withdraws from Vietnam; Nixon resigns.',continued:'Public distrust of government outlasts specific scandals.',emerged:'When a government lies to its people, how can trust be rebuilt?'},
   {id:'unit8', num:'Unit 8', title:'Modern America',years:'1980–Present',icon:'🗽',eraColor:'#1a1a3a',url:'https://olsonjoshua-code.github.io/Modern-America/',desc:"Reagan's revolution, 9/11, and a deeply divided nation.",topics:['Reagan Revolution','End of Cold War','9/11 & War on Terror','Great Recession','Obama presidency'],themes:['power','identity','economy','conflict'],changed:'U.S. becomes sole superpower after 1991.',continued:'Economic inequality; racial tension; partisan polarization.',emerged:'What responsibilities does the dominant world power have?'},
@@ -1130,7 +1232,7 @@ function renderTitleArt(){
 function toggleTeacherBox(){const b=document.getElementById('teacher-box'),l=document.getElementById('teacher-toggle-lbl');const open=b.style.display!=='block';b.style.display=open?'block':'none';l.textContent=open?'Cancel':'Teacher Login';if(open)document.getElementById('teacher-input').focus();}
 function submitTeacher(){const inp=document.getElementById('teacher-input'),err=document.getElementById('teacher-err');if(inp.value.trim().toLowerCase()===TEACHER_PWD){IS_TEACHER=true;S.isTeacher=true;S.name=S.name||'Mr. Olson';S.setupDone=true;saveS();inp.value='';document.getElementById('teacher-box').style.display='none';enterShell();}else{err.textContent='Incorrect code.';inp.value='';}}
 function startNewProfile(){document.getElementById('title-screen').style.display='none';const ss=document.getElementById('setup-screen');ss.style.display='block';buildStarterGrid();buildPeriodGrid();previewSetup();}
-function enterShell(){document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();});if(!S.isGuest&&S.name)syncFromSupabase();}
+function enterShell(){document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();});if(!S.isGuest&&S.name)syncFromSupabase();if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){setTimeout(()=>openOnboarding(),600);}else{setTimeout(()=>openWelcome(),600);}}}
 
 // ── SETUP ─────────────────────────────────────────────
 const STARTERS=CHARS.filter(c=>c.unlockMethod==='free');
@@ -1241,7 +1343,7 @@ function unitStatus(id){return S.unitsCompleted.includes(id)?'done':'avail';}
 function renderTimeline(){
   const inner=document.getElementById('tl-inner');if(!inner)return;
   inner.querySelectorAll('.unit-card,.tl-conn,.tl-div').forEach(e=>e.remove());
-  const NW=148,CW=32,DW=6,PAD=40;let x=PAD,doneX=PAD,eraSegs=[];let first=true;
+  const NW=126,CW=28,DW=6,PAD=40;let x=PAD,doneX=PAD,eraSegs=[];let first=true;
   ERAS.forEach(era=>{
     const units=era.units.map(uid=>UNIT_DATA.find(u=>u.id===uid)).filter(Boolean);if(!units.length)return;
     if(!first){const d=document.createElement('div');d.className='tl-div';inner.appendChild(d);x+=DW+4;}first=false;
@@ -1250,10 +1352,13 @@ function renderTimeline(){
       if(idx>0){const co=document.createElement('div');const ps=unitStatus(units[idx-1].id);co.className='tl-conn'+(ps==='done'?' done':'');co.innerHTML='<div class="tl-conn-line"></div>';inner.appendChild(co);x+=CW;}
       const st=unitStatus(u.id);
       const card=document.createElement('div');card.className=`unit-card view ${st}`;card.setAttribute('data-uid',u.id);card.onclick=()=>openPreview(u.id);
+      const statusBadge=st==='done'
+        ?`<div class="unit-card-status-row"><div class="unit-status us-done">✓ Completed</div></div>`
+        :`<div class="unit-card-status-row"><div class="unit-status us-play">▶ Play Now</div></div>`;
       card.innerHTML=`<div class="unit-card-strip" style="background:${u.eraColor}"></div>
         <div class="unit-card-art"><div class="unit-card-icon">${u.icon}</div><div class="unit-card-year">${u.years.split('–')[0]}</div></div>
         <div class="unit-card-body"><div class="unit-card-num">${u.num}</div><div class="unit-card-title">${u.title}</div>
-        ${st==='done'?`<div class="unit-status us-done">✓ Completed</div>`:''}</div>
+        ${statusBadge}</div>
         <div class="unit-card-prog"><div class="unit-card-prog-fill" style="width:${st==='done'?100:0}%"></div></div>`;
       inner.appendChild(card);if(st==='done')doneX=x+NW;x+=NW;
     });
@@ -1585,6 +1690,108 @@ function notify(msg){const n=document.createElement('div');n.className='notif';n
 window.addEventListener('message',e=>{if(e.data?.type==='unitComplete'&&e.data.unitId)onUnitComplete(e.data.unitId);});
 function onUnitComplete(uid){if(!S.unitsCompleted.includes(uid))S.unitsCompleted.push(uid);awardBadges();checkUnlocks();saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();}
 (()=>{const p=new URLSearchParams(window.location.search);const cid=p.get('complete');if(cid&&UNIT_DATA.find(u=>u.id===cid)){loadS();onUnitComplete(cid);}})();
+
+// ── ONBOARDING ────────────────────────────────────────
+const OB_KEY='ac_onboarding_seen';
+let _obIdx=0;
+function _obSeen(){try{return!!localStorage.getItem(OB_KEY);}catch(e){return false;}}
+
+const OB_SLIDES=[
+  {icon:'🏛️',title:'Welcome to American Chronicles',text:'This is your <strong>yearlong U.S. History course hub</strong>. Everything lives here — your unit games, your progress, your trophies, and your stats. Here\'s a quick tour so you know how it all works.'},
+  {icon:'🗺️',title:'The Timeline',text:'The <strong>scrollable timeline</strong> is the backbone of the course. Each card is a chronological unit game covering a different era — from the Civil War to Modern America.<br><br>Click any unit card to preview it and launch the game. Completed units glow green.'},
+  {icon:'⚖️',title:'Five Recurring Theme Games',text:'Below the timeline you\'ll find <strong>five cross-era theme campaigns</strong>: Power, Freedom &amp; Rights, Economy &amp; Work, Conflict &amp; Change, and American Identity.<br><br>These trace a single theme <em>across all of history</em>, connecting the eras you\'ve already studied.'},
+  {icon:'📋',title:'Midterm Checkpoint',text:'After completing the first half of the course, the <strong>Midterm Checkpoint</strong> unlocks — a cumulative EOC-style review mixing questions from all units and themes covered so far.<br><br>Think of it as proving your readiness before the second half of the year.'},
+  {icon:'🏆',title:'Scoring & EOC Levels',text:'Every unit game gives you a <strong>score</strong> and an <strong>EOC Practice Level</strong> based on accuracy:<br><br><strong style="color:#e8d0ff">Historian</strong> = 100% &nbsp;·&nbsp; <strong style="color:#ffd700">Gold</strong> = 90–99%<br><strong style="color:#c8c8d8">Silver</strong> = 80–89% &nbsp;·&nbsp; <strong style="color:#cd7f32">Bronze</strong> = 70–79%<br><br>Replay any unit to improve your trophy. Your best score is always saved.'},
+  {icon:'🃏',title:'Leaderboard & Cards',text:'Your scores appear on the <strong>class leaderboard</strong> — ranked by total points across all units.<br><br>Complete chapters to <strong>earn historical figure cards</strong>. The more you play and the higher you score, the more you unlock.<br><br>Tap <strong>❓ Help</strong> anytime to revisit this guide.'},
+];
+
+function openOnboarding(){
+  _obIdx=0;
+  document.getElementById('onboard-overlay').style.display='flex';
+  renderObSlide();
+}
+function closeOnboarding(){
+  document.getElementById('onboard-overlay').style.display='none';
+  try{localStorage.setItem(OB_KEY,'1');}catch(e){}
+  // After onboarding, show welcome card
+  setTimeout(()=>openWelcome(),300);
+}
+function obNav(dir){
+  _obIdx=Math.max(0,Math.min(OB_SLIDES.length-1,_obIdx+dir));
+  if(_obIdx===OB_SLIDES.length-1&&dir===1){closeOnboarding();return;}
+  renderObSlide();
+}
+function renderObSlide(){
+  const s=OB_SLIDES[_obIdx];
+  const total=OB_SLIDES.length;
+  document.getElementById('onboard-progress').innerHTML=OB_SLIDES.map((_,i)=>`<div class="ob-pip${i<=_obIdx?' done':''}"></div>`).join('');
+  document.getElementById('onboard-body').innerHTML=`<div class="ob-icon">${s.icon}</div><div class="ob-title">${s.title}</div><div class="ob-text">${s.text}</div>`;
+  document.getElementById('ob-step-lbl').textContent=`${_obIdx+1} of ${total}`;
+  document.getElementById('ob-back').style.display=_obIdx===0?'none':'inline-block';
+  document.getElementById('ob-next').querySelector('span').textContent=_obIdx===total-2?'Finish ✓':'Next →';
+}
+
+// ── WELCOME CARD ──────────────────────────────────────
+function openWelcome(){
+  const ov=document.getElementById('welcome-overlay');
+  if(!ov)return;
+  const isNew=S.unitsCompleted.length===0;
+  // Greeting label
+  document.getElementById('welcome-greeting-lbl').textContent=isNew?'WELCOME,':'WELCOME BACK,';
+  document.getElementById('welcome-name').textContent=S.name||'Historian';
+  document.getElementById('welcome-rank').textContent=getRank()+(S.period?' · Period '+S.period:'');
+  // Avatar
+  const ch=getChar(S.avatar);
+  document.getElementById('welcome-avatar').innerHTML=ch.svg().replace(/width="\d+"/,'width="64"').replace(/height="\d+"/,'height="64"');
+  // Stats
+  const total=UNIT_DATA.length;
+  const done=S.unitsCompleted.length;
+  const pct=Math.round((done/total)*100);
+  const trophies=S.badgesEarned.length;
+  const cards=S.unlocked.length;
+  // EOC
+  const eocSc=calcCumulativeEOC();
+  const eocLvl=eocSc!==null?shellEOCLevel(eocSc):null;
+  const eocDisp=eocLvl?`<span style="color:${eocLvl.color}">${eocLvl.label}</span>`:'<span style="color:var(--text3)">—</span>';
+  document.getElementById('welcome-stats').innerHTML=`
+    <div style="background:var(--bg3);border:1px solid var(--border);padding:10px;text-align:center">
+      <div style="font-family:var(--bebas);font-size:22px;color:var(--amber)">${done}<span style="font-size:12px;color:var(--text3)"> /${total}</span></div>
+      <div style="font-family:var(--dm);font-size:8px;color:var(--text3);letter-spacing:1px;margin-top:2px">UNITS DONE</div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);padding:10px;text-align:center">
+      <div style="font-family:var(--bebas);font-size:22px">${eocDisp}</div>
+      <div style="font-family:var(--dm);font-size:8px;color:var(--text3);letter-spacing:1px;margin-top:2px">EOC RANK</div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);padding:10px;text-align:center">
+      <div style="font-family:var(--bebas);font-size:22px;color:var(--gold)">${trophies}</div>
+      <div style="font-family:var(--dm);font-size:8px;color:var(--text3);letter-spacing:1px;margin-top:2px">TROPHIES</div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);padding:10px;text-align:center">
+      <div style="font-family:var(--bebas);font-size:22px;color:var(--teal2)">${cards}</div>
+      <div style="font-family:var(--dm);font-size:8px;color:var(--text3);letter-spacing:1px;margin-top:2px">CARDS</div>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);padding:10px;text-align:center;grid-column:span 2">
+      <div style="font-family:var(--bebas);font-size:22px;color:var(--text2)">${pct}%</div>
+      <div style="font-family:var(--dm);font-size:8px;color:var(--text3);letter-spacing:1px;margin-top:2px">OVERALL SCORE</div>
+    </div>`;
+  // Last played
+  const lastEl=document.getElementById('welcome-last');
+  if(done>0){
+    const lastId=S.unitsCompleted[S.unitsCompleted.length-1];
+    const lastUnit=UNIT_DATA.find(u=>u.id===lastId);
+    lastEl.innerHTML=lastUnit?`🕐 Last played: <strong style="color:var(--cream)">${lastUnit.num} — ${lastUnit.title}</strong>`:'';
+  } else {
+    lastEl.innerHTML=`<span style="color:var(--amber)">✊ Ready to begin your first unit?</span>`;
+  }
+  // Progress bar
+  document.getElementById('welcome-prog-pct').textContent=pct+'%';
+  setTimeout(()=>{const bar=document.getElementById('welcome-prog-bar');if(bar)bar.style.width=pct+'%';},100);
+  ov.style.display='flex';
+}
+function closeWelcome(){
+  const ov=document.getElementById('welcome-overlay');
+  if(ov)ov.style.display='none';
+}
 </script>
 </body>
 </html>
