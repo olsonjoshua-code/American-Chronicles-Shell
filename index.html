@@ -1748,7 +1748,7 @@ function openWelcome(){
   const total=UNIT_DATA.length;
   const done=S.unitsCompleted.length;
   const pct=Math.round((done/total)*100);
-  const trophies=S.badgesEarned.length;
+  const trophies=_trophyData.filter(r=>r.best_accuracy>=60).length;
   const cards=S.unlocked.length;
   // EOC
   const eocSc=calcCumulativeEOC();
