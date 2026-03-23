@@ -1547,8 +1547,14 @@ function openPreview(uid){
 function closePreview(){document.getElementById('preview-panel').classList.remove('open');document.getElementById('pv-backdrop').style.display='none';document.querySelectorAll('.unit-card').forEach(c=>c.classList.remove('selected'));}
 function buildLaunchArea(u,st){
   const area=document.getElementById('pv-launch');
-  if(st==='done'){area.innerHTML=`<div style="text-align:center;padding:8px 0"><div style="font-size:26px;margin-bottom:3px">✅</div><div style="font-family:var(--bebas);font-size:12px;color:var(--green2);letter-spacing:2px">Completed</div></div>${u.url?`<a href="${u.url}" target="_blank" onclick="localStorage.setItem('ac_shell_return',location.href)" style="text-decoration:none"><button class="btn full green" style="margin-top:5px"><span>↺ Replay ${u.num}</span></button></a>`:''}<button class="btn full" onclick="showView('trophies');closePreview();" style="border-color:var(--gold);color:var(--gold);margin-top:5px"><span>🏆 View Trophy</span></button>`;}
-  else if(u.url){area.innerHTML=`<a href="${u.url}" target="_blank" onclick="localStorage.setItem('ac_shell_return',location.href)" style="text-decoration:none;display:block"><button class="btn full" style="font-size:16px;padding:17px;letter-spacing:3px;border-width:2px;box-shadow:0 0 28px rgba(232,160,32,.22)"><span>▶ Launch ${u.num}</span></button></a><div style="font-family:var(--dm);font-size:9px;color:var(--text3);text-align:center;margin-top:7px">Opens in a new tab</div>`;}
+  // Checkpoint is always retakeable — show Launch regardless of completion status
+  const isCheckpoint = u.id === 'eoc_midterm';
+  const showDone = st==='done' && !isCheckpoint;
+  if(showDone){area.innerHTML=`<div style="text-align:center;padding:8px 0"><div style="font-size:26px;margin-bottom:3px">✅</div><div style="font-family:var(--bebas);font-size:12px;color:var(--green2);letter-spacing:2px">Completed</div></div>${u.url?`<a href="${u.url}" target="_blank" onclick="localStorage.setItem('ac_shell_return',location.href)" style="text-decoration:none"><button class="btn full green" style="margin-top:5px"><span>↺ Replay ${u.num}</span></button></a>`:''}<button class="btn full" onclick="showView('trophies');closePreview();" style="border-color:var(--gold);color:var(--gold);margin-top:5px"><span>🏆 View Trophy</span></button>`;}
+  else if(u.url){
+    const label = isCheckpoint && st==='done' ? '↺ Retake Checkpoint' : '▶ Launch '+u.num;
+    area.innerHTML=`<a href="${u.url}" target="_blank" onclick="localStorage.setItem('ac_shell_return',location.href)" style="text-decoration:none;display:block"><button class="btn full" style="font-size:16px;padding:17px;letter-spacing:3px;border-width:2px;box-shadow:0 0 28px rgba(232,160,32,.22)"><span>${label}</span></button></a><div style="font-family:var(--dm);font-size:9px;color:var(--text3);text-align:center;margin-top:7px">Opens in a new tab</div>`;
+  }
   else{area.innerHTML=`<div style="background:var(--bg3);border:1px dashed var(--border2);padding:16px;text-align:center"><div style="font-family:var(--bebas);font-size:13px;color:var(--text3);letter-spacing:3px">COMING SOON</div></div>`;}
 }
 function buildMiniMap(u){
