@@ -7,15 +7,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+DisAplaAy:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0d0a08;--bg2:#14100d;--bg3:#1c1510;--panel:#201812;
-  --border:#2e2118;--border2:#3d2e1e;
+  --bg:#2c1f14;--bg2:#3a2a1a;--bg3:#4a3525;--panel:#3f2e1e;
+  --border:#5c4030;--border2:#7a5840;
   --amber:#e8a020;--amber2:#c07818;--amber3:#f8c850;
   --red:#c03030;--red2:#e04040;
   --green:#2a7a3a;--green2:#38a050;
   --teal:#208878;--teal2:#2aaa98;
   --blue:#2850a0;--blue2:#4878d0;
   --purple:#6040a0;--purple2:#8060c8;
-  --text:#f0e8d8;--text2:#a09080;--text3:#584840;--cream:#f5ead8;
+  --text:#f0e8d8;--text2:#a09080;--text3:#8a6a50;--cream:#f5ead8;
   --gold:#ffd700;--silver:#c8c8d8;--bronze:#cd7f32;
   --historian:#e8d0ff;
   --bebas:'Bebas Neue',sans-serif;
@@ -28,7 +28,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--crimson);min-heigh
   background-image:radial-gradient(ellipse at 15% 10%,rgba(232,160,32,.06) 0%,transparent 55%),radial-gradient(ellipse at 85% 90%,rgba(192,48,48,.04) 0%,transparent 55%);}
 body::before{content:'';position:fixed;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:9998;opacity:.5;}
+  pointer-events:none;z-index:9998;opacity:.3;}
 
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pop{0%{transform:scale(.5);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
@@ -1129,7 +1129,7 @@ const UNIT_DATA=[
   {id:'theme_economy', num:'Theme: Economy',  title:'Engines of Change',   years:'1861–Present',icon:'⚙️',eraColor:'#80c880',url:'https://olsonjoshua-code.github.io/Engines-of-Change/',   desc:'Track how economic systems, labor, and industry have driven and disrupted American life.',topics:['Industrialization','Labor movement','New Deal','Postwar boom','Globalization'],themes:['economy'],changed:'The economy transformed from agrarian to industrial to postindustrial.',continued:'Persistent inequality alongside overall growth.',emerged:'Who benefits when the economy grows — and who gets left behind?'},
   {id:'theme_conflict',num:'Theme: Conflict', title:'Conflict & Change',   years:'1861–Present',icon:'⚔️',eraColor:'#e07070',url:'https://olsonjoshua-code.github.io/Conflict-Change/',      desc:'Examine how wars, reform movements, and upheaval have shaped the nation.',topics:['Civil War','WWI & WWII','Cold War','Civil Rights struggle','Vietnam & beyond'],themes:['conflict'],changed:"Each major conflict redefined America's role at home and abroad.",continued:'Violence and resistance as engines of change.',emerged:'Can lasting change come without conflict?'},
   {id:'theme_identity',num:'Theme: Identity', title:'We the People',       years:'1861–Present',icon:'🌎',eraColor:'#b890d8',url:'https://olsonjoshua-code.github.io/We-the-People/',        desc:'Explore how American identity has been defined, contested, and reimagined across eras.',topics:['Immigration','Nativism','Cultural movements','Pluralism','National mythology'],themes:['identity'],changed:'The definition of “American” has been continuously renegotiated.',continued:'Tension between e pluribus unum and exclusion.',emerged:'Who gets to be American — and who decides?'},
-  {id:'eoc_midterm',  num:'EOC Review',      title:'Cumulative EOC Review',years:'1861–Present',icon:'📋',eraColor:'#4878d0',url:'https://olsonjoshua-code.github.io/EOC-Review/',           desc:'A cumulative end-of-course review drawing questions from all units and themes.',topics:['All eras','All themes','Document analysis','Causation','Continuity & change'],themes:['power','freedom','economy','conflict','identity'],changed:'Your understanding of U.S. history — tested across the full arc.',continued:'The recurring questions that define the American story.',emerged:'How do all the pieces connect?'},
+  {id:'eoc_midterm',  num:'Midterm',         title:'Midterm Checkpoint',    years:'1861–1929',icon:'📋',eraColor:'#4878d0',url:'https://olsonjoshua-code.github.io/EOC-Checkpoint-Midterm-Readiness-Assessment/midterm_checkpoint.html',           desc:'A cumulative Semester 1 checkpoint covering Civil War through the Roaring Twenties across 6 progressive sections.',topics:['All eras','All themes','Document analysis','Causation','Continuity & change'],themes:['power','freedom','economy','conflict','identity'],changed:'Your understanding of U.S. history — tested across the full arc.',continued:'The recurring questions that define the American story.',emerged:'How do all the pieces connect?'},
 ];
 const ERAS=[
   {name:'Reconstruction Era',years:'1861–1877',units:['unit1'],color:'#8b4513'},
