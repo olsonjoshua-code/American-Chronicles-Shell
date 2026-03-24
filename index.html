@@ -307,23 +307,20 @@ body::before{content:'';position:fixed;inset:0;
 @keyframes rpgShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes rpgUnlock{0%{transform:scale(.9);opacity:0}50%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
 @keyframes swordPulse{0%,100%{filter:drop-shadow(0 0 6px rgba(200,160,32,.4))}50%{filter:drop-shadow(0 0 18px rgba(200,160,32,.8))}}
-.campaign-section{margin:16px 0 12px;padding:0 16px;max-width:680px;}
-.campaign-divider{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-.campaign-divider-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),var(--gold2),var(--border));}
-.campaign-divider-text{font-family:var(--bebas);font-size:11px;letter-spacing:2px;color:var(--gold2);white-space:nowrap;}
+.campaign-section{margin:0 0 22px;padding:0;}
 .rpg-locked-card{
-  background:rgba(15,12,5,.92);
-  border:1px dashed rgba(200,160,32,.2);
-  padding:10px 14px;
-  display:flex;align-items:center;gap:12px;
-  opacity:.55;
+  background:linear-gradient(135deg,rgba(20,16,13,.96),rgba(13,10,8,.99));
+  border:1px solid var(--border2);border-left:3px solid rgba(200,160,32,.3);
+  padding:12px 24px;
+  display:flex;align-items:center;gap:18px;
+  opacity:.6;
 }
 .rpg-unlock-card{
   background:linear-gradient(135deg,rgba(20,15,5,.99),rgba(14,10,3,.99));
-  border:1.5px solid var(--gold2);
-  padding:14px 16px;
+  border:1px solid var(--border2);border-left:3px solid var(--gold);
+  padding:12px 24px;
   position:relative;overflow:hidden;
-  cursor:pointer;transition:all .3s;
+  cursor:pointer;transition:all .2s;
   animation:rpgGlow 4s infinite;
 }
 .rpg-unlock-card::before{
@@ -335,27 +332,16 @@ body::before{content:'';position:fixed;inset:0;
   content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,var(--gold2),transparent);opacity:.4;
 }
-.rpg-unlock-card:hover{border-color:var(--gold3);transform:translateY(-1px);}
-.rpg-corner{position:absolute;width:14px;height:14px;border-color:var(--gold2);border-style:solid;opacity:.6;}
-.rpg-corner.tl{top:6px;left:6px;border-width:2px 0 0 2px;}
-.rpg-corner.tr{top:6px;right:6px;border-width:2px 2px 0 0;}
-.rpg-corner.bl{bottom:6px;left:6px;border-width:0 0 2px 2px;}
-.rpg-corner.br{bottom:6px;right:6px;border-width:0 2px 2px 0;}
-.rpg-inner{display:flex;align-items:center;gap:18px;position:relative;z-index:1;}
-.rpg-icon{font-size:48px;flex-shrink:0;animation:swordPulse 3s infinite;}
+.rpg-unlock-card:hover{border-color:var(--gold);box-shadow:0 2px 20px rgba(200,160,32,.15);}
+.rpg-inner{display:flex;align-items:center;gap:16px;position:relative;z-index:1;}
 .rpg-content{flex:1;}
-.rpg-eyebrow{font-family:var(--mono,monospace);font-size:7px;color:var(--gold2);letter-spacing:.2em;margin-bottom:5px;text-transform:uppercase;}
-.rpg-title{font-family:var(--bebas);font-size:26px;color:var(--gold);letter-spacing:.08em;margin-bottom:2px;text-shadow:0 0 20px rgba(200,160,32,.4);}
-.rpg-sub{font-family:var(--dm,sans-serif);font-size:10px;color:var(--text2);margin-bottom:10px;line-height:1.5;}
-.rpg-cta{font-family:var(--bebas);font-size:13px;letter-spacing:.1em;display:inline-block;padding:8px 20px;background:rgba(200,160,32,.12);border:1px solid var(--gold2);color:var(--gold);transition:all .2s;}
-.rpg-cta:hover{background:rgba(200,160,32,.22);box-shadow:0 0 16px rgba(200,160,32,.2);}
-.rpg-lock-icon{font-size:44px;flex-shrink:0;opacity:.4;}
-.rpg-lock-text{flex:1;}
-.rpg-lock-title{font-family:var(--bebas);font-size:20px;color:var(--text3);letter-spacing:.06em;margin-bottom:4px;}
-.rpg-lock-sub{font-family:var(--dm,sans-serif);font-size:10px;color:var(--text3);}
-.rpg-progress-bar{height:4px;background:rgba(255,255,255,.05);border-radius:2px;margin-top:8px;overflow:hidden;}
+.rpg-eyebrow{font-family:var(--mono,monospace);font-size:7px;color:var(--gold2);letter-spacing:.2em;margin-bottom:3px;text-transform:uppercase;}
+.rpg-title{font-family:var(--bebas);font-size:20px;color:var(--gold);letter-spacing:.08em;text-shadow:0 0 16px rgba(200,160,32,.35);}
+.rpg-cta{font-family:var(--bebas);font-size:12px;letter-spacing:.1em;display:inline-block;padding:7px 16px;background:rgba(200,160,32,.1);border:1px solid var(--gold2);color:var(--gold);transition:all .2s;white-space:nowrap;}
+.rpg-cta:hover{background:rgba(200,160,32,.2);}
+.rpg-progress-bar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
 .rpg-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:2px;transition:width .8s cubic-bezier(.4,0,.2,1);}
-.rpg-unlock-hint{font-family:var(--mono,monospace);font-size:8px;color:var(--gold2);margin-top:6px;}
+.rpg-unlock-hint{font-family:var(--mono,monospace);font-size:8px;color:var(--gold2);margin-top:5px;}
 </style>
 </head>
 <body>
@@ -505,11 +491,6 @@ body::before{content:'';position:fixed;inset:0;
 
     <!-- CAMPAIGN RPG SECTION -->
     <div class="campaign-section" id="campaign-rpg-section">
-      <div class="campaign-divider">
-        <div class="campaign-divider-line"></div>
-        <div class="campaign-divider-text">🗃️ Historian Ops</div>
-        <div class="campaign-divider-line"></div>
-      </div>
       <div id="rpg-card-mount"></div>
     </div>
 
@@ -1618,28 +1599,28 @@ function renderCampaignRPG(){
 
   if(!unlocked){
     mount.innerHTML=`<div class="rpg-locked-card">
-      <div class="rpg-lock-icon" style="font-size:30px">🗃️</div>
-      <div class="rpg-lock-text">
-        <div class="rpg-lock-title" style="font-size:14px">American Chronicles RPG</div>
-        <div class="rpg-lock-sub">Unlock: 3 Gold trophies · 8 units · or 50k pts</div>
-        <div class="rpg-progress-bar" style="margin-top:6px"><div class="rpg-progress-fill" style="width:${pct}%"></div></div>
-        <div class="rpg-unlock-hint">${byTrophy?"✓":goldTrophies+"/3"} Gold &nbsp;·&nbsp; ${byUnits?"✓":unitsCompleted+"/8"} units &nbsp;·&nbsp; ${byScore?"✓":totalScore.toLocaleString()+"/50k"} pts</div>
+      <div style="font-size:28px;flex-shrink:0;opacity:.5">🗃️</div>
+      <div style="flex:1;min-width:0">
+        <div style="font-family:var(--bebas);font-size:14px;color:var(--text3);letter-spacing:2px;margin-bottom:2px">American Chronicles RPG — Locked</div>
+        <div style="font-family:var(--dm);font-size:9px;color:var(--text3)">Unlock: 3 Gold trophies · 8 units completed · or 50k pts — whichever comes first</div>
+        <div class="rpg-progress-bar" style="margin-top:5px;max-width:260px"><div class="rpg-progress-fill" style="width:${pct}%"></div></div>
       </div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--text3);white-space:nowrap;flex-shrink:0">${byTrophy?"✓":goldTrophies+"/3"} Gold &nbsp;·&nbsp; ${byUnits?"✓":unitsCompleted+"/8"} units &nbsp;·&nbsp; ${byScore?"✓":totalScore.toLocaleString()+"/50k"} pts</div>
     </div>`;
   } else {
     const statusLine=completed
-      ?`<div style="font-family:var(--mono,monospace);font-size:9px;color:${tc};margin-bottom:8px">✓ Completed · ${tier.toUpperCase()} TIER · Best: ${r.best_score?.toLocaleString()||0} pts · ${r.best_accuracy}% accuracy</div>`
-      :`<div style="font-family:var(--dm,sans-serif);font-size:10px;color:var(--text2);margin-bottom:8px">18 chapters · 5 theme campaigns · EOC Final Challenge</div>`;
+      ?`<div style="font-family:var(--mono,monospace);font-size:9px;color:${tc}">✓ ${tier.toUpperCase()} · ${r.best_score?.toLocaleString()||0} pts · ${r.best_accuracy}% acc</div>`
+      :`<div style="font-family:var(--dm,sans-serif);font-size:10px;color:var(--text2)">18 chapters · 5 theme campaigns · EOC Final Challenge</div>`;
     mount.innerHTML=`<div class="rpg-unlock-card" onclick="launchRPG()" style="animation:rpgUnlock .5s ease both">
-      <div class="rpg-corner tl"></div><div class="rpg-corner tr"></div>
-      <div class="rpg-corner bl"></div><div class="rpg-corner br"></div>
       <div class="rpg-inner">
-        <div class="rpg-icon">🗃️</div>
+        <div style="font-size:28px;flex-shrink:0;filter:drop-shadow(0 0 10px rgba(200,160,32,.4))">🗃️</div>
         <div class="rpg-content">
           <div class="rpg-eyebrow">◈ Campaign Mode · Full Course</div>
-          <div class="rpg-title">American Chronicles RPG</div>
+          <div class="rpg-title" style="font-size:20px;margin-bottom:2px">American Chronicles RPG</div>
           ${statusLine}
-          <div class="rpg-cta">▶ Enter the Campaign</div>
+        </div>
+        <div style="flex-shrink:0">
+          <div class="rpg-cta" style="font-size:12px;padding:7px 16px">▶ Enter the Campaign</div>
         </div>
       </div>
     </div>`;
