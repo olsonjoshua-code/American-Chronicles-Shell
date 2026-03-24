@@ -462,31 +462,31 @@ body::before{content:'';position:fixed;inset:0;
         <div class="sh" style="margin-bottom:4px">Five Recurring Themes</div>
         <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:12px;letter-spacing:.5px">Cross-era campaigns — trace a theme across all of U.S. history</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px;align-items:stretch">
-          <a href="https://olsonjoshua-code.github.io/Balance-of-Power/" target="_blank" class="theme-chip tc-power theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none">
+          <div onclick="openPreview('theme_power')" class="theme-chip tc-power theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none;cursor:pointer">
             <span style="font-size:16px">⚖️</span><strong>Power</strong>
             <span style="font-size:8px;opacity:.8;font-style:italic">Who rules, who resists</span>
-            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Play Now</span></span>
-          </a>
-          <a href="https://olsonjoshua-code.github.io/Promise-of-Liberty/" target="_blank" class="theme-chip tc-freedom theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none">
+            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Preview</span></span>
+          </div>
+          <div onclick="openPreview('theme_freedom')" class="theme-chip tc-freedom theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none;cursor:pointer">
             <span style="font-size:16px">🗽</span><strong>Freedom &amp; Rights</strong>
             <span style="font-size:8px;opacity:.8;font-style:italic">Expanding or denying liberty</span>
-            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Play Now</span></span>
-          </a>
-          <a href="https://olsonjoshua-code.github.io/Engines-of-Change/" target="_blank" class="theme-chip tc-economy theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none">
+            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Preview</span></span>
+          </div>
+          <div onclick="openPreview('theme_economy')" class="theme-chip tc-economy theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none;cursor:pointer">
             <span style="font-size:16px">⚙️</span><strong>Economy &amp; Work</strong>
             <span style="font-size:8px;opacity:.8;font-style:italic">Labor, industry, wealth</span>
-            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Play Now</span></span>
-          </a>
-          <a href="https://olsonjoshua-code.github.io/Conflict-Change/" target="_blank" class="theme-chip tc-conflict theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none">
+            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Preview</span></span>
+          </div>
+          <div onclick="openPreview('theme_conflict')" class="theme-chip tc-conflict theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none;cursor:pointer">
             <span style="font-size:16px">⚔️</span><strong>Conflict &amp; Change</strong>
             <span style="font-size:8px;opacity:.8;font-style:italic">Wars, reform, upheaval</span>
-            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Play Now</span></span>
-          </a>
-          <a href="https://olsonjoshua-code.github.io/We-the-People/" target="_blank" class="theme-chip tc-identity theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none">
+            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Preview</span></span>
+          </div>
+          <div onclick="openPreview('theme_identity')" class="theme-chip tc-identity theme-link" style="padding:9px 11px;flex-direction:column;align-items:flex-start;gap:2px;font-size:10px;text-decoration:none;cursor:pointer">
             <span style="font-size:16px">🌎</span><strong>American Identity</strong>
             <span style="font-size:8px;opacity:.8;font-style:italic">Who we are becoming</span>
-            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Play Now</span></span>
-          </a>
+            <span class="theme-badge-anchor"><span class="unit-status us-play">▶ Preview</span></span>
+          </div>
         </div>
       </div>
 
@@ -1725,13 +1725,18 @@ const THEME_CLASS={power:'tc-power',freedom:'tc-freedom',economy:'tc-economy',co
 function openPreview(uid){
   const u=UNIT_DATA.find(x=>x.id===uid);if(!u)return;
   const st=unitStatus(uid);
+  const isTheme=uid.startsWith('theme_');
   document.getElementById('pv-num').textContent=u.num;document.getElementById('pv-title').textContent=u.title;document.getElementById('pv-years').textContent=u.years;
   document.getElementById('pv-desc').textContent=u.desc;document.getElementById('pv-changed').textContent=u.changed;document.getElementById('pv-continued').textContent=u.continued;document.getElementById('pv-emerged').textContent=u.emerged;
   document.getElementById('pv-hero').style.background=`linear-gradient(135deg,${u.eraColor}55,#0d0a08)`;
   document.getElementById('pv-hero-art').innerHTML=`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:80px;opacity:.1">${u.icon}</div>`;
   document.getElementById('pv-topics').innerHTML=u.topics.map(t=>`<span class="topic-tag">${t}</span>`).join('');
-  document.getElementById('pv-themes').innerHTML=u.themes.slice(0,4).map(t=>`<span class="theme-chip ${THEME_CLASS[t]}">${THEME_MAP[t]||t}</span>`).join('');
-  document.getElementById('pv-map').innerHTML=buildMiniMap(u);
+  // Hide themes row and map for theme units — they don't apply
+  const themesRow=document.getElementById('pv-themes').closest('div');
+  const mapRow=document.getElementById('pv-map').closest('div');
+  if(themesRow)themesRow.style.display=isTheme?'none':'';
+  if(mapRow)mapRow.style.display=isTheme?'none':'';
+  if(!isTheme){document.getElementById('pv-themes').innerHTML=u.themes.slice(0,4).map(t=>`<span class="theme-chip ${THEME_CLASS[t]}">${THEME_MAP[t]||t}</span>`).join('');document.getElementById('pv-map').innerHTML=buildMiniMap(u);}
   buildLaunchArea(u, u.id==='eoc_midterm' ? 'avail' : st);
   document.getElementById('preview-panel').classList.add('open');document.getElementById('pv-backdrop').style.display='block';
   document.querySelectorAll('.unit-card').forEach(c=>c.classList.remove('selected'));
