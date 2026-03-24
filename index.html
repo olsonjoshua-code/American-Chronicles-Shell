@@ -307,7 +307,7 @@ body::before{content:'';position:fixed;inset:0;
 @keyframes rpgShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes rpgUnlock{0%{transform:scale(.9);opacity:0}50%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
 @keyframes swordPulse{0%,100%{filter:drop-shadow(0 0 6px rgba(200,160,32,.4))}50%{filter:drop-shadow(0 0 18px rgba(200,160,32,.8))}}
-.campaign-section{margin:0 0 22px;padding:0;}
+.campaign-section{margin:0 0 0;padding:0;}
 .rpg-locked-card{
   background:linear-gradient(135deg,rgba(20,16,13,.96),rgba(13,10,8,.99));
   border:1px solid var(--border2);border-left:3px solid rgba(200,160,32,.3);
@@ -489,15 +489,15 @@ body::before{content:'';position:fixed;inset:0;
       </div>
     </div>
 
-    <!-- CAMPAIGN RPG SECTION -->
-    <div class="campaign-section" id="campaign-rpg-section">
-      <div id="rpg-card-mount"></div>
-    </div>
+
 
 
 
     <!-- TROPHY VIEW -->
     <div id="view-trophies" class="view">
+      <div class="campaign-section" id="campaign-rpg-section" style="margin-bottom:22px">
+        <div id="rpg-card-mount"></div>
+      </div>
       <div class="trophy-room-hero"><div class="tr-icon">🏆</div><div><div class="tr-title">Trophy Room</div><div class="tr-sub">Your best performance in each era. Earned by accuracy — certificates print your full history.</div></div></div>
       <div class="tier-legend">
         <div class="tl-item"><div class="tl-dot" style="border-color:var(--historian);background:rgba(232,208,255,.15)"></div>Historian — 100%</div>
