@@ -1740,7 +1740,7 @@ function openPreview(uid){
 function closePreview(){document.getElementById('preview-panel').classList.remove('open');document.getElementById('pv-backdrop').style.display='none';document.querySelectorAll('.unit-card').forEach(c=>c.classList.remove('selected'));}
 // ── DECK ID MAP: hub unit id → flashcard deck id ──────
 const DECK_MAP={
-  // Hub unit ID  ->  flashcard deck ID (matched by content, not number)
+  // Units with flashcard decks — mapped to actual deck IDs in flashcards.html
   'unit1'        :'unit1_civil_war_reconstruction',   // A House Divided
   'unit4b'       :'unit4b_crash_recovery',            // Crash & Recovery / New Deal
   'unit5a'       :'unit5a_wwii',                      // Arsenal of Democracy
@@ -1749,10 +1749,9 @@ const DECK_MAP={
   'unit7a'       :'unit7a_governing_1960s',           // Camelot / Kennedy & Johnson
   'unit7b'       :'unit9_vietnam_nixon',              // Napalm Dawn / Vietnam & Nixon
   'unit8'        :'unit10_america_1980s_present',     // Modern America / Reagan–Present
-  // Review decks
   'eoc_midterm'  :'midterm_review',                   // Midterm Checkpoint
-  // Note: unit2a, unit2b, unit3a, unit3b, unit4a have no flashcard deck yet
-  // These decks exist but have no hub unit: unit6_american_life_1950s, unit8_era_of_change, eoc_review
+  // Units without decks yet — buttons won't show for these:
+  // unit2a, unit2b, unit3a, unit3b, unit4a
 };
 const FC_BASE='https://olsonjoshua-code.github.io/U.S.History_Flashcards/';
 
