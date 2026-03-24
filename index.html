@@ -286,6 +286,18 @@ body::before{content:'';position:fixed;inset:0;
 .cont-text{font-family:var(--crimson);font-size:13px;color:var(--text2);line-height:1.4;font-style:italic}
 .pv-launch{margin-top:4px;display:flex;flex-direction:column;gap:7px}
 
+/* ── STUDY ACTIONS ── */
+.study-action-block{display:flex;flex-direction:column;gap:6px;margin-top:4px;padding-top:12px;border-top:1px solid var(--border)}
+.study-action-label{font-family:var(--bebas);font-size:9px;color:var(--text3);letter-spacing:3px;margin-bottom:2px}
+.btn.blue{border-color:var(--blue2);color:var(--blue2)}.btn.blue::before{background:var(--blue2)}.btn.blue:hover{color:#fff}
+.btn.purple{border-color:var(--purple2);color:var(--purple2)}.btn.purple::before{background:var(--purple2)}.btn.purple:hover{color:#fff}
+.btn.amber-dim{border-color:var(--amber2);color:var(--amber2)}.btn.amber-dim::before{background:var(--amber2)}.btn.amber-dim:hover{color:var(--bg)}
+.vocab-status-row{display:flex;align-items:center;gap:6px;font-family:var(--dm);font-size:9px;color:var(--text3);padding:4px 0}
+.vocab-check{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--green2);flex-shrink:0;text-align:center;line-height:12px;font-size:8px}
+.gold-earned{font-family:var(--bebas);font-size:10px;color:var(--gold);letter-spacing:1px}
+.hud-gold{font-family:var(--dm);font-size:8px;color:var(--text3);text-align:center;letter-spacing:1px}
+.hud-gold span{display:block;font-family:var(--bebas);font-size:15px;color:var(--gold)}
+
 /* teacher */
 #view-teacher{padding:24px 20px 56px;max-width:860px;margin:0 auto;width:100%}
 .t-unit-row{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
@@ -409,6 +421,7 @@ body::before{content:'';position:fixed;inset:0;
         <div class="hud-stat">TROPHIES<span id="hstat-trophies">0</span></div>
         <div class="hud-stat">EOC<span id="hstat-eoc">—</span></div>
         <div class="hud-stat">DONE<span id="hstat-pct">0%</span></div>
+        <div class="hud-stat">GOLD<span id="hstat-gold" style="color:var(--gold)">0</span></div>
       </div>
       <div class="hud-nav">
         <button class="nav-btn active" id="nav-timeline" onclick="showView('timeline')">🗺 Timeline</button>
@@ -1360,10 +1373,11 @@ const BADGES=[
 
 // ── STATE ─────────────────────────────────────────────
 let S={name:'',avatar:'scholar_f',period:'',isGuest:false,isTeacher:false,
-  unitsCompleted:[],badgesEarned:[],unlocked:CHARS.filter(c=>c.unlockMethod==='free').map(c=>c.id),setupDone:false};
+  unitsCompleted:[],badgesEarned:[],unlocked:CHARS.filter(c=>c.unlockMethod==='free').map(c=>c.id),setupDone:false,
+  gold:0,xp:0,vocabPassed:{},vocabBestScore:{},vocabFirstPass:{},flashcardsStudied:{}};
 function saveS(){try{localStorage.setItem(SHELL_KEY,JSON.stringify(S));}catch(e){}}
 function loadS(){try{const r=localStorage.getItem(SHELL_KEY);if(r){const d=JSON.parse(r);S={...S,...d};if(!S.unlocked||!S.unlocked.length)S.unlocked=CHARS.filter(c=>c.unlockMethod==='free').map(c=>c.id);// Never auto-restore teacher mode - requires fresh login each session
-S.isTeacher=false;}}catch(e){}}
+S.isTeacher=false;if(!S.gold)S.gold=0;if(!S.xp)S.xp=0;if(!S.vocabPassed)S.vocabPassed={};if(!S.vocabBestScore)S.vocabBestScore={};if(!S.vocabFirstPass)S.vocabFirstPass={};if(!S.flashcardsStudied)S.flashcardsStudied={};}}catch(e){}}
 
 function getChar(id){return CHARS.find(c=>c.id===id)||CHARS[0];}
 function getRank(){const n=S.unitsCompleted.length;let r=RANKS[0];for(const rk of RANKS)if(n>=rk.min)r=rk;return r.label;}
@@ -1490,6 +1504,7 @@ function updateHUD(){
   document.getElementById('hstat-units').textContent=S.unitsCompleted.length;
   document.getElementById('hstat-trophies').textContent=S.badgesEarned.length;
   document.getElementById('hstat-pct').textContent=pct+'%';
+  updateHUDGold();
   // EOC Rating in HUD
   const eocEl=document.getElementById('hstat-eoc');
   if(eocEl){
@@ -1723,14 +1738,107 @@ function openPreview(uid){
   document.querySelector(`[data-uid="${uid}"]`)?.classList.add('selected');
 }
 function closePreview(){document.getElementById('preview-panel').classList.remove('open');document.getElementById('pv-backdrop').style.display='none';document.querySelectorAll('.unit-card').forEach(c=>c.classList.remove('selected'));}
+// ── DECK ID MAP: hub unit id → flashcard deck id ──────
+const DECK_MAP={
+  'unit0_foundation':'foundation_bridge',
+  'unit1':'unit1_civil_war_reconstruction',
+  'unit2a':'unit2a_boomtown',
+  'unit2b':'unit2b_reform',
+  'unit3a':'unit3a_empire',
+  'unit3b':'unit3b_wwi',
+  'unit4a':'unit4a_boom_bust',
+  'unit4b':'unit4b_crash_recovery',
+  'unit5a':'unit5a_wwii',
+  'unit5b':'unit5b_cold_war',
+  'unit6':'unit6_civil_rights',
+  'unit7a':'unit7a_camelot',
+  'unit7b':'unit7b_vietnam',
+  'unit8':'unit8_modern',
+  'theme_power':'theme_power',
+  'theme_freedom':'theme_freedom',
+  'theme_economy':'theme_economy',
+  'theme_conflict':'theme_conflict',
+  'theme_identity':'theme_identity',
+  'eoc_midterm':'eoc_midterm',
+};
+const FC_BASE='https://olsonjoshua-code.github.io/U.S.History/';
+
+function getDeckId(unitId){return DECK_MAP[unitId]||null;}
+
+function buildStudyBlock(u){
+  const deckId=getDeckId(u.id);
+  if(!deckId)return'';
+  const passed=S.vocabPassed&&S.vocabPassed[deckId];
+  const studied=S.flashcardsStudied&&S.flashcardsStudied[deckId];
+  const bestScore=S.vocabBestScore&&S.vocabBestScore[deckId];
+  const studyUrl=`${FC_BASE}?deck=${encodeURIComponent(deckId)}&mode=study&from=hub`;
+  const quizUrl=`${FC_BASE}?deck=${encodeURIComponent(deckId)}&mode=quiz&from=hub`;
+  const briefingUrl=u.briefingUrl||null;
+
+  const vocabLabel=passed
+    ?`<span class="vocab-check">✓</span><span style="color:var(--green2)">Vocab Passed</span>${bestScore!==undefined?`<span class="gold-earned" style="margin-left:auto">Best: ${bestScore}%</span>`:''}`
+    :`<span style="color:var(--text3)">Vocab Check: Not yet passed</span>`;
+
+  const studyLabel=studied
+    ?`<span class="vocab-check" style="background:var(--teal2)">✓</span><span style="color:var(--teal2)">Flashcards Studied</span>`
+    :`<span style="color:var(--text3)">Flashcards: Not yet studied</span>`;
+
+  return`<div class="study-action-block">
+    <div class="study-action-label">📚 Study Tools</div>
+    <div class="vocab-status-row">${vocabLabel}</div>
+    <div class="vocab-status-row">${studyLabel}</div>
+    ${briefingUrl?`<a href="${briefingUrl}" target="_blank" style="text-decoration:none;display:block"><button class="btn full amber-dim sm"><span>📋 Open Briefing</span></button></a>`:''}
+    <a href="${studyUrl}" target="_blank" style="text-decoration:none;display:block"><button class="btn full teal sm" onclick="markStudied('${deckId}')"><span>🃏 Study Flashcards</span></button></a>
+    <a href="${quizUrl}" target="_blank" style="text-decoration:none;display:block"><button class="btn full ${passed?'green':'blue'} sm"><span>${passed?'↺ Retake Vocab Check':'⚡ Take Vocab Check'}</span></button></a>
+    <div style="font-family:var(--dm);font-size:8px;color:var(--text3);margin-top:2px;line-height:1.6">Complete the Vocab Check to earn <span style="color:var(--gold)">🪙 Gold</span>. Rewards require 60%+ to qualify.</div>
+  </div>`;
+}
+
+function markStudied(deckId){
+  if(!S.flashcardsStudied)S.flashcardsStudied={};
+  S.flashcardsStudied[deckId]=true;
+  saveS();
+}
+
 function buildLaunchArea(u,st){
   const area=document.getElementById('pv-launch');
-  if(st==='done'){area.innerHTML=`<div style="text-align:center;padding:8px 0"><div style="font-size:26px;margin-bottom:3px">✅</div><div style="font-family:var(--bebas);font-size:12px;color:var(--green2);letter-spacing:2px">Completed</div></div>${u.url?`<a href="${u.url}" target="_blank" onclick="localStorage.setItem('ac_shell_return',location.href)" style="text-decoration:none"><button class="btn full green" style="margin-top:5px"><span>↺ Replay ${u.num}</span></button></a>`:''}<button class="btn full" onclick="showView('trophies');closePreview();" style="border-color:var(--gold);color:var(--gold);margin-top:5px"><span>🏆 View Trophy</span></button>`;}
-  else if(u.url){
-    const label = '▶ Launch '+u.num;
-    area.innerHTML=`<a href="${u.url}" target="_blank" onclick="localStorage.setItem('ac_shell_return',location.href)" style="text-decoration:none;display:block"><button class="btn full" style="font-size:16px;padding:17px;letter-spacing:3px;border-width:2px;box-shadow:0 0 28px rgba(232,160,32,.22)"><span>${label}</span></button></a><div style="font-family:var(--dm);font-size:9px;color:var(--text3);text-align:center;margin-top:7px">Opens in a new tab</div>`;
+  const studyBlock=buildStudyBlock(u);
+  if(st==='done'){
+    area.innerHTML=`<div style="text-align:center;padding:8px 0"><div style="font-size:26px;margin-bottom:3px">✅</div><div style="font-family:var(--bebas);font-size:12px;color:var(--green2);letter-spacing:2px">Completed</div></div>${u.url?`<a href="${u.url}" target="_blank" onclick="localStorage.setItem('ac_shell_return',location.href)" style="text-decoration:none"><button class="btn full green" style="margin-top:5px"><span>↺ Replay ${u.num}</span></button></a>`:''}<button class="btn full" onclick="showView('trophies');closePreview();" style="border-color:var(--gold);color:var(--gold);margin-top:5px"><span>🏆 View Trophy</span></button>${studyBlock}`;
   }
-  else{area.innerHTML=`<div style="background:var(--bg3);border:1px dashed var(--border2);padding:16px;text-align:center"><div style="font-family:var(--bebas);font-size:13px;color:var(--text3);letter-spacing:3px">COMING SOON</div></div>`;}
+  else if(u.url){
+    const label='▶ Launch '+u.num;
+    area.innerHTML=`<a href="${u.url}" target="_blank" onclick="localStorage.setItem('ac_shell_return',location.href)" style="text-decoration:none;display:block"><button class="btn full" style="font-size:16px;padding:17px;letter-spacing:3px;border-width:2px;box-shadow:0 0 28px rgba(232,160,32,.22)"><span>${label}</span></button></a><div style="font-family:var(--dm);font-size:9px;color:var(--text3);text-align:center;margin-top:7px">Opens in a new tab</div>${studyBlock}`;
+  }
+  else{
+    area.innerHTML=`<div style="background:var(--bg3);border:1px dashed var(--border2);padding:16px;text-align:center"><div style="font-family:var(--bebas);font-size:13px;color:var(--text3);letter-spacing:3px">COMING SOON</div></div>${studyBlock}`;
+  }
+}
+
+// ── Listen for vocab reward messages from flashcard page ──
+window.addEventListener('message',e=>{
+  if(e.data?.type==='vocabReward'&&e.data.deckId){
+    const{deckId,gold:g,xp:x,score,passed}=e.data;
+    if(!S.vocabPassed)S.vocabPassed={};
+    if(!S.vocabBestScore)S.vocabBestScore={};
+    if(!S.vocabFirstPass)S.vocabFirstPass={};
+    if(passed){
+      const wasFirst=!S.vocabPassed[deckId];
+      S.vocabPassed[deckId]=true;
+      if(wasFirst)S.vocabFirstPass[deckId]=true;
+    }
+    if(score!==undefined)S.vocabBestScore[deckId]=Math.max(score,S.vocabBestScore[deckId]||0);
+    if(g){S.gold=(S.gold||0)+g;notify(`🪙 +${g} Gold earned from Vocab Check!`);}
+    if(x){S.xp=(S.xp||0)+x;notify(`⭐ +${x} XP earned!`);}
+    saveS();
+    updateHUDGold();
+  }
+  if(e.data?.type==='unitComplete'&&e.data.unitId)onUnitComplete(e.data.unitId);
+});
+
+function updateHUDGold(){
+  const el=document.getElementById('hstat-gold');
+  if(el)el.textContent=(S.gold||0).toLocaleString();
 }
 function buildMiniMap(u){
   const c=u.eraColor||'#3d2e1e';
@@ -2011,7 +2119,8 @@ function saveNotes(){try{localStorage.setItem('ac_teacher_notes',document.getEle
 
 // ── UTILS ─────────────────────────────────────────────
 function notify(msg){const n=document.createElement('div');n.className='notif';n.textContent=msg;document.body.appendChild(n);setTimeout(()=>n.remove(),3200);}
-window.addEventListener('message',e=>{if(e.data?.type==='unitComplete'&&e.data.unitId)onUnitComplete(e.data.unitId);});
+// onUnitComplete wired via message listener above
+
 function onUnitComplete(uid){if(!S.unitsCompleted.includes(uid))S.unitsCompleted.push(uid);awardBadges();checkUnlocks();saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();}
 (()=>{const p=new URLSearchParams(window.location.search);const cid=p.get('complete');if(cid&&UNIT_DATA.find(u=>u.id===cid)){loadS();onUnitComplete(cid);}})();
 
