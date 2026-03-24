@@ -1740,26 +1740,21 @@ function openPreview(uid){
 function closePreview(){document.getElementById('preview-panel').classList.remove('open');document.getElementById('pv-backdrop').style.display='none';document.querySelectorAll('.unit-card').forEach(c=>c.classList.remove('selected'));}
 // ── DECK ID MAP: hub unit id → flashcard deck id ──────
 const DECK_MAP={
+  // Unit decks — mapped to actual deck IDs in flashcards.html
   'unit0_foundation':'foundation_bridge',
   'unit1':'unit1_civil_war_reconstruction',
-  'unit2a':'unit2a_boomtown',
-  'unit2b':'unit2b_reform',
-  'unit3a':'unit3a_empire',
-  'unit3b':'unit3b_wwi',
-  'unit4a':'unit4a_boom_bust',
   'unit4b':'unit4b_crash_recovery',
   'unit5a':'unit5a_wwii',
-  'unit5b':'unit5b_cold_war',
-  'unit6':'unit6_civil_rights',
-  'unit7a':'unit7a_camelot',
-  'unit7b':'unit7b_vietnam',
-  'unit8':'unit8_modern',
-  'theme_power':'theme_power',
-  'theme_freedom':'theme_freedom',
-  'theme_economy':'theme_economy',
-  'theme_conflict':'theme_conflict',
-  'theme_identity':'theme_identity',
-  'eoc_midterm':'eoc_midterm',
+  'unit5b':'unit5b_early_cold_war',
+  'unit6':'unit6_american_life_1950s',
+  'unit7a':'unit7a_governing_1960s',
+  'unit7b':'unit7b_civil_rights_movement',
+  'unit8':'unit8_era_of_change',
+  'unit9':'unit9_vietnam_nixon',
+  'unit10':'unit10_america_1980s_present',
+  // Review decks
+  'eoc_midterm':'midterm_review',
+  'eoc_review':'eoc_review',
 };
 const FC_BASE='https://olsonjoshua-code.github.io/U.S.History_Flashcards/';
 
