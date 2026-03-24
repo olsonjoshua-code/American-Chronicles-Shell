@@ -307,16 +307,16 @@ body::before{content:'';position:fixed;inset:0;
 @keyframes rpgShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
 @keyframes rpgUnlock{0%{transform:scale(.9);opacity:0}50%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
 @keyframes swordPulse{0%,100%{filter:drop-shadow(0 0 6px rgba(200,160,32,.4))}50%{filter:drop-shadow(0 0 18px rgba(200,160,32,.8))}}
-.campaign-section{margin:24px 0 16px;padding:0 16px;}
-.campaign-divider{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.campaign-section{margin:16px 0 12px;padding:0 16px;}
+.campaign-divider{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
 .campaign-divider-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),var(--gold2),var(--border));}
 .campaign-divider-text{font-family:var(--bebas);font-size:11px;letter-spacing:2px;color:var(--gold2);white-space:nowrap;}
 .rpg-locked-card{
   background:linear-gradient(135deg,rgba(15,12,5,.95),rgba(10,8,3,.97));
-  border:2px dashed rgba(200,160,32,.2);
-  border-radius:2px;padding:24px 20px;
-  display:flex;align-items:center;gap:18px;
-  opacity:.5;filter:grayscale(.3);
+  border:1px dashed rgba(200,160,32,.25);
+  padding:12px 16px;
+  display:flex;align-items:center;gap:14px;
+  opacity:.55;filter:grayscale(.3);
   position:relative;overflow:hidden;
 }
 .rpg-locked-card::before{
@@ -325,8 +325,8 @@ body::before{content:'';position:fixed;inset:0;
 }
 .rpg-unlock-card{
   background:linear-gradient(135deg,rgba(20,15,5,.99),rgba(14,10,3,.99));
-  border:2px solid var(--gold2);border-radius:2px;
-  padding:20px 18px;
+  border:1.5px solid var(--gold2);
+  padding:14px 16px;
   position:relative;overflow:hidden;
   cursor:pointer;transition:all .3s;
   animation:rpgGlow 4s infinite;
@@ -1623,12 +1623,12 @@ function renderCampaignRPG(){
 
   if(!unlocked){
     mount.innerHTML=`<div class="rpg-locked-card">
-      <div class="rpg-lock-icon">🗃️</div>
+      <div class="rpg-lock-icon" style="font-size:30px">🗃️</div>
       <div class="rpg-lock-text">
-        <div class="rpg-lock-title">American Chronicles RPG</div>
-        <div class="rpg-lock-sub">A full-year U.S. History campaign spanning 18 chapters, theme operations, and the EOC Final Challenge. Unlock by earning 3 Gold trophies, completing 8 units, or reaching 50,000 points — whichever comes first.</div>
-        <div class="rpg-progress-bar"><div class="rpg-progress-fill" style="width:${pct}%"></div></div>
-        <div class="rpg-unlock-hint">${byTrophy?"✓":goldTrophies+"/3"} Gold trophies &nbsp;·&nbsp; ${byUnits?"✓":unitsCompleted+"/8"} units &nbsp;·&nbsp; ${byScore?"✓":totalScore.toLocaleString()+"/50k"} pts</div>
+        <div class="rpg-lock-title" style="font-size:14px">American Chronicles RPG</div>
+        <div class="rpg-lock-sub">Unlock: 3 Gold trophies · 8 units · or 50k pts</div>
+        <div class="rpg-progress-bar" style="margin-top:6px"><div class="rpg-progress-fill" style="width:${pct}%"></div></div>
+        <div class="rpg-unlock-hint">${byTrophy?"✓":goldTrophies+"/3"} Gold &nbsp;·&nbsp; ${byUnits?"✓":unitsCompleted+"/8"} units &nbsp;·&nbsp; ${byScore?"✓":totalScore.toLocaleString()+"/50k"} pts</div>
       </div>
     </div>`;
   } else {
