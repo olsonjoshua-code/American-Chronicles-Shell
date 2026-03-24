@@ -301,6 +301,66 @@ body::before{content:'';position:fixed;inset:0;
 .notif{position:fixed;top:76px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--amber2);padding:9px 20px;font-family:var(--dm);font-size:11px;color:var(--amber);z-index:10000;animation:pop .3s;white-space:nowrap;pointer-events:none}
 
 @media(max-width:600px){.hud-stats{display:none}.stat-grid{grid-template-columns:repeat(2,1fr)}.trophy-grid{grid-template-columns:repeat(2,1fr)}.char-grid{grid-template-columns:repeat(2,1fr)}.badge-grid{grid-template-columns:repeat(3,1fr)}#preview-panel{width:100vw}}
+
+/* ── CAMPAIGN RPG SECTION ───────────────────────────────── */
+@keyframes rpgGlow{0%,100%{box-shadow:0 0 20px rgba(200,160,32,.2),inset 0 0 20px rgba(200,160,32,.03)}50%{box-shadow:0 0 50px rgba(200,160,32,.45),inset 0 0 30px rgba(200,160,32,.08)}}
+@keyframes rpgShimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes rpgUnlock{0%{transform:scale(.9);opacity:0}50%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
+@keyframes swordPulse{0%,100%{filter:drop-shadow(0 0 6px rgba(200,160,32,.4))}50%{filter:drop-shadow(0 0 18px rgba(200,160,32,.8))}}
+.campaign-section{margin:24px 0 16px;padding:0 16px;}
+.campaign-divider{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.campaign-divider-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),var(--gold2),var(--border));}
+.campaign-divider-text{font-family:var(--bebas);font-size:11px;letter-spacing:2px;color:var(--gold2);white-space:nowrap;}
+.rpg-locked-card{
+  background:linear-gradient(135deg,rgba(15,12,5,.95),rgba(10,8,3,.97));
+  border:2px dashed rgba(200,160,32,.2);
+  border-radius:2px;padding:24px 20px;
+  display:flex;align-items:center;gap:18px;
+  opacity:.5;filter:grayscale(.3);
+  position:relative;overflow:hidden;
+}
+.rpg-locked-card::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,transparent,transparent 8px,rgba(200,160,32,.02) 8px,rgba(200,160,32,.02) 9px);
+}
+.rpg-unlock-card{
+  background:linear-gradient(135deg,rgba(20,15,5,.99),rgba(14,10,3,.99));
+  border:2px solid var(--gold2);border-radius:2px;
+  padding:20px 18px;
+  position:relative;overflow:hidden;
+  cursor:pointer;transition:all .3s;
+  animation:rpgGlow 4s infinite;
+}
+.rpg-unlock-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--gold3),var(--gold),transparent);
+  background-size:200% 100%;animation:rpgShimmer 2.5s linear infinite;
+}
+.rpg-unlock-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold2),transparent);opacity:.4;
+}
+.rpg-unlock-card:hover{border-color:var(--gold3);transform:translateY(-1px);}
+.rpg-corner{position:absolute;width:14px;height:14px;border-color:var(--gold2);border-style:solid;opacity:.6;}
+.rpg-corner.tl{top:6px;left:6px;border-width:2px 0 0 2px;}
+.rpg-corner.tr{top:6px;right:6px;border-width:2px 2px 0 0;}
+.rpg-corner.bl{bottom:6px;left:6px;border-width:0 0 2px 2px;}
+.rpg-corner.br{bottom:6px;right:6px;border-width:0 2px 2px 0;}
+.rpg-inner{display:flex;align-items:center;gap:18px;position:relative;z-index:1;}
+.rpg-icon{font-size:48px;flex-shrink:0;animation:swordPulse 3s infinite;}
+.rpg-content{flex:1;}
+.rpg-eyebrow{font-family:var(--mono,monospace);font-size:7px;color:var(--gold2);letter-spacing:.2em;margin-bottom:5px;text-transform:uppercase;}
+.rpg-title{font-family:var(--bebas);font-size:26px;color:var(--gold);letter-spacing:.08em;margin-bottom:2px;text-shadow:0 0 20px rgba(200,160,32,.4);}
+.rpg-sub{font-family:var(--dm,sans-serif);font-size:10px;color:var(--text2);margin-bottom:10px;line-height:1.5;}
+.rpg-cta{font-family:var(--bebas);font-size:13px;letter-spacing:.1em;display:inline-block;padding:8px 20px;background:rgba(200,160,32,.12);border:1px solid var(--gold2);color:var(--gold);transition:all .2s;}
+.rpg-cta:hover{background:rgba(200,160,32,.22);box-shadow:0 0 16px rgba(200,160,32,.2);}
+.rpg-lock-icon{font-size:44px;flex-shrink:0;opacity:.4;}
+.rpg-lock-text{flex:1;}
+.rpg-lock-title{font-family:var(--bebas);font-size:20px;color:var(--text3);letter-spacing:.06em;margin-bottom:4px;}
+.rpg-lock-sub{font-family:var(--dm,sans-serif);font-size:10px;color:var(--text3);}
+.rpg-progress-bar{height:4px;background:rgba(255,255,255,.05);border-radius:2px;margin-top:8px;overflow:hidden;}
+.rpg-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:2px;transition:width .8s cubic-bezier(.4,0,.2,1);}
+.rpg-unlock-hint{font-family:var(--mono,monospace);font-size:8px;color:var(--gold2);margin-top:6px;}
 </style>
 </head>
 <body>
@@ -386,10 +446,11 @@ body::before{content:'';position:fixed;inset:0;
     <div id="view-timeline" class="view active">
       <div class="course-intro">
         <div style="font-size:34px;flex-shrink:0">🏛️</div>
-        <div><div style="font-family:var(--bebas);font-size:10px;color:var(--text3);letter-spacing:3px;margin-bottom:4px">OVERARCHING COURSE QUESTION</div>
+        <div style="flex:1"><div style="font-family:var(--bebas);font-size:10px;color:var(--text3);letter-spacing:3px;margin-bottom:4px">OVERARCHING COURSE QUESTION</div>
           <div class="course-q">"What does it mean to be an American — and who gets to decide?"</div>
           <div style="font-family:var(--dm);font-size:9px;color:var(--text2);margin-top:5px">Scroll left to right through 150 years of history. Click any unit to preview and launch.</div>
         </div>
+        <div id="hub-rpg-mini" style="flex-shrink:0;margin-left:10px"></div>
       </div>
       <div id="tl-outer">
         <div id="era-bar"><div id="era-bar-inner"></div></div>
@@ -446,6 +507,18 @@ body::before{content:'';position:fixed;inset:0;
         <div style="position:absolute;top:0;right:0;width:120px;height:100%;background:linear-gradient(90deg,transparent,rgba(72,120,208,.05));pointer-events:none"></div>
       </div>
     </div>
+
+    <!-- CAMPAIGN RPG SECTION -->
+    <div class="campaign-section" id="campaign-rpg-section">
+      <div class="campaign-divider">
+        <div class="campaign-divider-line"></div>
+        <div class="campaign-divider-text">🗃️ Historian Ops</div>
+        <div class="campaign-divider-line"></div>
+      </div>
+      <div id="rpg-card-mount"></div>
+    </div>
+
+
 
     <!-- TROPHY VIEW -->
     <div id="view-trophies" class="view">
@@ -1130,6 +1203,7 @@ const UNIT_DATA=[
   {id:'theme_conflict',num:'Theme: Conflict', title:'Conflict & Change',   years:'1861–Present',icon:'⚔️',eraColor:'#e07070',url:'https://olsonjoshua-code.github.io/Conflict-Change/',      desc:'Examine how wars, reform movements, and upheaval have shaped the nation.',topics:['Civil War','WWI & WWII','Cold War','Civil Rights struggle','Vietnam & beyond'],themes:['conflict'],changed:"Each major conflict redefined America's role at home and abroad.",continued:'Violence and resistance as engines of change.',emerged:'Can lasting change come without conflict?'},
   {id:'theme_identity',num:'Theme: Identity', title:'We the People',       years:'1861–Present',icon:'🌎',eraColor:'#b890d8',url:'https://olsonjoshua-code.github.io/We-the-People/',        desc:'Explore how American identity has been defined, contested, and reimagined across eras.',topics:['Immigration','Nativism','Cultural movements','Pluralism','National mythology'],themes:['identity'],changed:'The definition of “American” has been continuously renegotiated.',continued:'Tension between e pluribus unum and exclusion.',emerged:'Who gets to be American — and who decides?'},
   {id:'eoc_midterm',  num:'Midterm',         title:'Midterm Checkpoint',    years:'1861–1929',icon:'📋',eraColor:'#4878d0',url:'https://olsonjoshua-code.github.io/EOC-Checkpoint-Midterm-Readiness-Assessment/',           desc:'A cumulative Semester 1 checkpoint covering Civil War through the Roaring Twenties across 6 progressive sections.',topics:['All eras','All themes','Document analysis','Causation','Continuity & change'],themes:['power','freedom','economy','conflict','identity'],changed:'Your understanding of U.S. history — tested across the full arc.',continued:'The recurring questions that define the American story.',emerged:'How do all the pieces connect?'},
+  {id:'unit_ac_rpg', num:'Campaign', title:'American Chronicles RPG', years:'1861–Present', icon:'🗃️', eraColor:'#c8a020', url:'https://olsonjoshua-code.github.io/History-EOC-RPG/', desc:'The ultimate history campaign. Battle through 18 chapters, theme operations, and the EOC Final Challenge across the full sweep of U.S. history. Earn your place as a Master Historian.', topics:['Civil War','Reconstruction','Industrialization','Progressive Era','WWI & WWII','Cold War','Civil Rights','Modern America','All 5 Themes','EOC Final Challenge'], themes:['power','freedom','economy','conflict','identity'], changed:'The entire arc of American history from 1861 to the present — mastered through combat.', continued:'The big questions that run through every era of American history.', emerged:'Can you master the full sweep of U.S. history and earn the rank of Master Historian?', isCampaign:true, unlockGoldTrophies:3},
 ];
 const ERAS=[
   {name:'Reconstruction Era',years:'1861–1877',units:['unit1'],color:'#8b4513'},
@@ -1380,6 +1454,9 @@ async function syncFromSupabase(){
   rows.forEach(r=>{if(!S.unitsCompleted.includes(r.unit_id)&&r.best_accuracy>=60){S.unitsCompleted.push(r.unit_id);changed=true;}});
   awardBadges();checkUnlocks();
   if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();}
+
+  renderCampaignRPG();
+  renderHubRPGMini();
 }
 
 function awardBadges(){
@@ -1514,6 +1591,108 @@ function renderTimeline(){
     eraSegs.forEach(s=>{const el=document.createElement('div');el.className='era-seg';el.style.cssText=`width:${s.endX-s.startX+20}px;background:${s.color}ee;border-left:3px solid ${s.color}`;el.textContent=s.name.toUpperCase()+' · '+s.years;ebi.appendChild(el);});}
   initDrag();initMinimap(x+PAD);
   refreshMidtermCard();
+
+  renderCampaignRPG();
+  renderHubRPGMini();
+}
+function renderCampaignRPG(){
+  const mount=document.getElementById('rpg-card-mount');
+  if(!mount)return;
+  const u=UNIT_DATA.find(x=>x.isCampaign);
+  if(!u)return;
+
+  // Unlock: any one of — 3+ Gold/Historian trophies, 8+ units completed, 50k+ total points
+  const goldTrophies=_trophyData.filter(r=>r.best_accuracy>=90).length;
+  const unitsCompleted=_trophyData.length;
+  const totalScore=_trophyData.reduce((a,r)=>a+(r.best_score||0),0);
+  const byTrophy=goldTrophies>=3;
+  const byUnits=unitsCompleted>=8;
+  const byScore=totalScore>=50000;
+  const unlocked=byTrophy||byUnits||byScore||S.isTeacher;
+  // Progress: highest % across all three conditions
+  const pctTrophy=Math.min(100,Math.round(goldTrophies/3*100));
+  const pctUnits=Math.min(100,Math.round(unitsCompleted/8*100));
+  const pctScore=Math.min(100,Math.round(totalScore/50000*100));
+  const pct=Math.max(pctTrophy,pctUnits,pctScore);
+
+  // Check if already completed
+  const r=_trophyData.find(x=>x.unit_id===u.id);
+  const tier=r?calcTier(r.best_accuracy):'empty';
+  const tc=TIER_COLOR[tier];
+  const completed=tier!=='empty';
+
+  if(!unlocked){
+    mount.innerHTML=`<div class="rpg-locked-card">
+      <div class="rpg-lock-icon">🗃️</div>
+      <div class="rpg-lock-text">
+        <div class="rpg-lock-title">American Chronicles RPG</div>
+        <div class="rpg-lock-sub">A full-year U.S. History campaign spanning 18 chapters, theme operations, and the EOC Final Challenge. Unlock by earning 3 Gold trophies, completing 8 units, or reaching 50,000 points — whichever comes first.</div>
+        <div class="rpg-progress-bar"><div class="rpg-progress-fill" style="width:${pct}%"></div></div>
+        <div class="rpg-unlock-hint">${byTrophy?"✓":goldTrophies+"/3"} Gold trophies &nbsp;·&nbsp; ${byUnits?"✓":unitsCompleted+"/8"} units &nbsp;·&nbsp; ${byScore?"✓":totalScore.toLocaleString()+"/50k"} pts</div>
+      </div>
+    </div>`;
+  } else {
+    const statusLine=completed
+      ?`<div style="font-family:var(--mono,monospace);font-size:9px;color:${tc};margin-bottom:8px">✓ Completed · ${tier.toUpperCase()} TIER · Best: ${r.best_score?.toLocaleString()||0} pts · ${r.best_accuracy}% accuracy</div>`
+      :`<div style="font-family:var(--dm,sans-serif);font-size:10px;color:var(--text2);margin-bottom:8px">18 chapters · 5 theme campaigns · EOC Final Challenge</div>`;
+    mount.innerHTML=`<div class="rpg-unlock-card" onclick="launchRPG()" style="animation:rpgUnlock .5s ease both">
+      <div class="rpg-corner tl"></div><div class="rpg-corner tr"></div>
+      <div class="rpg-corner bl"></div><div class="rpg-corner br"></div>
+      <div class="rpg-inner">
+        <div class="rpg-icon">🗃️</div>
+        <div class="rpg-content">
+          <div class="rpg-eyebrow">◈ Campaign Mode · Full Course</div>
+          <div class="rpg-title">American Chronicles RPG</div>
+          ${statusLine}
+          <div class="rpg-cta">▶ Enter the Campaign</div>
+        </div>
+      </div>
+    </div>`;
+  }
+}
+
+function launchRPG(){
+  const u=UNIT_DATA.find(x=>x.isCampaign);
+  if(!u)return;
+  window.location.href=u.url;
+}
+
+// Mini RPG card for the course-intro bar (far right of the header stripe)
+function renderHubRPGMini(){
+  const mount=document.getElementById('hub-rpg-mini');
+  if(!mount)return;
+  const u=UNIT_DATA.find(x=>x.isCampaign);
+  if(!u)return;
+  const goldTrophies=_trophyData.filter(r=>r.best_accuracy>=90).length;
+  const unitsCompleted=_trophyData.length;
+  const totalScore=_trophyData.reduce((a,r)=>a+(r.best_score||0),0);
+  const unlocked=(goldTrophies>=3)||(unitsCompleted>=8)||(totalScore>=50000)||S.isTeacher;
+  if(!unlocked){
+    const pct=Math.max(
+      Math.min(100,Math.round(goldTrophies/3*100)),
+      Math.min(100,Math.round(unitsCompleted/8*100)),
+      Math.min(100,Math.round(totalScore/50000*100))
+    );
+    mount.innerHTML=`<div style="width:140px;background:rgba(13,10,8,.85);border:1px solid var(--border2);padding:8px 10px;opacity:.55" title="Complete more units to unlock the RPG">
+      <div style="font-family:var(--bebas);font-size:9px;letter-spacing:2px;color:var(--text3);margin-bottom:4px">🔒 Historian Ops</div>
+      <div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="height:100%;width:${pct}%;background:var(--amber2);border-radius:2px;transition:width .6s"></div></div>
+      <div style="font-family:var(--dm);font-size:8px;color:var(--text3);margin-top:4px">${pct}% to unlock</div>
+    </div>`;
+  } else {
+    const r=_trophyData.find(x=>x.unit_id===u.id);
+    const done=r&&r.best_accuracy>=60;
+    mount.innerHTML=`<div onclick="launchRPG()" style="width:140px;background:rgba(20,14,4,.92);border:1px solid var(--amber2);padding:8px 10px;cursor:pointer;position:relative;overflow:hidden;transition:all .2s;animation:rpgGlow 4s infinite" onmouseenter="this.style.borderColor='var(--gold3)';this.style.transform='translateY(-1px)'" onmouseleave="this.style.borderColor='var(--amber2)';this.style.transform='translateY(0)'">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);opacity:.6"></div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+        <span style="font-size:16px">&#x1F5C3;&#xFE0F;</span>
+        <div>
+          <div style="font-family:var(--bebas);font-size:9px;letter-spacing:2px;color:var(--gold2)">Historian Ops</div>
+          <div style="font-family:var(--bebas);font-size:13px;color:var(--gold);letter-spacing:.05em;line-height:1">RPG Campaign</div>
+        </div>
+      </div>
+      <div style="font-family:var(--bebas);font-size:10px;letter-spacing:.1em;display:inline-block;padding:4px 10px;background:rgba(200,160,32,.14);border:1px solid var(--gold2);color:var(--gold);width:100%;text-align:center;box-sizing:border-box">${done?'&#9654; CONTINUE':'&#9654; LAUNCH'}</div>
+    </div>`;
+  }
 }
 
 function initDrag(){const t=document.getElementById('tl-track');if(!t||t._d)return;t._d=true;let down=false,sx,sl;t.addEventListener('mousedown',e=>{down=true;sx=e.pageX-t.offsetLeft;sl=t.scrollLeft;t.style.cursor='grabbing';});window.addEventListener('mouseup',()=>{down=false;if(t)t.style.cursor='grab';});t.addEventListener('mousemove',e=>{if(!down)return;e.preventDefault();t.scrollLeft=sl-(e.pageX-t.offsetLeft-sx);});t.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){e.preventDefault();t.scrollLeft+=e.deltaY*1.2;}},{passive:false});let ts;t.addEventListener('touchstart',e=>{ts=e.touches[0].clientX;});t.addEventListener('touchmove',e=>{if(!ts)return;t.scrollLeft+=ts-e.touches[0].clientX;ts=e.touches[0].clientX;});}
@@ -1574,7 +1753,7 @@ async function renderTrophyRoom(){
   if(!S.isGuest&&S.name){const rows=await sfetch(`/rest/v1/ac_results?name=eq.${encodeURIComponent(S.name)}&select=*`);if(Array.isArray(rows))_trophyData=rows;}
   const rmap={};_trophyData.forEach(r=>rmap[r.unit_id]=r);
 
-  grid.innerHTML=UNIT_DATA.map((u,idx)=>{
+  grid.innerHTML=UNIT_DATA.filter(u=>!u.isCampaign).map((u,idx)=>{
     const r=rmap[u.id];
     const tier=r?calcTier(r.best_accuracy):'empty';
     const tc=TIER_COLOR[tier],te=TIER_EMOJI[tier],tl=TIER_LABEL[tier];
@@ -1776,7 +1955,7 @@ function refreshProfile(){
   document.getElementById('profile-avatar').innerHTML=ch.svg().replace(/width="\d+"/,'width="78"').replace(/height="\d+"/,'height="78"');
   document.getElementById('prof-name').textContent=S.isGuest?'👤 Guest':(S.name||'Historian');
   document.getElementById('prof-rank').textContent=S.isGuest?'Progress not saved':`${getRank()}${S.period?' · Period '+S.period:''}`;
-  const done=S.unitsCompleted.length,total=UNIT_DATA.length,pct=Math.round((done/total)*100);
+  const done=S.unitsCompleted.filter(id=>UNIT_DATA.find(u=>u.id===id&&!u.isCampaign)).length,total=UNIT_DATA.filter(u=>!u.isCampaign).length,pct=Math.round((done/total)*100);
   document.getElementById('prof-bar').style.width=pct+'%';document.getElementById('prof-bar-lbl').textContent=`${done} of ${total} units complete`;
   document.getElementById('ps-units').textContent=done;
   document.getElementById('ps-trophies').textContent=_trophyData.filter(r=>r.best_accuracy>=60).length;
