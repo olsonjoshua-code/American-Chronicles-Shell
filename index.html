@@ -1740,18 +1740,28 @@ function openPreview(uid){
 function closePreview(){document.getElementById('preview-panel').classList.remove('open');document.getElementById('pv-backdrop').style.display='none';document.querySelectorAll('.unit-card').forEach(c=>c.classList.remove('selected'));}
 // ── DECK ID MAP: hub unit id → flashcard deck id ──────
 const DECK_MAP={
-  // Units with flashcard decks — mapped to actual deck IDs in flashcards.html
-  'unit1'        :'unit1_civil_war_reconstruction',   // A House Divided
-  'unit4b'       :'unit4b_crash_recovery',            // Crash & Recovery / New Deal
-  'unit5a'       :'unit5a_wwii',                      // Arsenal of Democracy
-  'unit5b'       :'unit5b_early_cold_war',            // Iron Curtain / Cold War
-  'unit6'        :'unit7b_civil_rights_movement',     // Chronicles of Change / Civil Rights
-  'unit7a'       :'unit7a_governing_1960s',           // Camelot / Kennedy & Johnson
-  'unit7b'       :'unit9_vietnam_nixon',              // Napalm Dawn / Vietnam & Nixon
-  'unit8'        :'unit10_america_1980s_present',     // Modern America / Reagan–Present
-  'eoc_midterm'  :'midterm_review',                   // Midterm Checkpoint
-  // Units without decks yet — buttons won't show for these:
-  // unit2a, unit2b, unit3a, unit3b, unit4a
+  // Hub unit ID  ->  flashcard deck ID (matched by content, not number)
+  'unit1'          :'unit1_civil_war_reconstruction',   // A House Divided
+  'unit2a'         :'unit2a_boomtown',                  // Boomtown Nation
+  'unit2b'         :'unit2b_reform',                    // Age of Reform
+  'unit3a'         :'unit3a_empire_rising',             // Empire Rising
+  'unit3b'         :'unit3b_into_the_trenches',         // Into the Trenches
+  'unit4a'         :'unit4a_boom_or_bust',              // Boom or Bust
+  'unit4b'         :'unit4b_crash_recovery',            // Crash & Recovery / New Deal
+  'unit5a'         :'unit5a_wwii',                      // Arsenal of Democracy
+  'unit5b'         :'unit5b_early_cold_war',            // Iron Curtain / Cold War
+  'unit6'          :'unit7b_civil_rights_movement',     // Chronicles of Change / Civil Rights
+  'unit7a'         :'unit7a_governing_1960s',           // Camelot / Kennedy & Johnson
+  'unit7b'         :'unit9_vietnam_nixon',              // Napalm Dawn / Vietnam & Nixon
+  'unit8'          :'unit10_america_1980s_present',     // Modern America / Reagan–Present
+  // Theme decks
+  'theme_power'    :'theme_power',                      // Balance of Power
+  'theme_freedom'  :'theme_freedom_rights',             // Promise of Liberty
+  'theme_economy'  :'theme_economy_work',               // Engines of Change
+  'theme_conflict' :'theme_conflict_change',            // Conflict & Change
+  'theme_identity' :'theme_american_identity',          // We the People
+  // Review decks
+  'eoc_midterm'    :'midterm_review',                   // Midterm Checkpoint
 };
 const FC_BASE='https://olsonjoshua-code.github.io/U.S.History_Flashcards/';
 
