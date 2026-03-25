@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Iron and Gold — Unit 2A: The Gilded Age and Industrial America</title>
+<title>Age of Reform — Unit 2B: The Progressive Era</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#080a0c;--bg2:#0e1014;--bg3:#14161c;--panel:#181a22;
-  --border:#202430;--border2:#2c3040;
-  --gold:#b87830;--gold2:#906018;--gold3:#d89840;
-  --red:#7a1818;--red2:#a82828;
-  --green:#1a5028;--green2:#287a3a;
-  --teal:#106050;--teal2:#189078;
-  --blue:#182040;--blue2:#283870;
-  --text:#e0dcd0;--text2:#908878;--text3:#505048;--cream:#f0ead8;
+  --bg:#0f0a0a;--bg2:#191010;--bg3:#211414;--panel:#271616;
+  --border:#301a1a;--border2:#402020;
+  --gold:#c87060;--gold2:#a05040;--gold3:#e89060;
+  --red:#8b2020;--red2:#b03030;
+  --green:#1a5a38;--green2:#2a7a50;
+  --teal:#186858;--teal2:#207868;
+  --blue:#1a2850;--blue2:#283878;
+  --text:#f0e0d8;--text2:#b09088;--text3:#806058;--cream:#f8ece8;
   --bebas:'Bebas Neue',sans-serif;
   --playfair:'Playfair Display',serif;
   --crimson:'Crimson Text',serif;
@@ -24,14 +24,14 @@
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:var(--crimson);min-height:100vh;overflow-x:hidden;
   background-image:
-    radial-gradient(ellipse at 50% 0%,   rgba(120,80,20,.22)  0%,  transparent 60%),
-    radial-gradient(ellipse at 15% 70%,  rgba(80, 50,10,.14)  0%,  transparent 55%),
-    radial-gradient(ellipse at 85% 85%,  rgba(40, 30, 8,.12)  0%,  transparent 50%),
-    linear-gradient(175deg, #0c0e12 0%, #090a0f 40%, #07080c 100%);}
-/* Industrial gear watermark (Gilded Age) */
+    radial-gradient(ellipse at 50% 0%,   rgba(160,60,40,.28)  0%,  transparent 60%),
+    radial-gradient(ellipse at 15% 60%,  rgba(120,40,25,.18)  0%,  transparent 55%),
+    radial-gradient(ellipse at 85% 85%,  rgba( 80,25,15,.15)  0%,  transparent 50%),
+    linear-gradient(175deg, #180c0a 0%, #120806 40%, #0e0604 100%);}
+/* Newspaper / printing press watermark (Progressive Era) */
 body::after{content:'';position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' width='400' height='400'%3E%3Cg transform='translate(200,200)' opacity='0.09' stroke='rgba(184,120,48,1)' fill='none'%3E%3Ccircle cx='0' cy='0' r='80' stroke-width='16'/%3E%3Ccircle cx='0' cy='0' r='30' stroke-width='8'/%3E%3Ccircle cx='0' cy='0' r='155' stroke-width='2' stroke-dasharray='6,8'/%3E%3Crect x='-8' y='-110' width='16' height='30' rx='3' fill='rgba(184,120,48,0.8)' stroke='none'/%3E%3Crect x='-8' y='80' width='16' height='30' rx='3' fill='rgba(184,120,48,0.8)' stroke='none'/%3E%3Crect x='-110' y='-8' width='30' height='16' rx='3' fill='rgba(184,120,48,0.8)' stroke='none'/%3E%3Crect x='80' y='-8' width='30' height='16' rx='3' fill='rgba(184,120,48,0.8)' stroke='none'/%3E%3Crect x='-8' y='-110' width='16' height='30' rx='3' transform='rotate(45)' fill='rgba(184,120,48,0.6)' stroke='none'/%3E%3Crect x='-8' y='80' width='16' height='30' rx='3' transform='rotate(45)' fill='rgba(184,120,48,0.6)' stroke='none'/%3E%3Crect x='-110' y='-8' width='30' height='16' rx='3' transform='rotate(45)' fill='rgba(184,120,48,0.6)' stroke='none'/%3E%3Crect x='80' y='-8' width='30' height='16' rx='3' transform='rotate(45)' fill='rgba(184,120,48,0.6)' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
-  background-size:500px 500px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' width='400' height='400'%3E%3Cg transform='translate(200,200)' opacity='0.09' fill='none' stroke='rgba(200,112,96,1)'%3E%3Crect x='-130' y='-160' width='260' height='320' rx='8' stroke-width='5'/%3E%3Crect x='-110' y='-140' width='220' height='35' rx='3' stroke-width='3'/%3E%3Cline x1='-110' y1='-88' x2='110' y2='-88' stroke-width='2'/%3E%3Cline x1='-110' y1='-65' x2='110' y2='-65' stroke-width='2'/%3E%3Cline x1='-110' y1='-42' x2='110' y2='-42' stroke-width='2'/%3E%3Cline x1='-110' y1='-19' x2='60' y2='-19' stroke-width='2'/%3E%3Cline x1='-110' y1='10' x2='110' y2='10' stroke-width='2'/%3E%3Cline x1='-110' y1='33' x2='110' y2='33' stroke-width='2'/%3E%3Cline x1='-110' y1='56' x2='80' y2='56' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:480px 480px;
   background-position:center center;
   background-repeat:no-repeat;
   pointer-events:none;z-index:0;opacity:1;}
@@ -514,18 +514,18 @@ body.hud-active #root{padding-top:68px;}
   </div>
 
   <!-- Unit title header -->
-  <div class="section-head" style="margin-top:4px;">Unit 2A — The Gilded Age and Industrial America</div>
+  <div class="section-head" style="margin-top:4px;">Unit 2B — The Progressive Era</div>
 
   <!-- Essential question -->
   <div class="eq-banner">
-    <strong>Essential Question:</strong> How did western expansion, industrial growth, labor conflict, and immigration transform American society in the decades after the Civil War — and who benefited, and who was left behind?
+    <strong>Essential Question:</strong> How did progressive reformers use journalism, legislation, and political organizing to expose and address the problems created by industrialization, urbanization, and political corruption?
   </div>
 
   <!-- Lesson / chapter cards — rendered by JS -->
   <div id="hub-chapters"></div>
 
   <!-- Divider -->
-  <div class="deco-divider"><span class="deco-divider-icon">⚙️</span></div>
+  <div class="deco-divider"><span class="deco-divider-icon">📰</span></div>
 
   <!-- Badges row — rendered by JS -->
   <div class="section-head" style="font-size:14px;">Badges</div>
@@ -559,7 +559,7 @@ body.hud-active #root{padding-top:68px;}
   <div class="q-context-pill">
     <div class="q-context-lesson" id="q-context-lesson">LESSON 38</div>
     <div class="q-context-sep"></div>
-    <div class="q-context-topic" id="q-context-topic">The Gilded Age</div>
+    <div class="q-context-topic" id="q-context-topic">A World Divided</div>
   </div>
 
   <!-- Momentum display -->
@@ -606,7 +606,7 @@ body.hud-active #root{padding-top:68px;}
     <div class="briefing-header">
       <div>
         <div class="briefing-eyebrow" id="briefing-eyebrow">LESSON 38 · MISSION BRIEFING</div>
-        <div class="briefing-title" id="briefing-title">The Gilded Age</div>
+        <div class="briefing-title" id="briefing-title">The Progressive Era</div>
       </div>
       <button class="briefing-close-btn" onclick="closeBriefing()">✕ Close</button>
     </div>
@@ -645,8 +645,8 @@ body.hud-active #root{padding-top:68px;}
 
     <!-- Trophy badge -->
     <div class="complete-badge" id="complete-badge">🏆</div>
-    <div class="complete-unit-lbl" id="complete-unit-lbl">UNIT 2A</div>
-    <div class="complete-lesson-title" id="complete-lesson-title">Iron and Gold</div>
+    <div class="complete-unit-lbl" id="complete-unit-lbl">UNIT 2B</div>
+    <div class="complete-lesson-title" id="complete-lesson-title">The Progressive Era</div>
     <div class="complete-tier" id="complete-tier" style="color:var(--gold)">GOLD — 90%</div>
 
     <!-- Stats row -->
@@ -681,7 +681,7 @@ body.hud-active #root{padding-top:68px;}
     <div class="complete-btn-group">
       <!-- Retry same lesson -->
       <button class="btn full" onclick="retryLesson()"><span>↺ Retry This Lesson</span></button>
-      <!-- Replay entire unit from Lesson 12 (always visible) -->
+      <!-- Replay entire unit from Lesson 16 (always visible) -->
       <button class="btn full" id="btn-replay-all" onclick="replayFromBeginning()" style="border-color:var(--gold2);color:var(--gold2);display:none;"><span>⟳ Replay Unit From Beginning</span></button>
       <!-- Return to unit hub -->
       <button class="btn full green" onclick="returnToUnitHub()"><span>← Return to Unit Hub</span></button>
@@ -721,8 +721,8 @@ body.hud-active #root{padding-top:68px;}
 
 <div id="login-gate">
   <div class="login-box">
-    <div class="login-logo">IRON AND<br>GOLD</div>
-    <div class="login-sub">Unit 2A — The Gilded Age and Industrial America</div>
+    <div class="login-logo">AGE OF<br>REFORM</div>
+    <div class="login-sub">Unit 2B — The Progressive Era</div>
 
     <div class="login-field">
       <label>Your Name</label>
@@ -801,7 +801,7 @@ body.hud-active #root{padding-top:68px;}
     <button class="overlay-close" onclick="document.getElementById('cardcoll-overlay').classList.remove('show')">CLOSE</button>
   </div>
   <div style="font-family:var(--crimson);font-size:15px;color:var(--text2);margin-bottom:16px;font-style:italic;">
-    Earn historical figure cards by completing lessons. Each card tells the story of a key Gilded Age figure.
+    Earn historical figure cards by completing lessons. Each card tells the story of a key The Progressive Era figure.
   </div>
   <div class="card-grid" id="cardcoll-grid"></div>
 </div>
@@ -813,11 +813,11 @@ body.hud-active #root{padding-top:68px;}
 // CONSTANTS & KEYS
 // ════════════════════════════════════════════
 const SHELL_KEY   = 'ac_shell_state';
-const SAVE_KEY   = 'ironandgold_v1_save';
-const UNIT_ID     = 'unit2a';
+const SAVE_KEY   = 'ageofreform_v1_save';
+const UNIT_ID     = 'unit2b';
 
 // ── GOLD ECONOMY ──────────────────────────────────────
-// These are the canonical reward values for Unit 2A.
+// These are the canonical reward values for UNIT 2B.
 // All gold earned here flows into the shell's global wallet
 // and from there into the RPG. Adjust by lesson type below.
 //
@@ -875,433 +875,329 @@ const AC_HEADERS  = {'Content-Type':'application/json','apikey':AC_SUPA_KEY,'Aut
 const LESSONS = [
 
   // ==================================================
-  // LESSON 12 — Boomtown Frontier
+  // LESSON 16 — Uncovering Problems
   // ==================================================
   {
-    id: 'lesson12',
-    label: 'LESSON 12',
-    title: 'Boomtown Frontier',
-    sub: 'Change and Conflict in the American West · 1865-1900',
-    icon: '🐎',
+    id: 'lesson16',
+    label: 'LESSON 16',
+    title: 'Uncovering Problems',
+    sub: 'Problems at the Turn of the Century · 1900s',
+    icon: '📰',
     type: 'lesson',
     briefing: {
-      location: 'Change and Conflict in the American West',
-      date: '1865-1900',
-      role: 'frontier correspondent',
-      text: 'The American West is changing fast. Railroads, ranching, mining, and farming are drawing settlers and investors, but the same changes are producing conflict, environmental strain, and violent pressure on Indigenous nations. Your mission is to track how opportunity and conflict shaped the frontier during the late nineteenth century.',
-      tags: ['SS.912.A.3.1', 'SS.912.A.3.4']
+      location: 'Problems at the Turn of the Century',
+      date: '1900s',
+      role: 'investigative reporter',
+      text: 'Factories are booming, cities are growing, and wealth is rising fast, but reformers see serious danger beneath the surface. Crowded housing, machine politics, unsafe workplaces, environmental damage, and corporate power all raise questions about who benefits from modern America. Your task is to identify the major problems that Progressive reformers wanted the nation to face.',
+      tags: ['SS.912.A.3.9']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Boomtown Frontier', cards: ['Transcontinental Railroad', 'Homestead Act'] },
+    rewards: { badge: 'Uncovering Problems', cards: ['Ida Tarbell', 'Muckraker Press Pass'] },
     bank: [
       {
-        id: '2A-L12-Q1',
-        text: 'Why did the Homestead Act encourage many Americans to move west after the Civil War?',
-        choices: ['It offered settlers land if they would live on it and improve it over time.', 'It offered settlers land only if they worked first for railroad companies in eastern cities.', 'It offered settlers land mainly to wealthy investors who planned to keep it undeveloped.', 'It offered settlers land only after Congress ended farming and ranching on the Great Plains.'],
-        correctAnswer: 'It offered settlers land if they would live on it and improve it over time.',
-        explanation: 'The Homestead Act opened western land to many families who hoped to build farms and new lives.',
-        standard: 'SS.912.A.3.1'
+        id: '2B-L16-Q1',
+        text: 'Why did many Progressives see rapidly growing cities as places in urgent need of reform?',
+        choices: ['Overcrowding, poor sanitation, and weak housing standards created serious health and safety problems.', 'Overcrowding, poor sanitation, and weak housing standards had already been solved by city machines.', 'Overcrowding, poor sanitation, and weak housing standards mainly affected wealthy suburban communities.', 'Overcrowding, poor sanitation, and weak housing standards mattered little beside foreign policy debates.'],
+        correctAnswer: 'Overcrowding, poor sanitation, and weak housing standards created serious health and safety problems.',
+        explanation: 'Rapid urban growth often outpaced city services, leaving many working-class families in unhealthy and unsafe conditions.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L12-Q2',
-        text: 'Why were railroads so important to the development of the American West?',
-        choices: ['They linked western farms, mines, and towns to national markets and sped migration.', 'They linked western farms, mines, and towns only after cattle ranching had already disappeared.', 'They linked western farms, mines, and towns mainly by reducing the need for trade and travel.', 'They linked western farms, mines, and towns while keeping western settlement away from eastern industry.'],
-        correctAnswer: 'They linked western farms, mines, and towns to national markets and sped migration.',
-        explanation: 'Railroads transformed the West by moving people, goods, and information across long distances much faster.',
-        standard: 'SS.912.A.3.4'
+        id: '2B-L16-Q2',
+        text: 'Why were tenement buildings often criticized by reformers?',
+        choices: ['They packed many families into cramped, poorly ventilated spaces with limited light and sanitation.', 'They packed many families into cramped, poorly ventilated spaces but offered unusually high safety standards.', 'They packed many families into cramped, poorly ventilated spaces mostly in rural farming communities.', 'They packed many families into cramped, poorly ventilated spaces only after zoning laws improved housing.'],
+        correctAnswer: 'They packed many families into cramped, poorly ventilated spaces with limited light and sanitation.',
+        explanation: 'Tenements became symbols of urban poverty because they exposed how little protection many industrial workers had.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L12-Q3',
-        text: 'Why did cattle ranching become such an important part of the western economy?',
-        choices: ['Open grasslands and rail access made it possible to raise cattle and ship beef eastward.', 'Open grasslands and rail access made it possible only after homesteaders abandoned farming entirely.', 'Open grasslands and rail access made it possible mainly because the federal government banned mining.', 'Open grasslands and rail access made it possible after Native nations regained control of rail lines.'],
-        correctAnswer: 'Open grasslands and rail access made it possible to raise cattle and ship beef eastward.',
-        explanation: 'The open range and expanding rail network helped turn cattle into a major western industry.',
-        standard: 'SS.912.A.3.1'
+        id: '2B-L16-Q3',
+        text: 'What was the main criticism of urban political machines?',
+        choices: ['They exchanged favors and jobs for votes while encouraging corruption and blocking honest government.', 'They exchanged favors and jobs for votes while expanding direct democracy and reducing corruption.', 'They exchanged favors and jobs for votes mainly to protect civil service reform from party bosses.', 'They exchanged favors and jobs for votes only in western territories without major immigrant populations.'],
+        correctAnswer: 'They exchanged favors and jobs for votes while encouraging corruption and blocking honest government.',
+        explanation: 'Machine politics gave assistance to some city residents, but reformers argued that it undermined fairness and accountability.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L12-Q4',
-        text: 'What challenge did many farmers face on the Great Plains in the late nineteenth century?',
-        choices: ['They struggled with drought, debt, and distance from markets even when harvests were strong.', 'They struggled with drought, debt, and distance from markets only after railroads disappeared.', 'They struggled with drought, debt, and distance from markets mainly because land was too cheap.', 'They struggled with drought, debt, and distance from markets after federal price controls ended inflation.'],
-        correctAnswer: 'They struggled with drought, debt, and distance from markets even when harvests were strong.',
-        explanation: 'Many western farmers depended on uncertain weather and faced high costs for shipping, equipment, and loans.',
-        standard: 'SS.912.A.3.1'
+        id: '2B-L16-Q4',
+        text: 'What role did muckrakers play in the Progressive Era?',
+        choices: ['They investigated corruption and social abuse, helping persuade the public that reform was necessary.', 'They investigated corruption and social abuse mainly to defend monopolies from new federal regulation.', 'They investigated corruption and social abuse only after Congress banned sensational magazine reporting.', 'They investigated corruption and social abuse mostly to promote isolation from immigration and world trade.'],
+        correctAnswer: 'They investigated corruption and social abuse, helping persuade the public that reform was necessary.',
+        explanation: 'Muckrakers used journalism to expose problems that many citizens either ignored or did not fully understand.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L12-Q5',
-        text: 'How did barbed wire change life on the western frontier?',
-        choices: ['It fenced land more effectively, helping end the open range and increasing conflict over property.', 'It fenced land more effectively, helping end the open range by removing all need for railroads.', 'It fenced land more effectively, helping end the open range only after mining towns emptied out.', 'It fenced land more effectively, helping end the open range while restoring buffalo herds immediately.'],
-        correctAnswer: 'It fenced land more effectively, helping end the open range and increasing conflict over property.',
-        explanation: 'Barbed wire made private control of land easier and contributed to clashes among ranchers, farmers, and others.',
-        standard: 'SS.912.A.3.1 · SS.912.A.3.4'
+        id: '2B-L16-Q5',
+        text: 'Why were large trusts and monopolies a major target of reformers?',
+        choices: ['Many people feared they concentrated too much economic power and weakened competition and consumer choice.', 'Many people feared they concentrated too much economic power but always guaranteed fair wages and prices.', 'Many people feared they concentrated too much economic power only in agriculture rather than industry.', 'Many people feared they concentrated too much economic power because they opposed railroad expansion entirely.'],
+        correctAnswer: 'Many people feared they concentrated too much economic power and weakened competition and consumer choice.',
+        explanation: 'Progressives often argued that concentrated corporate power threatened both democracy and economic fairness.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L12-Q6',
-        text: 'Why did many Indigenous nations resist western expansion during this period?',
-        choices: ['Settlers, railroads, and the U.S. Army threatened their land, resources, and political independence.', 'Settlers, railroads, and the U.S. Army threatened their land only after tribal governments dissolved willingly.', 'Settlers, railroads, and the U.S. Army threatened their land mainly by promoting equal tribal sovereignty.', 'Settlers, railroads, and the U.S. Army threatened their land after mining and ranching had ended in the West.'],
-        correctAnswer: 'Settlers, railroads, and the U.S. Army threatened their land, resources, and political independence.',
-        explanation: 'Conflict in the West centered on who would control land, movement, and the future of Native communities.',
-        standard: 'SS.912.A.3.1'
+        id: '2B-L16-Q6',
+        text: 'Why did reformers push for stronger food and drug protections in the early 1900s?',
+        choices: ['Reports of unsanitary processing and misleading products convinced many Americans that regulation was needed.', 'Reports of unsanitary processing and misleading products convinced many Americans to end all factory inspection.', 'Reports of unsanitary processing and misleading products affected only imported goods, not American industry.', 'Reports of unsanitary processing and misleading products appeared after Progressive reform had already ended.'],
+        correctAnswer: 'Reports of unsanitary processing and misleading products convinced many Americans that regulation was needed.',
+        explanation: 'Public outrage over unsafe products helped turn consumer protection into a national reform issue.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L12-Q7',
-        text: 'Why was the destruction of the buffalo so devastating to Plains Indian life?',
-        choices: ['Buffalo were central to food, clothing, shelter, and the economic life of many Plains cultures.', 'Buffalo were central to food, clothing, shelter only after reservation farming had replaced hunting.', 'Buffalo were central to food, clothing, shelter mainly for eastern factory workers and urban migrants.', 'Buffalo were central to food, clothing, shelter once railroads stopped crossing the Great Plains.'],
-        correctAnswer: 'Buffalo were central to food, clothing, shelter, and the economic life of many Plains cultures.',
-        explanation: 'The near destruction of the buffalo undermined Indigenous independence as well as traditional ways of life.',
-        standard: 'SS.912.A.3.1'
+        id: '2B-L16-Q7',
+        text: 'Why did child labor become such a visible issue for Progressives?',
+        choices: ['Children often worked long hours for low pay in dangerous conditions that limited their education.', 'Children often worked long hours for low pay, but reformers believed that schooling was unnecessary.', 'Children often worked long hours for low pay mostly in federal office jobs rather than factories.', 'Children often worked long hours for low pay only after labor unions had already won major protections.'],
+        correctAnswer: 'Children often worked long hours for low pay in dangerous conditions that limited their education.',
+        explanation: 'Reformers saw child labor as both a moral problem and a sign that industrial society needed stronger protections.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L12-Q8',
-        text: 'What was the goal of the Dawes Act of 1887?',
-        choices: ['It aimed to assimilate Native Americans by dividing tribal lands into individual allotments.', 'It aimed to assimilate Native Americans by restoring collective ownership of all reservation land.', 'It aimed to assimilate Native Americans mainly by returning the Black Hills to Sioux control.', 'It aimed to assimilate Native Americans only after the federal government abandoned boarding schools.'],
-        correctAnswer: 'It aimed to assimilate Native Americans by dividing tribal lands into individual allotments.',
-        explanation: 'The Dawes Act weakened tribal landholding and pushed assimilation, often with damaging long-term consequences.',
-        standard: 'SS.912.A.3.1'
+        id: '2B-L16-Q8',
+        text: 'Why did conservation become part of the Progressive reform agenda?',
+        choices: ['Many Americans worried that forests, land, and natural resources were being wasted too quickly.', 'Many Americans worried that forests, land, and natural resources were being preserved too aggressively.', 'Many Americans worried that forests, land, and natural resources should be controlled only by city machines.', 'Many Americans worried that forests, land, and natural resources mattered less than tariff policy alone.'],
+        correctAnswer: 'Many Americans worried that forests, land, and natural resources were being wasted too quickly.',
+        explanation: 'Progressive conservationists believed government should manage resources more responsibly for the public good.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L12-Q9',
-        text: 'Why did farmers’ protest movements gain support in the late nineteenth century?',
-        choices: ['Many farmers felt trapped by debt, low crop prices, and high shipping or storage costs.', 'Many farmers felt trapped by debt only after the federal government canceled railroad regulation entirely.', 'Many farmers felt trapped by debt mainly because industrial wages were rising too quickly in cities.', 'Many farmers felt trapped by debt after homesteading ended and western settlement stopped growing.'],
-        correctAnswer: 'Many farmers felt trapped by debt, low crop prices, and high shipping or storage costs.',
-        explanation: 'Agrarian protest reflected the economic pressures facing farmers in a rapidly changing national economy.',
-        standard: 'SS.912.A.3.1'
+        id: '2B-L16-Q9',
+        text: 'What larger concern connected many Progressive complaints about labor, housing, and politics?',
+        choices: ['Reformers believed industrial society had produced deep inequality that government could no longer ignore.', 'Reformers believed industrial society had produced deep inequality, but private charities had solved it.', 'Reformers believed industrial society had produced deep inequality only in the South and not northern cities.', 'Reformers believed industrial society had produced deep inequality because voters had too much influence already.'],
+        correctAnswer: 'Reformers believed industrial society had produced deep inequality that government could no longer ignore.',
+        explanation: 'Progressivism grew from the belief that modern industrial life had created problems too large for individuals alone to fix.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L12-Q10',
-        text: 'What best summarizes change and conflict in the American West during the Gilded Age?',
-        choices: ['New opportunities in farming, ranching, mining, and railroads came with intense competition and displacement.', 'New opportunities in farming, ranching, mining, and railroads ended conflict by satisfying every group equally.', 'New opportunities in farming, ranching, mining, and railroads mattered little beside eastern political reform.', 'New opportunities in farming, ranching, mining, and railroads appeared only after western settlement slowed.'],
-        correctAnswer: 'New opportunities in farming, ranching, mining, and railroads came with intense competition and displacement.',
-        explanation: 'The West offered promise, but it also produced conflict over land, labor, resources, and sovereignty.',
-        standard: 'SS.912.A.3.1 · SS.912.A.3.4'
+        id: '2B-L16-Q10',
+        text: 'What best summarizes the lesson of problems at the turn of the century?',
+        choices: ['Rapid industrial growth created serious social and political problems that inspired demands for reform.', 'Rapid industrial growth created serious social and political problems that ended interest in reform.', 'Rapid industrial growth created serious social and political problems only in foreign colonies, not America.', 'Rapid industrial growth created serious social and political problems that city bosses solved permanently.'],
+        correctAnswer: 'Rapid industrial growth created serious social and political problems that inspired demands for reform.',
+        explanation: 'The first stage of the Progressive Era was recognizing that economic growth had produced major costs as well as benefits.',
+        standard: 'SS.912.A.3.9'
       },
     ]
   },
 
   // ==================================================
-  // LESSON 13 — Age of Innovation
+  // LESSON 17 — The Progressives Respond
   // ==================================================
   {
-    id: 'lesson13',
-    label: 'LESSON 13',
-    title: 'Age of Innovation',
-    sub: 'Industry, Technology, and Big Business · 1870s-1900s',
-    icon: '💡',
+    id: 'lesson17',
+    label: 'LESSON 17',
+    title: 'The Progressives Respond',
+    sub: 'Reform Movements in Action · 1900s-1910s',
+    icon: '⚖️',
     type: 'lesson',
     briefing: {
-      location: 'Industry, Technology, and Big Business',
-      date: '1870s-1900s',
-      role: 'industrial analyst',
-      text: 'Factories, inventions, railroads, and corporate empires are reshaping the United States. Steel, oil, electricity, and new business practices are creating extraordinary wealth, but they are also concentrating power in the hands of a few industrial leaders. This lesson follows the rise of industrial America and the systems that supported it.',
-      tags: ['SS.912.A.3.2', 'SS.912.A.3.4', 'SS.912.A.3.5']
+      location: 'Reform Movements in Action',
+      date: '1900s-1910s',
+      role: 'settlement house organizer',
+      text: 'Once reformers identified the problems of modern America, they moved to action. Journalists exposed abuse, settlement workers served immigrant neighborhoods, labor activists pushed for safer jobs, suffragists demanded political power, and new democratic reforms challenged old party machines. This mission focuses on how Progressives tried to respond before reform moved fully onto the national stage.',
+      tags: ['SS.912.A.3.9', 'SS.912.A.3.10']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Age of Innovation', cards: ['Bessemer Steel', 'Thomas Edison'] },
+    rewards: { badge: 'The Progressives Respond', cards: ['Jane Addams', 'NAACP Charter'] },
     bank: [
       {
-        id: '2A-L13-Q1',
-        text: 'Why did industrial production expand so rapidly in the United States during the late nineteenth century?',
-        choices: ['Abundant resources, investment capital, new technology, and rail networks helped industry grow quickly.', 'Abundant resources, investment capital, new technology, and rail networks mattered only after 1910.', 'Abundant resources, investment capital, new technology, and rail networks reduced the need for factories.', 'Abundant resources, investment capital, new technology, and rail networks weakened national markets overall.'],
-        correctAnswer: 'Abundant resources, investment capital, new technology, and rail networks helped industry grow quickly.',
-        explanation: 'Industrial growth depended on more than one factor, including materials, transportation, labor, and financing.',
-        standard: 'SS.912.A.3.2'
+        id: '2B-L17-Q1',
+        text: 'What was the main goal of settlement houses such as Hull House?',
+        choices: ['They offered services and education in poor neighborhoods while helping immigrants adjust to city life.', 'They offered services and education in poor neighborhoods mainly to expand party-machine control of elections.', 'They offered services and education in poor neighborhoods only after immigrants moved back to rural areas.', 'They offered services and education in poor neighborhoods while opposing public health and child welfare laws.'],
+        correctAnswer: 'They offered services and education in poor neighborhoods while helping immigrants adjust to city life.',
+        explanation: 'Settlement houses combined direct service with reform activism and became central institutions of Progressive social work.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L13-Q2',
-        text: 'Why was the Bessemer process important to industrial America?',
-        choices: ['It made steel cheaper and more available for railroads, bridges, and tall buildings.', 'It made steel cheaper and more available only after iron had fully disappeared from construction.', 'It made steel cheaper and more available mainly by reducing the need for transportation networks.', 'It made steel cheaper and more available while weakening heavy industry across the entire nation.'],
-        correctAnswer: 'It made steel cheaper and more available for railroads, bridges, and tall buildings.',
-        explanation: 'Affordable steel supported rapid construction and became a foundation of modern industrial infrastructure.',
-        standard: 'SS.912.A.3.4'
+        id: '2B-L17-Q2',
+        text: 'What were Progressive labor reformers generally trying to accomplish?',
+        choices: ['They wanted shorter hours, safer workplaces, and stronger protections for women and children.', 'They wanted shorter hours, safer workplaces, and the end of all factory inspection requirements.', 'They wanted shorter hours, safer workplaces only for managers rather than industrial workers.', 'They wanted shorter hours, safer workplaces mainly by reducing voting rights for immigrants.'],
+        correctAnswer: 'They wanted shorter hours, safer workplaces, and stronger protections for women and children.',
+        explanation: 'Labor reformers focused on limiting abuse in industrial work and making government more responsive to working people.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L13-Q3',
-        text: 'How did Andrew Carnegie build power in the steel industry?',
-        choices: ['He used vertical integration to control multiple stages of production and lower business costs.', 'He used vertical integration only after the federal government nationalized the steel industry.', 'He used vertical integration mainly by purchasing competing oil refineries across several states.', 'He used vertical integration while arguing that railroads should never cooperate with steel producers.'],
-        correctAnswer: 'He used vertical integration to control multiple stages of production and lower business costs.',
-        explanation: 'By controlling raw materials, transport, and manufacturing, Carnegie reduced expenses and strengthened his company.',
-        standard: 'SS.912.A.3.4'
+        id: '2B-L17-Q3',
+        text: 'Why did Progressives support measures such as the initiative, referendum, and recall?',
+        choices: ['They believed these reforms would weaken party bosses and give voters more direct influence.', 'They believed these reforms would weaken party bosses by removing ordinary voters from politics entirely.', 'They believed these reforms would weaken party bosses only if senators were chosen by governors.', 'They believed these reforms would weaken party bosses mainly by reducing the power of local newspapers.'],
+        correctAnswer: 'They believed these reforms would weaken party bosses and give voters more direct influence.',
+        explanation: 'Direct democracy reforms were meant to make government more accountable and less controlled by political machines.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L13-Q4',
-        text: 'What was a key feature of John D. Rockefeller’s business strategy?',
-        choices: ['He used methods such as horizontal integration to dominate much of the oil refining business.', 'He used methods such as horizontal integration only after oil had stopped fueling modern industry.', 'He used methods such as horizontal integration mainly to break up his own company into smaller firms.', 'He used methods such as horizontal integration while refusing deals with railroads and pipelines.'],
-        correctAnswer: 'He used methods such as horizontal integration to dominate much of the oil refining business.',
-        explanation: 'Rockefeller expanded control by consolidating competitors and creating a powerful, coordinated business structure.',
-        standard: 'SS.912.A.3.4'
+        id: '2B-L17-Q4',
+        text: 'What problem was the direct primary supposed to address?',
+        choices: ['It reduced the power of party leaders by allowing voters to choose candidates more directly.', 'It reduced the power of party leaders by allowing state legislatures to appoint all candidates directly.', 'It reduced the power of party leaders mainly by replacing local elections with presidential appointments.', 'It reduced the power of party leaders only after national parties gave up using conventions.'],
+        correctAnswer: 'It reduced the power of party leaders by allowing voters to choose candidates more directly.',
+        explanation: 'Progressives hoped primaries would break the control that party insiders had over nominations.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L13-Q5',
-        text: 'How did inventions such as the electric light and the telephone affect daily life and business?',
-        choices: ['They changed how Americans worked, communicated, and organized both homes and industry.', 'They changed how Americans worked only after factories stopped depending on wage labor entirely.', 'They changed how Americans worked mainly by ending the need for cities and urban transportation.', 'They changed how Americans worked while reducing the speed of business communication nationwide.'],
-        correctAnswer: 'They changed how Americans worked, communicated, and organized both homes and industry.',
-        explanation: 'New inventions improved communication and productivity while reshaping modern life beyond the factory floor.',
-        standard: 'SS.912.A.3.5'
+        id: '2B-L17-Q5',
+        text: 'Why was the creation of the NAACP significant during the Progressive Era?',
+        choices: ['It showed that civil rights activism was part of reform, even though racism limited Progressive gains.', 'It showed that civil rights activism was part of reform only after segregation had already been ended.', 'It showed that civil rights activism was part of reform mainly by supporting literacy tests and poll taxes.', 'It showed that civil rights activism was part of reform while rejecting court challenges and legal strategy.'],
+        correctAnswer: 'It showed that civil rights activism was part of reform, even though racism limited Progressive gains.',
+        explanation: 'The NAACP represented a major organized push against segregation and injustice within an era that often failed Black Americans.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L13-Q6',
-        text: 'Why were railroads considered the backbone of the industrial economy?',
-        choices: ['They connected raw materials, factories, and consumers into a single national market.', 'They connected raw materials, factories, and consumers only after local markets had disappeared.', 'They connected raw materials, factories, and consumers mainly by replacing all need for shipping ports.', 'They connected raw materials, factories, and consumers while reducing the importance of time schedules.'],
-        correctAnswer: 'They connected raw materials, factories, and consumers into a single national market.',
-        explanation: 'Railroads tied together production, distribution, and consumption on a scale not previously possible.',
-        standard: 'SS.912.A.3.4'
+        id: '2B-L17-Q6',
+        text: 'Why did many Progressive women link suffrage to broader reform?',
+        choices: ['They argued that voting rights would help women push for education, health, labor, and family protections.', 'They argued that voting rights would help women withdraw from reform and leave politics to party bosses.', 'They argued that voting rights would help women defend child labor and oppose food safety laws.', 'They argued that voting rights would help women replace local government with settlement house committees.'],
+        correctAnswer: 'They argued that voting rights would help women push for education, health, labor, and family protections.',
+        explanation: 'For many suffragists, the vote was not just a right in itself but a tool for wider social reform.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L13-Q7',
-        text: 'What did supporters of laissez-faire economics generally argue during the Gilded Age?',
-        choices: ['Government should interfere as little as possible in business and let competition shape the market.', 'Government should interfere as little as possible only after all trusts had been placed under public ownership.', 'Government should interfere as little as possible mainly by setting national wages for every factory.', 'Government should interfere as little as possible while regulating every railroad fare and steel price.'],
-        correctAnswer: 'Government should interfere as little as possible in business and let competition shape the market.',
-        explanation: 'Many industrial leaders and their allies argued that markets worked best with limited government involvement.',
-        standard: 'SS.912.A.3.2'
+        id: '2B-L17-Q7',
+        text: 'Why did some reformers support the temperance or prohibition movement?',
+        choices: ['They believed limiting alcohol would reduce crime, protect families, and improve workplace discipline.', 'They believed limiting alcohol would reduce crime only by ending women’s activism in public life.', 'They believed limiting alcohol would reduce crime mainly by restoring machine politics in large cities.', 'They believed limiting alcohol would reduce crime after federal labor laws had already solved urban poverty.'],
+        correctAnswer: 'They believed limiting alcohol would reduce crime, protect families, and improve workplace discipline.',
+        explanation: 'Temperance reformers treated alcohol as both a moral issue and a social problem connected to poverty and violence.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L13-Q8',
-        text: 'Why were industrial leaders sometimes called both ‘captains of industry’ and ‘robber barons’?',
-        choices: ['They helped build the modern economy, but critics said they gained power through harsh and unfair methods.', 'They helped build the modern economy only after labor unions had gained full control of wages and hours.', 'They helped build the modern economy mainly by avoiding profit and donating every company to the public.', 'They helped build the modern economy while refusing to use railroads, trusts, or national markets.'],
-        correctAnswer: 'They helped build the modern economy, but critics said they gained power through harsh and unfair methods.',
-        explanation: 'The debate reflects the mixed legacy of industrialization: innovation and growth alongside exploitation and concentration of power.',
-        standard: 'SS.912.A.3.2 · SS.912.A.3.4'
+        id: '2B-L17-Q8',
+        text: 'What was the broader importance of state-level reform associated with leaders like Robert La Follette?',
+        choices: ['It showed that states could experiment with regulation and democracy before reforms spread nationally.', 'It showed that states could experiment with regulation only after the federal government abolished parties.', 'It showed that states could experiment with regulation mainly by ending antitrust law enforcement.', 'It showed that states could experiment with regulation while eliminating public education and tax reform.'],
+        correctAnswer: 'It showed that states could experiment with regulation and democracy before reforms spread nationally.',
+        explanation: 'Progressive reforms often began in states and cities, where new ideas could be tested before wider adoption.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L13-Q9',
-        text: 'Why did corporations and trusts become more common in the late nineteenth century?',
-        choices: ['They made it easier to gather capital, expand operations, and reduce competition across markets.', 'They made it easier to gather capital only after small local firms disappeared from the economy.', 'They made it easier to gather capital mainly by preventing managers from coordinating production decisions.', 'They made it easier to gather capital while weakening the power of every major industrial firm.'],
-        correctAnswer: 'They made it easier to gather capital, expand operations, and reduce competition across markets.',
-        explanation: 'Large business structures helped firms grow across regions and industries, often with greater efficiency and control.',
-        standard: 'SS.912.A.3.4'
+        id: '2B-L17-Q9',
+        text: 'Why did Progressives support city reforms such as commissions and city-manager systems?',
+        choices: ['They hoped professional administration would reduce corruption and make local government more efficient.', 'They hoped professional administration would reduce corruption by returning control to neighborhood party bosses.', 'They hoped professional administration would reduce corruption mainly by ending public sanitation services.', 'They hoped professional administration would reduce corruption only in western mining towns and nowhere else.'],
+        correctAnswer: 'They hoped professional administration would reduce corruption and make local government more efficient.',
+        explanation: 'Municipal reformers believed trained administrators and clearer structures could weaken machine politics.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-L13-Q10',
-        text: 'What best summarizes the Age of Innovation during the Gilded Age?',
-        choices: ['New technology and business systems created enormous growth while concentrating wealth and corporate power.', 'New technology and business systems created enormous growth only after labor conflict had largely disappeared.', 'New technology and business systems created enormous growth mainly by ending nationwide transportation networks.', 'New technology and business systems created enormous growth while making government regulation unnecessary.'],
-        correctAnswer: 'New technology and business systems created enormous growth while concentrating wealth and corporate power.',
-        explanation: 'Industrial America was defined by innovation, but also by the emergence of very large firms and major economic inequalities.',
-        standard: 'SS.912.A.3.2 · SS.912.A.3.4 · SS.912.A.3.5'
+        id: '2B-L17-Q10',
+        text: 'What idea tied together many Progressive responses to industrial-era problems?',
+        choices: ['Government should play a more active role in protecting the public and making democracy more responsive.', 'Government should play a more active role only in foreign policy and avoid domestic reform altogether.', 'Government should play a more active role by returning power to trusts and party machines.', 'Government should play a more active role mainly by reducing public participation in elections.'],
+        correctAnswer: 'Government should play a more active role in protecting the public and making democracy more responsive.',
+        explanation: 'Despite differences among reformers, many Progressives shared a belief that modern problems required more active public action.',
+        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
     ]
   },
 
   // ==================================================
-  // LESSON 14 — Labor Rising
-  // ==================================================
-  {
-    id: 'lesson14',
-    label: 'LESSON 14',
-    title: 'Labor Rising',
-    sub: 'Workers, Unions, and Industrial Conflict · 1870s-1890s',
-    icon: '✊',
-    type: 'lesson',
-    briefing: {
-      location: 'Workers, Unions, and Industrial Conflict',
-      date: '1870s-1890s',
-      role: 'labor organizer',
-      text: 'Industrial growth has created jobs, but it has also created exhausting hours, low pay, and dangerous conditions. Workers are forming unions, launching strikes, and demanding dignity in a system that often favors employers and the courts. Your task is to understand how labor responded to the inequalities of the Gilded Age.',
-      tags: ['SS.912.A.3.2', 'SS.912.A.3.4']
-    },
-    displayCount: 5,
-    goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Labor Rising', cards: ['Knights of Labor', 'American Federation of Labor'] },
-    bank: [
-      {
-        id: '2A-L14-Q1',
-        text: 'Why did many industrial workers become dissatisfied during the Gilded Age?',
-        choices: ['Long hours, low pay, dangerous workplaces, and little job security made factory life harsh.', 'Long hours, low pay, dangerous workplaces, and little job security mainly affected business owners.', 'Long hours, low pay, dangerous workplaces, and little job security had already been solved by law.', 'Long hours, low pay, dangerous workplaces, and little job security mattered only in farm communities.'],
-        correctAnswer: 'Long hours, low pay, dangerous workplaces, and little job security made factory life harsh.',
-        explanation: 'Industrial jobs offered wages, but many workers faced constant risks and had little power to improve conditions.',
-        standard: 'SS.912.A.3.2'
-      },
-      {
-        id: '2A-L14-Q2',
-        text: 'What made the Knights of Labor different from many earlier labor groups?',
-        choices: ['They welcomed a broad membership and pushed for wide social and workplace reforms.', 'They welcomed a broad membership only after skilled workers had left every major union.', 'They welcomed a broad membership mainly to defend child labor and oppose shorter workdays.', 'They welcomed a broad membership while rejecting any involvement in strikes or boycotts.'],
-        correctAnswer: 'They welcomed a broad membership and pushed for wide social and workplace reforms.',
-        explanation: 'The Knights aimed to unite many kinds of workers around broad reform goals, not just immediate wage gains.',
-        standard: 'SS.912.A.3.2'
-      },
-      {
-        id: '2A-L14-Q3',
-        text: 'How did the American Federation of Labor usually differ from the Knights of Labor?',
-        choices: ['It focused more on skilled workers and practical goals such as wages, hours, and conditions.', 'It focused more on skilled workers only after the federal government banned collective bargaining.', 'It focused more on skilled workers mainly by demanding public ownership of every major industry.', 'It focused more on skilled workers while refusing to negotiate with employers over any issue.'],
-        correctAnswer: 'It focused more on skilled workers and practical goals such as wages, hours, and conditions.',
-        explanation: 'The AFL was generally more limited in membership and more focused on direct workplace improvements.',
-        standard: 'SS.912.A.3.2'
-      },
-      {
-        id: '2A-L14-Q4',
-        text: 'Why was collective bargaining important to labor unions?',
-        choices: ['It let workers act together so employers had a harder time ignoring their demands.', 'It let workers act together only after courts had guaranteed unions complete legal protection.', 'It let workers act together mainly by replacing strikes with corporate stock ownership.', 'It let workers act together while reducing pressure for wages, safety, and shorter workdays.'],
-        correctAnswer: 'It let workers act together so employers had a harder time ignoring their demands.',
-        explanation: 'Workers had more leverage as a group than as isolated individuals negotiating one by one.',
-        standard: 'SS.912.A.3.2'
-      },
-      {
-        id: '2A-L14-Q5',
-        text: 'Why did the Haymarket affair damage the labor movement’s public image?',
-        choices: ['Violence at the rally led many Americans to associate unions with radicalism and disorder.', 'Violence at the rally led many Americans to associate unions only with farm protest in the West.', 'Violence at the rally led many Americans to support immediate federal recognition of every union.', 'Violence at the rally led many Americans mainly to blame railroad companies for low crop prices.'],
-        correctAnswer: 'Violence at the rally led many Americans to associate unions with radicalism and disorder.',
-        explanation: 'The bombing and its aftermath hurt organized labor by turning some public opinion against union activism.',
-        standard: 'SS.912.A.3.2'
-      },
-      {
-        id: '2A-L14-Q6',
-        text: 'What did the Homestead and Pullman strikes reveal about labor conflict in industrial America?',
-        choices: ['Employers and government forces often had the power to defeat strikes and weaken unions.', 'Employers and government forces often had the power only after unions gained total control of factories.', 'Employers and government forces often had the power mainly because workers opposed national unions.', 'Employers and government forces often had the power while refusing any help from courts or troops.'],
-        correctAnswer: 'Employers and government forces often had the power to defeat strikes and weaken unions.',
-        explanation: 'Major strikes showed how difficult it was for workers to succeed when corporations and government acted together.',
-        standard: 'SS.912.A.3.2 · SS.912.A.3.4'
-      },
-      {
-        id: '2A-L14-Q7',
-        text: 'Why did many workers believe the government sided with business during major strikes?',
-        choices: ['Courts, injunctions, and federal troops were often used against labor action rather than against employers.', 'Courts, injunctions, and federal troops were often used only after labor had already won every dispute.', 'Courts, injunctions, and federal troops were often used mainly to require corporations to share ownership.', 'Courts, injunctions, and federal troops were often used while banning management from hiring replacements.'],
-        correctAnswer: 'Courts, injunctions, and federal troops were often used against labor action rather than against employers.',
-        explanation: 'Many Gilded Age workers viewed government as protecting property and business stability over labor rights.',
-        standard: 'SS.912.A.3.2'
-      },
-      {
-        id: '2A-L14-Q8',
-        text: 'Why was it difficult for unions to organize all industrial workers successfully?',
-        choices: ['Workers were divided by skill, ethnicity, and job insecurity while employers fought organization aggressively.', 'Workers were divided by skill, ethnicity, and job insecurity only after unions stopped demanding better wages.', 'Workers were divided by skill, ethnicity, and job insecurity mainly because conditions were already improving quickly.', 'Workers were divided by skill, ethnicity, and job insecurity while employers supported nationwide unionization.'],
-        correctAnswer: 'Workers were divided by skill, ethnicity, and job insecurity while employers fought organization aggressively.',
-        explanation: 'Economic insecurity and social divisions made solidarity difficult, especially when employers used blacklists and strikebreakers.',
-        standard: 'SS.912.A.3.2'
-      },
-      {
-        id: '2A-L14-Q9',
-        text: 'What demand best captures the broader goals of many labor reformers during this era?',
-        choices: ['They wanted dignity at work through safer conditions, fairer pay, and more control over hours.', 'They wanted dignity at work only after the government dissolved every large corporation in the country.', 'They wanted dignity at work mainly by ending immigration and closing factories in major cities.', 'They wanted dignity at work while rejecting wage increases and workplace safety laws.'],
-        correctAnswer: 'They wanted dignity at work through safer conditions, fairer pay, and more control over hours.',
-        explanation: 'Labor protest was not only about wages, but also about respect, security, and the right to organize.',
-        standard: 'SS.912.A.3.2'
-      },
-      {
-        id: '2A-L14-Q10',
-        text: 'What best summarizes labor’s response to industrialism in the late nineteenth century?',
-        choices: ['Workers created unions and strikes to challenge a system that gave employers most of the power.', 'Workers created unions and strikes only after federal law had already secured equal treatment everywhere.', 'Workers created unions and strikes mainly to defend monopolies from reform and public criticism.', 'Workers created unions and strikes while supporting long hours and dangerous factory conditions.'],
-        correctAnswer: 'Workers created unions and strikes to challenge a system that gave employers most of the power.',
-        explanation: 'Labor activism grew because industrial workers felt that the rewards of economic growth were not being shared fairly.',
-        standard: 'SS.912.A.3.2 · SS.912.A.3.4'
-      },
-    ]
-  },
-
-  // ==================================================
-  // UNIT 2A CAPSTONE — Through Ellis Island
+  // UNIT 2B CAPSTONE — Age of Reform
   // ==================================================
   {
     id: 'capstone',
-    label: 'UNIT 2A CAPSTONE',
-    title: 'Through Ellis Island',
-    sub: 'Immigration, Nativism, and Adaptation · 1880s-1910s',
-    icon: '🗽',
+    label: 'UNIT 2B CAPSTONE',
+    title: 'Age of Reform',
+    sub: 'Progressivism on the National Stage · Roosevelt, Taft, and Wilson',
+    icon: '🏛️',
     type: 'capstone',
     briefing: {
-      location: 'Immigration, Nativism, and Adaptation',
-      date: '1880s-1910s',
-      role: 'immigration inspector',
-      text: 'Millions of newcomers are arriving in the United States through ports such as Ellis Island and Angel Island. They bring languages, skills, hopes, and traditions, but they also face harsh work, crowded cities, and growing nativist hostility. This capstone asks you to connect immigration to the wider story of industrial America.',
-      tags: ['SS.912.A.3.6', 'SS.912.A.3.7']
+      location: 'Progressivism on the National Stage',
+      date: 'Roosevelt, Taft, and Wilson',
+      role: 'White House policy adviser',
+      text: 'Progressivism has reached Washington. Theodore Roosevelt, William Howard Taft, and Woodrow Wilson all claim to support reform, but they use different methods and produce different results. This capstone asks you to connect trust regulation, conservation, consumer protection, banking reform, and democratic change into one national reform story.',
+      tags: ['SS.912.A.3.10', 'SS.912.A.3.9']
     },
     displayCount: 5,
     goldRules: { perCorrect: 25, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Through Ellis Island', cards: ['Ellis Island', 'Angel Island'] },
+    rewards: { badge: 'Age of Reform', cards: ['Square Deal', 'Federal Reserve Act'] },
     bank: [
       {
-        id: '2A-CAP-Q1',
-        text: 'What is the best example of a push factor that encouraged immigration to the United States?',
-        choices: ['Poverty, persecution, or lack of opportunity pushed many people to leave their homelands.', 'Poverty, persecution, or lack of opportunity pushed many people only after they found rich farmland in America.', 'Poverty, persecution, or lack of opportunity pushed many people mainly because U.S. cities were uncrowded.', 'Poverty, persecution, or lack of opportunity pushed many people after immigration restrictions had already ended.'],
-        correctAnswer: 'Poverty, persecution, or lack of opportunity pushed many people to leave their homelands.',
-        explanation: 'Push factors are pressures in a person’s home country that make departure more likely.',
-        standard: 'SS.912.A.3.6'
+        id: '2B-CAP-Q1',
+        text: 'What did Theodore Roosevelt mean by the Square Deal?',
+        choices: ['Government should balance the interests of workers, consumers, and business instead of serving only the powerful.', 'Government should balance the interests of workers, consumers, and business by ending all federal regulation.', 'Government should balance the interests of workers, consumers, and business only by breaking up every corporation.', 'Government should balance the interests of workers, consumers, and business mainly through foreign expansion.'],
+        correctAnswer: 'Government should balance the interests of workers, consumers, and business instead of serving only the powerful.',
+        explanation: 'Roosevelt presented the Square Deal as a fairer approach to modern industrial society rather than a rejection of capitalism.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-CAP-Q2',
-        text: 'What was a common pull factor drawing immigrants to the United States during the Gilded Age?',
-        choices: ['Many people were attracted by jobs, higher wages, and the hope of greater opportunity.', 'Many people were attracted by jobs only after factories had stopped hiring foreign-born workers.', 'Many people were attracted by jobs mainly because the United States promised free land in all cities.', 'Many people were attracted by jobs after nativist groups opened the border without restrictions.'],
-        correctAnswer: 'Many people were attracted by jobs, higher wages, and the hope of greater opportunity.',
-        explanation: 'Pull factors are positive conditions in a destination that encourage people to migrate there.',
-        standard: 'SS.912.A.3.6'
+        id: '2B-CAP-Q2',
+        text: 'How did Roosevelt generally approach trusts and large corporations?',
+        choices: ['He accepted some big businesses but argued that harmful trusts should face stronger federal control.', 'He accepted some big businesses but argued that harmful trusts should be ignored entirely by government.', 'He accepted some big businesses only after Congress had outlawed all interstate commerce regulation.', 'He accepted some big businesses mainly by promising that antitrust law would never be enforced again.'],
+        correctAnswer: 'He accepted some big businesses but argued that harmful trusts should face stronger federal control.',
+        explanation: 'Roosevelt distinguished between corporations he considered useful and those he believed abused the public interest.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-CAP-Q3',
-        text: 'What was the main purpose of Ellis Island?',
-        choices: ['It processed many immigrants entering the United States through the port of New York.', 'It processed many immigrants entering the United States only after Angel Island had closed permanently.', 'It processed many immigrants entering the United States mainly through the southern land border.', 'It processed many immigrants entering the United States while restricting all arrivals from Europe.'],
-        correctAnswer: 'It processed many immigrants entering the United States through the port of New York.',
-        explanation: 'Ellis Island became the major inspection station for many immigrants arriving on the East Coast.',
-        standard: 'SS.912.A.3.6'
+        id: '2B-CAP-Q3',
+        text: 'Why were the Pure Food and Drug Act and Meat Inspection Act important Progressive reforms?',
+        choices: ['They expanded federal responsibility for protecting consumers from unsafe products and unsanitary practices.', 'They expanded federal responsibility for protecting consumers mainly by removing all factory inspectors.', 'They expanded federal responsibility for protecting consumers only in imported goods rather than American factories.', 'They expanded federal responsibility for protecting consumers after Progressives abandoned national reform.'],
+        correctAnswer: 'They expanded federal responsibility for protecting consumers from unsafe products and unsanitary practices.',
+        explanation: 'These laws showed that public outrage could translate into lasting federal oversight of industry.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-CAP-Q4',
-        text: 'How was Angel Island different from Ellis Island for many immigrants?',
-        choices: ['Immigrants there often faced longer detentions and tougher questioning, especially many Asian arrivals.', 'Immigrants there often faced longer detentions only after Asian exclusion laws had been removed.', 'Immigrants there often faced longer detentions mainly because western cities had no labor demand.', 'Immigrants there often faced longer detentions while all East Coast ports closed to inspection.'],
-        correctAnswer: 'Immigrants there often faced longer detentions and tougher questioning, especially many Asian arrivals.',
-        explanation: 'Angel Island reflected the greater suspicion and restrictions directed at many immigrants from Asia.',
-        standard: 'SS.912.A.3.6'
+        id: '2B-CAP-Q4',
+        text: 'What made Roosevelt such an important figure in conservation policy?',
+        choices: ['He used federal power to protect large areas of land and promote the careful management of resources.', 'He used federal power to protect large areas of land mainly by opening every reserve to private logging.', 'He used federal power to protect large areas of land only after ending national forests and park policy.', 'He used federal power to protect large areas of land while rejecting any scientific resource planning.'],
+        correctAnswer: 'He used federal power to protect large areas of land and promote the careful management of resources.',
+        explanation: 'Roosevelt helped make conservation a major national responsibility rather than a minor local concern.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-CAP-Q5',
-        text: 'Why did many immigrants settle in large American cities instead of moving far inland immediately?',
-        choices: ['Cities offered factory jobs, transportation links, and communities of people from similar backgrounds.', 'Cities offered factory jobs only after western farming had become impossible for all new arrivals.', 'Cities offered factory jobs mainly because rural areas banned immigrant families from buying land.', 'Cities offered factory jobs while making it easy to avoid crowded housing and low wages.'],
-        correctAnswer: 'Cities offered factory jobs, transportation links, and communities of people from similar backgrounds.',
-        explanation: 'Urban centers offered both work and support networks, even though life there could be difficult.',
-        standard: 'SS.912.A.3.7'
+        id: '2B-CAP-Q5',
+        text: 'Why did Taft’s presidency divide the Progressive movement?',
+        choices: ['Many reformers thought he was less energetic than Roosevelt and too closely tied to conservative Republicans.', 'Many reformers thought he was less energetic than Roosevelt because he ended antitrust enforcement completely.', 'Many reformers thought he was less energetic than Roosevelt only after he supported women’s suffrage first.', 'Many reformers thought he was less energetic than Roosevelt mainly because he opposed tariff policy entirely.'],
+        correctAnswer: 'Many reformers thought he was less energetic than Roosevelt and too closely tied to conservative Republicans.',
+        explanation: 'Taft backed some reforms, but disputes over tariffs, conservation, and party leadership damaged Progressive unity.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-CAP-Q6',
-        text: 'What does the term nativism mean in the context of late nineteenth-century immigration?',
-        choices: ['It refers to hostility toward immigrants and a belief that native-born Americans deserved special protection.', 'It refers to hostility toward immigrants only after labor unions welcomed all newcomers equally.', 'It refers to hostility toward immigrants mainly by encouraging faster naturalization and equal rights.', 'It refers to hostility toward immigrants while supporting open borders for every ethnic group.'],
-        correctAnswer: 'It refers to hostility toward immigrants and a belief that native-born Americans deserved special protection.',
-        explanation: 'Nativism shaped public opinion and often led to discrimination, exclusion, and restrictive laws.',
-        standard: 'SS.912.A.3.6 · SS.912.A.3.7'
+        id: '2B-CAP-Q6',
+        text: 'Why was the election of 1912 so important to the history of Progressivism?',
+        choices: ['It showed that reform politics had become national, even though Progressives disagreed about the best path.', 'It showed that reform politics had become national only because all major candidates opposed regulation.', 'It showed that reform politics had become national mainly after Roosevelt and Taft reunited their parties.', 'It showed that reform politics had become national once Americans rejected antitrust policy entirely.'],
+        correctAnswer: 'It showed that reform politics had become national, even though Progressives disagreed about the best path.',
+        explanation: 'The split between Roosevelt and Taft, and Wilson’s victory, revealed both the strength and the divisions of reform politics.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-CAP-Q7',
-        text: 'Why was the Chinese Exclusion Act historically important?',
-        choices: ['It sharply restricted immigration from China and showed how federal policy could target a specific group.', 'It sharply restricted immigration from China only after anti-Asian prejudice had largely disappeared.', 'It sharply restricted immigration from China mainly to encourage broader immigration from Japan and Korea.', 'It sharply restricted immigration from China while guaranteeing equal treatment for Asian immigrants already present.'],
-        correctAnswer: 'It sharply restricted immigration from China and showed how federal policy could target a specific group.',
-        explanation: 'The law reflected strong anti-Chinese sentiment and marked a major turn toward federal immigration restriction.',
-        standard: 'SS.912.A.3.6'
+        id: '2B-CAP-Q7',
+        text: 'What was Wilson’s New Freedom mainly concerned with?',
+        choices: ['It aimed to restore competition by reducing tariff barriers, reforming banking, and limiting monopoly power.', 'It aimed to restore competition by increasing tariff barriers and protecting monopoly power from regulation.', 'It aimed to restore competition only by transferring corporate regulation to state political machines.', 'It aimed to restore competition mainly through conservation policy without touching finance or trusts.'],
+        correctAnswer: 'It aimed to restore competition by reducing tariff barriers, reforming banking, and limiting monopoly power.',
+        explanation: 'Wilson’s program focused on making the economic system fairer by changing the rules of finance and competition.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-CAP-Q8',
-        text: 'Why were ethnic neighborhoods important to many immigrant communities?',
-        choices: ['They provided language support, familiar customs, and mutual aid in an unfamiliar new society.', 'They provided language support only after immigrants had fully abandoned old traditions and identities.', 'They provided language support mainly by separating workers from jobs and transportation routes.', 'They provided language support while preventing families from attending churches, schools, or markets.'],
-        correctAnswer: 'They provided language support, familiar customs, and mutual aid in an unfamiliar new society.',
-        explanation: 'Immigrant neighborhoods helped newcomers adjust while preserving parts of their cultural heritage.',
-        standard: 'SS.912.A.3.7'
+        id: '2B-CAP-Q8',
+        text: 'Why was the Federal Reserve Act a major reform?',
+        choices: ['It created a new banking system to stabilize the money supply and reduce the risk of financial panic.', 'It created a new banking system mainly to end all federal oversight of national credit and currency.', 'It created a new banking system only for farmers while leaving urban banks outside the system.', 'It created a new banking system after Wilson had abandoned Progressive economic reform altogether.'],
+        correctAnswer: 'It created a new banking system to stabilize the money supply and reduce the risk of financial panic.',
+        explanation: 'The Federal Reserve gave the federal government a stronger role in managing the nation’s financial system.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-CAP-Q9',
-        text: 'What did Americanization efforts usually try to do?',
-        choices: ['They encouraged immigrants to adopt English, new civic habits, and mainstream American customs.', 'They encouraged immigrants to adopt English only after the government guaranteed equal treatment everywhere.', 'They encouraged immigrants to adopt English mainly by ending public schools and citizenship classes.', 'They encouraged immigrants to adopt English while forbidding any contact with American workplaces.'],
-        correctAnswer: 'They encouraged immigrants to adopt English, new civic habits, and mainstream American customs.',
-        explanation: 'Americanization programs often aimed to speed assimilation, though many immigrants kept important parts of their original cultures.',
-        standard: 'SS.912.A.3.7'
+        id: '2B-CAP-Q9',
+        text: 'What was the purpose of the Clayton Antitrust Act and the Federal Trade Commission?',
+        choices: ['They strengthened the government’s ability to regulate unfair business practices and protect competition.', 'They strengthened the government’s ability to regulate unfair business practices by weakening all consumer laws.', 'They strengthened the government’s ability to regulate unfair business practices only in foreign corporations.', 'They strengthened the government’s ability to regulate unfair business practices after ending antitrust enforcement.'],
+        correctAnswer: 'They strengthened the government’s ability to regulate unfair business practices and protect competition.',
+        explanation: 'These reforms built on earlier antitrust efforts and gave federal agencies more tools to supervise business behavior.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-CAP-Q10',
-        text: 'What challenge did many immigrants face soon after arriving in American cities?',
-        choices: ['They often found low-paying work, crowded housing, and prejudice in daily life.', 'They often found low-paying work only after factories stopped using immigrant labor entirely.', 'They often found low-paying work mainly because cities offered no transportation or job networks.', 'They often found low-paying work while enjoying immediate political power and social acceptance.'],
-        correctAnswer: 'They often found low-paying work, crowded housing, and prejudice in daily life.',
-        explanation: 'Opportunity drew immigrants to cities, but those opportunities often came with hardship and discrimination.',
-        standard: 'SS.912.A.3.7'
+        id: '2B-CAP-Q10',
+        text: 'How did the Sixteenth and Seventeenth Amendments reflect Progressive goals?',
+        choices: ['They expanded federal capacity and democratic responsiveness through an income tax and direct election of senators.', 'They expanded federal capacity and democratic responsiveness by ending the direct election of senators.', 'They expanded federal capacity and democratic responsiveness only by banning labor unions and strikes.', 'They expanded federal capacity and democratic responsiveness mainly through new immigration restrictions.'],
+        correctAnswer: 'They expanded federal capacity and democratic responsiveness through an income tax and direct election of senators.',
+        explanation: 'Progressives often wanted both a more capable government and a more directly accountable political system.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-CAP-Q11',
-        text: 'How did immigrants contribute to industrial America during this period?',
-        choices: ['They supplied labor, built communities, and helped fuel the growth of cities and factories.', 'They supplied labor only after industrial leaders had stopped recruiting workers from abroad.', 'They supplied labor mainly by leaving urban industry and returning immediately to rural Europe.', 'They supplied labor while avoiding railroads, manufacturing, and construction across the country.'],
-        correctAnswer: 'They supplied labor, built communities, and helped fuel the growth of cities and factories.',
-        explanation: 'Immigrants were essential to the workforce and to the social development of many American cities.',
-        standard: 'SS.912.A.3.6 · SS.912.A.3.7'
+        id: '2B-CAP-Q11',
+        text: 'What was one major limitation of Progressivism even at its strongest national moment?',
+        choices: ['Many reforms left segregation, racial injustice, and inequality only partly challenged or untouched.', 'Many reforms left segregation, racial injustice, and inequality fully solved by federal action.', 'Many reforms left segregation, racial injustice, and inequality only in western territories, not the South.', 'Many reforms left segregation, racial injustice, and inequality because Progressives opposed all regulation.'],
+        correctAnswer: 'Many reforms left segregation, racial injustice, and inequality only partly challenged or untouched.',
+        explanation: 'Progressive reform produced important changes, but it did not overcome all forms of injustice in American life.',
+        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
       {
-        id: '2A-CAP-Q12',
-        text: 'What best ties together the immigrant experience in Gilded Age America?',
-        choices: ['Newcomers pursued opportunity while facing difficult work, crowded cities, and strong nativist resistance.', 'Newcomers pursued opportunity only after immigration restrictions and anti-immigrant feeling had vanished.', 'Newcomers pursued opportunity mainly by avoiding industrial jobs and large urban neighborhoods.', 'Newcomers pursued opportunity while entering an economy with little demand for labor or skills.'],
-        correctAnswer: 'Newcomers pursued opportunity while facing difficult work, crowded cities, and strong nativist resistance.',
-        explanation: 'Immigration brought hope and upward mobility for many families, but it also involved hardship, adaptation, and exclusion.',
-        standard: 'SS.912.A.3.6 · SS.912.A.3.7'
+        id: '2B-CAP-Q12',
+        text: 'What best ties together the national stage of the Progressive Era?',
+        choices: ['Reform moved from local activism to federal action as presidents and Congress used government more aggressively.', 'Reform moved from local activism to federal action only after presidents gave up trust regulation and conservation.', 'Reform moved from local activism to federal action mainly by restoring power to political machines and bosses.', 'Reform moved from local activism to federal action while abandoning concerns about workers and consumers.'],
+        correctAnswer: 'Reform moved from local activism to federal action as presidents and Congress used government more aggressively.',
+        explanation: 'The capstone of the era was the shift from identifying problems to using national institutions to address them.',
+        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
     ]
   },
@@ -1313,184 +1209,185 @@ const LESSONS = [
     id: 'eoc',
     label: 'EOC REVIEW',
     title: 'EOC Practice Quiz',
-    sub: 'Gilded Age and Industrial America Review',
+    sub: 'Progressive Era Review',
     icon: '📋',
     type: 'eoc',
     briefing: {
-      location: 'Gilded Age and Industrial America Review',
+      location: 'Progressive Era Review',
       date: '',
       role: 'state exam coach',
-      text: 'This review mixes the full unit together. Expect questions about the West, industrial growth, big business, labor conflict, immigration, and nativism. Focus on how each part of the Gilded Age connected to the others instead of treating them as separate stories.',
-      tags: ['SS.912.A.3.1', 'SS.912.A.3.4', 'SS.912.A.3.2', 'SS.912.A.3.5', 'SS.912.A.3.6']
+      text: 'This review covers the full Progressive Era arc. You will need to connect the problems reformers identified, the organizations and activists who responded, and the national reforms carried out under Roosevelt, Taft, and Wilson. Watch for themes of regulation, democracy, public welfare, and the limits of reform.',
+      tags: ['SS.912.A.3.9', 'SS.912.A.3.10']
     },
     displayCount: 15,
     goldRules: { perCorrect: 15, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Industrial America Mastery', cards: ['Pullman Strike', 'Chinese Exclusion Act'] },
+    rewards: { badge: 'Progressive Era Mastery', cards: ['Federal Trade Commission', 'Nineteenth Amendment'] },
     bank: [
       {
-        id: '2A-EOC-Q1',
-        text: 'Why did the federal government encourage settlement in the American West after the Civil War?',
-        choices: ['Leaders wanted land developed through farming, railroads, and new communities across the frontier.', 'Leaders wanted land developed only after western ranching and mining had already disappeared.', 'Leaders wanted land developed mainly to reduce trade between the East and the Pacific coast.', 'Leaders wanted land developed while keeping most settlers concentrated in older Atlantic cities.'],
-        correctAnswer: 'Leaders wanted land developed through farming, railroads, and new communities across the frontier.',
-        explanation: 'Federal policy often supported western settlement as part of a larger plan for economic growth and national expansion.',
-        standard: 'SS.912.A.3.1'
+        id: '2B-EOC-Q1',
+        text: 'What was the main contribution of muckraker journalists to Progressive reform?',
+        choices: ['They exposed corruption and social abuse in ways that built public support for change.', 'They exposed corruption and social abuse mainly to defend monopolies from government oversight.', 'They exposed corruption and social abuse only after Congress ended antitrust and labor debates.', 'They exposed corruption and social abuse mostly to promote overseas expansion and naval policy.'],
+        correctAnswer: 'They exposed corruption and social abuse in ways that built public support for change.',
+        explanation: 'Muckrakers helped turn hidden or ignored problems into public issues that voters and lawmakers could not easily dismiss.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-EOC-Q2',
-        text: 'Why were railroads central to both western settlement and industrial growth?',
-        choices: ['They moved people and goods quickly, linking resources, factories, and markets across long distances.', 'They moved people and goods quickly only after factories no longer depended on national distribution.', 'They moved people and goods quickly mainly by ending the importance of farming and mining.', 'They moved people and goods quickly while preventing large businesses from reaching western customers.'],
-        correctAnswer: 'They moved people and goods quickly, linking resources, factories, and markets across long distances.',
-        explanation: 'Railroads tied together the economic changes happening in the West, in cities, and in national industry.',
-        standard: 'SS.912.A.3.1 · SS.912.A.3.4'
+        id: '2B-EOC-Q2',
+        text: 'Why were tenements and slums important topics in Progressive reform?',
+        choices: ['They revealed how industrial growth had produced dangerous living conditions for many urban families.', 'They revealed how industrial growth had produced dangerous living conditions only for wealthy residents.', 'They revealed how industrial growth had produced dangerous living conditions mainly in isolated farm areas.', 'They revealed how industrial growth had produced dangerous living conditions after reform had already solved them.'],
+        correctAnswer: 'They revealed how industrial growth had produced dangerous living conditions for many urban families.',
+        explanation: 'Housing reform became central because poor living conditions showed the human cost of rapid urban growth.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-EOC-Q3',
-        text: 'What was a major consequence of western expansion for many Indigenous peoples?',
-        choices: ['They faced displacement, military pressure, and policies meant to weaken their independence and landholding.', 'They faced displacement only after the federal government restored tribal control over western railroads.', 'They faced displacement mainly because mining and ranching had stopped drawing settlers into the region.', 'They faced displacement while gaining stronger protection for buffalo herds and open hunting grounds.'],
-        correctAnswer: 'They faced displacement, military pressure, and policies meant to weaken their independence and landholding.',
-        explanation: 'Expansion brought opportunity for settlers, but it often came at enormous cost to Native communities.',
-        standard: 'SS.912.A.3.1'
+        id: '2B-EOC-Q3',
+        text: 'Why did Progressives criticize political machines and party bosses?',
+        choices: ['They believed machine politics encouraged corruption and kept government from serving the public fairly.', 'They believed machine politics encouraged corruption but always protected merit-based civil service hiring.', 'They believed machine politics encouraged corruption only in small towns rather than major cities.', 'They believed machine politics encouraged corruption mainly by supporting too much direct democracy.'],
+        correctAnswer: 'They believed machine politics encouraged corruption and kept government from serving the public fairly.',
+        explanation: 'Many Progressives wanted more transparent institutions that answered to voters instead of patronage networks.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-EOC-Q4',
-        text: 'Why did many farmers become politically dissatisfied in the late nineteenth century?',
-        choices: ['Debt, low crop prices, and costly transportation left many farmers feeling trapped economically.', 'Debt, low crop prices, and costly transportation had already been solved by strong federal support.', 'Debt, low crop prices, and costly transportation mainly benefited small farmers on the Great Plains.', 'Debt, low crop prices, and costly transportation mattered only to factory workers in large cities.'],
-        correctAnswer: 'Debt, low crop prices, and costly transportation left many farmers feeling trapped economically.',
-        explanation: 'Rural protest grew because many farmers believed the new economy worked against them.',
-        standard: 'SS.912.A.3.1'
+        id: '2B-EOC-Q4',
+        text: 'Why did child labor reform matter to many Progressives?',
+        choices: ['It addressed the exploitation of children in dangerous work and defended the importance of schooling.', 'It addressed the exploitation of children mainly by moving them from factories into longer mine shifts.', 'It addressed the exploitation of children only after labor unions had ended industrial accidents entirely.', 'It addressed the exploitation of children by arguing that families should avoid public education.'],
+        correctAnswer: 'It addressed the exploitation of children in dangerous work and defended the importance of schooling.',
+        explanation: 'Opposition to child labor reflected Progressive concerns with safety, fairness, and the future of children.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-EOC-Q5',
-        text: 'What best explains the rapid rise of the Second Industrial Revolution in the United States?',
-        choices: ['Resources, labor, capital, and technology combined to expand manufacturing on a national scale.', 'Resources, labor, capital, and technology combined only after immigration and railroads had stopped growing.', 'Resources, labor, capital, and technology combined mainly to shrink the size of the national economy.', 'Resources, labor, capital, and technology combined while making cities less important to industry.'],
-        correctAnswer: 'Resources, labor, capital, and technology combined to expand manufacturing on a national scale.',
-        explanation: 'Industrial growth depended on several interconnected advantages rather than on a single invention or policy.',
-        standard: 'SS.912.A.3.2'
+        id: '2B-EOC-Q5',
+        text: 'Why did conservation become a national Progressive issue?',
+        choices: ['Reformers feared natural resources were being used recklessly and believed government should manage them wisely.', 'Reformers feared natural resources were being used recklessly only because cities had too little political power.', 'Reformers feared natural resources were being used recklessly after Roosevelt ended all national park policy.', 'Reformers feared natural resources were being used recklessly mainly by settlement houses and local charities.'],
+        correctAnswer: 'Reformers feared natural resources were being used recklessly and believed government should manage them wisely.',
+        explanation: 'Conservation fit Progressive ideas about expertise, planning, and the public good.',
+        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q6',
-        text: 'Why were steel and oil so important to the industrial economy?',
-        choices: ['They supported transportation, construction, machinery, energy, and many other expanding industries.', 'They supported transportation, construction, machinery only after electricity had replaced all fuel sources.', 'They supported transportation, construction, machinery mainly by reducing the value of railroads and factories.', 'They supported transportation, construction, machinery while making heavy industry unnecessary nationwide.'],
-        correctAnswer: 'They supported transportation, construction, machinery, energy, and many other expanding industries.',
-        explanation: 'Control of steel and oil became a source of enormous power because both were central to industrial growth.',
-        standard: 'SS.912.A.3.4'
+        id: '2B-EOC-Q6',
+        text: 'What made settlement houses an important part of Progressive reform?',
+        choices: ['They combined neighborhood services with activism aimed at improving education, health, and living conditions.', 'They combined neighborhood services with activism mainly to restore party machines to city government.', 'They combined neighborhood services with activism only after immigrants stopped settling in cities.', 'They combined neighborhood services with activism while opposing public sanitation and labor laws.'],
+        correctAnswer: 'They combined neighborhood services with activism aimed at improving education, health, and living conditions.',
+        explanation: 'Settlement houses showed that Progressivism often blended direct service with broader social and political reform.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-EOC-Q7',
-        text: 'Why did Americans debate the power of trusts and large corporations during the Gilded Age?',
-        choices: ['They created efficiency and growth, but many people feared they also reduced fairness and competition.', 'They created efficiency and growth only after labor unions gained full control over corporate hiring.', 'They created efficiency and growth mainly because they prevented national markets from developing further.', 'They created efficiency and growth while keeping wealth and economic influence widely and evenly distributed.'],
-        correctAnswer: 'They created efficiency and growth, but many people feared they also reduced fairness and competition.',
-        explanation: 'Big business generated wealth, yet critics worried about monopoly power and the concentration of influence.',
-        standard: 'SS.912.A.3.2 · SS.912.A.3.4'
+        id: '2B-EOC-Q7',
+        text: 'What was the main purpose of initiative, referendum, and recall reforms?',
+        choices: ['They were meant to give citizens more direct control and reduce the grip of party organizations.', 'They were meant to give citizens more direct control by removing elections from ordinary voters.', 'They were meant to give citizens more direct control only after senators returned to legislative appointment.', 'They were meant to give citizens more direct control mainly in foreign policy and war declarations.'],
+        correctAnswer: 'They were meant to give citizens more direct control and reduce the grip of party organizations.',
+        explanation: 'These reforms reflected Progressive efforts to make democracy more responsive and less dominated by insiders.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-EOC-Q8',
-        text: 'How did inventors and new technologies change the United States during this period?',
-        choices: ['They improved communication and production while helping create a more connected modern society.', 'They improved communication and production only after electricity and telephones lost practical value.', 'They improved communication and production mainly by reducing the need for urban business activity.', 'They improved communication and production while slowing the speed of commerce across the country.'],
-        correctAnswer: 'They improved communication and production while helping create a more connected modern society.',
-        explanation: 'Innovation reshaped both business operations and everyday life, making the economy faster and more integrated.',
-        standard: 'SS.912.A.3.5'
+        id: '2B-EOC-Q8',
+        text: 'Why was the Seventeenth Amendment seen as a Progressive victory?',
+        choices: ['It made senators directly elected by the people, reducing the influence of legislatures and party bosses.', 'It made senators directly elected by the people while restoring machine control over city governments.', 'It made senators directly elected by the people only after the presidency had lost veto power.', 'It made senators directly elected by the people mainly to increase tariff protection for trusts.'],
+        correctAnswer: 'It made senators directly elected by the people, reducing the influence of legislatures and party bosses.',
+        explanation: 'Direct election of senators matched Progressive demands for a more accountable and democratic political system.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q9',
-        text: 'Why did labor unrest grow alongside industrial expansion?',
-        choices: ['Many workers felt the new economy brought wealth to owners while leaving laborers overworked and insecure.', 'Many workers felt the new economy brought wealth only after labor laws had guaranteed safe workplaces.', 'Many workers felt the new economy brought wealth mainly because unions already controlled factory wages.', 'Many workers felt the new economy brought wealth while eliminating conflict between workers and managers.'],
-        correctAnswer: 'Many workers felt the new economy brought wealth to owners while leaving laborers overworked and insecure.',
-        explanation: 'Labor conflict grew because workers believed they were bearing the risks of industrialism without sharing fairly in its rewards.',
-        standard: 'SS.912.A.3.2'
+        id: '2B-EOC-Q9',
+        text: 'Why is the NAACP important in understanding the Progressive Era?',
+        choices: ['It reminds us that reform included civil rights activism, even though many Progressives ignored racial injustice.', 'It reminds us that reform included civil rights activism only after segregation had already been dismantled.', 'It reminds us that reform included civil rights activism mainly by supporting literacy tests and segregation laws.', 'It reminds us that reform included civil rights activism while rejecting all court-based legal challenges.'],
+        correctAnswer: 'It reminds us that reform included civil rights activism, even though many Progressives ignored racial injustice.',
+        explanation: 'The Progressive Era included important civil rights organizing, but racial equality was not embraced by all reformers.',
+        standard: 'SS.912.A.3.9'
       },
       {
-        id: '2A-EOC-Q10',
-        text: 'What was the main purpose of unions such as the Knights of Labor and the AFL?',
-        choices: ['They tried to give workers more bargaining power over wages, hours, and conditions.', 'They tried to give workers more bargaining power only after the government banned strikes entirely.', 'They tried to give workers more bargaining power mainly by defending monopolies against regulation.', 'They tried to give workers more bargaining power while rejecting any workplace reforms or contracts.'],
-        correctAnswer: 'They tried to give workers more bargaining power over wages, hours, and conditions.',
-        explanation: 'Despite different strategies, both groups aimed to improve workers’ leverage in an industrial economy.',
-        standard: 'SS.912.A.3.2'
+        id: '2B-EOC-Q10',
+        text: 'Why did women’s suffrage fit naturally with many Progressive reform goals?',
+        choices: ['Supporters believed voting rights would strengthen reform efforts involving health, labor, and public welfare.', 'Supporters believed voting rights would strengthen reform efforts by ending women’s participation in activism.', 'Supporters believed voting rights would strengthen reform efforts only in western territories and nowhere else.', 'Supporters believed voting rights would strengthen reform efforts mainly by protecting political machines.'],
+        correctAnswer: 'Supporters believed voting rights would strengthen reform efforts involving health, labor, and public welfare.',
+        explanation: 'Many reformers argued that the vote would help women influence policies affecting families and communities.',
+        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q11',
-        text: 'What did major strikes such as Homestead and Pullman suggest about industrial America?',
-        choices: ['Labor conflict could become national in scale, and employers often held greater legal and political power.', 'Labor conflict could become national in scale only after unions had secured broad federal protections.', 'Labor conflict could become national in scale mainly because business leaders supported worker control.', 'Labor conflict could become national in scale while avoiding courts, injunctions, and federal troops.'],
-        correctAnswer: 'Labor conflict could become national in scale, and employers often held greater legal and political power.',
-        explanation: 'These strikes revealed how difficult it was for organized labor to overcome corporate and government resistance.',
-        standard: 'SS.912.A.3.2 · SS.912.A.3.4'
+        id: '2B-EOC-Q11',
+        text: 'What was Roosevelt trying to achieve through the Square Deal?',
+        choices: ['He wanted a more balanced society in which government restrained abuses without destroying business.', 'He wanted a more balanced society only by dismantling every large corporation in the economy.', 'He wanted a more balanced society mainly through isolation from world trade and immigration.', 'He wanted a more balanced society by leaving trusts and railroads completely unregulated.'],
+        correctAnswer: 'He wanted a more balanced society in which government restrained abuses without destroying business.',
+        explanation: 'Roosevelt believed reform should make capitalism fairer and more stable rather than abolish it.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q12',
-        text: 'Why did many workers believe government favored business during labor disputes?',
-        choices: ['Courts and federal authorities often acted against strikes more quickly than against corporate abuses.', 'Courts and federal authorities often acted against strikes only after labor had already won all major battles.', 'Courts and federal authorities often acted against strikes mainly to protect unions from public criticism.', 'Courts and federal authorities often acted against strikes while refusing to issue injunctions or send troops.'],
-        correctAnswer: 'Courts and federal authorities often acted against strikes more quickly than against corporate abuses.',
-        explanation: 'The use of injunctions and troops convinced many laborers that government defended order and property first.',
-        standard: 'SS.912.A.3.2'
+        id: '2B-EOC-Q12',
+        text: 'Why were consumer protection laws such as the Pure Food and Drug Act significant?',
+        choices: ['They showed that the federal government would step in when private industry endangered the public.', 'They showed that the federal government would step in only to protect foreign producers from competition.', 'They showed that the federal government would step in mainly by eliminating all product labeling rules.', 'They showed that the federal government would step in after Progressives gave up regulatory reform.'],
+        correctAnswer: 'They showed that the federal government would step in when private industry endangered the public.',
+        explanation: 'These laws reflected the Progressive belief that public welfare justified stronger national regulation.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q13',
-        text: 'Why is Ellis Island such an important symbol in American immigration history?',
-        choices: ['It was the main entry station for millions of immigrants arriving through New York Harbor.', 'It was the main entry station only after the federal government closed Angel Island permanently.', 'It was the main entry station mainly for migrants crossing the Mexican border into Texas.', 'It was the main entry station while the United States had almost no immigration inspection system.'],
-        correctAnswer: 'It was the main entry station for millions of immigrants arriving through New York Harbor.',
-        explanation: 'Ellis Island stands for the large wave of immigration that helped supply labor and reshape city life.',
-        standard: 'SS.912.A.3.6'
+        id: '2B-EOC-Q13',
+        text: 'How did Roosevelt’s conservation policies reflect Progressive thinking?',
+        choices: ['They used federal expertise and planning to manage resources for long-term public benefit.', 'They used federal expertise and planning mainly to open every protected forest to private exploitation.', 'They used federal expertise and planning only after Congress abolished national reserves and parks.', 'They used federal expertise and planning while rejecting all scientific management of land and water.'],
+        correctAnswer: 'They used federal expertise and planning to manage resources for long-term public benefit.',
+        explanation: 'Conservation policy showed how Progressives trusted government experts to address modern national problems.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q14',
-        text: 'Why does Angel Island highlight a different side of the immigrant experience?',
-        choices: ['It shows that many Asian immigrants faced longer questioning, detention, and stronger suspicion.', 'It shows that many Asian immigrants faced longer questioning only after exclusion laws had ended.', 'It shows that many Asian immigrants faced longer questioning mainly because western jobs had disappeared.', 'It shows that many Asian immigrants faced longer questioning while all immigrants were treated identically.'],
-        correctAnswer: 'It shows that many Asian immigrants faced longer questioning, detention, and stronger suspicion.',
-        explanation: 'Angel Island reflected the unequal treatment that many immigrants from Asia encountered under restrictive laws.',
-        standard: 'SS.912.A.3.6'
+        id: '2B-EOC-Q14',
+        text: 'Why did Roosevelt and Taft end up splitting the Republican Party?',
+        choices: ['They differed over tariffs, conservation, and how far the federal government should go in reform.', 'They differed over tariffs, conservation, and whether the United States should abolish the presidency.', 'They differed over tariffs, conservation only after Taft joined the Democratic Party permanently.', 'They differed over tariffs, conservation mainly because Roosevelt opposed all antitrust law enforcement.'],
+        correctAnswer: 'They differed over tariffs, conservation, and how far the federal government should go in reform.',
+        explanation: 'Their conflict revealed that even Progressives disagreed strongly about leadership and the direction of reform.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q15',
-        text: 'How did nativism affect the lives of many immigrants in the United States?',
-        choices: ['It fueled prejudice and support for laws that restricted or targeted certain immigrant groups.', 'It fueled prejudice only after most immigrants had already moved out of large industrial cities.', 'It fueled prejudice mainly by encouraging open immigration without any legal barriers or quotas.', 'It fueled prejudice while guaranteeing equal social and political treatment for all newcomers.'],
-        correctAnswer: 'It fueled prejudice and support for laws that restricted or targeted certain immigrant groups.',
-        explanation: 'Nativist attitudes shaped public policy as well as everyday discrimination against newcomers.',
-        standard: 'SS.912.A.3.6 · SS.912.A.3.7'
+        id: '2B-EOC-Q15',
+        text: 'What was Wilson’s New Freedom designed to do?',
+        choices: ['It sought to reduce monopoly power and make the economic system more open and competitive.', 'It sought to reduce monopoly power only by ending bank reform and keeping tariffs high.', 'It sought to reduce monopoly power mainly by restoring party bosses to control of elections.', 'It sought to reduce monopoly power after Wilson rejected all Progressive economic ideas.'],
+        correctAnswer: 'It sought to reduce monopoly power and make the economic system more open and competitive.',
+        explanation: 'Wilson’s reform program focused on tariffs, banking, and antitrust policy as ways to reshape the economy.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q16',
-        text: 'Why did many immigrants form or join ethnic neighborhoods in American cities?',
-        choices: ['These communities offered support, jobs, familiar language, and cultural continuity in a new environment.', 'These communities offered support only after immigrants had fully given up their languages and traditions.', 'These communities offered support mainly by isolating workers from transportation and factory employment.', 'These communities offered support while preventing families from organizing mutual aid or businesses.'],
-        correctAnswer: 'These communities offered support, jobs, familiar language, and cultural continuity in a new environment.',
-        explanation: 'Ethnic neighborhoods helped immigrants adapt to the United States without immediately abandoning their identities.',
-        standard: 'SS.912.A.3.7'
+        id: '2B-EOC-Q16',
+        text: 'Why is the Federal Reserve Act often considered one of the most lasting Progressive reforms?',
+        choices: ['It reorganized the banking system and gave the nation a more stable structure for managing credit.', 'It reorganized the banking system mainly by ending all federal influence over money and interest rates.', 'It reorganized the banking system only for western farmers while excluding urban businesses.', 'It reorganized the banking system after repeated calls to return currency control to party machines.'],
+        correctAnswer: 'It reorganized the banking system and gave the nation a more stable structure for managing credit.',
+        explanation: 'The Federal Reserve created institutions that continued to shape American economic life long after the Progressive Era.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q17',
-        text: 'What challenge did many immigrant workers face in American cities?',
-        choices: ['They often took low-paying jobs and lived in crowded neighborhoods while trying to get established.', 'They often took low-paying jobs only after American factories had ended the need for immigrant labor.', 'They often took low-paying jobs mainly because cities offered no access to transportation or markets.', 'They often took low-paying jobs while enjoying immediate wealth and broad social acceptance.'],
-        correctAnswer: 'They often took low-paying jobs and lived in crowded neighborhoods while trying to get established.',
-        explanation: 'Immigrants were vital to the labor force, but many began life in America under difficult urban conditions.',
-        standard: 'SS.912.A.3.7'
+        id: '2B-EOC-Q17',
+        text: 'Why were the Federal Trade Commission and Clayton Antitrust Act important?',
+        choices: ['They gave the federal government stronger tools to monitor business behavior and curb unfair practices.', 'They gave the federal government stronger tools mainly to protect trusts from investigation and lawsuits.', 'They gave the federal government stronger tools only in foreign colonies rather than within the United States.', 'They gave the federal government stronger tools after Wilson ended his interest in economic reform.'],
+        correctAnswer: 'They gave the federal government stronger tools to monitor business behavior and curb unfair practices.',
+        explanation: 'These measures expanded the national government’s role in shaping fairer competition.',
+        standard: 'SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q18',
-        text: 'Why is the Chinese Exclusion Act a major turning point in immigration history?',
-        choices: ['It showed that federal law could single out one national group for harsh immigration restriction.', 'It showed that federal law could single out one national group only after all nativist feeling had faded.', 'It showed that federal law could single out one national group mainly to speed Asian naturalization.', 'It showed that federal law could single out one national group while opening unrestricted immigration from China.'],
-        correctAnswer: 'It showed that federal law could single out one national group for harsh immigration restriction.',
-        explanation: 'The law revealed how anti-immigrant prejudice could be written directly into federal policy.',
-        standard: 'SS.912.A.3.6'
+        id: '2B-EOC-Q18',
+        text: 'What belief united many local and national Progressive reformers?',
+        choices: ['Modern industrial problems required a more active government guided by expertise and public responsibility.', 'Modern industrial problems required a more active government only in foreign affairs rather than domestic life.', 'Modern industrial problems required a more active government mainly to restore machine politics in cities.', 'Modern industrial problems required a more active government by ending regulation and dismantling public agencies.'],
+        correctAnswer: 'Modern industrial problems required a more active government guided by expertise and public responsibility.',
+        explanation: 'Across many issues, Progressives believed that modern life demanded organized, informed public action.',
+        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q19',
-        text: 'What connection best links the West, industry, labor, and immigration in one Gilded Age story?',
-        choices: ['All were shaped by rapid economic growth that created opportunity while also producing conflict and inequality.', 'All were shaped by rapid economic growth only after national markets and railroads had stopped expanding.', 'All were shaped by rapid economic growth mainly because social conflict had largely disappeared by 1900.', 'All were shaped by rapid economic growth while government avoided any role in land or labor issues.'],
-        correctAnswer: 'All were shaped by rapid economic growth that created opportunity while also producing conflict and inequality.',
-        explanation: 'The same forces that built wealth and mobility also fueled labor unrest, displacement, and harsh urban conditions.',
-        standard: 'SS.912.A.3.1 · SS.912.A.3.2 · SS.912.A.3.6'
+        id: '2B-EOC-Q19',
+        text: 'What is one reason historians describe Progressivism as both influential and limited?',
+        choices: ['It achieved major reforms but often failed to confront segregation, racism, and deeper inequality fully.', 'It achieved major reforms but often failed only because voters rejected food safety and labor laws.', 'It achieved major reforms but often failed mainly because presidents refused any role in reform.', 'It achieved major reforms but often failed after machine politics disappeared everywhere in the country.'],
+        correctAnswer: 'It achieved major reforms but often failed to confront segregation, racism, and deeper inequality fully.',
+        explanation: 'The era produced real change, but it also left major exclusions and injustices in place.',
+        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
       {
-        id: '2A-EOC-Q20',
-        text: 'Which statement best summarizes the Gilded Age and Industrial America unit?',
-        choices: ['The nation grew more powerful and modern, but that growth brought intense conflict over land, labor, and identity.', 'The nation grew more powerful and modern only after immigration, labor protest, and western conflict had ended.', 'The nation grew more powerful and modern mainly because government solved inequality before the Progressive Era.', 'The nation grew more powerful and modern while avoiding major debates about business power and social change.'],
-        correctAnswer: 'The nation grew more powerful and modern, but that growth brought intense conflict over land, labor, and identity.',
-        explanation: 'The Gilded Age transformed the United States, but its gains were uneven and deeply contested.',
-        standard: 'SS.912.A.3.1 · SS.912.A.3.2 · SS.912.A.3.4 · SS.912.A.3.6 · SS.912.A.3.7'
+        id: '2B-EOC-Q20',
+        text: 'Which statement best summarizes the Progressive Era as a whole?',
+        choices: ['Americans used reform journalism, activism, and government power to address the problems of modern industrial life.', 'Americans used reform journalism, activism, and government power only to expand overseas empire and avoid domestic change.', 'Americans used reform journalism, activism, and government power mainly to restore older political machines.', 'Americans used reform journalism, activism, and government power without any disagreements over goals or methods.'],
+        correctAnswer: 'Americans used reform journalism, activism, and government power to address the problems of modern industrial life.',
+        explanation: 'The Progressive Era was defined by the effort to use modern reform tools against the social and political costs of industrialization.',
+        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
     ]
   },
 
 ];
+
 
 
 
@@ -1780,7 +1677,7 @@ function renderUnitHub() {
     bannerEl.innerHTML = `
       <div class="hub-banner">
         <div class="hub-banner-top">
-          <div class="hub-banner-label">UNIT 2A — THE GILDED AGE</div>
+          <div class="hub-banner-label">UNIT 2B — THE PROGRESSIVE ERA</div>
           <div class="hub-banner-count">${done}/${total} LESSONS</div>
         </div>
         <div class="hub-progress-bar">
@@ -1844,7 +1741,7 @@ function renderUnitHub() {
           UNIT COMPLETE — Want to improve your score?
         </div>
         <button class="btn full" onclick="replayFromBeginning()" style="border-color:var(--teal2);color:var(--teal2);">
-          <span>↺ Replay Unit from Lesson 12</span>
+          <span>↺ Replay Unit from Lesson 16</span>
         </button>
       </div>`;
   }
@@ -2359,7 +2256,7 @@ function returnToShell() {
 }
 
 function replayFromBeginning() {
-  // Reset all lesson progress and start from Lesson 12
+  // Reset all lesson progress and start from Lesson 16
   P.lessonsCompleted = [];
   P.lessonBestScores = {};
   saveP();
@@ -2410,7 +2307,7 @@ function printCertificate() {
     <div style="font-size:12px;color:#666;letter-spacing:.1em">THIS CERTIFIES THAT</div>
     <div class="name">${P.name || 'Historian'}</div>
     <div style="font-size:13px;color:#444;margin:6px 0">has successfully completed</div>
-    <div style="font-family:'Cinzel',serif;font-size:15px;color:#1a0a08;margin:4px 0">Iron and Gold — Unit 2A: The Gilded Age and Industrial America</div>
+    <div style="font-family:'Cinzel',serif;font-size:15px;color:#1a0a08;margin:4px 0">Age of Reform — Unit 2B: The Progressive Era</div>
     ${P.period ? `<div style="font-size:11px;color:#888;margin-top:4px">Period ${P.period}</div>` : ''}
     <div class="divider"></div>
     <div class="tier">${tier.label} · ${avgAcc}% Accuracy</div>
@@ -2521,29 +2418,28 @@ function showLoginGate() {
 // ════════════════════════════════════════════
 
 const HIST_CARDS = {
-  carnegie:    {icon:'🏭', name:'Andrew Carnegie',         role:'Steel Magnate · Philanthropist',
-    desc:'Built the largest steel empire in the world through vertical integration and ruthless cost-cutting. Later gave away 90% of his fortune to libraries, universities, and public institutions — embodying the contradictions of Gilded Age wealth.', unlockLesson:'lesson13'},
-  rockefeller: {icon:'🛢️', name:'John D. Rockefeller',      role:'Standard Oil · Trust Pioneer',
-    desc:'Controlled 90% of American oil refining through Standard Oil. His use of horizontal integration and secret railroad rebates made him the world’s first billionaire and the primary target of Progressive trust-busting.', unlockLesson:'lesson13'},
-  gompers:     {icon:'✊', name:'Samuel Gompers',           role:'AFL Founder · Labor Organizer',
-    desc:'Founded the American Federation of Labor in 1886 and led it for nearly four decades. Focused on practical gains — wages, hours, safety — rather than revolutionary politics, building the most durable labor organization in American history.', unlockLesson:'lesson14'},
-  sitting_bull:{icon:'🦦', name:'Sitting Bull',              role:'Lakota Chief · Battle of Little Bighorn',
-    desc:'Led the Lakota resistance against U.S. expansion onto treaty lands. His forces defeated Custer at Little Bighorn in 1876. Later killed by Indian police in 1890 during the Ghost Dance movement.', unlockLesson:'lesson12'},
-  addams_jane: {icon:'🏛️', name:'Jane Addams',              role:'Hull House · Settlement Movement',
-    desc:'Founded Hull House in Chicago in 1889, providing services to the immigrant poor. Her work bridges the Gilded Age and Progressive Era — the settlement house movement grew directly from witnessing the conditions that industrial capitalism created.', unlockLesson:'capstone'},
-  nast:        {icon:'🖼️', name:'Thomas Nast',               role:'Political Cartoonist · Harper’s Weekly',
-    desc:'His cartoons exposed Boss Tweed and Tammany Hall corruption so effectively that Tweed offered him $500,000 to stop. Created the modern symbols of both major parties — the Democratic donkey and Republican elephant.', unlockLesson:'lesson13'},
-  riis_gilded: {icon:'📷', name:'Jacob Riis',               role:'Muckraker · How the Other Half Lives',
-    desc:'His photographic journalism documented tenement life among the immigrant poor of New York, shocking middle-class Americans who had never seen how the other half lived and helping spark housing and labor reform.', unlockLesson:'capstone'},
+  riis:        {icon:'📷', name:'Jacob Riis',               role:'Muckraker · How the Other Half Lives',
+    desc:'His photographic journalism exposed the squalid conditions of New York tenement life to middle-class Americans who had never seen them. His 1890 book shocked the public and helped launch the settlement house and housing reform movements.', unlockLesson:'lesson16'},
+  tarbell:     {icon:'🗞️', name:'Ida Tarbell',              role:'Muckraker · Standard Oil Investigator',
+    desc:'Her 19-part series in McClure’s Magazine meticulously documented Standard Oil’s predatory practices. It became the model for investigative journalism and led directly to the Supreme Court’s breakup of Standard Oil in 1911.', unlockLesson:'lesson16'},
+  addams:      {icon:'🏠', name:'Jane Addams',              role:'Hull House · Nobel Peace Prize 1931',
+    desc:'Founded Hull House in Chicago in 1889, providing education, childcare, and community services to immigrant neighborhoods. Her settlement house model spread nationally and made her the most prominent social reformer of the era.', unlockLesson:'lesson16'},
+  tr:          {icon:'🦏', name:'Theodore Roosevelt',       role:'26th President · Trust-Buster',
+    desc:'Used the presidency as a ‘bully pulpit’ to regulate big business, protect public lands, and mediate labor disputes. His square deal positioned the federal government as a referee between capital and labor for the first time.', unlockLesson:'lesson17'},
+  wells:       {icon:'✏️', name:'Ida B. Wells',              role:'Anti-Lynching Crusader · Journalist',
+    desc:'Led a courageous campaign against lynching through journalism, speaking tours, and political organizing at a time when such work was genuinely dangerous. Helped found the NAACP and challenged progressive reformers to confront racial injustice.', unlockLesson:'lesson16'},
+  wilson:      {icon:'🏛️', name:'Woodrow Wilson',          role:'28th President · New Freedom',
+    desc:'His New Freedom program extended progressive reform to the national level: the Federal Reserve, the Clayton Antitrust Act, and the Federal Trade Commission reshaped banking, business regulation, and labor rights.', unlockLesson:'capstone'},
+  sinclair:    {icon:'🥩', name:'Upton Sinclair',           role:'Muckraker · The Jungle',
+    desc:'His 1906 novel exposed the horrifying conditions of Chicago meatpacking plants. Though he meant to expose worker exploitation, readers were more outraged by what was in their food — and Congress passed the Pure Food and Drug Act within months.', unlockLesson:'lesson16'},
 };
 
 const UNIT_BADGES = [
-  {id:'boomtown',         icon:'🐎', label:'Boomtown Frontier',    desc:'Completed Boomtown Frontier',        lessonId:'lesson12'},
-  {id:'innovation',       icon:'💡', label:'Age of Innovation',    desc:'Completed Age of Innovation',        lessonId:'lesson13'},
-  {id:'labor_rising',     icon:'✊', label:'Labor Rising',         desc:'Completed Labor Rising',             lessonId:'lesson14'},
-  {id:'ellis_island',     icon:'🗽', label:'Through Ellis Island', desc:'Completed the Capstone',             lessonId:'capstone'},
-  {id:'gilded_done',      icon:'📋', label:'Gilded Age Complete', desc:'Completed EOC Review',               lessonId:'eoc'},
-  {id:'unit2a_complete',  icon:'⭐', label:'Unit 2A Complete',     desc:'Completed all lessons',              lessonId:null},
+  {id:'uncovering',       icon:'📰', label:'Uncovering Problems',  desc:'Completed Uncovering Problems',      lessonId:'lesson16'},
+  {id:'progressives_respond', icon:'⚖️', label:'Progressives Respond', desc:'Completed The Progressives Respond', lessonId:'lesson17'},
+  {id:'age_of_reform',    icon:'🗾', label:'Age of Reform',        desc:'Completed the Capstone',             lessonId:'capstone'},
+  {id:'progressive_done', icon:'📋', label:'Progressive Complete', desc:'Completed EOC Review',               lessonId:'eoc'},
+  {id:'unit2b_complete',  icon:'⭐', label:'Unit 2B Complete',     desc:'Completed all lessons',              lessonId:null},
 ];
 
 // ════════════════════════════════════════════
@@ -2630,7 +2526,7 @@ function renderLeaderboard() {
     filtered = filtered.filter(s => s.period && s.period !== '0');
     if (_lbPeriodFilter !== 'all') filtered = filtered.filter(s => String(s.period) === String(_lbPeriodFilter));
   }
-  document.getElementById('lb-sync-status').textContent = filtered.length + ' students — Unit 2A: The Gilded Age and Industrial America';
+  document.getElementById('lb-sync-status').textContent = filtered.length + ' students — Unit 2B: The Progressive Era';
   if (!filtered.length) {
     document.getElementById('lb-content').innerHTML =
       '<div style="font-family:var(--crimson);color:var(--text3);font-style:italic;padding:16px;">No results yet.</div>';
@@ -2822,7 +2718,7 @@ function switchPlayer() {
   window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/'; // redirect to shell login
 }
 
-// ── Anti-copy
+// ── Anti-cheat
 (function(){
   function isInput(el){return el&&(el.tagName==='INPUT'||el.tagName==='TEXTAREA');}
   document.addEventListener('contextmenu',e=>{if(!isInput(e.target))e.preventDefault();});
