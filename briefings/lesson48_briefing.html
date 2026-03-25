@@ -6,23 +6,18 @@
   <title>Lesson 48 Briefing | The Great Society</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #07111f;
-      --bg2: #0d1d34;
-      --panel: rgba(10, 20, 38, 0.94);
-      --panel-2: rgba(15, 31, 55, 0.94);
-      --card: rgba(11, 24, 44, 0.96);
-      --card-2: rgba(16, 36, 63, 0.92);
-      --accent: #79c8ff;
-      --accent-2: #b7e2ff;
-      --text: #eef6ff;
-      --muted: #96afc9;
-      --rule: rgba(121, 200, 255, 0.18);
-      --rule-strong: rgba(121, 200, 255, 0.3);
-      --glow: rgba(121, 200, 255, 0.12);
-      --chip: rgba(121, 200, 255, 0.09);
+      --bg: #07111a;
+      --bg2: #0d1927;
+      --accent: #79c8e8;
+      --accent-2: #c7e9ff;
+      --text: #eef7ff;
+      --muted: #a3b8cb;
+      --rule: rgba(121, 200, 232, 0.18);
+      --rule-strong: rgba(121, 200, 232, 0.3);
+      --chip: rgba(121, 200, 232, 0.08);
     }
 
     * { box-sizing: border-box; }
@@ -31,37 +26,22 @@
       min-height: 100%;
       margin: 0;
       background:
-        radial-gradient(circle at top, rgba(121, 200, 255, 0.18), transparent 38%),
-        linear-gradient(180deg, #091626 0%, #07111f 52%, #040a14 100%);
+        radial-gradient(ellipse 80% 40% at 50% 0%, rgba(121, 200, 232, 0.11) 0%, transparent 60%),
+        var(--bg);
     }
 
     body {
-      font-family: "Fraunces", Georgia, serif;
+      font-family: "Cormorant Garamond", Georgia, serif;
       color: var(--text);
-      padding: 32px 18px 52px;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), rgba(255,255,255,0.02) calc(100% - 1px)),
-        linear-gradient(transparent 0, transparent calc(100% - 1px), rgba(255,255,255,0.015) calc(100% - 1px));
-      background-size: 40px 40px;
-      pointer-events: none;
-      opacity: 0.25;
+      display: flex;
+      justify-content: center;
+      padding: 36px 20px 60px;
     }
 
     .app {
-      width: min(1140px, 100%);
-      margin: 0 auto;
-      background:
-        linear-gradient(160deg, rgba(13, 29, 52, 0.98) 0%, rgba(6, 15, 29, 0.98) 100%);
+      width: min(1100px, 100%);
+      background: linear-gradient(170deg, #162332 0%, #0f1824 58%, #0a121c 100%);
       border: 1px solid var(--rule);
-      box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.03);
       overflow: hidden;
       position: relative;
     }
@@ -70,70 +50,67 @@
     .app::after {
       content: "";
       position: absolute;
-      inset: 0;
+      width: 60px;
+      height: 60px;
+      border-color: var(--rule-strong);
+      border-style: solid;
       pointer-events: none;
+      z-index: 1;
     }
 
-    .app::before {
-      background:
-        radial-gradient(circle at 18% 12%, rgba(121, 200, 255, 0.12), transparent 20%),
-        radial-gradient(circle at 85% 15%, rgba(183, 226, 255, 0.08), transparent 22%);
-      opacity: 0.9;
-    }
-
-    .app::after {
-      border: 1px solid rgba(255, 255, 255, 0.03);
-      inset: 12px;
-    }
+    .app::before { top: 0; left: 0; border-width: 1px 0 0 1px; }
+    .app::after  { top: 0; right: 0; border-width: 1px 1px 0 0; }
 
     .topbar {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 22px;
-      align-items: start;
-      padding: 38px 48px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 36px 52px 28px;
       border-bottom: 1px solid var(--rule);
       position: relative;
-      z-index: 1;
     }
 
     .topbar::after {
       content: "";
       position: absolute;
-      left: 48px;
-      right: 48px;
       bottom: -1px;
+      left: 52px;
+      right: 52px;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0.5;
+      opacity: 0.35;
     }
 
     .kicker {
-      font-family: "Manrope", Arial, sans-serif;
+      font-family: "Jost", sans-serif;
       text-transform: uppercase;
-      letter-spacing: 0.26em;
-      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      font-size: 0.67rem;
+      font-weight: 400;
       color: var(--accent);
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 14px;
     }
 
     .kicker::before,
     .kicker::after {
       content: "";
-      width: 28px;
+      display: block;
+      width: 24px;
       height: 1px;
       background: var(--rule-strong);
     }
 
     .title {
-      margin: 0 0 12px;
-      font-size: clamp(2rem, 3.7vw, 3.2rem);
-      font-weight: 400;
-      line-height: 1.04;
-      letter-spacing: 0.01em;
+      font-family: "Cormorant Garamond", serif;
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.1;
     }
 
     .title span {
@@ -142,68 +119,53 @@
 
     .subtitle {
       margin: 0;
-      max-width: 720px;
-      font-family: "Manrope", Arial, sans-serif;
-      font-size: 0.95rem;
+      max-width: 630px;
+      font-family: "Jost", sans-serif;
+      font-size: 0.9rem;
       font-weight: 300;
-      line-height: 1.8;
+      line-height: 1.75;
       color: var(--muted);
+      letter-spacing: 0.02em;
     }
 
-    .top-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: flex-end;
-    }
-
-    .meta-chip,
-    .return-link {
-      font-family: "Manrope", Arial, sans-serif;
+    .shell-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 18px;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--rule);
+      background: var(--chip);
+      font-family: "Jost", sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.18em;
       font-size: 0.68rem;
-      text-decoration: none;
+      font-weight: 400;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: border-color 0.25s, background 0.25s;
     }
 
-    .meta-chip {
-      color: var(--accent-2);
-      background: var(--chip);
-      border: 1px solid var(--rule);
-      padding: 10px 14px;
-    }
-
-    .return-link {
-      color: var(--text);
-      border: 1px solid var(--rule);
-      padding: 11px 16px;
-      background: rgba(255, 255, 255, 0.02);
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .return-link:hover {
-      background: rgba(121, 200, 255, 0.08);
+    .shell-link:hover {
       border-color: var(--rule-strong);
+      background: rgba(121, 200, 232, 0.13);
     }
 
     .main {
       display: grid;
-      grid-template-columns: minmax(0, 1.38fr) minmax(280px, 0.82fr);
-      min-height: 660px;
-      position: relative;
-      z-index: 1;
+      grid-template-columns: 1.35fr 0.8fr;
+      min-height: 640px;
     }
 
     .slide-area {
-      padding: 30px;
+      padding: 32px;
       border-right: 1px solid var(--rule);
     }
 
     .slide-shell {
-      min-height: 100%;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 22%),
-        linear-gradient(160deg, rgba(13, 30, 55, 0.98) 0%, rgba(8, 18, 34, 0.98) 100%);
+      min-height: 540px;
+      background: linear-gradient(160deg, rgba(16, 27, 41, 0.96) 0%, rgba(8, 14, 22, 0.98) 100%);
       border: 1px solid var(--rule);
       display: flex;
       flex-direction: column;
@@ -211,8 +173,8 @@
     }
 
     .image-band {
-      min-height: 290px;
-      background-color: #08111f;
+      height: 240px;
+      background-color: #0b121b;
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
@@ -220,8 +182,7 @@
       position: relative;
       display: flex;
       align-items: flex-end;
-      padding: 18px 18px 16px;
-      isolation: isolate;
+      padding: 18px;
     }
 
     .image-band::before {
@@ -229,44 +190,47 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(4, 10, 20, 0.12), rgba(4, 10, 20, 0.82)),
-        radial-gradient(circle at top right, rgba(121, 200, 255, 0.18), transparent 30%);
-      z-index: -1;
+        linear-gradient(180deg, rgba(4, 10, 20, 0.12), rgba(4, 10, 20, 0.82));
+      pointer-events: none;
     }
 
     .image-label {
-      font-family: "Manrope", Arial, sans-serif;
+      position: relative;
+      z-index: 1;
+      font-family: "Jost", sans-serif;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-size: 0.66rem;
-      color: var(--accent-2);
-      background: rgba(6, 12, 24, 0.74);
+      letter-spacing: 0.22em;
+      font-size: 0.67rem;
+      color: var(--text);
+      background: rgba(9, 16, 24, 0.78);
       border: 1px solid var(--rule);
-      padding: 8px 12px;
+      padding: 7px 12px;
     }
 
     .slide-content {
-      padding: 26px 28px 22px;
+      padding: 26px 28px 18px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       flex: 1;
     }
 
     .slide-heading {
       margin: 0;
-      font-size: clamp(1.7rem, 2.8vw, 2.35rem);
-      line-height: 1.14;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.5rem, 2.5vw, 2.08rem);
+      line-height: 1.12;
       font-weight: 400;
+      font-style: italic;
       color: var(--text);
     }
 
     .slide-text {
       margin: 0;
-      font-family: "Manrope", Arial, sans-serif;
-      font-size: 0.94rem;
+      font-family: "Jost", sans-serif;
+      font-size: 0.89rem;
       font-weight: 300;
-      line-height: 1.82;
+      line-height: 1.7;
       color: var(--muted);
     }
 
@@ -274,77 +238,75 @@
       list-style: none;
       margin: 0;
       padding: 0;
-      display: grid;
-      gap: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
     .bullet-list li {
-      font-family: "Manrope", Arial, sans-serif;
-      font-size: 0.9rem;
+      font-family: "Jost", sans-serif;
+      font-size: 0.86rem;
       font-weight: 300;
-      line-height: 1.65;
+      line-height: 1.58;
       color: var(--text);
       padding-left: 18px;
       position: relative;
     }
 
     .bullet-list li::before {
-      content: "";
+      content: "-";
       position: absolute;
       left: 0;
-      top: 0.68em;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: linear-gradient(180deg, var(--accent), var(--accent-2));
-      box-shadow: 0 0 0 4px rgba(121, 200, 255, 0.08);
-      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 0.8rem;
+      opacity: 0.8;
     }
 
     .remember {
       margin-top: auto;
-      padding: 16px 18px;
+      padding: 12px 16px;
       border-left: 2px solid var(--accent);
-      background:
-        linear-gradient(90deg, rgba(121, 200, 255, 0.12), rgba(121, 200, 255, 0.03));
-      font-family: "Manrope", Arial, sans-serif;
-      font-size: 0.9rem;
+      background: var(--chip);
+      font-family: "Jost", sans-serif;
+      font-size: 0.86rem;
       font-weight: 300;
-      line-height: 1.7;
+      line-height: 1.62;
       color: #d9ecfb;
     }
 
     .remember strong {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 7px;
+      font-family: "Jost", sans-serif;
       text-transform: uppercase;
       letter-spacing: 0.18em;
       font-size: 0.64rem;
-      font-weight: 600;
+      font-weight: 500;
       color: var(--accent);
     }
 
     .controls {
       display: flex;
+      justify-content: space-between;
       align-items: center;
       gap: 12px;
-      padding: 16px 28px 20px;
+      padding: 15px 28px 18px;
       border-top: 1px solid var(--rule);
-      background: rgba(121, 200, 255, 0.03);
+      background: rgba(121, 200, 232, 0.03);
     }
 
     .nav-btn {
       border: 1px solid var(--rule);
-      background: rgba(121, 200, 255, 0.06);
+      background: var(--chip);
       color: var(--text);
-      padding: 11px 18px;
-      font-family: "Manrope", Arial, sans-serif;
+      padding: 11px 20px;
+      font-family: "Jost", sans-serif;
       font-size: 0.68rem;
-      font-weight: 500;
+      font-weight: 400;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     .nav-btn:hover:not(:disabled) {
@@ -353,7 +315,7 @@
     }
 
     .nav-btn:disabled {
-      opacity: 0.32;
+      opacity: 0.3;
       cursor: not-allowed;
     }
 
@@ -366,17 +328,17 @@
     }
 
     .progress-text {
-      font-family: "Manrope", Arial, sans-serif;
+      font-family: "Jost", sans-serif;
       text-align: center;
-      font-size: 0.76rem;
-      letter-spacing: 0.16em;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
     }
 
     .progress-bar {
-      height: 3px;
-      background: rgba(121, 200, 255, 0.12);
+      height: 2px;
+      background: rgba(121, 200, 232, 0.12);
       overflow: hidden;
     }
 
@@ -388,9 +350,8 @@
     }
 
     .sidebar {
-      padding: 30px 24px;
-      background:
-        linear-gradient(180deg, rgba(8, 17, 31, 0.76) 0%, rgba(6, 12, 24, 0.92) 100%);
+      padding: 32px 26px;
+      background: linear-gradient(180deg, rgba(10, 18, 28, 0.76) 0%, rgba(7, 12, 19, 0.9) 100%);
     }
 
     .section-label {
@@ -398,9 +359,9 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-family: "Manrope", Arial, sans-serif;
-      font-size: 0.66rem;
-      font-weight: 600;
+      font-family: "Jost", sans-serif;
+      font-size: 0.65rem;
+      font-weight: 400;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
@@ -415,17 +376,16 @@
 
     .side-panel {
       margin-bottom: 14px;
-      padding: 18px;
+      padding: 18px 20px;
       border: 1px solid var(--rule);
-      background:
-        linear-gradient(180deg, rgba(121, 200, 255, 0.05), rgba(121, 200, 255, 0.02));
+      background: rgba(121, 200, 232, 0.04);
     }
 
     .side-title {
       margin: 0 0 14px;
-      font-family: "Manrope", Arial, sans-serif;
-      font-size: 0.66rem;
-      font-weight: 600;
+      font-family: "Jost", sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
@@ -433,8 +393,10 @@
 
     .eq {
       margin: 0;
-      font-size: 1.13rem;
-      line-height: 1.52;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.12rem;
+      font-style: italic;
+      line-height: 1.45;
       color: var(--text);
     }
 
@@ -446,46 +408,14 @@
 
     .term {
       border: 1px solid var(--rule);
-      background: rgba(121, 200, 255, 0.05);
+      background: rgba(199, 233, 255, 0.07);
       padding: 10px 8px;
-      font-family: "Manrope", Arial, sans-serif;
-      font-size: 0.81rem;
-      font-weight: 400;
+      font-family: "Jost", sans-serif;
+      font-size: 0.8rem;
+      font-weight: 300;
       color: var(--text);
       text-align: center;
       line-height: 1.35;
-    }
-
-    .cluster-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .cluster {
-      border: 1px solid rgba(121, 200, 255, 0.12);
-      background: rgba(255, 255, 255, 0.02);
-      padding: 12px 14px;
-    }
-
-    .cluster strong {
-      display: block;
-      margin-bottom: 5px;
-      font-family: "Manrope", Arial, sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent-2);
-    }
-
-    .cluster span,
-    .mini-list li,
-    .foot {
-      font-family: "Manrope", Arial, sans-serif;
-      font-size: 0.86rem;
-      font-weight: 300;
-      line-height: 1.72;
-      color: var(--muted);
     }
 
     .mini-list {
@@ -497,9 +427,14 @@
 
     .mini-list li {
       position: relative;
-      padding: 6px 0 6px 26px;
+      padding: 5px 0 5px 24px;
       border-bottom: 1px solid rgba(121, 200, 255, 0.08);
       counter-increment: guide;
+      font-family: "Jost", sans-serif;
+      font-size: 0.84rem;
+      font-weight: 300;
+      line-height: 1.62;
+      color: var(--muted);
     }
 
     .mini-list li:last-child {
@@ -510,10 +445,19 @@
       content: counter(guide);
       position: absolute;
       left: 0;
-      top: 6px;
-      font-family: "Fraunces", Georgia, serif;
+      top: 5px;
+      font-family: "Cormorant Garamond", serif;
       font-size: 0.95rem;
       color: var(--accent);
+      opacity: 0.72;
+    }
+
+    .foot {
+      font-family: "Jost", sans-serif;
+      font-size: 0.84rem;
+      font-weight: 300;
+      line-height: 1.72;
+      color: var(--muted);
     }
 
     .foot-ornament {
@@ -561,14 +505,9 @@
       animation: reveal 0.28s ease both;
     }
 
-    @media (max-width: 920px) {
-      .topbar,
+    @media (max-width: 900px) {
       .main {
         grid-template-columns: 1fr;
-      }
-
-      .top-actions {
-        align-items: flex-start;
       }
 
       .slide-area {
@@ -579,19 +518,24 @@
 
     @media (max-width: 640px) {
       body {
-        padding: 18px 10px 30px;
+        padding: 20px 10px 34px;
       }
 
-      .topbar,
-      .slide-area,
-      .sidebar {
-        padding-left: 16px;
-        padding-right: 16px;
+      .topbar {
+        padding: 26px 18px 22px;
+        align-items: flex-start;
+        flex-direction: column;
       }
 
       .topbar::after {
-        left: 16px;
-        right: 16px;
+        left: 18px;
+        right: 18px;
+      }
+
+      .slide-area,
+      .sidebar {
+        padding-left: 18px;
+        padding-right: 18px;
       }
 
       .controls {
@@ -608,7 +552,7 @@
       }
 
       .image-band {
-        min-height: 240px;
+        height: 220px;
       }
     }
   </style>
@@ -620,14 +564,11 @@
         <div class="kicker">American Chronicles Briefing</div>
         <h1 class="title">Lesson 48: <span>The Great Society</span></h1>
         <p class="subtitle">
-          A student study file on the 1964 election, Johnson's Great Society reforms, and the Warren Court's activist rulings during one of the most ambitious periods of domestic change in modern U.S. history.
+          A student study file on the 1964 election, Johnson's reform agenda, and the debate over how far government should go in shaping American life.
         </p>
       </div>
 
-      <div class="top-actions">
-        <div class="meta-chip">Role of Government | 1963-1968</div>
-        <a class="return-link" href="#" onclick="history.back(); return false;">&larr; Return</a>
-      </div>
+      <a class="shell-link" href="unit7a_briefing.html">&larr; Return to Unit 7A</a>
     </div>
 
     <div class="main">
@@ -660,7 +601,7 @@
       </section>
 
       <aside class="sidebar">
-        <div class="section-label">Policy Guide</div>
+        <div class="section-label">Study Guide</div>
 
         <div class="side-panel">
           <h3 class="side-title">Essential Question</h3>
@@ -676,44 +617,25 @@
             <div class="term">Medicare</div>
             <div class="term">Medicaid</div>
             <div class="term">Immigration Act of 1965</div>
-            <div class="term">Silent Spring</div>
             <div class="term">Warren Court</div>
             <div class="term">Miranda Rights</div>
           </div>
         </div>
 
         <div class="side-panel">
-          <h3 class="side-title">Section Roadmap</h3>
-          <div class="cluster-list">
-            <div class="cluster">
-              <strong>Election Debate</strong>
-              <span>Johnson and Goldwater clashed over whether bigger government meant progress or danger.</span>
-            </div>
-            <div class="cluster">
-              <strong>Great Society</strong>
-              <span>Congress passed sweeping reforms on poverty, rights, health care, education, immigration, and culture.</span>
-            </div>
-            <div class="cluster">
-              <strong>Warren Court</strong>
-              <span>The Supreme Court expanded voting equality, church-state limits, and protections for the accused.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="side-panel">
           <h3 class="side-title">What to Watch For</h3>
           <ol class="mini-list">
-            <li>How the 1964 election became a debate over liberty versus activist government.</li>
-            <li>Why Johnson's experience in Congress mattered so much for passing reforms.</li>
-            <li>Which programs attacked poverty, expanded health care, and widened opportunity.</li>
-            <li>How the Warren Court changed everyday rights in politics, schools, and criminal justice.</li>
+            <li>How Johnson and Goldwater argued about liberty and federal power.</li>
+            <li>Which Great Society programs attacked poverty, injustice, and lack of access.</li>
+            <li>How environmental and consumer protections fit into the same reform era.</li>
+            <li>Why Warren Court rulings mattered as much as Johnson's legislation.</li>
           </ol>
         </div>
 
         <div class="side-panel">
           <h3 class="side-title">Study Tip</h3>
           <p class="foot">
-            Break the chapter into three buckets: the 1964 election, Johnson's reform programs, and Warren Court rulings. Once you sort details into those three categories, the lesson becomes much easier to organize.
+            Organize the lesson in three parts: the 1964 election debate, Johnson's domestic programs, and the Warren Court. That structure makes the details much easier to remember.
           </p>
         </div>
       </aside>
@@ -728,97 +650,97 @@
         label: "1963 Transition",
         image: "url('images/lesson48/LBJ.png')",
         heading: "Johnson Inherits a Shaken Nation",
-        text: "When John F. Kennedy was assassinated on November 22, 1963, Lyndon B. Johnson stepped into the presidency during a national crisis. Many Americans knew little about him, but Johnson's decades in Congress and mastery of the legislative process made him far more experienced in government than Kennedy had been.",
+        text: "After Kennedy's assassination, Lyndon B. Johnson took office promising stability and forward movement. Unlike Kennedy, Johnson was known for legislative skill more than image.",
         bullets: [
-          "Johnson was a veteran lawmaker, not a youthful symbol like Kennedy.",
-          "His first task was to reassure Americans that government would keep moving.",
-          "From the start, he framed his presidency as action and continuity rather than glamour."
+          "He brought more than two decades of congressional experience.",
+          "His first goal was to prove the government would keep functioning.",
+          "That experience became the foundation of his domestic agenda."
         ],
-        remember: "Johnson's presidency began with uncertainty, but his political experience gave him tools Kennedy never fully had."
+        remember: "Johnson's power came from political skill, not presidential glamour."
       },
       {
         label: "1964 Election",
         image: "url('images/lesson48/letuscontinue.png')",
         heading: "The 1964 Election Became a Debate Over Government",
-        text: "Johnson's 'Let Us Continue' message tied him to Kennedy's memory, but the campaign quickly turned into a larger argument about the role of government. Johnson's Great Society promised federal action against poverty and racial injustice, while Barry Goldwater argued that liberty depended on limiting Washington's power.",
+        text: "Johnson used 'Let Us Continue' to connect himself to Kennedy, but the campaign became a larger debate over government's role. Barry Goldwater argued for limited federal power, while Johnson promoted an activist vision.",
         bullets: [
-          "Johnson called for an activist government that could improve social well-being.",
-          "Goldwater warned that expanding federal power threatened freedom.",
-          "Johnson's landslide victory gave Democrats a mandate, but it also energized modern conservatism and began the South's shift toward the Republican Party."
+          "Johnson tied reform to prosperity, justice, and opportunity.",
+          "Goldwater warned that bigger government threatened liberty.",
+          "Johnson's landslide gave Democrats a strong mandate."
         ],
-        remember: "The election of 1964 was not just about personalities. It was a direct argument over how much government should do."
+        remember: "The election was a direct argument over activist government versus limited government."
       },
       {
         label: "The Great Society",
         image: "url('images/lesson48/CRA1968.png')",
         heading: "Johnson Turned Vision into Legislation",
-        text: "Johnson described the Great Society as a nation that fought poverty and racial injustice while also improving knowledge, beauty, community, and contact with nature. Unlike Kennedy, he usually got his bills through Congress, thanks to a giant Democratic majority and his famous 'Johnson Treatment' of pressure, persuasion, and relentless follow-up.",
+        text: "Johnson described the Great Society as a nation that fought poverty and racial injustice while also improving education, community, beauty, and quality of life. He pushed that vision through Congress with unusual force.",
         bullets: [
-          "Johnson used praise, data, threats, and personal pressure to win votes.",
-          "He pushed more than 200 measures through Congress in five years.",
-          "The Great Society aimed at quality of life as much as economic growth."
+          "Johnson's famous 'treatment' pressured lawmakers into action.",
+          "A large Democratic majority helped him pass reform after reform.",
+          "In five years, he moved more than 200 measures through Congress."
         ],
-        remember: "Johnson's biggest advantage was knowing exactly how to move Congress from speeches to laws."
+        remember: "Johnson's presidency was defined by turning big ideas into actual law."
       },
       {
         label: "Civil Rights",
         image: "url('images/lesson48/kinglbj.png')",
         heading: "Ending Racial Injustice Was Central to the Program",
-        text: "Johnson made civil rights an early priority. He secured passage of the Civil Rights Act of 1964, supported the Voting Rights Act of 1965, and later signed the Civil Rights Act of 1968 to ban housing discrimination. Court rulings like Heart of Atlanta Motel v. United States also helped uphold this stronger federal role.",
+        text: "Civil rights stood near the center of Johnson's program. He signed the Civil Rights Act of 1964, the Voting Rights Act of 1965, and the Civil Rights Act of 1968 banning housing discrimination.",
         bullets: [
-          "The Civil Rights Act attacked discrimination in public accommodations.",
-          "The Voting Rights Act targeted barriers that kept African Americans from the ballot box.",
-          "Civil rights laws gave the Great Society a moral and constitutional purpose, not just an economic one."
+          "The federal government moved more aggressively against segregation.",
+          "Voting protections expanded access to political power.",
+          "Civil rights gave the Great Society a moral purpose."
         ],
-        remember: "The Great Society tried to make equality real through federal enforcement, not only rhetoric."
+        remember: "Johnson linked federal power to the unfinished work of racial equality."
       },
       {
         label: "War on Poverty",
         image: "linear-gradient(135deg, rgba(11, 33, 58, 0.45), rgba(4, 11, 22, 0.78)), url('images/lesson48/LBJ.png')",
         heading: "The War on Poverty Targeted Opportunity",
-        text: "Johnson expanded Kennedy's interest in antipoverty reform into a broad War on Poverty. The Economic Opportunity Act of 1964 created an Office of Economic Opportunity and launched programs such as Job Corps, Head Start, and VISTA, while HUD later focused federal attention on struggling urban neighborhoods.",
+        text: "The Economic Opportunity Act created the centerpiece of Johnson's War on Poverty. Its programs tried to attack the causes of poverty rather than only offering short-term relief.",
         bullets: [
-          "The goal was to attack the causes of poverty, not just provide short-term relief.",
-          "Job Corps trained young people, Head Start supported preschool children, and VISTA sent volunteers into poor communities.",
-          "HUD represented a larger federal effort to address urban decline and housing problems."
+          "Job Corps trained young people for work.",
+          "Head Start supported low-income preschool children.",
+          "VISTA sent volunteers into poor communities across the country."
         ],
-        remember: "Johnson believed government could expand opportunity if it invested directly in people and communities."
+        remember: "Johnson believed government could fight poverty by investing directly in people."
       },
       {
         label: "Health and Education",
         image: "url('images/lesson48/ladybird.png')",
         heading: "Reform Reached Hospitals, Schools, Culture, and Immigration",
-        text: "The Great Society widened federal involvement in everyday life. Medicare and Medicaid expanded health coverage, the Elementary and Secondary Education Act sent aid to needy students, and new support for the arts, humanities, and public broadcasting reflected Johnson's belief that a richer national life involved more than money. The Immigration Act of 1965 also ended the old national-origins quota system.",
+        text: "The Great Society expanded federal involvement in daily life through health care, education, culture, and immigration reform. These changes reshaped what many Americans expected government to provide.",
         bullets: [
-          "Medicare and Medicaid changed access to medical care for older and low-income Americans.",
-          "Federal aid reached classrooms, researchers, artists, and public television.",
-          "Immigration policy shifted toward family ties and skills instead of ethnic quotas."
+          "Medicare and Medicaid widened access to medical care.",
+          "Federal aid supported schools, arts, humanities, and public broadcasting.",
+          "The Immigration Act of 1965 ended the national-origins quota system."
         ],
-        remember: "The Great Society changed daily life not only through welfare policy, but through schools, hospitals, media, and immigration law."
+        remember: "The Great Society reshaped modern life through schools, hospitals, media, and immigration law."
       },
       {
         label: "Environment",
         image: "linear-gradient(135deg, rgba(13, 39, 66, 0.25), rgba(5, 12, 22, 0.82)), url('images/lesson48/florida.png')",
         heading: "Environment and Consumer Protection Became National Priorities",
-        text: "Inspired in part by Rachel Carson's Silent Spring, the Great Society era expanded concern for air, water, wildlife, and public beauty. Johnson worked with Congress on environmental laws while Lady Bird Johnson promoted beautification. At the same time, consumer protections addressed cigarette labeling, food standards, lending, and automobile safety.",
+        text: "The Great Society era also focused on the quality of American life. Environmental laws, beautification efforts, and consumer protections reflected the belief that government should guard public well-being in everyday life.",
         bullets: [
-          "Environmental reform grew from worries about chemicals, pollution, and damaged landscapes.",
+          "Silent Spring helped spark modern environmental concern.",
           "Lady Bird Johnson linked public policy to beauty, highways, and shared civic spaces.",
-          "Consumer laws assumed government should guard the public against hidden risks."
+          "Consumer laws targeted smoking, unsafe cars, and dishonest labeling."
         ],
-        remember: "Johnson's reform vision reached beyond poverty to the quality and safety of everyday American life."
+        remember: "Johnson's reforms reached beyond poverty to safety, beauty, and the environment."
       },
       {
         label: "Warren Court",
         image: "linear-gradient(135deg, rgba(17, 48, 82, 0.95), rgba(4, 10, 19, 0.98))",
         heading: "The Warren Court Reshaped Rights Through the Constitution",
-        text: "The Supreme Court under Chief Justice Earl Warren also transformed the 1960s. The Court enforced 'one person, one vote' in legislative districts, struck down state-sponsored school prayer, and expanded the rights of the accused in cases involving illegal searches, access to lawyers, and Miranda warnings. These decisions made the Court a major force in the era's domestic change.",
+        text: "The Supreme Court under Chief Justice Earl Warren reshaped politics, schools, and criminal justice. Its decisions expanded voting equality, limited school-sponsored prayer, and strengthened the rights of the accused.",
         bullets: [
-          "Baker v. Carr and Reynolds v. Sims pushed states to redraw districts more fairly.",
-          "Engel v. Vitale limited school-sponsored prayer under the First Amendment.",
-          "Mapp, Gideon, Escobedo, and Miranda strengthened protections in criminal cases."
+          "Baker v. Carr and Reynolds v. Sims enforced 'one person, one vote.'",
+          "Engel v. Vitale struck down state-sponsored prayer in public schools.",
+          "Mapp, Gideon, Escobedo, and Miranda broadened legal protections."
         ],
-        remember: "The 1960s changed American life through the courts as well as through Johnson's legislation."
+        remember: "The 1960s changed through court decisions as well as Johnson's legislation."
       }
     ];
 
