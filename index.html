@@ -1296,13 +1296,11 @@ const ERAS=[
   {name:'Reconstruction Era',years:'1861–1877',units:['unit1'],color:'#8b4513'},
   {name:'Gilded Age & Progressive',years:'1865–1920',units:['unit2a','unit2b'],color:'#7a5a10'},
   {name:'Empire & WWI',years:'1898–1920',units:['unit3a','unit3b'],color:'#1a4a7a'},
-  {name:'Boom, Bust & New Deal',years:'1920–1941',units:['unit4a','unit4b'],color:'#5a3a0a'},
-  {name:'WWII & Cold War',years:'1939–1963',units:['unit5a','unit5b'],color:'#2a3a1a'},
-  {name:'Civil Rights Era',years:'1954–1968',units:['unit6','unit7a'],color:'#7a2010'},
+  {name:'Boom & Bust',years:'1920–1933',units:['unit4a','eoc_midterm'],color:'#5a3a0a'},
+  {name:'New Deal & WWII',years:'1933–1945',units:['unit4b','unit5a'],color:'#2a3a1a'},
+  {name:'Cold War & Civil Rights',years:'1945–1968',units:['unit5b','unit6','unit7a'],color:'#7a2010'},
   {name:'Vietnam & Watergate',years:'1965–1975',units:['unit7b'],color:'#1a2a1a'},
   {name:'Contemporary America',years:'1980–Present',units:['unit8'],color:'#1a1a3a'},
-  {name:'Five Recurring Themes',years:'1861–Present',units:['theme_power','theme_freedom','theme_economy','theme_conflict','theme_identity'],color:'#6040a0'},
-  {name:'EOC Review',years:'1861–Present',units:['eoc_midterm'],color:'#2850a0'},
 ];
 
 // ── CHARACTER DATABASE ─────────────────────────────────
@@ -2217,6 +2215,21 @@ function renderArchive(){
           S.unitCards[unitId].push(cardId);
           saveS();
           notify('🃏 Card earned: '+cardId.replace(/_/g,' '));
+        }
+      }
+    }
+
+    // RPG character unlock — add to S.unlocked so shell collection updates
+    if(e.data.type==='RPG_CHAR_UNLOCKED'){
+      const charId=e.data.charId;
+      if(charId){
+        if(!Array.isArray(S.unlocked))S.unlocked=[];
+        if(!S.unlocked.includes(charId)){
+          S.unlocked.push(charId);
+          saveS();
+          notify('🎭 Character unlocked: '+(e.data.charName||charId).replace(/_/g,' '));
+          renderCharGrid&&renderCharGrid();
+          refreshProfile&&refreshProfile();
         }
       }
     }
