@@ -1418,6 +1418,112 @@ const CHARS=[
    unlockMethod:'complete:unit7b', unlockHint:'Complete Unit 7B',
    svg:()=>svgMedallion('#060606','#c9a84c',face('#d0a070','#1a1a1a',hair_long('#6a4a20'),'#1a1a2a',`<path d="M24 22 L26 17 L26 23" stroke="#c03030" stroke-width="1" fill="none"/>`)+'')},
 
+    // ── RPG ROSTER (Historian Ops — managed via S.unlocked) ──
+
+  // ── RPG STARTERS (match RPG roster IDs) ─────────────────────────────────
+  {id:'washington',      label:'George Washington',  cat:'historical', passive:'Father of the Nation: Balanced in all situations',
+   unlockMethod:'free', unlockHint:'Available in Historian Ops from the start',
+   svg:()=>svgMedallion('#080c10','#c9a84c',face('#d4a870','#1a1a1a',hair_long('#e8d0a0'),'#1a3060',`<rect x="14" y="22" width="12" height="1.5" rx=".5" fill="#c9a84c"/>`)+'')},
+  {id:'tubman',          label:'Harriet Tubman',     cat:'historical', passive:'Railroad: Recovery and survivability',
+   unlockMethod:'free', unlockHint:'Available in Historian Ops from the start',
+   svg:()=>svgMedallion('#080408','#c9a84c',face('#5a2a10','#0a0a0a',hair_short('#2a1a0a',11),'#1a0808'))},
+  {id:'roosevelt_t',     label:'Theodore Roosevelt', cat:'historical', passive:'Bully Pulpit: High HP and defense',
+   unlockMethod:'free', unlockHint:'Available in Historian Ops from the start',
+   svg:()=>svgMedallion('#0c0a06','#c9a84c',face('#d4a870','#1a0a00',hair_short('#4a2010',11),'#3a2010',beard('#3a1a08',.8)+glasses()))},
+
+  // ── RPG CHAPTER UNLOCKS ──────────────────────────────────────────────────
+  {id:'douglass',        label:'Frederick Douglass', cat:'historical', passive:'Abolitionist: Crit and streak bonus',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 1',
+   svg:()=>svgMedallion('#0a0808','#c9a84c',face('#6a3820','#0a0a0a',hair_afro('#2a1a0a'),'#1a0808',beard('#3a1a08',.6)))},
+  {id:'carnegie',        label:'Andrew Carnegie',    cat:'historical', passive:'Steel Empire: Gold multiplier',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 2',
+   svg:()=>svgMedallion('#0a0c10','#c9a84c',face('#e8c8a0','#1a1a1a',hair_short('#8b6a30'),'#1a2a3a',beard('#6a4a20',.5)))},
+  {id:'mother_jones',    label:'Mother Jones',        cat:'historical', passive:'Hell-Raiser: Resilience and recovery',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 2',
+   svg:()=>svgMedallion('#060808','#c9a84c',face('#c89878','#0a0a0a',hair_bun('#1a1a1a'),'#1a0a0a'))},
+  {id:'addams',          label:'Jane Addams',         cat:'historical', passive:'Hull House: Support and sustain',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 3',
+   svg:()=>svgMedallion('#080a0c','#c9a84c',face('#e8c8b0','#2a1a0a',hair_bun('#4a3020'),'#0a1a0a'))},
+  {id:'aguinaldo',       label:'Emilio Aguinaldo',    cat:'rival',      passive:'Resistance: High-risk offense',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 4',
+   svg:()=>svgMedallion('#0a0808','#c9a84c',face('#b07848','#1a0a00',hair_short('#1a0808'),'#2a1a0a'))},
+  {id:'bryan',           label:'W.J. Bryan',          cat:'historical', passive:'Cross of Gold: Gold and recovery hybrid',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 4',
+   svg:()=>svgMedallion('#080a0c','#c9a84c',face('#d4a870','#1a1a1a',hair_short('#3a2010'),'#1a1a3a'))},
+  {id:'wilson',          label:'Woodrow Wilson',      cat:'historical', passive:'14 Points: Balanced defense and utility',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 5',
+   svg:()=>svgMedallion('#060810','#c9a84c',face('#e8c8a0','#1a1a1a',hair_short('#6b4520'),'#00205b',glasses()))},
+  {id:'alvin_york',      label:'Alvin York',          cat:'historical', passive:'Sharpshooter: Strong offense and accuracy',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 5',
+   svg:()=>svgMedallion('#0a0c08','#c9a84c',face('#c8a070','#1a1a0a',hat_military('#556644'),'#3a4a2a'))},
+  {id:'hughes',          label:'Langston Hughes',     cat:'historical', passive:'Renaissance: Momentum and streak bonus',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 6',
+   svg:()=>svgMedallion('#060408','#c9a84c',face('#8a4a20','#0a0808',hair_short('#1a0808'),'#0a0818'))},
+  {id:'clara_bow',       label:'Clara Bow',           cat:'historical', passive:'It Girl: Speed and evade',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 6',
+   svg:()=>svgMedallion('#080408','#c9a84c',face('#e8c8a0','#1a1a1a',hair_short('#c84820'),'#1a0808'))},
+  {id:'perkins',         label:'Frances Perkins',     cat:'historical', passive:'Labor Secretary: Armor and recovery',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 7',
+   svg:()=>svgMedallion('#060810','#c9a84c',face('#d4b090','#2a1a0a',hair_bun('#3a2010'),'#1a0a1a'))},
+  {id:'eisenhower',      label:'Dwight Eisenhower',   cat:'historical', passive:'Supreme Commander: HP and boss resistance',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 8',
+   svg:()=>svgMedallion('#0a0c10','#c9a84c',face('#d4a870','#1a1a1a',hat_military('#4a5a3a'),'#3a4a2a',`<rect x="14" y="22" width="12" height="1.5" rx=".5" fill="#f0d060"/>`)+'')},
+  {id:'rosie',           label:'Rosie the Riveter',   cat:'historical', passive:'Home Front: Endurance and steady damage',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 8',
+   svg:()=>svgMedallion('#080a08','#c9a84c',face('#d4a870','#1a1a1a',hair_bun('#c84820'),'#1a1a3a',`<rect x="22" y="14" width="5" height="7" rx="1" fill="#c84820" opacity=".6"/>`)+'')},
+  {id:'truman',          label:'Harry Truman',        cat:'historical', passive:'Iron Resolve: Balanced wartime leader',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 9',
+   svg:()=>svgMedallion('#060810','#c9a84c',face('#e8c8a0','#1a1a1a',hair_short('#6b4520'),'#00205b',glasses()))},
+  {id:'stalin',          label:'Joseph Stalin',       cat:'rival',      passive:'Iron Curtain: Very high defense — attrition tank',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 9 (RIVAL)',
+   svg:()=>svgMedallion('#0a0808','#c9a84c',face('#c8a070','#1a1a1a',hair_short('#2a1a1a'),'#3a1a1a',beard('#2a1a1a',.7)))},
+  {id:'malcolm_x',       label:'Malcolm X',           cat:'historical', passive:'By Any Means: High-risk burst damage',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 10',
+   svg:()=>svgMedallion('#060408','#c9a84c',face('#8a4820','#0a0808',hair_short('#1a0808'),'#0a0a0a',glasses()))},
+  {id:'lbj',             label:'Lyndon B. Johnson',   cat:'historical', passive:'Great Society: Sustain and reward bonus',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 11',
+   svg:()=>svgMedallion('#080a0c','#c9a84c',face('#d4a870','#1a1a0a',hair_short('#3a2010'),'#3a2a1a'))},
+  {id:'nixon',           label:'Richard Nixon',       cat:'rival',      passive:'Détente: Trickster — utility and gold bonus',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 12 (RIVAL)',
+   svg:()=>svgMedallion('#060810','#c9a84c',face('#e8c8a0','#1a1a1a',hair_short('#3a2010'),'#1a1a3a',`<path d="M17 18 Q20 19 23 18" stroke="#a07040" stroke-width=".8" fill="none"/>`)+'')},
+  {id:'carter',          label:'Jimmy Carter',        cat:'historical', passive:'Plains Integrity: Balanced endurance',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 12',
+   svg:()=>svgMedallion('#080a0c','#c9a84c',face('#e8c8a0','#1a1a1a',hair_short('#c8a880'),'#1a2a1a'))},
+  {id:'obama',           label:'Barack Obama',        cat:'historical', passive:'Yes We Can: Balanced late-game leader',
+   unlockMethod:'rpg', unlockHint:'Unlock in Historian Ops — Chapter 13',
+   svg:()=>svgMedallion('#060408','#c9a84c',face('#8a4820','#0a0808',hair_short('#1a0808'),'#00205b',`<rect x="14" y="22" width="12" height="1.5" rx=".5" fill="#c9a84c"/>`)+'')},
+
+  // ── RPG THEME UNLOCKS ────────────────────────────────────────────────────
+  {id:'marshall',        label:'Thurgood Marshall',  cat:'special',    passive:'Balance of Power: Anti-boss precision',
+   unlockMethod:'rpg', unlockHint:'Unlock via Balance of Power theme campaign',
+   svg:()=>svgMedallion('#060408','#c9a84c',face('#7a4020','#0a0808',hair_short('#1a0808'),'#00205b',`<rect x="14" y="22" width="12" height="1.5" rx=".5" fill="#c9a84c"/>`)+'')},
+  {id:'anthony',         label:'Susan B. Anthony',   cat:'special',    passive:'Promise of Liberty: Persistence — reduced mistake penalty',
+   unlockMethod:'rpg', unlockHint:'Unlock via Promise of Liberty theme campaign',
+   svg:()=>svgMedallion('#060810','#c9a84c',face('#e8c8b0','#2a1a0a',hair_bun('#6a4a30'),'#3a1a3a'))},
+  {id:'jp_morgan',       label:'J.P. Morgan',        cat:'rival',      passive:'Engines of Change: High gold multiplier — economy rival',
+   unlockMethod:'rpg', unlockHint:'Unlock via Engines of Change theme campaign (RIVAL)',
+   svg:()=>svgMedallion('#0a0c10','#c9a84c',face('#e8c8a0','#1a1a1a',hair_short('#8b6a30'),'#1a2a3a',beard('#6a4a20',.8)+glasses()))},
+  {id:'lenin',           label:'Vladimir Lenin',     cat:'rival',      passive:'Moments of Crisis: Control and tactical pressure',
+   unlockMethod:'rpg', unlockHint:'Unlock via Moments of Crisis theme campaign (RIVAL)',
+   svg:()=>svgMedallion('#0a0808','#c9a84c',face('#d4a870','#1a1a1a',hair_short('#3a2010'),'#3a1a1a',beard('#4a2a1a',.6)))},
+  {id:'emma_lazarus',    label:'Emma Lazarus',       cat:'special',    passive:'American Identity: High recovery and morale bonus',
+   unlockMethod:'rpg', unlockHint:'Unlock via American Identity theme campaign',
+   svg:()=>svgMedallion('#060810','#c9a84c',face('#d4b090','#2a1a0a',hair_long('#3a2010'),'#1a2a3a'))},
+
+  // ── RPG PRESTIGE ─────────────────────────────────────────────────────────
+  {id:'historian_prime', label:'Historian Prime',    cat:'special',    passive:'Prestige: Elite balanced build — the complete historian',
+   unlockMethod:'rpg', unlockHint:'Unlock by completing the EOC Final Challenge in Historian Ops',
+   svg:()=>svgMedallion('#0a0c18','#f0d060',`
+    <circle cx="20" cy="15" r="7" fill="#d4a870"/>
+    <ellipse cx="20" cy="26" rx="9" ry="5.5" fill="#1a2a4a"/>
+    <rect x="13" y="21" width="14" height="8" fill="#1a2a4a"/>
+    <ellipse cx="17" cy="14" rx="1.1" ry="1.3" fill="#1a0a00"/>
+    <ellipse cx="23" cy="14" rx="1.1" ry="1.3" fill="#1a0a00"/>
+    <path d="M17 18 Q20 19.5 23 18" stroke="#a07040" stroke-width=".8" fill="none"/>
+    <rect x="14" y="22" width="12" height="1.5" rx=".5" fill="#f0d060"/>
+    <path d="M13 8 Q14 4 20 5 Q26 4 27 8 Q23 6 20 7 Q17 6 13 8Z" fill="#f0d060" opacity=".9"/>
+    <text x="20" y="12" text-anchor="middle" font-size="5" fill="#f0d060" opacity=".8">★</text>`)},
+
   // ── SPECIAL ────────────────────────────────────────
   {id:'mr_olson', label:'Mr. Olson', cat:'special', passive:'Teacher Mode: All bonuses active',
    unlockMethod:'teacher', unlockHint:'Teacher login required',
@@ -1572,6 +1678,7 @@ function checkUnlocks(){
   CHARS.forEach(ch=>{
     if(S.unlocked.includes(ch.id)||ch.unlockMethod==='teacher')return;
     if(ch.unlockMethod==='free'){if(!S.unlocked.includes(ch.id))S.unlocked.push(ch.id);return;}
+    if(ch.unlockMethod==='rpg')return; // Managed by Historian Ops RPG
     if(ch.unlockMethod==='teacher')return;
     // Special: Mr. Olson unlocks when student earns Gold or better on ALL 19 units
     if(ch.id==='mr_olson'){
