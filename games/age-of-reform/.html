@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Age of Reform — Unit 2B: The Progressive Era</title>
+<title>Empire Rising — Unit 3A: American Imperialism</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0f0a0a;--bg2:#191010;--bg3:#211414;--panel:#271616;
-  --border:#301a1a;--border2:#402020;
-  --gold:#c87060;--gold2:#a05040;--gold3:#e89060;
-  --red:#8b2020;--red2:#b03030;
-  --green:#1a5a38;--green2:#2a7a50;
+  --bg:#07090e;--bg2:#0b0d18;--bg3:#101320;--panel:#141828;
+  --border:#1c2240;--border2:#243060;
+  --gold:#c8a030;--gold2:#a07820;--gold3:#e8c050;
+  --red:#8a1818;--red2:#b02020;
+  --green:#1a5a2a;--green2:#2a7a3a;
   --teal:#186858;--teal2:#207868;
   --blue:#1a2850;--blue2:#283878;
-  --text:#f0e0d8;--text2:#b09088;--text3:#806058;--cream:#f8ece8;
+  --text:#e0dcc8;--text2:#a09870;--text3:#686040;--cream:#f0e8d0;
   --bebas:'Bebas Neue',sans-serif;
   --playfair:'Playfair Display',serif;
   --crimson:'Crimson Text',serif;
@@ -24,14 +24,14 @@
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:var(--crimson);min-height:100vh;overflow-x:hidden;
   background-image:
-    radial-gradient(ellipse at 50% 0%,   rgba(160,60,40,.28)  0%,  transparent 60%),
-    radial-gradient(ellipse at 15% 60%,  rgba(120,40,25,.18)  0%,  transparent 55%),
-    radial-gradient(ellipse at 85% 85%,  rgba( 80,25,15,.15)  0%,  transparent 50%),
-    linear-gradient(175deg, #180c0a 0%, #120806 40%, #0e0604 100%);}
-/* Newspaper / printing press watermark (Progressive Era) */
+    radial-gradient(ellipse at 50% 0%,   rgba(160,120,30,.22)  0%,  transparent 60%),
+    radial-gradient(ellipse at 15% 60%,  rgba(120, 90,20,.14)  0%,  transparent 55%),
+    radial-gradient(ellipse at 85% 85%,  rgba( 80, 60,10,.12)  0%,  transparent 50%),
+    linear-gradient(175deg, #09091a 0%, #070715 40%, #050510 100%);}
+/* Globe / compass rose watermark (Imperialism) */
 body::after{content:'';position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' width='400' height='400'%3E%3Cg transform='translate(200,200)' opacity='0.09' fill='none' stroke='rgba(200,112,96,1)'%3E%3Crect x='-130' y='-160' width='260' height='320' rx='8' stroke-width='5'/%3E%3Crect x='-110' y='-140' width='220' height='35' rx='3' stroke-width='3'/%3E%3Cline x1='-110' y1='-88' x2='110' y2='-88' stroke-width='2'/%3E%3Cline x1='-110' y1='-65' x2='110' y2='-65' stroke-width='2'/%3E%3Cline x1='-110' y1='-42' x2='110' y2='-42' stroke-width='2'/%3E%3Cline x1='-110' y1='-19' x2='60' y2='-19' stroke-width='2'/%3E%3Cline x1='-110' y1='10' x2='110' y2='10' stroke-width='2'/%3E%3Cline x1='-110' y1='33' x2='110' y2='33' stroke-width='2'/%3E%3Cline x1='-110' y1='56' x2='80' y2='56' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E");
-  background-size:480px 480px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' width='400' height='400'%3E%3Cg transform='translate(200,200)' opacity='0.09' stroke='rgba(200,160,48,1)' fill='none'%3E%3Ccircle cx='0' cy='0' r='155' stroke-width='3'/%3E%3Ccircle cx='0' cy='0' r='110' stroke-width='1.5' stroke-dasharray='6,8'/%3E%3Ccircle cx='0' cy='0' r='65' stroke-width='1.5' stroke-dasharray='4,6'/%3E%3Cline x1='0' y1='-155' x2='0' y2='155' stroke-width='1.5'/%3E%3Cline x1='-155' y1='0' x2='155' y2='0' stroke-width='1.5'/%3E%3Cline x1='-110' y1='-110' x2='110' y2='110' stroke-width='1' stroke-dasharray='3,5'/%3E%3Cline x1='110' y1='-110' x2='-110' y2='110' stroke-width='1' stroke-dasharray='3,5'/%3E%3Cpolygon points='0,-22 6,-6 22,0 6,6 0,22 -6,6 -22,0 -6,-6' fill='rgba(200,160,48,0.8)' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:500px 500px;
   background-position:center center;
   background-repeat:no-repeat;
   pointer-events:none;z-index:0;opacity:1;}
@@ -502,18 +502,18 @@ body.hud-active #root{padding-top:68px;}
   </div>
 
   <!-- Unit title header -->
-  <div class="section-head" style="margin-top:4px;">Unit 2B — The Progressive Era</div>
+  <div class="section-head" style="margin-top:4px;">Unit 3A — American Imperialism</div>
 
   <!-- Essential question -->
   <div class="eq-banner">
-    <strong>Essential Question:</strong> How did progressive reformers use journalism, legislation, and political organizing to expose and address the problems created by industrialization, urbanization, and political corruption?
+    <strong>Essential Question:</strong> How and why did the United States build an overseas empire at the turn of the twentieth century, and what were the costs and consequences of that expansion?
   </div>
 
   <!-- Lesson / chapter cards — rendered by JS -->
   <div id="hub-chapters"></div>
 
   <!-- Divider -->
-  <div class="deco-divider"><span class="deco-divider-icon">📰</span></div>
+  <div class="deco-divider"><span class="deco-divider-icon">🌐</span></div>
 
   <!-- Badges row — rendered by JS -->
   <div class="section-head" style="font-size:14px;">Badges</div>
@@ -594,7 +594,7 @@ body.hud-active #root{padding-top:68px;}
     <div class="briefing-header">
       <div>
         <div class="briefing-eyebrow" id="briefing-eyebrow">LESSON 38 · MISSION BRIEFING</div>
-        <div class="briefing-title" id="briefing-title">The Progressive Era</div>
+        <div class="briefing-title" id="briefing-title">American Imperialism</div>
       </div>
       <button class="briefing-close-btn" onclick="closeBriefing()">✕ Close</button>
     </div>
@@ -633,8 +633,8 @@ body.hud-active #root{padding-top:68px;}
 
     <!-- Trophy badge -->
     <div class="complete-badge" id="complete-badge">🏆</div>
-    <div class="complete-unit-lbl" id="complete-unit-lbl">UNIT 2B</div>
-    <div class="complete-lesson-title" id="complete-lesson-title">The Progressive Era</div>
+    <div class="complete-unit-lbl" id="complete-unit-lbl">UNIT 3A</div>
+    <div class="complete-lesson-title" id="complete-lesson-title">American Imperialism</div>
     <div class="complete-tier" id="complete-tier" style="color:var(--gold)">GOLD — 90%</div>
 
     <!-- Stats row -->
@@ -669,7 +669,7 @@ body.hud-active #root{padding-top:68px;}
     <div class="complete-btn-group">
       <!-- Retry same lesson -->
       <button class="btn full" onclick="retryLesson()"><span>↺ Retry This Lesson</span></button>
-      <!-- Replay entire unit from Lesson 16 (always visible) -->
+      <!-- Replay entire unit from Lesson 19 (always visible) -->
       <button class="btn full" id="btn-replay-all" onclick="replayFromBeginning()" style="border-color:var(--gold2);color:var(--gold2);display:none;"><span>⟳ Replay Unit From Beginning</span></button>
       <!-- Return to unit hub -->
       <button class="btn full green" onclick="returnToUnitHub()"><span>← Return to Unit Hub</span></button>
@@ -709,8 +709,8 @@ body.hud-active #root{padding-top:68px;}
 
 <div id="login-gate" class="show">
   <div class="login-box">
-    <div class="login-logo">AGE OF<br>REFORM</div>
-    <div class="login-sub">Unit 2B — The Progressive Era</div>
+    <div class="login-logo">EMPIRE<br>RISING</div>
+    <div class="login-sub">Unit 3A — American Imperialism</div>
 
     <div class="login-field">
       <label>Your Name</label>
@@ -789,7 +789,7 @@ body.hud-active #root{padding-top:68px;}
     <button class="overlay-close" onclick="document.getElementById('cardcoll-overlay').classList.remove('show')">CLOSE</button>
   </div>
   <div style="font-family:var(--crimson);font-size:15px;color:var(--text2);margin-bottom:16px;font-style:italic;">
-    Earn historical figure cards by completing lessons. Each card tells the story of a key The Progressive Era figure.
+    Earn historical figure cards by completing lessons. Each card tells the story of a key American Imperialism figure.
   </div>
   <div class="card-grid" id="cardcoll-grid"></div>
 </div>
@@ -801,11 +801,11 @@ body.hud-active #root{padding-top:68px;}
 // CONSTANTS & KEYS
 // ════════════════════════════════════════════
 const SHELL_KEY   = 'ac_shell_state';
-const SAVE_KEY   = 'ageofreform_v1_save';
-const UNIT_ID     = 'unit2b';
+const SAVE_KEY   = 'empirerising_v1_save';
+const UNIT_ID     = 'unit3a';
 
 // ── GOLD ECONOMY ──────────────────────────────────────
-// These are the canonical reward values for UNIT 2B.
+// These are the canonical reward values for UNIT 3A.
 // All gold earned here flows into the shell's global wallet
 // and from there into the RPG. Adjust by lesson type below.
 //
@@ -863,329 +863,329 @@ const AC_HEADERS  = {'Content-Type':'application/json','apikey':AC_SUPA_KEY,'Aut
 const LESSONS = [
 
   // ==================================================
-  // LESSON 16 — Uncovering Problems
+  // LESSON 19 — Setting a Course
   // ==================================================
   {
-    id: 'lesson16',
-    label: 'LESSON 16',
-    title: 'Uncovering Problems',
-    sub: 'Problems at the Turn of the Century · 1900s',
-    icon: '📰',
+    id: 'lesson19',
+    label: 'LESSON 19',
+    title: 'Setting a Course',
+    sub: 'Foreign Policy and Expansionism · 1800s',
+    icon: '🧭',
     type: 'lesson',
     briefing: {
-      location: 'Problems at the Turn of the Century',
-      date: '1900s',
-      role: 'investigative reporter',
-      text: 'Factories are booming, cities are growing, and wealth is rising fast, but reformers see serious danger beneath the surface. Crowded housing, machine politics, unsafe workplaces, environmental damage, and corporate power all raise questions about who benefits from modern America. Your task is to identify the major problems that Progressive reformers wanted the nation to face.',
-      tags: ['SS.912.A.3.9']
+      location: 'Foreign Policy and Expansionism',
+      date: '1800s',
+      role: 'naval policy adviser',
+      text: 'The United States is looking outward. Industrial growth, new markets, naval strategy, missionary activity, and ideas about national destiny are pushing leaders to rethink foreign policy. Before the Spanish-American War begins, Americans are already arguing about trade, influence, and whether expansion is a duty, a danger, or both.',
+      tags: ['SS.912.A.4.10']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Uncovering Problems', cards: ['Ida Tarbell', 'Muckraker Press Pass'] },
+    rewards: { badge: 'Setting a Course', cards: ['Alfred Thayer Mahan', 'Open Door Policy'] },
     bank: [
       {
-        id: '2B-L16-Q1',
-        text: 'Why did many Progressives see rapidly growing cities as places in urgent need of reform?',
-        choices: ['Overcrowding, poor sanitation, and weak housing standards created serious health and safety problems.', 'Overcrowding, poor sanitation, and weak housing standards had already been solved by city machines.', 'Overcrowding, poor sanitation, and weak housing standards mainly affected wealthy suburban communities.', 'Overcrowding, poor sanitation, and weak housing standards mattered little beside foreign policy debates.'],
-        correctAnswer: 'Overcrowding, poor sanitation, and weak housing standards created serious health and safety problems.',
-        explanation: 'Rapid urban growth often outpaced city services, leaving many working-class families in unhealthy and unsafe conditions.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L19-Q1',
+        text: 'Why did many American leaders become more interested in expansionism in the late 1800s?',
+        choices: ['They wanted new markets, strategic bases, and greater influence as the nation grew industrially.', 'They wanted to withdraw from world trade and focus only on settling the remaining western frontier.', 'They wanted to end naval spending and avoid involvement in Pacific and Caribbean affairs entirely.', 'They wanted to transfer U.S. foreign policy to European empires that already controlled overseas colonies.'],
+        correctAnswer: 'They wanted new markets, strategic bases, and greater influence as the nation grew industrially.',
+        explanation: 'Industrial expansion, global competition, and new ideas about national power pushed many policymakers toward overseas involvement.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L16-Q2',
-        text: 'Why were tenement buildings often criticized by reformers?',
-        choices: ['They packed many families into cramped, poorly ventilated spaces with limited light and sanitation.', 'They packed many families into cramped, poorly ventilated spaces but offered unusually high safety standards.', 'They packed many families into cramped, poorly ventilated spaces mostly in rural farming communities.', 'They packed many families into cramped, poorly ventilated spaces only after zoning laws improved housing.'],
-        correctAnswer: 'They packed many families into cramped, poorly ventilated spaces with limited light and sanitation.',
-        explanation: 'Tenements became symbols of urban poverty because they exposed how little protection many industrial workers had.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L19-Q2',
+        text: 'What was Alfred Thayer Mahan’s main argument about national power?',
+        choices: ['He argued that a strong navy and overseas bases were essential to great-power status.', 'He argued that a strong navy and overseas bases would weaken trade by provoking unnecessary wars.', 'He argued that a strong navy and overseas bases mattered less than retreating from foreign commerce.', 'He argued that a strong navy and overseas bases should be replaced by a permanent alliance with Britain.'],
+        correctAnswer: 'He argued that a strong navy and overseas bases were essential to great-power status.',
+        explanation: 'Mahan believed sea power, coaling stations, and a modern navy were key ingredients of international influence.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L16-Q3',
-        text: 'What was the main criticism of urban political machines?',
-        choices: ['They exchanged favors and jobs for votes while encouraging corruption and blocking honest government.', 'They exchanged favors and jobs for votes while expanding direct democracy and reducing corruption.', 'They exchanged favors and jobs for votes mainly to protect civil service reform from party bosses.', 'They exchanged favors and jobs for votes only in western territories without major immigrant populations.'],
-        correctAnswer: 'They exchanged favors and jobs for votes while encouraging corruption and blocking honest government.',
-        explanation: 'Machine politics gave assistance to some city residents, but reformers argued that it undermined fairness and accountability.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L19-Q3',
+        text: 'Why was Hawaii strategically important to American expansionists?',
+        choices: ['Its location made it valuable as a naval and commercial stop between the United States and Asia.', 'Its location made it valuable mainly because it was rich in gold and silver needed for coinage reforms.', 'Its location made it valuable because it blocked all European trade routes to the Atlantic coast.', 'Its location made it valuable only after the Spanish-American War ended and the canal at Panama opened.'],
+        correctAnswer: 'Its location made it valuable as a naval and commercial stop between the United States and Asia.',
+        explanation: 'Hawaii’s position in the Pacific made it important to naval strategy, trade, and the larger push toward Asian markets.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L16-Q4',
-        text: 'What role did muckrakers play in the Progressive Era?',
-        choices: ['They investigated corruption and social abuse, helping persuade the public that reform was necessary.', 'They investigated corruption and social abuse mainly to defend monopolies from new federal regulation.', 'They investigated corruption and social abuse only after Congress banned sensational magazine reporting.', 'They investigated corruption and social abuse mostly to promote isolation from immigration and world trade.'],
-        correctAnswer: 'They investigated corruption and social abuse, helping persuade the public that reform was necessary.',
-        explanation: 'Muckrakers used journalism to expose problems that many citizens either ignored or did not fully understand.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L19-Q4',
+        text: 'What was the main goal of the Open Door Policy in China?',
+        choices: ['To keep trade open to all major powers and prevent China from being divided into exclusive colonies.', 'To keep trade open to all major powers and encourage China to become an American military protectorate.', 'To keep trade open to all major powers by forcing Japan to abandon influence in Korea immediately.', 'To keep trade open to all major powers while ending American commercial activity in the Pacific.'],
+        correctAnswer: 'To keep trade open to all major powers and prevent China from being divided into exclusive colonies.',
+        explanation: 'The Open Door Policy sought equal commercial access in China rather than allowing one imperial power to shut out the others.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L16-Q5',
-        text: 'Why were large trusts and monopolies a major target of reformers?',
-        choices: ['Many people feared they concentrated too much economic power and weakened competition and consumer choice.', 'Many people feared they concentrated too much economic power but always guaranteed fair wages and prices.', 'Many people feared they concentrated too much economic power only in agriculture rather than industry.', 'Many people feared they concentrated too much economic power because they opposed railroad expansion entirely.'],
-        correctAnswer: 'Many people feared they concentrated too much economic power and weakened competition and consumer choice.',
-        explanation: 'Progressives often argued that concentrated corporate power threatened both democracy and economic fairness.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L19-Q5',
+        text: 'How did the closing of the frontier influence some supporters of expansion?',
+        choices: ['They argued that if continental expansion was ending, the nation should seek opportunity overseas instead.', 'They argued that if continental expansion was ending, the nation should abandon trade and stop building ships.', 'They argued that if continental expansion was ending, the nation should return western lands to Spain and Mexico.', 'They argued that if continental expansion was ending, the nation should avoid all diplomatic contact with Asia.'],
+        correctAnswer: 'They argued that if continental expansion was ending, the nation should seek opportunity overseas instead.',
+        explanation: 'Some expansionists believed the end of westward settlement meant the United States needed a new arena for economic and strategic growth.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L16-Q6',
-        text: 'Why did reformers push for stronger food and drug protections in the early 1900s?',
-        choices: ['Reports of unsanitary processing and misleading products convinced many Americans that regulation was needed.', 'Reports of unsanitary processing and misleading products convinced many Americans to end all factory inspection.', 'Reports of unsanitary processing and misleading products affected only imported goods, not American industry.', 'Reports of unsanitary processing and misleading products appeared after Progressive reform had already ended.'],
-        correctAnswer: 'Reports of unsanitary processing and misleading products convinced many Americans that regulation was needed.',
-        explanation: 'Public outrage over unsafe products helped turn consumer protection into a national reform issue.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L19-Q6',
+        text: 'Why did some Americans describe expansion in moral or religious terms?',
+        choices: ['They believed the United States had a duty to spread Christianity, democracy, and what they saw as civilization.', 'They believed the United States had a duty to end all missionary activity and separate trade from religion.', 'They believed the United States had a duty to restore old colonial empires under Spanish and Portuguese control.', 'They believed the United States had a duty to keep its culture isolated from all non-Western societies.'],
+        correctAnswer: 'They believed the United States had a duty to spread Christianity, democracy, and what they saw as civilization.',
+        explanation: 'Expansion was sometimes justified not only through economics and strategy, but also through cultural and religious claims about national mission.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L16-Q7',
-        text: 'Why did child labor become such a visible issue for Progressives?',
-        choices: ['Children often worked long hours for low pay in dangerous conditions that limited their education.', 'Children often worked long hours for low pay, but reformers believed that schooling was unnecessary.', 'Children often worked long hours for low pay mostly in federal office jobs rather than factories.', 'Children often worked long hours for low pay only after labor unions had already won major protections.'],
-        correctAnswer: 'Children often worked long hours for low pay in dangerous conditions that limited their education.',
-        explanation: 'Reformers saw child labor as both a moral problem and a sign that industrial society needed stronger protections.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L19-Q7',
+        text: 'Why is the purchase of Alaska often seen as an early sign of later American expansionism?',
+        choices: ['It showed that U.S. leaders were willing to acquire territory for strategic and economic reasons beyond the mainland.', 'It showed that U.S. leaders were unwilling to acquire territory for strategic and economic reasons beyond the mainland.', 'It showed that U.S. leaders wanted to transfer Pacific affairs entirely to Russia and avoid future involvement.', 'It showed that U.S. leaders were ready to create a military alliance with Spain against Britain and France.'],
+        correctAnswer: 'It showed that U.S. leaders were willing to acquire territory for strategic and economic reasons beyond the mainland.',
+        explanation: 'Though mocked at first, Alaska later appeared to fit a broader pattern of looking beyond the continental United States.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L16-Q8',
-        text: 'Why did conservation become part of the Progressive reform agenda?',
-        choices: ['Many Americans worried that forests, land, and natural resources were being wasted too quickly.', 'Many Americans worried that forests, land, and natural resources were being preserved too aggressively.', 'Many Americans worried that forests, land, and natural resources should be controlled only by city machines.', 'Many Americans worried that forests, land, and natural resources mattered less than tariff policy alone.'],
-        correctAnswer: 'Many Americans worried that forests, land, and natural resources were being wasted too quickly.',
-        explanation: 'Progressive conservationists believed government should manage resources more responsibly for the public good.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L19-Q8',
+        text: 'Why did expansionists care so much about influence in both the Caribbean and the Pacific?',
+        choices: ['Those regions were linked to shipping routes, trade access, and naval strategy in a growing world economy.', 'Those regions were linked only to domestic farming, which mattered more than trade or naval strategy.', 'Those regions were linked mainly to European religious politics and had little value to American commerce.', 'Those regions were linked to landlocked railroads, which made overseas naval policy mostly unnecessary.'],
+        correctAnswer: 'Those regions were linked to shipping routes, trade access, and naval strategy in a growing world economy.',
+        explanation: 'American leaders increasingly viewed sea lanes, ports, and island bases as part of a single global strategy.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L16-Q9',
-        text: 'What larger concern connected many Progressive complaints about labor, housing, and politics?',
-        choices: ['Reformers believed industrial society had produced deep inequality that government could no longer ignore.', 'Reformers believed industrial society had produced deep inequality, but private charities had solved it.', 'Reformers believed industrial society had produced deep inequality only in the South and not northern cities.', 'Reformers believed industrial society had produced deep inequality because voters had too much influence already.'],
-        correctAnswer: 'Reformers believed industrial society had produced deep inequality that government could no longer ignore.',
-        explanation: 'Progressivism grew from the belief that modern industrial life had created problems too large for individuals alone to fix.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L19-Q9',
+        text: 'Why did critics of expansionism oppose acquiring overseas territories?',
+        choices: ['They feared empire would betray republican ideals and entangle the United States in unjust domination abroad.', 'They feared empire would make the United States too weak to trade with Latin America and Asia.', 'They feared empire would force the nation to abandon all naval power and return to European dependence.', 'They feared empire would require immediate statehood for every territory the United States might ever buy.'],
+        correctAnswer: 'They feared empire would betray republican ideals and entangle the United States in unjust domination abroad.',
+        explanation: 'Anti-imperialists argued that ruling distant peoples without consent contradicted the nation’s own claims about liberty and self-government.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L16-Q10',
-        text: 'What best summarizes the lesson of problems at the turn of the century?',
-        choices: ['Rapid industrial growth created serious social and political problems that inspired demands for reform.', 'Rapid industrial growth created serious social and political problems that ended interest in reform.', 'Rapid industrial growth created serious social and political problems only in foreign colonies, not America.', 'Rapid industrial growth created serious social and political problems that city bosses solved permanently.'],
-        correctAnswer: 'Rapid industrial growth created serious social and political problems that inspired demands for reform.',
-        explanation: 'The first stage of the Progressive Era was recognizing that economic growth had produced major costs as well as benefits.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L19-Q10',
+        text: 'What best explains how American foreign policy was changing by the end of the nineteenth century?',
+        choices: ['The nation was moving from continental growth toward a more active search for overseas influence and power.', 'The nation was moving from continental growth toward permanent neutrality and withdrawal from world commerce.', 'The nation was moving from continental growth toward dependence on European empires for military protection.', 'The nation was moving from continental growth toward a policy of giving up Pacific interests and naval expansion.'],
+        correctAnswer: 'The nation was moving from continental growth toward a more active search for overseas influence and power.',
+        explanation: 'By the 1890s, many policymakers were beginning to see the United States as a nation whose future involved global reach, not just continental control.',
+        standard: 'SS.912.A.4.10'
       },
     ]
   },
 
   // ==================================================
-  // LESSON 17 — The Progressives Respond
+  // LESSON 20 — Splendid Little War
   // ==================================================
   {
-    id: 'lesson17',
-    label: 'LESSON 17',
-    title: 'The Progressives Respond',
-    sub: 'Reform Movements in Action · 1900s-1910s',
-    icon: '⚖️',
+    id: 'lesson20',
+    label: 'LESSON 20',
+    title: 'Splendid Little War',
+    sub: 'The Spanish-American War · 1898',
+    icon: '💥',
     type: 'lesson',
     briefing: {
-      location: 'Reform Movements in Action',
-      date: '1900s-1910s',
-      role: 'settlement house organizer',
-      text: 'Once reformers identified the problems of modern America, they moved to action. Journalists exposed abuse, settlement workers served immigrant neighborhoods, labor activists pushed for safer jobs, suffragists demanded political power, and new democratic reforms challenged old party machines. This mission focuses on how Progressives tried to respond before reform moved fully onto the national stage.',
-      tags: ['SS.912.A.3.9', 'SS.912.A.3.10']
+      location: 'The Spanish-American War',
+      date: '1898',
+      role: 'war correspondent',
+      text: 'Events in Cuba, sensational journalism, and the explosion of the USS Maine push the United States into war with Spain. The conflict is short, but its consequences are enormous. This lesson follows how the war began, how Americans fought it, and why a brief military victory turned into a major turning point in U.S. history.',
+      tags: ['SS.912.A.4.10']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'The Progressives Respond', cards: ['Jane Addams', 'NAACP Charter'] },
+    rewards: { badge: 'Splendid Little War', cards: ['USS Maine', 'Rough Riders'] },
     bank: [
       {
-        id: '2B-L17-Q1',
-        text: 'What was the main goal of settlement houses such as Hull House?',
-        choices: ['They offered services and education in poor neighborhoods while helping immigrants adjust to city life.', 'They offered services and education in poor neighborhoods mainly to expand party-machine control of elections.', 'They offered services and education in poor neighborhoods only after immigrants moved back to rural areas.', 'They offered services and education in poor neighborhoods while opposing public health and child welfare laws.'],
-        correctAnswer: 'They offered services and education in poor neighborhoods while helping immigrants adjust to city life.',
-        explanation: 'Settlement houses combined direct service with reform activism and became central institutions of Progressive social work.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L20-Q1',
+        text: 'Why were events in Cuba so important to the outbreak of the Spanish-American War?',
+        choices: ['The Cuban revolt against Spanish rule drew American sympathy and increased pressure for intervention.', 'The Cuban revolt against Spanish rule drew American sympathy only after Spain had already surrendered peacefully.', 'The Cuban revolt against Spanish rule drew American sympathy because Cuba asked to become a British colony.', 'The Cuban revolt against Spanish rule drew American sympathy mainly because it threatened U.S. control of Hawaii.'],
+        correctAnswer: 'The Cuban revolt against Spanish rule drew American sympathy and increased pressure for intervention.',
+        explanation: 'American attention to Cuba grew because the revolt was framed as both a humanitarian crisis and a nearby strategic issue.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L17-Q2',
-        text: 'What were Progressive labor reformers generally trying to accomplish?',
-        choices: ['They wanted shorter hours, safer workplaces, and stronger protections for women and children.', 'They wanted shorter hours, safer workplaces, and the end of all factory inspection requirements.', 'They wanted shorter hours, safer workplaces only for managers rather than industrial workers.', 'They wanted shorter hours, safer workplaces mainly by reducing voting rights for immigrants.'],
-        correctAnswer: 'They wanted shorter hours, safer workplaces, and stronger protections for women and children.',
-        explanation: 'Labor reformers focused on limiting abuse in industrial work and making government more responsive to working people.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L20-Q2',
+        text: 'How did yellow journalism affect public attitudes before the war?',
+        choices: ['Sensational reporting inflamed public emotion and encouraged stronger support for action against Spain.', 'Sensational reporting calmed public emotion and persuaded most newspapers to defend Spanish policy in Cuba.', 'Sensational reporting had little effect because newspapers avoided stories about imperialism and foreign affairs.', 'Sensational reporting ended once Congress banned illustrated newspapers from covering overseas conflicts.'],
+        correctAnswer: 'Sensational reporting inflamed public emotion and encouraged stronger support for action against Spain.',
+        explanation: 'Exaggerated or dramatic coverage helped shape opinion by presenting the Cuban conflict in highly emotional terms.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L17-Q3',
-        text: 'Why did Progressives support measures such as the initiative, referendum, and recall?',
-        choices: ['They believed these reforms would weaken party bosses and give voters more direct influence.', 'They believed these reforms would weaken party bosses by removing ordinary voters from politics entirely.', 'They believed these reforms would weaken party bosses only if senators were chosen by governors.', 'They believed these reforms would weaken party bosses mainly by reducing the power of local newspapers.'],
-        correctAnswer: 'They believed these reforms would weaken party bosses and give voters more direct influence.',
-        explanation: 'Direct democracy reforms were meant to make government more accountable and less controlled by political machines.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L20-Q3',
+        text: 'Why did the explosion of the USS Maine become such a powerful symbol in 1898?',
+        choices: ['Many Americans blamed Spain quickly, turning the explosion into a rallying cry for war.', 'Many Americans blamed Spain quickly, but only after Spain admitted responsibility and paid damages at once.', 'Many Americans blamed Spain quickly because the explosion had happened in Puerto Rico rather than Cuba.', 'Many Americans blamed Spain quickly even though the ship had been sunk by Germany in the Atlantic.'],
+        correctAnswer: 'Many Americans blamed Spain quickly, turning the explosion into a rallying cry for war.',
+        explanation: 'Even without clear evidence at the time, the Maine became a symbol used by newspapers and politicians to increase support for intervention.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L17-Q4',
-        text: 'What problem was the direct primary supposed to address?',
-        choices: ['It reduced the power of party leaders by allowing voters to choose candidates more directly.', 'It reduced the power of party leaders by allowing state legislatures to appoint all candidates directly.', 'It reduced the power of party leaders mainly by replacing local elections with presidential appointments.', 'It reduced the power of party leaders only after national parties gave up using conventions.'],
-        correctAnswer: 'It reduced the power of party leaders by allowing voters to choose candidates more directly.',
-        explanation: 'Progressives hoped primaries would break the control that party insiders had over nominations.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L20-Q4',
+        text: 'What did the Teller Amendment promise concerning Cuba?',
+        choices: ['The United States would not annex Cuba after the war and would recognize Cuban independence.', 'The United States would not annex Cuba after the war, but Spain would keep control of its trade policy.', 'The United States would not annex Cuba after the war unless the island requested immediate statehood.', 'The United States would not annex Cuba after the war, but Germany would supervise its government temporarily.'],
+        correctAnswer: 'The United States would not annex Cuba after the war and would recognize Cuban independence.',
+        explanation: 'The Teller Amendment was meant to reassure Americans and Cubans that the war was not being fought simply to seize Cuba.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L17-Q5',
-        text: 'Why was the creation of the NAACP significant during the Progressive Era?',
-        choices: ['It showed that civil rights activism was part of reform, even though racism limited Progressive gains.', 'It showed that civil rights activism was part of reform only after segregation had already been ended.', 'It showed that civil rights activism was part of reform mainly by supporting literacy tests and poll taxes.', 'It showed that civil rights activism was part of reform while rejecting court challenges and legal strategy.'],
-        correctAnswer: 'It showed that civil rights activism was part of reform, even though racism limited Progressive gains.',
-        explanation: 'The NAACP represented a major organized push against segregation and injustice within an era that often failed Black Americans.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L20-Q5',
+        text: 'Why was Commodore Dewey’s victory at Manila Bay important?',
+        choices: ['It quickly destroyed Spanish naval power in the Philippines and expanded the war into the Pacific.', 'It quickly destroyed Spanish naval power in the Philippines and ended all fighting in Cuba the same day.', 'It quickly destroyed Spanish naval power in the Philippines after Britain had already taken Manila first.', 'It quickly destroyed Spanish naval power in the Philippines but had little effect on later treaty decisions.'],
+        correctAnswer: 'It quickly destroyed Spanish naval power in the Philippines and expanded the war into the Pacific.',
+        explanation: 'Dewey’s victory showed that the war was about more than Cuba and opened the question of American power in Asia.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L17-Q6',
-        text: 'Why did many Progressive women link suffrage to broader reform?',
-        choices: ['They argued that voting rights would help women push for education, health, labor, and family protections.', 'They argued that voting rights would help women withdraw from reform and leave politics to party bosses.', 'They argued that voting rights would help women defend child labor and oppose food safety laws.', 'They argued that voting rights would help women replace local government with settlement house committees.'],
-        correctAnswer: 'They argued that voting rights would help women push for education, health, labor, and family protections.',
-        explanation: 'For many suffragists, the vote was not just a right in itself but a tool for wider social reform.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L20-Q6',
+        text: 'Why did Theodore Roosevelt and the Rough Riders become famous during the war?',
+        choices: ['Their exploits in Cuba became celebrated as symbols of courage, nationalism, and energetic American expansion.', 'Their exploits in Cuba became celebrated because they won the war without help from regular army forces.', 'Their exploits in Cuba became celebrated mainly after Roosevelt denounced imperialism and opposed overseas power.', 'Their exploits in Cuba became celebrated because they captured Madrid and forced Spain to surrender there.'],
+        correctAnswer: 'Their exploits in Cuba became celebrated as symbols of courage, nationalism, and energetic American expansion.',
+        explanation: 'Roosevelt’s wartime fame helped make him a national political figure and fit the era’s heroic image of expansion.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L17-Q7',
-        text: 'Why did some reformers support the temperance or prohibition movement?',
-        choices: ['They believed limiting alcohol would reduce crime, protect families, and improve workplace discipline.', 'They believed limiting alcohol would reduce crime only by ending women’s activism in public life.', 'They believed limiting alcohol would reduce crime mainly by restoring machine politics in large cities.', 'They believed limiting alcohol would reduce crime after federal labor laws had already solved urban poverty.'],
-        correctAnswer: 'They believed limiting alcohol would reduce crime, protect families, and improve workplace discipline.',
-        explanation: 'Temperance reformers treated alcohol as both a moral issue and a social problem connected to poverty and violence.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L20-Q7',
+        text: 'Why was the Spanish-American War sometimes called a ‘splendid little war’?',
+        choices: ['It was short and successful for the United States, though its aftermath proved far more complicated.', 'It was short and successful for the United States, and its aftermath created no serious new controversies.', 'It was short and successful for the United States only because European powers fought most of the battles.', 'It was short and successful for the United States after Spain agreed to surrender before any combat began.'],
+        correctAnswer: 'It was short and successful for the United States, though its aftermath proved far more complicated.',
+        explanation: 'The phrase captured the quick military victory, but later events showed that empire and occupation were not simple or cost-free.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L17-Q8',
-        text: 'What was the broader importance of state-level reform associated with leaders like Robert La Follette?',
-        choices: ['It showed that states could experiment with regulation and democracy before reforms spread nationally.', 'It showed that states could experiment with regulation only after the federal government abolished parties.', 'It showed that states could experiment with regulation mainly by ending antitrust law enforcement.', 'It showed that states could experiment with regulation while eliminating public education and tax reform.'],
-        correctAnswer: 'It showed that states could experiment with regulation and democracy before reforms spread nationally.',
-        explanation: 'Progressive reforms often began in states and cities, where new ideas could be tested before wider adoption.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L20-Q8',
+        text: 'What did the Treaty of Paris of 1898 do for the United States?',
+        choices: ['It ended the war and transferred control of Puerto Rico, Guam, and the Philippines to the United States.', 'It ended the war and transferred control of Cuba, Mexico, and Hawaii to the United States permanently.', 'It ended the war and transferred control of Panama, Nicaragua, and Samoa to the United States immediately.', 'It ended the war and transferred control of Canada, Cuba, and the Philippines to the United States.'],
+        correctAnswer: 'It ended the war and transferred control of Puerto Rico, Guam, and the Philippines to the United States.',
+        explanation: 'The treaty marked the United States’ arrival as an overseas imperial power by placing several former Spanish possessions under American control.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L17-Q9',
-        text: 'Why did Progressives support city reforms such as commissions and city-manager systems?',
-        choices: ['They hoped professional administration would reduce corruption and make local government more efficient.', 'They hoped professional administration would reduce corruption by returning control to neighborhood party bosses.', 'They hoped professional administration would reduce corruption mainly by ending public sanitation services.', 'They hoped professional administration would reduce corruption only in western mining towns and nowhere else.'],
-        correctAnswer: 'They hoped professional administration would reduce corruption and make local government more efficient.',
-        explanation: 'Municipal reformers believed trained administrators and clearer structures could weaken machine politics.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-L20-Q9',
+        text: 'Why did the Philippines become a major issue after the war with Spain?',
+        choices: ['Keeping the islands raised a fierce debate over empire, self-government, and America’s role in Asia.', 'Keeping the islands raised a fierce debate only because the Philippines demanded immediate U.S. statehood.', 'Keeping the islands raised a fierce debate after Spain reclaimed them during the Senate ratification fight.', 'Keeping the islands raised a fierce debate mainly because Britain wanted to buy them from the United States.'],
+        correctAnswer: 'Keeping the islands raised a fierce debate over empire, self-government, and America’s role in Asia.',
+        explanation: 'The Philippines forced Americans to confront whether victory over Spain meant liberation or the beginning of a new empire.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-L17-Q10',
-        text: 'What idea tied together many Progressive responses to industrial-era problems?',
-        choices: ['Government should play a more active role in protecting the public and making democracy more responsive.', 'Government should play a more active role only in foreign policy and avoid domestic reform altogether.', 'Government should play a more active role by returning power to trusts and party machines.', 'Government should play a more active role mainly by reducing public participation in elections.'],
-        correctAnswer: 'Government should play a more active role in protecting the public and making democracy more responsive.',
-        explanation: 'Despite differences among reformers, many Progressives shared a belief that modern problems required more active public action.',
-        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
+        id: '3A-L20-Q10',
+        text: 'What best explains why the Spanish-American War was a turning point in U.S. history?',
+        choices: ['The war transformed the United States from a continental power into a nation with overseas possessions.', 'The war transformed the United States from a continental power into a nation that rejected naval expansion.', 'The war transformed the United States from a continental power into a nation that avoided Asian affairs completely.', 'The war transformed the United States from a continental power into a nation that gave up Caribbean interests.'],
+        correctAnswer: 'The war transformed the United States from a continental power into a nation with overseas possessions.',
+        explanation: 'The war was brief, but it had lasting consequences because it accelerated the rise of the United States as an imperial and global power.',
+        standard: 'SS.912.A.4.10'
       },
     ]
   },
 
   // ==================================================
-  // UNIT 2B CAPSTONE — Age of Reform
+  // UNIT 3A CAPSTONE — Empire Rising
   // ==================================================
   {
     id: 'capstone',
-    label: 'UNIT 2B CAPSTONE',
-    title: 'Age of Reform',
-    sub: 'Progressivism on the National Stage · Roosevelt, Taft, and Wilson',
-    icon: '🏛️',
+    label: 'UNIT 3A CAPSTONE',
+    title: 'Empire Rising',
+    sub: 'Acquiring and Managing Global Power · 1898-1917',
+    icon: '🌐',
     type: 'capstone',
     briefing: {
-      location: 'Progressivism on the National Stage',
-      date: 'Roosevelt, Taft, and Wilson',
-      role: 'White House policy adviser',
-      text: 'Progressivism has reached Washington. Theodore Roosevelt, William Howard Taft, and Woodrow Wilson all claim to support reform, but they use different methods and produce different results. This capstone asks you to connect trust regulation, conservation, consumer protection, banking reform, and democratic change into one national reform story.',
-      tags: ['SS.912.A.3.10', 'SS.912.A.3.9']
+      location: 'Acquiring and Managing Global Power',
+      date: '1898-1917',
+      role: 'presidential foreign policy aide',
+      text: 'Victory over Spain leaves the United States with new territories and bigger ambitions. Roosevelt, Taft, and Wilson each try to manage American power in different ways across Latin America and the Pacific. This capstone explores how imperial expansion changed diplomacy, military policy, and the nation’s sense of itself in the world.',
+      tags: ['SS.912.A.4.10', 'SS.912.A.4.11']
     },
     displayCount: 5,
     goldRules: { perCorrect: 25, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Age of Reform', cards: ['Square Deal', 'Federal Reserve Act'] },
+    rewards: { badge: 'Empire Rising', cards: ['Big Stick Diplomacy', 'Panama Canal'] },
     bank: [
       {
-        id: '2B-CAP-Q1',
-        text: 'What did Theodore Roosevelt mean by the Square Deal?',
-        choices: ['Government should balance the interests of workers, consumers, and business instead of serving only the powerful.', 'Government should balance the interests of workers, consumers, and business by ending all federal regulation.', 'Government should balance the interests of workers, consumers, and business only by breaking up every corporation.', 'Government should balance the interests of workers, consumers, and business mainly through foreign expansion.'],
-        correctAnswer: 'Government should balance the interests of workers, consumers, and business instead of serving only the powerful.',
-        explanation: 'Roosevelt presented the Square Deal as a fairer approach to modern industrial society rather than a rejection of capitalism.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-CAP-Q1',
+        text: 'Why did the Philippine-American War break out after the United States defeated Spain?',
+        choices: ['Filipino nationalists expected independence, but the United States chose to keep control of the islands.', 'Filipino nationalists expected independence, but Spain returned to power and restored direct colonial rule.', 'Filipino nationalists expected independence, but Britain annexed the islands before American forces arrived.', 'Filipino nationalists expected independence, but Japan occupied Manila and forced both sides to retreat.'],
+        correctAnswer: 'Filipino nationalists expected independence, but the United States chose to keep control of the islands.',
+        explanation: 'The conflict exposed the contradiction between American anti-colonial language and the reality of U.S. imperial rule in the Philippines.',
+        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
       },
       {
-        id: '2B-CAP-Q2',
-        text: 'How did Roosevelt generally approach trusts and large corporations?',
-        choices: ['He accepted some big businesses but argued that harmful trusts should face stronger federal control.', 'He accepted some big businesses but argued that harmful trusts should be ignored entirely by government.', 'He accepted some big businesses only after Congress had outlawed all interstate commerce regulation.', 'He accepted some big businesses mainly by promising that antitrust law would never be enforced again.'],
-        correctAnswer: 'He accepted some big businesses but argued that harmful trusts should face stronger federal control.',
-        explanation: 'Roosevelt distinguished between corporations he considered useful and those he believed abused the public interest.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-CAP-Q2',
+        text: 'Why did members of the Anti-Imperialist League oppose American control of overseas territories?',
+        choices: ['They argued that ruling people without consent betrayed the nation’s democratic ideals.', 'They argued that ruling people without consent would weaken European colonial empires too quickly.', 'They argued that ruling people without consent would make the United States too rural and isolated.', 'They argued that ruling people without consent would require Congress to abolish all tariffs permanently.'],
+        correctAnswer: 'They argued that ruling people without consent betrayed the nation’s democratic ideals.',
+        explanation: 'Anti-imperialists believed empire contradicted the principles of self-government and liberty that Americans claimed to defend.',
+        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
       },
       {
-        id: '2B-CAP-Q3',
-        text: 'Why were the Pure Food and Drug Act and Meat Inspection Act important Progressive reforms?',
-        choices: ['They expanded federal responsibility for protecting consumers from unsafe products and unsanitary practices.', 'They expanded federal responsibility for protecting consumers mainly by removing all factory inspectors.', 'They expanded federal responsibility for protecting consumers only in imported goods rather than American factories.', 'They expanded federal responsibility for protecting consumers after Progressives abandoned national reform.'],
-        correctAnswer: 'They expanded federal responsibility for protecting consumers from unsafe products and unsanitary practices.',
-        explanation: 'These laws showed that public outrage could translate into lasting federal oversight of industry.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-CAP-Q3',
+        text: 'What did Roosevelt’s corollary to the Monroe Doctrine assert?',
+        choices: ['The United States could intervene in Latin America if instability there seemed to threaten order or foreign interests.', 'The United States could intervene in Latin America only with approval from every major European power first.', 'The United States could intervene in Latin America mainly to promote immediate independence from all debt payments.', 'The United States could intervene in Latin America only after Congress approved permanent annexation of each country.'],
+        correctAnswer: 'The United States could intervene in Latin America if instability there seemed to threaten order or foreign interests.',
+        explanation: 'Roosevelt expanded the Monroe Doctrine by claiming a more active American policing role in the Western Hemisphere.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-CAP-Q4',
-        text: 'What made Roosevelt such an important figure in conservation policy?',
-        choices: ['He used federal power to protect large areas of land and promote the careful management of resources.', 'He used federal power to protect large areas of land mainly by opening every reserve to private logging.', 'He used federal power to protect large areas of land only after ending national forests and park policy.', 'He used federal power to protect large areas of land while rejecting any scientific resource planning.'],
-        correctAnswer: 'He used federal power to protect large areas of land and promote the careful management of resources.',
-        explanation: 'Roosevelt helped make conservation a major national responsibility rather than a minor local concern.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-CAP-Q4',
+        text: 'What is the best summary of Roosevelt’s ‘Big Stick’ diplomacy?',
+        choices: ['Negotiate when possible, but back diplomacy with visible military strength and the willingness to act.', 'Negotiate when possible, but avoid building a navy because military power weakens diplomacy abroad.', 'Negotiate when possible, but depend mainly on private banks rather than government pressure overseas.', 'Negotiate when possible, but reject all involvement in Caribbean or Pacific affairs after 1901.'],
+        correctAnswer: 'Negotiate when possible, but back diplomacy with visible military strength and the willingness to act.',
+        explanation: 'Big Stick diplomacy reflected Roosevelt’s belief that power and readiness could make diplomacy more effective.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-CAP-Q5',
-        text: 'Why did Taft’s presidency divide the Progressive movement?',
-        choices: ['Many reformers thought he was less energetic than Roosevelt and too closely tied to conservative Republicans.', 'Many reformers thought he was less energetic than Roosevelt because he ended antitrust enforcement completely.', 'Many reformers thought he was less energetic than Roosevelt only after he supported women’s suffrage first.', 'Many reformers thought he was less energetic than Roosevelt mainly because he opposed tariff policy entirely.'],
-        correctAnswer: 'Many reformers thought he was less energetic than Roosevelt and too closely tied to conservative Republicans.',
-        explanation: 'Taft backed some reforms, but disputes over tariffs, conservation, and party leadership damaged Progressive unity.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-CAP-Q5',
+        text: 'Why was the Panama Canal so important to U.S. foreign policy?',
+        choices: ['It gave the United States a faster route between oceans, strengthening naval and commercial power.', 'It gave the United States a faster route between oceans, but only after World War I had already ended.', 'It gave the United States a faster route between oceans by connecting the Gulf of Mexico to the Great Lakes.', 'It gave the United States a faster route between oceans mainly for railroad traffic rather than shipping.'],
+        correctAnswer: 'It gave the United States a faster route between oceans, strengthening naval and commercial power.',
+        explanation: 'The canal was strategic because it linked the Atlantic and Pacific and made it easier for the United States to project power globally.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-CAP-Q6',
-        text: 'Why was the election of 1912 so important to the history of Progressivism?',
-        choices: ['It showed that reform politics had become national, even though Progressives disagreed about the best path.', 'It showed that reform politics had become national only because all major candidates opposed regulation.', 'It showed that reform politics had become national mainly after Roosevelt and Taft reunited their parties.', 'It showed that reform politics had become national once Americans rejected antitrust policy entirely.'],
-        correctAnswer: 'It showed that reform politics had become national, even though Progressives disagreed about the best path.',
-        explanation: 'The split between Roosevelt and Taft, and Wilson’s victory, revealed both the strength and the divisions of reform politics.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-CAP-Q6',
+        text: 'What was Taft’s dollar diplomacy intended to do?',
+        choices: ['Use American investment and financial influence to expand U.S. power without relying only on military force.', 'Use American investment and financial influence mainly to reduce all overseas trade and end foreign loans.', 'Use American investment and financial influence to transfer Caribbean governments directly to private corporations.', 'Use American investment and financial influence only in Europe, while ignoring Asia and Latin America.'],
+        correctAnswer: 'Use American investment and financial influence to expand U.S. power without relying only on military force.',
+        explanation: 'Dollar diplomacy emphasized financial leverage, hoping investment could secure influence while appearing less openly coercive.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-CAP-Q7',
-        text: 'What was Wilson’s New Freedom mainly concerned with?',
-        choices: ['It aimed to restore competition by reducing tariff barriers, reforming banking, and limiting monopoly power.', 'It aimed to restore competition by increasing tariff barriers and protecting monopoly power from regulation.', 'It aimed to restore competition only by transferring corporate regulation to state political machines.', 'It aimed to restore competition mainly through conservation policy without touching finance or trusts.'],
-        correctAnswer: 'It aimed to restore competition by reducing tariff barriers, reforming banking, and limiting monopoly power.',
-        explanation: 'Wilson’s program focused on making the economic system fairer by changing the rules of finance and competition.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-CAP-Q7',
+        text: 'How did Wilson’s moral diplomacy differ from Roosevelt’s and Taft’s approaches in theory?',
+        choices: ['Wilson claimed the U.S. should support governments that reflected democratic values rather than raw power alone.', 'Wilson claimed the U.S. should support governments that reflected democratic values by ending all interventions immediately.', 'Wilson claimed the U.S. should support governments that reflected democratic values only in Western Europe.', 'Wilson claimed the U.S. should support governments that reflected democratic values by giving up the Panama Canal.'],
+        correctAnswer: 'Wilson claimed the U.S. should support governments that reflected democratic values rather than raw power alone.',
+        explanation: 'Wilson spoke in moral terms, though in practice his administration still intervened abroad when it believed American interests were at stake.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-CAP-Q8',
-        text: 'Why was the Federal Reserve Act a major reform?',
-        choices: ['It created a new banking system to stabilize the money supply and reduce the risk of financial panic.', 'It created a new banking system mainly to end all federal oversight of national credit and currency.', 'It created a new banking system only for farmers while leaving urban banks outside the system.', 'It created a new banking system after Wilson had abandoned Progressive economic reform altogether.'],
-        correctAnswer: 'It created a new banking system to stabilize the money supply and reduce the risk of financial panic.',
-        explanation: 'The Federal Reserve gave the federal government a stronger role in managing the nation’s financial system.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-CAP-Q8',
+        text: 'Why did events in Mexico test Wilson’s foreign policy?',
+        choices: ['Violence and instability forced Wilson to balance moral language with military intervention and strategic concerns.', 'Violence and instability forced Wilson to recognize that Mexico should control the Panama Canal instead.', 'Violence and instability forced Wilson to abandon all diplomatic contact with Latin America permanently.', 'Violence and instability forced Wilson to support European empires reclaiming influence in the Western Hemisphere.'],
+        correctAnswer: 'Violence and instability forced Wilson to balance moral language with military intervention and strategic concerns.',
+        explanation: 'The Mexican Revolution revealed how difficult it was to apply idealistic rhetoric consistently in a region where the United States had major interests.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-CAP-Q9',
-        text: 'What was the purpose of the Clayton Antitrust Act and the Federal Trade Commission?',
-        choices: ['They strengthened the government’s ability to regulate unfair business practices and protect competition.', 'They strengthened the government’s ability to regulate unfair business practices by weakening all consumer laws.', 'They strengthened the government’s ability to regulate unfair business practices only in foreign corporations.', 'They strengthened the government’s ability to regulate unfair business practices after ending antitrust enforcement.'],
-        correctAnswer: 'They strengthened the government’s ability to regulate unfair business practices and protect competition.',
-        explanation: 'These reforms built on earlier antitrust efforts and gave federal agencies more tools to supervise business behavior.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-CAP-Q9',
+        text: 'What does the idea of a protectorate suggest about American power in this era?',
+        choices: ['The United States could control another territory’s affairs without granting it full equality or independence.', 'The United States could control another territory’s affairs only after admitting it as a full state immediately.', 'The United States could control another territory’s affairs only through private missionaries rather than government.', 'The United States could control another territory’s affairs mainly by surrendering military bases and trade rights.'],
+        correctAnswer: 'The United States could control another territory’s affairs without granting it full equality or independence.',
+        explanation: 'Protectorates revealed how empire could operate through influence, occupation, and legal limits rather than formal statehood.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-CAP-Q10',
-        text: 'How did the Sixteenth and Seventeenth Amendments reflect Progressive goals?',
-        choices: ['They expanded federal capacity and democratic responsiveness through an income tax and direct election of senators.', 'They expanded federal capacity and democratic responsiveness by ending the direct election of senators.', 'They expanded federal capacity and democratic responsiveness only by banning labor unions and strikes.', 'They expanded federal capacity and democratic responsiveness mainly through new immigration restrictions.'],
-        correctAnswer: 'They expanded federal capacity and democratic responsiveness through an income tax and direct election of senators.',
-        explanation: 'Progressives often wanted both a more capable government and a more directly accountable political system.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-CAP-Q10',
+        text: 'Why did the Caribbean and Pacific remain central to American power after 1898?',
+        choices: ['Control there shaped trade routes, naval strategy, and the ability to influence events far beyond U.S. shores.', 'Control there shaped trade routes only briefly, because the United States soon abandoned naval strategy altogether.', 'Control there shaped trade routes mainly after Europe lost interest in both regions during the 1880s.', 'Control there shaped trade routes, but had little connection to diplomacy, war planning, or imperial rivalry.'],
+        correctAnswer: 'Control there shaped trade routes, naval strategy, and the ability to influence events far beyond U.S. shores.',
+        explanation: 'American leaders viewed these regions as connected spaces where bases, canals, and commerce all affected global influence.',
+        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
       },
       {
-        id: '2B-CAP-Q11',
-        text: 'What was one major limitation of Progressivism even at its strongest national moment?',
-        choices: ['Many reforms left segregation, racial injustice, and inequality only partly challenged or untouched.', 'Many reforms left segregation, racial injustice, and inequality fully solved by federal action.', 'Many reforms left segregation, racial injustice, and inequality only in western territories, not the South.', 'Many reforms left segregation, racial injustice, and inequality because Progressives opposed all regulation.'],
-        correctAnswer: 'Many reforms left segregation, racial injustice, and inequality only partly challenged or untouched.',
-        explanation: 'Progressive reform produced important changes, but it did not overcome all forms of injustice in American life.',
-        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
+        id: '3A-CAP-Q11',
+        text: 'What central debate defined the age of American imperialism?',
+        choices: ['Whether overseas expansion strengthened national power or betrayed democratic principles at the same time.', 'Whether overseas expansion strengthened national power only if every new territory became a state immediately.', 'Whether overseas expansion strengthened national power by ending trade with Asia and Latin America completely.', 'Whether overseas expansion strengthened national power only after the United States gave up all Caribbean interests.'],
+        correctAnswer: 'Whether overseas expansion strengthened national power or betrayed democratic principles at the same time.',
+        explanation: 'Imperialism was always contested because it combined strategic ambition with uncomfortable questions about freedom, race, and consent.',
+        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
       },
       {
-        id: '2B-CAP-Q12',
-        text: 'What best ties together the national stage of the Progressive Era?',
-        choices: ['Reform moved from local activism to federal action as presidents and Congress used government more aggressively.', 'Reform moved from local activism to federal action only after presidents gave up trust regulation and conservation.', 'Reform moved from local activism to federal action mainly by restoring power to political machines and bosses.', 'Reform moved from local activism to federal action while abandoning concerns about workers and consumers.'],
-        correctAnswer: 'Reform moved from local activism to federal action as presidents and Congress used government more aggressively.',
-        explanation: 'The capstone of the era was the shift from identifying problems to using national institutions to address them.',
-        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
+        id: '3A-CAP-Q12',
+        text: 'What best explains how the United States changed between the 1890s and the years before World War I?',
+        choices: ['It became a more assertive global power, using war, diplomacy, finance, and naval strength to shape events abroad.', 'It became a more assertive global power only by withdrawing from the Caribbean and abandoning Pacific strategy.', 'It became a more assertive global power because European empires invited it to replace them peacefully everywhere.', 'It became a more assertive global power mainly by rejecting foreign trade and focusing again on the western frontier.'],
+        correctAnswer: 'It became a more assertive global power, using war, diplomacy, finance, and naval strength to shape events abroad.',
+        explanation: 'The era marked the United States’ transition into a global power whose influence rested on several tools, not just military conquest alone.',
+        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
       },
     ]
   },
@@ -1197,179 +1197,179 @@ const LESSONS = [
     id: 'eoc',
     label: 'EOC REVIEW',
     title: 'EOC Practice Quiz',
-    sub: 'Progressive Era Review',
+    sub: 'American Imperialism Review · expansion, war, and global power',
     icon: '📋',
     type: 'eoc',
     briefing: {
-      location: 'Progressive Era Review',
-      date: '',
-      role: 'state exam coach',
-      text: 'This review covers the full Progressive Era arc. You will need to connect the problems reformers identified, the organizations and activists who responded, and the national reforms carried out under Roosevelt, Taft, and Wilson. Watch for themes of regulation, democracy, public welfare, and the limits of reform.',
-      tags: ['SS.912.A.3.9', 'SS.912.A.3.10']
+      location: 'American Imperialism Review',
+      date: 'expansion, war, and global power',
+      role: 'exam prep coach',
+      text: 'This review section ties together the full Unit 3A arc. Expect questions that connect expansionist ideas, the Spanish-American War, and the growth of American influence under Roosevelt, Taft, and Wilson. The focus is on how military power, economics, diplomacy, and political debate all shaped the rise of the United States as a global power.',
+      tags: ['SS.912.A.4.10', 'SS.912.A.4.11']
     },
     displayCount: 15,
     goldRules: { perCorrect: 15, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Progressive Era Mastery', cards: ['Federal Trade Commission', 'Nineteenth Amendment'] },
+    rewards: { badge: 'Imperialism Mastery', cards: ['American Imperialism Review'] },
     bank: [
       {
-        id: '2B-EOC-Q1',
-        text: 'What was the main contribution of muckraker journalists to Progressive reform?',
-        choices: ['They exposed corruption and social abuse in ways that built public support for change.', 'They exposed corruption and social abuse mainly to defend monopolies from government oversight.', 'They exposed corruption and social abuse only after Congress ended antitrust and labor debates.', 'They exposed corruption and social abuse mostly to promote overseas expansion and naval policy.'],
-        correctAnswer: 'They exposed corruption and social abuse in ways that built public support for change.',
-        explanation: 'Muckrakers helped turn hidden or ignored problems into public issues that voters and lawmakers could not easily dismiss.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-EOC-Q1',
+        text: 'Why did the United States become more interested in overseas expansion in the late nineteenth century?',
+        choices: ['Industrial growth encouraged leaders to seek new markets, bases, and international influence.', 'Industrial growth encouraged leaders to abandon trade and avoid all contact with Caribbean and Pacific regions.', 'Industrial growth encouraged leaders to replace the navy with railroads as the main instrument of foreign policy.', 'Industrial growth encouraged leaders to return most western territories to earlier colonial powers abroad.'],
+        correctAnswer: 'Industrial growth encouraged leaders to seek new markets, bases, and international influence.',
+        explanation: 'Many expansionists believed economic growth and national power required a more active presence beyond North America.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-EOC-Q2',
-        text: 'Why were tenements and slums important topics in Progressive reform?',
-        choices: ['They revealed how industrial growth had produced dangerous living conditions for many urban families.', 'They revealed how industrial growth had produced dangerous living conditions only for wealthy residents.', 'They revealed how industrial growth had produced dangerous living conditions mainly in isolated farm areas.', 'They revealed how industrial growth had produced dangerous living conditions after reform had already solved them.'],
-        correctAnswer: 'They revealed how industrial growth had produced dangerous living conditions for many urban families.',
-        explanation: 'Housing reform became central because poor living conditions showed the human cost of rapid urban growth.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-EOC-Q2',
+        text: 'What was Mahan’s influence on American imperial policy?',
+        choices: ['He convinced many leaders that sea power and overseas bases were essential to national greatness.', 'He convinced many leaders that sea power and overseas bases would weaken trade and should be avoided.', 'He convinced many leaders that sea power and overseas bases mattered only after World War I ended.', 'He convinced many leaders that sea power and overseas bases should be controlled by private companies.'],
+        correctAnswer: 'He convinced many leaders that sea power and overseas bases were essential to national greatness.',
+        explanation: 'Mahan’s writings helped shape the belief that a modern navy and global coaling stations were crucial for a rising power.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-EOC-Q3',
-        text: 'Why did Progressives criticize political machines and party bosses?',
-        choices: ['They believed machine politics encouraged corruption and kept government from serving the public fairly.', 'They believed machine politics encouraged corruption but always protected merit-based civil service hiring.', 'They believed machine politics encouraged corruption only in small towns rather than major cities.', 'They believed machine politics encouraged corruption mainly by supporting too much direct democracy.'],
-        correctAnswer: 'They believed machine politics encouraged corruption and kept government from serving the public fairly.',
-        explanation: 'Many Progressives wanted more transparent institutions that answered to voters instead of patronage networks.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-EOC-Q3',
+        text: 'Why was Hawaii strategically valuable to American leaders?',
+        choices: ['It offered an important Pacific stop for commerce and naval operations between America and Asia.', 'It offered an important Pacific stop only for European empires and had little value to the United States.', 'It offered an important Pacific stop after the Panama Canal opened and the Atlantic trade route ended.', 'It offered an important Pacific stop mainly because it controlled access to the Mediterranean Sea.'],
+        correctAnswer: 'It offered an important Pacific stop for commerce and naval operations between America and Asia.',
+        explanation: 'Hawaii fit both the commercial and strategic goals of expansionists who wanted stronger Pacific influence.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-EOC-Q4',
-        text: 'Why did child labor reform matter to many Progressives?',
-        choices: ['It addressed the exploitation of children in dangerous work and defended the importance of schooling.', 'It addressed the exploitation of children mainly by moving them from factories into longer mine shifts.', 'It addressed the exploitation of children only after labor unions had ended industrial accidents entirely.', 'It addressed the exploitation of children by arguing that families should avoid public education.'],
-        correctAnswer: 'It addressed the exploitation of children in dangerous work and defended the importance of schooling.',
-        explanation: 'Opposition to child labor reflected Progressive concerns with safety, fairness, and the future of children.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-EOC-Q4',
+        text: 'What was the main point of the Open Door Policy?',
+        choices: ['The United States wanted equal trade access in China rather than exclusive colonial control by one power.', 'The United States wanted equal trade access in China by placing the whole country under direct American rule.', 'The United States wanted equal trade access in China only after ending all contact with Japan and Britain.', 'The United States wanted equal trade access in China by closing Chinese ports to every European nation.'],
+        correctAnswer: 'The United States wanted equal trade access in China rather than exclusive colonial control by one power.',
+        explanation: 'The policy sought to preserve American commercial opportunity without formally carving out a separate U.S. colony in China.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-EOC-Q5',
-        text: 'Why did conservation become a national Progressive issue?',
-        choices: ['Reformers feared natural resources were being used recklessly and believed government should manage them wisely.', 'Reformers feared natural resources were being used recklessly only because cities had too little political power.', 'Reformers feared natural resources were being used recklessly after Roosevelt ended all national park policy.', 'Reformers feared natural resources were being used recklessly mainly by settlement houses and local charities.'],
-        correctAnswer: 'Reformers feared natural resources were being used recklessly and believed government should manage them wisely.',
-        explanation: 'Conservation fit Progressive ideas about expertise, planning, and the public good.',
-        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
+        id: '3A-EOC-Q5',
+        text: 'Why did anti-imperialists object to overseas empire?',
+        choices: ['They believed governing people without consent contradicted American ideals of liberty and self-rule.', 'They believed governing people without consent would weaken Europe but strengthen democracy at home.', 'They believed governing people without consent was necessary if the United States hoped to trade in Asia.', 'They believed governing people without consent would force every territory to become a state immediately.'],
+        correctAnswer: 'They believed governing people without consent contradicted American ideals of liberty and self-rule.',
+        explanation: 'Anti-imperialists saw overseas rule as a betrayal of the political principles the United States claimed to represent.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-EOC-Q6',
-        text: 'What made settlement houses an important part of Progressive reform?',
-        choices: ['They combined neighborhood services with activism aimed at improving education, health, and living conditions.', 'They combined neighborhood services with activism mainly to restore party machines to city government.', 'They combined neighborhood services with activism only after immigrants stopped settling in cities.', 'They combined neighborhood services with activism while opposing public sanitation and labor laws.'],
-        correctAnswer: 'They combined neighborhood services with activism aimed at improving education, health, and living conditions.',
-        explanation: 'Settlement houses showed that Progressivism often blended direct service with broader social and political reform.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-EOC-Q6',
+        text: 'Why did the Cuban revolt draw such strong attention in the United States?',
+        choices: ['It blended humanitarian concern, economic interest, and strategic proximity in the Caribbean.', 'It blended humanitarian concern only after Spain had already granted Cuba full independence peacefully.', 'It blended humanitarian concern because Cuba had asked to join Britain instead of the United States.', 'It blended humanitarian concern mainly because Cuba threatened American control of the Philippines.'],
+        correctAnswer: 'It blended humanitarian concern, economic interest, and strategic proximity in the Caribbean.',
+        explanation: 'Cuba mattered to Americans because it was nearby, economically significant, and easy to present as a moral cause.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-EOC-Q7',
-        text: 'What was the main purpose of initiative, referendum, and recall reforms?',
-        choices: ['They were meant to give citizens more direct control and reduce the grip of party organizations.', 'They were meant to give citizens more direct control by removing elections from ordinary voters.', 'They were meant to give citizens more direct control only after senators returned to legislative appointment.', 'They were meant to give citizens more direct control mainly in foreign policy and war declarations.'],
-        correctAnswer: 'They were meant to give citizens more direct control and reduce the grip of party organizations.',
-        explanation: 'These reforms reflected Progressive efforts to make democracy more responsive and less dominated by insiders.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-EOC-Q7',
+        text: 'How did yellow journalism help create support for war with Spain?',
+        choices: ['It used sensational stories and images that heightened anger and urgency in the public mind.', 'It used sensational stories and images mainly to defend Spain and criticize intervention in Cuba.', 'It used sensational stories and images only after the war ended and the treaty was being debated.', 'It used sensational stories and images so rarely that newspapers had little effect on public opinion.'],
+        correctAnswer: 'It used sensational stories and images that heightened anger and urgency in the public mind.',
+        explanation: 'Yellow journalism helped turn foreign events into emotionally charged stories that encouraged interventionist sentiment.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-EOC-Q8',
-        text: 'Why was the Seventeenth Amendment seen as a Progressive victory?',
-        choices: ['It made senators directly elected by the people, reducing the influence of legislatures and party bosses.', 'It made senators directly elected by the people while restoring machine control over city governments.', 'It made senators directly elected by the people only after the presidency had lost veto power.', 'It made senators directly elected by the people mainly to increase tariff protection for trusts.'],
-        correctAnswer: 'It made senators directly elected by the people, reducing the influence of legislatures and party bosses.',
-        explanation: 'Direct election of senators matched Progressive demands for a more accountable and democratic political system.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-EOC-Q8',
+        text: 'Why did the USS Maine become such a rallying cry in 1898?',
+        choices: ['Its explosion was quickly blamed on Spain and became a symbol used to justify war.', 'Its explosion was quickly blamed on Spain only after Spain asked the United States for military alliance.', 'Its explosion was quickly blamed on Spain after the ship had already sunk in the Philippines.', 'Its explosion was quickly blamed on Spain because Germany had publicly admitted planting the bomb.'],
+        correctAnswer: 'Its explosion was quickly blamed on Spain and became a symbol used to justify war.',
+        explanation: 'Even without clear proof at the time, the Maine became a powerful political and emotional symbol in the rush to war.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-EOC-Q9',
-        text: 'Why is the NAACP important in understanding the Progressive Era?',
-        choices: ['It reminds us that reform included civil rights activism, even though many Progressives ignored racial injustice.', 'It reminds us that reform included civil rights activism only after segregation had already been dismantled.', 'It reminds us that reform included civil rights activism mainly by supporting literacy tests and segregation laws.', 'It reminds us that reform included civil rights activism while rejecting all court-based legal challenges.'],
-        correctAnswer: 'It reminds us that reform included civil rights activism, even though many Progressives ignored racial injustice.',
-        explanation: 'The Progressive Era included important civil rights organizing, but racial equality was not embraced by all reformers.',
-        standard: 'SS.912.A.3.9'
+        id: '3A-EOC-Q9',
+        text: 'Why was the Spanish-American War a turning point for the United States?',
+        choices: ['It brought overseas territories under U.S. control and marked the country’s rise as an imperial power.', 'It brought overseas territories under U.S. control only briefly before Spain retook them all in 1899.', 'It brought overseas territories under U.S. control mainly in Europe rather than the Caribbean or Pacific.', 'It brought overseas territories under U.S. control but ended American interest in global affairs afterward.'],
+        correctAnswer: 'It brought overseas territories under U.S. control and marked the country’s rise as an imperial power.',
+        explanation: 'The war’s importance lay less in its duration than in the lasting changes it produced in American foreign policy and territory.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-EOC-Q10',
-        text: 'Why did women’s suffrage fit naturally with many Progressive reform goals?',
-        choices: ['Supporters believed voting rights would strengthen reform efforts involving health, labor, and public welfare.', 'Supporters believed voting rights would strengthen reform efforts by ending women’s participation in activism.', 'Supporters believed voting rights would strengthen reform efforts only in western territories and nowhere else.', 'Supporters believed voting rights would strengthen reform efforts mainly by protecting political machines.'],
-        correctAnswer: 'Supporters believed voting rights would strengthen reform efforts involving health, labor, and public welfare.',
-        explanation: 'Many reformers argued that the vote would help women influence policies affecting families and communities.',
-        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
+        id: '3A-EOC-Q10',
+        text: 'What territories did the United States gain through the Treaty of Paris of 1898?',
+        choices: ['Puerto Rico, Guam, and the Philippines came under American control after Spain’s defeat.', 'Puerto Rico, Guam, and the Philippines came under American control only after the Senate rejected the treaty.', 'Puerto Rico, Guam, and the Philippines came under American control along with Cuba as a permanent U.S. state.', 'Puerto Rico, Guam, and the Philippines came under American control after Britain transferred them to Washington.'],
+        correctAnswer: 'Puerto Rico, Guam, and the Philippines came under American control after Spain’s defeat.',
+        explanation: 'The Treaty of Paris ended the war and turned the United States into a power with major overseas possessions.',
+        standard: 'SS.912.A.4.10'
       },
       {
-        id: '2B-EOC-Q11',
-        text: 'What was Roosevelt trying to achieve through the Square Deal?',
-        choices: ['He wanted a more balanced society in which government restrained abuses without destroying business.', 'He wanted a more balanced society only by dismantling every large corporation in the economy.', 'He wanted a more balanced society mainly through isolation from world trade and immigration.', 'He wanted a more balanced society by leaving trusts and railroads completely unregulated.'],
-        correctAnswer: 'He wanted a more balanced society in which government restrained abuses without destroying business.',
-        explanation: 'Roosevelt believed reform should make capitalism fairer and more stable rather than abolish it.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-EOC-Q11',
+        text: 'Why did the Philippine-American War matter in the history of U.S. imperialism?',
+        choices: ['It exposed the tension between promises of liberation and the reality of American imperial control.', 'It exposed the tension between promises of liberation and the reality that Spain had remained in power.', 'It exposed the tension between promises of liberation and the reality that Britain seized Manila first.', 'It exposed the tension between promises of liberation and the reality that the islands became states at once.'],
+        correctAnswer: 'It exposed the tension between promises of liberation and the reality of American imperial control.',
+        explanation: 'The war revealed that defeating one empire did not automatically mean self-government for the people involved.',
+        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
       },
       {
-        id: '2B-EOC-Q12',
-        text: 'Why were consumer protection laws such as the Pure Food and Drug Act significant?',
-        choices: ['They showed that the federal government would step in when private industry endangered the public.', 'They showed that the federal government would step in only to protect foreign producers from competition.', 'They showed that the federal government would step in mainly by eliminating all product labeling rules.', 'They showed that the federal government would step in after Progressives gave up regulatory reform.'],
-        correctAnswer: 'They showed that the federal government would step in when private industry endangered the public.',
-        explanation: 'These laws reflected the Progressive belief that public welfare justified stronger national regulation.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-EOC-Q12',
+        text: 'What did Roosevelt’s corollary add to the Monroe Doctrine?',
+        choices: ['It claimed the United States could intervene in Latin America to preserve order and protect interests.', 'It claimed the United States could intervene in Latin America only with permission from every European empire.', 'It claimed the United States could intervene in Latin America only to transfer control to private banks.', 'It claimed the United States could intervene in Latin America mainly to promote immediate statehood there.'],
+        correctAnswer: 'It claimed the United States could intervene in Latin America to preserve order and protect interests.',
+        explanation: 'The corollary transformed the Monroe Doctrine from a warning to Europe into a justification for active U.S. intervention.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-EOC-Q13',
-        text: 'How did Roosevelt’s conservation policies reflect Progressive thinking?',
-        choices: ['They used federal expertise and planning to manage resources for long-term public benefit.', 'They used federal expertise and planning mainly to open every protected forest to private exploitation.', 'They used federal expertise and planning only after Congress abolished national reserves and parks.', 'They used federal expertise and planning while rejecting all scientific management of land and water.'],
-        correctAnswer: 'They used federal expertise and planning to manage resources for long-term public benefit.',
-        explanation: 'Conservation policy showed how Progressives trusted government experts to address modern national problems.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-EOC-Q13',
+        text: 'Why was the Panama Canal so important to American power?',
+        choices: ['It made movement between oceans faster, increasing the strategic reach of U.S. trade and naval forces.', 'It made movement between oceans faster, but only for rail cargo rather than military or commercial ships.', 'It made movement between oceans faster after the United States withdrew from Pacific and Caribbean affairs.', 'It made movement between oceans faster mainly because it replaced all Atlantic ports on the East Coast.'],
+        correctAnswer: 'It made movement between oceans faster, increasing the strategic reach of U.S. trade and naval forces.',
+        explanation: 'The canal strengthened both military flexibility and commercial access by linking two major maritime worlds.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-EOC-Q14',
-        text: 'Why did Roosevelt and Taft end up splitting the Republican Party?',
-        choices: ['They differed over tariffs, conservation, and how far the federal government should go in reform.', 'They differed over tariffs, conservation, and whether the United States should abolish the presidency.', 'They differed over tariffs, conservation only after Taft joined the Democratic Party permanently.', 'They differed over tariffs, conservation mainly because Roosevelt opposed all antitrust law enforcement.'],
-        correctAnswer: 'They differed over tariffs, conservation, and how far the federal government should go in reform.',
-        explanation: 'Their conflict revealed that even Progressives disagreed strongly about leadership and the direction of reform.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-EOC-Q14',
+        text: 'What was the central idea behind Taft’s dollar diplomacy?',
+        choices: ['Economic investment could extend American influence abroad without depending only on military force.', 'Economic investment could extend American influence abroad only if the United States avoided all treaties.', 'Economic investment could extend American influence abroad by replacing the navy with missionary societies.', 'Economic investment could extend American influence abroad mainly by ending trade with Latin America.'],
+        correctAnswer: 'Economic investment could extend American influence abroad without depending only on military force.',
+        explanation: 'Dollar diplomacy used financial leverage as a tool of foreign policy, especially in Latin America and East Asia.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-EOC-Q15',
-        text: 'What was Wilson’s New Freedom designed to do?',
-        choices: ['It sought to reduce monopoly power and make the economic system more open and competitive.', 'It sought to reduce monopoly power only by ending bank reform and keeping tariffs high.', 'It sought to reduce monopoly power mainly by restoring party bosses to control of elections.', 'It sought to reduce monopoly power after Wilson rejected all Progressive economic ideas.'],
-        correctAnswer: 'It sought to reduce monopoly power and make the economic system more open and competitive.',
-        explanation: 'Wilson’s reform program focused on tariffs, banking, and antitrust policy as ways to reshape the economy.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-EOC-Q15',
+        text: 'How did Wilson describe moral diplomacy in principle?',
+        choices: ['He said the United States should support governments that reflected democratic and moral principles.', 'He said the United States should support governments that reflected democratic and moral principles only in Europe.', 'He said the United States should support governments that reflected democratic and moral principles by ending all interventions.', 'He said the United States should support governments that reflected democratic and moral principles through annexation.'],
+        correctAnswer: 'He said the United States should support governments that reflected democratic and moral principles.',
+        explanation: 'Wilson’s language emphasized ideals, though his administration still intervened in places like Mexico and the Caribbean.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-EOC-Q16',
-        text: 'Why is the Federal Reserve Act often considered one of the most lasting Progressive reforms?',
-        choices: ['It reorganized the banking system and gave the nation a more stable structure for managing credit.', 'It reorganized the banking system mainly by ending all federal influence over money and interest rates.', 'It reorganized the banking system only for western farmers while excluding urban businesses.', 'It reorganized the banking system after repeated calls to return currency control to party machines.'],
-        correctAnswer: 'It reorganized the banking system and gave the nation a more stable structure for managing credit.',
-        explanation: 'The Federal Reserve created institutions that continued to shape American economic life long after the Progressive Era.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-EOC-Q16',
+        text: 'Why did Mexico become such a difficult test for Wilson’s foreign policy?',
+        choices: ['Instability there forced him to choose between moral rhetoric and the use of American power.', 'Instability there forced him to choose between moral rhetoric and surrendering the Panama Canal.', 'Instability there forced him to choose between moral rhetoric and supporting Spanish rule in Cuba again.', 'Instability there forced him to choose between moral rhetoric and joining the Anti-Imperialist League.'],
+        correctAnswer: 'Instability there forced him to choose between moral rhetoric and the use of American power.',
+        explanation: 'Mexico revealed how hard it was to apply idealistic principles consistently when security and strategic interests were involved.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-EOC-Q17',
-        text: 'Why were the Federal Trade Commission and Clayton Antitrust Act important?',
-        choices: ['They gave the federal government stronger tools to monitor business behavior and curb unfair practices.', 'They gave the federal government stronger tools mainly to protect trusts from investigation and lawsuits.', 'They gave the federal government stronger tools only in foreign colonies rather than within the United States.', 'They gave the federal government stronger tools after Wilson ended his interest in economic reform.'],
-        correctAnswer: 'They gave the federal government stronger tools to monitor business behavior and curb unfair practices.',
-        explanation: 'These measures expanded the national government’s role in shaping fairer competition.',
-        standard: 'SS.912.A.3.10'
+        id: '3A-EOC-Q17',
+        text: 'What does the idea of a protectorate suggest about imperial power?',
+        choices: ['A stronger nation can control another territory’s policies without granting it equal political standing.', 'A stronger nation can control another territory’s policies only after making it a state immediately.', 'A stronger nation can control another territory’s policies only through private churches and charities.', 'A stronger nation can control another territory’s policies only if Europe approves every decision first.'],
+        correctAnswer: 'A stronger nation can control another territory’s policies without granting it equal political standing.',
+        explanation: 'Protectorates show that empire can work through indirect control as well as outright annexation.',
+        standard: 'SS.912.A.4.11'
       },
       {
-        id: '2B-EOC-Q18',
-        text: 'What belief united many local and national Progressive reformers?',
-        choices: ['Modern industrial problems required a more active government guided by expertise and public responsibility.', 'Modern industrial problems required a more active government only in foreign affairs rather than domestic life.', 'Modern industrial problems required a more active government mainly to restore machine politics in cities.', 'Modern industrial problems required a more active government by ending regulation and dismantling public agencies.'],
-        correctAnswer: 'Modern industrial problems required a more active government guided by expertise and public responsibility.',
-        explanation: 'Across many issues, Progressives believed that modern life demanded organized, informed public action.',
-        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
+        id: '3A-EOC-Q18',
+        text: 'Why were the Caribbean and Pacific so central to American imperial strategy?',
+        choices: ['They connected shipping lanes, naval bases, trade routes, and access to wider global influence.', 'They connected shipping lanes only after the United States ended trade with Asia and Latin America.', 'They connected shipping lanes mainly because Europe had abandoned all interest in both regions.', 'They connected shipping lanes but had little relationship to military planning or economic expansion.'],
+        correctAnswer: 'They connected shipping lanes, naval bases, trade routes, and access to wider global influence.',
+        explanation: 'American leaders increasingly treated these regions as linked zones of commerce, strategy, and imperial competition.',
+        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
       },
       {
-        id: '2B-EOC-Q19',
-        text: 'What is one reason historians describe Progressivism as both influential and limited?',
-        choices: ['It achieved major reforms but often failed to confront segregation, racism, and deeper inequality fully.', 'It achieved major reforms but often failed only because voters rejected food safety and labor laws.', 'It achieved major reforms but often failed mainly because presidents refused any role in reform.', 'It achieved major reforms but often failed after machine politics disappeared everywhere in the country.'],
-        correctAnswer: 'It achieved major reforms but often failed to confront segregation, racism, and deeper inequality fully.',
-        explanation: 'The era produced real change, but it also left major exclusions and injustices in place.',
-        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
+        id: '3A-EOC-Q19',
+        text: 'What central argument shaped the domestic debate over American imperialism?',
+        choices: ['Supporters saw expansion as power and opportunity, while critics saw it as a betrayal of republican ideals.', 'Supporters saw expansion as power and opportunity, while critics argued only about which islands were profitable.', 'Supporters saw expansion as power and opportunity, while critics wanted immediate annexation of Cuba and Mexico.', 'Supporters saw expansion as power and opportunity, while critics mainly opposed naval technology and coaling stations.'],
+        correctAnswer: 'Supporters saw expansion as power and opportunity, while critics saw it as a betrayal of republican ideals.',
+        explanation: 'Imperialism sparked debate because it raised questions not just about strategy, but about national identity and political principle.',
+        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
       },
       {
-        id: '2B-EOC-Q20',
-        text: 'Which statement best summarizes the Progressive Era as a whole?',
-        choices: ['Americans used reform journalism, activism, and government power to address the problems of modern industrial life.', 'Americans used reform journalism, activism, and government power only to expand overseas empire and avoid domestic change.', 'Americans used reform journalism, activism, and government power mainly to restore older political machines.', 'Americans used reform journalism, activism, and government power without any disagreements over goals or methods.'],
-        correctAnswer: 'Americans used reform journalism, activism, and government power to address the problems of modern industrial life.',
-        explanation: 'The Progressive Era was defined by the effort to use modern reform tools against the social and political costs of industrialization.',
-        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
+        id: '3A-EOC-Q20',
+        text: 'Which theme best ties together the full American imperialism unit?',
+        choices: ['The United States expanded its global reach through war, diplomacy, and economics while debating the meaning of empire.', 'The United States expanded its global reach through war, diplomacy, and economics after rejecting overseas influence.', 'The United States expanded its global reach through war, diplomacy, and economics only inside North America.', 'The United States expanded its global reach through war, diplomacy, and economics without any serious domestic opposition.'],
+        correctAnswer: 'The United States expanded its global reach through war, diplomacy, and economics while debating the meaning of empire.',
+        explanation: 'American imperialism was not only a story of expansion, but also of argument over what that expansion meant for the nation and the people it affected.',
+        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
       },
     ]
   },
@@ -1640,7 +1640,7 @@ function renderUnitHub() {
     bannerEl.innerHTML = `
       <div class="hub-banner">
         <div class="hub-banner-top">
-          <div class="hub-banner-label">UNIT 2B — THE PROGRESSIVE ERA</div>
+          <div class="hub-banner-label">UNIT 3A — AMERICAN IMPERIALISM</div>
           <div class="hub-banner-count">${done}/${total} LESSONS</div>
         </div>
         <div class="hub-progress-bar">
@@ -1704,7 +1704,7 @@ function renderUnitHub() {
           UNIT COMPLETE — Want to improve your score?
         </div>
         <button class="btn full" onclick="replayFromBeginning()" style="border-color:var(--teal2);color:var(--teal2);">
-          <span>↺ Replay Unit from Lesson 16</span>
+          <span>↺ Replay Unit from Lesson 19</span>
         </button>
       </div>`;
   }
@@ -2219,7 +2219,7 @@ function returnToShell() {
 }
 
 function replayFromBeginning() {
-  // Reset all lesson progress and start from Lesson 16
+  // Reset all lesson progress and start from Lesson 19
   P.lessonsCompleted = [];
   P.lessonBestScores = {};
   saveP();
@@ -2250,7 +2250,7 @@ function printCertificate() {
       <div style="text-align:center;margin-bottom:24px;">
         <div style="font-size:36px;margin-bottom:8px;">🏛️</div>
         <div style="font-size:28px;font-weight:bold;letter-spacing:3px;color:#c83020;">AMERICAN CHRONICLES</div>
-        <div style="font-size:14px;letter-spacing:2px;color:#666;margin-top:4px;">UNIT 2B — THE PROGRESSIVE ERA · CERTIFICATE OF COMPLETION</div>
+        <div style="font-size:14px;letter-spacing:2px;color:#666;margin-top:4px;">UNIT 3A — AMERICAN IMPERIALISM · CERTIFICATE OF COMPLETION</div>
       </div>
       <div style="text-align:center;margin-bottom:20px;padding:16px;border:1px solid #c83020;">
         <div style="font-size:13px;color:#666;letter-spacing:1px;">THIS CERTIFIES THAT</div>
@@ -2375,28 +2375,28 @@ function showLoginGate() {
 // ════════════════════════════════════════════
 
 const HIST_CARDS = {
-  riis:        {icon:'📷', name:'Jacob Riis',               role:'Muckraker · How the Other Half Lives',
-    desc:'His photographic journalism exposed the squalid conditions of New York tenement life to middle-class Americans who had never seen them. His 1890 book shocked the public and helped launch the settlement house and housing reform movements.', unlockLesson:'lesson16'},
-  tarbell:     {icon:'🗞️', name:'Ida Tarbell',              role:'Muckraker · Standard Oil Investigator',
-    desc:'Her 19-part series in McClure’s Magazine meticulously documented Standard Oil’s predatory practices. It became the model for investigative journalism and led directly to the Supreme Court’s breakup of Standard Oil in 1911.', unlockLesson:'lesson16'},
-  addams:      {icon:'🏠', name:'Jane Addams',              role:'Hull House · Nobel Peace Prize 1931',
-    desc:'Founded Hull House in Chicago in 1889, providing education, childcare, and community services to immigrant neighborhoods. Her settlement house model spread nationally and made her the most prominent social reformer of the era.', unlockLesson:'lesson16'},
-  tr:          {icon:'🦏', name:'Theodore Roosevelt',       role:'26th President · Trust-Buster',
-    desc:'Used the presidency as a ‘bully pulpit’ to regulate big business, protect public lands, and mediate labor disputes. His square deal positioned the federal government as a referee between capital and labor for the first time.', unlockLesson:'lesson17'},
-  wells:       {icon:'✏️', name:'Ida B. Wells',              role:'Anti-Lynching Crusader · Journalist',
-    desc:'Led a courageous campaign against lynching through journalism, speaking tours, and political organizing at a time when such work was genuinely dangerous. Helped found the NAACP and challenged progressive reformers to confront racial injustice.', unlockLesson:'lesson16'},
-  wilson:      {icon:'🏛️', name:'Woodrow Wilson',          role:'28th President · New Freedom',
-    desc:'His New Freedom program extended progressive reform to the national level: the Federal Reserve, the Clayton Antitrust Act, and the Federal Trade Commission reshaped banking, business regulation, and labor rights.', unlockLesson:'capstone'},
-  sinclair:    {icon:'🥩', name:'Upton Sinclair',           role:'Muckraker · The Jungle',
-    desc:'His 1906 novel exposed the horrifying conditions of Chicago meatpacking plants. Though he meant to expose worker exploitation, readers were more outraged by what was in their food — and Congress passed the Pure Food and Drug Act within months.', unlockLesson:'lesson16'},
+  mahan:       {icon:'⚓', name:'Alfred Thayer Mahan',      role:'Naval Strategist · Author of Sea Power',
+    desc:'His 1890 book argued that national greatness depended on naval power and overseas bases. Deeply influenced Theodore Roosevelt, Henry Cabot Lodge, and a generation of American leaders who saw empire as destiny.', unlockLesson:'lesson19'},
+  mckinley:    {icon:'🇺🇸', name:'William McKinley',         role:'25th President · 1897–1901',
+    desc:'Led the United States into the Spanish-American War in 1898 and presided over the acquisition of Puerto Rico, Guam, and the Philippines. Struggled publicly with the morality of empire before embracing expansion as divine mission.', unlockLesson:'lesson20'},
+  dewey:       {icon:'⚓', name:'George Dewey',             role:'Commodore · Battle of Manila Bay',
+    desc:'Destroyed the Spanish Pacific fleet at Manila Bay in a single morning on May 1, 1898 without losing a single American sailor. His victory opened the Philippines to American control and made him an instant national hero.', unlockLesson:'lesson20'},
+  roosevelt:   {icon:'🦏', name:'Theodore Roosevelt',       role:'26th President · Rough Rider · 1901–1909',
+    desc:'Led the Rough Riders up San Juan Hill and emerged from the war a national celebrity. As president, he expanded the Monroe Doctrine into the Roosevelt Corollary, asserting the right to intervene across Latin America.', unlockLesson:'lesson20'},
+  aguinaldo:   {icon:'🇵🇭', name:'Emilio Aguinaldo',         role:'Philippine Revolutionary Leader',
+    desc:'Led the Filipino struggle for independence first against Spain, then against the United States. The Philippine-American War he led lasted three years, killed hundreds of thousands, and is often forgotten in American histories of empire.', unlockLesson:'capstone'},
+  hay:         {icon:'📜', name:'John Hay',                role:'Secretary of State · Open Door Policy',
+    desc:'Authored the Open Door Notes in 1899 and 1900, demanding equal trading rights in China for all nations. His policy protected American commercial interests without requiring formal colonial control over Chinese territory.', unlockLesson:'capstone'},
+  twain:       {icon:'✏️', name:'Mark Twain',               role:'Author · Anti-Imperialist League',
+    desc:'One of the most prominent voices in the Anti-Imperialist League. Wrote blistering satire against the Philippine War and American hypocrisy. “We have gone there to conquer, not to redeem.”', unlockLesson:'lesson20'},
 };
 
 const UNIT_BADGES = [
-  {id:'uncovering',       icon:'📰', label:'Uncovering Problems',  desc:'Completed Uncovering Problems',      lessonId:'lesson16'},
-  {id:'progressives_respond', icon:'⚖️', label:'Progressives Respond', desc:'Completed The Progressives Respond', lessonId:'lesson17'},
-  {id:'age_of_reform',    icon:'🗾', label:'Age of Reform',        desc:'Completed the Capstone',             lessonId:'capstone'},
-  {id:'progressive_done', icon:'📋', label:'Progressive Complete', desc:'Completed EOC Review',               lessonId:'eoc'},
-  {id:'unit2b_complete',  icon:'⭐', label:'Unit 2B Complete',     desc:'Completed all lessons',              lessonId:null},
+  {id:'setting_course',   icon:'🧭', label:'Setting a Course',    desc:'Completed Setting a Course',         lessonId:'lesson19'},
+  {id:'splendid_war',     icon:'💥', label:'Splendid Little War',  desc:'Completed Splendid Little War',      lessonId:'lesson20'},
+  {id:'empire_rising',    icon:'🌐', label:'Empire Rising',        desc:'Completed the Capstone',             lessonId:'capstone'},
+  {id:'imperialism_done', icon:'📋', label:'Imperialism Complete', desc:'Completed EOC Review',               lessonId:'eoc'},
+  {id:'unit3a_complete',  icon:'⭐', label:'Unit 3A Complete',     desc:'Completed all lessons',              lessonId:null},
 ];
 
 // ════════════════════════════════════════════
@@ -2483,7 +2483,7 @@ function renderLeaderboard() {
     filtered = filtered.filter(s => s.period && s.period !== '0');
     if (_lbPeriodFilter !== 'all') filtered = filtered.filter(s => String(s.period) === String(_lbPeriodFilter));
   }
-  document.getElementById('lb-sync-status').textContent = filtered.length + ' students — Unit 2B: The Progressive Era';
+  document.getElementById('lb-sync-status').textContent = filtered.length + ' students — Unit 3A: American Imperialism';
   if (!filtered.length) {
     document.getElementById('lb-content').innerHTML =
       '<div style="font-family:var(--crimson);color:var(--text3);font-style:italic;padding:16px;">No results yet.</div>';
