@@ -801,7 +801,7 @@ async function signInWithGoogle(){
   const { error } = await _supa.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: window.location.href,
+      redirectTo: 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/',
       queryParams: { hd: '' } // allow any Google account (school accounts work fine)
     }
   });
