@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>American Chronicles — U.S. History Course Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+DisAplaAy:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#2c1f14;--bg2:#3a2a1a;--bg3:#4a3525;--panel:#3f2e1e;
@@ -841,14 +841,14 @@ function eraTrophyScene(unitId, c, tier){
       <rect width="100" height="90" fill="${col2}18"/>
       <line x1="0" y1="62" x2="100" y2="62" stroke="${col}" stroke-width=".8" opacity=".3"/>
       <!-- Two opposing soldiers -->
-      <g opacity="${g?.5:.75}">
+      <g opacity="${g ? .5 : .75}">
         <rect x="12" y="45" width="5" height="12" fill="${col}"/>
         <circle cx="14.5" cy="42" r="3.5" fill="${col}"/>
         <line x1="14.5" y1="38" x2="14.5" y2="28" stroke="${col}" stroke-width="1.2"/>
         <polygon points="14.5,27 12.5,30 16.5,30" fill="${col}"/>
         <rect x="12" y="57" width="5" height="5" fill="${col}" opacity=".7"/>
       </g>
-      <g opacity="${g?.5:.65}" transform="scale(-1,1) translate(-100,0)">
+      <g opacity="${g ? .5 : .65}" transform="scale(-1,1) translate(-100,0)">
         <rect x="12" y="45" width="5" height="12" fill="${col}"/>
         <circle cx="14.5" cy="42" r="3.5" fill="${col}"/>
         <line x1="14.5" y1="38" x2="14.5" y2="28" stroke="${col}" stroke-width="1.2"/>
@@ -856,7 +856,7 @@ function eraTrophyScene(unitId, c, tier){
         <rect x="12" y="57" width="5" height="5" fill="${col}" opacity=".7"/>
       </g>
       <!-- Capitol dome center -->
-      <g opacity="${g?.4:.5}" transform="translate(40,14)">
+      <g opacity="${g ? .4 : .5}" transform="translate(40,14)">
         <ellipse cx="10" cy="14" rx="10" ry="7" fill="${col}"/>
         <rect x="3" y="14" width="14" height="10" fill="${col}"/>
         <rect x="1" y="23" width="18" height="2.5" fill="${col}"/>
@@ -869,7 +869,7 @@ function eraTrophyScene(unitId, c, tier){
     unit2a:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- Steam locomotive, side view -->
-      <g opacity="${g?.45:.7}" transform="translate(8,30)">
+      <g opacity="${g ? .45 : .7}" transform="translate(8,30)">
         <rect x="0" y="15" width="58" height="14" rx="2" fill="${col}"/>
         <rect x="5" y="10" width="22" height="15" rx="1" fill="${col}"/>
         <rect x="28" y="6" width="10" height="19" rx="1" fill="${col}"/>
@@ -894,7 +894,7 @@ function eraTrophyScene(unitId, c, tier){
     unit2b:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- Suffragist holding banner -->
-      <g opacity="${g?.45:.7}" transform="translate(30,8)">
+      <g opacity="${g ? .45 : .7}" transform="translate(30,8)">
         <circle cx="10" cy="10" r="5.5" fill="${col}"/>
         <ellipse cx="10" cy="24" rx="8" ry="6" fill="${col}"/>
         <rect x="3" y="18" width="14" height="10" fill="${col}"/>
@@ -907,7 +907,7 @@ function eraTrophyScene(unitId, c, tier){
         <rect x="13" y="16" width="5" height="7" rx="2" fill="${col}" opacity=".8"/>
       </g>
       <!-- newspaper sheets -->
-      <rect x="5" y="55" width="18" height="14" rx="1" fill="${col}" opacity="${g?.25:.25}"/>
+      <rect x="5" y="55" width="18" height="14" rx="1" fill="${col}" opacity="${g ? .25 : .25}"/>
       <rect x="10" y="57" width="12" height="1.5" rx=".5" fill="${col2}" opacity=".5"/>
       <rect x="10" y="60" width="10" height="1" rx=".5" fill="${col2}" opacity=".4"/>
       <rect x="10" y="62.5" width="11" height="1" rx=".5" fill="${col2}" opacity=".4"/>
@@ -916,7 +916,7 @@ function eraTrophyScene(unitId, c, tier){
     unit3a:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- Globe with latitude lines -->
-      <g opacity="${g?.45:.55}" transform="translate(28,8)">
+      <g opacity="${g ? .45 : .55}" transform="translate(28,8)">
         <circle cx="22" cy="22" r="20" fill="none" stroke="${col}" stroke-width="1.5"/>
         <ellipse cx="22" cy="22" rx="10" ry="20" fill="none" stroke="${col}" stroke-width=".7" opacity=".5"/>
         <ellipse cx="22" cy="22" rx="20" ry="8" fill="none" stroke="${col}" stroke-width=".7" opacity=".5"/>
@@ -929,18 +929,18 @@ function eraTrophyScene(unitId, c, tier){
         <polygon points="22,4 19,9 22,8 25,9" fill="${col}" opacity=".7"/>
       </g>
       <!-- eagle feathers/wings hint -->
-      <path d="M10 72 Q30 60 50 65 Q70 60 90 72" stroke="${col}" stroke-width="1" fill="none" opacity="${g?.25:.3}"/>
+      <path d="M10 72 Q30 60 50 65 Q70 60 90 72" stroke="${col}" stroke-width="1" fill="none" opacity="${g ? .25 : .3}"/>
       <text x="50" y="86" font-family="'Bebas Neue',serif" font-size="9" fill="${col}" opacity=".45" text-anchor="middle" letter-spacing="2">1898–1914</text>`,
 
     unit3b:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- Trench silhouette -->
-      <path d="M0 70 Q15 55 35 58 Q45 52 55 56 Q70 48 100 55" stroke="${col}" stroke-width="1.5" fill="none" opacity="${g?.4:.5}"/>
-      <path d="M0 70 Q15 55 35 58 Q45 52 55 56 Q70 48 100 55 L100 90 L0 90Z" fill="${col}" opacity="${g?.18:.12}"/>
+      <path d="M0 70 Q15 55 35 58 Q45 52 55 56 Q70 48 100 55" stroke="${col}" stroke-width="1.5" fill="none" opacity="${g ? .4 : .5}"/>
+      <path d="M0 70 Q15 55 35 58 Q45 52 55 56 Q70 48 100 55 L100 90 L0 90Z" fill="${col}" opacity="${g ? .18 : .12}"/>
       <!-- wire/barbed wire -->
-      <line x1="0" y1="60" x2="100" y2="55" stroke="${col}" stroke-width=".6" stroke-dasharray="3,4" opacity="${g?.3:.3}"/>
+      <line x1="0" y1="60" x2="100" y2="55" stroke="${col}" stroke-width=".6" stroke-dasharray="3,4" opacity="${g ? .3 : .3}"/>
       <!-- silhouette soldiers in trench -->
-      <g opacity="${g?.42:.6}">
+      <g opacity="${g ? .42 : .6}">
         <circle cx="25" cy="55" r="3.5" fill="${col}"/>
         <rect x="22" y="57" width="6" height="8" fill="${col}"/>
         <line x1="28" y1="58" x2="36" y2="52" stroke="${col}" stroke-width="1.5"/>
@@ -949,16 +949,16 @@ function eraTrophyScene(unitId, c, tier){
         <line x1="58" y1="55" x2="66" y2="49" stroke="${col}" stroke-width="1.5"/>
       </g>
       <!-- shell burst -->
-      <circle cx="78" cy="38" r="2" fill="${col}" opacity="${g?.25:.3}"/>
-      <line x1="78" y1="36" x2="78" y2="30" stroke="${col}" stroke-width=".8" opacity="${g?.25:.3}"/>
-      <line x1="78" y1="36" x2="73" y2="31" stroke="${col}" stroke-width=".8" opacity="${g?.25:.25}"/>
-      <line x1="78" y1="36" x2="83" y2="31" stroke="${col}" stroke-width=".8" opacity="${g?.25:.25}"/>
+      <circle cx="78" cy="38" r="2" fill="${col}" opacity="${g ? .25 : .3}"/>
+      <line x1="78" y1="36" x2="78" y2="30" stroke="${col}" stroke-width=".8" opacity="${g ? .25 : .3}"/>
+      <line x1="78" y1="36" x2="73" y2="31" stroke="${col}" stroke-width=".8" opacity="${g ? .25 : .25}"/>
+      <line x1="78" y1="36" x2="83" y2="31" stroke="${col}" stroke-width=".8" opacity="${g ? .25 : .25}"/>
       <text x="50" y="87" font-family="'Bebas Neue',serif" font-size="9" fill="${col}" opacity=".45" text-anchor="middle" letter-spacing="2">1914–1920</text>`,
 
     unit4a:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- Jazz trumpet player -->
-      <g opacity="${g?.45:.72}" transform="translate(12,6)">
+      <g opacity="${g ? .45 : .72}" transform="translate(12,6)">
         <circle cx="12" cy="10" r="5.5" fill="${col}"/>
         <ellipse cx="12" cy="24" rx="7" ry="6" fill="${col}"/>
         <rect x="6" y="18" width="12" height="12" fill="${col}"/>
@@ -980,7 +980,7 @@ function eraTrophyScene(unitId, c, tier){
     unit4b:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- Dustbowl: man walking away with suitcase -->
-      <g opacity="${g?.45:.7}">
+      <g opacity="${g ? .45 : .7}">
         <!-- dramatic ground lines -->
         <path d="M0 65 Q25 60 50 63 Q75 60 100 65" stroke="${col}" stroke-width=".8" fill="none" opacity=".4"/>
         <path d="M0 70 Q30 65 60 68 Q80 65 100 70" stroke="${col}" stroke-width=".5" fill="none" opacity=".3"/>
@@ -1006,7 +1006,7 @@ function eraTrophyScene(unitId, c, tier){
     unit5a:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- WWII: Stars on shield/star formation -->
-      <g opacity="${g?.45:.65}">
+      <g opacity="${g ? .45 : .65}">
         <!-- Pentagon-ish star burst -->
         <polygon points="50,12 57,32 76,32 61,44 67,64 50,53 33,64 39,44 24,32 43,32" fill="none" stroke="${col}" stroke-width="1.2" opacity=".6"/>
         <polygon points="50,18 55,30 68,30 58,38 62,51 50,43 38,51 42,38 32,30 45,30" fill="${col}" opacity=".22"/>
@@ -1027,7 +1027,7 @@ function eraTrophyScene(unitId, c, tier){
     unit5b:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- Cold War: wall dividing two sides -->
-      <g opacity="${g?.45:.65}">
+      <g opacity="${g ? .45 : .65}">
         <!-- wall -->
         <rect x="45" y="15" width="10" height="52" fill="${col}" opacity=".4"/>
         <line x1="45" y1="15" x2="55" y2="15" stroke="${col}" stroke-width=".5" opacity=".5"/>
@@ -1052,7 +1052,7 @@ function eraTrophyScene(unitId, c, tier){
     unit6:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- Civil Rights: marching figures -->
-      <g opacity="${g?.45:.72}">
+      <g opacity="${g ? .45 : .72}">
         <!-- marching line -->
         <path d="M5 68 L95 60" stroke="${col}" stroke-width=".7" opacity=".3"/>
         <!-- 4 figures marching left to right -->
@@ -1079,7 +1079,7 @@ function eraTrophyScene(unitId, c, tier){
     unit7a:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- Camelot: JFK silhouette at podium, space rocket -->
-      <g opacity="${g?.45:.68}">
+      <g opacity="${g ? .45 : .68}">
         <!-- Podium figure -->
         <circle cx="30" cy="30" r="5.5" fill="${col}"/>
         <rect x="25" y="34" width="10" height="14" fill="${col}"/>
@@ -1106,7 +1106,7 @@ function eraTrophyScene(unitId, c, tier){
     unit7b:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- Vietnam: helicopter, jungle silhouette -->
-      <g opacity="${g?.45:.68}">
+      <g opacity="${g ? .45 : .68}">
         <!-- jungle treeline -->
         <path d="M0 75 Q8 55 16 65 Q22 50 30 62 Q36 48 44 60 Q50 52 58 63 Q64 50 72 62 Q78 55 86 65 Q92 53 100 62 L100 90 L0 90Z" fill="${col}" opacity=".35"/>
         <!-- helicopter -->
@@ -1129,7 +1129,7 @@ function eraTrophyScene(unitId, c, tier){
     unit8:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- Modern America: city skyline, TV/screen, Statue of Liberty torch -->
-      <g opacity="${g?.45:.65}">
+      <g opacity="${g ? .45 : .65}">
         <!-- skyline -->
         <rect x="5" y="50" width="8" height="22" fill="${col}" opacity=".4"/>
         <rect x="15" y="42" width="10" height="30" fill="${col}" opacity=".38"/>
@@ -1156,7 +1156,7 @@ function eraTrophyScene(unitId, c, tier){
     theme_power:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- scales of justice -->
-      <g opacity="${g?.45:.72}" transform="translate(28,8)">
+      <g opacity="${g ? .45 : .72}" transform="translate(28,8)">
         <line x1="22" y1="8" x2="22" y2="55" stroke="${col}" stroke-width="1.5"/>
         <line x1="4" y1="18" x2="40" y2="18" stroke="${col}" stroke-width="1.2"/>
         <line x1="4" y1="18" x2="10" y2="34" stroke="${col}" stroke-width=".9"/>
@@ -1175,7 +1175,7 @@ function eraTrophyScene(unitId, c, tier){
     theme_freedom:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- torch -->
-      <g opacity="${g?.45:.72}" transform="translate(38,4)">
+      <g opacity="${g ? .45 : .72}" transform="translate(38,4)">
         <rect x="9" y="38" width="6" height="28" rx="1" fill="${col}"/>
         <ellipse cx="12" cy="37" rx="5" ry="4" fill="${col}" opacity=".7"/>
         <!-- flame -->
@@ -1196,7 +1196,7 @@ function eraTrophyScene(unitId, c, tier){
     theme_economy:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- gear -->
-      <g opacity="${g?.45:.65}" transform="translate(32,10)">
+      <g opacity="${g ? .45 : .65}" transform="translate(32,10)">
         <circle cx="18" cy="22" r="11" fill="none" stroke="${col}" stroke-width="2.5"/>
         <circle cx="18" cy="22" r="5"  fill="${col}" opacity=".5"/>
         ${[0,45,90,135,180,225,270,315].map((a,i)=>`<rect x="16" y="${22-16}" width="4" height="6" rx="1" fill="${col}" transform="rotate(${a},18,22)" opacity=".7"/>`).join('')}
@@ -1214,7 +1214,7 @@ function eraTrophyScene(unitId, c, tier){
     theme_conflict:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- crossed swords -->
-      <g opacity="${g?.45:.7}">
+      <g opacity="${g ? .45 : .7}">
         <line x1="20" y1="15" x2="80" y2="70" stroke="${col}" stroke-width="2.5"/>
         <polygon points="20,15 15,22 25,22" fill="${col}" opacity=".8"/>
         <rect x="76" y="66" width="8" height="4" rx="1" fill="${col}" transform="rotate(45,80,68)" opacity=".7"/>
@@ -1232,7 +1232,7 @@ function eraTrophyScene(unitId, c, tier){
     theme_identity:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- diverse silhouettes -->
-      <g opacity="${g?.45:.7}">
+      <g opacity="${g ? .45 : .7}">
         ${[14,28,42,56,70,84].map((x,i)=>{
           const h=[30,36,28,34,32,30][i];
           const hy=44-h;
@@ -1250,7 +1250,7 @@ function eraTrophyScene(unitId, c, tier){
     eoc_midterm:`
       <rect width="100" height="90" fill="${col2}18"/>
       <!-- document / scroll -->
-      <g opacity="${g?.45:.7}" transform="translate(28,8)">
+      <g opacity="${g ? .45 : .7}" transform="translate(28,8)">
         <rect x="2" y="5" width="40" height="52" rx="2" fill="${col}" opacity=".18" stroke="${col}" stroke-width="1.2"/>
         <rect x="2" y="5" width="40" height="10" rx="2" fill="${col}" opacity=".35"/>
         <!-- text lines -->
@@ -1281,7 +1281,7 @@ const UNIT_DATA=[
   {id:'unit5a',num:'Unit 5A',title:'Arsenal of Democracy',years:'1939–1945',icon:'🎖️',eraColor:'#2a3a1a',url:'https://olsonjoshua-code.github.io/Arsenal-of-Democracy/',desc:'America enters the war after Pearl Harbor and fights on two fronts.',topics:['Causes of WWII','Pearl Harbor','Home Front','Japanese internment','Holocaust','Manhattan Project'],themes:['conflict','freedom','power','identity'],changed:'U.S. and USSR emerge as superpowers; nuclear age begins.',continued:'Racial segregation in the military.',emerged:'When does the end justify the means in war?'},
   {id:'unit5b',num:'Unit 5B',title:'Iron Curtain',years:'1945–1963',icon:'☢️',eraColor:'#2a3a1a',url:'https://olsonjoshua-code.github.io/iron-curtain/',desc:'Two superpowers. One world on the edge.',topics:['Truman Doctrine','Marshall Plan','Korean War','McCarthyism','Cuban Missile Crisis'],themes:['conflict','power','freedom','identity'],changed:'Permanent military buildup; government power over dissent expands.',continued:'Racial inequality at home contrasts with freedom rhetoric.',emerged:'How do you protect freedom through institutions that restrict it?'},
   {id:'unit6', num:'Unit 6', title:'Chronicles of Change',years:'1954–1965',icon:'✊',eraColor:'#7a2010',url:'https://olsonjoshua-code.github.io/chronicles-of-change/',desc:'The Civil Rights Movement forced America to confront the contradiction at its heart.',topics:['Brown v. Board','Montgomery Bus Boycott','Sit-ins & SNCC','Freedom Rides','Civil Rights Act 1964','Voting Rights Act 1965'],themes:['freedom','conflict','power','identity'],changed:'Legal segregation dismantled; voting rights enforced.',continued:'Economic inequality; residential segregation.',emerged:'When legal equality is won, what remains?'},
-  {id:'unit7a',num:'Unit 7A',title:'Camelot',years:'1961–1968',icon:'🕊️',eraColor:'#7a2010',url:'https://olsonjoshua-code.github.io/camelot/',briefingUrl:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/briefings/unit7a_briefing.html'The Kennedy years and their violent end.',topics:['Kennedy presidency','Cuban Missile Crisis','JFK assassination','LBJ & Great Society','Black Power'],themes:['power','conflict','identity','freedom'],changed:'Great Society expands social safety net.',continued:'Cold War logic drives foreign policy.',emerged:'When the leaders of a movement are killed, how does a nation hold onto hope?'},
+  {id:'unit7a',num:'Unit 7A',title:'Camelot',years:'1961–1968',icon:'🕊️',eraColor:'#7a2010',url:'https://olsonjoshua-code.github.io/camelot/',briefingUrl:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/briefings/unit7a_briefing.html',desc:'The Kennedy years and their violent end.',topics:['Kennedy presidency','Cuban Missile Crisis','JFK assassination','LBJ & Great Society','Black Power'],themes:['power','conflict','identity','freedom'],changed:'Great Society expands social safety net.',continued:'Cold War logic drives foreign policy.',emerged:'When the leaders of a movement are killed, how does a nation hold onto hope?'},
   {id:'unit7b',num:'Unit 7B',title:'Napalm Dawn',years:'1965–1975',icon:'🪖',eraColor:'#1a2a1a',url:'https://olsonjoshua-code.github.io/Napalm-Dawn/',desc:"America's longest war — and its first televised defeat.",topics:['Gulf of Tonkin','Anti-war movement','My Lai Massacre','Tet Offensive','Watergate'],themes:['conflict','power','freedom','identity'],changed:'U.S. withdraws from Vietnam; Nixon resigns.',continued:'Public distrust of government outlasts specific scandals.',emerged:'When a government lies to its people, how can trust be rebuilt?'},
   {id:'unit8', num:'Unit 8', title:'Modern America',years:'1980–Present',icon:'🗽',eraColor:'#1a1a3a',url:'https://olsonjoshua-code.github.io/Modern-America/',desc:"Reagan's revolution, 9/11, and a deeply divided nation.",topics:['Reagan Revolution','End of Cold War','9/11 & War on Terror','Great Recession','Obama presidency'],themes:['power','identity','economy','conflict'],changed:'U.S. becomes sole superpower after 1991.',continued:'Economic inequality; racial tension; partisan polarization.',emerged:'What responsibilities does the dominant world power have?'},
   {id:'theme_power',   num:'Theme: Power',    title:'Balance of Power',    years:'1861–Present',icon:'⚖️',eraColor:'#d07860',url:'https://olsonjoshua-code.github.io/Balance-of-Power/',    desc:'Trace the struggle over who holds power across all of U.S. history.',topics:['Federal vs. state power','Executive overreach','Checks & balances','Civil rights legislation','Protest & resistance'],themes:['power'],changed:'The balance of power has shifted repeatedly between federal, state, and popular forces.',continued:'Tension between concentrated power and democratic accountability.',emerged:'Who ultimately holds power in a democracy — and how is it won or lost?'},
