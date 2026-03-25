@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Empire Rising — Unit 3A: American Imperialism</title>
+<title>Into the Trenches — Unit 3B: World War I</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07090e;--bg2:#0b0d18;--bg3:#101320;--panel:#141828;
-  --border:#1c2240;--border2:#243060;
-  --gold:#c8a030;--gold2:#a07820;--gold3:#e8c050;
-  --red:#8a1818;--red2:#b02020;
-  --green:#1a5a2a;--green2:#2a7a3a;
-  --teal:#186858;--teal2:#207868;
-  --blue:#1a2850;--blue2:#283878;
-  --text:#e0dcc8;--text2:#a09870;--text3:#686040;--cream:#f0e8d0;
+  --bg:#07080b;--bg2:#0e0f0a;--bg3:#141510;--panel:#0f1109;
+  --border:#1e2214;--border2:#2a3018;
+  --gold:#8a9a40;--gold2:#6a7a28;--gold3:#b0c050;
+  --red:#7a2010;--red2:#a03020;
+  --green:#2a4a18;--green2:#3a6828;
+  --teal:#1a4838;--teal2:#246048;
+  --blue:#182030;--blue2:#243850;
+  --text:#d8dcc0;--text2:#909870;--text3:#585e40;--cream:#e8ecd0;
   --bebas:'Bebas Neue',sans-serif;
   --playfair:'Playfair Display',serif;
   --crimson:'Crimson Text',serif;
@@ -24,13 +24,13 @@
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:var(--crimson);min-height:100vh;overflow-x:hidden;
   background-image:
-    radial-gradient(ellipse at 50% 0%,   rgba(160,120,30,.22)  0%,  transparent 60%),
-    radial-gradient(ellipse at 15% 60%,  rgba(120, 90,20,.14)  0%,  transparent 55%),
-    radial-gradient(ellipse at 85% 85%,  rgba( 80, 60,10,.12)  0%,  transparent 50%),
-    linear-gradient(175deg, #09091a 0%, #070715 40%, #050510 100%);}
-/* Globe / compass rose watermark (Imperialism) */
+    radial-gradient(ellipse at 50% 0%,   rgba(80,100,20,.28)  0%,  transparent 60%),
+    radial-gradient(ellipse at 15% 60%,  rgba(60, 80,10,.18)  0%,  transparent 55%),
+    radial-gradient(ellipse at 85% 85%,  rgba(40, 55, 5,.15)  0%,  transparent 50%),
+    linear-gradient(175deg, #0a0c07 0%, #080a05 40%, #050703 100%);}
+/* WWI cross / memorial watermark */
 body::after{content:'';position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' width='400' height='400'%3E%3Cg transform='translate(200,200)' opacity='0.09' stroke='rgba(200,160,48,1)' fill='none'%3E%3Ccircle cx='0' cy='0' r='155' stroke-width='3'/%3E%3Ccircle cx='0' cy='0' r='110' stroke-width='1.5' stroke-dasharray='6,8'/%3E%3Ccircle cx='0' cy='0' r='65' stroke-width='1.5' stroke-dasharray='4,6'/%3E%3Cline x1='0' y1='-155' x2='0' y2='155' stroke-width='1.5'/%3E%3Cline x1='-155' y1='0' x2='155' y2='0' stroke-width='1.5'/%3E%3Cline x1='-110' y1='-110' x2='110' y2='110' stroke-width='1' stroke-dasharray='3,5'/%3E%3Cline x1='110' y1='-110' x2='-110' y2='110' stroke-width='1' stroke-dasharray='3,5'/%3E%3Cpolygon points='0,-22 6,-6 22,0 6,6 0,22 -6,6 -22,0 -6,-6' fill='rgba(200,160,48,0.8)' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' width='400' height='400'%3E%3Cg transform='translate(200,200)' opacity='0.09' stroke='rgba(138,154,64,1)' fill='none'%3E%3Ccircle cx='0' cy='0' r='155' stroke-width='2.5'/%3E%3Ccircle cx='0' cy='0' r='140' stroke-width='1' stroke-dasharray='5,7'/%3E%3Crect x='-18' y='-85' width='36' height='170' rx='4' stroke-width='0' fill='rgba(138,154,64,0.9)'/%3E%3Crect x='-75' y='-20' width='150' height='36' rx='4' stroke-width='0' fill='rgba(138,154,64,0.9)'/%3E%3Ccircle cx='0' cy='0' r='28' stroke-width='0' fill='rgba(7,8,11,1)'/%3E%3Ccircle cx='0' cy='0' r='22' stroke-width='3' fill='none'/%3E%3C/g%3E%3C/svg%3E");
   background-size:500px 500px;
   background-position:center center;
   background-repeat:no-repeat;
@@ -502,18 +502,18 @@ body.hud-active #root{padding-top:68px;}
   </div>
 
   <!-- Unit title header -->
-  <div class="section-head" style="margin-top:4px;">Unit 3A — American Imperialism</div>
+  <div class="section-head" style="margin-top:4px;">Unit 3B — World War I</div>
 
   <!-- Essential question -->
   <div class="eq-banner">
-    <strong>Essential Question:</strong> How and why did the United States build an overseas empire at the turn of the twentieth century, and what were the costs and consequences of that expansion?
+    <strong>Essential Question:</strong> How did World War I transform the United States — its government, its society, its role in the world — and why did the peace it created plant the seeds of future catastrophe?
   </div>
 
   <!-- Lesson / chapter cards — rendered by JS -->
   <div id="hub-chapters"></div>
 
   <!-- Divider -->
-  <div class="deco-divider"><span class="deco-divider-icon">🌐</span></div>
+  <div class="deco-divider"><span class="deco-divider-icon">🌿</span></div>
 
   <!-- Badges row — rendered by JS -->
   <div class="section-head" style="font-size:14px;">Badges</div>
@@ -594,7 +594,7 @@ body.hud-active #root{padding-top:68px;}
     <div class="briefing-header">
       <div>
         <div class="briefing-eyebrow" id="briefing-eyebrow">LESSON 38 · MISSION BRIEFING</div>
-        <div class="briefing-title" id="briefing-title">American Imperialism</div>
+        <div class="briefing-title" id="briefing-title">World War I</div>
       </div>
       <button class="briefing-close-btn" onclick="closeBriefing()">✕ Close</button>
     </div>
@@ -633,8 +633,8 @@ body.hud-active #root{padding-top:68px;}
 
     <!-- Trophy badge -->
     <div class="complete-badge" id="complete-badge">🏆</div>
-    <div class="complete-unit-lbl" id="complete-unit-lbl">UNIT 3A</div>
-    <div class="complete-lesson-title" id="complete-lesson-title">American Imperialism</div>
+    <div class="complete-unit-lbl" id="complete-unit-lbl">UNIT 3B</div>
+    <div class="complete-lesson-title" id="complete-lesson-title">World War I</div>
     <div class="complete-tier" id="complete-tier" style="color:var(--gold)">GOLD — 90%</div>
 
     <!-- Stats row -->
@@ -669,7 +669,7 @@ body.hud-active #root{padding-top:68px;}
     <div class="complete-btn-group">
       <!-- Retry same lesson -->
       <button class="btn full" onclick="retryLesson()"><span>↺ Retry This Lesson</span></button>
-      <!-- Replay entire unit from Lesson 19 (always visible) -->
+      <!-- Replay entire unit from Lesson 22 (always visible) -->
       <button class="btn full" id="btn-replay-all" onclick="replayFromBeginning()" style="border-color:var(--gold2);color:var(--gold2);display:none;"><span>⟳ Replay Unit From Beginning</span></button>
       <!-- Return to unit hub -->
       <button class="btn full green" onclick="returnToUnitHub()"><span>← Return to Unit Hub</span></button>
@@ -709,8 +709,8 @@ body.hud-active #root{padding-top:68px;}
 
 <div id="login-gate" class="show">
   <div class="login-box">
-    <div class="login-logo">EMPIRE<br>RISING</div>
-    <div class="login-sub">Unit 3A — American Imperialism</div>
+    <div class="login-logo">INTO THE<br>TRENCHES</div>
+    <div class="login-sub">Unit 3B — World War I</div>
 
     <div class="login-field">
       <label>Your Name</label>
@@ -789,7 +789,7 @@ body.hud-active #root{padding-top:68px;}
     <button class="overlay-close" onclick="document.getElementById('cardcoll-overlay').classList.remove('show')">CLOSE</button>
   </div>
   <div style="font-family:var(--crimson);font-size:15px;color:var(--text2);margin-bottom:16px;font-style:italic;">
-    Earn historical figure cards by completing lessons. Each card tells the story of a key American Imperialism figure.
+    Earn historical figure cards by completing lessons. Each card tells the story of a key World War I figure.
   </div>
   <div class="card-grid" id="cardcoll-grid"></div>
 </div>
@@ -801,11 +801,11 @@ body.hud-active #root{padding-top:68px;}
 // CONSTANTS & KEYS
 // ════════════════════════════════════════════
 const SHELL_KEY   = 'ac_shell_state';
-const SAVE_KEY   = 'empirerising_v1_save';
-const UNIT_ID     = 'unit3a';
+const SAVE_KEY   = 'intothetrenches_v1_save';
+const UNIT_ID     = 'unit3b';
 
 // ── GOLD ECONOMY ──────────────────────────────────────
-// These are the canonical reward values for UNIT 3A.
+// These are the canonical reward values for UNIT 3B.
 // All gold earned here flows into the shell's global wallet
 // and from there into the RPG. Adjust by lesson type below.
 //
@@ -863,329 +863,433 @@ const AC_HEADERS  = {'Content-Type':'application/json','apikey':AC_SUPA_KEY,'Aut
 const LESSONS = [
 
   // ==================================================
-  // LESSON 19 — Setting a Course
+  // LESSON 22 — From Neutrality to War
   // ==================================================
   {
-    id: 'lesson19',
-    label: 'LESSON 19',
-    title: 'Setting a Course',
-    sub: 'Foreign Policy and Expansionism · 1800s',
-    icon: '🧭',
+    id: 'lesson22',
+    label: 'LESSON 22',
+    title: 'From Neutrality to War',
+    sub: 'American Entry into World War I · 1914-1917',
+    icon: '🌊',
     type: 'lesson',
     briefing: {
-      location: 'Foreign Policy and Expansionism',
-      date: '1800s',
-      role: 'naval policy adviser',
-      text: 'The United States is looking outward. Industrial growth, new markets, naval strategy, missionary activity, and ideas about national destiny are pushing leaders to rethink foreign policy. Before the Spanish-American War begins, Americans are already arguing about trade, influence, and whether expansion is a duty, a danger, or both.',
-      tags: ['SS.912.A.4.10']
+      location: 'American Entry into World War I',
+      date: '1914-1917',
+      role: 'State Department aide',
+      text: 'Europe is at war, but the United States is trying to remain neutral. As the conflict drags on, submarine warfare, economic ties, and diplomatic crises pull America closer to intervention. This lesson follows the difficult shift from distance and caution to direct involvement in a global war.',
+      tags: ['SS.912.A.4.5']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Setting a Course', cards: ['Alfred Thayer Mahan', 'Open Door Policy'] },
+    rewards: { badge: 'Neutrality Broken', cards: ['Woodrow Wilson', 'Zimmermann Telegram'] },
     bank: [
       {
-        id: '3A-L19-Q1',
-        text: 'Why did many American leaders become more interested in expansionism in the late 1800s?',
-        choices: ['They wanted new markets, strategic bases, and greater influence as the nation grew industrially.', 'They wanted to withdraw from world trade and focus only on settling the remaining western frontier.', 'They wanted to end naval spending and avoid involvement in Pacific and Caribbean affairs entirely.', 'They wanted to transfer U.S. foreign policy to European empires that already controlled overseas colonies.'],
-        correctAnswer: 'They wanted new markets, strategic bases, and greater influence as the nation grew industrially.',
-        explanation: 'Industrial expansion, global competition, and new ideas about national power pushed many policymakers toward overseas involvement.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L22-Q1',
+        text: 'Why did many Americans support neutrality when World War I began in Europe in 1914?',
+        choices: ['They believed the conflict was a European war and wanted to avoid another costly overseas entanglement.', 'They believed the United States had already signed a treaty requiring support for the Central Powers immediately.', 'They believed American trade with Europe would end if the nation stayed out of the fighting.', 'They believed both sides were democracies, so the war would settle itself without outside involvement.'],
+        correctAnswer: 'They believed the conflict was a European war and wanted to avoid another costly overseas entanglement.',
+        explanation: 'At first, many Americans saw the war as a European struggle and hoped the United States could stay out of the bloodshed and expense.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-L19-Q2',
-        text: 'What was Alfred Thayer Mahan’s main argument about national power?',
-        choices: ['He argued that a strong navy and overseas bases were essential to great-power status.', 'He argued that a strong navy and overseas bases would weaken trade by provoking unnecessary wars.', 'He argued that a strong navy and overseas bases mattered less than retreating from foreign commerce.', 'He argued that a strong navy and overseas bases should be replaced by a permanent alliance with Britain.'],
-        correctAnswer: 'He argued that a strong navy and overseas bases were essential to great-power status.',
-        explanation: 'Mahan believed sea power, coaling stations, and a modern navy were key ingredients of international influence.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L22-Q2',
+        text: 'Why was maintaining neutrality difficult for the United States even before 1917?',
+        choices: ['Americans had cultural ties, economic links, and political sympathies that made true detachment hard to sustain.', 'Americans had no cultural ties, economic links, or political sympathies with any European power at all.', 'Americans were forced by law to send troops overseas as soon as the fighting began in 1914.', 'Americans were unable to trade with either side because the Atlantic Ocean had been fully blockaded.'],
+        correctAnswer: 'Americans had cultural ties, economic links, and political sympathies that made true detachment hard to sustain.',
+        explanation: 'Even before entering the war, the United States was drawn in by trade, shared political values, and public reactions to events at sea.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-L19-Q3',
-        text: 'Why was Hawaii strategically important to American expansionists?',
-        choices: ['Its location made it valuable as a naval and commercial stop between the United States and Asia.', 'Its location made it valuable mainly because it was rich in gold and silver needed for coinage reforms.', 'Its location made it valuable because it blocked all European trade routes to the Atlantic coast.', 'Its location made it valuable only after the Spanish-American War ended and the canal at Panama opened.'],
-        correctAnswer: 'Its location made it valuable as a naval and commercial stop between the United States and Asia.',
-        explanation: 'Hawaii’s position in the Pacific made it important to naval strategy, trade, and the larger push toward Asian markets.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L22-Q3',
+        text: 'Why did the sinking of the Lusitania matter so much in the United States?',
+        choices: ['It intensified anger toward Germany by showing that submarine warfare could kill civilians, including Americans.', 'It ended the war immediately by convincing Germany to surrender its navy to the United States.', 'It forced Congress to declare war because Britain demanded an immediate military alliance after the attack.', 'It proved that the United States had already been secretly fighting alongside Germany in the Atlantic.'],
+        correctAnswer: 'It intensified anger toward Germany by showing that submarine warfare could kill civilians, including Americans.',
+        explanation: 'The Lusitania became a major turning point in public opinion because it dramatized the danger Germany’s submarine campaign posed to civilians.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-L19-Q4',
-        text: 'What was the main goal of the Open Door Policy in China?',
-        choices: ['To keep trade open to all major powers and prevent China from being divided into exclusive colonies.', 'To keep trade open to all major powers and encourage China to become an American military protectorate.', 'To keep trade open to all major powers by forcing Japan to abandon influence in Korea immediately.', 'To keep trade open to all major powers while ending American commercial activity in the Pacific.'],
-        correctAnswer: 'To keep trade open to all major powers and prevent China from being divided into exclusive colonies.',
-        explanation: 'The Open Door Policy sought equal commercial access in China rather than allowing one imperial power to shut out the others.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L22-Q4',
+        text: 'Why did unrestricted submarine warfare push the United States closer to war?',
+        choices: ['Germany resumed attacking ships without warning, threatening American lives, trade, and freedom of the seas.', 'Germany resumed attacking ships without warning, but only in the Pacific where U.S. trade hardly mattered.', 'Germany resumed attacking ships without warning after promising to protect American ships at all times.', 'Germany resumed attacking ships without warning because Britain had already surrendered the Atlantic routes.'],
+        correctAnswer: 'Germany resumed attacking ships without warning, threatening American lives, trade, and freedom of the seas.',
+        explanation: 'When Germany resumed unrestricted submarine warfare in 1917, it convinced many Americans that neutrality could no longer protect national interests.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-L19-Q5',
-        text: 'How did the closing of the frontier influence some supporters of expansion?',
-        choices: ['They argued that if continental expansion was ending, the nation should seek opportunity overseas instead.', 'They argued that if continental expansion was ending, the nation should abandon trade and stop building ships.', 'They argued that if continental expansion was ending, the nation should return western lands to Spain and Mexico.', 'They argued that if continental expansion was ending, the nation should avoid all diplomatic contact with Asia.'],
-        correctAnswer: 'They argued that if continental expansion was ending, the nation should seek opportunity overseas instead.',
-        explanation: 'Some expansionists believed the end of westward settlement meant the United States needed a new arena for economic and strategic growth.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L22-Q5',
+        text: 'How did economic ties to the Allies influence American attitudes toward the war?',
+        choices: ['Trade and loans connected the U.S. economy more closely to Allied success than to German victory.', 'Trade and loans connected the U.S. economy more closely to the Central Powers than to Britain or France.', 'Trade and loans were illegal during the war, so economics played almost no role in American opinion.', 'Trade and loans ended by 1915, leaving the United States fully isolated from European financial pressures.'],
+        correctAnswer: 'Trade and loans connected the U.S. economy more closely to Allied success than to German victory.',
+        explanation: 'American banks and exporters had strong ties to Allied nations, which made their defeat seem economically dangerous to the United States.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-L19-Q6',
-        text: 'Why did some Americans describe expansion in moral or religious terms?',
-        choices: ['They believed the United States had a duty to spread Christianity, democracy, and what they saw as civilization.', 'They believed the United States had a duty to end all missionary activity and separate trade from religion.', 'They believed the United States had a duty to restore old colonial empires under Spanish and Portuguese control.', 'They believed the United States had a duty to keep its culture isolated from all non-Western societies.'],
-        correctAnswer: 'They believed the United States had a duty to spread Christianity, democracy, and what they saw as civilization.',
-        explanation: 'Expansion was sometimes justified not only through economics and strategy, but also through cultural and religious claims about national mission.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L22-Q6',
+        text: 'What was the preparedness movement during the years before U.S. entry into World War I?',
+        choices: ['It argued that the nation should strengthen its military in case neutrality failed and war became unavoidable.', 'It argued that the nation should immediately join Germany and Austria-Hungary to end the war quickly.', 'It argued that the nation should dismantle the army so foreign powers would not see America as a threat.', 'It argued that the nation should stop all industrial production until the European conflict ended.'],
+        correctAnswer: 'It argued that the nation should strengthen its military in case neutrality failed and war became unavoidable.',
+        explanation: 'Preparedness advocates believed the United States needed a larger army and navy even if it hoped to stay out of the war.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-L19-Q7',
-        text: 'Why is the purchase of Alaska often seen as an early sign of later American expansionism?',
-        choices: ['It showed that U.S. leaders were willing to acquire territory for strategic and economic reasons beyond the mainland.', 'It showed that U.S. leaders were unwilling to acquire territory for strategic and economic reasons beyond the mainland.', 'It showed that U.S. leaders wanted to transfer Pacific affairs entirely to Russia and avoid future involvement.', 'It showed that U.S. leaders were ready to create a military alliance with Spain against Britain and France.'],
-        correctAnswer: 'It showed that U.S. leaders were willing to acquire territory for strategic and economic reasons beyond the mainland.',
-        explanation: 'Though mocked at first, Alaska later appeared to fit a broader pattern of looking beyond the continental United States.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L22-Q7',
+        text: 'Why did the Zimmermann Telegram outrage many Americans in 1917?',
+        choices: ['Germany proposed that Mexico join it against the United States if America entered the war.', 'Germany proposed that Mexico mediate peace and help the United States remain neutral permanently.', 'Germany proposed that Mexico sell arms to Britain and France through ports on the Gulf Coast.', 'Germany proposed that Mexico take control of American shipping lanes in exchange for war loans.'],
+        correctAnswer: 'Germany proposed that Mexico join it against the United States if America entered the war.',
+        explanation: 'The telegram alarmed Americans because it suggested Germany was willing to encourage military action against the United States itself.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-L19-Q8',
-        text: 'Why did expansionists care so much about influence in both the Caribbean and the Pacific?',
-        choices: ['Those regions were linked to shipping routes, trade access, and naval strategy in a growing world economy.', 'Those regions were linked only to domestic farming, which mattered more than trade or naval strategy.', 'Those regions were linked mainly to European religious politics and had little value to American commerce.', 'Those regions were linked to landlocked railroads, which made overseas naval policy mostly unnecessary.'],
-        correctAnswer: 'Those regions were linked to shipping routes, trade access, and naval strategy in a growing world economy.',
-        explanation: 'American leaders increasingly viewed sea lanes, ports, and island bases as part of a single global strategy.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L22-Q8',
+        text: 'Why did the fall of the Russian czar make it easier for Wilson to frame the war as a defense of democracy?',
+        choices: ['It meant the main Allied powers could be described more easily as fighting on the side of constitutional government.', 'It meant Russia had joined Germany, so the United States could fight only against autocratic empires.', 'It meant Britain and France had become monarchies again, which reduced support for the Allied cause.', 'It meant the United States no longer needed to work with European allies to justify military entry.'],
+        correctAnswer: 'It meant the main Allied powers could be described more easily as fighting on the side of constitutional government.',
+        explanation: 'The Russian Revolution removed one of the most obvious autocratic allies from the Allied side, making Wilson’s democratic language more persuasive.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-L19-Q9',
-        text: 'Why did critics of expansionism oppose acquiring overseas territories?',
-        choices: ['They feared empire would betray republican ideals and entangle the United States in unjust domination abroad.', 'They feared empire would make the United States too weak to trade with Latin America and Asia.', 'They feared empire would force the nation to abandon all naval power and return to European dependence.', 'They feared empire would require immediate statehood for every territory the United States might ever buy.'],
-        correctAnswer: 'They feared empire would betray republican ideals and entangle the United States in unjust domination abroad.',
-        explanation: 'Anti-imperialists argued that ruling distant peoples without consent contradicted the nation’s own claims about liberty and self-government.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L22-Q9',
+        text: 'What was the central idea in Wilson’s argument that the world must be made safe for democracy?',
+        choices: ['The United States should fight because German actions threatened international law and democratic self-government.', 'The United States should fight because conquest in Europe would immediately increase American farmland exports.', 'The United States should fight because democracy required the permanent occupation of all defeated empires.', 'The United States should fight because neutrality had already guaranteed peace on the Atlantic Ocean.'],
+        correctAnswer: 'The United States should fight because German actions threatened international law and democratic self-government.',
+        explanation: 'Wilson presented the war as a moral and political struggle over whether aggressive militarism would dominate global affairs.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-L19-Q10',
-        text: 'What best explains how American foreign policy was changing by the end of the nineteenth century?',
-        choices: ['The nation was moving from continental growth toward a more active search for overseas influence and power.', 'The nation was moving from continental growth toward permanent neutrality and withdrawal from world commerce.', 'The nation was moving from continental growth toward dependence on European empires for military protection.', 'The nation was moving from continental growth toward a policy of giving up Pacific interests and naval expansion.'],
-        correctAnswer: 'The nation was moving from continental growth toward a more active search for overseas influence and power.',
-        explanation: 'By the 1890s, many policymakers were beginning to see the United States as a nation whose future involved global reach, not just continental control.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L22-Q10',
+        text: 'Why was American entry into World War I so important to the final outcome of the conflict?',
+        choices: ['U.S. manpower, supplies, and financial strength helped the exhausted Allies continue fighting and regain momentum.', 'U.S. manpower, supplies, and financial strength were mostly symbolic because the war had already ended by 1917.', 'U.S. manpower, supplies, and financial strength mainly benefited Germany after Britain imposed a blockade.', 'U.S. manpower, supplies, and financial strength mattered only in Asia and had little effect in Europe.'],
+        correctAnswer: 'U.S. manpower, supplies, and financial strength helped the exhausted Allies continue fighting and regain momentum.',
+        explanation: 'American entry mattered not only because troops arrived, but because the United States brought money, materials, and renewed morale to the Allied side.',
+        standard: 'SS.912.A.4.5'
       },
     ]
   },
 
   // ==================================================
-  // LESSON 20 — Splendid Little War
+  // LESSON 23 — Into the Trenches
   // ==================================================
   {
-    id: 'lesson20',
-    label: 'LESSON 20',
-    title: 'Splendid Little War',
-    sub: 'The Spanish-American War · 1898',
-    icon: '💥',
+    id: 'lesson23',
+    label: 'LESSON 23',
+    title: 'Into the Trenches',
+    sub: 'The Course and Conduct of World War I · 1914-1918',
+    icon: '⚔️',
     type: 'lesson',
     briefing: {
-      location: 'The Spanish-American War',
-      date: '1898',
-      role: 'war correspondent',
-      text: 'Events in Cuba, sensational journalism, and the explosion of the USS Maine push the United States into war with Spain. The conflict is short, but its consequences are enormous. This lesson follows how the war began, how Americans fought it, and why a brief military victory turned into a major turning point in U.S. history.',
-      tags: ['SS.912.A.4.10']
+      location: 'The Course and Conduct of World War I',
+      date: '1914-1918',
+      role: 'military planner',
+      text: 'World War I becomes a brutal test of industrial warfare. Trenches, machine guns, artillery, poison gas, and massive casualties turn battle into attrition on a global scale. This section examines how the war was fought, why it became so deadly, and how American troops helped shape the final outcome.',
+      tags: ['SS.912.A.4.6']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Splendid Little War', cards: ['USS Maine', 'Rough Riders'] },
+    rewards: { badge: 'Into the Trenches', cards: ['Trench Warfare', 'John J. Pershing'] },
     bank: [
       {
-        id: '3A-L20-Q1',
-        text: 'Why were events in Cuba so important to the outbreak of the Spanish-American War?',
-        choices: ['The Cuban revolt against Spanish rule drew American sympathy and increased pressure for intervention.', 'The Cuban revolt against Spanish rule drew American sympathy only after Spain had already surrendered peacefully.', 'The Cuban revolt against Spanish rule drew American sympathy because Cuba asked to become a British colony.', 'The Cuban revolt against Spanish rule drew American sympathy mainly because it threatened U.S. control of Hawaii.'],
-        correctAnswer: 'The Cuban revolt against Spanish rule drew American sympathy and increased pressure for intervention.',
-        explanation: 'American attention to Cuba grew because the revolt was framed as both a humanitarian crisis and a nearby strategic issue.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L23-Q1',
+        text: 'Why did trench warfare lead to such long stalemates on the Western Front?',
+        choices: ['Defensive weapons and fortified positions made it extremely costly to attack and difficult to break through.', 'Defensive weapons and fortified positions made both sides stop using artillery and machine guns altogether.', 'Defensive weapons and fortified positions encouraged armies to avoid Europe and fight mainly at sea.', 'Defensive weapons and fortified positions forced commanders to rely only on cavalry charges and hand weapons.'],
+        correctAnswer: 'Defensive weapons and fortified positions made it extremely costly to attack and difficult to break through.',
+        explanation: 'Machine guns, barbed wire, and artillery gave defenders a major advantage, which made frontal assaults deadly and slow to produce results.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-L20-Q2',
-        text: 'How did yellow journalism affect public attitudes before the war?',
-        choices: ['Sensational reporting inflamed public emotion and encouraged stronger support for action against Spain.', 'Sensational reporting calmed public emotion and persuaded most newspapers to defend Spanish policy in Cuba.', 'Sensational reporting had little effect because newspapers avoided stories about imperialism and foreign affairs.', 'Sensational reporting ended once Congress banned illustrated newspapers from covering overseas conflicts.'],
-        correctAnswer: 'Sensational reporting inflamed public emotion and encouraged stronger support for action against Spain.',
-        explanation: 'Exaggerated or dramatic coverage helped shape opinion by presenting the Cuban conflict in highly emotional terms.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L23-Q2',
+        text: 'How did new military technology change World War I combat?',
+        choices: ['Weapons like machine guns, poison gas, and heavy artillery increased casualties and made war more industrial.', 'Weapons like machine guns, poison gas, and heavy artillery reduced casualties by making battles shorter.', 'Weapons like machine guns, poison gas, and heavy artillery replaced infantry with small volunteer militias.', 'Weapons like machine guns, poison gas, and heavy artillery mattered little compared with eighteenth-century tactics.'],
+        correctAnswer: 'Weapons like machine guns, poison gas, and heavy artillery increased casualties and made war more industrial.',
+        explanation: 'World War I showed how industrial technology could make battlefield killing far more efficient and devastating.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-L20-Q3',
-        text: 'Why did the explosion of the USS Maine become such a powerful symbol in 1898?',
-        choices: ['Many Americans blamed Spain quickly, turning the explosion into a rallying cry for war.', 'Many Americans blamed Spain quickly, but only after Spain admitted responsibility and paid damages at once.', 'Many Americans blamed Spain quickly because the explosion had happened in Puerto Rico rather than Cuba.', 'Many Americans blamed Spain quickly even though the ship had been sunk by Germany in the Atlantic.'],
-        correctAnswer: 'Many Americans blamed Spain quickly, turning the explosion into a rallying cry for war.',
-        explanation: 'Even without clear evidence at the time, the Maine became a symbol used by newspapers and politicians to increase support for intervention.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L23-Q3',
+        text: 'What does the term war of attrition mean in the context of World War I?',
+        choices: ['A strategy of wearing down the enemy through repeated losses rather than winning quickly through maneuver.', 'A strategy of refusing to fight until industrial production stops and diplomacy restores old borders.', 'A strategy of using only naval power to avoid losses among infantry on the battlefield.', 'A strategy of avoiding major battles by retreating until the enemy runs out of ammunition.'],
+        correctAnswer: 'A strategy of wearing down the enemy through repeated losses rather than winning quickly through maneuver.',
+        explanation: 'World War I often became a contest of endurance in which armies tried to outlast each other despite massive casualties.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-L20-Q4',
-        text: 'What did the Teller Amendment promise concerning Cuba?',
-        choices: ['The United States would not annex Cuba after the war and would recognize Cuban independence.', 'The United States would not annex Cuba after the war, but Spain would keep control of its trade policy.', 'The United States would not annex Cuba after the war unless the island requested immediate statehood.', 'The United States would not annex Cuba after the war, but Germany would supervise its government temporarily.'],
-        correctAnswer: 'The United States would not annex Cuba after the war and would recognize Cuban independence.',
-        explanation: 'The Teller Amendment was meant to reassure Americans and Cubans that the war was not being fought simply to seize Cuba.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L23-Q4',
+        text: 'How did the war on the Eastern Front differ from the trench stalemate in the West?',
+        choices: ['It involved more movement over larger distances, even though the fighting remained extremely deadly.', 'It involved more movement over larger distances, but almost no major battles between large armies.', 'It involved more movement over larger distances because neither side used railroads or heavy artillery there.', 'It involved more movement over larger distances only after the United States sent troops into Russia.'],
+        correctAnswer: 'It involved more movement over larger distances, even though the fighting remained extremely deadly.',
+        explanation: 'The Eastern Front was generally less static than the Western Front, but it was still marked by brutal combat and huge losses.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-L20-Q5',
-        text: 'Why was Commodore Dewey’s victory at Manila Bay important?',
-        choices: ['It quickly destroyed Spanish naval power in the Philippines and expanded the war into the Pacific.', 'It quickly destroyed Spanish naval power in the Philippines and ended all fighting in Cuba the same day.', 'It quickly destroyed Spanish naval power in the Philippines after Britain had already taken Manila first.', 'It quickly destroyed Spanish naval power in the Philippines but had little effect on later treaty decisions.'],
-        correctAnswer: 'It quickly destroyed Spanish naval power in the Philippines and expanded the war into the Pacific.',
-        explanation: 'Dewey’s victory showed that the war was about more than Cuba and opened the question of American power in Asia.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L23-Q5',
+        text: 'Why did Russia’s withdrawal from the war matter in 1917-1918?',
+        choices: ['It allowed Germany to shift forces westward, increasing pressure on the Allies before American strength fully arrived.', 'It allowed Germany to shift forces westward, which immediately forced Britain and France to surrender.', 'It allowed Germany to shift forces westward after the United States had already occupied Berlin and Vienna.', 'It allowed Germany to shift forces westward because the Ottoman Empire had already joined the Allies.'],
+        correctAnswer: 'It allowed Germany to shift forces westward, increasing pressure on the Allies before American strength fully arrived.',
+        explanation: 'Russia’s exit gave Germany a short-term military advantage, making the arrival of American troops even more important.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-L20-Q6',
-        text: 'Why did Theodore Roosevelt and the Rough Riders become famous during the war?',
-        choices: ['Their exploits in Cuba became celebrated as symbols of courage, nationalism, and energetic American expansion.', 'Their exploits in Cuba became celebrated because they won the war without help from regular army forces.', 'Their exploits in Cuba became celebrated mainly after Roosevelt denounced imperialism and opposed overseas power.', 'Their exploits in Cuba became celebrated because they captured Madrid and forced Spain to surrender there.'],
-        correctAnswer: 'Their exploits in Cuba became celebrated as symbols of courage, nationalism, and energetic American expansion.',
-        explanation: 'Roosevelt’s wartime fame helped make him a national political figure and fit the era’s heroic image of expansion.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L23-Q6',
+        text: 'Why did Pershing want American troops to fight as an independent force rather than as replacements inside Allied units?',
+        choices: ['He believed an independent American army would preserve morale, national identity, and stronger battlefield impact.', 'He believed an independent American army would avoid all combat until Germany accepted peace terms.', 'He believed an independent American army should replace both British and French leadership across the front.', 'He believed an independent American army could fight only in colonial theaters outside Europe.'],
+        correctAnswer: 'He believed an independent American army would preserve morale, national identity, and stronger battlefield impact.',
+        explanation: 'Pershing wanted the United States to make a distinct military contribution rather than simply dissolving its troops into exhausted Allied formations.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-L20-Q7',
-        text: 'Why was the Spanish-American War sometimes called a ‘splendid little war’?',
-        choices: ['It was short and successful for the United States, though its aftermath proved far more complicated.', 'It was short and successful for the United States, and its aftermath created no serious new controversies.', 'It was short and successful for the United States only because European powers fought most of the battles.', 'It was short and successful for the United States after Spain agreed to surrender before any combat began.'],
-        correctAnswer: 'It was short and successful for the United States, though its aftermath proved far more complicated.',
-        explanation: 'The phrase captured the quick military victory, but later events showed that empire and occupation were not simple or cost-free.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L23-Q7',
+        text: 'How did the convoy system help the Allies in the Atlantic?',
+        choices: ['Grouping merchant ships with naval escorts made them harder for German submarines to attack successfully.', 'Grouping merchant ships with naval escorts made them more visible and easier for submarines to destroy.', 'Grouping merchant ships with naval escorts ended the need for a navy because commerce became self-protecting.', 'Grouping merchant ships with naval escorts shifted the main naval war from the Atlantic to the Baltic Sea.'],
+        correctAnswer: 'Grouping merchant ships with naval escorts made them harder for German submarines to attack successfully.',
+        explanation: 'The convoy system reduced shipping losses and helped keep soldiers and supplies moving across the Atlantic.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-L20-Q8',
-        text: 'What did the Treaty of Paris of 1898 do for the United States?',
-        choices: ['It ended the war and transferred control of Puerto Rico, Guam, and the Philippines to the United States.', 'It ended the war and transferred control of Cuba, Mexico, and Hawaii to the United States permanently.', 'It ended the war and transferred control of Panama, Nicaragua, and Samoa to the United States immediately.', 'It ended the war and transferred control of Canada, Cuba, and the Philippines to the United States.'],
-        correctAnswer: 'It ended the war and transferred control of Puerto Rico, Guam, and the Philippines to the United States.',
-        explanation: 'The treaty marked the United States’ arrival as an overseas imperial power by placing several former Spanish possessions under American control.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L23-Q8',
+        text: 'What was an armistice in the context of World War I?',
+        choices: ['It was an agreement to stop fighting, even though a final peace settlement still had to be negotiated.', 'It was an agreement that permanently settled all war aims and border disputes immediately on the battlefield.', 'It was an agreement that transferred control of Germany directly to the United States and Britain.', 'It was an agreement that required all armies to remain in combat until the League of Nations was created.'],
+        correctAnswer: 'It was an agreement to stop fighting, even though a final peace settlement still had to be negotiated.',
+        explanation: 'The armistice ended the fighting in November 1918, but it did not itself decide the political terms of peace.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-L20-Q9',
-        text: 'Why did the Philippines become a major issue after the war with Spain?',
-        choices: ['Keeping the islands raised a fierce debate over empire, self-government, and America’s role in Asia.', 'Keeping the islands raised a fierce debate only because the Philippines demanded immediate U.S. statehood.', 'Keeping the islands raised a fierce debate after Spain reclaimed them during the Senate ratification fight.', 'Keeping the islands raised a fierce debate mainly because Britain wanted to buy them from the United States.'],
-        correctAnswer: 'Keeping the islands raised a fierce debate over empire, self-government, and America’s role in Asia.',
-        explanation: 'The Philippines forced Americans to confront whether victory over Spain meant liberation or the beginning of a new empire.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L23-Q9',
+        text: 'Why is World War I often described as the first modern industrial war?',
+        choices: ['It mobilized mass armies, mechanized killing, and industrial production on a global scale.', 'It mobilized mass armies, mechanized killing, and industrial production only in small colonial conflicts.', 'It mobilized mass armies, mechanized killing, and industrial production without affecting civilians or economies.', 'It mobilized mass armies, mechanized killing, and industrial production while remaining mostly a naval war.'],
+        correctAnswer: 'It mobilized mass armies, mechanized killing, and industrial production on a global scale.',
+        explanation: 'World War I involved entire societies and economies, not just professional armies, making it a new kind of total industrial conflict.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-L20-Q10',
-        text: 'What best explains why the Spanish-American War was a turning point in U.S. history?',
-        choices: ['The war transformed the United States from a continental power into a nation with overseas possessions.', 'The war transformed the United States from a continental power into a nation that rejected naval expansion.', 'The war transformed the United States from a continental power into a nation that avoided Asian affairs completely.', 'The war transformed the United States from a continental power into a nation that gave up Caribbean interests.'],
-        correctAnswer: 'The war transformed the United States from a continental power into a nation with overseas possessions.',
-        explanation: 'The war was brief, but it had lasting consequences because it accelerated the rise of the United States as an imperial and global power.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-L23-Q10',
+        text: 'What best explains how the United States helped tip the balance in 1918?',
+        choices: ['Fresh troops, industrial resources, and financial strength helped the Allies outlast Germany’s final offensives.', 'Fresh troops, industrial resources, and financial strength mattered little because Germany had already surrendered before they arrived.', 'Fresh troops, industrial resources, and financial strength mainly supported Russia after the Bolsheviks stayed in the war.', 'Fresh troops, industrial resources, and financial strength were used mostly to fight Austria in Latin America.'],
+        correctAnswer: 'Fresh troops, industrial resources, and financial strength helped the Allies outlast Germany’s final offensives.',
+        explanation: 'The United States entered at a critical moment when Allied endurance, morale, and supply needed reinforcement.',
+        standard: 'SS.912.A.4.6'
       },
     ]
   },
 
   // ==================================================
-  // UNIT 3A CAPSTONE — Empire Rising
+  // LESSON 24 — The Home Front
+  // ==================================================
+  {
+    id: 'lesson24',
+    label: 'LESSON 24',
+    title: 'The Home Front',
+    sub: 'The Home Front · 1917-1918',
+    icon: '🏭',
+    type: 'lesson',
+    briefing: {
+      location: 'The Home Front',
+      date: '1917-1918',
+      role: 'war mobilization organizer',
+      text: 'Fighting overseas required enormous sacrifices at home. The federal government expanded its reach into industry, speech, food production, labor, and public opinion as Americans were asked to support the war effort in every aspect of life. This lesson explores both patriotic mobilization and the tensions it created.',
+      tags: ['SS.912.A.4.7']
+    },
+    displayCount: 5,
+    goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
+    rewards: { badge: 'The Home Front', cards: ['Liberty Bonds', 'War Industries Board'] },
+    bank: [
+      {
+        id: '3B-L24-Q1',
+        text: 'What was the main purpose of the War Industries Board during World War I?',
+        choices: ['It coordinated industrial production so factories could meet military needs more efficiently.', 'It coordinated industrial production mainly by closing private factories and ending consumer manufacturing.', 'It coordinated industrial production by allowing each company to ignore federal requests for wartime priorities.', 'It coordinated industrial production only after the war ended, when demobilization became the main concern.'],
+        correctAnswer: 'It coordinated industrial production so factories could meet military needs more efficiently.',
+        explanation: 'The War Industries Board helped direct raw materials, standardize products, and increase industrial efficiency for the war effort.',
+        standard: 'SS.912.A.4.7'
+      },
+      {
+        id: '3B-L24-Q2',
+        text: 'Why did the government urge Americans to conserve food during World War I?',
+        choices: ['Food conservation was meant to support soldiers overseas and help feed Allied civilians and armies.', 'Food conservation was meant to reduce farm output so prices would fall and urban wages would rise.', 'Food conservation was meant to replace Liberty Bonds as the government’s main source of war funding.', 'Food conservation was meant to stop exports entirely until Germany agreed to accept Wilson’s Fourteen Points.'],
+        correctAnswer: 'Food conservation was meant to support soldiers overseas and help feed Allied civilians and armies.',
+        explanation: 'Under Herbert Hoover’s Food Administration, Americans were asked to change habits at home so more food could support the Allied war effort.',
+        standard: 'SS.912.A.4.7'
+      },
+      {
+        id: '3B-L24-Q3',
+        text: 'What was the purpose of Liberty Bond campaigns during the war?',
+        choices: ['They raised money for the war while encouraging civilians to show patriotic support through purchase.', 'They raised money for the war by forcing every household to surrender its private savings to the army.', 'They raised money for the war only from corporations, because ordinary citizens were barred from buying bonds.', 'They raised money for the war after combat ended, when paying veterans became the government’s main task.'],
+        correctAnswer: 'They raised money for the war while encouraging civilians to show patriotic support through purchase.',
+        explanation: 'Liberty Bonds linked war finance to public participation by inviting citizens to invest directly in the national effort.',
+        standard: 'SS.912.A.4.7'
+      },
+      {
+        id: '3B-L24-Q4',
+        text: 'How did the Committee on Public Information help mobilize support for the war?',
+        choices: ['It used posters, films, speeches, and media campaigns to build patriotic support for the conflict.', 'It used posters, films, speeches, and media campaigns mainly to criticize Allied governments publicly.', 'It used posters, films, speeches, and media campaigns only to recruit soldiers from foreign countries.', 'It used posters, films, speeches, and media campaigns after the armistice to oppose the peace treaty.'],
+        correctAnswer: 'It used posters, films, speeches, and media campaigns to build patriotic support for the conflict.',
+        explanation: 'The CPI became a major propaganda agency, shaping public opinion in favor of the war and mobilization.',
+        standard: 'SS.912.A.4.7'
+      },
+      {
+        id: '3B-L24-Q5',
+        text: 'Why were the Espionage and Sedition Acts controversial?',
+        choices: ['They restricted speech and dissent in ways critics believed violated civil liberties during wartime.', 'They restricted speech and dissent only among enemy soldiers captured on European battlefields.', 'They restricted speech and dissent by ending all newspapers and replacing them with federal bulletins.', 'They restricted speech and dissent mainly after 1920, when the war had long been over.'],
+        correctAnswer: 'They restricted speech and dissent in ways critics believed violated civil liberties during wartime.',
+        explanation: 'Supporters saw the laws as necessary for security, but critics argued they suppressed free expression far beyond real military need.',
+        standard: 'SS.912.A.4.7'
+      },
+      {
+        id: '3B-L24-Q6',
+        text: 'What was the importance of Schenck v. United States during World War I?',
+        choices: ['The Court ruled that speech could be limited in wartime when it posed a clear and immediate danger.', 'The Court ruled that speech could never be limited in wartime, even if it directly blocked military operations.', 'The Court ruled that Congress had no authority to draft soldiers or regulate wartime propaganda campaigns.', 'The Court ruled that the League of Nations could override the Bill of Rights in national emergencies.'],
+        correctAnswer: 'The Court ruled that speech could be limited in wartime when it posed a clear and immediate danger.',
+        explanation: 'Schenck is remembered because it showed how wartime conditions could lead courts to accept limits on speech that would be debated for decades.',
+        standard: 'SS.912.A.4.7'
+      },
+      {
+        id: '3B-L24-Q7',
+        text: 'How did World War I affect the role of women on the home front?',
+        choices: ['Women entered new jobs and public roles, strengthening arguments that they deserved greater political rights.', 'Women entered new jobs and public roles only briefly because the government prohibited them from war industries.', 'Women entered new jobs and public roles mainly by replacing all male political leaders in Congress.', 'Women entered new jobs and public roles after the war, once suffrage had already been nationally approved.'],
+        correctAnswer: 'Women entered new jobs and public roles, strengthening arguments that they deserved greater political rights.',
+        explanation: 'Women’s wartime service and work contributed to changing expectations about citizenship and helped strengthen the case for suffrage.',
+        standard: 'SS.912.A.4.7'
+      },
+      {
+        id: '3B-L24-Q8',
+        text: 'Why did World War I accelerate the Great Migration of African Americans to northern cities?',
+        choices: ['Wartime labor demand opened industrial jobs while southern segregation and violence continued to push people north.', 'Wartime labor demand ended industrial jobs while southern conditions improved enough to reduce migration sharply.', 'Wartime labor demand mattered little because most factories refused to hire Black workers during the war years.', 'Wartime labor demand pushed African Americans westward mainly because northern cities had closed their factories.'],
+        correctAnswer: 'Wartime labor demand opened industrial jobs while southern segregation and violence continued to push people north.',
+        explanation: 'The war created new opportunities in the North, even though migrants still faced racism and inequality after they arrived.',
+        standard: 'SS.912.A.4.7'
+      },
+      {
+        id: '3B-L24-Q9',
+        text: 'What did anti-German sentiment on the home front reveal about wartime patriotism?',
+        choices: ['Patriotism could slide into suspicion, intolerance, and pressure to conform in language and culture.', 'Patriotism could slide into suspicion, but only among soldiers stationed overseas and never at home.', 'Patriotism could slide into suspicion, which led the government to protect German culture more actively.', 'Patriotism could slide into suspicion only after the peace treaty debate began in the Senate.'],
+        correctAnswer: 'Patriotism could slide into suspicion, intolerance, and pressure to conform in language and culture.',
+        explanation: 'The home front showed that mobilization could unite people, but it could also produce intolerance toward those seen as different or disloyal.',
+        standard: 'SS.912.A.4.7'
+      },
+      {
+        id: '3B-L24-Q10',
+        text: 'What best explains why the World War I home front changed the relationship between Americans and their government?',
+        choices: ['Mobilization expanded federal influence over industry, speech, labor, and everyday patriotic behavior.', 'Mobilization expanded federal influence only overseas, leaving domestic life almost untouched by the war.', 'Mobilization expanded federal influence by abolishing elections and replacing Congress with a war cabinet.', 'Mobilization expanded federal influence mainly through peacetime welfare programs created after 1925.'],
+        correctAnswer: 'Mobilization expanded federal influence over industry, speech, labor, and everyday patriotic behavior.',
+        explanation: 'The war required a broader federal presence in daily life, which changed how Americans experienced the power of the national state.',
+        standard: 'SS.912.A.4.7'
+      },
+    ]
+  },
+
+  // ==================================================
+  // UNIT 3B CAPSTONE — To Ratify or Reject?
   // ==================================================
   {
     id: 'capstone',
-    label: 'UNIT 3A CAPSTONE',
-    title: 'Empire Rising',
-    sub: 'Acquiring and Managing Global Power · 1898-1917',
-    icon: '🌐',
+    label: 'UNIT 3B CAPSTONE',
+    title: 'To Ratify or Reject?',
+    sub: 'The Treaty of Versailles · To Ratify or Reject? · 1919-1920',
+    icon: '📜',
     type: 'capstone',
     briefing: {
-      location: 'Acquiring and Managing Global Power',
-      date: '1898-1917',
-      role: 'presidential foreign policy aide',
-      text: 'Victory over Spain leaves the United States with new territories and bigger ambitions. Roosevelt, Taft, and Wilson each try to manage American power in different ways across Latin America and the Pacific. This capstone explores how imperial expansion changed diplomacy, military policy, and the nation’s sense of itself in the world.',
-      tags: ['SS.912.A.4.10', 'SS.912.A.4.11']
+      location: 'The Treaty of Versailles',
+      date: '1919-1920',
+      role: 'Senate foreign relations adviser',
+      text: 'The fighting is over, but the peace may reshape the world just as deeply as the war itself. President Wilson wants the United States to join the League of Nations and help create a new international order, while critics warn that the treaty could entangle the nation in future wars. This capstone centers on the great ratification debate and the future it would determine.',
+      tags: ['SS.912.A.4.8']
     },
     displayCount: 5,
     goldRules: { perCorrect: 25, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Empire Rising', cards: ['Big Stick Diplomacy', 'Panama Canal'] },
+    rewards: { badge: 'To Ratify or Reject?', cards: ['League of Nations', 'Henry Cabot Lodge'] },
     bank: [
       {
-        id: '3A-CAP-Q1',
-        text: 'Why did the Philippine-American War break out after the United States defeated Spain?',
-        choices: ['Filipino nationalists expected independence, but the United States chose to keep control of the islands.', 'Filipino nationalists expected independence, but Spain returned to power and restored direct colonial rule.', 'Filipino nationalists expected independence, but Britain annexed the islands before American forces arrived.', 'Filipino nationalists expected independence, but Japan occupied Manila and forced both sides to retreat.'],
-        correctAnswer: 'Filipino nationalists expected independence, but the United States chose to keep control of the islands.',
-        explanation: 'The conflict exposed the contradiction between American anti-colonial language and the reality of U.S. imperial rule in the Philippines.',
-        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
+        id: '3B-CAP-Q1',
+        text: 'What was Wilson’s main goal in proposing the Fourteen Points?',
+        choices: ['He wanted a peace based on openness, self-determination, and cooperation rather than revenge alone.', 'He wanted a peace based on harsh punishments that would permanently dismantle Germany as a nation.', 'He wanted a peace based on American isolation from Europe and an end to all foreign alliances.', 'He wanted a peace based on restoring every empire to its prewar borders without political reforms.'],
+        correctAnswer: 'He wanted a peace based on openness, self-determination, and cooperation rather than revenge alone.',
+        explanation: 'Wilson hoped the peace settlement would reduce the chances of future war by building a more just and cooperative international order.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-CAP-Q2',
-        text: 'Why did members of the Anti-Imperialist League oppose American control of overseas territories?',
-        choices: ['They argued that ruling people without consent betrayed the nation’s democratic ideals.', 'They argued that ruling people without consent would weaken European colonial empires too quickly.', 'They argued that ruling people without consent would make the United States too rural and isolated.', 'They argued that ruling people without consent would require Congress to abolish all tariffs permanently.'],
-        correctAnswer: 'They argued that ruling people without consent betrayed the nation’s democratic ideals.',
-        explanation: 'Anti-imperialists believed empire contradicted the principles of self-government and liberty that Americans claimed to defend.',
-        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
+        id: '3B-CAP-Q2',
+        text: 'Why did Wilson consider the League of Nations essential to the peace settlement?',
+        choices: ['He believed a permanent international organization could help resolve disputes before they turned into war.', 'He believed a permanent international organization should replace all national governments after the war.', 'He believed a permanent international organization would allow the United States to avoid diplomacy entirely.', 'He believed a permanent international organization should be controlled only by the victorious European empires.'],
+        correctAnswer: 'He believed a permanent international organization could help resolve disputes before they turned into war.',
+        explanation: 'For Wilson, the League was the heart of a new international system that would preserve peace through cooperation and collective action.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-CAP-Q3',
-        text: 'What did Roosevelt’s corollary to the Monroe Doctrine assert?',
-        choices: ['The United States could intervene in Latin America if instability there seemed to threaten order or foreign interests.', 'The United States could intervene in Latin America only with approval from every major European power first.', 'The United States could intervene in Latin America mainly to promote immediate independence from all debt payments.', 'The United States could intervene in Latin America only after Congress approved permanent annexation of each country.'],
-        correctAnswer: 'The United States could intervene in Latin America if instability there seemed to threaten order or foreign interests.',
-        explanation: 'Roosevelt expanded the Monroe Doctrine by claiming a more active American policing role in the Western Hemisphere.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-CAP-Q3',
+        text: 'How did the Treaty of Versailles differ from Wilson’s more idealistic hopes for the peace?',
+        choices: ['The treaty imposed punitive terms on Germany that reflected revenge and security concerns more than reconciliation.', 'The treaty imposed punitive terms on Germany only after Wilson asked the Senate to reject the League of Nations.', 'The treaty imposed punitive terms on Germany by placing Britain and France under German military occupation.', 'The treaty imposed punitive terms on Germany only in colonial Africa and not in Europe itself.'],
+        correctAnswer: 'The treaty imposed punitive terms on Germany that reflected revenge and security concerns more than reconciliation.',
+        explanation: 'The final treaty included reparations, territorial losses, and war guilt language that went far beyond Wilson’s softer public vision.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-CAP-Q4',
-        text: 'What is the best summary of Roosevelt’s ‘Big Stick’ diplomacy?',
-        choices: ['Negotiate when possible, but back diplomacy with visible military strength and the willingness to act.', 'Negotiate when possible, but avoid building a navy because military power weakens diplomacy abroad.', 'Negotiate when possible, but depend mainly on private banks rather than government pressure overseas.', 'Negotiate when possible, but reject all involvement in Caribbean or Pacific affairs after 1901.'],
-        correctAnswer: 'Negotiate when possible, but back diplomacy with visible military strength and the willingness to act.',
-        explanation: 'Big Stick diplomacy reflected Roosevelt’s belief that power and readiness could make diplomacy more effective.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-CAP-Q4',
+        text: 'Why did Article X of the League covenant alarm many opponents in the Senate?',
+        choices: ['They feared it might obligate the United States to defend other nations without Congress controlling the decision.', 'They feared it might require the United States to give up its army and navy to a European command.', 'They feared it might force the United States to return all wartime loans to Germany immediately.', 'They feared it might ban international trade unless every nation accepted Wilson’s Fourteen Points fully.'],
+        correctAnswer: 'They feared it might obligate the United States to defend other nations without Congress controlling the decision.',
+        explanation: 'Opponents of the treaty worried that League membership could weaken Congress’s constitutional role in deciding when the nation went to war.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-CAP-Q5',
-        text: 'Why was the Panama Canal so important to U.S. foreign policy?',
-        choices: ['It gave the United States a faster route between oceans, strengthening naval and commercial power.', 'It gave the United States a faster route between oceans, but only after World War I had already ended.', 'It gave the United States a faster route between oceans by connecting the Gulf of Mexico to the Great Lakes.', 'It gave the United States a faster route between oceans mainly for railroad traffic rather than shipping.'],
-        correctAnswer: 'It gave the United States a faster route between oceans, strengthening naval and commercial power.',
-        explanation: 'The canal was strategic because it linked the Atlantic and Pacific and made it easier for the United States to project power globally.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-CAP-Q5',
+        text: 'Who were the irreconcilables in the Senate debate over the treaty?',
+        choices: ['They were senators who opposed joining the League of Nations under almost any circumstances.', 'They were senators who supported the treaty only if Wilson accepted every reservation proposed by Lodge.', 'They were senators who wanted the United States to join both the League and the Central Powers.', 'They were senators who opposed the treaty only because they wanted harsher punishments on Germany.'],
+        correctAnswer: 'They were senators who opposed joining the League of Nations under almost any circumstances.',
+        explanation: 'The irreconcilables rejected the treaty outright, usually because they opposed entangling the United States in permanent international commitments.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-CAP-Q6',
-        text: 'What was Taft’s dollar diplomacy intended to do?',
-        choices: ['Use American investment and financial influence to expand U.S. power without relying only on military force.', 'Use American investment and financial influence mainly to reduce all overseas trade and end foreign loans.', 'Use American investment and financial influence to transfer Caribbean governments directly to private corporations.', 'Use American investment and financial influence only in Europe, while ignoring Asia and Latin America.'],
-        correctAnswer: 'Use American investment and financial influence to expand U.S. power without relying only on military force.',
-        explanation: 'Dollar diplomacy emphasized financial leverage, hoping investment could secure influence while appearing less openly coercive.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-CAP-Q6',
+        text: 'How were reservationists different from irreconcilables in the treaty fight?',
+        choices: ['Reservationists wanted changes or conditions added, while irreconcilables opposed the treaty altogether.', 'Reservationists wanted changes or conditions added, while irreconcilables supported Wilson without any changes.', 'Reservationists wanted changes or conditions added, while irreconcilables preferred a military alliance with Germany.', 'Reservationists wanted changes or conditions added, while irreconcilables focused only on domestic tax policy.'],
+        correctAnswer: 'Reservationists wanted changes or conditions added, while irreconcilables opposed the treaty altogether.',
+        explanation: 'Reservationists were not necessarily against the League itself, but they wanted the United States to enter on more limited terms.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-CAP-Q7',
-        text: 'How did Wilson’s moral diplomacy differ from Roosevelt’s and Taft’s approaches in theory?',
-        choices: ['Wilson claimed the U.S. should support governments that reflected democratic values rather than raw power alone.', 'Wilson claimed the U.S. should support governments that reflected democratic values by ending all interventions immediately.', 'Wilson claimed the U.S. should support governments that reflected democratic values only in Western Europe.', 'Wilson claimed the U.S. should support governments that reflected democratic values by giving up the Panama Canal.'],
-        correctAnswer: 'Wilson claimed the U.S. should support governments that reflected democratic values rather than raw power alone.',
-        explanation: 'Wilson spoke in moral terms, though in practice his administration still intervened abroad when it believed American interests were at stake.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-CAP-Q7',
+        text: 'Why was Henry Cabot Lodge so important in the treaty debate?',
+        choices: ['As a leading senator, he organized opposition and framed reservations that shaped the ratification fight.', 'As a leading senator, he organized support for Wilson by urging immediate ratification without debate.', 'As a leading senator, he replaced Wilson at the Paris Peace Conference and rewrote the treaty alone.', 'As a leading senator, he led the irreconcilables in demanding that Germany occupy the Rhineland permanently.'],
+        correctAnswer: 'As a leading senator, he organized opposition and framed reservations that shaped the ratification fight.',
+        explanation: 'Lodge was central because he led the Senate coalition that challenged Wilson’s version of internationalism.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-CAP-Q8',
-        text: 'Why did events in Mexico test Wilson’s foreign policy?',
-        choices: ['Violence and instability forced Wilson to balance moral language with military intervention and strategic concerns.', 'Violence and instability forced Wilson to recognize that Mexico should control the Panama Canal instead.', 'Violence and instability forced Wilson to abandon all diplomatic contact with Latin America permanently.', 'Violence and instability forced Wilson to support European empires reclaiming influence in the Western Hemisphere.'],
-        correctAnswer: 'Violence and instability forced Wilson to balance moral language with military intervention and strategic concerns.',
-        explanation: 'The Mexican Revolution revealed how difficult it was to apply idealistic rhetoric consistently in a region where the United States had major interests.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-CAP-Q8',
+        text: 'Why did Wilson’s refusal to accept major reservations help doom the treaty?',
+        choices: ['It prevented a compromise that might have won enough Senate votes for ratification.', 'It prevented a compromise because Wilson had already promised Germany the Senate would reject peace.', 'It prevented a compromise only after the League of Nations had already collapsed in Europe.', 'It prevented a compromise because the Constitution prohibited presidents from negotiating with senators.'],
+        correctAnswer: 'It prevented a compromise that might have won enough Senate votes for ratification.',
+        explanation: 'Wilson believed strong reservations would weaken the League too much, but his rigid position narrowed the path to Senate approval.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-CAP-Q9',
-        text: 'What does the idea of a protectorate suggest about American power in this era?',
-        choices: ['The United States could control another territory’s affairs without granting it full equality or independence.', 'The United States could control another territory’s affairs only after admitting it as a full state immediately.', 'The United States could control another territory’s affairs only through private missionaries rather than government.', 'The United States could control another territory’s affairs mainly by surrendering military bases and trade rights.'],
-        correctAnswer: 'The United States could control another territory’s affairs without granting it full equality or independence.',
-        explanation: 'Protectorates revealed how empire could operate through influence, occupation, and legal limits rather than formal statehood.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-CAP-Q9',
+        text: 'Why did the Senate ultimately reject the Treaty of Versailles?',
+        choices: ['Partisan politics, constitutional concerns, and disagreement over international commitments blocked ratification.', 'Partisan politics, constitutional concerns, and disagreement ended after the public demanded immediate approval.', 'Partisan politics, constitutional concerns, and disagreement mattered less than military defeat by Germany in 1919.', 'Partisan politics, constitutional concerns, and disagreement disappeared once Wilson resigned from office.'],
+        correctAnswer: 'Partisan politics, constitutional concerns, and disagreement over international commitments blocked ratification.',
+        explanation: 'The treaty failed because the Senate could not agree on whether and how the United States should join Wilson’s postwar order.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-CAP-Q10',
-        text: 'Why did the Caribbean and Pacific remain central to American power after 1898?',
-        choices: ['Control there shaped trade routes, naval strategy, and the ability to influence events far beyond U.S. shores.', 'Control there shaped trade routes only briefly, because the United States soon abandoned naval strategy altogether.', 'Control there shaped trade routes mainly after Europe lost interest in both regions during the 1880s.', 'Control there shaped trade routes, but had little connection to diplomacy, war planning, or imperial rivalry.'],
-        correctAnswer: 'Control there shaped trade routes, naval strategy, and the ability to influence events far beyond U.S. shores.',
-        explanation: 'American leaders viewed these regions as connected spaces where bases, canals, and commerce all affected global influence.',
-        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
+        id: '3B-CAP-Q10',
+        text: 'What was one important consequence of the United States not joining the League of Nations?',
+        choices: ['The League was weakened because one of the world’s most powerful nations remained outside it.', 'The League was strengthened because it no longer had to depend on American economic or military influence.', 'The League was weakened only in Asia, while Europe became more stable without U.S. involvement.', 'The League was strengthened because Germany and Russia joined it immediately in America’s place.'],
+        correctAnswer: 'The League was weakened because one of the world’s most powerful nations remained outside it.',
+        explanation: 'Without the United States, the League lacked some of the authority and capacity Wilson had hoped it would have.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-CAP-Q11',
-        text: 'What central debate defined the age of American imperialism?',
-        choices: ['Whether overseas expansion strengthened national power or betrayed democratic principles at the same time.', 'Whether overseas expansion strengthened national power only if every new territory became a state immediately.', 'Whether overseas expansion strengthened national power by ending trade with Asia and Latin America completely.', 'Whether overseas expansion strengthened national power only after the United States gave up all Caribbean interests.'],
-        correctAnswer: 'Whether overseas expansion strengthened national power or betrayed democratic principles at the same time.',
-        explanation: 'Imperialism was always contested because it combined strategic ambition with uncomfortable questions about freedom, race, and consent.',
-        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
+        id: '3B-CAP-Q11',
+        text: 'Why do historians often connect the Treaty of Versailles to later international instability?',
+        choices: ['Its harsh treatment of Germany created resentment while failing to secure a truly stable peace.', 'Its harsh treatment of Germany created resentment, but only in regions outside Europe and the Atlantic world.', 'Its harsh treatment of Germany created resentment after the treaty had already prevented all future dictatorships.', 'Its harsh treatment of Germany created resentment mainly because it restored Germany’s colonies and army fully.'],
+        correctAnswer: 'Its harsh treatment of Germany created resentment while failing to secure a truly stable peace.',
+        explanation: 'Many historians argue that the treaty punished Germany enough to create bitterness, but not enough to build durable security.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-CAP-Q12',
-        text: 'What best explains how the United States changed between the 1890s and the years before World War I?',
-        choices: ['It became a more assertive global power, using war, diplomacy, finance, and naval strength to shape events abroad.', 'It became a more assertive global power only by withdrawing from the Caribbean and abandoning Pacific strategy.', 'It became a more assertive global power because European empires invited it to replace them peacefully everywhere.', 'It became a more assertive global power mainly by rejecting foreign trade and focusing again on the western frontier.'],
-        correctAnswer: 'It became a more assertive global power, using war, diplomacy, finance, and naval strength to shape events abroad.',
-        explanation: 'The era marked the United States’ transition into a global power whose influence rested on several tools, not just military conquest alone.',
-        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
+        id: '3B-CAP-Q12',
+        text: 'What larger question was really at stake in the debate over ratifying the Treaty of Versailles?',
+        choices: ['Whether the United States should embrace an active international role or retreat from global commitments.', 'Whether the United States should dissolve Congress and let the League of Nations write domestic law.', 'Whether the United States should return immediately to monarchy so presidents could avoid Senate opposition.', 'Whether the United States should ally with Germany to revise the peace settlement by military force.'],
+        correctAnswer: 'Whether the United States should embrace an active international role or retreat from global commitments.',
+        explanation: 'The ratification fight was about more than one treaty; it was a major argument over the future place of the United States in world affairs.',
+        standard: 'SS.912.A.4.8'
       },
     ]
   },
@@ -1197,179 +1301,179 @@ const LESSONS = [
     id: 'eoc',
     label: 'EOC REVIEW',
     title: 'EOC Practice Quiz',
-    sub: 'American Imperialism Review · expansion, war, and global power',
+    sub: 'World War I Review · neutrality, warfare, mobilization, and peace',
     icon: '📋',
     type: 'eoc',
     briefing: {
-      location: 'American Imperialism Review',
-      date: 'expansion, war, and global power',
+      location: 'World War I Review',
+      date: 'neutrality, warfare, mobilization, and peace',
       role: 'exam prep coach',
-      text: 'This review section ties together the full Unit 3A arc. Expect questions that connect expansionist ideas, the Spanish-American War, and the growth of American influence under Roosevelt, Taft, and Wilson. The focus is on how military power, economics, diplomacy, and political debate all shaped the rise of the United States as a global power.',
-      tags: ['SS.912.A.4.10', 'SS.912.A.4.11']
+      text: 'This review section ties together the full Unit 3B arc. Expect questions that connect neutrality and intervention, trench warfare and new technology, wartime mobilization and civil liberties, and the debate over Versailles and the League of Nations. The goal is synthesis across the entire World War I experience.',
+      tags: ['SS.912.A.4.5', 'SS.912.A.4.6', 'SS.912.A.4.7', 'SS.912.A.4.8']
     },
     displayCount: 15,
     goldRules: { perCorrect: 15, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Imperialism Mastery', cards: ['American Imperialism Review'] },
+    rewards: { badge: 'World War I Mastery', cards: ['World War I Review'] },
     bank: [
       {
-        id: '3A-EOC-Q1',
-        text: 'Why did the United States become more interested in overseas expansion in the late nineteenth century?',
-        choices: ['Industrial growth encouraged leaders to seek new markets, bases, and international influence.', 'Industrial growth encouraged leaders to abandon trade and avoid all contact with Caribbean and Pacific regions.', 'Industrial growth encouraged leaders to replace the navy with railroads as the main instrument of foreign policy.', 'Industrial growth encouraged leaders to return most western territories to earlier colonial powers abroad.'],
-        correctAnswer: 'Industrial growth encouraged leaders to seek new markets, bases, and international influence.',
-        explanation: 'Many expansionists believed economic growth and national power required a more active presence beyond North America.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-EOC-Q1',
+        text: 'Why did many Americans initially want to stay out of World War I?',
+        choices: ['They saw it as a distant European conflict and wanted to avoid another costly foreign entanglement.', 'They saw it as a distant European conflict and believed the United States had no economic ties overseas.', 'They saw it as a distant European conflict and had already promised military support to Germany.', 'They saw it as a distant European conflict and expected Congress to join the war within weeks.'],
+        correctAnswer: 'They saw it as a distant European conflict and wanted to avoid another costly foreign entanglement.',
+        explanation: 'Neutrality appealed because many Americans believed European rivalries should not automatically become American wars.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-EOC-Q2',
-        text: 'What was Mahan’s influence on American imperial policy?',
-        choices: ['He convinced many leaders that sea power and overseas bases were essential to national greatness.', 'He convinced many leaders that sea power and overseas bases would weaken trade and should be avoided.', 'He convinced many leaders that sea power and overseas bases mattered only after World War I ended.', 'He convinced many leaders that sea power and overseas bases should be controlled by private companies.'],
-        correctAnswer: 'He convinced many leaders that sea power and overseas bases were essential to national greatness.',
-        explanation: 'Mahan’s writings helped shape the belief that a modern navy and global coaling stations were crucial for a rising power.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-EOC-Q2',
+        text: 'Why did the sinking of the Lusitania matter to American public opinion?',
+        choices: ['It showed that German submarine warfare threatened civilian lives and could involve Americans directly.', 'It showed that German submarine warfare had ended because public outrage forced Berlin to apologize fully.', 'It showed that German submarine warfare was aimed only at military vessels and not civilian passengers.', 'It showed that German submarine warfare had been coordinated jointly with the British navy in secret.'],
+        correctAnswer: 'It showed that German submarine warfare threatened civilian lives and could involve Americans directly.',
+        explanation: 'The Lusitania deepened anti-German feeling by making the costs of unrestricted submarine warfare vivid to Americans.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-EOC-Q3',
-        text: 'Why was Hawaii strategically valuable to American leaders?',
-        choices: ['It offered an important Pacific stop for commerce and naval operations between America and Asia.', 'It offered an important Pacific stop only for European empires and had little value to the United States.', 'It offered an important Pacific stop after the Panama Canal opened and the Atlantic trade route ended.', 'It offered an important Pacific stop mainly because it controlled access to the Mediterranean Sea.'],
-        correctAnswer: 'It offered an important Pacific stop for commerce and naval operations between America and Asia.',
-        explanation: 'Hawaii fit both the commercial and strategic goals of expansionists who wanted stronger Pacific influence.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-EOC-Q3',
+        text: 'Why did the Zimmermann Telegram push the United States closer to war?',
+        choices: ['It suggested Germany was willing to encourage military conflict against the United States itself.', 'It suggested Germany was willing to accept Wilson’s peace plan if Mexico stayed neutral in Europe.', 'It suggested Germany was willing to surrender its Atlantic fleet if America avoided the Allied side.', 'It suggested Germany was willing to divide British colonies in Asia with the United States.'],
+        correctAnswer: 'It suggested Germany was willing to encourage military conflict against the United States itself.',
+        explanation: 'The telegram intensified public anger because it implied a direct threat to American territory and security.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-EOC-Q4',
-        text: 'What was the main point of the Open Door Policy?',
-        choices: ['The United States wanted equal trade access in China rather than exclusive colonial control by one power.', 'The United States wanted equal trade access in China by placing the whole country under direct American rule.', 'The United States wanted equal trade access in China only after ending all contact with Japan and Britain.', 'The United States wanted equal trade access in China by closing Chinese ports to every European nation.'],
-        correctAnswer: 'The United States wanted equal trade access in China rather than exclusive colonial control by one power.',
-        explanation: 'The policy sought to preserve American commercial opportunity without formally carving out a separate U.S. colony in China.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-EOC-Q4',
+        text: 'What was Wilson’s main public reason for asking Congress to declare war in 1917?',
+        choices: ['He argued that German actions threatened democracy, international law, and freedom of the seas.', 'He argued that German actions had already occupied American territory and overthrown the federal government.', 'He argued that German actions made it necessary to conquer Europe before Russia could grow stronger.', 'He argued that German actions had ended all Allied resistance, leaving the United States to fight alone.'],
+        correctAnswer: 'He argued that German actions threatened democracy, international law, and freedom of the seas.',
+        explanation: 'Wilson framed intervention as a defense of broader political principles, not merely retaliation for isolated incidents.',
+        standard: 'SS.912.A.4.5'
       },
       {
-        id: '3A-EOC-Q5',
-        text: 'Why did anti-imperialists object to overseas empire?',
-        choices: ['They believed governing people without consent contradicted American ideals of liberty and self-rule.', 'They believed governing people without consent would weaken Europe but strengthen democracy at home.', 'They believed governing people without consent was necessary if the United States hoped to trade in Asia.', 'They believed governing people without consent would force every territory to become a state immediately.'],
-        correctAnswer: 'They believed governing people without consent contradicted American ideals of liberty and self-rule.',
-        explanation: 'Anti-imperialists saw overseas rule as a betrayal of the political principles the United States claimed to represent.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-EOC-Q5',
+        text: 'Why did trench warfare produce such high casualties with so little territorial gain?',
+        choices: ['Defensive positions and new weapons made attacks extremely deadly while breakthroughs remained difficult.', 'Defensive positions and new weapons made attacks extremely deadly, but armies kept refusing to use artillery.', 'Defensive positions and new weapons made attacks extremely deadly only on the Eastern Front in Russia.', 'Defensive positions and new weapons made attacks extremely deadly after the armistice had already been signed.'],
+        correctAnswer: 'Defensive positions and new weapons made attacks extremely deadly while breakthroughs remained difficult.',
+        explanation: 'Machine guns, artillery, and trench systems favored defense, creating repeated assaults with catastrophic human cost.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-EOC-Q6',
-        text: 'Why did the Cuban revolt draw such strong attention in the United States?',
-        choices: ['It blended humanitarian concern, economic interest, and strategic proximity in the Caribbean.', 'It blended humanitarian concern only after Spain had already granted Cuba full independence peacefully.', 'It blended humanitarian concern because Cuba had asked to join Britain instead of the United States.', 'It blended humanitarian concern mainly because Cuba threatened American control of the Philippines.'],
-        correctAnswer: 'It blended humanitarian concern, economic interest, and strategic proximity in the Caribbean.',
-        explanation: 'Cuba mattered to Americans because it was nearby, economically significant, and easy to present as a moral cause.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-EOC-Q6',
+        text: 'How did World War I demonstrate the power of modern industrial warfare?',
+        choices: ['Mass production and new weapons made the scale and efficiency of destruction far greater than before.', 'Mass production and new weapons made the scale and efficiency of destruction far smaller than before.', 'Mass production and new weapons mattered little because cavalry and swords still dominated most battles.', 'Mass production and new weapons affected only naval warfare and had little impact on fighting on land.'],
+        correctAnswer: 'Mass production and new weapons made the scale and efficiency of destruction far greater than before.',
+        explanation: 'World War I revealed how industry, technology, and logistics could intensify warfare beyond earlier nineteenth-century models.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-EOC-Q7',
-        text: 'How did yellow journalism help create support for war with Spain?',
-        choices: ['It used sensational stories and images that heightened anger and urgency in the public mind.', 'It used sensational stories and images mainly to defend Spain and criticize intervention in Cuba.', 'It used sensational stories and images only after the war ended and the treaty was being debated.', 'It used sensational stories and images so rarely that newspapers had little effect on public opinion.'],
-        correctAnswer: 'It used sensational stories and images that heightened anger and urgency in the public mind.',
-        explanation: 'Yellow journalism helped turn foreign events into emotionally charged stories that encouraged interventionist sentiment.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-EOC-Q7',
+        text: 'Why was the convoy system important to the Allied war effort?',
+        choices: ['It helped protect shipping and keep soldiers and supplies moving across the Atlantic.', 'It helped protect shipping by removing the need for escort vessels and naval planning completely.', 'It helped protect shipping only after Germany had already agreed to stop submarine warfare permanently.', 'It helped protect shipping mainly on the Mediterranean route between Italy and the Ottoman Empire.'],
+        correctAnswer: 'It helped protect shipping and keep soldiers and supplies moving across the Atlantic.',
+        explanation: 'Convoys reduced submarine losses and allowed Allied logistics to function more effectively in the face of German attacks.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-EOC-Q8',
-        text: 'Why did the USS Maine become such a rallying cry in 1898?',
-        choices: ['Its explosion was quickly blamed on Spain and became a symbol used to justify war.', 'Its explosion was quickly blamed on Spain only after Spain asked the United States for military alliance.', 'Its explosion was quickly blamed on Spain after the ship had already sunk in the Philippines.', 'Its explosion was quickly blamed on Spain because Germany had publicly admitted planting the bomb.'],
-        correctAnswer: 'Its explosion was quickly blamed on Spain and became a symbol used to justify war.',
-        explanation: 'Even without clear proof at the time, the Maine became a powerful political and emotional symbol in the rush to war.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-EOC-Q8',
+        text: 'Why did American troops matter so much in 1918 even though the war had already been raging for years?',
+        choices: ['They provided fresh manpower and morale when European armies were exhausted by years of attrition.', 'They provided fresh manpower and morale only after Germany had already accepted unconditional surrender.', 'They provided fresh manpower and morale mainly to Russia after the Bolsheviks reentered the war effort.', 'They provided fresh manpower and morale by replacing all British and French commanders at once.'],
+        correctAnswer: 'They provided fresh manpower and morale when European armies were exhausted by years of attrition.',
+        explanation: 'The arrival of the American Expeditionary Force helped the Allies regain confidence and sustain the final push.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-EOC-Q9',
-        text: 'Why was the Spanish-American War a turning point for the United States?',
-        choices: ['It brought overseas territories under U.S. control and marked the country’s rise as an imperial power.', 'It brought overseas territories under U.S. control only briefly before Spain retook them all in 1899.', 'It brought overseas territories under U.S. control mainly in Europe rather than the Caribbean or Pacific.', 'It brought overseas territories under U.S. control but ended American interest in global affairs afterward.'],
-        correctAnswer: 'It brought overseas territories under U.S. control and marked the country’s rise as an imperial power.',
-        explanation: 'The war’s importance lay less in its duration than in the lasting changes it produced in American foreign policy and territory.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-EOC-Q9',
+        text: 'What did the armistice of November 11, 1918 do?',
+        choices: ['It stopped the fighting while leaving the final political peace terms to later negotiations.', 'It stopped the fighting and permanently settled every border and reparations issue at once.', 'It stopped the fighting only on the Western Front while naval and colonial combat continued unchanged.', 'It stopped the fighting after the Senate had already ratified the Treaty of Versailles unanimously.'],
+        correctAnswer: 'It stopped the fighting while leaving the final political peace terms to later negotiations.',
+        explanation: 'The armistice ended combat, but the harder questions of postwar politics were left for the peace conference.',
+        standard: 'SS.912.A.4.6'
       },
       {
-        id: '3A-EOC-Q10',
-        text: 'What territories did the United States gain through the Treaty of Paris of 1898?',
-        choices: ['Puerto Rico, Guam, and the Philippines came under American control after Spain’s defeat.', 'Puerto Rico, Guam, and the Philippines came under American control only after the Senate rejected the treaty.', 'Puerto Rico, Guam, and the Philippines came under American control along with Cuba as a permanent U.S. state.', 'Puerto Rico, Guam, and the Philippines came under American control after Britain transferred them to Washington.'],
-        correctAnswer: 'Puerto Rico, Guam, and the Philippines came under American control after Spain’s defeat.',
-        explanation: 'The Treaty of Paris ended the war and turned the United States into a power with major overseas possessions.',
-        standard: 'SS.912.A.4.10'
+        id: '3B-EOC-Q10',
+        text: 'What did the War Industries Board reveal about the home front during World War I?',
+        choices: ['The federal government took a much larger role in coordinating industrial production for war needs.', 'The federal government took a much larger role in ending all war contracts so private markets could recover.', 'The federal government took a much larger role only after 1920 when peacetime reconstruction began.', 'The federal government took a much larger role mainly in farming while leaving industry entirely alone.'],
+        correctAnswer: 'The federal government took a much larger role in coordinating industrial production for war needs.',
+        explanation: 'Mobilization required a closer partnership between government and industry than many Americans had experienced before.',
+        standard: 'SS.912.A.4.7'
       },
       {
-        id: '3A-EOC-Q11',
-        text: 'Why did the Philippine-American War matter in the history of U.S. imperialism?',
-        choices: ['It exposed the tension between promises of liberation and the reality of American imperial control.', 'It exposed the tension between promises of liberation and the reality that Spain had remained in power.', 'It exposed the tension between promises of liberation and the reality that Britain seized Manila first.', 'It exposed the tension between promises of liberation and the reality that the islands became states at once.'],
-        correctAnswer: 'It exposed the tension between promises of liberation and the reality of American imperial control.',
-        explanation: 'The war revealed that defeating one empire did not automatically mean self-government for the people involved.',
-        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
+        id: '3B-EOC-Q11',
+        text: 'Why was the Committee on Public Information important to the war effort?',
+        choices: ['It shaped public opinion through propaganda designed to sustain support for mobilization and sacrifice.', 'It shaped public opinion by defending antiwar movements and criticizing Liberty Bond campaigns openly.', 'It shaped public opinion only in Congress, where public speeches were banned during the emergency.', 'It shaped public opinion after the war by urging Americans to reject all international cooperation.'],
+        correctAnswer: 'It shaped public opinion through propaganda designed to sustain support for mobilization and sacrifice.',
+        explanation: 'The CPI showed how modern governments could try to manage public feeling and national morale during wartime.',
+        standard: 'SS.912.A.4.7'
       },
       {
-        id: '3A-EOC-Q12',
-        text: 'What did Roosevelt’s corollary add to the Monroe Doctrine?',
-        choices: ['It claimed the United States could intervene in Latin America to preserve order and protect interests.', 'It claimed the United States could intervene in Latin America only with permission from every European empire.', 'It claimed the United States could intervene in Latin America only to transfer control to private banks.', 'It claimed the United States could intervene in Latin America mainly to promote immediate statehood there.'],
-        correctAnswer: 'It claimed the United States could intervene in Latin America to preserve order and protect interests.',
-        explanation: 'The corollary transformed the Monroe Doctrine from a warning to Europe into a justification for active U.S. intervention.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-EOC-Q12',
+        text: 'Why are the Espionage and Sedition Acts important in the history of civil liberties?',
+        choices: ['They showed how war could lead the government to punish dissent and test the limits of free speech.', 'They showed how war could protect dissent by preventing the government from regulating speech at all.', 'They showed how war could eliminate courts and leave civil liberties entirely to military commanders.', 'They showed how war could strengthen the rights of antiwar groups by requiring equal time in the press.'],
+        correctAnswer: 'They showed how war could lead the government to punish dissent and test the limits of free speech.',
+        explanation: 'These laws remain important because they reveal the tension between national security claims and constitutional freedoms.',
+        standard: 'SS.912.A.4.7'
       },
       {
-        id: '3A-EOC-Q13',
-        text: 'Why was the Panama Canal so important to American power?',
-        choices: ['It made movement between oceans faster, increasing the strategic reach of U.S. trade and naval forces.', 'It made movement between oceans faster, but only for rail cargo rather than military or commercial ships.', 'It made movement between oceans faster after the United States withdrew from Pacific and Caribbean affairs.', 'It made movement between oceans faster mainly because it replaced all Atlantic ports on the East Coast.'],
-        correctAnswer: 'It made movement between oceans faster, increasing the strategic reach of U.S. trade and naval forces.',
-        explanation: 'The canal strengthened both military flexibility and commercial access by linking two major maritime worlds.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-EOC-Q13',
+        text: 'How did World War I contribute to changing views of women’s political role in the United States?',
+        choices: ['Women’s wartime work and service strengthened arguments that they deserved full political citizenship.', 'Women’s wartime work and service weakened arguments for suffrage because public life became more masculine.', 'Women’s wartime work and service ended after Congress banned women from factories and relief organizations.', 'Women’s wartime work and service mattered only in Europe because American women stayed outside the war effort.'],
+        correctAnswer: 'Women’s wartime work and service strengthened arguments that they deserved full political citizenship.',
+        explanation: 'The war gave suffrage supporters more evidence that women were essential participants in national life and deserved the vote.',
+        standard: 'SS.912.A.4.7'
       },
       {
-        id: '3A-EOC-Q14',
-        text: 'What was the central idea behind Taft’s dollar diplomacy?',
-        choices: ['Economic investment could extend American influence abroad without depending only on military force.', 'Economic investment could extend American influence abroad only if the United States avoided all treaties.', 'Economic investment could extend American influence abroad by replacing the navy with missionary societies.', 'Economic investment could extend American influence abroad mainly by ending trade with Latin America.'],
-        correctAnswer: 'Economic investment could extend American influence abroad without depending only on military force.',
-        explanation: 'Dollar diplomacy used financial leverage as a tool of foreign policy, especially in Latin America and East Asia.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-EOC-Q14',
+        text: 'Why did World War I help accelerate the Great Migration?',
+        choices: ['Northern industry needed labor, while racism and limited opportunity in the South continued pushing people away.', 'Northern industry needed labor, but federal law blocked African Americans from moving across state lines.', 'Northern industry needed labor only after 1925, long after wartime migration had already stopped.', 'Northern industry needed labor because European immigration had increased faster than factory demand.'],
+        correctAnswer: 'Northern industry needed labor, while racism and limited opportunity in the South continued pushing people away.',
+        explanation: 'The war opened new industrial opportunities, even as migrants continued to face discrimination in northern cities.',
+        standard: 'SS.912.A.4.7'
       },
       {
-        id: '3A-EOC-Q15',
-        text: 'How did Wilson describe moral diplomacy in principle?',
-        choices: ['He said the United States should support governments that reflected democratic and moral principles.', 'He said the United States should support governments that reflected democratic and moral principles only in Europe.', 'He said the United States should support governments that reflected democratic and moral principles by ending all interventions.', 'He said the United States should support governments that reflected democratic and moral principles through annexation.'],
-        correctAnswer: 'He said the United States should support governments that reflected democratic and moral principles.',
-        explanation: 'Wilson’s language emphasized ideals, though his administration still intervened in places like Mexico and the Caribbean.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-EOC-Q15',
+        text: 'What was Wilson trying to accomplish with the Fourteen Points?',
+        choices: ['He was trying to shape a more stable peace based on openness, cooperation, and self-determination.', 'He was trying to shape a more stable peace by dividing Europe into permanent military occupation zones.', 'He was trying to shape a more stable peace by excluding the United States from all future diplomacy.', 'He was trying to shape a more stable peace by restoring monarchies across Central and Eastern Europe.'],
+        correctAnswer: 'He was trying to shape a more stable peace based on openness, cooperation, and self-determination.',
+        explanation: 'Wilson’s plan reflected his belief that lasting peace required international principles, not just military victory.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-EOC-Q16',
-        text: 'Why did Mexico become such a difficult test for Wilson’s foreign policy?',
-        choices: ['Instability there forced him to choose between moral rhetoric and the use of American power.', 'Instability there forced him to choose between moral rhetoric and surrendering the Panama Canal.', 'Instability there forced him to choose between moral rhetoric and supporting Spanish rule in Cuba again.', 'Instability there forced him to choose between moral rhetoric and joining the Anti-Imperialist League.'],
-        correctAnswer: 'Instability there forced him to choose between moral rhetoric and the use of American power.',
-        explanation: 'Mexico revealed how hard it was to apply idealistic principles consistently when security and strategic interests were involved.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-EOC-Q16',
+        text: 'Why did Wilson believe the League of Nations was necessary after the war?',
+        choices: ['He believed ongoing international cooperation was needed to prevent future wars and resolve disputes.', 'He believed ongoing international cooperation was needed mainly to strengthen Germany against France and Britain.', 'He believed ongoing international cooperation was needed so the United States could avoid diplomacy completely.', 'He believed ongoing international cooperation was needed to replace Congress as the nation’s foreign policy authority.'],
+        correctAnswer: 'He believed ongoing international cooperation was needed to prevent future wars and resolve disputes.',
+        explanation: 'Wilson thought the League would make peace more durable by providing a structure for collective security and diplomacy.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-EOC-Q17',
-        text: 'What does the idea of a protectorate suggest about imperial power?',
-        choices: ['A stronger nation can control another territory’s policies without granting it equal political standing.', 'A stronger nation can control another territory’s policies only after making it a state immediately.', 'A stronger nation can control another territory’s policies only through private churches and charities.', 'A stronger nation can control another territory’s policies only if Europe approves every decision first.'],
-        correctAnswer: 'A stronger nation can control another territory’s policies without granting it equal political standing.',
-        explanation: 'Protectorates show that empire can work through indirect control as well as outright annexation.',
-        standard: 'SS.912.A.4.11'
+        id: '3B-EOC-Q17',
+        text: 'Why were Lodge’s reservations so important in the treaty debate?',
+        choices: ['They reflected an effort to limit League obligations while still leaving open the possibility of joining.', 'They reflected an effort to abolish the Senate’s role in treaty approval and strengthen presidential power.', 'They reflected an effort to restore Germany’s army so Europe could balance France and Russia again.', 'They reflected an effort to force Wilson to accept the Central Powers as members of the League immediately.'],
+        correctAnswer: 'They reflected an effort to limit League obligations while still leaving open the possibility of joining.',
+        explanation: 'Reservationists tried to reshape the treaty rather than reject it absolutely, which made the fight over compromise especially important.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-EOC-Q18',
-        text: 'Why were the Caribbean and Pacific so central to American imperial strategy?',
-        choices: ['They connected shipping lanes, naval bases, trade routes, and access to wider global influence.', 'They connected shipping lanes only after the United States ended trade with Asia and Latin America.', 'They connected shipping lanes mainly because Europe had abandoned all interest in both regions.', 'They connected shipping lanes but had little relationship to military planning or economic expansion.'],
-        correctAnswer: 'They connected shipping lanes, naval bases, trade routes, and access to wider global influence.',
-        explanation: 'American leaders increasingly treated these regions as linked zones of commerce, strategy, and imperial competition.',
-        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
+        id: '3B-EOC-Q18',
+        text: 'Why did the Senate refuse to ratify the Treaty of Versailles?',
+        choices: ['Partisanship, concerns about Article X, and disagreement over international commitments blocked approval.', 'Partisanship, concerns about Article X, and disagreement disappeared once Wilson accepted all Senate revisions.', 'Partisanship, concerns about Article X, and disagreement mattered only because Germany rejected the treaty first.', 'Partisanship, concerns about Article X, and disagreement ended when the League voted to admit the United States.'],
+        correctAnswer: 'Partisanship, concerns about Article X, and disagreement over international commitments blocked approval.',
+        explanation: 'The treaty failed because the Senate could not unite behind Wilson’s vision of internationalism or a workable compromise.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-EOC-Q19',
-        text: 'What central argument shaped the domestic debate over American imperialism?',
-        choices: ['Supporters saw expansion as power and opportunity, while critics saw it as a betrayal of republican ideals.', 'Supporters saw expansion as power and opportunity, while critics argued only about which islands were profitable.', 'Supporters saw expansion as power and opportunity, while critics wanted immediate annexation of Cuba and Mexico.', 'Supporters saw expansion as power and opportunity, while critics mainly opposed naval technology and coaling stations.'],
-        correctAnswer: 'Supporters saw expansion as power and opportunity, while critics saw it as a betrayal of republican ideals.',
-        explanation: 'Imperialism sparked debate because it raised questions not just about strategy, but about national identity and political principle.',
-        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
+        id: '3B-EOC-Q19',
+        text: 'Why was the League of Nations weakened by the absence of the United States?',
+        choices: ['It lost the support of a major economic and political power that Wilson had expected to anchor it.', 'It lost the support of a major economic and political power only after the League had already dissolved in 1919.', 'It lost the support of a major economic and political power because the United States joined a rival alliance.', 'It lost the support of a major economic and political power mainly because Britain and France withdrew as well.'],
+        correctAnswer: 'It lost the support of a major economic and political power that Wilson had expected to anchor it.',
+        explanation: 'Without American membership, the League lacked some of the authority, credibility, and capacity Wilson had hoped it would possess.',
+        standard: 'SS.912.A.4.8'
       },
       {
-        id: '3A-EOC-Q20',
-        text: 'Which theme best ties together the full American imperialism unit?',
-        choices: ['The United States expanded its global reach through war, diplomacy, and economics while debating the meaning of empire.', 'The United States expanded its global reach through war, diplomacy, and economics after rejecting overseas influence.', 'The United States expanded its global reach through war, diplomacy, and economics only inside North America.', 'The United States expanded its global reach through war, diplomacy, and economics without any serious domestic opposition.'],
-        correctAnswer: 'The United States expanded its global reach through war, diplomacy, and economics while debating the meaning of empire.',
-        explanation: 'American imperialism was not only a story of expansion, but also of argument over what that expansion meant for the nation and the people it affected.',
-        standard: 'SS.912.A.4.10 · SS.912.A.4.11'
+        id: '3B-EOC-Q20',
+        text: 'Which theme best ties together the full World War I unit?',
+        choices: ['The war pushed the United States into a larger global role while changing politics, society, and ideas about power.', 'The war pushed the United States into a larger global role only in Europe, without changing life at home.', 'The war pushed the United States into a larger global role after the nation had already rejected all foreign trade.', 'The war pushed the United States into a larger global role mainly by ending debates over civil liberties and diplomacy.'],
+        correctAnswer: 'The war pushed the United States into a larger global role while changing politics, society, and ideas about power.',
+        explanation: 'World War I reshaped American foreign policy, military mobilization, civil liberties, and the debate over international responsibility.',
+        standard: 'SS.912.A.4.5 · SS.912.A.4.6 · SS.912.A.4.7 · SS.912.A.4.8'
       },
     ]
   },
@@ -1640,7 +1744,7 @@ function renderUnitHub() {
     bannerEl.innerHTML = `
       <div class="hub-banner">
         <div class="hub-banner-top">
-          <div class="hub-banner-label">UNIT 3A — AMERICAN IMPERIALISM</div>
+          <div class="hub-banner-label">UNIT 3B — WORLD WAR I</div>
           <div class="hub-banner-count">${done}/${total} LESSONS</div>
         </div>
         <div class="hub-progress-bar">
@@ -1704,7 +1808,7 @@ function renderUnitHub() {
           UNIT COMPLETE — Want to improve your score?
         </div>
         <button class="btn full" onclick="replayFromBeginning()" style="border-color:var(--teal2);color:var(--teal2);">
-          <span>↺ Replay Unit from Lesson 19</span>
+          <span>↺ Replay Unit from Lesson 22</span>
         </button>
       </div>`;
   }
@@ -2219,7 +2323,7 @@ function returnToShell() {
 }
 
 function replayFromBeginning() {
-  // Reset all lesson progress and start from Lesson 19
+  // Reset all lesson progress and start from Lesson 22
   P.lessonsCompleted = [];
   P.lessonBestScores = {};
   saveP();
@@ -2250,7 +2354,7 @@ function printCertificate() {
       <div style="text-align:center;margin-bottom:24px;">
         <div style="font-size:36px;margin-bottom:8px;">🏛️</div>
         <div style="font-size:28px;font-weight:bold;letter-spacing:3px;color:#c83020;">AMERICAN CHRONICLES</div>
-        <div style="font-size:14px;letter-spacing:2px;color:#666;margin-top:4px;">UNIT 3A — AMERICAN IMPERIALISM · CERTIFICATE OF COMPLETION</div>
+        <div style="font-size:14px;letter-spacing:2px;color:#666;margin-top:4px;">UNIT 3B — WORLD WAR I · CERTIFICATE OF COMPLETION</div>
       </div>
       <div style="text-align:center;margin-bottom:20px;padding:16px;border:1px solid #c83020;">
         <div style="font-size:13px;color:#666;letter-spacing:1px;">THIS CERTIFIES THAT</div>
@@ -2375,28 +2479,29 @@ function showLoginGate() {
 // ════════════════════════════════════════════
 
 const HIST_CARDS = {
-  mahan:       {icon:'⚓', name:'Alfred Thayer Mahan',      role:'Naval Strategist · Author of Sea Power',
-    desc:'His 1890 book argued that national greatness depended on naval power and overseas bases. Deeply influenced Theodore Roosevelt, Henry Cabot Lodge, and a generation of American leaders who saw empire as destiny.', unlockLesson:'lesson19'},
-  mckinley:    {icon:'🇺🇸', name:'William McKinley',         role:'25th President · 1897–1901',
-    desc:'Led the United States into the Spanish-American War in 1898 and presided over the acquisition of Puerto Rico, Guam, and the Philippines. Struggled publicly with the morality of empire before embracing expansion as divine mission.', unlockLesson:'lesson20'},
-  dewey:       {icon:'⚓', name:'George Dewey',             role:'Commodore · Battle of Manila Bay',
-    desc:'Destroyed the Spanish Pacific fleet at Manila Bay in a single morning on May 1, 1898 without losing a single American sailor. His victory opened the Philippines to American control and made him an instant national hero.', unlockLesson:'lesson20'},
-  roosevelt:   {icon:'🦏', name:'Theodore Roosevelt',       role:'26th President · Rough Rider · 1901–1909',
-    desc:'Led the Rough Riders up San Juan Hill and emerged from the war a national celebrity. As president, he expanded the Monroe Doctrine into the Roosevelt Corollary, asserting the right to intervene across Latin America.', unlockLesson:'lesson20'},
-  aguinaldo:   {icon:'🇵🇭', name:'Emilio Aguinaldo',         role:'Philippine Revolutionary Leader',
-    desc:'Led the Filipino struggle for independence first against Spain, then against the United States. The Philippine-American War he led lasted three years, killed hundreds of thousands, and is often forgotten in American histories of empire.', unlockLesson:'capstone'},
-  hay:         {icon:'📜', name:'John Hay',                role:'Secretary of State · Open Door Policy',
-    desc:'Authored the Open Door Notes in 1899 and 1900, demanding equal trading rights in China for all nations. His policy protected American commercial interests without requiring formal colonial control over Chinese territory.', unlockLesson:'capstone'},
-  twain:       {icon:'✏️', name:'Mark Twain',               role:'Author · Anti-Imperialist League',
-    desc:'One of the most prominent voices in the Anti-Imperialist League. Wrote blistering satire against the Philippine War and American hypocrisy. “We have gone there to conquer, not to redeem.”', unlockLesson:'lesson20'},
+  wilson:      {icon:'🕊️', name:'Woodrow Wilson',          role:'28th President · 1913–1921',
+    desc:'Led the United States into WWI with the promise to make the world safe for democracy. Proposed the idealistic Fourteen Points and the League of Nations — then watched the Senate reject it. His stroke during the ratification fight left him broken and the peace incomplete.', unlockLesson:'lesson22'},
+  pershing:    {icon:'⭐', name:'Gen. John Pershing',        role:'Commander, American Expeditionary Forces',
+    desc:'Led two million American soldiers to France as the AEF. Insisted on keeping American forces independent rather than feeding them into depleted Allied units. The fresh U.S. troops helped break the stalemate and tip the war toward Allied victory in 1918.', unlockLesson:'lesson23'},
+  zimmermann:  {icon:'📜', name:'Arthur Zimmermann',        role:'German Foreign Secretary · 1917',
+    desc:'His secret telegram proposing a military alliance with Mexico against the United States — promising Texas, New Mexico, and Arizona in return — was intercepted by British intelligence and helped push an outraged American public toward declaring war.', unlockLesson:'lesson22'},
+  debs:        {icon:'✊', name:'Eugene V. Debs',            role:'Socialist Leader · Anti-War Activist',
+    desc:'Imprisoned under the Espionage Act for a speech opposing the draft. His case exposed how wartime patriotism was weaponized to suppress dissent, labor organizing, and political opposition to the war.', unlockLesson:'lesson24'},
+  lodge:       {icon:'🇺🇸', name:'Henry Cabot Lodge',        role:'Senate Majority Leader · WWI Opponent',
+    desc:'Led Republican opposition to the Treaty of Versailles and the League of Nations. His insistence on Senate sovereignty over foreign treaties reflected deep American skepticism about permanent international commitments.', unlockLesson:'capstone'},
+  pankhurst:   {icon:'📢', name:'Jeannette Rankin',          role:'First Woman in Congress · Anti-War Vote',
+    desc:'The first woman elected to Congress — and one of only 50 representatives to vote against declaring war in 1917. “You can no more win a war than you can win an earthquake.” She later cast the sole vote against declaring war after Pearl Harbor.', unlockLesson:'lesson24'},
+  haig:        {icon:'🛡️', name:'Field Marshal Douglas Haig', role:'British Commander · Western Front',
+    desc:'Commanded British forces at the Somme, where 57,000 British soldiers fell on the first day. His faith in breakthrough tactics despite machine guns, artillery, and barbed wire made him both the symbol of industrial-scale slaughter and, to some, the general who held the line.', unlockLesson:'lesson23'},
 };
 
 const UNIT_BADGES = [
-  {id:'setting_course',   icon:'🧭', label:'Setting a Course',    desc:'Completed Setting a Course',         lessonId:'lesson19'},
-  {id:'splendid_war',     icon:'💥', label:'Splendid Little War',  desc:'Completed Splendid Little War',      lessonId:'lesson20'},
-  {id:'empire_rising',    icon:'🌐', label:'Empire Rising',        desc:'Completed the Capstone',             lessonId:'capstone'},
-  {id:'imperialism_done', icon:'📋', label:'Imperialism Complete', desc:'Completed EOC Review',               lessonId:'eoc'},
-  {id:'unit3a_complete',  icon:'⭐', label:'Unit 3A Complete',     desc:'Completed all lessons',              lessonId:null},
+  {id:'neutrality_to_war',  icon:'🌊', label:'Into the War',         desc:'Completed From Neutrality to War',    lessonId:'lesson22'},
+  {id:'trenches',           icon:'⛏️', label:'Into the Trenches',    desc:'Completed Into the Trenches',        lessonId:'lesson23'},
+  {id:'home_front_wwi',     icon:'🏭', label:'Home Front',            desc:'Completed The Home Front',           lessonId:'lesson24'},
+  {id:'ratify_reject',      icon:'🕊️', label:'To Ratify or Reject', desc:'Completed the Capstone',          lessonId:'capstone'},
+  {id:'wwi_done',           icon:'📋', label:'WWI Complete',          desc:'Completed EOC Review',               lessonId:'eoc'},
+  {id:'unit3b_complete',    icon:'⭐', label:'Unit 3B Complete',      desc:'Completed all lessons',              lessonId:null},
 ];
 
 // ════════════════════════════════════════════
@@ -2483,7 +2588,7 @@ function renderLeaderboard() {
     filtered = filtered.filter(s => s.period && s.period !== '0');
     if (_lbPeriodFilter !== 'all') filtered = filtered.filter(s => String(s.period) === String(_lbPeriodFilter));
   }
-  document.getElementById('lb-sync-status').textContent = filtered.length + ' students — Unit 3A: American Imperialism';
+  document.getElementById('lb-sync-status').textContent = filtered.length + ' students — Unit 3B: World War I';
   if (!filtered.length) {
     document.getElementById('lb-content').innerHTML =
       '<div style="font-family:var(--crimson);color:var(--text3);font-style:italic;padding:16px;">No results yet.</div>';
@@ -2671,20 +2776,11 @@ function switchPlayer() {
   showLoginGate();
 }
 
-// ── Anti-cheat
+// ── Anti-copy
 (function(){
   function isInput(el){return el&&(el.tagName==='INPUT'||el.tagName==='TEXTAREA');}
   document.addEventListener('contextmenu',e=>{if(!isInput(e.target))e.preventDefault();});
   document.addEventListener('copy',e=>{if(!isInput(e.target))e.preventDefault();});
-  document.addEventListener('cut',e=>{if(!isInput(e.target))e.preventDefault();});
-  document.addEventListener('keydown',e=>{
-    if(isInput(e.target))return;
-    const ctrl=e.ctrlKey||e.metaKey;
-    if(ctrl&&['c','x','a','u','s','C','X','A','U','S'].includes(e.key))e.preventDefault();
-    if(e.key==='F12'||(ctrl&&e.shiftKey&&['i','I','j','J'].includes(e.key)))e.preventDefault();
-  });
-  document.addEventListener('selectstart',e=>{if(!isInput(e.target))e.preventDefault();});
-  document.addEventListener('dragstart',e=>e.preventDefault());
 })();
 
 </script>
