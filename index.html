@@ -1775,7 +1775,8 @@ async function boot(){
     if(profile){
       // Returning student — merge DB profile and go straight in
       applyProfileFromDB(profile);
-      saveS(); // update local cache
+      // Save immediately (bypass debounce) so game files can read session right away
+      try{localStorage.setItem('ac_shell_state', JSON.stringify(S));}catch(e){}
       awardBadges();
       enterShell();
     } else {
