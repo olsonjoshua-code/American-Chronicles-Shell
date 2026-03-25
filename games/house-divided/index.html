@@ -2645,10 +2645,14 @@ window.addEventListener('DOMContentLoaded', () => {
   const hasSession = loadP();
 
   if (hasSession) {
+    // Shell handles auth — skip all gates, go straight in
     document.getElementById('login-gate').classList.remove('show');
-    showWelcomeBack();
+    const wbo = document.getElementById('welcome-back-overlay');
+    if (wbo) wbo.classList.remove('show');
+    showUnitHub();
   } else {
-    showLoginGate();
+  // No shell session — redirect to shell to login with Google
+  window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/';
   }
 });
 
@@ -2657,7 +2661,7 @@ window.addEventListener('DOMContentLoaded', () => {
 // ════════════════════════════════════════════
 
 function showWelcomeBack() {
-  if (!P) { showLoginGate(); return; }
+  if (!P) { window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/'; // redirect to shell login return; }
 
   // Populate avatar
   const avatarEl = document.getElementById('wb-avatar');
@@ -2699,7 +2703,7 @@ function switchPlayer() {
   try { localStorage.removeItem(SAVE_KEY); } catch(e) {}
   P = null;
   document.getElementById('welcome-back-overlay').classList.remove('show');
-  showLoginGate();
+  window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/'; // redirect to shell login
 }
 
 // ── Anti-copy
