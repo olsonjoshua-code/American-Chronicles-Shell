@@ -1,0 +1,2877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engines of Change — Work, Wealth, and Opportunity Across Time</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080c08;--bg2:#0f1510;--bg3:#171e15;--panel:#1c2419;
+  --border:#1e2c1a;--border2:#2a3d24;
+  --gold:#c8960a;--gold2:#a87a06;--gold3:#e0b830;
+  --red:#8a2010;--red2:#b03018;
+  --green:#2a5a1a;--green2:#3a7a28;
+  --teal:#1a5848;--teal2:#247868;
+  --blue:#1a3050;--blue2:#284870;
+  --text:#e0e8d8;--text2:#8aaa80;--text3:#4a6a48;--cream:#f0f0e0;
+  --bebas:'Bebas Neue',sans-serif;
+  --playfair:'Playfair Display',serif;
+  --crimson:'Crimson Text',serif;
+  --dm:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--crimson);min-height:100vh;overflow-x:hidden;
+  background-image:
+    radial-gradient(ellipse at 50% 0%,   rgba(200,150,10,.18)  0%,  transparent 60%),
+    radial-gradient(ellipse at 15% 60%,  rgba(42,90,26,.16)    0%,  transparent 55%),
+    radial-gradient(ellipse at 85% 85%,  rgba(160,120,6,.12)   0%,  transparent 50%),
+    linear-gradient(175deg, #090d09 0%, #070b07 40%, #050805 100%);}
+/* Factory / industrial watermark (Engines of Change) */
+body::after{content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' width='400' height='400'%3E%3Cg transform='translate(200,200)' opacity='0.09' stroke='rgba(200,150,10,1)' fill='none'%3E%3Ccircle cx='0' cy='0' r='155' stroke-width='2' stroke-dasharray='5,8'/%3E%3Ccircle cx='0' cy='20' r='70' stroke-width='14'/%3E%3Ccircle cx='0' cy='20' r='25' stroke-width='7'/%3E%3Crect x='-8' y='-130' width='16' height='30' rx='3' fill='rgba(200,150,10,0.8)' stroke='none'/%3E%3Crect x='-8' y='120' width='16' height='30' rx='3' fill='rgba(200,150,10,0.8)' stroke='none'/%3E%3Crect x='-130' y='12' width='30' height='16' rx='3' fill='rgba(200,150,10,0.8)' stroke='none'/%3E%3Crect x='100' y='12' width='30' height='16' rx='3' fill='rgba(200,150,10,0.8)' stroke='none'/%3E%3Crect x='-8' y='-130' width='16' height='30' rx='3' transform='rotate(45 0 20)' fill='rgba(200,150,10,0.6)' stroke='none'/%3E%3Crect x='-8' y='120' width='16' height='30' rx='3' transform='rotate(45 0 20)' fill='rgba(200,150,10,0.6)' stroke='none'/%3E%3Crect x='-130' y='12' width='30' height='16' rx='3' transform='rotate(45 0 20)' fill='rgba(200,150,10,0.6)' stroke='none'/%3E%3Crect x='100' y='12' width='30' height='16' rx='3' transform='rotate(45 0 20)' fill='rgba(200,150,10,0.6)' stroke='none'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:500px 500px;
+  background-position:center center;
+  background-repeat:no-repeat;
+  pointer-events:none;z-index:0;opacity:1;}
+/* Noise texture on top of everything */
+body::before{content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  background-repeat:repeat;
+  pointer-events:none;z-index:9998;opacity:0.7;}
+/* Scanline effect */
+#root::before{content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.012) 3px,rgba(0,0,0,0.012) 4px);
+  pointer-events:none;z-index:9999;}
+
+/* ── ROOT / LAYOUT ── */
+#root{max-width:640px;margin:0 auto;padding:0 16px 100px;min-height:100vh;position:relative;z-index:1;}
+/* When HUD is visible, push content down so it isn't hidden behind the fixed bar */
+body.hud-active #root{padding-top:68px;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pop{0%{transform:scale(.5);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes floatUp{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-70px)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 15px rgba(200,48,32,.3)}50%{box-shadow:0 0 40px rgba(200,48,32,.7)}}
+
+/* ── SCREEN SYSTEM ── */
+.screen{display:none;padding-top:16px;}
+.screen.active{display:block;animation:fadeIn .4s ease;}
+
+/* ── BUTTONS ── */
+.btn{font-family:var(--bebas);font-size:15px;letter-spacing:2px;background:transparent;
+  border:1.5px solid var(--gold);color:var(--gold);padding:12px 28px;cursor:pointer;
+  transition:all .2s;display:inline-block;position:relative;overflow:hidden;text-transform:uppercase;}
+.btn::before{content:'';position:absolute;inset:0;background:var(--gold);transform:scaleX(0);
+  transform-origin:left;transition:transform .2s;z-index:0;pointer-events:none;}
+.btn:hover{color:var(--bg);box-shadow:0 0 25px rgba(200,48,32,.4);}
+.btn:hover::before{transform:scaleX(1);}
+.btn span{position:relative;z-index:1;}
+.btn:active{transform:scale(.97);}
+.btn.full{display:block;width:100%;text-align:center;margin:6px 0;}
+.btn.sm{font-size:11px;padding:8px 18px;letter-spacing:1.5px;}
+.btn.green{border-color:var(--green2);color:var(--green2);}
+.btn.green::before{background:var(--green2);}
+.btn.green:hover{color:#fff;}
+.btn.teal{border-color:#2aaa98;color:#2aaa98;}
+.btn.teal::before{background:#2aaa98;}
+.btn.teal:hover{color:#fff;}
+.btn:disabled{opacity:.25;cursor:not-allowed;pointer-events:none;}
+
+/* ── TOP HUD (sticky) ── */
+#game-hud{background:linear-gradient(180deg,rgba(8,6,8,.98),rgba(16,8,16,.95));
+  border-bottom:1px solid var(--border2);border-left:1px solid var(--border2);border-right:1px solid var(--border2);
+  padding:10px 14px;
+  position:fixed;top:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:640px;
+  z-index:200;backdrop-filter:blur(12px);
+  display:none;}
+.hud-inner{display:flex;align-items:center;gap:12px;}
+.hud-avatar{width:44px;height:44px;flex-shrink:0;border-radius:50%;overflow:hidden;}
+.hud-info{flex:1;min-width:0;}
+.hud-name{font-family:var(--playfair);font-size:12px;color:var(--gold);font-style:italic;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hud-rank{font-family:var(--dm);font-size:10px;color:var(--text2);}
+.hud-xp-bar{height:3px;background:rgba(255,255,255,.06);margin-top:4px;border-radius:2px;overflow:hidden;}
+.hud-xp-fill{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold3));transition:width .6s;border-radius:2px;}
+.hud-stats{display:flex;gap:10px;flex-shrink:0;}
+.hud-stat{font-family:var(--dm);font-size:8px;color:var(--text3);text-align:center;}
+.hud-stat span{display:block;color:var(--gold);font-size:13px;font-weight:600;}
+.hud-back-btn{font-family:var(--dm);font-size:9px;background:transparent;
+  border:1px solid var(--border2);color:var(--text3);padding:5px 10px;cursor:pointer;
+  transition:all .15s;letter-spacing:.5px;flex-shrink:0;}
+.hud-back-btn:hover{border-color:var(--gold2);color:var(--gold);}
+
+/* ── NOTIFICATIONS ── */
+.notif{position:fixed;top:80px;left:50%;transform:translateX(-50%);
+  background:var(--panel);border:1px solid var(--gold2);padding:10px 20px;
+  font-family:var(--dm);font-size:11px;color:var(--gold);z-index:1000;
+  animation:pop .3s,floatUp 2.5s .8s forwards;white-space:nowrap;max-width:90vw;text-align:center;}
+
+/* ── SECTION HEADING ── */
+.section-head{font-family:var(--bebas);font-size:18px;letter-spacing:2px;color:var(--gold);
+  border-bottom:1px solid var(--border2);padding-bottom:6px;margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;}
+.section-head::before{content:'';display:block;width:3px;height:18px;background:var(--gold);}
+
+
+/* ════════════════════════════════
+   UNIT HUB — civil rights style
+════════════════════════════════ */
+.hub-banner{background:var(--bg2);border:1px solid var(--border2);
+  border-radius:2px;padding:14px 16px;margin-bottom:12px;}
+.hub-banner-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.hub-banner-label{font-family:var(--bebas);font-size:11px;color:var(--text3);letter-spacing:3px;}
+.hub-banner-count{font-family:var(--bebas);font-size:13px;color:var(--gold);}
+.hub-progress-bar{height:6px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;}
+.hub-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:3px;transition:width .6s;}
+
+.eq-banner{background:linear-gradient(135deg,rgba(26,8,8,.15),rgba(42,10,10,.08));
+  border:1px solid var(--border2);border-left:3px solid var(--gold);
+  padding:12px 16px;margin-bottom:16px;
+  font-family:var(--crimson);font-size:15px;color:var(--text2);font-style:italic;line-height:1.6;}
+.eq-banner strong{color:var(--gold);font-style:normal;}
+
+.deco-divider{display:flex;align-items:center;gap:10px;margin:16px 0;}
+.deco-divider::before,.deco-divider::after{content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border2),transparent);}
+.deco-divider-icon{font-size:14px;color:var(--text3);}
+
+/* Chapter cards */
+.unit-card{background:var(--bg2);border:1px solid var(--border);
+  margin-bottom:10px;overflow:hidden;transition:border-color .2s;cursor:pointer;}
+.unit-card.available:hover{border-color:var(--gold2);}
+.unit-card.locked{opacity:.5;cursor:not-allowed;pointer-events:none;}
+.unit-card.completed{border-color:var(--green);}
+.unit-card.next-up{border-color:var(--gold2);animation:glowPulse 3s infinite;}
+.unit-card-header{display:flex;align-items:center;gap:12px;padding:14px 16px;}
+.unit-icon{font-size:28px;flex-shrink:0;}
+.unit-info{flex:1;}
+.unit-number{font-family:var(--dm);font-size:9px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;}
+.unit-name{font-family:var(--playfair);font-size:15px;color:var(--cream);margin:2px 0;}
+.unit-desc{font-family:var(--crimson);font-size:13px;color:var(--text2);font-style:italic;}
+.unit-status{font-family:var(--dm);font-size:8px;padding:4px 10px;border:1px solid;}
+.unit-status.available{color:var(--gold);border-color:var(--gold2);background:rgba(200,48,32,.08);}
+.unit-status.locked{color:var(--text3);border-color:var(--border);}
+.unit-status.completed{color:var(--green2);border-color:var(--green);background:rgba(56,160,80,.08);}
+.unit-progress-bar{height:2px;background:rgba(255,255,255,.04);}
+.unit-progress-fill{height:100%;background:var(--gold2);transition:width .5s;}
+.unit-card-meta{padding:0 16px 8px;font-family:var(--dm);font-size:9px;color:var(--text3);}
+.unit-card-unlock{padding:0 16px 8px;font-family:var(--dm);font-size:8px;color:var(--text3);font-style:italic;}
+
+
+
+/* ════════════════════════════════
+   LAYER 3: BRIEFING MODAL
+════════════════════════════════ */
+#briefing-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);
+  z-index:500;overflow-y:auto;padding:20px 16px 60px;}
+#briefing-modal.show{display:block;animation:fadeIn .3s ease;}
+.briefing-inner{max-width:560px;margin:0 auto;}
+.briefing-header{display:flex;align-items:flex-start;justify-content:space-between;
+  gap:10px;margin-bottom:20px;padding-top:10px;}
+.briefing-eyebrow{font-family:var(--bebas);font-size:10px;color:var(--text3);
+  letter-spacing:4px;margin-bottom:4px;}
+.briefing-title{font-family:var(--playfair);font-size:clamp(20px,4vw,28px);
+  color:var(--cream);font-style:italic;line-height:1.2;}
+.briefing-close-btn{font-family:var(--dm);font-size:10px;background:var(--bg2);
+  border:1px solid var(--border2);color:var(--text2);padding:7px 12px;cursor:pointer;
+  transition:all .2s;flex-shrink:0;margin-top:4px;}
+.briefing-close-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+.briefing-scene{width:100%;margin-bottom:16px;border:1px solid var(--border2);overflow:hidden;}
+.briefing-location-row{display:flex;align-items:center;gap:8px;padding:8px 12px;
+  background:rgba(200,48,32,.06);border-bottom:1px solid var(--border);}
+.briefing-location{font-family:var(--bebas);font-size:10px;color:var(--gold2);letter-spacing:2px;}
+.briefing-date{font-family:var(--crimson);font-size:12px;color:var(--text3);font-style:italic;}
+
+.briefing-text{font-family:var(--crimson);font-size:16px;line-height:1.75;color:var(--text);
+  padding:18px;background:var(--bg2);border:1px solid var(--border);
+  margin-bottom:14px;position:relative;}
+.briefing-text::before{content:'\201C';font-family:var(--playfair);font-size:70px;
+  color:rgba(200,48,32,.06);position:absolute;top:-8px;left:10px;line-height:1;pointer-events:none;}
+
+.briefing-quote{font-family:var(--playfair);font-size:14px;color:var(--gold);
+  font-style:italic;border-left:3px solid var(--gold2);padding:10px 14px;
+  background:rgba(200,48,32,.04);margin-bottom:16px;line-height:1.6;}
+
+.briefing-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+.briefing-tag{font-family:var(--dm);font-size:8px;color:var(--text3);
+  border:1px solid var(--border2);padding:3px 8px;border-radius:2px;}
+
+.briefing-proceed-row{display:flex;flex-direction:column;gap:8px;}
+
+/* ════════════════════════════════
+   LAYER 3: QUESTION SCREEN
+════════════════════════════════ */
+#question-screen{padding-top:0;}
+.q-progress-bar-wrap{height:3px;background:rgba(255,255,255,.05);margin-bottom:20px;border-radius:2px;}
+.q-progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold3));
+  transition:width .4s;border-radius:2px;}
+
+.q-context-pill{display:inline-flex;align-items:center;gap:6px;
+  background:rgba(200,48,32,.06);border:1px solid var(--border2);
+  padding:5px 10px;margin-bottom:16px;}
+.q-context-lesson{font-family:var(--bebas);font-size:9px;color:var(--text3);letter-spacing:3px;}
+.q-context-sep{width:1px;height:10px;background:var(--border2);}
+.q-context-topic{font-family:var(--crimson);font-size:11px;color:var(--text2);font-style:italic;}
+
+/* THE QUESTION — primary visual weight */
+.q-block{background:var(--bg2);border:1px solid var(--border2);
+  border-left:3px solid var(--gold);padding:20px 18px;margin-bottom:18px;}
+.q-number{font-family:var(--bebas);font-size:10px;color:var(--text3);
+  letter-spacing:3px;margin-bottom:8px;}
+.q-text{font-family:var(--playfair);font-size:clamp(15px,2.8vw,18px);
+  color:var(--cream);line-height:1.55;}
+
+/* Answer choices */
+.choices-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.choice-btn{display:block;width:100%;background:var(--bg2);border:1px solid var(--border2);
+  color:var(--text);padding:14px 16px;cursor:pointer;text-align:left;
+  transition:all .2s;position:relative;overflow:hidden;}
+.choice-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--gold);transform:scaleY(0);transition:transform .2s;pointer-events:none;}
+.choice-btn:hover:not(.answered){border-color:var(--gold2);background:rgba(200,48,32,.04);}
+.choice-btn:hover:not(.answered)::before{transform:scaleY(1);}
+.choice-btn.correct{border-color:var(--green2)!important;background:rgba(40,80,32,.08)!important;animation:pop .3s;}
+.choice-btn.correct::before{background:var(--green2)!important;transform:scaleY(1)!important;}
+.choice-btn.incorrect{border-color:var(--red2)!important;background:rgba(128,16,16,.06)!important;opacity:.6;}
+.choice-btn.incorrect::before{background:var(--red2)!important;transform:scaleY(1)!important;}
+.choice-btn.answered{cursor:default;}
+.choice-letter{font-family:var(--bebas);font-size:13px;color:var(--gold2);
+  margin-right:10px;display:inline-block;width:20px;}
+.choice-text{font-family:var(--crimson);font-size:16px;line-height:1.4;}
+
+/* Feedback */
+.feedback-panel{display:none;border-left:3px solid var(--gold);
+  padding:16px 16px 16px 20px;margin-bottom:14px;animation:slideUp .3s;
+  background:var(--bg2);border:1px solid var(--border);}
+.feedback-panel.show{display:block;}
+.feedback-panel.correct{border-left-color:var(--green2)!important;border-color:rgba(56,160,80,.2);}
+.feedback-panel.incorrect{border-left-color:var(--red2)!important;border-color:rgba(192,32,32,.2);}
+.feedback-verdict{font-family:var(--bebas);font-size:14px;letter-spacing:2px;margin-bottom:8px;}
+.feedback-verdict.correct{color:var(--green2);}
+.feedback-verdict.incorrect{color:var(--red2);}
+.feedback-text{font-family:var(--crimson);font-size:15px;line-height:1.65;
+  color:var(--text);margin-bottom:8px;}
+.feedback-standard{font-family:var(--dm);font-size:9px;color:var(--text3);
+  border-top:1px solid var(--border);padding-top:8px;margin-top:8px;}
+
+/* Momentum tracker */
+.momentum-display{display:flex;align-items:center;gap:12px;background:var(--bg2);
+  border:1px solid var(--border);padding:10px 14px;margin-bottom:14px;}
+.momentum-label{font-family:var(--bebas);font-size:10px;color:var(--text3);
+  letter-spacing:2px;flex-shrink:0;}
+.momentum-track{flex:1;height:6px;background:rgba(255,255,255,.05);
+  border-radius:3px;overflow:hidden;}
+.momentum-fill{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold3));
+  border-radius:3px;transition:width .5s;}
+.momentum-val{font-family:var(--playfair);font-size:13px;color:var(--gold);
+  font-style:italic;flex-shrink:0;min-width:60px;text-align:right;}
+
+/* ════════════════════════════════
+   LESSON COMPLETE OVERLAY
+════════════════════════════════ */
+#lesson-complete{display:none;position:fixed;inset:0;background:#080608;
+  z-index:600;overflow-y:auto;text-align:center;}
+#lesson-complete.show{display:block;animation:fadeIn .4s;}
+.complete-inner{max-width:480px;margin:0 auto;padding:30px 16px 100px;}
+.complete-badge{width:100px;height:100px;margin:0 auto 16px;border:2px solid var(--gold);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:48px;animation:glowPulse 2s infinite;background:var(--bg2);}
+.complete-unit-lbl{font-family:var(--bebas);font-size:10px;color:var(--text3);
+  letter-spacing:4px;margin-bottom:6px;}
+.complete-lesson-title{font-family:var(--playfair);font-size:24px;color:var(--cream);
+  font-style:italic;margin-bottom:4px;}
+.complete-tier{font-family:var(--bebas);font-size:14px;letter-spacing:2px;margin-bottom:20px;}
+.complete-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px;}
+.complete-stat{background:var(--bg2);border:1px solid var(--border);padding:12px;text-align:center;}
+.complete-stat-val{font-family:var(--bebas);font-size:24px;color:var(--gold);}
+.complete-stat-lbl{font-family:var(--dm);font-size:8px;color:var(--text3);
+  letter-spacing:1px;margin-top:2px;}
+.complete-btn-group{display:flex;flex-direction:column;gap:8px;max-width:360px;margin:0 auto;}
+
+/* ════════════════════════════════
+   LOGIN GATE
+════════════════════════════════ */
+#login-gate{display:none;position:fixed;inset:0;background:rgba(0,0,0,.97);
+  z-index:900;align-items:center;justify-content:center;padding:20px;}
+#login-gate.show{display:flex;}
+.login-box{background:var(--bg2);border:1px solid var(--border2);max-width:380px;width:100%;padding:28px 24px;}
+.login-logo{font-family:var(--bebas);font-size:clamp(28px,6vw,40px);color:var(--gold);
+  letter-spacing:4px;margin-bottom:4px;text-align:center;}
+.login-sub{font-family:var(--playfair);font-size:13px;color:var(--text2);
+  font-style:italic;text-align:center;margin-bottom:20px;}
+.login-field{margin-bottom:10px;}
+.login-field label{font-family:var(--bebas);font-size:10px;color:var(--text3);
+  letter-spacing:2px;display:block;margin-bottom:5px;}
+.login-input{font-family:var(--playfair);font-size:15px;font-style:italic;
+  background:var(--bg3);border:1.5px solid var(--border2);color:var(--cream);
+  padding:10px 14px;width:100%;outline:none;transition:border-color .2s;}
+.login-input:focus{border-color:var(--gold);}
+.login-input::placeholder{color:var(--text3);}
+.login-notice{font-family:var(--dm);font-size:9px;color:var(--text3);
+  text-align:center;margin-top:8px;line-height:1.5;}
+
+/* ════════════════════════════════
+   WELCOME BACK MODAL
+════════════════════════════════ */
+#welcome-back-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);
+  z-index:950;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);}
+#welcome-back-overlay.show{display:flex;}
+.wb-box{background:var(--bg2);border:1px solid var(--border2);max-width:420px;width:100%;
+  padding:28px 24px;text-align:center;animation:slideUp .3s ease both;}
+.wb-avatar{width:70px;height:70px;margin:0 auto 14px;border-radius:50%;overflow:hidden;}
+.wb-greeting{font-family:var(--bebas);font-size:10px;color:var(--text3);letter-spacing:4px;margin-bottom:6px;}
+.wb-name{font-family:var(--playfair);font-size:24px;color:var(--cream);font-style:italic;margin-bottom:4px;}
+.wb-sub{font-family:var(--dm);font-size:10px;color:var(--gold2);margin-bottom:4px;}
+.wb-progress{font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:20px;}
+
+
+/* ── Standard tag on question block ── */
+.q-standard-tag{font-family:var(--dm);font-size:9px;letter-spacing:2px;
+  color:var(--gold);border:1px solid var(--gold2);
+  background:rgba(0,0,0,.25);
+  display:inline-block;padding:3px 9px;margin-bottom:8px;
+  text-transform:uppercase;}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);}
+::-webkit-scrollbar-thumb:hover{background:var(--gold2);}
+
+/* ════════════════════════════════
+   BOTTOM NAV (carried from v1)
+════════════════════════════════ */
+#bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:640px;background:rgba(8,6,8,.97);
+  border-top:1px solid var(--border2);border-left:1px solid var(--border2);border-right:1px solid var(--border2);
+  display:none;z-index:300;backdrop-filter:blur(12px);}
+.bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;padding:8px 4px;background:none;border:none;color:var(--text3);cursor:pointer;
+  font-family:var(--dm);font-size:8px;letter-spacing:.5px;transition:color .15s;}
+.bn-btn:hover,.bn-btn.active{color:var(--gold);}
+.bn-icon{font-size:18px;display:block;}
+
+/* ════════════════════════════════
+   OVERLAYS (carried from v1)
+════════════════════════════════ */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.94);
+  z-index:400;overflow-y:auto;padding:20px 16px 80px;}
+.overlay.show{display:block;animation:fadeIn .2s;}
+.overlay-header{display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:16px;position:sticky;top:0;background:rgba(8,6,8,.97);
+  padding:10px 0;border-bottom:1px solid var(--border2);z-index:10;}
+.overlay-title{font-family:var(--bebas);font-size:22px;color:var(--gold);letter-spacing:2px;}
+.overlay-close{font-family:var(--dm);font-size:10px;background:var(--bg3);
+  border:1px solid var(--border2);color:var(--text2);padding:7px 14px;cursor:pointer;transition:all .2s;}
+.overlay-close:hover{border-color:var(--gold);color:var(--gold);}
+
+/* Leaderboard */
+.lb-wrap{background:var(--bg2);border:1px solid var(--border2);padding:20px;}
+.lb-tabs{display:flex;gap:5px;margin-bottom:12px;flex-wrap:wrap;}
+.lb-tab{font-family:var(--bebas);font-size:10px;letter-spacing:1px;padding:5px 12px;
+  cursor:pointer;border:1px solid var(--border2);color:var(--text3);background:transparent;transition:all .15s;}
+.lb-tab.active{border-color:var(--gold);color:var(--bg);background:var(--gold);}
+.lb-table{width:100%;border-collapse:collapse;}
+.lb-table th{font-family:var(--bebas);font-size:9px;letter-spacing:2px;color:var(--text3);
+  padding:7px 8px;border-bottom:1px solid var(--border2);text-align:left;}
+.lb-table td{padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.025);
+  font-family:var(--dm);font-size:11px;color:var(--text2);vertical-align:middle;}
+.lb-table tr.lb-you td{background:rgba(200,48,32,.05);color:var(--text);}
+.lb-name{font-family:var(--playfair);font-size:13px;color:var(--cream);font-style:italic;}
+.lb-score{font-family:var(--bebas);font-size:16px;color:var(--gold);}
+
+/* Profile overlay */
+.profile-stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:16px;}
+.profile-stat{background:var(--bg2);border:1px solid var(--border);padding:12px;text-align:center;}
+.profile-stat-val{font-family:var(--bebas);font-size:24px;color:var(--gold);}
+.profile-stat-lbl{font-family:var(--dm);font-size:9px;color:var(--text3);letter-spacing:1px;margin-top:2px;}
+.badges-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.badge-pill{background:var(--bg2);border:1px solid var(--border);padding:6px 10px;
+  display:flex;align-items:center;gap:6px;font-family:var(--dm);font-size:9px;color:var(--text2);}
+.badge-pill.earned{border-color:var(--gold2);color:var(--gold);background:rgba(200,48,32,.06);}
+.badge-icon{font-size:16px;filter:grayscale(1);}
+.badge-pill.earned .badge-icon{filter:none;}
+
+/* Historical figure cards */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-bottom:16px;}
+.hist-card{background:var(--bg2);border:1px solid var(--gold2);padding:14px;position:relative;overflow:hidden;}
+.hist-card::before{content:'';position:absolute;inset:4px;border:1px solid rgba(200,48,32,.12);pointer-events:none;}
+.hist-card-icon{font-size:36px;text-align:center;margin-bottom:8px;}
+.hist-card-name{font-family:var(--bebas);font-size:13px;color:var(--gold);letter-spacing:1px;margin-bottom:2px;}
+.hist-card-role{font-family:var(--dm);font-size:9px;color:#2aaa98;margin-bottom:6px;}
+.hist-card-desc{font-family:var(--crimson);font-size:13px;color:var(--text2);font-style:italic;line-height:1.5;}
+.hist-card-unlock{font-family:var(--dm);font-size:8px;color:var(--text3);margin-top:6px;}
+.locked-card{opacity:.35;}
+
+/* ════════════════════════════════
+   TROPHY / EOC DISPLAY
+════════════════════════════════ */
+.trophy-display{background:var(--bg2);border:1px solid var(--border2);
+  padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:14px;}
+.trophy-icon{font-size:36px;flex-shrink:0;filter:drop-shadow(0 0 10px rgba(200,48,32,.4));}
+.trophy-info{flex:1;}
+.trophy-tier-name{font-family:var(--bebas);font-size:18px;letter-spacing:2px;margin-bottom:2px;}
+.trophy-stat-row{display:flex;gap:14px;flex-wrap:wrap;}
+.trophy-stat{font-family:var(--dm);font-size:9px;color:var(--text3);}
+.trophy-stat strong{color:var(--text2);}
+.eoc-rating-badge{font-family:var(--bebas);font-size:11px;letter-spacing:1px;
+  padding:4px 10px;border:1px solid;display:inline-block;margin-top:5px;}
+
+/* ════════════════════════════════
+   BADGE & CARD REWARD CHIPS
+════════════════════════════════ */
+.reward-section{background:var(--bg2);border:1px solid var(--border2);
+  padding:12px 14px;margin-bottom:14px;}
+.reward-section-lbl{font-family:var(--bebas);font-size:9px;color:var(--text3);
+  letter-spacing:3px;margin-bottom:8px;}
+.reward-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.reward-chip{display:flex;align-items:center;gap:6px;padding:5px 10px;
+  border:1px solid var(--border2);background:var(--bg3);}
+.reward-chip.earned{border-color:var(--gold2);background:rgba(200,48,32,.06);
+  animation:pop .4s ease;}
+.reward-chip-icon{font-size:16px;}
+.reward-chip-lbl{font-family:var(--dm);font-size:9px;color:var(--text3);}
+.reward-chip.earned .reward-chip-lbl{color:var(--gold);}
+.reward-chip.locked-chip{opacity:.35;}
+
+/* Lesson card rewards preview */
+.lesson-card-rewards{padding:0 16px 10px;display:flex;gap:5px;flex-wrap:wrap;}
+.lesson-reward-pip{font-family:var(--dm);font-size:8px;color:var(--text3);
+  border:1px solid var(--border2);padding:2px 6px;display:inline-flex;align-items:center;gap:3px;}
+.lesson-reward-pip.earned{border-color:var(--gold2);color:var(--gold);}
+
+/* Next-lesson unlock indicator on cards */
+.lesson-card.next-up{border-color:var(--gold2);animation:glowPulse 3s infinite;}
+.lesson-card-unlock-note{font-family:var(--dm);font-size:8px;color:var(--text3);
+  padding:0 16px 8px;font-style:italic;}
+
+/* ════════════════════════════════
+   CERTIFICATE / PRINT
+════════════════════════════════ */
+#print-area{display:none;}
+@media print{
+  body>*:not(#print-area){display:none!important;}
+  #print-area{display:block!important;padding:40px;}
+  .cert-body{font-family:Georgia,serif;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════
+     STICKY HUD (shows after login)
+═══════════════════════════════ -->
+<div id="game-hud">
+  <div class="hud-inner">
+    <div class="hud-avatar" id="hud-avatar-wrap"></div>
+    <div class="hud-info">
+      <div class="hud-name" id="hud-player-name">—</div>
+      <div class="hud-rank" id="hud-player-rank">—</div>
+      <div class="hud-xp-bar"><div class="hud-xp-fill" id="hud-xp-fill" style="width:0%"></div></div>
+    </div>
+    <div class="hud-stats">
+      <div class="hud-stat">🪙 GOLD<span id="hud-score" style="color:#f5c842;">0</span></div>
+      <div class="hud-stat">STREAK<span id="hud-streak">0</span></div>
+    </div>
+    <button class="hud-back-btn" id="hud-back-unit" onclick="returnToUnitHub()">← Unit Hub</button>
+    <button class="hud-back-btn" id="hud-back-shell" onclick="returnToShell()">🏛 A.C.</button>
+  </div>
+</div>
+
+<div id="root">
+
+<!-- ═══════════════════════════════════════════════════════
+     LAYER 2: UNIT HUB
+═══════════════════════════════════════════════════════ -->
+<div class="screen" id="unit-hub-screen">
+
+  <!-- Player banner — name, rank, progress -->
+  <div id="hub-player-banner"></div>
+
+  <!-- Shell return (shown when arriving from American Chronicles) -->
+  <div id="shell-return-btn" style="display:none;margin-bottom:12px;">
+    <button class="btn full" onclick="returnToShell()" style="border-color:var(--teal2);color:var(--teal2);">
+      <span>← Return to American Chronicles Hub</span>
+    </button>
+  </div>
+
+  <!-- Unit title header -->
+  <div class="section-head" style="margin-top:4px;">Engines of Change — Cross-Era Campaign</div>
+
+  <!-- Essential question -->
+  <div class="eq-banner">
+    <strong>Essential Question:</strong> How have economic systems shaped opportunity, inequality, and daily life in American history?
+  </div>
+
+  <!-- Lesson / chapter cards — rendered by JS -->
+  <div id="hub-chapters"></div>
+
+  <!-- Divider -->
+  <div class="deco-divider"><span class="deco-divider-icon">⚙️</span></div>
+
+  <!-- Badges row — rendered by JS -->
+  <div class="section-head" style="font-size:14px;">Badges</div>
+  <div class="badges-row" id="hub-badges"></div>
+
+  <!-- Trophy / EOC block — rendered by JS -->
+  <div id="hub-trophy-section" style="display:none;"></div>
+
+  <!-- Print certificate — shown when unit complete -->
+  <div id="hub-cert-row" style="display:none;margin-top:4px;">
+    <button class="btn full" onclick="printCertificate()" style="border-color:var(--gold2);color:var(--gold2);">
+      <span>🖨️ Print Certificate</span>
+    </button>
+    <div style="font-family:var(--dm);font-size:8px;color:var(--text3);text-align:center;margin-top:4px;">Updates automatically with your latest score</div>
+  </div>
+
+</div><!-- /unit-hub-screen -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     LAYER 3a: QUESTION SCREEN
+═══════════════════════════════════════════════════════ -->
+<div class="screen" id="question-screen">
+
+  <!-- Progress bar across the top -->
+  <div class="q-progress-bar-wrap" style="margin-top:16px;">
+    <div class="q-progress-bar-fill" id="q-progress-fill" style="width:0%"></div>
+  </div>
+
+  <!-- Context pill — small reminder of which lesson/topic -->
+  <div class="q-context-pill">
+    <div class="q-context-lesson" id="q-context-lesson">LESSON 38</div>
+    <div class="q-context-sep"></div>
+    <div class="q-context-topic" id="q-context-topic">A World Divided</div>
+  </div>
+
+  <!-- Momentum display -->
+  <div class="momentum-display">
+    <div class="momentum-label">MOMENTUM</div>
+    <div class="momentum-track">
+      <div class="momentum-fill" id="momentum-fill" style="width:0%"></div>
+    </div>
+    <div class="momentum-val" id="momentum-val">Ready</div>
+  </div>
+
+  <!-- THE QUESTION — primary visual weight -->
+  <div class="q-block">
+    <div class="q-standard-tag" id="q-standard-tag" style="display:none;"></div>
+    <div class="q-number" id="q-number">QUESTION 1 OF 4</div>
+    <div class="q-text" id="q-text">Question text loads here.</div>
+  </div>
+
+  <!-- Answer choices -->
+  <div class="choices-list" id="choices-list"></div>
+
+  <!-- Feedback panel (hidden until answered) -->
+  <div class="feedback-panel" id="feedback-panel">
+    <div class="feedback-verdict" id="feedback-verdict"></div>
+    <div class="feedback-text" id="feedback-text"></div>
+    <div class="feedback-standard" id="feedback-standard"></div>
+  </div>
+
+  <!-- Next/Proceed button (hidden until answered) -->
+  <div id="next-btn-wrap" style="display:none;">
+    <button class="btn full" onclick="nextQuestion()"><span id="next-btn-label">Next Question →</span></button>
+  </div>
+
+</div><!-- /question-screen -->
+
+</div><!-- #root -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     BRIEFING MODAL (shown before question screen)
+═══════════════════════════════════════════════════════ -->
+<div id="briefing-modal">
+  <div class="briefing-inner">
+    <div class="briefing-header">
+      <div>
+        <div class="briefing-eyebrow" id="briefing-eyebrow">LESSON 38 · MISSION BRIEFING</div>
+        <div class="briefing-title" id="briefing-title">A World Divided</div>
+      </div>
+      <button class="briefing-close-btn" onclick="closeBriefing()">✕ Close</button>
+    </div>
+
+    <!-- Optional scene visual (rendered by JS) -->
+    <div class="briefing-scene" id="briefing-scene"></div>
+
+    <div class="briefing-location-row">
+      <div class="briefing-location" id="briefing-location">Washington D.C. and Europe</div>
+      <div class="briefing-date" id="briefing-date">1945–1949</div>
+    </div>
+    <div id="briefing-role" style="display:none;font-family:var(--bebas);font-size:10px;color:var(--gold2);letter-spacing:2px;padding:6px 12px;background:rgba(200,48,32,.06);border-bottom:1px solid var(--border);margin-bottom:0;"></div>
+
+    <!-- Historical briefing text -->
+    <div class="briefing-text" id="briefing-text">Briefing text loads here.</div>
+
+    <!-- Optional pull quote -->
+    <div class="briefing-quote" id="briefing-quote" style="display:none;"></div>
+
+    <!-- Standards/tags -->
+    <div class="briefing-meta" id="briefing-meta"></div>
+
+    <div class="briefing-proceed-row">
+      <button class="btn full" onclick="proceedToQuestions()"><span>Proceed to Questions →</span></button>
+      <button class="btn full sm" style="border-color:var(--border2);color:var(--text3);" onclick="closeBriefing()"><span>← Back to Unit Hub</span></button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     LESSON COMPLETE OVERLAY
+═══════════════════════════════════════════════════════ -->
+<div id="lesson-complete">
+  <div class="complete-inner">
+
+    <!-- Trophy badge -->
+    <div class="complete-badge" id="complete-badge">🏆</div>
+    <div class="complete-unit-lbl" id="complete-unit-lbl">UNIT 5B</div>
+    <div class="complete-lesson-title" id="complete-lesson-title">A World Divided</div>
+    <div class="complete-tier" id="complete-tier" style="color:var(--gold)">GOLD — 90%</div>
+
+    <!-- Stats row -->
+    <div class="complete-stats" id="complete-stats"></div>
+
+    <!-- EOC Rating (shown on unit completion / EOC lesson) -->
+    <div id="complete-eoc-block" style="display:none;margin-bottom:16px;">
+      <div style="font-family:var(--bebas);font-size:10px;color:var(--text3);letter-spacing:3px;margin-bottom:6px;">EOC PRACTICE RATING</div>
+      <div id="complete-eoc-rating" style="font-family:var(--bebas);font-size:22px;letter-spacing:2px;"></div>
+      <div id="complete-eoc-label" style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-top:3px;"></div>
+    </div>
+
+    <!-- Gold earned this run -->
+    <div id="complete-rewards" style="display:none;background:var(--bg2);border:1px solid var(--gold2);padding:14px;margin-bottom:16px;">
+      <div style="font-family:var(--bebas);font-size:9px;color:var(--text3);letter-spacing:3px;margin-bottom:8px;">GOLD EARNED THIS RUN</div>
+      <div id="complete-rewards-inner"></div>
+    </div>
+
+    <!-- Badges earned this lesson -->
+    <div id="complete-badges-block" style="display:none;" class="reward-section">
+      <div class="reward-section-lbl">BADGES</div>
+      <div class="reward-chips" id="complete-badges-chips"></div>
+    </div>
+
+    <!-- Cards earned this lesson -->
+    <div id="complete-cards-block" style="display:none;" class="reward-section">
+      <div class="reward-section-lbl">HISTORICAL FIGURE CARDS</div>
+      <div class="reward-chips" id="complete-cards-chips"></div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="complete-btn-group">
+      <!-- Retry same lesson -->
+      <button class="btn full" onclick="retryLesson()"><span>↺ Retry This Lesson</span></button>
+      <!-- Replay entire unit from Lesson 38 (always visible) -->
+      <button class="btn full" id="btn-replay-all" onclick="replayFromBeginning()" style="border-color:var(--gold2);color:var(--gold2);display:none;"><span>⟳ Replay Unit From Beginning</span></button>
+      <!-- Return to unit hub -->
+      <button class="btn full green" onclick="returnToUnitHub()"><span>← Return to Unit Hub</span></button>
+      <!-- Return to shell -->
+      <button class="btn full teal" onclick="returnToShell()"><span>🏛 Return to American Chronicles</span></button>
+      <!-- Print certificate (shown when unit complete) -->
+      <button class="btn full" id="btn-print-cert" onclick="printCertificate()" style="display:none;border-color:var(--text3);color:var(--text3);"><span>🖨️ Print Certificate</span></button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Print area -->
+<div id="print-area"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     LOGIN GATE
+═══════════════════════════════════════════════════════ -->
+<!-- WELCOME BACK MODAL -->
+<div id="welcome-back-overlay">
+  <div class="wb-box">
+    <div class="wb-avatar" id="wb-avatar"></div>
+    <div class="wb-greeting">WELCOME BACK</div>
+    <div class="wb-name" id="wb-name">Historian</div>
+    <div class="wb-sub" id="wb-sub">Curious Citizen</div>
+    <div class="wb-progress" id="wb-progress">No progress saved yet</div>
+    <button class="btn full" onclick="confirmWelcomeBack()" style="margin-bottom:8px;">
+      <span>Continue as This Student</span>
+    </button>
+    <button class="btn full" onclick="switchPlayer()"
+      style="border-color:var(--border2);color:var(--text3);font-size:11px;">
+      <span>That's Not Me — Switch Player</span>
+    </button>
+  </div>
+</div>
+
+<div id="login-gate" class="show">
+  <div class="login-box">
+    <div class="login-logo">ENGINES<br>OF CHANGE</div>
+    <div class="login-sub">Work, Wealth, and Opportunity Across Time</div>
+
+    <div class="login-field">
+      <label>Your Name</label>
+      <input type="text" class="login-input" id="login-name" placeholder="Enter your name" maxlength="40" autocomplete="off">
+    </div>
+
+    <div class="login-field">
+      <label>Class Period</label>
+      <div id="period-selector" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:4px;"></div>
+    </div>
+
+    <div style="margin-top:14px;">
+      <button class="btn full" onclick="submitLogin()"><span>Enter →</span></button>
+    </div>
+
+    <div class="login-notice">Returning from American Chronicles? Your profile loads automatically.</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     BOTTOM NAV (carried from v1)
+════════════════════════════════════════════ -->
+<div id="bottom-nav">
+  <button class="bn-btn active" id="bn-hub" onclick="navToHub()">
+    <span class="bn-icon">🏠</span>Hub
+  </button>
+  <button class="bn-btn" onclick="openLeaderboard()">
+    <span class="bn-icon">🏆</span>Ranks
+  </button>
+  <button class="bn-btn" onclick="openProfile()">
+    <span class="bn-icon">👤</span>Profile
+  </button>
+  <button class="bn-btn" onclick="openCardCollection()">
+    <span class="bn-icon">🃏</span>Cards
+  </button>
+</div>
+
+<!-- LEADERBOARD OVERLAY -->
+<div class="overlay" id="leaderboard-overlay">
+  <div class="overlay-header">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="overlay-title">🏆 Leaderboard</div>
+      <button id="lb-teacher-unlock" onclick="unlockLBDelete()" style="font-family:var(--dm);font-size:8px;background:transparent;border:1px solid var(--border2);color:var(--text3);padding:4px 8px;cursor:pointer;" title="Teacher: unlock delete">🔒</button>
+    </div>
+    <button class="overlay-close" onclick="closeLeaderboard()">CLOSE</button>
+  </div>
+  <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px;" id="lb-type-tabs">
+    <button class="lb-tab active" onclick="setLbType('overall',this)">🌐 Overall</button>
+    <button class="lb-tab" onclick="setLbType('class',this)">🏫 My Class</button>
+  </div>
+  <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;" id="lb-period-tabs"></div>
+  <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:10px;" id="lb-sync-status">Loading…</div>
+  <div id="lb-content"></div>
+</div>
+
+<!-- PROFILE OVERLAY -->
+<div class="overlay" id="profile-overlay">
+  <div class="overlay-header">
+    <div class="overlay-title">Your Profile</div>
+    <button class="overlay-close" onclick="closeProfile()">CLOSE</button>
+  </div>
+  <div id="profile-avatar-large" style="text-align:center;margin-bottom:16px;"></div>
+  <div class="profile-stat-grid" id="profile-stat-grid"></div>
+  <div class="section-head" style="font-size:13px;">Badges Earned</div>
+  <div class="badges-row" id="profile-badge-grid" style="margin-bottom:16px;"></div>
+  <div class="section-head" style="font-size:13px;margin-top:8px;">Card Collection</div>
+  <div class="card-grid" id="profile-card-grid"></div>
+  <div style="height:20px;"></div>
+</div>
+
+<!-- CARD COLLECTION OVERLAY -->
+<div class="overlay" id="cardcoll-overlay">
+  <div class="overlay-header">
+    <div class="overlay-title">Historical Figures</div>
+    <button class="overlay-close" onclick="document.getElementById('cardcoll-overlay').classList.remove('show')">CLOSE</button>
+  </div>
+  <div style="font-family:var(--crimson);font-size:15px;color:var(--text2);margin-bottom:16px;font-style:italic;">
+    Earn historical figure cards by completing lessons. Each card tells the story of a key Cold War figure.
+  </div>
+  <div class="card-grid" id="cardcoll-grid"></div>
+</div>
+
+<script>
+'use strict';
+
+// ════════════════════════════════════════════
+// CONSTANTS & KEYS
+// ════════════════════════════════════════════
+const SHELL_KEY   = 'ac_shell_state';
+const SAVE_KEY   = 'engines_theme_v1_save';
+const UNIT_ID     = 'theme_engines';
+
+// ── GOLD ECONOMY ──────────────────────────────────────
+// These are the canonical reward values for Unit 5B.
+// All gold earned here flows into the shell's global wallet
+// and from there into the RPG. Adjust by lesson type below.
+//
+// lesson      : 20 per correct · 25 completion · 25 perfect run
+// extension   : 20 per correct · 30 completion · 30 perfect run
+// capstone    : 25 per correct · 50 completion · 50 mastery (100% acc)
+// eoc         : 15 per correct · 50 completion · 50 high-score (≥90%)
+//
+const GOLD_RULES = {
+  lesson:    { perCorrect: 20, completionBonus: 25, perfectBonus: 25  },
+  extension: { perCorrect: 20, completionBonus: 30, perfectBonus: 30  },
+  capstone:  { perCorrect: 25, completionBonus: 50, masteryBonus: 50  },
+  eoc:       { perCorrect: 15, completionBonus: 50, highScoreBonus: 50 },
+};
+
+// Supabase credentials (carried over from original)
+const OLD_SUPA_URL = 'https://iluvuartxsenbgylogit.supabase.co';
+const OLD_SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsdXZ1YXJ0eHNlbmJneWxvZ2l0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NjA2OTIsImV4cCI6MjA4OTQzNjY5Mn0.stAmdi5xy7ofDAB4AiRg78Eoky-7FXZEa-Ui1dgwHd0';
+const OLD_HEADERS = {'Content-Type':'application/json','apikey':OLD_SUPA_KEY,'Authorization':'Bearer '+OLD_SUPA_KEY};
+
+const AC_SUPA_URL = 'https://dnmrwglrcvlbamzhlzlx.supabase.co';
+const AC_SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRubXJ3Z2xyY3ZsYmFtemhsemx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NjA2OTEsImV4cCI6MjA4OTQzNjY5MX0.jEIM-dGgB0cUS0A6w31LJ5AK9QDCS_UqdVnPrb8dlXM';
+const AC_HEADERS  = {'Content-Type':'application/json','apikey':AC_SUPA_KEY,'Authorization':'Bearer '+AC_SUPA_KEY};
+
+// ════════════════════════════════════════════
+// LESSON DATA — TEMPLATE STRUCTURE
+// Replace briefings and question banks via JSON later.
+// ════════════════════════════════════════════
+
+/*
+  LESSON STRUCTURE CONTRACT:
+  Each lesson object has:
+    id         — unique string key
+    label      — e.g. "LESSON 38"
+    title      — thematic title
+    sub        — location · years
+    icon       — emoji
+    type       — 'lesson' | 'capstone' | 'eoc'
+    briefing   — { location, date, text, quote?, tags[] }
+    bank       — array of question objects (8–12 for lessons, 20–25 for EOC)
+    displayCount — number of questions to show per playthrough
+    cardEarned — optional string id
+
+  QUESTION STRUCTURE CONTRACT:
+  Each question in bank:
+    id         — unique string
+    text       — question text
+    choices    — array of { text, correct, feedback }
+    standard   — e.g. "SS.912.A.6.12"
+
+  NOTE: Answer choices are randomized on every playthrough.
+        displayCount questions are drawn randomly from bank each time.
+*/
+
+const LESSONS = [
+
+  // ==================================================
+  // CHAPTER 1 — Who Owns the Future?
+  // ==================================================
+  {
+    id: 'ch1',
+    label: 'CHAPTER 1',
+    title: 'Who Owns the Future?',
+    sub: 'Land, capital, property, and control of opportunity',
+    icon: '🏭',
+    type: 'lesson',
+    briefing: {
+      location: 'Land, capital, property, and control of opportunity',
+      date: '',
+      role: 'economic systems analyst',
+      text: 'Opportunity is never distributed evenly. In this chapter, students compare how land, railroads, industry, credit, and corporate power shaped who could build wealth and who got pushed aside. The focus is not just growth, but who controlled the engines of that growth.',
+      tags: ['SS.912.A.3.1', 'SS.912.A.3.4', 'SS.912.A.3.2']
+    },
+    displayCount: 5,
+    goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
+    rewards: { badge: 'Who Owns the Future?', cards: ['Homestead Act', 'Standard Oil'] },
+    bank: [
+      {
+        id: 'EOC-C1-Q1',
+        text: 'What is the strongest comparison between homesteading policy and federal railroad land grants?',
+        choices: ['One offered land to individuals, while the other gave enormous resources to corporations shaping western growth.', 'One offered land to individuals only after railroads had stopped influencing settlement and western trade.', 'One offered land to individuals, while the other mainly transferred power from corporations back to small farmers.', 'One offered land to individuals while the other focused mostly on education reform and urban public housing.'],
+        correctAnswer: 'One offered land to individuals, while the other gave enormous resources to corporations shaping western growth.',
+        explanation: 'Both policies created opportunity, but they distributed power very differently between ordinary settlers and large businesses.',
+        standard: 'SS.912.A.3.1 · SS.912.A.3.4'
+      },
+      {
+        id: 'EOC-C1-Q2',
+        text: 'How did opportunity differ for homesteaders and large industrial capitalists in the late nineteenth century?',
+        choices: ['Homesteaders often lacked credit and security, while industrialists had better access to capital, networks, and influence.', 'Homesteaders often lacked credit only after industrialists had already lost control of banks and investment markets.', 'Homesteaders often lacked credit, while industrialists depended mostly on free land rather than financing or investors.', 'Homesteaders often lacked credit because western farming was easier and less risky than industrial ownership.'],
+        correctAnswer: 'Homesteaders often lacked credit and security, while industrialists had better access to capital, networks, and influence.',
+        explanation: 'Economic opportunity was shaped not just by effort, but by who had access to money, transportation, and political connections.',
+        standard: 'SS.912.A.3.1 · SS.912.A.3.4'
+      },
+      {
+        id: 'EOC-C1-Q3',
+        text: 'Which development is the best example of a private industry controlling economic opportunity for many other Americans?',
+        choices: ['Railroad companies setting shipping access and rates that farmers and businesses often had to accept.', 'The Nineteenth Amendment extending voting rights regardless of sex during the Progressive Era.', 'The Voting Rights Act protecting ballot access in the South during the Civil Rights era.', 'The Fourteenth Amendment defining national citizenship after the Civil War and Reconstruction.'],
+        correctAnswer: 'Railroad companies setting shipping access and rates that farmers and businesses often had to accept.',
+        explanation: 'Railroads became gatekeepers because access to markets often depended on routes and prices they controlled.',
+        standard: 'SS.912.A.3.4'
+      },
+      {
+        id: 'EOC-C1-Q4',
+        text: 'What recurring pattern appears when land, transport, or industry become concentrated in a few hands?',
+        choices: ['Those who control key systems often shape who else can compete, expand, or profit in the economy.', 'Those who control key systems usually lose influence because smaller businesses set the rules for access.', 'Those who control key systems only matter when government completely withdraws from law and regulation.', 'Those who control key systems mainly reduce inequality by distributing opportunity evenly across all regions.'],
+        correctAnswer: 'Those who control key systems often shape who else can compete, expand, or profit in the economy.',
+        explanation: 'The chapter’s central idea is that opportunity often follows control over infrastructure, property, and capital.',
+        standard: 'SS.912.A.3.2 · SS.912.A.3.4'
+      },
+      {
+        id: 'EOC-C1-Q5',
+        text: 'How did Carnegie and Rockefeller most clearly compare as economic actors?',
+        choices: ['Both built vast enterprises by concentrating control over production and limiting the power of rivals.', 'Both built vast enterprises only after the federal government took ownership of steel and oil for them.', 'Both built vast enterprises mainly by dividing their industries into many small firms with equal influence.', 'Both built vast enterprises while refusing to use railroads, investors, or large corporate structures.'],
+        correctAnswer: 'Both built vast enterprises by concentrating control over production and limiting the power of rivals.',
+        explanation: 'Even though their methods differed, both men became symbols of how industrial expansion could centralize opportunity.',
+        standard: 'SS.912.A.3.4'
+      },
+      {
+        id: 'EOC-C1-Q6',
+        text: 'Which statement best captures continuity and change in economic opportunity from western settlement to industrial expansion?',
+        choices: ['Opportunity shifted from land ownership toward wage labor and corporate systems, but unequal access remained central.', 'Opportunity shifted from land ownership only after industrial capitalism had already removed inequality from the economy.', 'Opportunity shifted from land ownership mainly because western settlement had little connection to business growth.', 'Opportunity shifted from land ownership while credit, property, and transportation became less important than before.'],
+        correctAnswer: 'Opportunity shifted from land ownership toward wage labor and corporate systems, but unequal access remained central.',
+        explanation: 'The form of opportunity changed, but the basic question of who could control or enter the system did not disappear.',
+        standard: 'SS.912.A.3.1 · SS.912.A.3.2'
+      },
+      {
+        id: 'EOC-C1-Q7',
+        text: 'Which evidence best supports the claim that industrial expansion distributed benefits unevenly?',
+        choices: ['Railroad and industrial leaders gained wealth while many farmers, workers, and Indigenous peoples paid major costs.', 'Railroad and industrial leaders gained wealth only after small farmers and wage workers became equally prosperous.', 'Railroad and industrial leaders gained wealth, proving expansion removed conflict over land and labor permanently.', 'Railroad and industrial leaders gained wealth while government prevented any region from dominating markets or transport.'],
+        correctAnswer: 'Railroad and industrial leaders gained wealth while many farmers, workers, and Indigenous peoples paid major costs.',
+        explanation: 'Growth brought new wealth, but it also brought displacement, exploitation, and unequal bargaining power.',
+        standard: 'SS.912.A.3.1 · SS.912.A.3.4'
+      },
+      {
+        id: 'EOC-C1-Q8',
+        text: 'Which development is the strongest example of government widening economic opportunity while still doing so unevenly?',
+        choices: ['The Homestead Act opening western land to many settlers even as access stayed unequal and contested.', 'The Pullman Strike showing federal involvement in a major labor conflict during the 1890s.', 'The Fourteenth Amendment redefining citizenship after the Civil War and Reconstruction.', 'The Free Speech Movement challenging campus restrictions during the 1960s.'],
+        correctAnswer: 'The Homestead Act opening western land to many settlers even as access stayed unequal and contested.',
+        explanation: 'Homesteading widened opportunity for some, but not on equal terms and not without major conflict over land and power.',
+        standard: 'SS.912.A.3.1'
+      },
+      {
+        id: 'EOC-C1-Q9',
+        text: 'Why do railroads belong in a chapter titled ‘Who Owns the Future?’',
+        choices: ['Because control of routes, rates, and land values helped determine who could prosper in the modern economy.', 'Because control of routes, rates, and land values mattered only after railroads stopped shaping national markets.', 'Because control of routes, rates, and land values mainly weakened the influence of capital and corporate power.', 'Because control of routes, rates, and land values turned transportation into a minor issue beside local farming alone.'],
+        correctAnswer: 'Because control of routes, rates, and land values helped determine who could prosper in the modern economy.',
+        explanation: 'Infrastructure ownership is economic power because it structures access for everyone else using the system.',
+        standard: 'SS.912.A.3.4'
+      },
+      {
+        id: 'EOC-C1-Q10',
+        text: 'What broad pattern best answers the chapter question ‘Who Owns the Future?’',
+        choices: ['Economic opportunity usually flows toward those who control land, capital, transport, and large institutions.', 'Economic opportunity usually flows only after government removes all links between wealth and political influence.', 'Economic opportunity usually flows mainly to small producers once industrial concentration begins to grow.', 'Economic opportunity usually flows while property, credit, and infrastructure matter less than individual ambition alone.'],
+        correctAnswer: 'Economic opportunity usually flows toward those who control land, capital, transport, and large institutions.',
+        explanation: 'The chapter’s cross-era argument is that ownership and control matter as much as labor or effort in shaping opportunity.',
+        standard: 'SS.912.A.3.1 · SS.912.A.3.2 · SS.912.A.3.4'
+      },
+    ]
+  },
+
+  // ==================================================
+  // CHAPTER 2 — Workers and Wealth
+  // ==================================================
+  {
+    id: 'ch2',
+    label: 'CHAPTER 2',
+    title: 'Workers and Wealth',
+    sub: 'Labor, wages, class conflict, and the fight for dignity',
+    icon: '✊',
+    type: 'lesson',
+    briefing: {
+      location: 'Labor, wages, class conflict, and the fight for dignity',
+      date: '',
+      role: 'labor correspondent',
+      text: 'Factories and corporations created enormous wealth, but workers rarely controlled how that wealth was shared. This chapter follows wages, dangerous workplaces, unions, strikes, and reform, asking how labor challenged systems that favored owners and managers.',
+      tags: ['SS.912.A.3.2', 'SS.912.A.3.9', 'SS.912.A.3.4', 'SS.912.A.5.12']
+    },
+    displayCount: 5,
+    goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
+    rewards: { badge: 'Workers and Wealth', cards: ['Knights of Labor', 'Triangle Shirtwaist Fire'] },
+    bank: [
+      {
+        id: 'EOC-C2-Q1',
+        text: 'How did the Knights of Labor differ most clearly from the American Federation of Labor?',
+        choices: ['The Knights sought broad reform and wider membership, while the AFL focused more narrowly on skilled workers and workplace gains.', 'The Knights sought broad reform only after the AFL had already organized every major industrial worker in the country.', 'The Knights sought broad reform, while the AFL mainly rejected wages, hours, and safety as labor concerns.', 'The Knights sought broad reform while the AFL argued unions should stay out of bargaining and strikes entirely.'],
+        correctAnswer: 'The Knights sought broad reform and wider membership, while the AFL focused more narrowly on skilled workers and workplace gains.',
+        explanation: 'The two groups reflect different labor strategies, one broader and more idealistic, the other more practical and focused.',
+        standard: 'SS.912.A.3.2'
+      },
+      {
+        id: 'EOC-C2-Q2',
+        text: 'What recurring pattern appears in discussions of factory labor from the Gilded Age into the Progressive Era?',
+        choices: ['Workers often faced long hours and danger while employers benefited from rules that kept labor weak.', 'Workers often faced long hours only after government had already guaranteed safe factories and fair wages.', 'Workers often faced long hours mainly because unions controlled hiring, pay, and scheduling in most industries.', 'Workers often faced long hours while industrial reform became less connected to politics and public law.'],
+        correctAnswer: 'Workers often faced long hours and danger while employers benefited from rules that kept labor weak.',
+        explanation: 'The chapter emphasizes that harsh conditions were not accidental; they grew from unequal power in the workplace.',
+        standard: 'SS.912.A.3.2'
+      },
+      {
+        id: 'EOC-C2-Q3',
+        text: 'Which case is the strongest example of economic growth depending on the weak bargaining power of vulnerable workers?',
+        choices: ['Child labor in factories and mills, where children often worked long hours for low pay in unsafe conditions.', 'The Federal Reserve Act stabilizing banking and credit through a new national financial structure.', 'The GI Bill helping many veterans move into college and homeownership after World War II.', 'The Immigration Act of 1965 changing national-origin rules in federal immigration law.'],
+        correctAnswer: 'Child labor in factories and mills, where children often worked long hours for low pay in unsafe conditions.',
+        explanation: 'Child labor reveals how economic systems can rely on groups with very little power to protect themselves.',
+        standard: 'SS.912.A.3.2 · SS.912.A.3.9'
+      },
+      {
+        id: 'EOC-C2-Q4',
+        text: 'What is the strongest comparison between Haymarket and Pullman as labor-history events?',
+        choices: ['Both became moments when labor protest was linked to disorder, making public support for unions harder to sustain.', 'Both became moments only after the federal government had openly committed itself to protecting every major strike.', 'Both became moments mainly because employers surrendered quickly and unions won broad national reforms at once.', 'Both became moments while courts and newspapers treated labor activism as fully legitimate and nonthreatening.'],
+        correctAnswer: 'Both became moments when labor protest was linked to disorder, making public support for unions harder to sustain.',
+        explanation: 'Each crisis damaged labor’s image in part because opponents used fear and instability to turn public opinion against unions.',
+        standard: 'SS.912.A.3.2 · SS.912.A.3.4'
+      },
+      {
+        id: 'EOC-C2-Q5',
+        text: 'Why should strikes and union campaigns be understood as class conflict rather than just workplace disagreements?',
+        choices: ['They were fights over who controlled profits, time, safety, and power in the industrial economy.', 'They were fights only after workers had already gained equal control over ownership and decision-making.', 'They were fights mainly because unions wanted to eliminate wages and return industry to small farms.', 'They were fights while questions of wealth and power stayed mostly separate from labor protest.'],
+        correctAnswer: 'They were fights over who controlled profits, time, safety, and power in the industrial economy.',
+        explanation: 'Labor struggles mattered because they challenged the deeper distribution of authority and wealth, not just a single contract.',
+        standard: 'SS.912.A.3.2'
+      },
+      {
+        id: 'EOC-C2-Q6',
+        text: 'Which development is the strongest example of tragedy pushing economic reform forward?',
+        choices: ['The Triangle Shirtwaist Fire exposing unsafe labor conditions and helping build support for regulation.', 'The Compromise of 1877 settling a disputed presidential election after Reconstruction politics had stalled.', 'The Open Door Policy asserting equal trade access in China at the turn of the century.', 'The Marshall Plan sending American aid to Europe after World War II.'],
+        correctAnswer: 'The Triangle Shirtwaist Fire exposing unsafe labor conditions and helping build support for regulation.',
+        explanation: 'The fire became a powerful symbol of why workplace safety could not be left to employers alone.',
+        standard: 'SS.912.A.3.9'
+      },
+      {
+        id: 'EOC-C2-Q7',
+        text: 'Which statement best captures continuity and change in labor reform from the Progressive Era to the New Deal?',
+        choices: ['Reformers moved from exposing abuse toward building stronger federal protections for unions and workers.', 'Reformers moved from exposing abuse only after unions had already become more powerful than employers nationwide.', 'Reformers moved from exposing abuse mainly by ending all government involvement in wages, hours, and bargaining.', 'Reformers moved from exposing abuse while making labor rights less important to national economic politics.'],
+        correctAnswer: 'Reformers moved from exposing abuse toward building stronger federal protections for unions and workers.',
+        explanation: 'The New Deal deepened earlier labor reform by giving workers more legal standing within the national economy.',
+        standard: 'SS.912.A.3.9 · SS.912.A.5.12'
+      },
+      {
+        id: 'EOC-C2-Q8',
+        text: 'Which evidence best supports the claim that government did not always stand in the same place between labor and capital?',
+        choices: ['Federal power helped suppress strikes in the 1890s, but New Deal policy later recognized labor rights more openly.', 'Federal power helped suppress strikes in the 1890s, and New Deal policy later banned collective bargaining completely.', 'Federal power helped suppress strikes in the 1890s only because labor had already won equal protection nationwide.', 'Federal power helped suppress strikes in the 1890s, proving that government never shaped labor relations at all.'],
+        correctAnswer: 'Federal power helped suppress strikes in the 1890s, but New Deal policy later recognized labor rights more openly.',
+        explanation: 'This contrast shows that state power could reinforce inequality in one era and partly rebalance it in another.',
+        standard: 'SS.912.A.3.2 · SS.912.A.5.12'
+      },
+      {
+        id: 'EOC-C2-Q9',
+        text: 'Why does this chapter treat wages and working conditions as questions of dignity as well as economics?',
+        choices: ['Because daily work shapes freedom, security, and whether people have real control over their lives.', 'Because daily work shapes freedom only after income becomes more important than citizenship or law.', 'Because daily work shapes freedom mainly when unions reject hours, safety, and contracts as reform goals.', 'Because daily work shapes freedom while questions of power and inequality stay outside the workplace.'],
+        correctAnswer: 'Because daily work shapes freedom, security, and whether people have real control over their lives.',
+        explanation: 'Work is not only about income; it is also about time, safety, respect, and power over daily life.',
+        standard: 'SS.912.A.3.2 · SS.912.A.5.12'
+      },
+      {
+        id: 'EOC-C2-Q10',
+        text: 'What broad pattern best answers the chapter question ‘Workers and Wealth’?',
+        choices: ['Wealth rarely flowed fairly to workers without collective action, public pressure, and reform.', 'Wealth rarely flowed fairly only after labor unions had already disappeared from national economic life.', 'Wealth rarely flowed fairly mainly because workers consistently controlled industry more than employers did.', 'Wealth rarely flowed fairly while labor protest became less connected to law, politics, and public debate.'],
+        correctAnswer: 'Wealth rarely flowed fairly to workers without collective action, public pressure, and reform.',
+        explanation: 'This chapter’s cross-era point is that labor usually had to organize to challenge unequal distribution of wealth and power.',
+        standard: 'SS.912.A.3.2 · SS.912.A.3.9 · SS.912.A.5.12'
+      },
+    ]
+  },
+
+  // ==================================================
+  // CHAPTER 3 — Boom, Bust, and Survival
+  // ==================================================
+  {
+    id: 'ch3',
+    label: 'CHAPTER 3',
+    title: 'Boom, Bust, and Survival',
+    sub: 'Economic instability, hardship, and adaptation across eras',
+    icon: '📉',
+    type: 'lesson',
+    briefing: {
+      location: 'Economic instability, hardship, and adaptation across eras',
+      date: '',
+      role: 'crisis reporter',
+      text: 'Economic growth is never smooth. Panic, depression, dust storms, layoffs, inflation, and industrial collapse have all forced Americans to improvise new ways to survive. This chapter asks what economic instability looks like across time and who bears its heaviest burdens.',
+      tags: ['SS.912.A.3.2', 'SS.912.A.5.11', 'SS.912.A.7.17', 'SS.912.A.5.12', 'SS.912.A.6.3']
+    },
+    displayCount: 5,
+    goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
+    rewards: { badge: 'Boom, Bust, and Survival', cards: ['Great Depression', 'Hooverville'] },
+    bank: [
+      {
+        id: 'EOC-C3-Q1',
+        text: 'What is the strongest comparison between the Panic of 1893 and the Great Depression?',
+        choices: ['Both exposed instability in the economy, but the Great Depression reached deeper and lasted far longer.', 'Both exposed instability only after the federal government had already guaranteed full employment nationwide.', 'Both exposed instability mainly because farmers and workers had become wealthier than industrial investors.', 'Both exposed instability while causing little change in how Americans thought about business or government.'],
+        correctAnswer: 'Both exposed instability in the economy, but the Great Depression reached deeper and lasted far longer.',
+        explanation: 'Each crisis hurt workers and communities, but the Great Depression reshaped national life on a much larger scale.',
+        standard: 'SS.912.A.3.2 · SS.912.A.5.11'
+      },
+      {
+        id: 'EOC-C3-Q2',
+        text: 'Which development is the strongest example of widespread visible hardship during economic collapse?',
+        choices: ['Hoovervilles appearing as unemployed and displaced people created makeshift communities for survival.', 'The Federal Reserve creating a national banking structure in the early twentieth century.', 'The GI Bill expanding access to college and homeownership after World War II.', 'The Interstate Commerce Act regulating railroad rates during the Gilded Age.'],
+        correctAnswer: 'Hoovervilles appearing as unemployed and displaced people created makeshift communities for survival.',
+        explanation: 'Hoovervilles became a powerful symbol of how economic collapse altered daily life for ordinary Americans.',
+        standard: 'SS.912.A.5.11'
+      },
+      {
+        id: 'EOC-C3-Q3',
+        text: 'How did Dust Bowl migration and later deindustrialization most clearly compare?',
+        choices: ['Both displaced communities and forced families to rebuild economic life under harsh new conditions.', 'Both displaced communities only after the federal government had fully prevented unemployment and migration pressure.', 'Both displaced communities mainly by increasing wages and job security in regions that lost industry.', 'Both displaced communities while leaving housing, schooling, and local identity mostly untouched.'],
+        correctAnswer: 'Both displaced communities and forced families to rebuild economic life under harsh new conditions.',
+        explanation: 'The details differed, but both crises uprooted workers and communities rather than harming only abstract markets.',
+        standard: 'SS.912.A.5.11 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C3-Q4',
+        text: 'What recurring pattern appears when major economic systems break down?',
+        choices: ['Those with the least savings and weakest protection usually face the hardest choices first.', 'Those with the least savings usually recover fastest because instability protects the poor more than the wealthy.', 'Those with the least savings struggle only after government has already removed every form of relief or support.', 'Those with the least savings matter less because national crises mainly affect banks and investors alone.'],
+        correctAnswer: 'Those with the least savings and weakest protection usually face the hardest choices first.',
+        explanation: 'Economic crisis is uneven: vulnerable groups often feel collapse earlier and more severely than those with more resources.',
+        standard: 'SS.912.A.3.2 · SS.912.A.5.11 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C3-Q5',
+        text: 'What is the strongest comparison between Hoover’s response to the Depression and New Deal relief efforts?',
+        choices: ['Hoover favored more limited intervention, while the New Deal used broader federal action to address mass hardship.', 'Hoover favored more limited intervention only after the New Deal had already built a national safety net first.', 'Hoover favored more limited intervention, while the New Deal tried to reduce government involvement in relief.', 'Hoover favored more limited intervention while the New Deal focused mainly on foreign trade instead of domestic crisis.'],
+        correctAnswer: 'Hoover favored more limited intervention, while the New Deal used broader federal action to address mass hardship.',
+        explanation: 'This comparison shows how crisis can alter expectations about what government should do when markets fail.',
+        standard: 'SS.912.A.5.11 · SS.912.A.5.12'
+      },
+      {
+        id: 'EOC-C3-Q6',
+        text: 'Which statement best captures continuity and change from postwar recession fears to 1970s stagflation?',
+        choices: ['Americans kept fearing instability, but the form shifted from depression-era unemployment to inflation and stagnation together.', 'Americans kept fearing instability only after prosperity had ended all debate about wages, prices, and job security.', 'Americans kept fearing instability mainly because the federal government stopped influencing the economy after 1945.', 'Americans kept fearing instability while inflation and unemployment became less important to household life over time.'],
+        correctAnswer: 'Americans kept fearing instability, but the form shifted from depression-era unemployment to inflation and stagnation together.',
+        explanation: 'Economic anxiety persisted even in a richer society, though the character of the crisis changed.',
+        standard: 'SS.912.A.6.3 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C3-Q7',
+        text: 'Which evidence best supports the claim that survival during collapse sometimes depends on collective or public support, not just private effort?',
+        choices: ['New Deal relief programs showed that many families depended on public aid when jobs and local charity failed.', 'New Deal relief programs showed that many families depended only on private markets once banks stabilized themselves.', 'New Deal relief programs mattered little because unemployment disappeared before federal help could reach people.', 'New Deal relief programs proved Americans no longer needed work, wages, or long-term economic recovery.'],
+        correctAnswer: 'New Deal relief programs showed that many families depended on public aid when jobs and local charity failed.',
+        explanation: 'The crisis revealed that private resilience alone could not carry millions of people through systemic collapse.',
+        standard: 'SS.912.A.5.12'
+      },
+      {
+        id: 'EOC-C3-Q8',
+        text: 'Which case is the strongest example of families adapting to economic disaster by moving rather than staying put?',
+        choices: ['Dust Bowl migration as environmental and economic collapse pushed many farm families westward.', 'The Federal Reserve Act creating a new banking system to manage money and credit nationally.', 'The Sherman Antitrust Act responding to monopoly power during the late nineteenth century.', 'The PATCO strike signaling a harder line toward unions in the early 1980s.'],
+        correctAnswer: 'Dust Bowl migration as environmental and economic collapse pushed many farm families westward.',
+        explanation: 'Migration became a survival strategy when land, weather, and the economy all failed at once.',
+        standard: 'SS.912.A.5.11'
+      },
+      {
+        id: 'EOC-C3-Q9',
+        text: 'Why does deindustrialization belong in a chapter about boom, bust, and survival rather than only one about technology or trade?',
+        choices: ['Because plant closures reshaped work, neighborhoods, identity, and survival for entire communities.', 'Because plant closures mattered only after industry had already stopped influencing local tax bases or schools.', 'Because plant closures mainly increased job security and wages for workers left behind in old factory regions.', 'Because plant closures left daily life unchanged even though production moved and employment disappeared.'],
+        correctAnswer: 'Because plant closures reshaped work, neighborhoods, identity, and survival for entire communities.',
+        explanation: 'Deindustrialization was not just an economic statistic; it transformed everyday life in places built around manufacturing.',
+        standard: 'SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C3-Q10',
+        text: 'What broad pattern best answers the chapter question ‘Boom, Bust, and Survival’?',
+        choices: ['Economic growth brings instability as well as prosperity, and ordinary people repeatedly adapt to shocks they did not create.', 'Economic growth brings instability only after modern government stops affecting markets, relief, and employment.', 'Economic growth brings instability mainly because downturns affect investors far more than workers or families.', 'Economic growth brings instability while crisis steadily becomes less important to daily life across time.'],
+        correctAnswer: 'Economic growth brings instability as well as prosperity, and ordinary people repeatedly adapt to shocks they did not create.',
+        explanation: 'The chapter’s synthesis is that instability is part of economic history, and its burdens are felt most sharply in daily life.',
+        standard: 'SS.912.A.3.2 · SS.912.A.5.11 · SS.912.A.5.12 · SS.912.A.7.17'
+      },
+    ]
+  },
+
+  // ==================================================
+  // CHAPTER 4 — Government and the Economy
+  // ==================================================
+  {
+    id: 'ch4',
+    label: 'CHAPTER 4',
+    title: 'Government and the Economy',
+    sub: 'Regulation, reform, intervention, and rollback',
+    icon: '🏛️',
+    type: 'lesson',
+    briefing: {
+      location: 'Regulation, reform, intervention, and rollback',
+      date: '',
+      role: 'policy historian',
+      text: 'Economic life in the United States has never been purely private. Regulation, central banking, relief programs, wartime mobilization, tax policy, and deregulation all changed how much power government would use to shape markets. This chapter tracks those shifting answers.',
+      tags: ['SS.912.A.3.9', 'SS.912.A.7.17', 'SS.912.A.3.10', 'SS.912.A.5.12', 'SS.912.A.6.3', 'SS.912.A.7.3']
+    },
+    displayCount: 5,
+    goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
+    rewards: { badge: 'Government and the Economy', cards: ['Federal Reserve', 'Reaganomics'] },
+    bank: [
+      {
+        id: 'EOC-C4-Q1',
+        text: 'What is the strongest comparison between Progressive Era regulation and Reagan-era economics?',
+        choices: ['Progressives trusted government more to restrain corporate power, while Reagan-era policy favored lighter regulation.', 'Progressives trusted government more only after Reagan had already reduced taxes and deregulated major industries.', 'Progressives trusted government more mainly by abolishing antitrust law and removing consumer protections.', 'Progressives trusted government more while Reagan-era policy called for direct public ownership of major firms.'],
+        correctAnswer: 'Progressives trusted government more to restrain corporate power, while Reagan-era policy favored lighter regulation.',
+        explanation: 'The comparison captures a long-running argument over whether markets should be corrected by government or freed from it.',
+        standard: 'SS.912.A.3.9 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C4-Q2',
+        text: 'Which development is the best example of government acting directly to restrain concentrated corporate power?',
+        choices: ['Theodore Roosevelt’s trust-busting campaigns against corporations seen as harmful to the public interest.', 'The Homestead Act opening western land claims to settlers during the post-Civil War era.', 'The GI Bill supporting education and mortgages for many veterans after World War II.', 'The PATCO strike demonstrating conflict between organized labor and the Reagan administration.'],
+        correctAnswer: 'Theodore Roosevelt’s trust-busting campaigns against corporations seen as harmful to the public interest.',
+        explanation: 'Roosevelt symbolized the idea that government could intervene to limit private economic domination.',
+        standard: 'SS.912.A.3.9 · SS.912.A.3.10'
+      },
+      {
+        id: 'EOC-C4-Q3',
+        text: 'How did the Federal Reserve and Social Security most clearly compare as economic reforms?',
+        choices: ['Both expanded federal responsibility, though one stabilized finance while the other protected people from insecurity.', 'Both expanded federal responsibility only after wartime mobilization had already solved banking and retirement issues.', 'Both expanded federal responsibility mainly by shrinking national power and returning policy to local banks.', 'Both expanded federal responsibility while rejecting any role for long-term planning or economic stability.'],
+        correctAnswer: 'Both expanded federal responsibility, though one stabilized finance while the other protected people from insecurity.',
+        explanation: 'These reforms show that government intervention can target both the structure of markets and the risks faced by individuals.',
+        standard: 'SS.912.A.3.10 · SS.912.A.5.12'
+      },
+      {
+        id: 'EOC-C4-Q4',
+        text: 'What recurring pattern appears when the economy enters severe crisis or total war?',
+        choices: ['Government usually takes on a larger role in directing resources, labor, and production.', 'Government usually takes on a larger role only after markets have already solved the emergency on their own.', 'Government usually takes on a larger role mainly by reducing planning and ending national coordination.', 'Government usually takes on a larger role while becoming less visible in taxes, prices, and production.'],
+        correctAnswer: 'Government usually takes on a larger role in directing resources, labor, and production.',
+        explanation: 'When markets alone cannot manage crisis, Americans often accept a stronger federal role.',
+        standard: 'SS.912.A.5.12 · SS.912.A.6.3'
+      },
+      {
+        id: 'EOC-C4-Q5',
+        text: 'What is the strongest comparison between the New Deal and Great Society as economic reform efforts?',
+        choices: ['Both used federal action to widen security and opportunity, though they responded to different kinds of inequality.', 'Both used federal action only after conservative politics had already rejected any public role in welfare or reform.', 'Both used federal action mainly to reduce labor rights and weaken public support for social insurance programs.', 'Both used federal action while insisting that poverty and inequality should be handled only by private charity.'],
+        correctAnswer: 'Both used federal action to widen security and opportunity, though they responded to different kinds of inequality.',
+        explanation: 'The New Deal focused on collapse and insecurity, while the Great Society targeted poverty and access within a richer society.',
+        standard: 'SS.912.A.5.12 · SS.912.A.7.3'
+      },
+      {
+        id: 'EOC-C4-Q6',
+        text: 'Which statement best captures continuity and change in the role of government in the economy across these eras?',
+        choices: ['Federal power expanded dramatically in the twentieth century, though later leaders pushed to roll some of it back.', 'Federal power expanded dramatically only after the 1980s had already ended regulation and tax policy debates.', 'Federal power expanded dramatically mainly because Americans stopped arguing over markets, welfare, and inequality.', 'Federal power expanded dramatically while the presidency and Congress lost interest in economic management.'],
+        correctAnswer: 'Federal power expanded dramatically in the twentieth century, though later leaders pushed to roll some of it back.',
+        explanation: 'This chapter highlights both the growth of federal intervention and the later backlash against it.',
+        standard: 'SS.912.A.3.9 · SS.912.A.5.12 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C4-Q7',
+        text: 'Which development is the strongest example of the federal government coordinating the economy on a massive scale?',
+        choices: ['World War II mobilization directing production, labor, and industry toward military needs.', 'The Pendleton Act reforming civil service appointments during the Gilded Age.', 'The Seneca Falls Convention calling for broader rights in the nineteenth century.', 'The Voting Rights Act targeting disenfranchisement in the Civil Rights era.'],
+        correctAnswer: 'World War II mobilization directing production, labor, and industry toward military needs.',
+        explanation: 'Wartime mobilization showed how extensively the federal government could shape the economy when national priorities demanded it.',
+        standard: 'SS.912.A.6.3'
+      },
+      {
+        id: 'EOC-C4-Q8',
+        text: 'Which development is the best example of a rollback in faith that federal regulation should guide economic life?',
+        choices: ['Reagan-era deregulation and tax policy arguing that markets work better with less federal interference.', 'The Sherman Antitrust Act expressing concern about concentrated economic power during the Gilded Age.', 'The Wagner Act strengthening workers’ bargaining rights during the New Deal.', 'The Pure Food and Drug Act increasing federal consumer protections in the Progressive Era.'],
+        correctAnswer: 'Reagan-era deregulation and tax policy arguing that markets work better with less federal interference.',
+        explanation: 'This is the clearest example here of a political turn toward deregulation and skepticism about government intervention.',
+        standard: 'SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C4-Q9',
+        text: 'Which evidence best supports the claim that Americans have often turned to government when private economic power seemed too concentrated or unstable?',
+        choices: ['Trust-busting, banking reform, and New Deal regulation all expanded public power when markets seemed insufficient.', 'Trust-busting, banking reform, and New Deal regulation all proved government never mattered to the economy at all.', 'Trust-busting, banking reform, and New Deal regulation only appeared after corporate power had already declined permanently.', 'Trust-busting, banking reform, and New Deal regulation mainly aimed to remove Washington from economic management.'],
+        correctAnswer: 'Trust-busting, banking reform, and New Deal regulation all expanded public power when markets seemed insufficient.',
+        explanation: 'These reforms share a common logic: when private systems fail or dominate too strongly, public power grows.',
+        standard: 'SS.912.A.3.10 · SS.912.A.5.12'
+      },
+      {
+        id: 'EOC-C4-Q10',
+        text: 'What broad pattern best answers the chapter question ‘Government and the Economy’?',
+        choices: ['Americans repeatedly argue over how much public power should shape markets, security, and opportunity.', 'Americans repeatedly argue only after the economy stops affecting daily life, work, and inequality.', 'Americans repeatedly argue mainly because government has no real influence on regulation, taxes, or welfare.', 'Americans repeatedly argue while questions of public versus private power become less important over time.'],
+        correctAnswer: 'Americans repeatedly argue over how much public power should shape markets, security, and opportunity.',
+        explanation: 'That debate ties together regulation, relief, central banking, social insurance, wartime planning, and deregulation.',
+        standard: 'SS.912.A.3.9 · SS.912.A.3.10 · SS.912.A.5.12 · SS.912.A.6.3 · SS.912.A.7.17'
+      },
+    ]
+  },
+
+  // ==================================================
+  // CHAPTER 5 — Opportunity and Inequality
+  // ==================================================
+  {
+    id: 'ch5',
+    label: 'CHAPTER 5',
+    title: 'Opportunity and Inequality',
+    sub: 'Mobility, access, exclusion, and unequal outcomes',
+    icon: '⚖️',
+    type: 'lesson',
+    briefing: {
+      location: 'Mobility, access, exclusion, and unequal outcomes',
+      date: '',
+      role: 'opportunity researcher',
+      text: 'Americans often celebrate opportunity, but access to it has always been unequal. Immigration, race, gender, housing, education, and geography all shaped who could move upward and who stayed locked out. This chapter treats opportunity as a historical system, not just a personal dream.',
+      tags: ['SS.912.A.3.6', 'SS.912.A.3.7', 'SS.912.A.7.17', 'SS.912.A.7.3']
+    },
+    displayCount: 5,
+    goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
+    rewards: { badge: 'Opportunity and Inequality', cards: ['GI Bill', 'Redlining'] },
+    bank: [
+      {
+        id: 'EOC-C5-Q1',
+        text: 'How did Ellis Island and Angel Island most clearly compare as gateways to opportunity?',
+        choices: ['Both processed newcomers, but Angel Island often reflected harsher suspicion that limited opportunity more sharply.', 'Both processed newcomers only after federal law had already guaranteed equal treatment to all immigrants.', 'Both processed newcomers mainly by removing inspection and legal screening from the immigration process.', 'Both processed newcomers while keeping immigration separate from labor, race, and national identity debates.'],
+        correctAnswer: 'Both processed newcomers, but Angel Island often reflected harsher suspicion that limited opportunity more sharply.',
+        explanation: 'The two stations illustrate that opportunity in America was filtered differently depending on race, region, and law.',
+        standard: 'SS.912.A.3.6 · SS.912.A.3.7'
+      },
+      {
+        id: 'EOC-C5-Q2',
+        text: 'What is the strongest comparison between the GI Bill and redlining?',
+        choices: ['One expanded opportunity for many families, while the other blocked wealth-building unevenly along racial lines.', 'One expanded opportunity for many families only after redlining had already ended residential inequality completely.', 'One expanded opportunity for many families, while the other focused mainly on factory safety and union bargaining.', 'One expanded opportunity for many families while the other made suburbs more accessible to everyone equally.'],
+        correctAnswer: 'One expanded opportunity for many families, while the other blocked wealth-building unevenly along racial lines.',
+        explanation: 'Taken together, they show that government policy could widen mobility for some while limiting it for others.',
+        standard: 'SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C5-Q3',
+        text: 'What recurring pattern appears in the history of opportunity in the United States?',
+        choices: ['Access depends on institutions such as housing, schools, credit, and law, not only on individual effort.', 'Access depends on institutions only after all major debates over race, gender, and immigration have ended.', 'Access depends on institutions mainly because hard work has never mattered to mobility in any historical period.', 'Access depends on institutions while inequality becomes less connected to policy, geography, and discrimination.'],
+        correctAnswer: 'Access depends on institutions such as housing, schools, credit, and law, not only on individual effort.',
+        explanation: 'The chapter rejects the idea that opportunity is simply personal; it shows how systems structure mobility.',
+        standard: 'SS.912.A.3.7 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C5-Q4',
+        text: 'Which development is the strongest example of formal opportunity existing but being distributed unequally?',
+        choices: ['The GI Bill, which offered mobility for many veterans but was implemented unevenly across racial lines.', 'The Homestead Act, which opened western land claims during post-Civil War settlement and migration.', 'The Federal Reserve Act, which restructured banking and monetary policy in the early twentieth century.', 'The Wagner Act, which strengthened collective bargaining in the New Deal labor system.'],
+        correctAnswer: 'The GI Bill, which offered mobility for many veterans but was implemented unevenly across racial lines.',
+        explanation: 'The GI Bill is powerful because it complicates the story of opportunity by showing access and exclusion operating together.',
+        standard: 'SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C5-Q5',
+        text: 'How did immigrant labor in the early industrial era compare with later wage inequality in a globalized economy?',
+        choices: ['Both offered opportunity to some workers while also leaving many vulnerable to low pay and insecure conditions.', 'Both offered opportunity only after the federal government had eliminated all barriers to fair wages and promotion.', 'Both offered opportunity mainly by making race, language, and legal status irrelevant to economic outcomes.', 'Both offered opportunity while ending political conflict over class, labor markets, and economic mobility.'],
+        correctAnswer: 'Both offered opportunity to some workers while also leaving many vulnerable to low pay and insecure conditions.',
+        explanation: 'The comparison shows that opportunity and exploitation often exist side by side in changing labor systems.',
+        standard: 'SS.912.A.3.6 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C5-Q6',
+        text: 'Which statement best captures continuity and change in racial economic inequality from the Civil Rights era to the present?',
+        choices: ['Legal barriers weakened, but wealth, schooling, housing, and labor-market gaps continued in new forms.', 'Legal barriers weakened only after economic inequality had already disappeared across race and region.', 'Legal barriers weakened mainly because housing, credit, and school access stopped affecting mobility after 1965.', 'Legal barriers weakened while economic outcomes became unrelated to policy, discrimination, or history.'],
+        correctAnswer: 'Legal barriers weakened, but wealth, schooling, housing, and labor-market gaps continued in new forms.',
+        explanation: 'The chapter emphasizes that equality in law does not automatically produce equality in outcomes.',
+        standard: 'SS.912.A.7.3 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C5-Q7',
+        text: 'Why do suburbs and redlining belong in a chapter on opportunity rather than only one on housing?',
+        choices: ['Because where families could live shaped wealth, schools, security, and long-term mobility across generations.', 'Because where families could live mattered only after housing had stopped affecting schools, taxes, and local jobs.', 'Because where families could live mainly influenced architecture and transportation rather than opportunity itself.', 'Because where families could live made economic inequality less important once homeownership began to spread.'],
+        correctAnswer: 'Because where families could live shaped wealth, schools, security, and long-term mobility across generations.',
+        explanation: 'Housing policy mattered because it affected much more than shelter; it structured access to future opportunity.',
+        standard: 'SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C5-Q8',
+        text: 'Why do affirmative action debates fit the theme of opportunity and inequality?',
+        choices: ['They ask whether fair opportunity means equal rules alone or stronger remedies for unequal starting points.', 'They ask whether fair opportunity matters only in colleges and has little to do with work or public policy.', 'They ask whether fair opportunity is best achieved by ignoring history, exclusion, and access to institutions.', 'They ask whether fair opportunity should be replaced entirely by private privilege and inherited advantage.'],
+        correctAnswer: 'They ask whether fair opportunity means equal rules alone or stronger remedies for unequal starting points.',
+        explanation: 'These debates belong here because they center on how societies define fairness in unequal conditions.',
+        standard: 'SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C5-Q9',
+        text: 'Which evidence best supports the claim that modern opportunity gaps are tied to long historical systems rather than only individual choices?',
+        choices: ['Persistent differences in wealth, neighborhood resources, school access, and wages reflect earlier unequal institutions.', 'Persistent differences in wealth prove that schooling, housing, and policy have little effect on life outcomes.', 'Persistent differences in wealth only appear after all major legal and historical barriers have been fully removed.', 'Persistent differences in wealth mainly show that immigration and race no longer affect economic mobility.'],
+        correctAnswer: 'Persistent differences in wealth, neighborhood resources, school access, and wages reflect earlier unequal institutions.',
+        explanation: 'This evidence connects present inequality to earlier systems of exclusion rather than to effort alone.',
+        standard: 'SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-C5-Q10',
+        text: 'What broad pattern best answers the chapter question ‘Opportunity and Inequality’?',
+        choices: ['Opportunity grows when access widens, but unequal systems keep shaping who can actually move ahead.', 'Opportunity grows only after race, housing, immigration, and education stop affecting economic life altogether.', 'Opportunity grows mainly because mobility becomes disconnected from policy, law, and institutional access.', 'Opportunity grows while inequality steadily loses influence over work, wealth, and community life.'],
+        correctAnswer: 'Opportunity grows when access widens, but unequal systems keep shaping who can actually move ahead.',
+        explanation: 'This chapter argues that opportunity is real but uneven, and that institutions help decide who benefits most.',
+        standard: 'SS.912.A.3.6 · SS.912.A.3.7 · SS.912.A.7.3 · SS.912.A.7.17'
+      },
+    ]
+  },
+
+  // ==================================================
+  // CUMULATIVE REVIEW — Cumulative Review
+  // ==================================================
+  {
+    id: 'eoc',
+    label: 'CUMULATIVE REVIEW',
+    title: 'Cumulative Review',
+    sub: 'Cross-era synthesis of work, wealth, inequality, and opportunity',
+    icon: '📋',
+    type: 'eoc',
+    briefing: {
+      location: 'Cross-era synthesis of work, wealth, inequality, and opportunity',
+      date: '',
+      role: 'economic themes moderator',
+      text: 'This review pulls together the whole Engines of Change campaign. Students should compare how land, labor, crisis, government policy, and unequal access shaped daily life and opportunity across American history.',
+      tags: ['SS.912.A.3.1', 'SS.912.A.7.17', 'SS.912.A.3.7', 'SS.912.A.3.4', 'SS.912.A.3.2', 'SS.912.A.5.12']
+    },
+    displayCount: 15,
+    goldRules: { perCorrect: 15, completionBonus: 50, perfectBonus: 50 },
+    rewards: { badge: 'Engines of Change Mastery', cards: ['Work and Wealth', 'Economic Inequality'] },
+    bank: [
+      {
+        id: 'EOC-REV-Q1',
+        text: 'What is the strongest comparison between the Homestead Act and the GI Bill?',
+        choices: ['Both used public policy to widen opportunity, though access and outcomes remained unequal in practice.', 'Both used public policy only after private markets had already made property and schooling equally available.', 'Both used public policy mainly to reduce land ownership and homeownership among ordinary families.', 'Both used public policy while avoiding any connection to wealth-building or long-term mobility.'],
+        correctAnswer: 'Both used public policy to widen opportunity, though access and outcomes remained unequal in practice.',
+        explanation: 'Each policy expanded opportunity for many Americans while still leaving important groups at a disadvantage.',
+        standard: 'SS.912.A.3.1 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q2',
+        text: 'What broad pattern connects western land access, suburban homeownership, and modern wealth gaps?',
+        choices: ['Access to assets like land, housing, and credit shapes opportunity more deeply than effort alone.', 'Access to assets shapes opportunity only after government stops affecting markets, schools, and neighborhoods.', 'Access to assets shapes opportunity mainly because wages and labor conditions rarely affect mobility over time.', 'Access to assets shapes opportunity while inequality becomes less tied to family wealth or public policy.'],
+        correctAnswer: 'Access to assets like land, housing, and credit shapes opportunity more deeply than effort alone.',
+        explanation: 'Across eras, ownership and access to wealth-building systems repeatedly influence who can move ahead.',
+        standard: 'SS.912.A.3.1 · SS.912.A.3.7 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q3',
+        text: 'How do railroads in the Gilded Age and globalization in the modern era most clearly compare?',
+        choices: ['Both reorganized economic opportunity by connecting markets in ways that benefited some groups more than others.', 'Both reorganized economic opportunity only after small local producers had already become stronger than large firms.', 'Both reorganized economic opportunity mainly by reducing the importance of transport, trade, and labor mobility.', 'Both reorganized economic opportunity while making inequality less tied to geography, industry, or infrastructure.'],
+        correctAnswer: 'Both reorganized economic opportunity by connecting markets in ways that benefited some groups more than others.',
+        explanation: 'Large economic systems can expand growth while also redistributing advantage unevenly across regions and workers.',
+        standard: 'SS.912.A.3.4 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q4',
+        text: 'Which development best shows concentrated private power shaping the economic future of others?',
+        choices: ['Standard Oil dominating a major industry and narrowing the space for smaller competitors.', 'The Voting Rights Act protecting ballot access in the South during the 1960s.', 'The Seneca Falls Convention demanding broader political rights before the Civil War.', 'The Brown decision challenging school segregation in the mid-twentieth century.'],
+        correctAnswer: 'Standard Oil dominating a major industry and narrowing the space for smaller competitors.',
+        explanation: 'This example most directly captures how large firms can shape whole markets rather than just individual businesses.',
+        standard: 'SS.912.A.3.4'
+      },
+      {
+        id: 'EOC-REV-Q5',
+        text: 'What is the strongest comparison between factory labor during the Gilded Age and deindustrialization in the late twentieth century?',
+        choices: ['In both eras, workers often had little control over economic decisions that profoundly shaped their lives.', 'In both eras, workers had little control only after unions had become stronger than employers across every industry.', 'In both eras, workers had little control mainly because government had fully guaranteed wages and job security.', 'In both eras, workers had little control while class conflict became less connected to economic change.'],
+        correctAnswer: 'In both eras, workers often had little control over economic decisions that profoundly shaped their lives.',
+        explanation: 'Whether facing dangerous factories or plant closures, workers often lived with decisions made by owners and larger systems.',
+        standard: 'SS.912.A.3.2 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q6',
+        text: 'What broad pattern connects unions, strikes, and labor reform across these eras?',
+        choices: ['Workers usually had to organize collectively before wealth and power were shared more fairly.', 'Workers usually had to organize collectively only after government had already guaranteed equal bargaining power.', 'Workers usually had to organize collectively mainly because wages and safety were unrelated to political reform.', 'Workers usually had to organize collectively while employers steadily lost influence over law and public opinion.'],
+        correctAnswer: 'Workers usually had to organize collectively before wealth and power were shared more fairly.',
+        explanation: 'The review keeps returning to the idea that labor power did not emerge automatically from economic growth.',
+        standard: 'SS.912.A.3.2 · SS.912.A.5.12'
+      },
+      {
+        id: 'EOC-REV-Q7',
+        text: 'How did the Great Depression and the 1970s era of stagflation most clearly compare?',
+        choices: ['Both shook confidence in the economy, though one centered on mass collapse and the other on inflation with stagnation.', 'Both shook confidence in the economy only after federal policy had already eliminated unemployment and recession fears.', 'Both shook confidence in the economy mainly because workers and consumers were becoming more secure than before.', 'Both shook confidence in the economy while making government policy seem less relevant to daily life.'],
+        correctAnswer: 'Both shook confidence in the economy, though one centered on mass collapse and the other on inflation with stagnation.',
+        explanation: 'The nature of the crisis changed, but both eras produced major anxiety about how the economy was functioning.',
+        standard: 'SS.912.A.5.11 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q8',
+        text: 'Which development best shows the federal government trying to stabilize economic life after systemic collapse?',
+        choices: ['New Deal relief and reform programs responding to unemployment, insecurity, and banking failure.', 'The Haymarket affair intensifying conflict between labor radicals and the public in the 1880s.', 'The Chinese Exclusion Act restricting migration from a targeted group in the late nineteenth century.', 'The Free Speech Movement challenging university restrictions on political organizing in the 1960s.'],
+        correctAnswer: 'New Deal relief and reform programs responding to unemployment, insecurity, and banking failure.',
+        explanation: 'The New Deal is the clearest example here of government trying to rebuild economic stability on a national scale.',
+        standard: 'SS.912.A.5.12'
+      },
+      {
+        id: 'EOC-REV-Q9',
+        text: 'Why does the history of regulation, relief, and deregulation fit together in one theme game?',
+        choices: ['They are different answers to the same question of how much government should shape economic life.', 'They are different answers only after Americans stop linking markets to inequality, labor, and social welfare.', 'They are different answers mainly because government has rarely influenced banking, wages, or corporate behavior.', 'They are different answers while public debate over taxes, regulation, and welfare becomes less important.'],
+        correctAnswer: 'They are different answers to the same question of how much government should shape economic life.',
+        explanation: 'This theme game treats policy shifts as part of one long national argument over public and private economic power.',
+        standard: 'SS.912.A.3.9 · SS.912.A.5.12 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q10',
+        text: 'Which evidence best supports the claim that housing policy shaped long-term wealth inequality?',
+        choices: ['The contrast between GI Bill opportunity and redlining shows how homeownership gains were distributed unevenly.', 'The contrast between GI Bill opportunity and redlining proves housing had little connection to school access or savings.', 'The contrast between GI Bill opportunity and redlining only mattered after suburbs lost their role in family wealth.', 'The contrast between GI Bill opportunity and redlining mainly shows that labor markets are unrelated to place.'],
+        correctAnswer: 'The contrast between GI Bill opportunity and redlining shows how homeownership gains were distributed unevenly.',
+        explanation: 'Housing became a major route to wealth, so unequal access there had long-term effects across generations.',
+        standard: 'SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q11',
+        text: 'Which statement best captures continuity and change from western land opportunity to postwar suburban opportunity?',
+        choices: ['Property remained a key path to mobility, but access stayed shaped by policy, race, and unequal institutions.', 'Property remained a key path to mobility only after government stopped shaping land, credit, and housing markets.', 'Property remained a key path to mobility mainly because homeownership replaced all importance of wages and jobs.', 'Property remained a key path to mobility while wealth-building became less tied to family assets over time.'],
+        correctAnswer: 'Property remained a key path to mobility, but access stayed shaped by policy, race, and unequal institutions.',
+        explanation: 'Different forms of property mattered in different eras, but access to them remained politically structured.',
+        standard: 'SS.912.A.3.1 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q12',
+        text: 'What is the strongest comparison between Hoovervilles during the Depression and later Rust Belt decline?',
+        choices: ['Both show that economic crisis can transform whole communities, not just household income or market numbers.', 'Both show that economic crisis only mattered after federal policy had already guaranteed local prosperity.', 'Both show that economic crisis mainly improved neighborhood stability by encouraging new long-term investment.', 'Both show that economic crisis had little influence on identity, place, schools, or family decisions.'],
+        correctAnswer: 'Both show that economic crisis can transform whole communities, not just household income or market numbers.',
+        explanation: 'The impact of economic change is social and geographic as well as financial.',
+        standard: 'SS.912.A.5.11 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q13',
+        text: 'Which case is the strongest example of a workplace disaster changing national attitudes about reform?',
+        choices: ['The Triangle Shirtwaist Fire exposing how unsafe labor systems could become without stronger regulation.', 'The Open Door Policy challenging imperial competition in China at the turn of the century.', 'The Compromise of 1850 delaying sectional conflict over slavery and western expansion.', 'The PATCO strike showing conflict between government and organized labor in the 1980s.'],
+        correctAnswer: 'The Triangle Shirtwaist Fire exposing how unsafe labor systems could become without stronger regulation.',
+        explanation: 'It remains a powerful example of reform pressure growing out of visible industrial tragedy.',
+        standard: 'SS.912.A.3.9'
+      },
+      {
+        id: 'EOC-REV-Q14',
+        text: 'What broad pattern connects the Gilded Age and the age of globalization?',
+        choices: ['Periods of rapid growth can widen opportunity for some while also increasing inequality and insecurity for others.', 'Periods of rapid growth only widen opportunity after labor conflict and wealth concentration have fully disappeared.', 'Periods of rapid growth mainly reduce inequality because large firms steadily lose influence over the economy.', 'Periods of rapid growth make questions of wages, mobility, and access less important to everyday life.'],
+        correctAnswer: 'Periods of rapid growth can widen opportunity for some while also increasing inequality and insecurity for others.',
+        explanation: 'This theme game keeps emphasizing that growth and fairness do not automatically move together.',
+        standard: 'SS.912.A.3.4 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q15',
+        text: 'Why does a game about work and opportunity include immigration stations, exclusion, and affirmative action debates?',
+        choices: ['Because opportunity depends on who can enter institutions, not just on how hard people work once inside them.', 'Because opportunity depends on entry only after labor markets stop shaping wages, schooling, and promotion.', 'Because opportunity depends on entry mainly when race, nationality, and policy become irrelevant to mobility.', 'Because opportunity depends on entry while wealth and inequality stay separate from law and public systems.'],
+        correctAnswer: 'Because opportunity depends on who can enter institutions, not just on how hard people work once inside them.',
+        explanation: 'The chapter argues that barriers to access are themselves part of economic history.',
+        standard: 'SS.912.A.3.6 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q16',
+        text: 'Which evidence best supports the claim that Americans sometimes turn to public power when markets alone seem inadequate?',
+        choices: ['Trust-busting, New Deal reform, and wartime mobilization all expanded the federal role during major economic strain.', 'Trust-busting, New Deal reform, and wartime mobilization all proved that federal action weakens when crisis grows worse.', 'Trust-busting, New Deal reform, and wartime mobilization only appeared after private firms solved instability by themselves.', 'Trust-busting, New Deal reform, and wartime mobilization mainly aimed to remove Washington from economic planning.'],
+        correctAnswer: 'Trust-busting, New Deal reform, and wartime mobilization all expanded the federal role during major economic strain.',
+        explanation: 'These examples share the idea that private markets alone were not enough in moments of concentration or crisis.',
+        standard: 'SS.912.A.3.10 · SS.912.A.5.12 · SS.912.A.6.3'
+      },
+      {
+        id: 'EOC-REV-Q17',
+        text: 'Which development best shows that opportunity can be expanded and restricted at the same time?',
+        choices: ['The postwar housing boom, when some families built wealth rapidly while redlining excluded many others.', 'The Homestead Strike, when labor conflict turned violent in a steel town during the 1890s.', 'The Federal Reserve Act, which reorganized banking and monetary authority in the early twentieth century.', 'The PATCO strike, when the Reagan administration took a hard line against federal workers.'],
+        correctAnswer: 'The postwar housing boom, when some families built wealth rapidly while redlining excluded many others.',
+        explanation: 'This example is especially useful because it combines upward mobility and structural exclusion in the same era.',
+        standard: 'SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q18',
+        text: 'Which statement best captures continuity and change in the balance between labor and capital across these eras?',
+        choices: ['Workers gained more protection in some periods, but business power remained a major force in shaping the rules.', 'Workers gained more protection only after business influence had disappeared from law and public policy completely.', 'Workers gained more protection mainly because unions replaced government as the main economic authority nationwide.', 'Workers gained more protection while wages, hours, and safety became less important to public debate.'],
+        correctAnswer: 'Workers gained more protection in some periods, but business power remained a major force in shaping the rules.',
+        explanation: 'The review links labor history to the wider question of who has enough power to shape economic systems.',
+        standard: 'SS.912.A.3.2 · SS.912.A.5.12 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q19',
+        text: 'Why does the essential question include daily life rather than only wealth, markets, and policy?',
+        choices: ['Because economic systems shape where people live, how they work, what they fear, and what futures seem possible.', 'Because economic systems shape daily life only after politics, schooling, and family structure stop mattering.', 'Because economic systems shape daily life mainly through stock prices rather than housing, work, or security.', 'Because economic systems shape daily life while leaving community identity and personal risk mostly unchanged.'],
+        correctAnswer: 'Because economic systems shape where people live, how they work, what they fear, and what futures seem possible.',
+        explanation: 'The theme game is about lived history, so it connects economic systems to ordinary experience rather than abstract numbers alone.',
+        standard: 'SS.912.A.3.2 · SS.912.A.5.11 · SS.912.A.7.17'
+      },
+      {
+        id: 'EOC-REV-Q20',
+        text: 'Which statement best answers the game’s essential question about work, wealth, and opportunity across American history?',
+        choices: ['Economic systems created opportunity and growth, but they also repeatedly concentrated power and produced unequal outcomes.', 'Economic systems created opportunity and growth only after government stopped shaping markets, labor, and access to assets.', 'Economic systems created opportunity and growth mainly because inequality became less important over time to ordinary life.', 'Economic systems created opportunity and growth while leaving daily work, mobility, and security mostly unaffected.'],
+        correctAnswer: 'Economic systems created opportunity and growth, but they also repeatedly concentrated power and produced unequal outcomes.',
+        explanation: 'That answer best captures the campaign’s central theme: growth and opportunity have always been tied to conflict over power, access, and inequality.',
+        standard: 'SS.912.A.3.1 · SS.912.A.3.2 · SS.912.A.3.4 · SS.912.A.3.6 · SS.912.A.3.9 · SS.912.A.5.11 · SS.912.A.5.12 · SS.912.A.6.3 · SS.912.A.7.17'
+      },
+    ]
+  },
+
+];
+
+
+
+
+
+// ════════════════════════════════════════════
+// PLAYER STATE
+// ════════════════════════════════════════════
+
+let P = null; // player state object
+
+const DEFAULT_P = {
+  name: '',
+  period: null,
+  // Unit progress
+  lessonsCompleted: [], // array of lesson ids
+  lessonBestScores: {}, // lessonId -> { correct, total, accuracy }
+  totalCorrect: 0,
+  totalAnswered: 0,
+  // Collections earned in this unit
+  cardsEarned: [],
+  badgesEarned: [],
+  // Session state
+  lastLesson: null
+};
+
+function loadP() {
+  // 1. Try shell state first (seamless session from American Chronicles)
+  try {
+    const raw = localStorage.getItem(SHELL_KEY);
+    if (raw) {
+      const shell = JSON.parse(raw);
+      if (shell && shell.name && shell.name !== 'Guest') {
+        // Build a P from shell identity
+        const saved = loadSavedUnit();
+        P = Object.assign({}, DEFAULT_P, saved || {}, {
+          name: shell.name,
+          period: shell.period || null,
+          avatar: shell.avatar || 'scholar_f',
+          globalRank: shell.rank || 'Curious Citizen',
+          fromShell: true
+        });
+        return true;
+      }
+    }
+  } catch(e) {}
+
+  // 2. Try local save
+  const saved = loadSavedUnit();
+  if (saved && saved.name) {
+    P = Object.assign({}, DEFAULT_P, saved);
+    return true;
+  }
+  return false;
+}
+
+function loadSavedUnit() {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch(e) { return null; }
+}
+
+function saveP() {
+  try { localStorage.setItem(SAVE_KEY, JSON.stringify(P)); } catch(e) {}
+}
+
+// ════════════════════════════════════════════
+// PORTRAIT ENGINE (minimal — reads from shell or generates)
+// ════════════════════════════════════════════
+
+function getAvatarSVG(id, size=44) {
+  // Shell provides its own SVG. Here we generate a simple fallback.
+  const colors = {
+    scholar_f:   {bg:'#0d1a2e',ring:'#c9a84c',skin:'#f0c8a0',hair:'#3a2010',outfit:'#1a3060'},
+    activist_m:  {bg:'#100808',ring:'#c9a84c',skin:'#a06040',hair:'#1a0a0a',outfit:'#3a0a0a'},
+    reporter_f:  {bg:'#0a0c08',ring:'#c9a84c',skin:'#8a5530',hair:'#2a1a0a',outfit:'#1a2a1a'},
+    soldier_m:   {bg:'#2a3a1a',ring:'#c9a84c',skin:'#d4a870',hair:'#556644',outfit:'#3a4a2a'},
+    pioneer_f:   {bg:'#0c0a06',ring:'#c9a84c',skin:'#c89870',hair:'#8b4513',outfit:'#5a3010'},
+    worker_m_asian:{bg:'#080a0a',ring:'#c9a84c',skin:'#d4b080',hair:'#555544',outfit:'#1a1a1a'},
+  };
+  const c = colors[id] || colors.scholar_f;
+  return `<svg viewBox="0 0 40 40" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:50%">
+    <circle cx="20" cy="20" r="19.5" fill="${c.ring}"/>
+    <circle cx="20" cy="20" r="15.5" fill="${c.bg}"/>
+    <circle cx="20" cy="17" r="6" fill="${c.skin}"/>
+    <ellipse cx="20" cy="11" rx="6" ry="4" fill="${c.hair}"/>
+    <ellipse cx="20" cy="26" rx="8.5" ry="5.5" fill="${c.outfit}"/>
+    <rect x="13" y="21" width="14" height="8" fill="${c.outfit}"/>
+  </svg>`;
+}
+
+// ════════════════════════════════════════════
+// SESSION GAME STATE
+// ════════════════════════════════════════════
+
+let activeLesson = null;   // lesson object
+let activeQueue = [];      // randomized question subset for this playthrough
+let activeQIdx = 0;        // current question index in queue
+let sessionCorrect = 0;
+let sessionTotal = 0;
+let sessionScore = 0;
+let sessionGoldEarned = 0; // gold earned this specific run
+let momentum = 0;
+let streak = 0;
+let answeredCurrent = false;
+
+// ════════════════════════════════════════════
+// GOLD WALLET — reads/writes the shared shell state
+// The shell is the single source of truth for gold.
+// This file writes directly to SHELL_KEY so the balance
+// is immediately available when the student returns to shell.
+// ════════════════════════════════════════════
+
+/**
+ * Read current gold balance from shell state.
+ */
+function getShellGold() {
+  try {
+    const raw = localStorage.getItem(SHELL_KEY);
+    if (raw) { const s = JSON.parse(raw); return s.gold || 0; }
+  } catch(e) {}
+  return 0;
+}
+
+/**
+ * Award gold directly into the shell wallet.
+ * Also pushes a ledger entry so it appears in the shell's Gold view.
+ * @param {number} amount
+ * @param {string} source  — human label shown in ledger
+ * @param {boolean} showParticle
+ */
+function awardGoldToShell(amount, source, showParticle = true) {
+  if (!amount || amount <= 0) return;
+  sessionGoldEarned += amount;
+  try {
+    const raw = localStorage.getItem(SHELL_KEY);
+    const shell = raw ? JSON.parse(raw) : {};
+    shell.gold        = (shell.gold        || 0) + amount;
+    shell.goldEarned  = (shell.goldEarned  || 0) + amount;
+    if (amount > (shell.goldBestRun || 0)) shell.goldBestRun = amount;
+    if (!Array.isArray(shell.goldLedger)) shell.goldLedger = [];
+    shell.goldLedger.unshift({ ts: Date.now(), source, unitId: UNIT_ID, amount, type: 'earn' });
+    if (shell.goldLedger.length > 50) shell.goldLedger = shell.goldLedger.slice(0, 50);
+    localStorage.setItem(SHELL_KEY, JSON.stringify(shell));
+  } catch(e) { console.warn('Gold write failed', e); }
+  if (showParticle) spawnGoldParticle('+' + amount + ' 🪙');
+  // Update HUD gold display
+  updateHUDGold();
+}
+
+function spawnGoldParticle(text) {
+  const el = document.createElement('div');
+  el.style.cssText = `position:fixed;font-family:'Bebas Neue',sans-serif;font-size:15px;
+    color:#f5c842;pointer-events:none;z-index:9200;
+    text-shadow:0 0 8px rgba(245,200,66,.7);
+    animation:_gpFloat 1.6s ease-out forwards;`;
+  el.textContent = text;
+  // Inject keyframe once
+  if (!document.getElementById('_gp-style')) {
+    const s = document.createElement('style');
+    s.id = '_gp-style';
+    s.textContent = `@keyframes _gpFloat{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-55px) scale(1.2)}}`;
+    document.head.appendChild(s);
+  }
+  const hudScore = document.getElementById('hud-score');
+  if (hudScore) {
+    const r = hudScore.getBoundingClientRect();
+    el.style.left = (r.left + r.width / 2 - 24) + 'px';
+    el.style.top  = (r.top - 8) + 'px';
+  } else { el.style.left = '50%'; el.style.top = '80px'; }
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1800);
+}
+
+function updateHUDGold() {
+  const g = getShellGold();
+  const el = document.getElementById('hud-score');
+  if (el) el.textContent = g.toLocaleString();
+}
+
+// ════════════════════════════════════════════
+// UTILITY
+// ════════════════════════════════════════════
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function pickSubset(bank, n) {
+  return shuffle(bank).slice(0, Math.min(n, bank.length));
+}
+
+function calcTier(acc) {
+  if (acc === 100) return {label:'Historian', color:'#e8d0ff', icon:'🏛️'};
+  if (acc >= 90)  return {label:'Gold',      color:'#ffd700', icon:'🥇'};
+  if (acc >= 80)  return {label:'Silver',    color:'#c8c8d8', icon:'🥈'};
+  if (acc >= 70)  return {label:'Bronze',    color:'#cd7f32', icon:'🥉'};
+  if (acc >= 60)  return {label:'Completed', color:'#38a050', icon:'✅'};
+  return              {label:'Try Again',    color:'#c02020', icon:'🔄'};
+}
+
+function notify(msg, col) {
+  const n = document.createElement('div');
+  n.className = 'notif' + (col ? ' ' + col : '');
+  n.textContent = msg;
+  document.body.appendChild(n);
+  setTimeout(() => n.remove(), 3500);
+}
+
+// ════════════════════════════════════════════
+// SCREEN ROUTING (Layer 2 and Layer 3)
+// ════════════════════════════════════════════
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+}
+
+function showUnitHub() {
+  showScreen('unit-hub-screen');
+  document.getElementById('game-hud').style.display = 'block';
+  document.body.classList.add('hud-active');
+  document.getElementById('hud-back-unit').style.display = 'none';
+  document.getElementById('hud-back-shell').style.display = P && P.fromShell ? 'inline-block' : 'none';
+  showBottomNav();
+  setActiveNav(0);
+  renderUnitHub();
+}
+
+function showQuestionScreen() {
+  showScreen('question-screen');
+  document.getElementById('game-hud').style.display = 'block';
+  document.body.classList.add('hud-active');
+  document.getElementById('hud-back-unit').style.display = 'inline-block';
+  document.getElementById('hud-back-shell').style.display = P && P.fromShell ? 'inline-block' : 'none';
+}
+
+// ════════════════════════════════════════════
+// UNIT HUB RENDERING
+// ════════════════════════════════════════════
+
+function isLessonUnlocked(idx) {
+  if (idx === 0) return true;
+  return P.lessonsCompleted.includes(LESSONS[idx - 1].id);
+}
+
+function renderUnitHub() {
+  updateHUD();
+
+  // ── Player banner ──────────────────────────
+  const done  = P.lessonsCompleted.length;
+  const total = LESSONS.length;
+  const pct   = Math.round(done / total * 100);
+  const bannerEl = document.getElementById('hub-player-banner');
+  if (bannerEl) {
+    bannerEl.innerHTML = `
+      <div class="hub-banner">
+        <div class="hub-banner-top">
+          <div class="hub-banner-label">UNIT 5B — EARLY COLD WAR</div>
+          <div class="hub-banner-count">${done}/${total} LESSONS</div>
+        </div>
+        <div class="hub-progress-bar">
+          <div class="hub-progress-fill" style="width:${pct}%"></div>
+        </div>
+      </div>`;
+  }
+
+  // Shell return button — show if arrived from shell
+  const shellBtn = document.getElementById('shell-return-btn');
+  if (shellBtn) shellBtn.style.display = P.fromShell ? 'block' : 'none';
+
+  // ── Chapter cards ──────────────────────────
+  const chEl = document.getElementById('hub-chapters');
+  if (!chEl) return;
+
+  chEl.innerHTML = LESSONS.map((lesson, idx) => {
+    const completed = P.lessonsCompleted.includes(lesson.id);
+    const unlocked  = isLessonUnlocked(idx);
+    const isNextUp  = unlocked && !completed && idx > 0;
+    const best      = P.lessonBestScores[lesson.id];
+
+    const statusLabel = completed ? '✓ COMPLETE' : unlocked ? '▶ PLAY' : '🔒 LOCKED';
+    const statusClass = completed ? 'completed'  : unlocked ? 'available' : 'locked';
+
+    let cardClass = 'unit-card ' + statusClass;
+    if (isNextUp) cardClass += ' next-up';
+
+    const metaRow = best
+      ? `<div class="unit-card-meta">Best: ${best.accuracy}% · ${best.correct}/${best.total} correct</div>`
+      : '';
+
+    const unlockNote = !unlocked
+      ? `<div class="unit-card-unlock">Complete ${LESSONS[idx-1].label} to unlock</div>`
+      : '';
+
+    return `<div class="${cardClass}" onclick="${unlocked ? `openBriefing('${lesson.id}')` : ''}">
+      <div class="unit-card-header">
+        <div class="unit-icon">${unlocked ? lesson.icon : '🔒'}</div>
+        <div class="unit-info">
+          <div class="unit-number">${lesson.label}</div>
+          <div class="unit-name">${lesson.title}</div>
+          <div class="unit-desc">${lesson.sub}</div>
+        </div>
+        <div class="unit-status ${statusClass}">${statusLabel}</div>
+      </div>
+      ${metaRow}
+      ${unlockNote}
+      <div class="unit-progress-bar">
+        <div class="unit-progress-fill" style="width:${completed ? 100 : 0}%"></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Replay from beginning — show when all done
+  const allDone = LESSONS.every(l => P.lessonsCompleted.includes(l.id));
+  if (allDone) {
+    chEl.innerHTML += `
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border2);">
+        <div style="font-family:var(--dm);font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:8px;text-align:center;">
+          UNIT COMPLETE — Want to improve your score?
+        </div>
+        <button class="btn full" onclick="replayFromBeginning()" style="border-color:var(--teal2);color:var(--teal2);">
+          <span>↺ Replay Unit from Lesson 38</span>
+        </button>
+      </div>`;
+  }
+
+  // ── Badges row ─────────────────────────────
+  const badgesEl = document.getElementById('hub-badges');
+  if (badgesEl) {
+    badgesEl.innerHTML = UNIT_BADGES.map(b => {
+      const earned = b.lessonId
+        ? P.lessonsCompleted.includes(b.lessonId)
+        : LESSONS.every(l => P.lessonsCompleted.includes(l.id));
+      return `<div class="badge-pill ${earned ? 'earned' : ''}">
+        <span class="badge-icon">${b.icon}</span>${b.label}
+      </div>`;
+    }).join('');
+  }
+
+  // ── Certificate row ─────────────────────────
+  const certRow = document.getElementById('hub-cert-row');
+  if (certRow) certRow.style.display = allDone ? 'block' : 'none';
+
+  // ── Trophy block ────────────────────────────
+  renderHubTrophySection();
+}
+
+// ── EOC Rating helpers (matches shell logic) ─────────────
+function eocLevel(acc) {
+  if (acc >= 90) return {level:5, label:'Level 5 — Historian Ready', color:'#38a050'};
+  if (acc >= 80) return {level:4, label:'Level 4 — Strong',          color:'#2aaa98'};
+  if (acc >= 70) return {level:3, label:'Level 3 — Developing',      color:'#c07818'};
+  if (acc >= 60) return {level:2, label:'Level 2 — Needs Review',    color:'#a01818'};
+  return              {level:1, label:'Level 1 — Try Again',         color:'#c02020'};
+}
+
+function renderHubTrophySection() {
+  const el = document.getElementById('hub-trophy-section');
+  if (!el) return;
+
+  // Only show if at least one lesson completed
+  const scores = Object.values(P.lessonBestScores || {});
+  if (!scores.length) { el.style.display = 'none'; return; }
+  el.style.display = 'block';
+
+  const best = P.lessonBestScores;
+  const tierOrder = ['tryagain','completed','bronze','silver','gold','historian'];
+
+  // Unit overall trophy = best single-lesson accuracy
+  const bestAcc = Math.max(...scores.map(s => s.accuracy));
+  const unitTier = calcTier(bestAcc);
+
+  // EOC rating from the EOC lesson specifically, or overall avg
+  const eocScore = best['eoc'] ? best['eoc'].accuracy :
+    Math.round(scores.reduce((a, s) => a + s.accuracy, 0) / scores.length);
+  const eoc = eocLevel(eocScore);
+
+  el.innerHTML = `
+    <div class="sh" style="margin-top:20px;">Unit Performance</div>
+    <div class="trophy-display">
+      <div class="trophy-icon">${unitTier.icon}</div>
+      <div class="trophy-info">
+        <div class="trophy-tier-name" style="color:${unitTier.color}">${unitTier.label}</div>
+        <div class="trophy-stat-row">
+          <div class="trophy-stat">Best accuracy: <strong>${bestAcc}%</strong></div>
+          <div class="trophy-stat">Lessons done: <strong>${P.lessonsCompleted.length}/${LESSONS.length}</strong></div>
+        </div>
+        <div class="eoc-rating-badge" style="color:${eoc.color};border-color:${eoc.color};">
+          EOC ${eoc.label}
+        </div>
+      </div>
+    </div>`;
+}
+
+// ════════════════════════════════════════════
+// HUD
+// ════════════════════════════════════════════
+
+function updateHUD() {
+  if (!P) return;
+  document.getElementById('hud-player-name').textContent = P.name;
+  // RULE: Always show global rank from shell — never a unit-specific rank
+  document.getElementById('hud-player-rank').textContent = P.globalRank || 'Curious Citizen';
+  document.getElementById('hud-avatar-wrap').innerHTML = getAvatarSVG(P.avatar || 'scholar_f', 44);
+  // Gold balance — reads from shared shell wallet
+  document.getElementById('hud-score').textContent = getShellGold().toLocaleString();
+  document.getElementById('hud-streak').textContent = streak;
+
+  const xpPct = Math.min(100, Math.round(((P.totalAnswered || 0) / 60) * 100));
+  document.getElementById('hud-xp-fill').style.width = xpPct + '%';
+}
+
+// ════════════════════════════════════════════
+// BRIEFING FLOW
+// ════════════════════════════════════════════
+
+function openBriefing(lessonId) {
+  const lesson = LESSONS.find(l => l.id === lessonId);
+  if (!lesson) return;
+  activeLesson = lesson;
+
+  const b = lesson.briefing;
+
+  document.getElementById('briefing-eyebrow').textContent = lesson.label + ' · MISSION BRIEFING';
+  document.getElementById('briefing-title').textContent = lesson.title;
+  document.getElementById('briefing-location').textContent = b.location || '';
+  document.getElementById('briefing-date').textContent = b.date || '';
+  document.getElementById('briefing-text').textContent = b.text || '';
+
+  // Role line
+  const roleEl = document.getElementById('briefing-role');
+  if (roleEl) {
+    if (b.role) { roleEl.textContent = 'Your role: ' + b.role; roleEl.style.display = 'block'; }
+    else roleEl.style.display = 'none';
+  }
+
+  // Quote
+  const qEl = document.getElementById('briefing-quote');
+  if (b.quote) {
+    qEl.textContent = b.quote;
+    qEl.style.display = 'block';
+  } else {
+    qEl.style.display = 'none';
+  }
+
+  // Tags
+  document.getElementById('briefing-meta').innerHTML =
+    (b.tags || []).map(t => `<span class="briefing-tag">${t}</span>`).join('');
+
+  // Scene placeholder (could load SVG from SCENES object later)
+  const sceneEl = document.getElementById('briefing-scene');
+  sceneEl.innerHTML = `<div style="width:100%;height:60px;background:var(--bg3);border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-family:var(--bebas);font-size:10px;color:var(--text3);letter-spacing:3px;">[SCENE ART LOADS FROM JSON]</div>`;
+
+  document.getElementById('briefing-modal').classList.add('show');
+  window.scrollTo(0, 0);
+}
+
+function closeBriefing() {
+  document.getElementById('briefing-modal').classList.remove('show');
+  activeLesson = null;
+}
+
+function proceedToQuestions() {
+  if (!activeLesson) return;
+  document.getElementById('briefing-modal').classList.remove('show');
+  startLesson(activeLesson);
+}
+
+// ════════════════════════════════════════════
+// QUESTION ENGINE
+// ════════════════════════════════════════════
+
+function startLesson(lesson) {
+  activeLesson = lesson;
+  activeQueue = pickSubset(lesson.bank, lesson.displayCount);
+  activeQIdx = 0;
+  sessionCorrect = 0;
+  sessionTotal = 0;
+  sessionScore = 0;
+  sessionGoldEarned = 0;
+  momentum = 0;
+  streak = 0;
+  answeredCurrent = false;
+
+  showQuestionScreen();
+  renderQuestion();
+}
+
+function renderQuestion() {
+  if (activeQIdx >= activeQueue.length) {
+    finishLesson();
+    return;
+  }
+
+  const q = activeQueue[activeQIdx];
+  const total = activeQueue.length;
+  answeredCurrent = false;
+
+  // Progress bar
+  document.getElementById('q-progress-fill').style.width =
+    Math.round(activeQIdx / total * 100) + '%';
+
+  // Context pill
+  document.getElementById('q-context-lesson').textContent = activeLesson.label;
+  document.getElementById('q-context-topic').textContent = activeLesson.title;
+
+  // Momentum
+  updateMomentumDisplay();
+
+  // Question number
+  document.getElementById('q-number').textContent =
+    `QUESTION ${activeQIdx + 1} OF ${total}`;
+
+  // Question text
+  document.getElementById('q-text').textContent = q.text;
+
+  // Standard tag — shown if question has a standard code
+  const stdTag = document.getElementById('q-standard-tag');
+  if (stdTag) {
+    if (q.standard) {
+      stdTag.textContent = q.standard;
+      stdTag.style.display = 'inline-block';
+    } else {
+      stdTag.style.display = 'none';
+    }
+  }
+
+  // Shuffle choices at runtime.
+  // correctAnswer is a plain string matching one of the choices — no index assumptions.
+  const shuffledChoices = shuffle(q.choices.slice());
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+
+  document.getElementById('choices-list').innerHTML = shuffledChoices.map((choiceText, i) => {
+    const isCorrect = (choiceText === q.correctAnswer);
+    // Encode explanation and standard safely for inline onclick
+    const safeExpl  = encodeURIComponent(q.explanation || '');
+    const safeStd   = encodeURIComponent(q.standard || '');
+    return `<button class="choice-btn"
+      data-correct="${isCorrect}"
+      data-explanation="${safeExpl}"
+      data-standard="${safeStd}"
+      onclick="selectChoice(this)">
+      <span class="choice-letter">${letters[i]}.</span>
+      <span class="choice-text">${choiceText}</span>
+    </button>`;
+  }).join('');
+
+  // Hide feedback and next btn
+  const fp = document.getElementById('feedback-panel');
+  fp.className = 'feedback-panel';
+  document.getElementById('next-btn-wrap').style.display = 'none';
+
+  updateHUD();
+}
+
+function selectChoice(btn) {
+  if (answeredCurrent) return;
+  answeredCurrent = true;
+
+  // Read correctness from data attribute — set during render, not passed through onclick
+  const isCorrect  = btn.dataset.correct === 'true';
+  const explanation = decodeURIComponent(btn.dataset.explanation || '');
+  const standard   = decodeURIComponent(btn.dataset.standard || '');
+
+  // Mark all buttons answered; highlight chosen and correct
+  document.querySelectorAll('.choice-btn').forEach(b => {
+    b.classList.add('answered');
+    if (b.dataset.correct === 'true') b.classList.add('correct');
+  });
+  if (!isCorrect) btn.classList.add('incorrect');
+
+  sessionTotal++;
+  const rules = activeLesson.goldRules || GOLD_RULES[activeLesson.type] || GOLD_RULES.lesson;
+
+  if (isCorrect) {
+    sessionCorrect++;
+    streak++;
+    const pts = 100 + (streak > 1 ? (streak - 1) * 25 : 0);
+    sessionScore += pts;
+    momentum = Math.min(100, momentum + 20);
+    awardGoldToShell(rules.perCorrect, 'Correct Answer — ' + activeLesson.label, true);
+    notify(streak > 2 ? `🔥 ${streak} streak! +${rules.perCorrect} 🪙` : `✓ Correct! +${rules.perCorrect} 🪙`);
+  } else {
+    streak = 0;
+    momentum = Math.max(0, momentum - 10);
+    notify('✗ Incorrect');
+  }
+
+  P.totalAnswered = (P.totalAnswered || 0) + 1;
+  if (isCorrect) P.totalCorrect = (P.totalCorrect || 0) + 1;
+  saveP();
+
+  const fp = document.getElementById('feedback-panel');
+  fp.className = 'feedback-panel show ' + (isCorrect ? 'correct' : 'incorrect');
+  document.getElementById('feedback-verdict').className =
+    'feedback-verdict ' + (isCorrect ? 'correct' : 'incorrect');
+  document.getElementById('feedback-verdict').textContent = isCorrect ? '✓ Correct' : '✗ Incorrect';
+  document.getElementById('feedback-text').textContent = explanation;
+  document.getElementById('feedback-standard').textContent = standard ? `Standard: ${standard}` : '';
+
+  const nw = document.getElementById('next-btn-wrap');
+  nw.style.display = 'block';
+  const isLast = activeQIdx === activeQueue.length - 1;
+  document.getElementById('next-btn-label').textContent = isLast ? 'See Results →' : 'Next Question →';
+
+  updateMomentumDisplay();
+  updateHUD();
+}
+
+function nextQuestion() {
+  activeQIdx++;
+  renderQuestion();
+}
+
+function updateMomentumDisplay() {
+  document.getElementById('momentum-fill').style.width = momentum + '%';
+  const labels = ['Ready', 'Warming Up', 'On Track', 'Sharp!', 'On Fire 🔥'];
+  const idx = Math.floor(momentum / 25);
+  document.getElementById('momentum-val').textContent = labels[Math.min(idx, labels.length - 1)];
+}
+
+// ════════════════════════════════════════════
+// LESSON COMPLETE
+// ════════════════════════════════════════════
+
+function finishLesson() {
+  const acc = sessionTotal > 0 ? Math.round(sessionCorrect / sessionTotal * 100) : 0;
+  const tier = calcTier(acc);
+  const rules = activeLesson.goldRules || GOLD_RULES[activeLesson.type] || GOLD_RULES.lesson;
+
+  // ── Gold bonuses ─────────────────────────────────────
+  let bonusGold = 0, bonusLabel = '';
+  if (acc >= 60) {
+    awardGoldToShell(rules.completionBonus, 'Completion Bonus — ' + activeLesson.label, false);
+    bonusGold += rules.completionBonus; bonusLabel = 'Completion Bonus';
+  }
+  if ((activeLesson.type === 'lesson' || activeLesson.type === 'extension') && acc === 100 && rules.perfectBonus) {
+    awardGoldToShell(rules.perfectBonus, 'Perfect Run — ' + activeLesson.label, false);
+    bonusGold += rules.perfectBonus; bonusLabel = 'Perfect Run!';
+  } else if (activeLesson.type === 'capstone' && acc === 100 && rules.masteryBonus) {
+    awardGoldToShell(rules.masteryBonus, 'Mastery — ' + activeLesson.label, false);
+    bonusGold += rules.masteryBonus; bonusLabel = 'Mastery Achieved!';
+  } else if (activeLesson.type === 'eoc' && acc >= 90 && rules.highScoreBonus) {
+    awardGoldToShell(rules.highScoreBonus, 'High Score — ' + activeLesson.label, false);
+    bonusGold += rules.highScoreBonus; bonusLabel = 'High Score Bonus!';
+  }
+  if (sessionGoldEarned > 0) spawnGoldParticle('+' + sessionGoldEarned + ' 🪙 total');
+
+  // ── Save best score ───────────────────────────────────
+  const prev = P.lessonBestScores[activeLesson.id];
+  if (!prev || acc > prev.accuracy) {
+    P.lessonBestScores[activeLesson.id] = {
+      correct: sessionCorrect, total: sessionTotal, accuracy: acc, score: sessionScore
+    };
+  }
+  const passedThisRun = acc >= 60;
+  const alreadyCompleted = P.lessonsCompleted.includes(activeLesson.id);
+  if (passedThisRun && !alreadyCompleted) {
+    P.lessonsCompleted.push(activeLesson.id);
+    // Push badge and cards to shell archive
+    pushRewardsToShell(activeLesson);
+  }
+  saveP();
+  pushACResult(acc);
+
+  // ── Trophy badge ──────────────────────────────────────
+  document.getElementById('complete-badge').textContent = tier.icon;
+  document.getElementById('complete-unit-lbl').textContent = activeLesson.label;
+  document.getElementById('complete-lesson-title').textContent = activeLesson.title;
+  document.getElementById('complete-tier').textContent = tier.label + ' — ' + acc + '%';
+  document.getElementById('complete-tier').style.color = tier.color;
+
+  // ── Stats row ─────────────────────────────────────────
+  document.getElementById('complete-stats').innerHTML = [
+    { val: sessionCorrect + '/' + sessionTotal, lbl: 'CORRECT' },
+    { val: acc + '%',                            lbl: 'ACCURACY' },
+    { val: '🪙 ' + sessionGoldEarned.toLocaleString(), lbl: 'GOLD EARNED' },
+  ].map(s => `<div class="complete-stat">
+    <div class="complete-stat-val">${s.val}</div>
+    <div class="complete-stat-lbl">${s.lbl}</div>
+  </div>`).join('');
+
+  // ── EOC Rating (show on EOC lesson or unit completion) ──
+  const allDone = LESSONS.every(l => P.lessonsCompleted.includes(l.id));
+  const showEOC = activeLesson.type === 'eoc' || allDone;
+  const eocBlock = document.getElementById('complete-eoc-block');
+  if (showEOC) {
+    const eoc = eocLevel(acc);
+    document.getElementById('complete-eoc-rating').textContent = eoc.label;
+    document.getElementById('complete-eoc-rating').style.color = eoc.color;
+    document.getElementById('complete-eoc-label').textContent =
+      acc >= 60 ? 'This result has been saved to your American Chronicles profile.' :
+      'Score 60% or higher to record your EOC rating.';
+    eocBlock.style.display = 'block';
+  } else {
+    eocBlock.style.display = 'none';
+  }
+
+  // ── Gold reward block ─────────────────────────────────
+  const rewardsEl = document.getElementById('complete-rewards');
+  const rewardsIn = document.getElementById('complete-rewards-inner');
+  if (bonusGold > 0 && rewardsIn) {
+    rewardsIn.innerHTML = `
+      <div style="font-family:var(--bebas);font-size:18px;color:#f5c842;margin-bottom:4px;">
+        +${bonusGold} 🪙 ${bonusLabel}
+      </div>
+      <div style="font-family:var(--dm);font-size:9px;color:var(--text3);">
+        This run: +${sessionGoldEarned} 🪙 · Shell balance: ${getShellGold().toLocaleString()} 🪙
+      </div>`;
+    rewardsEl.style.display = 'block';
+  } else {
+    rewardsEl.style.display = 'none';
+  }
+
+  // ── Badges earned ──────────────────────────────────────
+  const rewards = activeLesson.rewards || {};
+  const badgeNames = rewards.badge ? [rewards.badge] : [];
+  const cardNames  = rewards.cards || [];
+  const newlyEarned = passedThisRun && !alreadyCompleted;
+
+  const badgesBlock = document.getElementById('complete-badges-block');
+  const badgesChips = document.getElementById('complete-badges-chips');
+  if (badgeNames.length) {
+    badgesChips.innerHTML = badgeNames.map(b =>
+      `<div class="reward-chip ${newlyEarned ? 'earned' : ''}">
+        <span class="reward-chip-icon">🏅</span>
+        <span class="reward-chip-lbl">${newlyEarned ? '✓ ' : ''}${b}</span>
+      </div>`
+    ).join('');
+    badgesBlock.style.display = 'block';
+  } else {
+    badgesBlock.style.display = 'none';
+  }
+
+  // ── Cards earned ───────────────────────────────────────
+  const cardsBlock = document.getElementById('complete-cards-block');
+  const cardsChips = document.getElementById('complete-cards-chips');
+  if (cardNames.length) {
+    cardsChips.innerHTML = cardNames.map(c =>
+      `<div class="reward-chip ${newlyEarned ? 'earned' : ''}">
+        <span class="reward-chip-icon">🃏</span>
+        <span class="reward-chip-lbl">${newlyEarned ? '✓ ' : ''}${c}</span>
+      </div>`
+    ).join('');
+    cardsBlock.style.display = 'block';
+  } else {
+    cardsBlock.style.display = 'none';
+  }
+
+  // ── Button visibility ──────────────────────────────────
+  // "Replay from Beginning" — show when all lessons done or on the last lesson
+  const isLastLesson = activeLesson.id === LESSONS[LESSONS.length - 1].id;
+  const replayBtn = document.getElementById('btn-replay-all');
+  if (replayBtn) replayBtn.style.display = (allDone || isLastLesson) ? 'block' : 'none';
+
+  // Print certificate — show when full unit complete
+  const certBtn = document.getElementById('btn-print-cert');
+  if (certBtn) certBtn.style.display = allDone ? 'block' : 'none';
+
+  document.getElementById('lesson-complete').classList.add('show');
+  window.scrollTo(0, 0);
+}
+
+// ── Push earned rewards to shell archive ─────────────────
+function pushRewardsToShell(lesson) {
+  const rewards = lesson.rewards || {};
+  const badge = rewards.badge;
+  const cards = rewards.cards || [];
+
+  try {
+    const raw = localStorage.getItem(SHELL_KEY);
+    const shell = raw ? JSON.parse(raw) : {};
+    if (!shell.unitBadges) shell.unitBadges = {};
+    if (!shell.unitCards)  shell.unitCards  = {};
+    if (!shell.unitBadges[UNIT_ID]) shell.unitBadges[UNIT_ID] = [];
+    if (!shell.unitCards[UNIT_ID])  shell.unitCards[UNIT_ID]  = [];
+
+    // Badge — store as slugified id
+    if (badge) {
+      const badgeId = badge.toLowerCase().replace(/\s+/g, '_');
+      if (!shell.unitBadges[UNIT_ID].includes(badgeId)) {
+        shell.unitBadges[UNIT_ID].push(badgeId);
+      }
+    }
+    // Cards
+    cards.forEach(c => {
+      const cardId = c.toLowerCase().replace(/\s+/g, '_');
+      if (!shell.unitCards[UNIT_ID].includes(cardId)) {
+        shell.unitCards[UNIT_ID].push(cardId);
+      }
+    });
+
+    // Also mark unit as completed in shell if all lessons done
+    if (LESSONS.every(l => P.lessonsCompleted.includes(l.id))) {
+      if (!Array.isArray(shell.unitsCompleted)) shell.unitsCompleted = [];
+      if (!shell.unitsCompleted.includes(UNIT_ID)) shell.unitsCompleted.push(UNIT_ID);
+    }
+
+    localStorage.setItem(SHELL_KEY, JSON.stringify(shell));
+  } catch(e) { console.warn('pushRewardsToShell failed', e); }
+
+  // Also notify via postMessage for live shell sessions
+  try {
+    if (badge) window.parent.postMessage({type:'UNIT_BADGE_EARNED', unitId:UNIT_ID, badgeId: badge.toLowerCase().replace(/\s+/g,'_')}, '*');
+    cards.forEach(c => window.parent.postMessage({type:'UNIT_CARD_EARNED', unitId:UNIT_ID, cardId: c.toLowerCase().replace(/\s+/g,'_')}, '*'));
+  } catch(e) {}
+}
+
+// ════════════════════════════════════════════
+// BUTTON LOGIC (completion screen)
+// ════════════════════════════════════════════
+
+function retryLesson() {
+  // Replay same lesson — same briefing → questions
+  document.getElementById('lesson-complete').classList.remove('show');
+  openBriefing(activeLesson.id);
+}
+
+function returnToUnitHub() {
+  // Go to Layer 2 — Unit Hub — NO re-login
+  document.getElementById('lesson-complete').classList.remove('show');
+  document.getElementById('briefing-modal').classList.remove('show');
+  activeLesson = null;
+  showUnitHub();
+}
+
+function returnToShell() {
+  saveP();
+  if (window.opener && !window.opener.closed) { window.opener.focus(); window.close(); return; }
+  try { window.parent.postMessage({type:'RETURN_TO_SHELL', unitId: UNIT_ID}, '*'); } catch(e) {}
+  notify('Returning to American Chronicles…');
+  const shellURL = localStorage.getItem('ac_shell_url');
+  if (shellURL) { setTimeout(() => { window.location.href = shellURL; }, 600); }
+}
+
+function replayFromBeginning() {
+  // Reset all lesson progress and start from Lesson 38
+  P.lessonsCompleted = [];
+  P.lessonBestScores = {};
+  saveP();
+  document.getElementById('lesson-complete').classList.remove('show');
+  // Start the first lesson's briefing
+  openBriefing(LESSONS[0].id);
+}
+
+function printCertificate() {
+  const scores = P.lessonBestScores;
+  const allScores = Object.values(scores);
+  const avgAcc = allScores.length
+    ? Math.round(allScores.reduce((a, s) => a + s.accuracy, 0) / allScores.length)
+    : 0;
+  const tier = calcTier(avgAcc);
+  const eoc = eocLevel(avgAcc);
+  const date = new Date().toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+
+  const lessonRows = LESSONS.map(l => {
+    const s = scores[l.id];
+    return s
+      ? `<tr><td>${l.label}</td><td>${l.title}</td><td>${s.accuracy}%</td><td>${s.correct}/${s.total}</td></tr>`
+      : `<tr style="opacity:.4"><td>${l.label}</td><td>${l.title}</td><td>—</td><td>—</td></tr>`;
+  }).join('');
+
+  document.getElementById('print-area').innerHTML = `
+    <div class="cert-body" style="max-width:700px;margin:0 auto;font-family:Georgia,serif;padding:40px;border:3px double #c83020;">
+      <div style="text-align:center;margin-bottom:24px;">
+        <div style="font-size:36px;margin-bottom:8px;">🏛️</div>
+        <div style="font-size:28px;font-weight:bold;letter-spacing:3px;color:#c83020;">AMERICAN CHRONICLES</div>
+        <div style="font-size:14px;letter-spacing:2px;color:#666;margin-top:4px;">UNIT 5B — EARLY COLD WAR · CERTIFICATE OF COMPLETION</div>
+      </div>
+      <div style="text-align:center;margin-bottom:20px;padding:16px;border:1px solid #c83020;">
+        <div style="font-size:13px;color:#666;letter-spacing:1px;">THIS CERTIFIES THAT</div>
+        <div style="font-size:26px;font-style:italic;margin:6px 0;">${P.name || 'Historian'}</div>
+        <div style="font-size:13px;color:#666;">has completed Unit 7B: Napalm Dawn — Vietnam and the 1970s</div>
+        ${P.period ? `<div style="font-size:12px;color:#999;margin-top:4px;">Period ${P.period}</div>` : ''}
+      </div>
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="font-size:22px;font-weight:bold;color:#c83020;">${tier.icon} ${tier.label}</div>
+        <div style="font-size:13px;color:#666;">Overall Accuracy: ${avgAcc}%</div>
+        <div style="font-size:13px;color:#333;margin-top:4px;">EOC Practice Rating: ${eoc.label}</div>
+      </div>
+      <table style="width:100%;border-collapse:collapse;margin-bottom:20px;font-size:12px;">
+        <thead><tr style="border-bottom:2px solid #c83020;">
+          <th style="text-align:left;padding:6px;">Lesson</th>
+          <th style="text-align:left;padding:6px;">Title</th>
+          <th style="padding:6px;">Accuracy</th>
+          <th style="padding:6px;">Score</th>
+        </tr></thead>
+        <tbody>${lessonRows}</tbody>
+      </table>
+      <div style="text-align:center;font-size:11px;color:#999;border-top:1px solid #ddd;padding-top:12px;">
+        Issued ${date} · American Chronicles · Created by Joshua Olson · Brevard County, FL
+      </div>
+    </div>`;
+
+  setTimeout(() => window.print(), 100);
+}
+
+// ════════════════════════════════════════════
+// SUPABASE PUSH
+// ════════════════════════════════════════════
+
+async function pushACResult(acc) {
+  if (!P || !P.name || P.name === 'Guest') return;
+  const tier = calcTier(acc);
+  try {
+    const existing = await fetch(
+      AC_SUPA_URL + '/rest/v1/ac_results?name=eq.' + encodeURIComponent(P.name) +
+      '&period=eq.' + encodeURIComponent(P.period || '') +
+      '&unit_id=eq.' + UNIT_ID,
+      {headers: AC_HEADERS}
+    );
+    const rows = await existing.json();
+    const prev = rows && rows[0];
+    const tierOrder = ['tryagain','completed','bronze','silver','gold','historian'];
+    const tierKey = tier.label.toLowerCase().replace(' ','');
+    const bestTier = prev ?
+      (tierOrder.indexOf(tierKey) > tierOrder.indexOf(prev.trophy) ? tierKey : prev.trophy) :
+      tierKey;
+    await fetch(
+      AC_SUPA_URL + '/rest/v1/ac_results?on_conflict=name,period,unit_id',
+      {
+        method: 'POST',
+        headers: Object.assign({}, AC_HEADERS, {'Prefer':'resolution=merge-duplicates'}),
+        body: JSON.stringify({
+          name: P.name,
+          period: P.period || '',
+          unit_id: UNIT_ID,
+          best_score: Math.max(sessionScore, prev ? prev.best_score || 0 : 0),
+          best_accuracy: Math.max(acc, prev ? prev.best_accuracy || 0 : 0),
+          trophy: bestTier,
+          attempts: (prev ? prev.attempts || 0 : 0) + 1,
+          updated_at: new Date().toISOString()
+        })
+      }
+    );
+  } catch(e) { console.log('AC push failed', e); }
+}
+
+// ════════════════════════════════════════════
+// LOGIN GATE
+// ════════════════════════════════════════════
+
+function buildPeriodSelector() {
+  const el = document.getElementById('period-selector');
+  el.innerHTML = [1,2,3,4,5,6,7].map(p =>
+    `<div onclick="selectPeriod(${p}, this)"
+      style="background:var(--bg3);border:1.5px solid var(--border2);color:var(--text3);
+      font-family:var(--bebas);font-size:18px;padding:8px 4px;text-align:center;cursor:pointer;transition:all .15s;"
+      id="period-opt-${p}">${p}</div>`
+  ).join('');
+}
+
+let selectedPeriod = null;
+function selectPeriod(p, el) {
+  selectedPeriod = p;
+  document.querySelectorAll('#period-selector div').forEach(d => {
+    d.style.borderColor = 'var(--border2)';
+    d.style.color = 'var(--text3)';
+    d.style.background = 'var(--bg3)';
+  });
+  el.style.borderColor = 'var(--gold)';
+  el.style.color = 'var(--gold)';
+  el.style.background = 'rgba(200,48,32,.08)';
+}
+
+function submitLogin() {
+  const name = document.getElementById('login-name').value.trim();
+  if (!name) { alert('Please enter your name.'); return; }
+  if (!selectedPeriod) { alert('Please select your class period.'); return; }
+
+  P = Object.assign({}, DEFAULT_P, loadSavedUnit() || {}, {
+    name,
+    period: selectedPeriod,
+    globalRank: 'Curious Citizen'
+  });
+  P.fromShell = false;
+  saveP();
+
+  document.getElementById('login-gate').classList.remove('show');
+  showUnitHub();
+}
+
+function showLoginGate() {
+  document.getElementById('login-gate').classList.add('show');
+}
+
+// ════════════════════════════════════════════
+// HISTORICAL CARDS & BADGES DATA
+// (carried from v1, adapted to new lesson structure)
+// ════════════════════════════════════════════
+
+const HIST_CARDS = {
+  carnegie:    {icon:'🏭', name:'Andrew Carnegie',         role:'Steel Magnate · Gilded Age',
+    desc:'Built the largest steel empire in America and then gave most of it away. His rise from immigrant poverty to world’s richest man was held up as proof that capitalism rewarded hard work. His workers’ conditions at Homestead told a different story.', unlockLesson:'ch1'},
+  gompers:     {icon:'✊', name:'Samuel Gompers',           role:'AFL Founder · Labor Organizer',
+    desc:'Founded the American Federation of Labor and spent four decades building the most durable labor organization in U.S. history. Focused on concrete gains — wages, hours, safety — rather than socialist politics, winning what workers could actually keep.', unlockLesson:'ch2'},
+  triangle:    {icon:'🔥', name:'Triangle Shirtwaist Workers', role:'Reform Symbol · 1911',
+    desc:'146 garment workers, mostly young immigrant women, died when fire swept through a locked factory in New York. Their deaths horrified the nation and directly produced fire codes, labor regulations, and factory inspection laws that saved millions of lives.', unlockLesson:'ch2'},
+  fdr_econ:    {icon:'📻', name:'Franklin D. Roosevelt',     role:'New Deal Architect',
+    desc:'His New Deal permanently changed what Americans expected from government during economic crisis. Social Security, labor rights, bank regulation, and public works programs created a safety net that still shapes American life today.', unlockLesson:'ch4'},
+  chavez:      {icon:'🍇', name:'César Chávez',              role:'UFW Founder · Farmworker Rights',
+    desc:'Led the United Farm Workers and organized boycotts that forced growers to negotiate. His campaigns connected labor rights with civil rights and showed that workers at the very bottom of the economy could build collective power.', unlockLesson:'ch3'},
+  keynes:      {icon:'💹', name:'John Maynard Keynes',       role:'Economist · Government Intervention',
+    desc:'His theory that governments should spend to stimulate economies in crisis provided the intellectual foundation for the New Deal and postwar economic policy. Later challenged by supply-side economists during the Reagan era.', unlockLesson:'ch4'},
+  friedman:    {icon:'📉', name:'Milton Friedman',           role:'Economist · Free Market Champion',
+    desc:'The intellectual godfather of Reaganomics. His arguments for deregulation, lower taxes, and market-based solutions reshaped American economic policy from the 1980s onward and challenged the New Deal consensus that had dominated for decades.', unlockLesson:'ch5'},
+};
+
+const UNIT_BADGES = [
+  {id:'engines_ch1',  icon:'🏭', label:'Who Owns the Future?',  desc:'Completed Chapter 1',              lessonId:'ch1'},
+  {id:'engines_ch2',  icon:'✊', label:'Workers and Wealth',     desc:'Completed Chapter 2',              lessonId:'ch2'},
+  {id:'engines_ch3',  icon:'📉', label:'Boom, Bust, Survival',  desc:'Completed Chapter 3',              lessonId:'ch3'},
+  {id:'engines_ch4',  icon:'🏛️', label:'Government and Economy', desc:'Completed Chapter 4',         lessonId:'ch4'},
+  {id:'engines_ch5',  icon:'⚖️', label:'Opportunity and Inequality', desc:'Completed Chapter 5',       lessonId:'ch5'},
+  {id:'engines_eoc',  icon:'📋', label:'Economy Synthesis',    desc:'Completed Cumulative Review',      lessonId:'eoc'},
+  {id:'engines_done', icon:'⭐', label:'Engines of Change',     desc:'Completed entire campaign',        lessonId:null},
+];
+
+// ════════════════════════════════════════════
+// BOTTOM NAV & OVERLAY FUNCTIONS
+// ════════════════════════════════════════════
+
+function navToHub() {
+  // Close any open overlays and return to unit hub
+  document.querySelectorAll('.overlay').forEach(o => o.classList.remove('show'));
+  document.getElementById('lesson-complete').classList.remove('show');
+  document.getElementById('briefing-modal').classList.remove('show');
+  setActiveNav(0);
+  returnToUnitHub();
+}
+
+function setActiveNav(idx) {
+  document.querySelectorAll('.bn-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+}
+
+function showBottomNav() {
+  document.getElementById('bottom-nav').style.display = 'flex';
+}
+
+// ── LEADERBOARD ──────────────────────────────
+let _lbAllData = [];
+let _lbType = 'overall';
+let _lbPeriodFilter = 'all';
+let _lbDeleteUnlocked = false;
+
+function openLeaderboard() {
+  document.getElementById('leaderboard-overlay').classList.add('show');
+  setActiveNav(1);
+  loadLeaderboard();
+}
+function closeLeaderboard() {
+  document.getElementById('leaderboard-overlay').classList.remove('show');
+  setActiveNav(0);
+}
+
+async function loadLeaderboard() {
+  if (!P) return;
+  document.getElementById('lb-sync-status').textContent = 'Loading…';
+  try {
+    const r = await fetch(
+      AC_SUPA_URL + '/rest/v1/ac_results?unit_id=eq.' + UNIT_ID + '&order=best_score.desc&limit=200',
+      {headers: AC_HEADERS}
+    );
+    _lbAllData = await r.json() || [];
+    renderLeaderboard();
+  } catch(e) {
+    document.getElementById('lb-sync-status').textContent = 'Could not load scores.';
+    _lbAllData = [];
+    renderLeaderboard();
+  }
+}
+
+function setLbType(type, btn) {
+  _lbType = type;
+  _lbPeriodFilter = 'all';
+  document.querySelectorAll('#lb-type-tabs .lb-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderLeaderboard();
+}
+
+function setLbPeriod(p, btn) {
+  _lbPeriodFilter = p;
+  document.querySelectorAll('#lb-period-tabs .lb-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderLeaderboard();
+}
+
+function renderLeaderboard() {
+  const medals = ['🥇','🥈','🥉'];
+  const periods = [...new Set(_lbAllData.map(s => s.period).filter(p => p && p !== '0'))].sort((a,b) => +a - +b);
+  if (_lbType === 'class') {
+    document.getElementById('lb-period-tabs').innerHTML = periods.map(p =>
+      `<button class="lb-tab ${_lbPeriodFilter===p?'active':''}" onclick="setLbPeriod('${p}',this)">Period ${p}</button>`
+    ).join('');
+  } else {
+    document.getElementById('lb-period-tabs').innerHTML = '';
+  }
+  let filtered = _lbAllData;
+  if (_lbType === 'class') {
+    filtered = filtered.filter(s => s.period && s.period !== '0');
+    if (_lbPeriodFilter !== 'all') filtered = filtered.filter(s => String(s.period) === String(_lbPeriodFilter));
+  }
+  document.getElementById('lb-sync-status').textContent = filtered.length + ' students — Engines of Change Campaign';
+  if (!filtered.length) {
+    document.getElementById('lb-content').innerHTML =
+      '<div style="font-family:var(--crimson);color:var(--text3);font-style:italic;padding:16px;">No results yet.</div>';
+    return;
+  }
+  const showDelete = _lbDeleteUnlocked;
+  const headerCols = `<th>#</th><th>STUDENT</th><th>SCORE</th><th>ACCURACY</th><th>ATTEMPTS</th>${showDelete?'<th></th>':''}`;
+  const rows = filtered.slice(0, 50).map((s, i) => {
+    const isMe = P && s.name === P.name && String(s.period) === String(P.period);
+    const medal = i < 3 ? medals[i] : '#' + (i+1);
+    const mc = i===0?'var(--gold)':i===1?'#c0c0c0':i===2?'#cd7f32':'var(--text3)';
+    const delBtn = showDelete
+      ? `<td><button onclick="lbDeleteEntry('${s.name.replace(/'/g,"\\'")}','${s.period}')" style="font-family:var(--bebas);font-size:9px;background:transparent;border:1px solid var(--red2);color:var(--red2);padding:2px 6px;cursor:pointer;">X</button></td>`
+      : '';
+    return `<tr class="${isMe?'lb-you':''}">
+      <td style="font-family:var(--dm);font-size:12px;color:${mc};">${medal}</td>
+      <td><div class="lb-name">${s.name||'--'}${isMe?' ◀':''}</div></td>
+      <td class="lb-score">${(s.best_score||0).toLocaleString()}</td>
+      <td style="font-family:var(--dm);font-size:10px;color:var(--gold);">${s.best_accuracy!=null?s.best_accuracy+'%':'--'}</td>
+      <td style="font-family:var(--dm);font-size:10px;color:var(--text3);">${s.attempts||1}</td>
+      ${delBtn}
+    </tr>`;
+  }).join('');
+  document.getElementById('lb-content').innerHTML =
+    `<table class="lb-table"><thead><tr>${headerCols}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function unlockLBDelete() {
+  const code = prompt('Teacher delete code:');
+  if (code === 'olson219') {
+    _lbDeleteUnlocked = true;
+    document.getElementById('lb-teacher-unlock').textContent = '🔓';
+    renderLeaderboard();
+  }
+}
+
+async function lbDeleteEntry(name, period) {
+  if (!confirm(`Remove "${name}" from leaderboard?`)) return;
+  try {
+    await fetch(
+      AC_SUPA_URL + '/rest/v1/ac_results?name=eq.' + encodeURIComponent(name) +
+      '&period=eq.' + encodeURIComponent(period) + '&unit_id=eq.' + UNIT_ID,
+      {method:'DELETE', headers: AC_HEADERS}
+    );
+    notify('Removed');
+    loadLeaderboard();
+  } catch(e) { notify('Error removing entry'); }
+}
+
+// ── PROFILE ──────────────────────────────────
+function openProfile() {
+  if (!P) return;
+  setActiveNav(2);
+  // Avatar
+  document.getElementById('profile-avatar-large').innerHTML =
+    `<div style="width:80px;height:80px;margin:0 auto;">${getAvatarSVG(P.avatar||'scholar_f', 80)}</div>
+     <div style="font-family:var(--playfair);font-size:18px;color:var(--cream);font-style:italic;margin-top:8px;">${P.name}</div>
+     <div style="font-family:var(--dm);font-size:10px;color:var(--gold2);margin-top:3px;">${P.globalRank||'Curious Citizen'}${P.period?' · Period '+P.period:''}</div>`;
+
+  // Stats
+  const scores = Object.values(P.lessonBestScores || {});
+  const totalCorrect = scores.reduce((a, s) => a + (s.correct||0), 0);
+  const totalAnswered = scores.reduce((a, s) => a + (s.total||0), 0);
+  const avgAcc = totalAnswered > 0 ? Math.round(totalCorrect / totalAnswered * 100) : 0;
+  const bestAcc = scores.length ? Math.max(...scores.map(s => s.accuracy)) : 0;
+  const tier = calcTier(bestAcc);
+  document.getElementById('profile-stat-grid').innerHTML = [
+    {val: P.lessonsCompleted.length + '/' + LESSONS.length, lbl: 'LESSONS DONE'},
+    {val: avgAcc + '%',       lbl: 'OVERALL ACCURACY'},
+    {val: tier.icon + ' ' + tier.label, lbl: 'TROPHY TIER'},
+    {val: getShellGold().toLocaleString() + ' 🪙', lbl: 'GOLD BALANCE'},
+  ].map(s =>
+    `<div class="profile-stat"><div class="profile-stat-val">${s.val}</div><div class="profile-stat-lbl">${s.lbl}</div></div>`
+  ).join('');
+
+  // Badges
+  document.getElementById('profile-badge-grid').innerHTML = UNIT_BADGES.map(b => {
+    const earned = b.lessonId
+      ? P.lessonsCompleted.includes(b.lessonId)
+      : LESSONS.every(l => P.lessonsCompleted.includes(l.id));
+    return `<div class="badge-pill ${earned?'earned':''}">
+      <span class="badge-icon">${b.icon}</span>${b.label}
+    </div>`;
+  }).join('');
+
+  // Cards
+  document.getElementById('profile-card-grid').innerHTML = Object.entries(HIST_CARDS).map(([k, c]) => {
+    const earned = P.lessonsCompleted.includes(c.unlockLesson);
+    return `<div class="hist-card ${earned?'':'locked-card'}">
+      <div class="hist-card-icon">${c.icon}</div>
+      <div class="hist-card-name">${c.name}</div>
+      <div class="hist-card-role">${c.role}</div>
+      <div class="hist-card-desc">${earned ? c.desc : 'Complete ' + (LESSONS.find(l=>l.id===c.unlockLesson)?.label||'the lesson') + ' to unlock.'}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('profile-overlay').classList.add('show');
+}
+function closeProfile() {
+  document.getElementById('profile-overlay').classList.remove('show');
+  setActiveNav(0);
+}
+
+// ── CARD COLLECTION ──────────────────────────
+function openCardCollection() {
+  setActiveNav(3);
+  document.getElementById('cardcoll-grid').innerHTML = Object.entries(HIST_CARDS).map(([k, c]) => {
+    const earned = P && P.lessonsCompleted.includes(c.unlockLesson);
+    return `<div class="hist-card ${earned?'':'locked-card'}">
+      <div class="hist-card-icon">${c.icon}</div>
+      <div class="hist-card-name">${c.name}</div>
+      <div class="hist-card-role">${c.role}</div>
+      <div class="hist-card-desc">${earned ? c.desc : 'Complete ' + (LESSONS.find(l=>l.id===c.unlockLesson)?.label||'the lesson') + ' to unlock this card.'}</div>
+      ${!earned ? `<div class="hist-card-unlock">🔒 Locked</div>` : ''}
+    </div>`;
+  }).join('');
+  document.getElementById('cardcoll-overlay').classList.add('show');
+}
+
+// ════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════
+
+window.addEventListener('DOMContentLoaded', () => {
+  buildPeriodSelector();
+
+  // Try loading from shell session first
+  const hasSession = loadP();
+
+  if (hasSession) {
+    document.getElementById('login-gate').classList.remove('show');
+    showWelcomeBack();
+  } else {
+    showLoginGate();
+  }
+});
+
+// ════════════════════════════════════════════
+// WELCOME BACK MODAL
+// ════════════════════════════════════════════
+
+function showWelcomeBack() {
+  if (!P) { showLoginGate(); return; }
+
+  // Populate avatar
+  const avatarEl = document.getElementById('wb-avatar');
+  if (avatarEl) avatarEl.innerHTML = getAvatarSVG(P.avatar || 'scholar_f', 70);
+
+  // Name
+  const nameEl = document.getElementById('wb-name');
+  if (nameEl) nameEl.textContent = P.name || 'Historian';
+
+  // Rank / teacher / period line
+  const subEl = document.getElementById('wb-sub');
+  if (subEl) {
+    const parts = [];
+    if (P.globalRank) parts.push(P.globalRank);
+    if (P.period) parts.push('Period ' + P.period);
+    subEl.textContent = parts.join(' — ') || 'Curious Citizen';
+  }
+
+  // Progress line
+  const progEl = document.getElementById('wb-progress');
+  if (progEl) {
+    const done = (P.lessonsCompleted || []).length;
+    const total = LESSONS.length;
+    progEl.textContent = done > 0
+      ? done + ' of ' + total + ' lessons completed'
+      : 'No progress saved yet';
+  }
+
+  document.getElementById('welcome-back-overlay').classList.add('show');
+}
+
+function confirmWelcomeBack() {
+  document.getElementById('welcome-back-overlay').classList.remove('show');
+  showUnitHub();
+}
+
+function switchPlayer() {
+  // Clear saved unit state so a new player can log in fresh
+  try { localStorage.removeItem(SAVE_KEY); } catch(e) {}
+  P = null;
+  document.getElementById('welcome-back-overlay').classList.remove('show');
+  showLoginGate();
+}
+
+// ── Anti-copy
+(function(){
+  function isInput(el){return el&&(el.tagName==='INPUT'||el.tagName==='TEXTAREA');}
+  document.addEventListener('contextmenu',e=>{if(!isInput(e.target))e.preventDefault();});
+  document.addEventListener('copy',e=>{if(!isInput(e.target))e.preventDefault();});
+})();
+
+</script>
+</body>
+</html>
