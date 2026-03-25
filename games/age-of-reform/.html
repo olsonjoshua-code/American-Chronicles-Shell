@@ -2214,8 +2214,8 @@ function returnToShell() {
   if (window.opener && !window.opener.closed) { window.opener.focus(); window.close(); return; }
   try { window.parent.postMessage({type:'RETURN_TO_SHELL', unitId: UNIT_ID}, '*'); } catch(e) {}
   notify('Returning to American Chronicles…');
-  const shellURL = localStorage.getItem('ac_shell_url');
-  if (shellURL) { setTimeout(() => { window.location.href = shellURL; }, 600); }
+  const shellURL = localStorage.getItem('ac_shell_url') || 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/';
+  setTimeout(() => { window.location.href = shellURL; }, 600);
 }
 
 function replayFromBeginning() {
