@@ -1638,11 +1638,14 @@ window.addEventListener('load',()=>{
 });
 
 function boot(){
+  // If returning from a unit game (or any reload) with an existing session,
+  // skip the title screen entirely and go straight into the shell.
+  if(S.setupDone){enterShell();return;}
   renderTitleArt();
   const ts=document.getElementById('title-screen');ts.style.display='flex';
   const cb=document.getElementById('btn-continue'),cn=document.getElementById('continue-note');
-  if(S.setupDone){cb.disabled=false;cb.style.opacity='1';if(cn)cn.textContent='Welcome back, '+(S.name||'Historian')+'.';}
-  else{cb.disabled=true;cb.style.opacity='.3';if(cn)cn.textContent='Start a New Journey first.';}
+  cb.disabled=true;cb.style.opacity='.3';
+  if(cn)cn.textContent='Start a New Journey first.';
 }
 
 function renderTitleArt(){
