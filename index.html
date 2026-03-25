@@ -2495,8 +2495,17 @@ async function renderTrophyRoom(){
 async function renderLeaderboard(){
   document.getElementById('lb-sync').textContent='Loading class results…';
   const all=await sfetch('/rest/v1/ac_results?select=name,period,unit_id,best_score,best_accuracy,cards&order=best_score.desc&limit=400');
-  // aggregate per student
-  const sm={};(all||[]).forEach(r=>{const k=r.name+'|'+r.period;if(!sm[k])sm[k]={name:r.name,period:r.period,score:0,units:0,golds:0,cards:0};sm[k].score+=r.best_score||0;sm[k].units++;if(r.best_accuracy>=90)sm[k].golds++;sm[k].cards+=r.cards||0;});
+  // aggregate per student — teacher rows (any period='teacher' OR is_teacher flag) merged under name only
+  const sm={};
+  (all||[]).forEach(r=>{
+    const isT=r.is_teacher||r.period==='teacher';
+    const k=isT?'__teacher__'+r.name:r.name+'|'+r.period;
+    if(!sm[k])sm[k]={name:r.name,period:isT?'':r.period,score:0,units:0,golds:0,cards:0,is_teacher:isT};
+    sm[k].score+=r.best_score||0;sm[k].units++;
+    if(r.best_accuracy>=90)sm[k].golds++;
+    sm[k].cards+=r.cards||0;
+    if(isT)sm[k].is_teacher=true;
+  });
   const sts=Object.values(sm).sort((a,b)=>b.score-a.score);
   // tabs
   const periods=[...new Set(sts.filter(s=>s.period&&!s.is_teacher&&s.period!=='teacher').map(s=>String(s.period)))].sort((a,b)=>+a-+b);
