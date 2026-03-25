@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>American Chronicles — U.S. History Course Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
   --bg:#2c1f14;--bg2:#3a2a1a;--bg3:#4a3525;--panel:#3f2e1e;
@@ -415,16 +416,24 @@ body::before{content:'';position:fixed;inset:0;
   <div class="ld-bar-wrap"><div id="ld-bar" class="ld-bar-fill"></div></div>
 </div>
 
-<!-- TITLE -->
+<!-- LOGIN SCREEN -->
 <div id="title-screen">
   <div class="title-banner" id="title-art"></div>
   <div class="title-logo">American Chronicles</div>
   <div class="title-sub">A Playable Journey Through U.S. History</div>
   <div class="title-badge">10th Grade · Florida EOC Aligned</div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:9px;max-width:300px;margin:0 auto">
-    <button class="btn full" onclick="startNewProfile()"><span>New Journey →</span></button>
-    <button class="btn full" id="btn-continue" onclick="enterShell()" style="border-color:var(--teal2);color:var(--teal2)"><span>Continue Course</span></button>
-    <div id="continue-note" style="font-family:var(--dm);font-size:9px;color:var(--text3);min-height:13px;text-align:center"></div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;max-width:300px;margin:0 auto">
+
+    <!-- Google Sign-In button -->
+    <button class="btn full" id="btn-google-login" onclick="signInWithGoogle()" style="border-color:var(--amber);color:var(--amber);display:flex;align-items:center;justify-content:center;gap:10px">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20H24v8h11.3C33.6 33.1 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34.2 6.5 29.4 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8 20-20 0-1.3-.1-2.7-.4-4z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 16 19 13 24 13c3 0 5.8 1.1 7.9 3l5.7-5.7C34.2 6.5 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5L31.8 34c-2.1 1.5-4.8 2-7.8 2-5.2 0-9.6-3-11.3-7.3l-6.6 5.1C9.5 39.5 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20H24v8h11.3c-.9 2.5-2.6 4.5-4.8 5.9L37 38.9C41.2 35.1 44 30.1 44 24c0-1.3-.1-2.7-.4-4z"/></svg>
+      <span>Sign in with Google</span>
+    </button>
+
+    <div id="login-status" style="font-family:var(--dm);font-size:10px;color:var(--text3);min-height:14px;text-align:center"></div>
+
+    <!-- Teacher login (unchanged) -->
     <div id="teacher-box" style="display:none;width:100%;margin-top:4px">
       <input id="teacher-input" type="password" maxlength="16" style="font-family:var(--bebas);font-size:16px;letter-spacing:3px;background:var(--bg2);border:1.5px solid var(--teal);color:var(--cream);padding:10px;width:100%;outline:none;text-align:center;text-transform:uppercase;margin-bottom:6px" placeholder="CODE" onkeydown="if(event.key==='Enter')submitTeacher()">
       <button class="btn full teal" onclick="submitTeacher()"><span>Teacher Login</span></button>
@@ -435,9 +444,10 @@ body::before{content:'';position:fixed;inset:0;
   <div style="margin-top:2.5rem;font-family:var(--dm);font-size:9px;color:var(--text3);letter-spacing:1px;line-height:2;text-align:center">CREATED BY JOSHUA OLSON · BREVARD COUNTY, FL<br><span style="opacity:.55">© 2026 Joshua Olson · All Rights Reserved</span></div>
 </div>
 
-<!-- SETUP -->
+<!-- SETUP (first-time profile after Google login) -->
 <div id="setup-screen">
-  <div style="font-family:var(--bebas);font-size:24px;color:var(--amber);letter-spacing:3px;margin-bottom:16px">Create Your Profile</div>
+  <div style="font-family:var(--bebas);font-size:24px;color:var(--amber);letter-spacing:3px;margin-bottom:4px">One-Time Setup</div>
+  <div style="font-family:var(--dm);font-size:10px;color:var(--text3);margin-bottom:16px;text-align:center">This only happens once — your profile saves to your account.</div>
   <div class="char-preview-wrap">
     <div id="setup-avatar" style="margin:0 auto 10px"></div>
     <div style="font-family:var(--playfair);font-size:18px;color:var(--cream);font-style:italic" id="setup-name-disp">Historian</div>
@@ -445,14 +455,12 @@ body::before{content:'';position:fixed;inset:0;
   </div>
   <div class="sh" style="font-size:13px;margin-bottom:9px">Choose Your Character</div>
   <div class="starter-grid" id="starter-grid"></div>
-  <div class="sh" style="font-size:13px;margin:13px 0 8px">Your Name</div>
+  <div class="sh" style="font-size:13px;margin:13px 0 8px">Your Display Name</div>
   <input class="name-input" id="name-input" type="text" maxlength="24" placeholder="Enter your name…" oninput="previewSetup()">
   <div class="sh" style="font-size:13px;margin:13px 0 8px">Class Period</div>
   <div id="period-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:4px"></div>
   <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-top:3px">So your teacher can find your progress.</div>
-  <button class="btn full green" onclick="confirmProfile()" style="margin-top:18px"><span>Enter American Chronicles →</span></button>
-  <div style="display:flex;align-items:center;gap:10px;margin:14px 0 4px"><div style="flex:1;height:1px;background:var(--border2)"></div><div style="font-family:var(--dm);font-size:9px;color:var(--text3);flex-shrink:0">OR</div><div style="flex:1;height:1px;background:var(--border2)"></div></div>
-  <button class="btn full" onclick="enterGuest()" style="border-color:var(--border2);color:var(--text2);font-size:11px"><span>Play as Guest</span></button>
+  <button class="btn full green" onclick="confirmProfile()" style="margin-top:18px"><span>Save & Enter American Chronicles →</span></button>
 </div>
 
 <!-- SHELL -->
@@ -620,7 +628,10 @@ body::before{content:'';position:fixed;inset:0;
       </div>
       <div class="sh" style="font-size:14px;margin-top:4px">Badges</div>
       <div class="badge-grid" id="badge-grid"></div>
-      <button class="btn sm" onclick="resetProfile()" style="margin-top:22px;border-color:var(--border2);color:var(--text3);font-size:9px"><span>↺ Reset Profile</span></button>
+      <div style="display:flex;gap:10px;margin-top:22px;flex-wrap:wrap">
+  <button class="btn sm" onclick="resetProfile()" style="border-color:var(--border2);color:var(--text3);font-size:9px"><span>↺ Reset Profile</span></button>
+  <button class="btn sm" onclick="signOut()" style="border-color:var(--red2);color:var(--red2);font-size:9px"><span>⇥ Sign Out</span></button>
+</div>
     </div>
 
     <!-- STORY VIEW -->
@@ -778,7 +789,116 @@ body::before{content:'';position:fixed;inset:0;
 const SUPA_URL='https://dnmrwglrcvlbamzhlzlx.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRubXJ3Z2xyY3ZsYmFtemhsemx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NjA2OTEsImV4cCI6MjA4OTQzNjY5MX0.jEIM-dGgB0cUS0A6w31LJ5AK9QDCS_UqdVnPrb8dlXM';
 const SUPA_H={'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY};
-async function sfetch(path,opts={}){try{const r=await fetch(SUPA_URL+path,{headers:SUPA_H,...opts});return await r.json();}catch(e){return[];}}
+
+// ── SUPABASE AUTH CLIENT ───────────────────────────────
+const _supa = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+let _authUser = null; // set after Google login
+
+// ── GOOGLE SIGN-IN ─────────────────────────────────────
+async function signInWithGoogle(){
+  const statusEl = document.getElementById('login-status');
+  if(statusEl) statusEl.textContent = 'Opening Google sign-in…';
+  const { error } = await _supa.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: window.location.href,
+      queryParams: { hd: '' } // allow any Google account (school accounts work fine)
+    }
+  });
+  if(error && statusEl) statusEl.textContent = 'Sign-in failed: ' + error.message;
+}
+
+// ── SIGN OUT ───────────────────────────────────────────
+async function signOut(){
+  await _supa.auth.signOut();
+  localStorage.removeItem(SHELL_KEY);
+  _authUser = null;
+  location.reload();
+}
+
+// ── AUTH-AWARE FETCH ───────────────────────────────────
+// Uses the user's session token if available, falls back to anon key
+async function sfetch(path, opts={}){
+  try {
+    const { data:{ session } } = await _supa.auth.getSession();
+    const authHeader = session
+      ? 'Bearer ' + session.access_token
+      : 'Bearer ' + SUPA_KEY;
+    const headers = {
+      'Content-Type':'application/json',
+      'apikey': SUPA_KEY,
+      'Authorization': authHeader,
+      ...(opts.headers||{})
+    };
+    const r = await fetch(SUPA_URL + path, {...opts, headers});
+    return await r.json();
+  } catch(e){ return []; }
+}
+
+// ── PROFILE TABLE HELPERS ──────────────────────────────
+// ac_profiles stores per-user settings (avatar, period, gold, etc.)
+// keyed by the Supabase auth user id.
+
+async function loadProfileFromDB(){
+  if(!_authUser) return null;
+  const data = await sfetch('/rest/v1/ac_profiles?user_id=eq.'+_authUser.id+'&select=*');
+  return Array.isArray(data) && data[0] ? data[0] : null;
+}
+
+async function saveProfileToDB(){
+  if(!_authUser || S.isGuest) return;
+  const payload = {
+    user_id:       _authUser.id,
+    name:          S.name,
+    period:        S.period||'',
+    avatar:        S.avatar||'scholar_f',
+    gold:          S.gold||0,
+    gold_earned:   S.goldEarned||0,
+    gold_spent:    S.goldSpent||0,
+    gold_best_run: S.goldBestRun||0,
+    gold_ledger:   JSON.stringify(S.goldLedger||[]),
+    units_completed: JSON.stringify(S.unitsCompleted||[]),
+    badges_earned:   JSON.stringify(S.badgesEarned||[]),
+    unlocked:        JSON.stringify(S.unlocked||[]),
+    unit_badges:     JSON.stringify(S.unitBadges||{}),
+    unit_cards:      JSON.stringify(S.unitCards||{}),
+    vocab_passed:    JSON.stringify(S.vocabPassed||{}),
+    vocab_best_score:JSON.stringify(S.vocabBestScore||{}),
+    flashcards_studied:JSON.stringify(S.flashcardsStudied||{}),
+    updated_at:    new Date().toISOString()
+  };
+  const { data:{ session } } = await _supa.auth.getSession();
+  const authHeader = session ? 'Bearer '+session.access_token : 'Bearer '+SUPA_KEY;
+  await fetch(SUPA_URL+'/rest/v1/ac_profiles?on_conflict=user_id', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':authHeader,
+             'Prefer':'resolution=merge-duplicates'},
+    body: JSON.stringify(payload)
+  });
+}
+
+function applyProfileFromDB(profile){
+  // Merge DB profile into S state
+  if(!profile) return;
+  S.name    = profile.name || S.name;
+  S.period  = profile.period || S.period;
+  S.avatar  = profile.avatar || S.avatar;
+  S.gold    = profile.gold || 0;
+  S.goldEarned   = profile.gold_earned || 0;
+  S.goldSpent    = profile.gold_spent  || 0;
+  S.goldBestRun  = profile.gold_best_run || 0;
+  try { S.goldLedger        = JSON.parse(profile.gold_ledger||'[]'); }    catch(e){}
+  try { S.unitsCompleted    = JSON.parse(profile.units_completed||'[]'); } catch(e){}
+  try { S.badgesEarned      = JSON.parse(profile.badges_earned||'[]'); }   catch(e){}
+  try { S.unlocked          = JSON.parse(profile.unlocked||'[]'); }         catch(e){}
+  try { S.unitBadges        = JSON.parse(profile.unit_badges||'{}'); }      catch(e){}
+  try { S.unitCards         = JSON.parse(profile.unit_cards||'{}'); }       catch(e){}
+  try { S.vocabPassed       = JSON.parse(profile.vocab_passed||'{}'); }     catch(e){}
+  try { S.vocabBestScore    = JSON.parse(profile.vocab_best_score||'{}'); } catch(e){}
+  try { S.flashcardsStudied = JSON.parse(profile.flashcards_studied||'{}');} catch(e){}
+  S.setupDone = true;
+  S.isGuest   = false;
+}
 
 const TEACHER_PWD='olson219';
 const SHELL_KEY='ac_shell_state';
@@ -1612,7 +1732,11 @@ const BADGES=[
 let S={name:'',avatar:'scholar_f',period:'',isGuest:false,isTeacher:false,
   unitsCompleted:[],badgesEarned:[],unlocked:CHARS.filter(c=>c.unlockMethod==='free').map(c=>c.id),setupDone:false,
   gold:0,xp:0,vocabPassed:{},vocabBestScore:{},vocabFirstPass:{},flashcardsStudied:{}};
-function saveS(){try{localStorage.setItem(SHELL_KEY,JSON.stringify(S));}catch(e){}}
+function saveS(){
+  try{localStorage.setItem(SHELL_KEY,JSON.stringify(S));}catch(e){}
+  // Debounced DB push — don't hammer Supabase on every state change
+  if(!saveS._t) saveS._t=setTimeout(()=>{saveS._t=null;saveProfileToDB();},2000);
+}
 function loadS(){try{const r=localStorage.getItem(SHELL_KEY);if(r){const d=JSON.parse(r);S={...S,...d};if(!S.unlocked||!S.unlocked.length)S.unlocked=CHARS.filter(c=>c.unlockMethod==='free').map(c=>c.id);// Never auto-restore teacher mode - requires fresh login each session
 S.isTeacher=false;if(!S.gold)S.gold=0;if(!S.xp)S.xp=0;if(!S.vocabPassed)S.vocabPassed={};if(!S.vocabBestScore)S.vocabBestScore={};if(!S.vocabFirstPass)S.vocabFirstPass={};if(!S.flashcardsStudied)S.flashcardsStudied={};
 // ── New wallet + archive fields (safe defaults for old saves) ──
@@ -1628,24 +1752,58 @@ function getChar(id){return CHARS.find(c=>c.id===id)||CHARS[0];}
 function getRank(){const n=S.unitsCompleted.length;let r=RANKS[0];for(const rk of RANKS)if(n>=rk.min)r=rk;return r.label;}
 
 // ── LOADING ───────────────────────────────────────────
-window.addEventListener('load',()=>{
-  loadS();
-  awardBadges(); // ensure badgesEarned is consistent with unitsCompleted from localStorage
-  const bar=document.getElementById('ld-bar');let p=0;
+window.addEventListener('load', async ()=>{
+  loadS(); // load local cache immediately for speed
+  const bar=document.getElementById('ld-bar'); let p=0;
   const iv=setInterval(()=>{p+=Math.random()*22+8;bar.style.width=Math.min(p,96)+'%';
-    if(p>=96){clearInterval(iv);bar.style.width='100%';setTimeout(()=>{const ls=document.getElementById('loading-screen');ls.style.opacity='0';setTimeout(()=>{ls.style.display='none';boot();},500);},280);}
+    if(p>=96){clearInterval(iv);bar.style.width='100%';setTimeout(()=>{const ls=document.getElementById('loading-screen');ls.style.opacity='0';setTimeout(()=>boot(),500);},280);}
   },100);
 });
 
-function boot(){
-  // If returning from a unit game (or any reload) with an existing session,
-  // skip the title screen entirely and go straight into the shell.
-  if(S.setupDone){enterShell();return;}
-  renderTitleArt();
-  const ts=document.getElementById('title-screen');ts.style.display='flex';
-  const cb=document.getElementById('btn-continue'),cn=document.getElementById('continue-note');
-  cb.disabled=true;cb.style.opacity='.3';
-  if(cn)cn.textContent='Start a New Journey first.';
+async function boot(){
+  document.getElementById('loading-screen').style.display='none';
+
+  // Check if we're returning from Google OAuth redirect
+  const { data:{ session } } = await _supa.auth.getSession();
+
+  if(session){
+    // Authenticated via Google
+    _authUser = session.user;
+    const profile = await loadProfileFromDB();
+    if(profile){
+      // Returning student — merge DB profile and go straight in
+      applyProfileFromDB(profile);
+      saveS(); // update local cache
+      awardBadges();
+      enterShell();
+    } else {
+      // First-ever login — show one-time setup screen
+      // Pre-fill name from Google account if available
+      const googleName = session.user.user_metadata?.full_name || '';
+      if(googleName){
+        S.name = googleName.split(' ')[0]; // first name as default
+        const ni = document.getElementById('name-input');
+        if(ni){ ni.value = S.name; }
+      }
+      showSetupScreen();
+    }
+  } else if(S.setupDone && !S.isGuest){
+    // Has local session (returned from unit game, same device) — go straight in
+    awardBadges();
+    enterShell();
+  } else {
+    // No session — show login screen
+    renderTitleArt();
+    document.getElementById('title-screen').style.display='flex';
+  }
+}
+
+function showSetupScreen(){
+  document.getElementById('title-screen').style.display='none';
+  document.getElementById('setup-screen').style.display='block';
+  buildStarterGrid();
+  buildPeriodGrid();
+  previewSetup();
 }
 
 function renderTitleArt(){
@@ -1679,9 +1837,32 @@ function buildPeriodGrid(){
 function pickAvatar(id,el){S.avatar=id;document.querySelectorAll('.starter-opt').forEach(e=>e.classList.remove('selected'));el.classList.add('selected');previewSetup();}
 function pickPeriod(p){S.period=p;buildPeriodGrid();previewSetup();}
 function previewSetup(){const n=document.getElementById('name-input')?.value.trim()||'Historian';document.getElementById('setup-avatar').innerHTML=getChar(S.avatar).svg().replace(/width="\d+"/,'width="80"').replace(/height="\d+"/,'height="80"');document.getElementById('setup-name-disp').textContent=n;document.getElementById('setup-sub').textContent=S.period?`Curious Citizen · Period ${S.period}`:'Curious Citizen';}
-function confirmProfile(){const n=document.getElementById('name-input').value.trim();if(!n){alert('Enter your name.');return;}if(!S.period){alert('Select your class period.');return;}S.name=n;S.isGuest=false;S.setupDone=true;saveS();enterShell();}
+async function confirmProfile(){
+  const n=document.getElementById('name-input').value.trim();
+  if(!n){alert('Enter your name.');return;}
+  if(!S.period){alert('Select your class period.');return;}
+  S.name=n; S.isGuest=false; S.setupDone=true;
+  saveS();
+  // Save to DB so it follows them across devices
+  await saveProfileToDB();
+  enterShell();
+}
 function enterGuest(){S.name='Guest';S.isGuest=true;S.setupDone=false;enterShell();}
-function resetProfile(){if(!confirm('Reset everything? This cannot be undone.'))return;localStorage.removeItem(SHELL_KEY);location.reload();}
+async function resetProfile(){
+  if(!confirm('Reset everything? This cannot be undone.'))return;
+  localStorage.removeItem(SHELL_KEY);
+  // Also clear their DB profile if logged in
+  if(_authUser){
+    const {data:{session}}=await _supa.auth.getSession();
+    if(session){
+      await fetch(SUPA_URL+'/rest/v1/ac_profiles?user_id=eq.'+_authUser.id,{
+        method:'DELETE',
+        headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+session.access_token}
+      });
+    }
+  }
+  await signOut();
+}
 
 // ── SUPABASE SYNC ─────────────────────────────────────
 async function syncFromSupabase(){
@@ -1700,6 +1881,8 @@ async function syncFromSupabase(){
 
   renderCampaignRPG();
   renderHubRPGMini();
+  // Push any newly-synced progress back to profile DB
+  if(_authUser && !S.isGuest) saveProfileToDB();
 }
 
 function awardBadges(){
