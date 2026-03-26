@@ -133,7 +133,29 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 #question-screen,#section-intro-screen,#section-summary-screen,#final-screen,
 .choice-btn,.q-card,.stimulus-block{-webkit-user-select:none;-moz-user-select:none;user-select:none;}
 input{-webkit-user-select:text!important;user-select:text!important;}
+/* ── Unit Trophy Reveal Overlay ── */
+#unit-trophy-overlay{display:none;position:fixed;inset:0;z-index:9500;background:rgba(4,3,2,.97);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;}
+#unit-trophy-overlay.show{display:flex;animation:fadeIn .5s ease;}
+.utr-eyebrow{font-family:var(--bebas);font-size:11px;letter-spacing:4px;color:var(--text3);margin-bottom:10px;}
+.utr-name{font-family:var(--playfair);font-size:22px;color:var(--cream);font-style:italic;margin-bottom:18px;}
+.utr-icon{font-size:72px;margin-bottom:14px;filter:drop-shadow(0 0 28px rgba(200,160,32,.5));}
+.utr-trophy-name{font-family:var(--bebas);font-size:32px;letter-spacing:4px;margin-bottom:6px;}
+.utr-msg{font-family:var(--crimson);font-size:16px;color:var(--text2);font-style:italic;max-width:380px;line-height:1.6;margin-bottom:24px;}
+.utr-acc{font-family:var(--bebas);font-size:14px;color:var(--text3);letter-spacing:2px;margin-bottom:24px;}
+.utr-btn{font-family:var(--bebas);font-size:14px;letter-spacing:3px;background:transparent;border:1.5px solid;color:inherit;padding:14px 32px;cursor:pointer;transition:all .2s;}
 </style>
+<script>
+// Instant redirect if no shell session
+(function(){
+  try{
+    var s=localStorage.getItem('ac_shell_state');
+    if(!s){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');return;}
+    var p=JSON.parse(s);
+    // Just need a real name — setupDone may not be set with Google auth
+    if(!p||!p.name||p.name==='Guest'){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');return;}
+  }catch(e){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');}
+})();
+</script>
 </head>
 <body>
 <div id="root">
@@ -258,7 +280,7 @@ input{-webkit-user-select:text!important;user-select:text!important;}
 </div>
 
 <!-- WELCOME GATE -->
-<div class="welcome-gate" id="welcome-gate">
+<div class="welcome-gate" id="welcome-gate" style="display:none">
   <div class="welcome-inner">
     <div id="wg-avatar" style="width:60px;height:60px;margin:0 auto 12px"></div>
     <div style="font-family:var(--bebas);font-size:11px;color:var(--text3);letter-spacing:3px;margin-bottom:6px">WELCOME BACK</div>
@@ -417,6 +439,44 @@ function notifyShellComplete() {
   } catch(e) {}
 }
 
+// ── UNIT TROPHY REVEAL ────────────────────────────────────
+function calcTier(acc){
+  if(acc===100)return{label:'Historian',color:'#e8d0ff',icon:'🏛️'};
+  if(acc>=90) return{label:'Gold',      color:'#ffd700',icon:'🥇'};
+  if(acc>=80) return{label:'Silver',    color:'#c8c8d8',icon:'🥈'};
+  if(acc>=70) return{label:'Bronze',    color:'#cd7f32',icon:'🥉'};
+  if(acc>=60) return{label:'Completed', color:'#38a050',icon:'✅'};
+  return           {label:'Try Again',  color:'#c02020',icon:'🔄'};
+}
+function showUnitTrophy(overallAcc) {
+  const tier = calcTier(overallAcc);
+  var name = (typeof G !== 'undefined' && G && G.name) ? G.name : (typeof P !== 'undefined' && P && P.name) ? P.name : 'Historian';
+  const passed = overallAcc >= 60;
+  const messages = {
+    historian: `An extraordinary performance, ${name}. Every question answered correctly. You have mastered this unit.`,
+    gold:      `Outstanding work, ${name}. A gold-level result reflects real command of the material.`,
+    silver:    `Well done, ${name}. A solid silver performance — you know this unit.`,
+    bronze:    `Good work, ${name}. A bronze trophy is yours. Replay to sharpen your understanding and push higher.`,
+    completed: `You completed the unit, ${name}. Keep reviewing and try again to earn a trophy.`,
+    tryagain:  `Good effort, ${name}. You didn't quite reach trophy level this time — but every replay builds understanding. Give it another shot.`
+  };
+  const tierKey = tier.label.toLowerCase().replace(' ', '');
+  const msg = messages[tierKey] || messages.tryagain;
+  document.getElementById('utr-name').textContent = name;
+  document.getElementById('utr-icon').textContent = passed ? tier.icon : '📚';
+  document.getElementById('utr-trophy-name').textContent = passed ? tier.label + ' Trophy' : 'Keep Going';
+  document.getElementById('utr-trophy-name').style.color = tier.color;
+  document.getElementById('utr-msg').textContent = msg;
+  document.getElementById('utr-acc').textContent = 'Overall Accuracy: ' + overallAcc + '%';
+  const btn = document.getElementById('utr-btn');
+  btn.textContent = passed ? 'View My Results ▶' : 'Try Again ↺';
+  btn.style.borderColor = tier.color;
+  btn.style.color = tier.color;
+  document.getElementById('unit-trophy-overlay').classList.add('show');
+}
+function closeUnitTrophy() {
+  document.getElementById('unit-trophy-overlay').classList.remove('show');
+}
 function returnToShell() {
   var stored = localStorage.getItem('ac_shell_return');
   window.location.href = stored || SHELL_URL;
@@ -881,6 +941,9 @@ function showFinalResults() {
   saveGame();
   notifyShellComplete();
   pushACResult();
+  // Show unit trophy reveal
+  var finalAcc = G.checkpointBestAccuracy || 0;
+  setTimeout(function(){ showUnitTrophy(finalAcc); }, 1200);
 
   var el = document.getElementById('final-results-content');
   if (el) {
@@ -1005,7 +1068,17 @@ function printCertificate() {
     '<div><div class="sig-line"></div><div class="sig-name">' + new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}) + '</div><div class="sig-title">DATE COMPLETED</div></div>' +
     '</div></div>' +
     '<div class="nbtn"><button onclick="window.print()">Print / Save as PDF</button><button onclick="window.close()" style="background:#3a3020">Close</button></div>' +
-    '</body></html>');
+    '<!-- UNIT TROPHY REVEAL OVERLAY -->
+<div id="unit-trophy-overlay">
+  <div class="utr-eyebrow">UNIT COMPLETE</div>
+  <div class="utr-name" id="utr-name"></div>
+  <div class="utr-icon" id="utr-icon"></div>
+  <div class="utr-trophy-name" id="utr-trophy-name"></div>
+  <div class="utr-msg" id="utr-msg"></div>
+  <div class="utr-acc" id="utr-acc"></div>
+  <button class="utr-btn" id="utr-btn" onclick="closeUnitTrophy()"></button>
+</div>
+</body></html>');
   w.document.close();
 }
 
@@ -1191,7 +1264,22 @@ window.addEventListener('DOMContentLoaded', function() {
   try {
     var saved = loadGame();
     if (saved) G = saved;
-    showLoginGate();
+    // Check for shell session — skip login gate if already logged in
+    try {
+      var shellRaw = localStorage.getItem('ac_shell_state');
+      if (shellRaw) {
+        var shell = JSON.parse(shellRaw);
+        if (shell && shell.name && shell.name !== 'Guest' && shell.setupDone) {
+          document.getElementById('welcome-gate').style.display = 'none';
+          document.getElementById('welcome-gate').classList.remove('show');
+          G = Object.assign({}, G || {}, { name: shell.name, period: shell.period || '', fromShell: true });
+          showMap();
+          return;
+        }
+      }
+    } catch(se) {}
+    // No shell session — redirect to shell to login with Google
+  window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/';
   } catch(e) {
     // Show error visibly if JS fails
     document.body.innerHTML = '<div style="position:fixed;inset:0;background:#0d0a08;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:sans-serif;color:#e8a020;padding:20px;text-align:center">' +
