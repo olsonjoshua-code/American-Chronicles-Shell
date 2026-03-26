@@ -1833,7 +1833,20 @@ function renderTitleArt(){
 function toggleTeacherBox(){const b=document.getElementById('teacher-box'),l=document.getElementById('teacher-toggle-lbl');const open=b.style.display!=='block';b.style.display=open?'block':'none';l.textContent=open?'Cancel':'Teacher Login';if(open)document.getElementById('teacher-input').focus();}
 function submitTeacher(){const inp=document.getElementById('teacher-input'),err=document.getElementById('teacher-err');if(inp.value.trim().toLowerCase()===TEACHER_PWD){IS_TEACHER=true;S.isTeacher=true;S.name=S.name||'Mr. Olson';S.setupDone=true;saveS();inp.value='';document.getElementById('teacher-box').style.display='none';enterShell();}else{err.textContent='Incorrect code.';inp.value='';}}
 function startNewProfile(){document.getElementById('title-screen').style.display='none';const ss=document.getElementById('setup-screen');ss.style.display='block';buildStarterGrid();buildPeriodGrid();previewSetup();}
-function enterShell(){document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name){syncFromSupabase().then(()=>openWelcome());}else{setTimeout(()=>openWelcome(),600);}}}else{if(!S.isGuest&&S.name)syncFromSupabase();}}
+function _returnFromGame(){
+  // Returns true if we just came back from a unit game (suppress welcome card)
+  try {
+    const ref = document.referrer;
+    const shellUrl = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/';
+    // If referrer is NOT the shell itself, we came from a game
+    if (ref && ref !== '' && !ref.startsWith(shellUrl)) return true;
+    // Also check the ac_shell_url flag set by the game's returnToShell()
+    const flag = sessionStorage.getItem('ac_returned_from_game');
+    if (flag) { sessionStorage.removeItem('ac_returned_from_game'); return true; }
+  } catch(e) {}
+  return false;
+}
+function enterShell(){document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name){syncFromSupabase().then(()=>{if(!_returnFromGame())openWelcome();});}else{if(!_returnFromGame())setTimeout(()=>openWelcome(),600);}}}else{if(!S.isGuest&&S.name)syncFromSupabase();}}
 
 // ── SETUP ─────────────────────────────────────────────
 const STARTERS=CHARS.filter(c=>c.unlockMethod==='free');
@@ -2584,6 +2597,7 @@ function renderArchive(){
 
     // Unit game signaling "return to shell" — restore session, no re-login
     if(e.data.type==='RETURN_TO_SHELL'){
+      try{sessionStorage.setItem('ac_returned_from_game','1');}catch(err){}
       if(S.setupDone){
         // Refresh data from Supabase and re-render — no title screen
         if(S.name&&!S.isGuest)syncFromSupabase();
@@ -2827,37 +2841,73 @@ function printCert(uid){
 //  CHARACTER ROOM
 // ══════════════════════════════════════════════════════
 function renderCharRoom(){
-  // RULE: Shell Characters view shows only default starter avatars.
-  // All other characters (historical, presidents, athletes, icons, archetypes, special)
-  // are available in the CHARS array for the RPG to use — they are simply not
-  // displayed here. They will be unlockable through the RPG, not through this shell.
-  const tabs=document.getElementById('char-cat-tabs');
-  if(tabs)tabs.innerHTML=''; // hide category tabs — only one category shown here
-
-  // Update hero text to reflect starters-only
+  checkUnlocks();
+  // Update hero text
   const heroSub=document.querySelector('.char-room-hero .cr-sub');
-  if(heroSub)heroSub.textContent='Choose the character that represents you across the course. Your equipped avatar appears on your profile, HUD, and certificates. Additional characters will be unlockable through the RPG Campaign.';
+  if(heroSub)heroSub.textContent='Choose the character that represents you across the course. Your equipped avatar appears on your profile, HUD, and certificates. Unlock more by completing units, earning trophies, and playing Historian Ops.';
 
+  // Build category tabs
+  const tabs=document.getElementById('char-cat-tabs');
+  const cats=[
+    {key:'all',label:'All'},
+    {key:'starter',label:'Starters'},
+    {key:'historical',label:'Historical'},
+    {key:'president',label:'Presidents'},
+    {key:'athlete',label:'Athletes'},
+    {key:'icon',label:'Icons'},
+    {key:'archetype',label:'Archetypes'},
+    {key:'rival',label:'Rivals'},
+    {key:'special',label:'Special'},
+  ];
+  if(tabs){
+    tabs.innerHTML=cats.map(c=>`<button class="cct df-btn ${_charCat===c.key?'active':''}" onclick="setCharCat('${c.key}')">${c.label}</button>`).join('');
+  }
   renderCharGrid();
 }
 
-function setCharCat(cat){_charCat=cat;document.querySelectorAll('.cct').forEach((b,i)=>b.classList.toggle('active',CHAR_CATS[i].key===cat));renderCharGrid();}
+function setCharCat(cat){_charCat=cat;renderCharRoom();}
 
 function renderCharGrid(){
   checkUnlocks();
   const grid=document.getElementById('char-grid');
-  // Shell only shows starters — CHARS array fully intact for RPG use
-  const list=CHARS.filter(c=>c.cat==='starter');
+  if(!grid)return;
+
+  // Deduplicate by id — keep first occurrence
+  const seen=new Set();
+  const list=CHARS.filter(c=>{
+    if(c.unlockMethod==='teacher')return false; // never show teacher char to students
+    if(seen.has(c.id))return false;
+    seen.add(c.id);
+    return _charCat==='all'||c.cat===_charCat;
+  });
+
   grid.innerHTML=list.map(ch=>{
     const isEquipped=S.avatar===ch.id;
-    const isUnlocked=S.unlocked.includes(ch.id);
-    return `<div class="char-card ${isEquipped?'equipped':''}" onclick="equipChar('${ch.id}')" title="${ch.label}">
-      ${isEquipped?'<div class="char-badge-equipped">EQUIPPED</div>':''}
-      <div style="width:68px;height:68px;margin:0 auto">${ch.svg().replace(/width="\d+"/,'width="68"').replace(/height="\d+"/,'height="68"')}</div>
-      <div class="char-name">${ch.label}</div>
-      <div class="char-cat-lbl">Starter</div>
-      ${isUnlocked&&!isEquipped?`<button class="char-equip-btn" onclick="event.stopPropagation();equipChar('${ch.id}')">Equip</button>`:''}
-    </div>`;
+    const isUnlocked=S.unlocked.includes(ch.id)||ch.unlockMethod==='free';
+    const svgHtml=ch.svg().replace(/width="\d+"/,'width="68"').replace(/height="\d+"/,'height="68"');
+    const catLabel=ch.cat.charAt(0).toUpperCase()+ch.cat.slice(1);
+
+    if(isUnlocked){
+      return `<div class="char-card ${isEquipped?'equipped':''}" onclick="equipChar('${ch.id}')" title="${ch.label}">
+        ${isEquipped?'<div class="char-badge-equipped">EQUIPPED</div>':''}
+        <div style="width:68px;height:68px;margin:0 auto 6px">${svgHtml}</div>
+        <div class="char-name">${ch.label}</div>
+        <div class="char-cat-lbl">${catLabel}</div>
+        ${ch.passive?`<div style="font-family:var(--dm);font-size:8px;color:var(--teal2);margin-top:4px;line-height:1.4;font-style:italic">${ch.passive}</div>`:''}
+        ${!isEquipped?`<button class="char-equip-btn" onclick="event.stopPropagation();equipChar('${ch.id}')">Equip</button>`:''}
+      </div>`;
+    } else {
+      // Locked — show dimmed medallion so students can see what they're aiming for
+      return `<div class="char-card locked" title="Locked: ${ch.unlockHint||''}">
+        <div style="width:68px;height:68px;margin:0 auto 6px;position:relative">
+          <div style="opacity:.25;filter:grayscale(1)">${svgHtml}</div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px">🔒</div>
+        </div>
+        <div class="char-name" style="color:var(--text3)">${ch.label}</div>
+        <div class="char-cat-lbl">${catLabel}</div>
+        <div style="font-family:var(--dm);font-size:8px;color:var(--text3);margin-top:4px;line-height:1.4;font-style:italic;opacity:.7">${ch.unlockHint||'Keep playing to unlock'}</div>
+      </div>`;
+    }
   }).join('');
 }
 
