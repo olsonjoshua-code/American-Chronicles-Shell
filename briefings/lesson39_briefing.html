@@ -183,15 +183,7 @@
       display: flex;
       align-items: flex-end;
       padding: 18px;
-    }
-
-    .image-band.is-map {
-      background-size: contain;
-      background-color: #d8dfe8;
-    }
-
-    .image-band.is-portrait {
-      background-size: contain;
+      transition: height 0.3s ease;
     }
 
     .media-video {
@@ -553,6 +545,7 @@
       {
         label: "Berlin Blockade",
         image: BASE + "During the Berlin B.jpeg",
+        fit: "contain", height: 300,
         heading: "The Soviet Blockade of Berlin Became the Cold War's First Major Crisis in Europe",
         text: "In 1948, the Soviet Union cut off all land access to West Berlin, hoping to force the Allies to abandon the city or cancel plans for a democratic West Germany. Instead of backing down, the United States launched a massive airlift, flying food, fuel, and supplies to the city's two million residents for over ten months.",
         bullets: [
@@ -565,7 +558,7 @@
       {
         label: "NATO vs. Warsaw Pact",
         image: BASE + "By 1955, two milita.jpg",
-        map: true,
+        fit: "contain-light", height: 300,
         heading: "Two Military Alliances Formally Divided Europe Into Armed Camps",
         text: "In 1949, the United States and its Western allies formed NATO, pledging that an attack on any member would be treated as an attack on all. When West Germany joined NATO in 1955, the Soviet Union responded by creating the Warsaw Pact — its own military alliance with the communist nations of Eastern Europe.",
         bullets: [
@@ -578,6 +571,7 @@
       {
         label: "Hungary 1956",
         image: BASE + "Hungary's atte.jpeg",
+        fit: "cover", height: 240,
         heading: "Hungary's Revolt Against Soviet Control Revealed the Limits of Western Containment",
         text: "In October 1956, Hungarians rose up against their communist government, forming a reform movement that sought freedom from Soviet domination. Soviet tanks crushed the revolt within days, killing thousands. The United States, despite its rhetoric about 'liberating captive peoples,' did not intervene, unwilling to risk war with the USSR.",
         bullets: [
@@ -590,6 +584,7 @@
       {
         label: "China Falls",
         image: BASE + "In October 1949, the Chi.jpg",
+        fit: "contain", height: 320,
         heading: "Communist Victory in China Expanded the Cold War Into Asia",
         text: "In 1949, Mao Zedong's communist forces defeated the U.S.-backed Nationalists, establishing the People's Republic of China. Chiang Kai-shek and the Nationalists fled to Taiwan. The loss of China to communism shocked Americans and raised fears of a growing communist bloc stretching across Eurasia.",
         bullets: [
@@ -602,7 +597,7 @@
       {
         label: "Chiang Kai-shek",
         image: BASE + "Chinese Nationalist leader Chiang Kai-shek (also kn.jpg",
-        portrait: true,
+        fit: "contain", height: 340,
         heading: "The United States Backed Taiwan as China's Legitimate Government for Decades",
         text: "After fleeing to Taiwan, Chiang Kai-shek led the Nationalist government that the United States continued to recognize as the real China. American trade with mainland China was suspended and the U.S. worked to keep communist China isolated from the global community — a policy that lasted until formal diplomatic relations resumed in 1979.",
         bullets: [
@@ -615,6 +610,7 @@
       {
         label: "Korean War",
         image: BASE + "The Korean W.jpg",
+        fit: "cover", height: 240,
         heading: "The Korean War Was the First Hot Military Conflict of the Cold War Era",
         text: "In June 1950, North Korean forces armed with Soviet weapons invaded South Korea, aiming to unite the peninsula under communist rule. President Truman ordered U.S. forces to respond, and the UN authorized a multinational force under American command. The war killed over 54,000 Americans and several million Koreans before ending in a stalemate in 1953.",
         bullets: [
@@ -627,7 +623,7 @@
       {
         label: "Korean Peninsula",
         image: BASE + "For much of the Kore.jpg",
-        map: true,
+        fit: "contain-light", height: 300,
         heading: "The Fighting in Korea Seesawed Across the 38th Parallel for Three Years",
         text: "For much of the war, neither side could achieve a decisive victory. UN forces pushed deep into North Korea before China's intervention drove them back. General MacArthur called for bombing China and using nuclear weapons — demands Truman refused and for which he fired MacArthur. The final armistice created a demilitarized zone that still divides the peninsula.",
         bullets: [
@@ -640,6 +636,7 @@
       {
         label: "Propaganda",
         image: BASE + "The United States Info.jpeg",
+        fit: "contain", height: 290,
         heading: "The United States Fought the Cold War With Words and Radio Waves, Not Just Weapons",
         text: "The U.S. Information Agency used radio broadcasts, films, and publications to spread anticommunist messages behind the Iron Curtain. Radio Free Europe and Radio Liberty beamed programming in local languages into Soviet-bloc nations, hoping to encourage dissent and erode faith in communist governments. The Soviets tried to jam the signals with mechanical noise.",
         bullets: [
@@ -652,7 +649,7 @@
       {
         label: "Cold War Hot Spots",
         image: BASE + "Cold War Hot.jpg",
-        map: true,
+        fit: "contain-light", height: 260,
         heading: "The Cold War Spread to the Developing World Through Aid, Covert Action, and Military Force",
         text: "By the mid-1950s, the United States and Soviet Union competed for influence across Asia, Africa, and Latin America — the 'Third World.' The CIA overthrew governments in Iran and Guatemala, the U.S. sent troops to Lebanon, and both superpowers gave military and economic aid to friendly regimes, often at the expense of democracy and human rights.",
         bullets: [
@@ -665,6 +662,7 @@
       {
         label: "U.S. Troops Abroad",
         image: BASE + "During the Col.jpg",
+        fit: "cover", height: 240,
         heading: "American Soldiers Were Deployed Across the Globe to Hold the Line Against Communism",
         text: "Throughout the Cold War, U.S. forces intervened in conflicts from Lebanon to the Dominican Republic, often backing anticommunist governments regardless of their democratic record. Military intervention became a standard Cold War tool alongside propaganda and covert action.",
         bullets: [
@@ -677,6 +675,7 @@
       {
         label: "The H-Bomb",
         image: BASE + "In 1952, the Un.jpg",
+        fit: "cover", height: 240,
         heading: "The United States and Soviet Union Raced to Build Weapons of Unimaginable Destruction",
         text: "In 1949, the Soviet Union tested its first atomic bomb, ending the U.S. nuclear monopoly. Truman approved development of the hydrogen bomb — 500 times more powerful than the bombs dropped on Japan. The Soviets tested their own H-bomb a year later. By 1960, both sides had ICBMs and nuclear submarines capable of launching warheads at distant continents.",
         bullets: [
@@ -689,6 +688,7 @@
       {
         label: "Khrushchev & U-2",
         image: BASE + "Soviet leader Nikita Khru.jpg",
+        fit: "cover", height: 240,
         heading: "The U-2 Spy Plane Incident Exposed the Hidden Face of Cold War Espionage",
         text: "On May 1, 1960, a Soviet missile shot down a U.S. U-2 spy plane flying over the USSR. Pilot Francis Gary Powers was captured and put on trial in Moscow. President Eisenhower initially denied the mission, then admitted it. The incident collapsed a planned summit between the two leaders and set back efforts to reduce Cold War tensions.",
         bullets: [
@@ -701,7 +701,7 @@
       {
         label: "Powers on Trial",
         image: BASE + "The Soviet Union put U-2 pilot Francis Gary Powers on tri.jpeg",
-        portrait: true,
+        fit: "contain", height: 360,
         heading: "Mutual Assured Destruction Kept the Cold War From Becoming World War III",
         text: "U.S. policy moved from simple deterrence to brinkmanship — a willingness to go to the edge of war to force Soviet retreat. Combined with the doctrine of Mutual Assured Destruction, both sides understood that any nuclear attack would trigger an overwhelming response. This terrifying logic kept the Cold War cold, even as crises like the U-2 incident brought the world to the brink.",
         bullets: [
@@ -731,10 +731,14 @@
     function renderSlide(index) {
       const slide = slides[index];
 
-      imageBand.classList.remove("has-video", "is-map", "is-portrait");
-      if (slide.map)     imageBand.classList.add("is-map");
-      if (slide.portrait) imageBand.classList.add("is-portrait");
+      // Apply per-slide image sizing
+      const fit    = slide.fit    || "cover";
+      const height = slide.height || 240;
+      imageBand.style.height          = height + "px";
+      imageBand.style.backgroundSize  = fit === "cover" ? "cover" : "contain";
+      imageBand.style.backgroundColor = fit === "contain-light" ? "#d8dfe0" : "#0e141e";
       imageBand.style.backgroundImage = `url("${slide.image}")`;
+
       mediaVideo.pause();
       mediaVideo.removeAttribute("src");
       mediaVideo.load();
@@ -767,4 +771,3 @@
   </script>
 </body>
 </html>
-
