@@ -1,1 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 44 Briefing | The Civil Rights Revolution: "Like a Mighty Stream"</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0b08;
+      --bg2: #1a1310;
+      --accent: #c0392b;
+      --accent-2: #d4a84b;
+      --accent-3: #7a9e7e;
+      --text: #f0e8dc;
+      --muted: #c8b89e;
+      --rule: rgba(192, 57, 43, 0.18);
+      --rule-strong: rgba(192, 57, 43, 0.35);
+      --chip: rgba(192, 57, 43, 0.09);
+    }
 
+    * { box-sizing: border-box; }
+
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      background:
+        radial-gradient(ellipse 80% 40% at 50% 0%, rgba(192, 57, 43, 0.12) 0%, transparent 60%),
+        var(--bg);
+    }
+
+    body {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      padding: 36px 20px 60px;
+    }
+
+    .app {
+      width: min(1100px, 100%);
+      background: linear-gradient(170deg, #221510 0%, #160e09 58%, #0d0806 100%);
+      border: 1px solid var(--rule);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .app::before,
+    .app::after {
+      content: "";
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-color: var(--rule-strong);
+      border-style: solid;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .app::before { top: 0; left: 0; border-width: 1px 0 0 1px; }
+    .app::after  { top: 0; right: 0; border-width: 1px 1px 0 0; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 36px 52px 28px;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+
+    .topbar::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 52px;
+      right: 52px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.4;
+    }
+
+    .kicker {
+      font-family: "Jost", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      font-size: 0.67rem;
+      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .kicker::before,
+    .kicker::after {
+      content: "";
+      display: block;
+      height: 1px;
+      width: 32px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    .lesson-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin: 0 0 6px;
+    }
+
+    .lesson-subtitle {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .essential-q {
+      background: var(--chip);
+      border: 1px solid var(--rule-strong);
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+      margin-top: 18px;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .essential-q strong {
+      font-style: normal;
+      font-size: 0.7rem;
+      font-family: "Jost", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* ── VOCAB PANEL ── */
+    .vocab-panel {
+      background: rgba(192, 57, 43, 0.05);
+      border: 1px solid var(--rule);
+      border-top: 2px solid var(--accent);
+      padding: 20px 24px;
+      min-width: 220px;
+      max-width: 260px;
+      flex-shrink: 0;
+    }
+
+    .vocab-panel-title {
+      font-family: "Jost", sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .vocab-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .vocab-list li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(192, 57, 43, 0.1);
+      font-style: italic;
+    }
+
+    .vocab-list li:last-child { border-bottom: none; }
+
+    /* ── BODY CONTENT ── */
+    .content {
+      padding: 44px 52px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-num {
+      font-family: "Jost", sans-serif;
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+      margin-top: 44px;
+    }
+
+    .section-num:first-child { margin-top: 0; }
+
+    h2.section-title {
+      font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 20px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+
+    h2.section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    h3.sub-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--accent-2);
+      margin: 24px 0 10px;
+      font-style: normal;
+    }
+
+    p {
+      font-size: 1.08rem;
+      line-height: 1.78;
+      color: var(--muted);
+      margin: 0 0 16px;
+      font-weight: 300;
+    }
+
+    p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      border-left: 3px solid var(--accent);
+      margin: 28px 0 28px 0;
+      padding: 18px 24px;
+      background: rgba(192, 57, 43, 0.04);
+    }
+
+    .pull-quote p {
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text);
+      margin: 0 0 8px;
+      line-height: 1.7;
+    }
+
+    .pull-quote cite {
+      font-size: 0.75rem;
+      font-family: "Jost", sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    /* ── IMAGES ── */
+    .img-float-right {
+      float: right;
+      margin: 4px 0 20px 32px;
+      max-width: 280px;
+      width: 40%;
+    }
+
+    .img-float-left {
+      float: left;
+      margin: 4px 32px 20px 0;
+      max-width: 280px;
+      width: 40%;
+    }
+
+    .img-full {
+      width: 100%;
+      margin: 28px 0;
+      clear: both;
+    }
+
+    .img-wide {
+      width: 70%;
+      margin: 28px auto;
+      display: block;
+      clear: both;
+    }
+
+    .img-wrap {
+      border: 1px solid var(--rule);
+    }
+
+    .img-wrap img {
+      width: 100%;
+      display: block;
+      filter: grayscale(20%) contrast(1.05);
+    }
+
+    .img-caption {
+      font-size: 0.78rem;
+      font-family: "Jost", sans-serif;
+      color: rgba(200, 184, 158, 0.7);
+      line-height: 1.5;
+      padding: 10px 12px;
+      background: rgba(0,0,0,0.2);
+      border-top: 1px solid var(--rule);
+    }
+
+    .clearfix::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* ── DATA TABLE ── */
+    .data-table-wrap {
+      margin: 28px 0;
+      border: 1px solid var(--rule);
+      overflow: hidden;
+      clear: both;
+    }
+
+    .data-table-title {
+      background: rgba(192, 57, 43, 0.12);
+      padding: 12px 18px;
+      font-family: "Jost", sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    table.data-table thead th {
+      background: rgba(0,0,0,0.3);
+      padding: 10px 14px;
+      text-align: left;
+      font-family: "Jost", sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    table.data-table tbody tr {
+      border-bottom: 1px solid rgba(192, 57, 43, 0.08);
+    }
+
+    table.data-table tbody tr:last-child { border-bottom: none; }
+
+    table.data-table tbody tr:nth-child(even) {
+      background: rgba(255,255,255,0.02);
+    }
+
+    table.data-table tbody td {
+      padding: 9px 14px;
+      color: var(--muted);
+    }
+
+    table.data-table tbody td:first-child {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .data-table-source {
+      padding: 8px 14px;
+      font-size: 0.68rem;
+      color: rgba(200,184,158,0.45);
+      font-family: "Jost", sans-serif;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ── INFOGRAPHIC IMAGE ── */
+    .infographic-wrap {
+      margin: 28px 0;
+      border: 1px solid var(--rule);
+      clear: both;
+    }
+
+    .infographic-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    /* ── MAP IMAGE ── */
+    .map-wrap {
+      margin: 28px 0;
+      border: 1px solid var(--rule);
+      clear: both;
+    }
+
+    .map-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    .map-wrap .img-caption {
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ── KEY FIGURES GRID ── */
+    .figures-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+      clear: both;
+    }
+
+    .figure-card {
+      border: 1px solid var(--rule);
+      background: rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+
+    .figure-card img {
+      width: 100%;
+      display: block;
+      height: 180px;
+      object-fit: cover;
+      filter: grayscale(25%) contrast(1.05);
+    }
+
+    .figure-card-body {
+      padding: 12px;
+    }
+
+    .figure-card-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .figure-card-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: "Jost", sans-serif;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    /* ── SUMMARY CHIPS ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 28px 0;
+      clear: both;
+    }
+
+    @media (max-width: 600px) {
+      .summary-grid { grid-template-columns: 1fr; }
+      .img-float-right, .img-float-left {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 20px 0;
+      }
+      .topbar { flex-direction: column; }
+      .vocab-panel { max-width: 100%; min-width: unset; }
+      .content { padding: 28px 22px; }
+    }
+
+    .summary-card {
+      background: var(--chip);
+      border: 1px solid var(--rule);
+      border-top: 2px solid var(--accent);
+      padding: 16px 18px;
+    }
+
+    .summary-card-title {
+      font-family: "Jost", sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .summary-card p {
+      font-size: 0.88rem;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--rule-strong), transparent);
+      margin: 36px 0;
+      clear: both;
+    }
+
+    /* ── SPOTLIGHT (person profile) ── */
+    .spotlight {
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--accent-2);
+      background: rgba(212, 168, 75, 0.04);
+      padding: 22px 24px;
+      margin: 32px 0;
+      clear: both;
+    }
+
+    .spotlight-label {
+      font-family: "Jost", sans-serif;
+      font-size: 0.62rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--accent-2);
+      margin-bottom: 6px;
+    }
+
+    .spotlight h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0 0 16px;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--rule);
+      padding: 18px 52px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-left {
+      font-family: "Jost", sans-serif;
+      font-size: 0.62rem;
+      color: rgba(200,184,158,0.35);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .footer-right {
+      font-family: "Jost", sans-serif;
+      font-size: 0.62rem;
+      color: rgba(192, 57, 43, 0.45);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* ── TAG CHIPS ── */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 18px 0 28px;
+    }
+
+    .chip {
+      font-family: "Jost", sans-serif;
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(192, 57, 43, 0.35);
+      background: var(--chip);
+      padding: 4px 11px;
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ── TOPBAR ── -->
+  <div class="topbar">
+    <div style="flex:1">
+      <div class="kicker">Lesson 44 &nbsp;·&nbsp; American Chronicles</div>
+      <h1 class="lesson-title">The Civil Rights Revolution</h1>
+      <p class="lesson-subtitle">"Like a Mighty Stream"</p>
+      <div class="essential-q">
+        <strong>Essential Question</strong>
+        How did civil rights activists advance the ideals of liberty, equality, and opportunity for African Americans?
+      </div>
+    </div>
+    <div class="vocab-panel">
+      <div class="vocab-panel-title">Key Vocabulary</div>
+      <ul class="vocab-list">
+        <li>Civil Rights Act of 1964</li>
+        <li>Freedom Rides</li>
+        <li>Freedom Summer</li>
+        <li>March on Washington</li>
+        <li>Montgomery Bus Boycott</li>
+        <li>SCLC</li>
+        <li>SNCC</li>
+        <li>Voting Rights Act of 1965</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <div class="content">
+
+    <!-- INTRO -->
+    <div class="chip-row">
+      <span class="chip">1955 – 1965</span>
+      <span class="chip">Nonviolent Resistance</span>
+      <span class="chip">Desegregation</span>
+      <span class="chip">Voting Rights</span>
+      <span class="chip">Landmark Legislation</span>
+    </div>
+
+    <div class="clearfix">
+      <div class="img-float-right img-wrap">
+        <img src="ese childr.jpg" alt="Children arrested at Birmingham civil rights marches" />
+        <div class="img-caption">Children arrested at the Birmingham civil rights marches, 1963. Over 1,000 young protesters were arrested, doused with fire hoses, and chased by police dogs.</div>
+      </div>
+
+      <p>On May 3, 1963, a 16-year-old named Cardell Gay marched through the streets of Birmingham, Alabama, to protest segregation. He remembered, "The police were there with their dogs and their hoses. And … although they had instructed us to stop, we would not stop." What the police "let fly" was water from a high-pressure fire hose, powerful enough to knock children down the street.</p>
+
+      <p>These protests proved that African Americans would not relent in their struggle for civil rights. As one 12-year-old protester declared, <strong>"I'll keep marching till I get freedom."</strong></p>
+
+      <p>From 1955 to 1965, the United States witnessed a determined campaign to desegregate buses, schools, lunch counters, and other public places — and to expand voting rights for African Americans. This lesson traces those key events.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 1: Montgomery -->
+    <div class="section-num">Section 1</div>
+    <h2 class="section-title">A Boycott in Montgomery Inspires a Movement</h2>
+
+    <div class="clearfix">
+      <div class="img-float-right img-wrap">
+        <img src="blic buses we.jpeg" alt="Segregated bus interior" />
+        <div class="img-caption">Public buses were rigidly segregated in the South. African Americans had to sit in the back rows, separated from White riders, and give up their seats if the bus was full.</div>
+      </div>
+
+      <p>Although the 1954 Supreme Court ruling in <em>Brown v. Board of Education</em> outlawed segregation in public schools, the practice continued throughout the South. Laws required Black and White people to use separate facilities — from drinking fountains and waiting rooms to restaurant seats and bus rows.</p>
+
+      <h3 class="sub-title">Rosa Parks and the Spark of Defiance</h3>
+
+      <p>On <strong>December 1, 1955</strong>, Rosa Parks, a 43-year-old seamstress and NAACP activist, refused to give up her bus seat to a White passenger in Montgomery, Alabama. She later explained: <em>"This is what I wanted to know: when and how would we ever determine our rights as human beings?"</em></p>
+    </div>
+
+    <div class="clearfix">
+      <div class="img-float-left img-wrap">
+        <img src="sa Parks was arr.jpg" alt="Rosa Parks being fingerprinted after arrest" />
+        <div class="img-caption">Rosa Parks was arrested after refusing to give up her seat. Her defiance became the catalyst for the Montgomery Bus Boycott. When the driver threatened to call police, she calmly replied, "You may go on and do so."</div>
+      </div>
+
+      <p>Local NAACP leaders had been organizing a test case against segregation, and Parks — a woman of impeccable reputation — was an ideal candidate. A local activist named E. D. Nixon asked if the NAACP could build a case around her arrest, and she agreed.</p>
+
+      <p>Ministers announced a one-day boycott on December 5, the day of Parks' court hearing. <strong>Ninety percent</strong> of African Americans who usually rode the bus honored the boycott — an astonishing display of unity.</p>
+    </div>
+
+    <h3 class="sub-title">A Young Minister Becomes a Leader</h3>
+
+    <div class="clearfix">
+      <div class="img-float-right img-wrap">
+        <img src="erend Martin Luth.jpg" alt="Martin Luther King Jr. at pulpit" />
+        <div class="img-caption">Reverend Martin Luther King Jr. delivering his final Sunday sermon at Washington National Cathedral, March 31, 1961. His strategy of nonviolent protest — drawn from Mohandas Gandhi — shaped the entire civil rights movement.</div>
+      </div>
+
+      <p>The boycott's organizers, the <strong>Montgomery Improvement Association (MIA)</strong>, chose 26-year-old minister <strong>Martin Luther King Jr.</strong> to lead the effort. King told the assembled crowd at Holt Street Baptist Church:</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>"We are determined here in Montgomery to work and fight until justice runs down like water and righteousness like a mighty stream."</p>
+      <cite>— Martin Luther King Jr., December 5, 1955</cite>
+    </div>
+
+    <p>African Americans organized elaborate carpools, walked miles, rode bicycles, and hitchhiked. White extremists bombed boycott leaders' homes and Black churches. But after <strong>381 days</strong>, in November 1956, the Supreme Court upheld a ruling that bus segregation was unconstitutional. The boycott ended in victory — and King emerged as a national civil rights leader.</p>
+
+    <p>In 1957, King and other ministers founded the <strong>Southern Christian Leadership Conference (SCLC)</strong>, pledging to use nonviolent resistance to "redeem the soul of America."</p>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 2: School Desegregation -->
+    <div class="section-num">Section 2</div>
+    <h2 class="section-title">School Desegregation</h2>
+
+    <h3 class="sub-title">The Little Rock Nine — 1957</h3>
+
+    <div class="clearfix">
+      <div class="img-float-right img-wrap">
+        <img src="beth Eckfor.jpg" alt="Elizabeth Eckford at Central High School" />
+        <div class="img-caption">Elizabeth Eckford walks through a hostile mob on her way to Central High School in Little Rock, Arkansas, September 1957. She and eight other Black students — the "Little Rock Nine" — challenged segregation by enrolling at the all-White school.</div>
+      </div>
+
+      <p>A federal judge ordered Little Rock, Arkansas to desegregate its schools in 1957. Nine Black students were scheduled to attend Central High School — but Arkansas Governor Orval Faubus called out the National Guard to block them.</p>
+
+      <p>Elizabeth Eckford recalled the mob surrounding her: <em>"They moved closer and closer… I looked into the face of an old woman and it seemed a kind face, but when I looked again, she spat on me."</em></p>
+
+      <p>President Eisenhower — though personally opposed to forced integration — could not permit defiance of federal authority. He sent federal troops to escort the students and placed the Arkansas Guard under federal control. The nine rode to school in jeep convoys. Despite threats, acid attacks, and constant harassment, eight of the nine finished the year.</p>
+    </div>
+
+    <h3 class="sub-title">James Meredith at Ole Miss — 1962</h3>
+
+    <div class="clearfix">
+      <div class="img-float-right img-wrap">
+        <img src="es Meredith w.jpg" alt="James Meredith escorted by federal marshals" />
+        <div class="img-caption">James Meredith (center), the first African American to attend the University of Mississippi, is escorted to class by U.S. Marshals in 1962. Meredith wrote that America's future "rests on… whether or not the Negro citizen is to be allowed to receive an education in his own state."</div>
+      </div>
+
+      <p>In 1961, Korean War veteran <strong>James Meredith</strong> applied to the University of Mississippi ("Ole Miss"). When rejected, he took the case to court with NAACP support — and won. Mississippi Governor Ross Barnett personally blocked Meredith's enrollment.</p>
+
+      <p>Meredith arrived secretly on September 30, 1962, sparking a riot. Two men were killed. President Kennedy sent federal marshals to escort Meredith to his classes. Meredith graduated in the summer of 1963. Days before enrolling, he wrote: <em>"The price of progress is indeed high, but the price of holding back is much higher."</em></p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 3: Sit-ins & Freedom Rides -->
+    <div class="section-num">Section 3</div>
+    <h2 class="section-title">Sit-ins and Freedom Rides</h2>
+
+    <div class="clearfix">
+      <div class="img-float-right img-wrap">
+        <img src="esters held s.jpg" alt="Sit-in protesters at lunch counter" />
+        <div class="img-caption">Protesters hold sit-ins to integrate lunch counters across the South, remaining nonviolent even when taunted. College students led these demonstrations — many became influential movement leaders.</div>
+      </div>
+
+      <p>On <strong>February 1, 1960</strong>, four Black students from North Carolina A&T sat down at a segregated Woolworth's lunch counter in Greensboro. The waitress refused service. They stayed until the store closed — and returned the next day with 20 more. The <strong>sit-in movement</strong> spread quickly across the South.</p>
+
+      <p>In April 1960, SCLC leader Ella Baker organized a meeting of student activists in Raleigh, North Carolina, forming the <strong>Student Nonviolent Coordinating Committee (SNCC)</strong>. SNCC trained students in civil disobedience — deliberately breaking unjust laws without violence, even if physically attacked.</p>
+
+      <p>On May 10, 1960, Nashville became the first major southern city to begin integrating its public facilities.</p>
+    </div>
+
+    <h3 class="sub-title">The Freedom Rides — 1961</h3>
+
+    <div class="map-wrap">
+      <img src="Freedom_Riders_Face_Violen.png" alt="Freedom Rides 1961 map" />
+      <div class="img-caption">The Freedom Rides of 1961 traced routes across the South testing compliance with Supreme Court rulings banning segregation in interstate transport. Stars mark locations of violent attacks; annotations show the number jailed at each site.</div>
+    </div>
+
+    <p>In 1960, the Supreme Court declared segregation in interstate transport illegal. To test whether southern states were complying, the <strong>Congress of Racial Equality (CORE)</strong> organized Freedom Rides in spring 1961.</p>
+
+    <p>On May 4, thirteen riders — seven Black, six White — boarded buses heading south from Washington, D.C. Near Anniston, Alabama, a White mob attacked, firebombed a bus, and beat passengers as they fled. SNCC continued the rides after CORE withdrew. When riders reached Jackson, Mississippi, they were arrested. Attorney General Robert Kennedy negotiated federal marshals for protection — but could not prevent the violence.</p>
+
+    <p>In late 1962, the Interstate Commerce Commission issued rules mandating integrated interstate buses and terminals. CORE's leader James Farmer declared victory.</p>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 4: Birmingham -->
+    <div class="section-num">Section 4</div>
+    <h2 class="section-title">A Campaign in Birmingham</h2>
+
+    <p>Martin Luther King Jr. called Birmingham, Alabama, the most segregated city in America. In spring 1963, the SCLC united with local activists led by Reverend Fred Shuttlesworth to launch a series of nonviolent actions.</p>
+
+    <h3 class="sub-title">Letter from a Birmingham Jail</h3>
+
+    <div class="clearfix">
+      <div class="img-float-right img-wrap">
+        <img src="rly 1960s_ lar.jpg" alt="Civil rights demonstration early 1960s" />
+        <div class="img-caption">A large civil rights demonstration in the early 1960s. The growing movement put pressure on politicians and businesses to end segregation.</div>
+      </div>
+
+      <p>Protests began April 3, 1963. Thirty marchers were arrested at Birmingham City Hall for demonstrating without a permit. On April 12, King and 50 others were arrested. While in jail, White clergy published an ad calling the demonstrations "unwise and untimely."</p>
+
+      <p>King responded with his now-famous <strong>"Letter from a Birmingham Jail,"</strong> explaining why direct action could not wait:</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>"We know through painful experience that freedom is never voluntarily given by the oppressor; it must be demanded by the oppressed… 'justice too long delayed is justice denied.'"</p>
+      <cite>— Martin Luther King Jr., Letter from a Birmingham Jail, April 16, 1963</cite>
+    </div>
+
+    <h3 class="sub-title">The Children's Campaign</h3>
+
+    <div class="clearfix">
+      <div class="img-float-left img-wrap">
+        <img src="ay 3_ 1963_ Birmi.jpg" alt="Birmingham fire hoses turned on protesters" />
+        <div class="img-caption">On May 3, 1963, Birmingham police turned high-pressure fire hoses on peaceful child protesters. The blasts were strong enough to strip bark from trees. These images shocked the nation and galvanized support for the civil rights movement.</div>
+      </div>
+
+      <p>By late April, protest numbers were dwindling. The SCLC turned to children — arguing they would develop "a sense of their own stake in freedom and justice." On May 2, over 1,000 youths marched from 16th Street Baptist Church. Bull Connor arrested most of them. On May 3, Connor ordered police to use fire hoses and dogs on students attempting to march.</p>
+
+      <p>News photographs and television footage of peaceful children being knocked over by blasts of water and attacked by dogs <strong>shocked the nation</strong>. Birmingham officials reached a historic accord on May 10, agreeing to desegregate public facilities within 90 days.</p>
+
+      <p>The backlash was brutal — the Ku Klux Klan bombed a motel where Black leaders were staying, and on September 15, a bomb at 16th Street Baptist Church killed <strong>four African American girls</strong>: Denise McNair, Addie Mae Collins, Cynthia Wesley, and Carole Robertson.</p>
+    </div>
+
+    <div class="clearfix">
+      <div class="img-float-right img-wrap">
+        <img src="n the civil righ.jpeg" alt="Birmingham civil rights memorial" />
+        <div class="img-caption">A memorial commemorating the victims of the Birmingham civil rights campaign. The 16th Street Baptist Church bombing killed four young girls and became a defining moment of the movement.</div>
+      </div>
+
+      <div class="img-float-left img-wrap" style="max-width:240px;width:34%;">
+        <img src="RE orga.jpeg" alt="CORE organized march" />
+        <div class="img-caption">CORE organized a memorial march for the four girls killed in the 16th Street Baptist Church bombing — drawing national attention to Birmingham's climate of violence.</div>
+      </div>
+    </div>
+
+    <div style="clear:both"></div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 5: March on Washington & Legislation -->
+    <div class="section-num">Section 5</div>
+    <h2 class="section-title">Achieving Landmark Civil Rights Legislation</h2>
+
+    <h3 class="sub-title">The March on Washington — August 28, 1963</h3>
+
+    <div class="clearfix">
+      <div class="img-float-right img-wrap">
+        <img src="ust 28_ 1963_ ap.jpg" alt="March on Washington, August 28, 1963" />
+        <div class="img-caption">On August 28, 1963, approximately 250,000 people marched in Washington, D.C. — the largest political gathering in U.S. history at the time — demanding civil rights, employment, housing, and voting rights.</div>
+      </div>
+
+      <p>Following Birmingham, activists shifted focus to Washington, D.C., organizing a massive march for "jobs and freedom." On August 28, more than <strong>250,000 people</strong> marched — including some 60,000 White supporters, union members, clergy, students, and celebrities like Rosa Parks and Jackie Robinson.</p>
+
+      <p>The march's climax was Martin Luther King Jr.'s <strong>"I Have a Dream"</strong> speech from the Lincoln Memorial:</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>"I have a dream that one day this nation will rise up and live out the true meaning of its creed: 'We hold these truths to be self-evident; that all men are created equal…' Free at last! Free at last! Thank God Almighty, we are free at last!"</p>
+      <cite>— Martin Luther King Jr., "I Have a Dream," August 28, 1963</cite>
+    </div>
+
+    <div class="clearfix">
+      <div class="img-float-left img-wrap">
+        <img src="ter_the_Vo.jpg" alt="Voters outside City Hall after Voting Rights Act" />
+        <div class="img-caption">After the Voting Rights Act was passed in 1965, African Americans lined up to vote for the first time throughout the South. The number of registered Black voters grew dramatically in the late 1960s.</div>
+      </div>
+
+      <div class="img-float-right img-wrap">
+        <img src="tin Luther K.jpg" alt="Martin Luther King Jr. at podium" />
+        <div class="img-caption">Reverend Martin Luther King Jr. delivers his "I Have a Dream" speech at the Lincoln Memorial, August 28, 1963 — one of the most iconic moments in American history.</div>
+      </div>
+    </div>
+
+    <div style="clear:both;"></div>
+
+    <h3 class="sub-title">The Civil Rights Act of 1964</h3>
+
+    <p>When Congress debated the civil rights bill Kennedy had cautiously supported, his assassination in November 1963 became a turning point. President Lyndon B. Johnson declared: <em>"No memorial oration or eulogy could more eloquently honor President Kennedy's memory than the earliest possible passage of the civil rights bill."</em></p>
+
+    <p>Despite a prolonged Senate filibuster, the <strong>Civil Rights Act of 1964</strong> was signed into law on July 2, 1964. It banned discrimination on the basis of race, sex, religion, or national origin — the most sweeping civil rights legislation since Reconstruction.</p>
+
+    <div class="infographic-wrap">
+      <img src="mark law ban.jpg" alt="Effects of the Civil Rights Act infographic" />
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SECTION 6: Voting Rights -->
+    <div class="section-num">Section 6</div>
+    <h2 class="section-title">Regaining Voting Rights</h2>
+
+    <p>The <strong>Twenty-fourth Amendment</strong> (ratified January 1964) banned poll taxes that had been used to disenfranchise Black voters. But formal obstacles — literacy tests, registration barriers, and outright violence — still kept millions of African Americans from the ballot.</p>
+
+    <div class="data-table-wrap">
+      <div class="data-table-title">Voter Registration Rates in Selected Southern States, 1965</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>% Black Voters Registered</th>
+            <th>% White Voters Registered</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Alabama</td><td>19.3%</td><td>69.2%</td></tr>
+          <tr><td>Georgia</td><td>27.4%</td><td>62.6%</td></tr>
+          <tr><td>Louisiana</td><td>31.6%</td><td>80.5%</td></tr>
+          <tr><td>Mississippi</td><td>6.7%</td><td>69.9%</td></tr>
+          <tr><td>North Carolina</td><td>46.8%</td><td>96.8%</td></tr>
+          <tr><td>South Carolina</td><td>37.3%</td><td>75.7%</td></tr>
+          <tr><td>Virginia</td><td>38.3%</td><td>61.1%</td></tr>
+        </tbody>
+      </table>
+      <div class="data-table-source">Source: Grofman, Handley, and Niemi, <em>Minority Representation and the Quest for Voting Equality</em>, Cambridge Press, 1992; U.S. Dept. of Justice, Civil Rights Division.</div>
+    </div>
+
+    <h3 class="sub-title">Freedom Summer — 1964</h3>
+
+    <p>In spring 1964, CORE and SNCC organized <strong>Freedom Summer</strong> — a campaign to register Black voters in Mississippi, one of the most segregated states in the country. Nearly 900 predominantly White college student volunteers were trained in voter registration and warned of violent opposition.</p>
+
+    <p>On June 21, three student activists — <strong>James Chaney</strong> (Black), and <strong>Andrew Goodman</strong> and <strong>Michael Schwerner</strong> (White) — disappeared in Neshoba County, Mississippi. Six weeks later, the FBI found their bodies. They had been murdered. Numerous other beatings, shootings, and bombings marred the summer, most going unpunished.</p>
+
+    <h3 class="sub-title">Selma and the Voting Rights Act of 1965</h3>
+
+    <div class="clearfix">
+      <div class="img-float-right img-wrap">
+        <img src="eds of people w.jpeg" alt="Crowds gathered at civil rights meeting" />
+        <div class="img-caption">Hundreds gathered at civil rights meetings as the movement built momentum toward landmark federal legislation.</div>
+      </div>
+
+      <p>In early 1965, the SCLC began registering Black voters in Selma, Alabama, where only 320 of more than 15,000 eligible Black voters were registered. Over 3,000 protesters were arrested.</p>
+
+      <p>On March 7, 1965 — later called "Bloody Sunday" — marchers crossing the Edmund Pettus Bridge were met with state troopers armed with billy clubs, bullwhips, and tear gas. Television footage of the violence outraged the nation.</p>
+
+      <p>In August, Congress passed the <strong>Voting Rights Act of 1965</strong>, outlawing literacy tests and requiring federal supervision of voter registration in suppressed areas. The results were dramatic: Black voter registration in Mississippi rose from under 7% in 1964 to 59% by 1968. In Alabama, it rose from 20% to 57%. Across the South, the number of Black voters swelled from 1 million to 3.1 million.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- KEY FIGURES -->
+    <div class="section-num">Key Figures</div>
+    <h2 class="section-title">People of the Movement</h2>
+
+    <div class="figures-grid">
+      <div class="figure-card">
+        <img src="erend Martin Luth.jpg" alt="Martin Luther King Jr." />
+        <div class="figure-card-body">
+          <div class="figure-card-name">Martin Luther King Jr.</div>
+          <div class="figure-card-desc">Led the Montgomery Bus Boycott, founded SCLC, delivered the "I Have a Dream" speech, and directed the Birmingham campaign. Awarded the Nobel Peace Prize in 1964 at age 35.</div>
+        </div>
+      </div>
+      <div class="figure-card">
+        <img src="sa Parks was arr.jpg" alt="Rosa Parks" />
+        <div class="figure-card-body">
+          <div class="figure-card-name">Rosa Parks</div>
+          <div class="figure-card-desc">NAACP activist whose refusal to give up her bus seat on December 1, 1955 catalyzed the Montgomery Bus Boycott and became a defining act of resistance.</div>
+        </div>
+      </div>
+      <div class="figure-card">
+        <img src="beth Eckfor.jpg" alt="Elizabeth Eckford" />
+        <div class="figure-card-body">
+          <div class="figure-card-name">Elizabeth Eckford</div>
+          <div class="figure-card-desc">One of the Little Rock Nine who faced a hostile mob to integrate Central High School in Arkansas in 1957 under federal military escort.</div>
+        </div>
+      </div>
+      <div class="figure-card">
+        <img src="es Meredith w.jpg" alt="James Meredith" />
+        <div class="figure-card-body">
+          <div class="figure-card-name">James Meredith</div>
+          <div class="figure-card-desc">Korean War veteran who became the first African American to attend the University of Mississippi in 1962, requiring federal marshal protection throughout the year.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SUMMARY -->
+    <div class="section-num">Summary</div>
+    <h2 class="section-title">Key Events at a Glance</h2>
+
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-card-title">Montgomery Bus Boycott · 1955–56</div>
+        <p>381 days of boycotts by Black Montgomery residents led to the Supreme Court ruling that bus segregation was unconstitutional. King emerged as a national leader.</p>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-title">SCLC &amp; SNCC · 1957 / 1960</div>
+        <p>The Southern Christian Leadership Conference and Student Nonviolent Coordinating Committee organized nonviolent direct-action campaigns across the South.</p>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-title">Freedom Rides · 1961</div>
+        <p>Interracial teams rode buses through the South to test compliance with anti-segregation rulings. They faced firebombs and beatings, but ultimately forced integration of interstate terminals.</p>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-title">Birmingham Campaign · 1963</div>
+        <p>Protests, sit-ins, and the Children's Campaign brought national and international attention to segregation. King's "Letter from a Birmingham Jail" became a landmark document.</p>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-title">March on Washington · Aug. 28, 1963</div>
+        <p>250,000 people gathered in D.C. — the largest political gathering in U.S. history — to demand civil rights and economic justice. King's "I Have a Dream" speech galvanized the nation.</p>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-title">Civil Rights Act · 1964 &amp; Voting Rights Act · 1965</div>
+        <p>Landmark legislation banned discrimination in public life and employment, and outlawed voter suppression tactics, dramatically expanding Black voter registration across the South.</p>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- ── FOOTER ── -->
+  <div class="footer">
+    <div class="footer-left">© 2026 Teachers' Curriculum Institute &nbsp;·&nbsp; Level A</div>
+    <div class="footer-right">Lesson 44 &nbsp;·&nbsp; American Chronicles</div>
+  </div>
+
+</div><!-- /app -->
+</body>
+</html>
