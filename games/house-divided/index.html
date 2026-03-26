@@ -2234,7 +2234,16 @@ function getDeckId(unitId){return DECK_MAP[unitId]||null;}
 
 function buildStudyBlock(u){
   const deckId=getDeckId(u.id);
-  if(!deckId)return'';
+  // If no deck but has a briefing, still show the briefing button
+  if(!deckId){
+    if(u.briefingUrl){
+      return`<div class="study-action-block">
+    <div class="study-action-label">📚 Study Tools</div>
+    <a href="${u.briefingUrl}" target="_blank" style="text-decoration:none;display:block"><button class="btn full amber-dim sm"><span>📋 Open Briefing</span></button></a>
+  </div>`;
+    }
+    return'';
+  }
   const passed=S.vocabPassed&&S.vocabPassed[deckId];
   const studied=S.flashcardsStudied&&S.flashcardsStudied[deckId];
   const bestScore=S.vocabBestScore&&S.vocabBestScore[deckId];
