@@ -738,9 +738,31 @@ z-index:1;}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--border2);}
+/* ── Unit Trophy Reveal Overlay ── */
+#unit-trophy-overlay{display:none;position:fixed;inset:0;z-index:9500;background:rgba(4,3,2,.97);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;}
+#unit-trophy-overlay.show{display:flex;animation:fadeIn .5s ease;}
+.utr-eyebrow{font-family:var(--bebas);font-size:11px;letter-spacing:4px;color:var(--text3);margin-bottom:10px;}
+.utr-name{font-family:var(--playfair);font-size:22px;color:var(--cream);font-style:italic;margin-bottom:18px;}
+.utr-icon{font-size:72px;margin-bottom:14px;filter:drop-shadow(0 0 28px rgba(200,160,32,.5));}
+.utr-trophy-name{font-family:var(--bebas);font-size:32px;letter-spacing:4px;margin-bottom:6px;}
+.utr-msg{font-family:var(--crimson);font-size:16px;color:var(--text2);font-style:italic;max-width:380px;line-height:1.6;margin-bottom:24px;}
+.utr-acc{font-family:var(--bebas);font-size:14px;color:var(--text3);letter-spacing:2px;margin-bottom:24px;}
+.utr-btn{font-family:var(--bebas);font-size:14px;letter-spacing:3px;background:transparent;border:1.5px solid;color:inherit;padding:14px 32px;cursor:pointer;transition:all .2s;}
 </style>
 
 
+<script>
+// Instant redirect if no shell session
+(function(){
+  try{
+    var s=localStorage.getItem('ac_shell_state');
+    if(!s){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');return;}
+    var p=JSON.parse(s);
+    // Just need a real name — setupDone may not be set with Google auth
+    if(!p||!p.name||p.name==='Guest'){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');return;}
+  }catch(e){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');}
+})();
+</script>
 </head>
 <body>
 <div class="noise-overlay"></div>
@@ -4398,6 +4420,9 @@ function checkContinue(){
     document.getElementById('cb-name').textContent=G.name;
     document.getElementById('cb-stats').textContent='Level '+G.level+' · '+G.score+' pts · Period '+G.period;
     document.getElementById('ls-start').style.display='none';
+  } else {
+    // No session and no save — redirect to shell to login
+    window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/';
   }
 }
 function continueGame(){if(loadSave()){launchGame();}else{notify('Save not found','red');hideContinue();}}
@@ -6307,7 +6332,10 @@ window.addEventListener('DOMContentLoaded',()=>{
   // Try shell auto-login first — show welcome-back overlay if session found
   const sp=getShellProfile();
   if(sp&&sp.name&&sp.name!=='Guest'){
-    showWelcomeBack(sp);
+    // Shell handles auth — skip welcome-back, go straight in
+    const wbo=document.getElementById('welcome-back-overlay');
+    if(wbo)wbo.classList.remove('show');
+    checkContinue();
   } else {
     checkContinue();
   }
@@ -6501,5 +6529,15 @@ function getUnlockHint(ch){
 
 
 </script>
+<!-- UNIT TROPHY REVEAL OVERLAY -->
+<div id="unit-trophy-overlay">
+  <div class="utr-eyebrow">UNIT COMPLETE</div>
+  <div class="utr-name" id="utr-name"></div>
+  <div class="utr-icon" id="utr-icon"></div>
+  <div class="utr-trophy-name" id="utr-trophy-name"></div>
+  <div class="utr-msg" id="utr-msg"></div>
+  <div class="utr-acc" id="utr-acc"></div>
+  <button class="utr-btn" id="utr-btn" onclick="closeUnitTrophy()"></button>
+</div>
 </body>
 </html>
