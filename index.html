@@ -1925,22 +1925,10 @@ function awardBadges(){
 }
 
 function checkUnlocks(){
-  const rmap={};_trophyData.forEach(r=>rmap[r.unit_id]=r);
-  const tiers=['tryagain','completed','bronze','silver','gold','historian'];
+  // Only auto-award free characters — everything else must be unlocked via the RPG
   CHARS.forEach(ch=>{
-    if(S.unlocked.includes(ch.id)||ch.unlockMethod==='teacher')return;
-    if(ch.unlockMethod==='free'){if(!S.unlocked.includes(ch.id))S.unlocked.push(ch.id);return;}
-    if(ch.unlockMethod==='rpg')return; // Managed by Historian Ops RPG
-    if(ch.unlockMethod==='teacher')return;
-    // Special: Mr. Olson unlocks when student earns Gold or better on ALL 19 units
-    if(ch.id==='mr_olson'){
-      const allGold=UNIT_DATA.every(u=>{const r=rmap[u.id];return r&&r.best_accuracy>=90;});
-      if(allGold){S.unlocked.push(ch.id);notify('🏛️ You unlocked a secret character — check the Special tab!');}
-      return;
-    }
-    const m=ch.unlockMethod;
-    if(m.startsWith('complete:')){const uid=m.split(':')[1];if(S.unitsCompleted.includes(uid)){S.unlocked.push(ch.id);notify(`🎭 Unlocked: ${ch.label}!`);}}
-    else if(m.startsWith('trophy:')){const[,tier,uid]=m.split(':');const r=rmap[uid];if(!r)return;const earned=calcTier(r.best_accuracy);if(tiers.indexOf(earned)>=tiers.indexOf(tier)){S.unlocked.push(ch.id);notify(`🎭 Unlocked: ${ch.label}!`);}}
+    if(S.unlocked.includes(ch.id))return;
+    if(ch.unlockMethod==='free'){S.unlocked.push(ch.id);}
   });
 }
 
