@@ -1823,6 +1823,7 @@ function showResults() {
     <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:18px">
       <button class="btn full" onclick="switchMode('study')"><span>🃏 Review Flashcards Again</span></button>
       <button class="btn full blue" onclick="startQuiz()"><span>↺ Retake Quiz</span></button>
+      <button class="btn full" onclick="printVocabCert('${d.title}', ${pct}, ${quizScore}, ${total})" style="border-color:var(--gold);color:var(--gold)"><span>🎓 Print Vocabulary Certificate</span></button>
       <a id="hub-return-btn" href="javascript:history.back()" style="text-decoration:none;display:block">
         <button class="btn full green"><span>← Return to Hub</span></button>
       </a>
@@ -1838,6 +1839,83 @@ function showResults() {
     const ref = document.referrer;
     returnBtn.href = (ref && ref !== window.location.href) ? ref : HUB_URL;
   }
+}
+
+
+// ══════════════════════════════════════════════════════
+//  VOCAB CERTIFICATE
+// ══════════════════════════════════════════════════════
+function printVocabCert(deckTitle, pct, correct, total) {
+  const date = new Date().toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+  const name = S.name || 'Historian';
+  const period = S.period ? 'Period ' + S.period : '';
+
+  // Grade color and label matching the results screen
+  let gradeColor = '#e04040', gradeLabel = 'Developing';
+  if (pct === 100) { gradeColor = '#e8d0ff'; gradeLabel = 'Historian — Perfect Score'; }
+  else if (pct >= 90) { gradeColor = '#ffd700'; gradeLabel = 'Mastery'; }
+  else if (pct >= 80) { gradeColor = '#c8c8d8'; gradeLabel = 'Proficient'; }
+  else if (pct >= 70) { gradeColor = '#cd7f32'; gradeLabel = 'Approaching Mastery'; }
+  else if (pct >= 60) { gradeColor = '#38a050'; gradeLabel = 'Passing'; }
+
+  const w = window.open('', '_blank', 'width=860,height=640');
+  if (!w) { alert('Allow popups to print your certificate.'); return; }
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Vocab Certificate</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Inter:wght@400;600&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#faf7f0;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;font-family:Georgia,serif}
+    .cert{width:780px;background:#faf7f0;border:3px double ${gradeColor};padding:38px 48px;text-align:center;position:relative}
+    .cert::before{content:'';position:absolute;inset:8px;border:1px solid ${gradeColor};opacity:.3;pointer-events:none}
+    .eyebrow{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.35em;color:#8a6a2a;margin-bottom:8px}
+    .icon{font-size:44px;margin:8px 0}
+    .main-title{font-family:'Cinzel Decorative',serif;font-size:20px;color:#1a1208;letter-spacing:.08em;margin:8px 0}
+    .divider{height:2px;background:linear-gradient(90deg,transparent,${gradeColor},transparent);margin:14px auto;width:75%}
+    .certifies{font-size:11px;letter-spacing:.15em;color:#5a4520;margin:6px 0}
+    .student-name{font-family:'Cinzel Decorative',serif;font-size:28px;color:#1a1208;margin:8px 0;letter-spacing:.05em}
+    .deck-name{font-family:'Cinzel',serif;font-size:14px;color:#3a2510;margin:6px 0;line-height:1.5}
+    .grade-badge{font-family:'Cinzel Decorative',serif;font-size:20px;color:${gradeColor};letter-spacing:.1em;margin:10px 0}
+    .score-row{display:flex;justify-content:center;gap:32px;margin:14px 0;padding:12px 20px;background:rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.08)}
+    .score-item{text-align:center}
+    .score-val{font-family:'Cinzel',serif;font-size:22px;color:#7a4820;font-weight:700}
+    .score-lbl{font-size:8px;letter-spacing:.12em;color:#8a6a2a;margin-top:2px;font-family:'Inter',sans-serif}
+    .sigs{display:flex;justify-content:space-around;margin-top:18px;padding-top:14px;border-top:1px solid rgba(0,0,0,.15)}
+    .sig-line{width:150px;height:1px;background:#8a6a2a;margin:0 auto 5px}
+    .sig-name{font-family:'Cinzel',serif;font-size:11px;color:#1a1208;font-weight:700}
+    .sig-title{font-size:8px;color:#8a6a2a;letter-spacing:.08em;font-family:'Inter',sans-serif;margin-top:2px}
+    .footer{font-size:9px;color:#aaa;margin-top:14px;border-top:1px solid #e0d8c8;padding-top:10px;letter-spacing:.05em}
+    .pbtn{margin-top:16px;padding:10px 26px;background:${gradeColor};border:none;color:#1a1208;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.08em;cursor:pointer}
+    @media print{body{padding:0}.np{display:none!important}}
+  </style></head><body>
+  <div class="cert">
+    <div class="eyebrow">AMERICAN CHRONICLES · U.S. HISTORY · VOCABULARY ASSESSMENT</div>
+    <div class="icon">📚</div>
+    <div class="main-title">Vocabulary Certificate</div>
+    <div class="divider"></div>
+    <div class="certifies">THIS CERTIFIES THAT</div>
+    <div class="student-name">${name}</div>
+    <div class="certifies">has completed the vocabulary assessment for</div>
+    <div class="deck-name"><strong>${deckTitle}</strong></div>
+    ${period ? `<div style="font-size:10px;color:#888;margin-top:4px;font-family:'Inter',sans-serif">${period}</div>` : ''}
+    <div class="divider"></div>
+    <div class="grade-badge">${gradeLabel}</div>
+    <div class="score-row">
+      <div class="score-item"><div class="score-val">${pct}%</div><div class="score-lbl">ACCURACY</div></div>
+      <div class="score-item"><div class="score-val">${correct}/${total}</div><div class="score-lbl">CORRECT</div></div>
+    </div>
+    <div class="sigs">
+      <div><div class="sig-line"></div><div class="sig-name">${name}</div><div class="sig-title">STUDENT${period ? ' · ' + period : ''}</div></div>
+      <div><div class="sig-line"></div><div class="sig-name">Joshua Olson</div><div class="sig-title">U.S. HISTORY TEACHER</div></div>
+      <div><div class="sig-line"></div><div class="sig-name">${date}</div><div class="sig-title">DATE COMPLETED</div></div>
+    </div>
+    <div class="footer">American Chronicles · Created by Joshua Olson · Brevard County, FL · Unlimited attempts — your best effort earns your grade</div>
+  </div>
+  <div class="np" style="text-align:center;margin-top:14px">
+    <button class="pbtn" onclick="window.print()">🖨 Print / Save as PDF</button>
+    <button class="pbtn" onclick="window.close()" style="margin-left:9px;background:#5a4520;color:#faf7f0">✕ Close</button>
+  </div>
+  </body></html>`);
+  w.document.close();
 }
 
 // ══════════════════════════════════════════════════════
@@ -1900,4 +1978,3 @@ function notify(msg) {
 </script>
 </body>
 </html>
-
