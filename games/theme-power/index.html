@@ -460,7 +460,29 @@ body.hud-active #root{padding-top:68px;}
   #print-area{display:block!important;padding:40px;}
   .cert-body{font-family:Georgia,serif;}
 }
+/* ── Unit Trophy Reveal Overlay ── */
+#unit-trophy-overlay{display:none;position:fixed;inset:0;z-index:9500;background:rgba(4,3,2,.97);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;}
+#unit-trophy-overlay.show{display:flex;animation:fadeIn .5s ease;}
+.utr-eyebrow{font-family:var(--bebas);font-size:11px;letter-spacing:4px;color:var(--text3);margin-bottom:10px;}
+.utr-name{font-family:var(--playfair);font-size:22px;color:var(--cream);font-style:italic;margin-bottom:18px;}
+.utr-icon{font-size:72px;margin-bottom:14px;filter:drop-shadow(0 0 28px rgba(200,160,32,.5));}
+.utr-trophy-name{font-family:var(--bebas);font-size:32px;letter-spacing:4px;margin-bottom:6px;}
+.utr-msg{font-family:var(--crimson);font-size:16px;color:var(--text2);font-style:italic;max-width:380px;line-height:1.6;margin-bottom:24px;}
+.utr-acc{font-family:var(--bebas);font-size:14px;color:var(--text3);letter-spacing:2px;margin-bottom:24px;}
+.utr-btn{font-family:var(--bebas);font-size:14px;letter-spacing:3px;background:transparent;border:1.5px solid;color:inherit;padding:14px 32px;cursor:pointer;transition:all .2s;}
 </style>
+<script>
+// Instant redirect if no shell session
+(function(){
+  try{
+    var s=localStorage.getItem('ac_shell_state');
+    if(!s){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');return;}
+    var p=JSON.parse(s);
+    // Just need a real name — setupDone may not be set with Google auth
+    if(!p||!p.name||p.name==='Guest'){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');return;}
+  }catch(e){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');}
+})();
+</script>
 </head>
 <body>
 
@@ -707,7 +729,17 @@ body.hud-active #root{padding-top:68px;}
   </div>
 </div>
 
-<div id="login-gate" class="show">
+<!-- UNIT TROPHY REVEAL OVERLAY -->
+<div id="unit-trophy-overlay">
+  <div class="utr-eyebrow">UNIT COMPLETE</div>
+  <div class="utr-name" id="utr-name"></div>
+  <div class="utr-icon" id="utr-icon"></div>
+  <div class="utr-trophy-name" id="utr-trophy-name"></div>
+  <div class="utr-msg" id="utr-msg"></div>
+  <div class="utr-acc" id="utr-acc"></div>
+  <button class="utr-btn" id="utr-btn" onclick="closeUnitTrophy()"></button>
+</div>
+<div id="login-gate">
   <div class="login-box">
     <div class="login-logo">BALANCE<br>OF POWER</div>
     <div class="login-sub">Cross-Era Theme Campaign</div>
@@ -1678,25 +1710,50 @@ function saveP() {
 // PORTRAIT ENGINE (minimal — reads from shell or generates)
 // ════════════════════════════════════════════
 
-function getAvatarSVG(id, size=44) {
-  // Shell provides its own SVG. Here we generate a simple fallback.
-  const colors = {
-    scholar_f:   {bg:'#0d1a2e',ring:'#c9a84c',skin:'#f0c8a0',hair:'#3a2010',outfit:'#1a3060'},
-    activist_m:  {bg:'#100808',ring:'#c9a84c',skin:'#a06040',hair:'#1a0a0a',outfit:'#3a0a0a'},
-    reporter_f:  {bg:'#0a0c08',ring:'#c9a84c',skin:'#8a5530',hair:'#2a1a0a',outfit:'#1a2a1a'},
-    soldier_m:   {bg:'#2a3a1a',ring:'#c9a84c',skin:'#d4a870',hair:'#556644',outfit:'#3a4a2a'},
-    pioneer_f:   {bg:'#0c0a06',ring:'#c9a84c',skin:'#c89870',hair:'#8b4513',outfit:'#5a3010'},
-    worker_m_asian:{bg:'#080a0a',ring:'#c9a84c',skin:'#d4b080',hair:'#555544',outfit:'#1a1a1a'},
-  };
-  const c = colors[id] || colors.scholar_f;
-  return `<svg viewBox="0 0 40 40" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:50%">
-    <circle cx="20" cy="20" r="19.5" fill="${c.ring}"/>
-    <circle cx="20" cy="20" r="15.5" fill="${c.bg}"/>
-    <circle cx="20" cy="17" r="6" fill="${c.skin}"/>
-    <ellipse cx="20" cy="11" rx="6" ry="4" fill="${c.hair}"/>
-    <ellipse cx="20" cy="26" rx="8.5" ry="5.5" fill="${c.outfit}"/>
-    <rect x="13" y="21" width="14" height="8" fill="${c.outfit}"/>
+function svgMedallion(bg,ring,face,size=44){
+  return `<svg viewBox="0 0 40 40" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:50%;overflow:visible">
+    <circle cx="20" cy="20" r="19.5" fill="${ring}"/>
+    <circle cx="20" cy="20" r="17.5" fill="${darken(ring)}"/>
+    <circle cx="20" cy="20" r="15.5" fill="${bg}"/>
+    ${face}
+    <circle cx="20" cy="20" r="15.5" fill="none" stroke="${ring}" stroke-width=".35" opacity=".5"/>
   </svg>`;
+}
+function darken(c){const m={'#c9a84c':'#a8863a','#208878':'#156658','#7a2010':'#4a1008','#2a4a8a':'#1a3060','#6a4a20':'#4a3010','#c07818':'#905010'};return m[c]||'#0a0808';}
+function face(skin,eyes,hair,outfit,extras=''){return `
+  <circle cx="20" cy="17" r="6" fill="${skin}"/>
+  <ellipse cx="20" cy="26" rx="8.5" ry="5.5" fill="${outfit}"/>
+  <rect x="13" y="21" width="14" height="8" fill="${outfit}"/>
+  <ellipse cx="17.5" cy="16" rx="1.1" ry="1.4" fill="${eyes}"/>
+  <ellipse cx="22.5" cy="16" rx="1.1" ry="1.4" fill="${eyes}"/>
+  ${hair}
+  ${extras}`;}
+function hair_short(c,y=12){return `<ellipse cx="20" cy="${y}" rx="6" ry="3.5" fill="${c}"/>`;}
+function hair_bun(c){return `<ellipse cx="20" cy="11.5" rx="5.5" ry="3" fill="${c}"/><circle cx="20" cy="9.5" r="2.5" fill="${c}"/>`;}
+function hair_long(c){return `<ellipse cx="20" cy="11" rx="6" ry="4" fill="${c}"/><path d="M14 14 Q12 20 14 25" fill="none" stroke="${c}" stroke-width="2.5"/><path d="M26 14 Q28 20 26 25" fill="none" stroke="${c}" stroke-width="2.5"/>`;}
+function hair_afro(c){return `<ellipse cx="20" cy="10" rx="8" ry="6" fill="${c}"/>`;}
+function hair_straight_long(c){return `<ellipse cx="20" cy="11" rx="6.5" ry="4" fill="${c}"/><path d="M13.5 14 Q12 22 13.5 27" fill="none" stroke="${c}" stroke-width="3"/><path d="M26.5 14 Q28 22 26.5 27" fill="none" stroke="${c}" stroke-width="3"/>`;}
+function beard(c,opacity=1){return `<path d="M15 20 Q16 24 20 25 Q24 24 25 20" fill="${c}" opacity="${opacity}"/>`;}
+function glasses(){return `<rect x="14.5" y="14" width="4" height="3.5" rx="1.5" fill="none" stroke="#2a1a0a" stroke-width=".9"/><rect x="21.5" y="14" width="4" height="3.5" rx="1.5" fill="none" stroke="#2a1a0a" stroke-width=".9"/><line x1="18.5" y1="15.5" x2="21.5" y2="15.5" stroke="#2a1a0a" stroke-width=".8"/>`;}
+function hat_top(c){return `<rect x="15" y="5.5" width="10" height="9" rx=".8" fill="${c}"/><rect x="12" y="14" width="16" height="2" rx=".5" fill="${c}"/>`;}
+function hat_military(c){return `<ellipse cx="20" cy="12" rx="6.5" ry="3.5" fill="${c}"/><rect x="16" y="8" width="8" height="4.5" rx=".5" fill="${c}"/>`;}
+function hat_cowboy(c){return `<ellipse cx="20" cy="12.5" rx="6" ry="3.2" fill="${c}"/><rect x="16" y="9" width="8" height="4" rx=".5" fill="${c}"/><path d="M13 13 Q12 15 14 16" fill="none" stroke="${c}" stroke-width="2"/><path d="M27 13 Q28 15 26 16" fill="none" stroke="${c}" stroke-width="2"/>`;}
+function detail_book(){return `<rect x="22" y="19" width="5" height="7" rx=".5" fill="#f5ead8" opacity=".8"/>`;}
+function detail_stars(){return `<text x="16" y="28" font-size="5" fill="#c9a84c" opacity=".7">★★</text>`;}
+
+// Starter characters for game HUD avatars
+const STARTERS = {
+  scholar_f:    ()=>svgMedallion('#0d1a2e','#c9a84c',face('#f0c8a0','#1a1a1a',hair_long('#3a2010'),'#1a3060',detail_book())),
+  activist_m:   ()=>svgMedallion('#100808','#c9a84c',face('#a06040','#1a1a1a',hair_afro('#1a0a0a'),'#3a0a0a')),
+  reporter_f:   ()=>svgMedallion('#0a0c08','#c9a84c',face('#8a5530','#0a0a0a',hair_straight_long('#2a1a0a'),'#1a2a1a')),
+  soldier_m:    ()=>svgMedallion('#2a3a1a','#c9a84c',face('#d4a870','#1a1a0a',hat_military('#556644'),'#3a4a2a',beard('#a07040',.35))),
+  pioneer_f:    ()=>svgMedallion('#0c0a06','#c9a84c',face('#c89870','#2a1a0a',hat_cowboy('#8b4513'),'#5a3010')),
+  worker_m_asian:()=>svgMedallion('#080a0a','#c9a84c',face('#d4b080','#1a0a00',hat_military('#555544'),'#1a1a1a')),
+};
+function getAvatarSVG(id, size=44){
+  const fn = STARTERS[id] || STARTERS.scholar_f;
+  const svg = fn();
+  return svg.replace(/width="\d+"/, `width="${size}"`).replace(/height="\d+"/, `height="${size}"`);
 }
 
 // ════════════════════════════════════════════
@@ -2278,7 +2335,17 @@ function finishLesson() {
     pushRewardsToShell(activeLesson);
   }
   saveP();
-  pushACResult(acc);
+
+  // Only push to Supabase when the entire unit is complete
+  const allDoneCheck = LESSONS.every(l => P.lessonsCompleted.includes(l.id));
+  if (allDoneCheck) {
+    const allScores = Object.values(P.lessonBestScores);
+    const overallAcc = allScores.length
+      ? Math.round(allScores.reduce((a, s) => a + s.accuracy, 0) / allScores.length)
+      : acc;
+    pushACResult(overallAcc);
+    setTimeout(() => showUnitTrophy(overallAcc), 1200);
+  }
 
   // ── Trophy badge ──────────────────────────────────────
   document.getElementById('complete-badge').textContent = tier.icon;
@@ -2441,13 +2508,48 @@ function returnToUnitHub() {
   showUnitHub();
 }
 
+// ── UNIT TROPHY REVEAL ────────────────────────────────────
+function showUnitTrophy(overallAcc) {
+  const tier = calcTier(overallAcc);
+  const name = P.name || 'Historian';
+  const passed = overallAcc >= 60;
+  const messages = {
+    historian: `An extraordinary performance, ${name}. Every question answered correctly. You have mastered this unit.`,
+    gold:      `Outstanding work, ${name}. A gold-level result reflects real command of the material.`,
+    silver:    `Well done, ${name}. A solid silver performance — you know this unit.`,
+    bronze:    `Good work, ${name}. A bronze trophy is yours. Replay to sharpen your understanding and push higher.`,
+    completed: `You completed the unit, ${name}. Keep reviewing and try again to earn a trophy.`,
+    tryagain:  `Good effort, ${name}. You didn't quite reach trophy level this time — but every replay builds understanding. Give it another shot.`
+  };
+  const tierKey = tier.label.toLowerCase().replace(' ', '');
+  const msg = messages[tierKey] || messages.tryagain;
+  document.getElementById('utr-name').textContent = name;
+  document.getElementById('utr-icon').textContent = passed ? tier.icon : '📚';
+  document.getElementById('utr-trophy-name').textContent = passed ? tier.label + ' Trophy' : 'Keep Going';
+  document.getElementById('utr-trophy-name').style.color = tier.color;
+  document.getElementById('utr-msg').textContent = msg;
+  document.getElementById('utr-acc').textContent = 'Overall Accuracy: ' + overallAcc + '%';
+  const btn = document.getElementById('utr-btn');
+  btn.textContent = passed ? 'View My Results ▶' : 'Try Again ↺';
+  btn.style.borderColor = tier.color;
+  btn.style.color = tier.color;
+  document.getElementById('unit-trophy-overlay').classList.add('show');
+}
+function closeUnitTrophy() {
+  document.getElementById('unit-trophy-overlay').classList.remove('show');
+  const acc = parseInt(document.getElementById('utr-acc').textContent.replace(/[^0-9]/g,''));
+  if (acc < 60) {
+    document.getElementById('lesson-complete') && document.getElementById('lesson-complete').classList.remove('show');
+    showUnitHub && showUnitHub();
+  }
+}
 function returnToShell() {
   saveP();
   if (window.opener && !window.opener.closed) { window.opener.focus(); window.close(); return; }
   try { window.parent.postMessage({type:'RETURN_TO_SHELL', unitId: UNIT_ID}, '*'); } catch(e) {}
   notify('Returning to American Chronicles…');
-  const shellURL = localStorage.getItem('ac_shell_url');
-  if (shellURL) { setTimeout(() => { window.location.href = shellURL; }, 600); }
+  const shellURL = localStorage.getItem('ac_shell_url') || 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/';
+  setTimeout(() => { window.location.href = shellURL; }, 600);
 }
 
 function replayFromBeginning() {
@@ -2469,49 +2571,54 @@ function printCertificate() {
   const tier = calcTier(avgAcc);
   const eoc = eocLevel(avgAcc);
   const date = new Date().toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
-
   const lessonRows = LESSONS.map(l => {
     const s = scores[l.id];
     return s
-      ? `<tr><td>${l.label}</td><td>${l.title}</td><td>${s.accuracy}%</td><td>${s.correct}/${s.total}</td></tr>`
-      : `<tr style="opacity:.4"><td>${l.label}</td><td>${l.title}</td><td>—</td><td>—</td></tr>`;
+      ? `<tr><td>${l.label}</td><td>${l.title}</td><td style="text-align:center">${s.accuracy}%</td><td style="text-align:center">${s.correct}/${s.total}</td></tr>`
+      : `<tr style="opacity:.4"><td>${l.label}</td><td>${l.title}</td><td style="text-align:center">—</td><td style="text-align:center">—</td></tr>`;
   }).join('');
-
-  document.getElementById('print-area').innerHTML = `
-    <div class="cert-body" style="max-width:700px;margin:0 auto;font-family:Georgia,serif;padding:40px;border:3px double #c83020;">
-      <div style="text-align:center;margin-bottom:24px;">
-        <div style="font-size:36px;margin-bottom:8px;">🏛️</div>
-        <div style="font-size:28px;font-weight:bold;letter-spacing:3px;color:#c83020;">AMERICAN CHRONICLES</div>
-        <div style="font-size:14px;letter-spacing:2px;color:#666;margin-top:4px;">UNIT 5B — EARLY COLD WAR · CERTIFICATE OF COMPLETION</div>
-      </div>
-      <div style="text-align:center;margin-bottom:20px;padding:16px;border:1px solid #c83020;">
-        <div style="font-size:13px;color:#666;letter-spacing:1px;">THIS CERTIFIES THAT</div>
-        <div style="font-size:26px;font-style:italic;margin:6px 0;">${P.name || 'Historian'}</div>
-        <div style="font-size:13px;color:#666;">has completed Unit 7B: Napalm Dawn — Vietnam and the 1970s</div>
-        ${P.period ? `<div style="font-size:12px;color:#999;margin-top:4px;">Period ${P.period}</div>` : ''}
-      </div>
-      <div style="text-align:center;margin-bottom:20px;">
-        <div style="font-size:22px;font-weight:bold;color:#c83020;">${tier.icon} ${tier.label}</div>
-        <div style="font-size:13px;color:#666;">Overall Accuracy: ${avgAcc}%</div>
-        <div style="font-size:13px;color:#333;margin-top:4px;">EOC Practice Rating: ${eoc.label}</div>
-      </div>
-      <table style="width:100%;border-collapse:collapse;margin-bottom:20px;font-size:12px;">
-        <thead><tr style="border-bottom:2px solid #c83020;">
-          <th style="text-align:left;padding:6px;">Lesson</th>
-          <th style="text-align:left;padding:6px;">Title</th>
-          <th style="padding:6px;">Accuracy</th>
-          <th style="padding:6px;">Score</th>
-        </tr></thead>
-        <tbody>${lessonRows}</tbody>
-      </table>
-      <div style="text-align:center;font-size:11px;color:#999;border-top:1px solid #ddd;padding-top:12px;">
-        Issued ${date} · American Chronicles · Created by Joshua Olson · Brevard County, FL
-      </div>
-    </div>`;
-
-  setTimeout(() => window.print(), 100);
+  const w = window.open('','_blank','width=780,height=680');
+  if(!w){notify('Allow popups to print certificate.');return;}
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Certificate</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#faf7f0;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;font-family:Georgia,serif}
+    .cert{width:700px;background:#faf7f0;border:3px double #c83020;padding:36px 44px;text-align:center}
+    .title{font-family:'Cinzel Decorative',serif;font-size:22px;color:#1a0a08;letter-spacing:.08em;margin:8px 0}
+    .divider{height:2px;background:linear-gradient(90deg,transparent,#c83020,transparent);margin:14px auto;width:80%}
+    .name{font-family:'Cinzel Decorative',serif;font-size:28px;color:#1a0a08;margin:8px 0}
+    .tier{font-family:'Cinzel',serif;font-size:18px;color:#c83020;letter-spacing:.1em;margin:8px 0}
+    table{width:100%;border-collapse:collapse;font-size:12px;margin:12px 0}
+    th{border-bottom:2px solid #c83020;padding:6px;text-align:left;font-family:'Cinzel',serif;letter-spacing:.05em}
+    td{padding:5px 6px;border-bottom:1px solid #e0d8c8}
+    .footer{font-size:10px;color:#888;margin-top:14px;border-top:1px solid #ddd;padding-top:10px}
+    .pbtn{margin-top:16px;padding:10px 24px;background:#c83020;border:none;color:#fff;font-family:'Cinzel',serif;font-size:12px;cursor:pointer;letter-spacing:.06em}
+    @media print{.pbtn{display:none}}
+  </style></head><body>
+  <div class="cert">
+    <div style="font-size:10px;letter-spacing:.3em;color:#888;font-family:'Cinzel',serif">AMERICAN CHRONICLES · U.S. HISTORY</div>
+    <div style="font-size:40px;margin:10px 0">${tier.icon}</div>
+    <div class="title">Certificate of Completion</div>
+    <div class="divider"></div>
+    <div style="font-size:12px;color:#666;letter-spacing:.1em">THIS CERTIFIES THAT</div>
+    <div class="name">${P.name || 'Historian'}</div>
+    <div style="font-size:13px;color:#444;margin:6px 0">has successfully completed</div>
+    <div style="font-family:'Cinzel',serif;font-size:15px;color:#1a0a08;margin:4px 0">Balance of Power — Who Holds Power Across Time</div>
+    ${P.period ? `<div style="font-size:11px;color:#888;margin-top:4px">Period ${P.period}</div>` : ''}
+    <div class="divider"></div>
+    <div class="tier">${tier.label} · ${avgAcc}% Accuracy</div>
+    <div style="font-size:12px;color:#555;margin:4px 0">EOC Practice Rating: ${eoc.label}</div>
+    <table>
+      <thead><tr><th>Lesson</th><th>Title</th><th style="text-align:center">Accuracy</th><th style="text-align:center">Score</th></tr></thead>
+      <tbody>${lessonRows}</tbody>
+    </table>
+    <div class="footer">Issued ${date} · American Chronicles · Created by Joshua Olson · Brevard County, FL</div>
+  </div>
+  <button class="pbtn" onclick="window.print()">🖨 Print / Save as PDF</button>
+  </body></html>`);
+  w.document.close();
 }
-
 // ════════════════════════════════════════════
 // SUPABASE PUSH
 // ════════════════════════════════════════════
@@ -2545,6 +2652,7 @@ async function pushACResult(acc) {
           best_score: Math.max(sessionScore, prev ? prev.best_score || 0 : 0),
           best_accuracy: Math.max(acc, prev ? prev.best_accuracy || 0 : 0),
           trophy: bestTier,
+          cards: Math.max(P.cardsEarned ? P.cardsEarned.length : 0, prev ? prev.cards || 0 : 0),
           attempts: (prev ? prev.attempts || 0 : 0) + 1,
           updated_at: new Date().toISOString()
         })
@@ -2848,10 +2956,14 @@ window.addEventListener('DOMContentLoaded', () => {
   const hasSession = loadP();
 
   if (hasSession) {
+    // Shell handles auth — skip all gates, go straight in
     document.getElementById('login-gate').classList.remove('show');
-    showWelcomeBack();
+    const wbo = document.getElementById('welcome-back-overlay');
+    if (wbo) wbo.classList.remove('show');
+    showUnitHub();
   } else {
-    showLoginGate();
+  // No shell session — redirect to shell to login with Google
+  window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/';
   }
 });
 
@@ -2860,7 +2972,7 @@ window.addEventListener('DOMContentLoaded', () => {
 // ════════════════════════════════════════════
 
 function showWelcomeBack() {
-  if (!P) { showLoginGate(); return; }
+  if (!P) { window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/'; return; }
 
   // Populate avatar
   const avatarEl = document.getElementById('wb-avatar');
@@ -2902,7 +3014,7 @@ function switchPlayer() {
   try { localStorage.removeItem(SAVE_KEY); } catch(e) {}
   P = null;
   document.getElementById('welcome-back-overlay').classList.remove('show');
-  showLoginGate();
+  window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/'; // redirect to shell login
 }
 
 // ── Anti-copy
