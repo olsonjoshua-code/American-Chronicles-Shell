@@ -10,7 +10,7 @@
     body { font-family: Arial, Helvetica, sans-serif; background:#e8e8e8; color:#111; font-size:15px; line-height:1.6; }
 
     /* HEADER */
-    .header { background:#fff; border-bottom:2px solid #222; padding:14px 40px; display:flex; justAifyA-content:space-between; align-items:center; position:sticky; top:0; z-index:10; }
+    .header { background:#fff; border-bottom:2px solid #222; padding:14px 40px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:10; }
     .header-title { font-size:1rem; font-weight:bold; }
     .header-sub { font-size:0.78rem; color:#666; margin-top:2px; }
     .header-right { text-align:right; font-size:0.82rem; color:#444; }
@@ -192,6 +192,7 @@
   </div>
   <p class="results-msg" id="results-msg"></p>
   <button class="btn-restart" onclick="restartQuiz()">Try Again</button>
+  <button class="btn-restart" onclick="returnToShell()" style="margin-left:10px;background:#5a4520;">← Return to Shell</button>
 </div>
 
 <script>
@@ -428,6 +429,23 @@
       [0,   "Achievement Level 1 — Keep studying! Review your notes and briefings, then give it another try."]
     ];
     document.getElementById("results-msg").textContent = msgs.find(([t]) => scale >= t)[1];
+
+    // Notify shell of completion
+    try {
+      const shellUrl = localStorage.getItem('ac_shell_url') || '../index.html';
+      const shellState = localStorage.getItem('ac_shell_state');
+      if (shellState) {
+        const state = JSON.parse(shellState);
+        state.unitsCompleted = state.unitsCompleted || [];
+        if (!state.unitsCompleted.includes('eoc_practice')) {
+          state.unitsCompleted.push('eoc_practice');
+        }
+        localStorage.setItem('ac_shell_state', JSON.stringify(state));
+      }
+      // postMessage to parent shell if embedded
+      if (window.opener) window.opener.postMessage({ type: 'unitComplete', unitId: 'eoc_practice' }, '*');
+      if (window.parent !== window) window.parent.postMessage({ type: 'unitComplete', unitId: 'eoc_practice' }, '*');
+    } catch(e) {}
   }
 
   function restartQuiz() {
@@ -437,6 +455,14 @@
     strikes = questions.map(() => new Array(4).fill(false));
     document.getElementById("results-screen").style.display = "none";
     document.getElementById("start-screen").style.display = "block";
+  }
+
+  function returnToShell() {
+    try {
+      const url = localStorage.getItem('ac_shell_url');
+      if (url) { window.location.href = url; return; }
+    } catch(e) {}
+    window.location.href = '../index.html';
   }
 
   document.addEventListener("keydown", e => {
