@@ -905,94 +905,144 @@ const LESSONS = [
     icon: '📰',
     type: 'lesson',
     briefing: {
-      location: 'Problems at the Turn of the Century',
+      location: 'American Cities and Factories',
       date: '1900s',
-      role: 'investigative reporter',
+      role: 'investigative journalist',
       text: 'Factories are booming, cities are growing, and wealth is rising fast, but reformers see serious danger beneath the surface. Crowded housing, machine politics, unsafe workplaces, environmental damage, and corporate power all raise questions about who benefits from modern America. Your task is to identify the major problems that Progressive reformers wanted the nation to face.',
       tags: ['SS.912.A.3.9']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Uncovering Problems', cards: ['Ida Tarbell', 'Muckraker Press Pass'] },
+    rewards: { badge: 'Uncovering Problems', cards: ['Upton Sinclair', 'Jacob Riis'] },
     bank: [
       {
         id: '2B-L16-Q1',
         text: 'Why did many Progressives see rapidly growing cities as places in urgent need of reform?',
-        choices: ['Overcrowding, poor sanitation, and weak housing standards created serious health and safety problems.', 'Overcrowding, poor sanitation, and weak housing standards had already been solved by city machines.', 'Overcrowding, poor sanitation, and weak housing standards mainly affected wealthy suburban communities.', 'Overcrowding, poor sanitation, and weak housing standards mattered little beside foreign policy debates.'],
+        choices: [
+          'Overcrowding, poor sanitation, and weak housing standards created serious health and safety problems.',
+          'Most city residents were recent immigrants who resisted American laws and created lawless neighborhoods.',
+          'Cities concentrated too much political power in the hands of local elected officials and their allies.',
+          'Rapid urban growth was destroying farmland and threatening the agricultural economy of the nation.'
+        ],
         correctAnswer: 'Overcrowding, poor sanitation, and weak housing standards created serious health and safety problems.',
-        explanation: 'Rapid urban growth often outpaced city services, leaving many working-class families in unhealthy and unsafe conditions.',
+        explanation: 'Rapid urbanization outpaced city services — sewers, clean water, safe housing — leaving many urban residents vulnerable to disease, injury, and exploitation.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L16-Q2',
         text: 'Why were tenement buildings often criticized by reformers?',
-        choices: ['They packed many families into cramped, poorly ventilated spaces with limited light and sanitation.', 'They packed many families into cramped, poorly ventilated spaces but offered unusually high safety standards.', 'They packed many families into cramped, poorly ventilated spaces mostly in rural farming communities.', 'They packed many families into cramped, poorly ventilated spaces only after zoning laws improved housing.'],
+        choices: [
+          'They packed many families into cramped, poorly ventilated spaces with limited light and sanitation.',
+          'Tenements were owned by city governments and reformers believed private housing would be safer.',
+          'The buildings were constructed with shoddy materials that collapsed frequently, injuring residents.',
+          'Reformers criticized tenements mainly because they were built too far from factories, making commutes dangerous.'
+        ],
         correctAnswer: 'They packed many families into cramped, poorly ventilated spaces with limited light and sanitation.',
-        explanation: 'Tenements became symbols of urban poverty because they exposed how little protection many industrial workers had.',
+        explanation: 'Tenements were designed to maximize profit by housing as many people as possible in minimal space, making disease, fire, and unsafe conditions common.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L16-Q3',
         text: 'What was the main criticism of urban political machines?',
-        choices: ['They exchanged favors and jobs for votes while encouraging corruption and blocking honest government.', 'They exchanged favors and jobs for votes while expanding direct democracy and reducing corruption.', 'They exchanged favors and jobs for votes mainly to protect civil service reform from party bosses.', 'They exchanged favors and jobs for votes only in western territories without major immigrant populations.'],
+        choices: [
+          'They exchanged favors and jobs for votes while encouraging corruption and blocking honest government.',
+          'Political machines were criticized for excluding immigrant groups from political participation entirely.',
+          'They concentrated too much power in the hands of reformers who used government to impose their values.',
+          'Machines were unpopular because they raised taxes dramatically to fund public works projects.'
+        ],
         correctAnswer: 'They exchanged favors and jobs for votes while encouraging corruption and blocking honest government.',
-        explanation: 'Machine politics gave assistance to some city residents, but reformers argued that it undermined fairness and accountability.',
+        explanation: 'Political machines like Tammany Hall traded city contracts, jobs, and services for votes, enriching bosses and their allies while making efficient government nearly impossible.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L16-Q4',
         text: 'What role did muckrakers play in the Progressive Era?',
-        choices: ['They investigated corruption and social abuse, helping persuade the public that reform was necessary.', 'They investigated corruption and social abuse mainly to defend monopolies from new federal regulation.', 'They investigated corruption and social abuse only after Congress banned sensational magazine reporting.', 'They investigated corruption and social abuse mostly to promote isolation from immigration and world trade.'],
+        choices: [
+          'They investigated corruption and social abuse, helping persuade the public that reform was necessary.',
+          'Muckrakers were political operatives hired by reform candidates to dig up dirt on their opponents.',
+          'They worked as undercover government inspectors who reported violations directly to federal agencies.',
+          'Muckrakers were settlement house workers who documented poverty in immigrant neighborhoods.'
+        ],
         correctAnswer: 'They investigated corruption and social abuse, helping persuade the public that reform was necessary.',
-        explanation: 'Muckrakers used journalism to expose problems that many citizens either ignored or did not fully understand.',
+        explanation: 'Investigative journalists like Ida Tarbell, Upton Sinclair, and Lincoln Steffens exposed corporate abuses, unsafe food, and corrupt politics to mass audiences.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L16-Q5',
         text: 'Why were large trusts and monopolies a major target of reformers?',
-        choices: ['Many people feared they concentrated too much economic power and weakened competition and consumer choice.', 'Many people feared they concentrated too much economic power but always guaranteed fair wages and prices.', 'Many people feared they concentrated too much economic power only in agriculture rather than industry.', 'Many people feared they concentrated too much economic power because they opposed railroad expansion entirely.'],
+        choices: [
+          'Many people feared they concentrated too much economic power and weakened competition and consumer choice.',
+          'Trusts were mainly criticized because they employed too many immigrants at wages below the legal minimum.',
+          'Reformers targeted monopolies primarily because they exported American profits to European investors.',
+          'Most opposition to trusts came from southern farmers who resented northern industrial dominance.'
+        ],
         correctAnswer: 'Many people feared they concentrated too much economic power and weakened competition and consumer choice.',
-        explanation: 'Progressives often argued that concentrated corporate power threatened both democracy and economic fairness.',
+        explanation: 'Giant corporations in oil, steel, and railroads controlled entire industries, setting prices arbitrarily and crushing smaller competitors, which angered consumers and small business owners alike.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L16-Q6',
         text: 'Why did reformers push for stronger food and drug protections in the early 1900s?',
-        choices: ['Reports of unsanitary processing and misleading products convinced many Americans that regulation was needed.', 'Reports of unsanitary processing and misleading products convinced many Americans to end all factory inspection.', 'Reports of unsanitary processing and misleading products affected only imported goods, not American industry.', 'Reports of unsanitary processing and misleading products appeared after Progressive reform had already ended.'],
+        choices: [
+          'Reports of unsanitary processing and misleading products convinced many Americans that regulation was needed.',
+          'Food safety was mainly a concern in rural areas where farms lacked inspection and veterinary oversight.',
+          'Most food safety complaints came from wealthy consumers who wanted higher quality imported products.',
+          'Reformers pushed for food laws primarily to help American companies compete against cheaper foreign imports.'
+        ],
         correctAnswer: 'Reports of unsanitary processing and misleading products convinced many Americans that regulation was needed.',
-        explanation: 'Public outrage over unsafe products helped turn consumer protection into a national reform issue.',
+        explanation: 'Books like Upton Sinclair\'s "The Jungle" shocked the public with descriptions of meatpacking conditions, building support for the Pure Food and Drug Act and Meat Inspection Act.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L16-Q7',
         text: 'Why did child labor become such a visible issue for Progressives?',
-        choices: ['Children often worked long hours for low pay in dangerous conditions that limited their education.', 'Children often worked long hours for low pay, but reformers believed that schooling was unnecessary.', 'Children often worked long hours for low pay mostly in federal office jobs rather than factories.', 'Children often worked long hours for low pay only after labor unions had already won major protections.'],
+        choices: [
+          'Children often worked long hours for low pay in dangerous conditions that limited their education.',
+          'Child labor was mainly a rural problem on family farms, not an urban industrial issue.',
+          'Most child workers were employed by city governments in jobs like street cleaning and mail delivery.',
+          'The issue became prominent primarily because middle-class children were being pulled from school to work.'
+        ],
         correctAnswer: 'Children often worked long hours for low pay in dangerous conditions that limited their education.',
-        explanation: 'Reformers saw child labor as both a moral problem and a sign that industrial society needed stronger protections.',
+        explanation: 'Photographs by Lewis Hine and reports by reformers showed children as young as six working in mines, mills, and factories in conditions that damaged their health and blocked their schooling.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L16-Q8',
         text: 'Why did conservation become part of the Progressive reform agenda?',
-        choices: ['Many Americans worried that forests, land, and natural resources were being wasted too quickly.', 'Many Americans worried that forests, land, and natural resources were being preserved too aggressively.', 'Many Americans worried that forests, land, and natural resources should be controlled only by city machines.', 'Many Americans worried that forests, land, and natural resources mattered less than tariff policy alone.'],
+        choices: [
+          'Many Americans worried that forests, land, and natural resources were being wasted too quickly.',
+          'Conservation was mainly a western issue because eastern states had already protected their natural resources.',
+          'Reformers focused on conservation primarily to protect the tourism industry from overdevelopment.',
+          'Conservation became an issue after a series of major earthquakes and floods damaged western territories.'
+        ],
         correctAnswer: 'Many Americans worried that forests, land, and natural resources were being wasted too quickly.',
-        explanation: 'Progressive conservationists believed government should manage resources more responsibly for the public good.',
+        explanation: 'Rapid industrial expansion consumed forests, minerals, and water at alarming rates, prompting calls for federal management to prevent permanent depletion.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L16-Q9',
         text: 'What larger concern connected many Progressive complaints about labor, housing, and politics?',
-        choices: ['Reformers believed industrial society had produced deep inequality that government could no longer ignore.', 'Reformers believed industrial society had produced deep inequality, but private charities had solved it.', 'Reformers believed industrial society had produced deep inequality only in the South and not northern cities.', 'Reformers believed industrial society had produced deep inequality because voters had too much influence already.'],
+        choices: [
+          'Reformers believed industrial society had produced deep inequality that government could no longer ignore.',
+          'Most Progressives were primarily concerned about immigration and the threat it posed to American culture.',
+          'The connecting theme was distrust of foreign influence — reformers wanted America to withdraw from world trade.',
+          'Progressive reformers shared a concern that democracy itself was becoming too radical and needed restraint.'
+        ],
         correctAnswer: 'Reformers believed industrial society had produced deep inequality that government could no longer ignore.',
-        explanation: 'Progressivism grew from the belief that modern industrial life had created problems too large for individuals alone to fix.',
+        explanation: 'Whether addressing housing, factory conditions, food safety, or political corruption, Progressives shared the belief that unregulated industrial capitalism had created problems government had a duty to fix.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L16-Q10',
         text: 'What best summarizes the lesson of problems at the turn of the century?',
-        choices: ['Rapid industrial growth created serious social and political problems that inspired demands for reform.', 'Rapid industrial growth created serious social and political problems that ended interest in reform.', 'Rapid industrial growth created serious social and political problems only in foreign colonies, not America.', 'Rapid industrial growth created serious social and political problems that city bosses solved permanently.'],
+        choices: [
+          'Rapid industrial growth created serious social and political problems that inspired demands for reform.',
+          'American cities and factories were basically well run, and reformers exaggerated their problems for political gain.',
+          'The main problems of the era were caused by immigration, which overwhelmed cities and public services.',
+          'Turn-of-the-century problems were already being solved by private charities before the government got involved.'
+        ],
         correctAnswer: 'Rapid industrial growth created serious social and political problems that inspired demands for reform.',
-        explanation: 'The first stage of the Progressive Era was recognizing that economic growth had produced major costs as well as benefits.',
+        explanation: 'The scale and speed of industrialization and urbanization created conditions that outpaced voluntary solutions, making the case for organized government action.',
         standard: 'SS.912.A.3.9'
       },
     ]
@@ -1009,94 +1059,144 @@ const LESSONS = [
     icon: '⚖️',
     type: 'lesson',
     briefing: {
-      location: 'Reform Movements in Action',
+      location: 'American Cities and State Capitals',
       date: '1900s-1910s',
-      role: 'settlement house organizer',
+      role: 'reform activist',
       text: 'Once reformers identified the problems of modern America, they moved to action. Journalists exposed abuse, settlement workers served immigrant neighborhoods, labor activists pushed for safer jobs, suffragists demanded political power, and new democratic reforms challenged old party machines. This mission focuses on how Progressives tried to respond before reform moved fully onto the national stage.',
       tags: ['SS.912.A.3.9', 'SS.912.A.3.10']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'The Progressives Respond', cards: ['Jane Addams', 'NAACP Charter'] },
+    rewards: { badge: 'Progressives Respond', cards: ['Jane Addams', 'W.E.B. Du Bois'] },
     bank: [
       {
         id: '2B-L17-Q1',
         text: 'What was the main goal of settlement houses such as Hull House?',
-        choices: ['They offered services and education in poor neighborhoods while helping immigrants adjust to city life.', 'They offered services and education in poor neighborhoods mainly to expand party-machine control of elections.', 'They offered services and education in poor neighborhoods only after immigrants moved back to rural areas.', 'They offered services and education in poor neighborhoods while opposing public health and child welfare laws.'],
+        choices: [
+          'They offered services and education in poor neighborhoods while helping immigrants adjust to city life.',
+          'Settlement houses were built by corporations to provide worker housing near factories.',
+          'They served mainly as political headquarters where reformers organized campaigns for office.',
+          'Settlement houses were designed to train immigrants to return to their home countries with new skills.'
+        ],
         correctAnswer: 'They offered services and education in poor neighborhoods while helping immigrants adjust to city life.',
-        explanation: 'Settlement houses combined direct service with reform activism and became central institutions of Progressive social work.',
+        explanation: 'Settlement houses put middle-class reformers directly in poor urban communities, providing childcare, English classes, job training, and advocacy while gathering data on industrial conditions.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L17-Q2',
         text: 'What were Progressive labor reformers generally trying to accomplish?',
-        choices: ['They wanted shorter hours, safer workplaces, and stronger protections for women and children.', 'They wanted shorter hours, safer workplaces, and the end of all factory inspection requirements.', 'They wanted shorter hours, safer workplaces only for managers rather than industrial workers.', 'They wanted shorter hours, safer workplaces mainly by reducing voting rights for immigrants.'],
+        choices: [
+          'They wanted shorter hours, safer workplaces, and stronger protections for women and children.',
+          'Labor reformers mainly pushed for government ownership of major industries like steel and railroads.',
+          'Their primary goal was restricting immigration to reduce competition for jobs among native-born workers.',
+          'Most labor reformers focused on ending child labor on farms rather than in factories or mines.'
+        ],
         correctAnswer: 'They wanted shorter hours, safer workplaces, and stronger protections for women and children.',
-        explanation: 'Labor reformers focused on limiting abuse in industrial work and making government more responsive to working people.',
+        explanation: 'Progressive labor reformers lobbied for laws limiting working hours, establishing safety standards, banning child labor, and creating workers\' compensation systems.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L17-Q3',
         text: 'Why did Progressives support measures such as the initiative, referendum, and recall?',
-        choices: ['They believed these reforms would weaken party bosses and give voters more direct influence.', 'They believed these reforms would weaken party bosses by removing ordinary voters from politics entirely.', 'They believed these reforms would weaken party bosses only if senators were chosen by governors.', 'They believed these reforms would weaken party bosses mainly by reducing the power of local newspapers.'],
+        choices: [
+          'They believed these reforms would weaken party bosses and give voters more direct influence.',
+          'Progressives supported these tools to help big corporations block legislation they opposed.',
+          'The measures were designed to speed up lawmaking by removing courts from the legislative process.',
+          'Progressives backed them mainly to allow wealthy citizens to overturn laws they found inconvenient.'
+        ],
         correctAnswer: 'They believed these reforms would weaken party bosses and give voters more direct influence.',
-        explanation: 'Direct democracy reforms were meant to make government more accountable and less controlled by political machines.',
+        explanation: 'These direct democracy tools allowed citizens to propose laws, approve or reject legislation, and remove officials — bypassing the party machines that controlled most state legislatures.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L17-Q4',
         text: 'What problem was the direct primary supposed to address?',
-        choices: ['It reduced the power of party leaders by allowing voters to choose candidates more directly.', 'It reduced the power of party leaders by allowing state legislatures to appoint all candidates directly.', 'It reduced the power of party leaders mainly by replacing local elections with presidential appointments.', 'It reduced the power of party leaders only after national parties gave up using conventions.'],
+        choices: [
+          'It reduced the power of party leaders by allowing voters to choose candidates more directly.',
+          'The direct primary was created to prevent immigrants from voting in elections before they were citizens.',
+          'It was designed to limit the number of candidates on the ballot to reduce voter confusion.',
+          'The direct primary gave state legislatures more control over who could run for federal office.'
+        ],
         correctAnswer: 'It reduced the power of party leaders by allowing voters to choose candidates more directly.',
-        explanation: 'Progressives hoped primaries would break the control that party insiders had over nominations.',
+        explanation: 'Before the direct primary, party bosses chose candidates in private caucuses. The direct primary gave ordinary voters the power to decide who appeared on the general election ballot.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L17-Q5',
         text: 'Why was the creation of the NAACP significant during the Progressive Era?',
-        choices: ['It showed that civil rights activism was part of reform, even though racism limited Progressive gains.', 'It showed that civil rights activism was part of reform only after segregation had already been ended.', 'It showed that civil rights activism was part of reform mainly by supporting literacy tests and poll taxes.', 'It showed that civil rights activism was part of reform while rejecting court challenges and legal strategy.'],
+        choices: [
+          'It showed that civil rights activism was part of reform, even though racism limited Progressive gains.',
+          'The NAACP convinced most Progressive leaders to make racial equality the centerpiece of their platform.',
+          'It was the first organization to successfully challenge Jim Crow laws in the federal courts.',
+          'The NAACP\'s founding proved that most white Progressives were genuinely committed to racial justice.'
+        ],
         correctAnswer: 'It showed that civil rights activism was part of reform, even though racism limited Progressive gains.',
-        explanation: 'The NAACP represented a major organized push against segregation and injustice within an era that often failed Black Americans.',
+        explanation: 'The NAACP\'s founding in 1909 reveals both the inclusion of civil rights in the broader reform movement and its limits, since most white Progressives ignored or even supported racial segregation.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L17-Q6',
         text: 'Why did many Progressive women link suffrage to broader reform?',
-        choices: ['They argued that voting rights would help women push for education, health, labor, and family protections.', 'They argued that voting rights would help women withdraw from reform and leave politics to party bosses.', 'They argued that voting rights would help women defend child labor and oppose food safety laws.', 'They argued that voting rights would help women replace local government with settlement house committees.'],
+        choices: [
+          'They argued that voting rights would help women push for education, health, labor, and family protections.',
+          'Most women wanted the vote primarily to ensure that temperance laws would be passed nationally.',
+          'Progressive women saw suffrage mainly as a way to achieve equal representation in corporate leadership.',
+          'They believed women\'s votes would end political corruption because women were naturally more honest.'
+        ],
         correctAnswer: 'They argued that voting rights would help women push for education, health, labor, and family protections.',
-        explanation: 'For many suffragists, the vote was not just a right in itself but a tool for wider social reform.',
+        explanation: 'Many suffragists argued that women needed the vote specifically to advance legislation protecting children, workers, and families — the issues they cared most about.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L17-Q7',
         text: 'Why did some reformers support the temperance or prohibition movement?',
-        choices: ['They believed limiting alcohol would reduce crime, protect families, and improve workplace discipline.', 'They believed limiting alcohol would reduce crime only by ending women’s activism in public life.', 'They believed limiting alcohol would reduce crime mainly by restoring machine politics in large cities.', 'They believed limiting alcohol would reduce crime after federal labor laws had already solved urban poverty.'],
+        choices: [
+          'They believed limiting alcohol would reduce crime, protect families, and improve workplace discipline.',
+          'Temperance was mainly driven by anti-immigrant sentiment because reformers associated alcohol with foreign cultures.',
+          'Most temperance advocates were motivated by economic concerns rather than moral or social ones.',
+          'Reformers supported prohibition primarily because the liquor industry was connected to political machines.'
+        ],
         correctAnswer: 'They believed limiting alcohol would reduce crime, protect families, and improve workplace discipline.',
-        explanation: 'Temperance reformers treated alcohol as both a moral issue and a social problem connected to poverty and violence.',
+        explanation: 'Many Progressives saw alcohol as a root cause of poverty, domestic violence, industrial accidents, and political corruption, making temperance a natural part of the reform agenda.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L17-Q8',
         text: 'What was the broader importance of state-level reform associated with leaders like Robert La Follette?',
-        choices: ['It showed that states could experiment with regulation and democracy before reforms spread nationally.', 'It showed that states could experiment with regulation only after the federal government abolished parties.', 'It showed that states could experiment with regulation mainly by ending antitrust law enforcement.', 'It showed that states could experiment with regulation while eliminating public education and tax reform.'],
+        choices: [
+          'It showed that states could experiment with regulation and democracy before reforms spread nationally.',
+          'State reforms were mainly important because they proved that federal intervention was unnecessary.',
+          'La Follette\'s Wisconsin showed that the Democratic Party was more committed to reform than the Republicans.',
+          'State-level reform mattered primarily in the South, where federal laws could not be enforced effectively.'
+        ],
         correctAnswer: 'It showed that states could experiment with regulation and democracy before reforms spread nationally.',
-        explanation: 'Progressive reforms often began in states and cities, where new ideas could be tested before wider adoption.',
+        explanation: 'Wisconsin under La Follette became a "laboratory of democracy" — testing railroad regulation, direct primaries, and workers\' compensation that other states and eventually Congress would adopt.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L17-Q9',
         text: 'Why did Progressives support city reforms such as commissions and city-manager systems?',
-        choices: ['They hoped professional administration would reduce corruption and make local government more efficient.', 'They hoped professional administration would reduce corruption by returning control to neighborhood party bosses.', 'They hoped professional administration would reduce corruption mainly by ending public sanitation services.', 'They hoped professional administration would reduce corruption only in western mining towns and nowhere else.'],
+        choices: [
+          'They hoped professional administration would reduce corruption and make local government more efficient.',
+          'City commissions were supported mainly to give business leaders direct control over municipal contracts.',
+          'Progressives wanted city managers because elected mayors had become too powerful and independent.',
+          'The reforms were designed to make cities more attractive to foreign investment and international trade.'
+        ],
         correctAnswer: 'They hoped professional administration would reduce corruption and make local government more efficient.',
-        explanation: 'Municipal reformers believed trained administrators and clearer structures could weaken machine politics.',
+        explanation: 'By replacing elected politicians with trained administrators, Progressives hoped to bring the same efficiency and expertise to government that engineers brought to business.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-L17-Q10',
         text: 'What idea tied together many Progressive responses to industrial-era problems?',
-        choices: ['Government should play a more active role in protecting the public and making democracy more responsive.', 'Government should play a more active role only in foreign policy and avoid domestic reform altogether.', 'Government should play a more active role by returning power to trusts and party machines.', 'Government should play a more active role mainly by reducing public participation in elections.'],
+        choices: [
+          'Government should play a more active role in protecting the public and making democracy more responsive.',
+          'The best solution to industrial problems was voluntary action by businesses and private charities.',
+          'Most Progressives believed that reducing immigration would automatically solve urban and labor problems.',
+          'Reform required dismantling capitalism entirely and replacing it with cooperative public ownership.'
+        ],
         correctAnswer: 'Government should play a more active role in protecting the public and making democracy more responsive.',
-        explanation: 'Despite differences among reformers, many Progressives shared a belief that modern problems required more active public action.',
+        explanation: 'From settlement houses to direct primaries to railroad regulation, Progressives consistently argued that organized government action — guided by expertise — was the right tool for modern problems.',
         standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
     ]
@@ -1113,117 +1213,177 @@ const LESSONS = [
     icon: '🏛️',
     type: 'capstone',
     briefing: {
-      location: 'Progressivism on the National Stage',
+      location: 'Washington D.C.',
       date: 'Roosevelt, Taft, and Wilson',
-      role: 'White House policy adviser',
+      role: 'White House correspondent',
       text: 'Progressivism has reached Washington. Theodore Roosevelt, William Howard Taft, and Woodrow Wilson all claim to support reform, but they use different methods and produce different results. This capstone asks you to connect trust regulation, conservation, consumer protection, banking reform, and democratic change into one national reform story.',
       tags: ['SS.912.A.3.10', 'SS.912.A.3.9']
     },
     displayCount: 5,
     goldRules: { perCorrect: 25, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Age of Reform', cards: ['Square Deal', 'Federal Reserve Act'] },
+    rewards: { badge: 'Age of Reform', cards: ['Theodore Roosevelt', 'Woodrow Wilson'] },
     bank: [
       {
         id: '2B-CAP-Q1',
         text: 'What did Theodore Roosevelt mean by the Square Deal?',
-        choices: ['Government should balance the interests of workers, consumers, and business instead of serving only the powerful.', 'Government should balance the interests of workers, consumers, and business by ending all federal regulation.', 'Government should balance the interests of workers, consumers, and business only by breaking up every corporation.', 'Government should balance the interests of workers, consumers, and business mainly through foreign expansion.'],
+        choices: [
+          'Government should balance the interests of workers, consumers, and business instead of serving only the powerful.',
+          'Roosevelt believed every American deserved equal pay regardless of their occupation or industry.',
+          'The Square Deal was his promise to break up every large corporation in the United States.',
+          'It referred to his plan to negotiate fair land treaties with Native American nations in the West.'
+        ],
         correctAnswer: 'Government should balance the interests of workers, consumers, and business instead of serving only the powerful.',
-        explanation: 'Roosevelt presented the Square Deal as a fairer approach to modern industrial society rather than a rejection of capitalism.',
+        explanation: 'Roosevelt\'s Square Deal rested on the idea that government should be a neutral referee ensuring that no single group — whether labor or capital — gained unfair advantage over others.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-CAP-Q2',
         text: 'How did Roosevelt generally approach trusts and large corporations?',
-        choices: ['He accepted some big businesses but argued that harmful trusts should face stronger federal control.', 'He accepted some big businesses but argued that harmful trusts should be ignored entirely by government.', 'He accepted some big businesses only after Congress had outlawed all interstate commerce regulation.', 'He accepted some big businesses mainly by promising that antitrust law would never be enforced again.'],
+        choices: [
+          'He accepted some big businesses but argued that harmful trusts should face stronger federal control.',
+          'Roosevelt believed all large corporations should be broken up regardless of how they behaved.',
+          'He refused to challenge any corporation that employed more than a certain number of workers.',
+          'Roosevelt trusted the courts to regulate corporations and avoided using executive power directly.'
+        ],
         correctAnswer: 'He accepted some big businesses but argued that harmful trusts should face stronger federal control.',
-        explanation: 'Roosevelt distinguished between corporations he considered useful and those he believed abused the public interest.',
+        explanation: 'Roosevelt distinguished between "good trusts" that benefited the public and "bad trusts" that abused their power — he wanted to regulate the latter, not destroy big business entirely.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-CAP-Q3',
         text: 'Why were the Pure Food and Drug Act and Meat Inspection Act important Progressive reforms?',
-        choices: ['They expanded federal responsibility for protecting consumers from unsafe products and unsanitary practices.', 'They expanded federal responsibility for protecting consumers mainly by removing all factory inspectors.', 'They expanded federal responsibility for protecting consumers only in imported goods rather than American factories.', 'They expanded federal responsibility for protecting consumers after Progressives abandoned national reform.'],
+        choices: [
+          'They expanded federal responsibility for protecting consumers from unsafe products and unsanitary practices.',
+          'The acts were mainly symbolic gestures since the government lacked the power to enforce them.',
+          'They were primarily intended to help American meat exporters compete against European competitors.',
+          'The laws were passed to protect farmers from unfair competition by large meatpacking companies.'
+        ],
         correctAnswer: 'They expanded federal responsibility for protecting consumers from unsafe products and unsanitary practices.',
-        explanation: 'These laws showed that public outrage could translate into lasting federal oversight of industry.',
+        explanation: 'These landmark laws established that the federal government had both the authority and the duty to regulate the safety of products sold to American consumers.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-CAP-Q4',
         text: 'What made Roosevelt such an important figure in conservation policy?',
-        choices: ['He used federal power to protect large areas of land and promote the careful management of resources.', 'He used federal power to protect large areas of land mainly by opening every reserve to private logging.', 'He used federal power to protect large areas of land only after ending national forests and park policy.', 'He used federal power to protect large areas of land while rejecting any scientific resource planning.'],
+        choices: [
+          'He used federal power to protect large areas of land and promote the careful management of resources.',
+          'Roosevelt was important mainly because he convinced Congress to sell public lands to environmental groups.',
+          'His conservation legacy rested primarily on returning all federal land to state governments for local management.',
+          'Roosevelt focused conservation efforts on urban parks and city green spaces rather than wilderness areas.'
+        ],
         correctAnswer: 'He used federal power to protect large areas of land and promote the careful management of resources.',
-        explanation: 'Roosevelt helped make conservation a major national responsibility rather than a minor local concern.',
+        explanation: 'Roosevelt set aside more than 230 million acres of public land, established national parks and forests, and made conservation a central responsibility of the federal government.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-CAP-Q5',
-        text: 'Why did Taft’s presidency divide the Progressive movement?',
-        choices: ['Many reformers thought he was less energetic than Roosevelt and too closely tied to conservative Republicans.', 'Many reformers thought he was less energetic than Roosevelt because he ended antitrust enforcement completely.', 'Many reformers thought he was less energetic than Roosevelt only after he supported women’s suffrage first.', 'Many reformers thought he was less energetic than Roosevelt mainly because he opposed tariff policy entirely.'],
+        text: 'Why did Taft\'s presidency divide the Progressive movement?',
+        choices: [
+          'Many reformers thought he was less energetic than Roosevelt and too closely tied to conservative Republicans.',
+          'Taft alienated Progressives by openly supporting large trusts and opposing any federal regulation.',
+          'He divided the movement by trying to abolish the Federal Reserve before it was fully established.',
+          'Taft angered Progressives by supporting women\'s suffrage, which many male reformers opposed.'
+        ],
         correctAnswer: 'Many reformers thought he was less energetic than Roosevelt and too closely tied to conservative Republicans.',
-        explanation: 'Taft backed some reforms, but disputes over tariffs, conservation, and party leadership damaged Progressive unity.',
+        explanation: 'Taft\'s handling of tariff reform and conservation — seen as backing away from Roosevelt\'s agenda — convinced many Progressives that he was not truly committed to reform.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-CAP-Q6',
         text: 'Why was the election of 1912 so important to the history of Progressivism?',
-        choices: ['It showed that reform politics had become national, even though Progressives disagreed about the best path.', 'It showed that reform politics had become national only because all major candidates opposed regulation.', 'It showed that reform politics had become national mainly after Roosevelt and Taft reunited their parties.', 'It showed that reform politics had become national once Americans rejected antitrust policy entirely.'],
+        choices: [
+          'It showed that reform politics had become national, even though Progressives disagreed about the best path.',
+          'The election permanently ended the Republican Party\'s influence in American politics.',
+          'It was the first election in which women could vote nationally, transforming the political landscape.',
+          'The 1912 race showed that third parties could win the presidency when they had a popular candidate.'
+        ],
         correctAnswer: 'It showed that reform politics had become national, even though Progressives disagreed about the best path.',
-        explanation: 'The split between Roosevelt and Taft, and Wilson’s victory, revealed both the strength and the divisions of reform politics.',
+        explanation: 'With Roosevelt, Wilson, and even Taft all claiming reform credentials, 1912 showed how thoroughly Progressive ideas had reshaped national politics — even as the movement split over methods.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-CAP-Q7',
-        text: 'What was Wilson’s New Freedom mainly concerned with?',
-        choices: ['It aimed to restore competition by reducing tariff barriers, reforming banking, and limiting monopoly power.', 'It aimed to restore competition by increasing tariff barriers and protecting monopoly power from regulation.', 'It aimed to restore competition only by transferring corporate regulation to state political machines.', 'It aimed to restore competition mainly through conservation policy without touching finance or trusts.'],
+        text: 'What was Wilson\'s New Freedom mainly concerned with?',
+        choices: [
+          'It aimed to restore competition by reducing tariff barriers, reforming banking, and limiting monopoly power.',
+          'Wilson\'s New Freedom focused primarily on expanding voting rights and reforming immigration policy.',
+          'It called for government ownership of railroads and utilities to end the power of private monopolies.',
+          'The New Freedom was Wilson\'s plan to use federal spending to eliminate poverty in American cities.'
+        ],
         correctAnswer: 'It aimed to restore competition by reducing tariff barriers, reforming banking, and limiting monopoly power.',
-        explanation: 'Wilson’s program focused on making the economic system fairer by changing the rules of finance and competition.',
+        explanation: 'Wilson believed the solution to corporate power was not regulation of big business but breaking it up — lowering tariffs, reforming banking, and strengthening antitrust law to restore free competition.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-CAP-Q8',
         text: 'Why was the Federal Reserve Act a major reform?',
-        choices: ['It created a new banking system to stabilize the money supply and reduce the risk of financial panic.', 'It created a new banking system mainly to end all federal oversight of national credit and currency.', 'It created a new banking system only for farmers while leaving urban banks outside the system.', 'It created a new banking system after Wilson had abandoned Progressive economic reform altogether.'],
+        choices: [
+          'It created a new banking system to stabilize the money supply and reduce the risk of financial panic.',
+          'The act was mainly important because it gave the federal government the power to print money for the first time.',
+          'It transferred control of American banks from private owners to the federal government directly.',
+          'The Federal Reserve Act established a national minimum wage for bank employees and tellers.'
+        ],
         correctAnswer: 'It created a new banking system to stabilize the money supply and reduce the risk of financial panic.',
-        explanation: 'The Federal Reserve gave the federal government a stronger role in managing the nation’s financial system.',
+        explanation: 'By establishing a central bank with the ability to expand or contract credit, the Federal Reserve Act addressed the financial instability that had caused panics in 1873, 1893, and 1907.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-CAP-Q9',
         text: 'What was the purpose of the Clayton Antitrust Act and the Federal Trade Commission?',
-        choices: ['They strengthened the government’s ability to regulate unfair business practices and protect competition.', 'They strengthened the government’s ability to regulate unfair business practices by weakening all consumer laws.', 'They strengthened the government’s ability to regulate unfair business practices only in foreign corporations.', 'They strengthened the government’s ability to regulate unfair business practices after ending antitrust enforcement.'],
-        correctAnswer: 'They strengthened the government’s ability to regulate unfair business practices and protect competition.',
-        explanation: 'These reforms built on earlier antitrust efforts and gave federal agencies more tools to supervise business behavior.',
+        choices: [
+          'They strengthened the government\'s ability to regulate unfair business practices and protect competition.',
+          'The Clayton Act and FTC were primarily designed to break up the Standard Oil trust specifically.',
+          'Together they gave labor unions the power to impose binding contracts on unwilling employers.',
+          'The laws were mainly symbolic since neither created any new enforcement mechanisms.'
+        ],
+        correctAnswer: 'They strengthened the government\'s ability to regulate unfair business practices and protect competition.',
+        explanation: 'The Clayton Act defined specific illegal business practices and the FTC gave the government a standing agency to monitor and challenge anticompetitive behavior on an ongoing basis.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-CAP-Q10',
         text: 'How did the Sixteenth and Seventeenth Amendments reflect Progressive goals?',
-        choices: ['They expanded federal capacity and democratic responsiveness through an income tax and direct election of senators.', 'They expanded federal capacity and democratic responsiveness by ending the direct election of senators.', 'They expanded federal capacity and democratic responsiveness only by banning labor unions and strikes.', 'They expanded federal capacity and democratic responsiveness mainly through new immigration restrictions.'],
+        choices: [
+          'They expanded federal capacity and democratic responsiveness through an income tax and direct election of senators.',
+          'Both amendments were primarily about states\' rights, giving states more control over federal legislation.',
+          'The amendments expanded voting rights by prohibiting racial and gender discrimination at the polls.',
+          'They were mainly economic measures designed to fund railroad construction and western settlement.'
+        ],
         correctAnswer: 'They expanded federal capacity and democratic responsiveness through an income tax and direct election of senators.',
-        explanation: 'Progressives often wanted both a more capable government and a more directly accountable political system.',
+        explanation: 'The income tax gave the federal government a more flexible revenue source to fund reform programs, while direct Senate elections removed an important source of boss and corporate power.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-CAP-Q11',
         text: 'What was one major limitation of Progressivism even at its strongest national moment?',
-        choices: ['Many reforms left segregation, racial injustice, and inequality only partly challenged or untouched.', 'Many reforms left segregation, racial injustice, and inequality fully solved by federal action.', 'Many reforms left segregation, racial injustice, and inequality only in western territories, not the South.', 'Many reforms left segregation, racial injustice, and inequality because Progressives opposed all regulation.'],
+        choices: [
+          'Many reforms left segregation, racial injustice, and inequality only partly challenged or untouched.',
+          'Progressive reforms were quickly reversed by the Supreme Court before they could take effect.',
+          'Most Progressive legislation only applied to wealthy states and had no impact in rural or southern areas.',
+          'The movement failed because Progressive presidents could never get their bills through Congress.'
+        ],
         correctAnswer: 'Many reforms left segregation, racial injustice, and inequality only partly challenged or untouched.',
-        explanation: 'Progressive reform produced important changes, but it did not overcome all forms of injustice in American life.',
+        explanation: 'Wilson actually re-segregated the federal government, and most Progressive reforms ignored or reinforced racial inequality, revealing the limits of a movement dominated by white middle-class reformers.',
         standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
       {
         id: '2B-CAP-Q12',
         text: 'What best ties together the national stage of the Progressive Era?',
-        choices: ['Reform moved from local activism to federal action as presidents and Congress used government more aggressively.', 'Reform moved from local activism to federal action only after presidents gave up trust regulation and conservation.', 'Reform moved from local activism to federal action mainly by restoring power to political machines and bosses.', 'Reform moved from local activism to federal action while abandoning concerns about workers and consumers.'],
+        choices: [
+          'Reform moved from local activism to federal action as presidents and Congress used government more aggressively.',
+          'The era ended in failure because none of the major reforms survived beyond the Wilson administration.',
+          'Progressivism succeeded mainly because private businesses voluntarily cleaned up their practices.',
+          'National reform was primarily driven by the Supreme Court rather than by elected officials or activists.'
+        ],
         correctAnswer: 'Reform moved from local activism to federal action as presidents and Congress used government more aggressively.',
-        explanation: 'The capstone of the era was the shift from identifying problems to using national institutions to address them.',
+        explanation: 'The Progressive Era produced a fundamental expansion of federal regulatory power — consumer protection, banking, antitrust, conservation — establishing precedents that shaped American government for generations.',
         standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
     ]
   },
 
   // ==================================================
-  // EOC REVIEW — EOC Practice Quiz
+  // EOC REVIEW — Progressive Era
   // ==================================================
   {
     id: 'eoc',
@@ -1241,166 +1401,266 @@ const LESSONS = [
     },
     displayCount: 15,
     goldRules: { perCorrect: 15, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Progressive Era Mastery', cards: ['Federal Trade Commission', 'Nineteenth Amendment'] },
+    rewards: { badge: 'Progressive Era Mastery', cards: ['Ida Tarbell', 'Florence Kelley'] },
     bank: [
       {
         id: '2B-EOC-Q1',
         text: 'What was the main contribution of muckraker journalists to Progressive reform?',
-        choices: ['They exposed corruption and social abuse in ways that built public support for change.', 'They exposed corruption and social abuse mainly to defend monopolies from government oversight.', 'They exposed corruption and social abuse only after Congress ended antitrust and labor debates.', 'They exposed corruption and social abuse mostly to promote overseas expansion and naval policy.'],
+        choices: [
+          'They exposed corruption and social abuse in ways that built public support for change.',
+          'Muckrakers worked directly for government agencies that needed evidence to prosecute corporations.',
+          'Their main contribution was creating new political parties that could challenge the existing system.',
+          'Muckrakers focused on foreign policy failures rather than domestic industrial problems.'
+        ],
         correctAnswer: 'They exposed corruption and social abuse in ways that built public support for change.',
-        explanation: 'Muckrakers helped turn hidden or ignored problems into public issues that voters and lawmakers could not easily dismiss.',
+        explanation: 'By publishing shocking investigations in mass-circulation magazines, muckrakers created the public pressure that made reform legislation politically possible.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-EOC-Q2',
         text: 'Why were tenements and slums important topics in Progressive reform?',
-        choices: ['They revealed how industrial growth had produced dangerous living conditions for many urban families.', 'They revealed how industrial growth had produced dangerous living conditions only for wealthy residents.', 'They revealed how industrial growth had produced dangerous living conditions mainly in isolated farm areas.', 'They revealed how industrial growth had produced dangerous living conditions after reform had already solved them.'],
+        choices: [
+          'They revealed how industrial growth had produced dangerous living conditions for many urban families.',
+          'Tenements were mainly a problem in southern cities and had little connection to northern industrial growth.',
+          'Reformers focused on tenements because landlords were primarily responsible for all urban political corruption.',
+          'Slums were important mainly as evidence that immigrants were failing to assimilate into American society.'
+        ],
         correctAnswer: 'They revealed how industrial growth had produced dangerous living conditions for many urban families.',
-        explanation: 'Housing reform became central because poor living conditions showed the human cost of rapid urban growth.',
+        explanation: 'Jacob Riis and other reformers showed how rapid industrialization and urbanization had created housing conditions that bred disease, crime, and poverty.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-EOC-Q3',
         text: 'Why did Progressives criticize political machines and party bosses?',
-        choices: ['They believed machine politics encouraged corruption and kept government from serving the public fairly.', 'They believed machine politics encouraged corruption but always protected merit-based civil service hiring.', 'They believed machine politics encouraged corruption only in small towns rather than major cities.', 'They believed machine politics encouraged corruption mainly by supporting too much direct democracy.'],
+        choices: [
+          'They believed machine politics encouraged corruption and kept government from serving the public fairly.',
+          'Political machines were criticized mainly for being too democratic and giving immigrants too much influence.',
+          'Progressives opposed machine politics because machines supported labor unions and workers\' rights.',
+          'Party bosses were unpopular mainly because they raised property taxes to fund their patronage networks.'
+        ],
         correctAnswer: 'They believed machine politics encouraged corruption and kept government from serving the public fairly.',
-        explanation: 'Many Progressives wanted more transparent institutions that answered to voters instead of patronage networks.',
+        explanation: 'Bosses like Tammany Hall\'s leadership traded city services for votes and enriched themselves through kickbacks, creating a system where public interest took a back seat to political loyalty.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-EOC-Q4',
         text: 'Why did child labor reform matter to many Progressives?',
-        choices: ['It addressed the exploitation of children in dangerous work and defended the importance of schooling.', 'It addressed the exploitation of children mainly by moving them from factories into longer mine shifts.', 'It addressed the exploitation of children only after labor unions had ended industrial accidents entirely.', 'It addressed the exploitation of children by arguing that families should avoid public education.'],
+        choices: [
+          'It addressed the exploitation of children in dangerous work and defended the importance of schooling.',
+          'Child labor reform was mainly a rural issue since most child workers were employed on farms.',
+          'Progressives pushed for child labor laws primarily to reduce competition with adult workers.',
+          'The issue mattered mainly because child workers were excluded from union membership.'
+        ],
         correctAnswer: 'It addressed the exploitation of children in dangerous work and defended the importance of schooling.',
-        explanation: 'Opposition to child labor reflected Progressive concerns with safety, fairness, and the future of children.',
+        explanation: 'Children working in mines, mills, and factories were denied education and subjected to dangerous conditions, making their protection a natural cause for reformers concerned with public welfare.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-EOC-Q5',
         text: 'Why did conservation become a national Progressive issue?',
-        choices: ['Reformers feared natural resources were being used recklessly and believed government should manage them wisely.', 'Reformers feared natural resources were being used recklessly only because cities had too little political power.', 'Reformers feared natural resources were being used recklessly after Roosevelt ended all national park policy.', 'Reformers feared natural resources were being used recklessly mainly by settlement houses and local charities.'],
+        choices: [
+          'Reformers feared natural resources were being used recklessly and believed government should manage them wisely.',
+          'Conservation was a national issue mainly because forest fires had destroyed several major cities.',
+          'Progressives pushed conservation to protect the profits of lumber and mining companies from competition.',
+          'The movement grew primarily out of sporting and hunting clubs rather than industrial concerns.'
+        ],
         correctAnswer: 'Reformers feared natural resources were being used recklessly and believed government should manage them wisely.',
-        explanation: 'Conservation fit Progressive ideas about expertise, planning, and the public good.',
+        explanation: 'The rapid destruction of forests and depletion of natural resources convinced many Progressives that only federal management could prevent permanent environmental damage.',
         standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q6',
         text: 'What made settlement houses an important part of Progressive reform?',
-        choices: ['They combined neighborhood services with activism aimed at improving education, health, and living conditions.', 'They combined neighborhood services with activism mainly to restore party machines to city government.', 'They combined neighborhood services with activism only after immigrants stopped settling in cities.', 'They combined neighborhood services with activism while opposing public sanitation and labor laws.'],
+        choices: [
+          'They combined neighborhood services with activism aimed at improving education, health, and living conditions.',
+          'Settlement houses were mainly important as boarding houses for unmarried working women.',
+          'Their primary purpose was to prepare immigrants for deportation if they violated labor laws.',
+          'Settlement houses were funded by city political machines as a way to build loyalty among immigrants.'
+        ],
         correctAnswer: 'They combined neighborhood services with activism aimed at improving education, health, and living conditions.',
-        explanation: 'Settlement houses showed that Progressivism often blended direct service with broader social and political reform.',
+        explanation: 'Institutions like Hull House were both service organizations and research centers — their work both directly helped poor communities and generated the data reformers used to demand legislative change.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-EOC-Q7',
         text: 'What was the main purpose of initiative, referendum, and recall reforms?',
-        choices: ['They were meant to give citizens more direct control and reduce the grip of party organizations.', 'They were meant to give citizens more direct control by removing elections from ordinary voters.', 'They were meant to give citizens more direct control only after senators returned to legislative appointment.', 'They were meant to give citizens more direct control mainly in foreign policy and war declarations.'],
+        choices: [
+          'They were meant to give citizens more direct control and reduce the grip of party organizations.',
+          'These tools were created primarily to allow corporations to block unfavorable legislation.',
+          'The reforms were designed to speed up lawmaking by eliminating the need for legislative debate.',
+          'They were mainly used in rural states to give farmers more influence over urban-dominated legislatures.'
+        ],
         correctAnswer: 'They were meant to give citizens more direct control and reduce the grip of party organizations.',
-        explanation: 'These reforms reflected Progressive efforts to make democracy more responsive and less dominated by insiders.',
+        explanation: 'Direct democracy tools gave citizens a way to bypass corrupt or unresponsive legislatures, putting lawmaking power directly in voters\' hands.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-EOC-Q8',
         text: 'Why was the Seventeenth Amendment seen as a Progressive victory?',
-        choices: ['It made senators directly elected by the people, reducing the influence of legislatures and party bosses.', 'It made senators directly elected by the people while restoring machine control over city governments.', 'It made senators directly elected by the people only after the presidency had lost veto power.', 'It made senators directly elected by the people mainly to increase tariff protection for trusts.'],
+        choices: [
+          'It made senators directly elected by the people, reducing the influence of legislatures and party bosses.',
+          'The amendment gave women the right to vote and doubled the potential Progressive electorate.',
+          'It abolished the Senate entirely and transferred its powers to a more representative assembly.',
+          'The Seventeenth Amendment required senators to live in the state they represented for at least ten years.'
+        ],
         correctAnswer: 'It made senators directly elected by the people, reducing the influence of legislatures and party bosses.',
-        explanation: 'Direct election of senators matched Progressive demands for a more accountable and democratic political system.',
+        explanation: 'Before 1913, state legislatures chose senators, which meant bosses and corporations could effectively buy Senate seats. Direct election made senators accountable to voters instead.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q9',
         text: 'Why is the NAACP important in understanding the Progressive Era?',
-        choices: ['It reminds us that reform included civil rights activism, even though many Progressives ignored racial injustice.', 'It reminds us that reform included civil rights activism only after segregation had already been dismantled.', 'It reminds us that reform included civil rights activism mainly by supporting literacy tests and segregation laws.', 'It reminds us that reform included civil rights activism while rejecting all court-based legal challenges.'],
+        choices: [
+          'It reminds us that reform included civil rights activism, even though many Progressives ignored racial injustice.',
+          'The NAACP shows that most Progressives were deeply committed to racial equality and integration.',
+          'It demonstrates that African American leaders rejected Progressivism as a movement for white Americans only.',
+          'The NAACP\'s founding shows that civil rights reform was fully achieved during the Progressive Era.'
+        ],
         correctAnswer: 'It reminds us that reform included civil rights activism, even though many Progressives ignored racial injustice.',
-        explanation: 'The Progressive Era included important civil rights organizing, but racial equality was not embraced by all reformers.',
+        explanation: 'The NAACP\'s founding reveals both the breadth of the reform impulse and its limits — Black activists had to organize separately because most white Progressives excluded racial justice from their agenda.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: '2B-EOC-Q10',
-        text: 'Why did women’s suffrage fit naturally with many Progressive reform goals?',
-        choices: ['Supporters believed voting rights would strengthen reform efforts involving health, labor, and public welfare.', 'Supporters believed voting rights would strengthen reform efforts by ending women’s participation in activism.', 'Supporters believed voting rights would strengthen reform efforts only in western territories and nowhere else.', 'Supporters believed voting rights would strengthen reform efforts mainly by protecting political machines.'],
+        text: 'Why did women\'s suffrage fit naturally with many Progressive reform goals?',
+        choices: [
+          'Supporters believed voting rights would strengthen reform efforts involving health, labor, and public welfare.',
+          'Most male Progressives supported suffrage because they believed women would vote conservatively.',
+          'Suffrage was connected to Progressivism mainly because both movements were led by the same organizations.',
+          'Women wanted the vote primarily to gain equal representation in corporate management and banking.'
+        ],
         correctAnswer: 'Supporters believed voting rights would strengthen reform efforts involving health, labor, and public welfare.',
-        explanation: 'Many reformers argued that the vote would help women influence policies affecting families and communities.',
+        explanation: 'Many suffragists argued that women needed political power specifically to advance legislation protecting children, workers, and families — the issues at the heart of Progressive reform.',
         standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q11',
         text: 'What was Roosevelt trying to achieve through the Square Deal?',
-        choices: ['He wanted a more balanced society in which government restrained abuses without destroying business.', 'He wanted a more balanced society only by dismantling every large corporation in the economy.', 'He wanted a more balanced society mainly through isolation from world trade and immigration.', 'He wanted a more balanced society by leaving trusts and railroads completely unregulated.'],
+        choices: [
+          'He wanted a more balanced society in which government restrained abuses without destroying business.',
+          'Roosevelt\'s goal was to eliminate all large corporations and return the economy to small-scale competition.',
+          'The Square Deal was his plan to give every American worker a guaranteed minimum wage and pension.',
+          'He wanted to transfer economic regulation entirely from the federal government to the states.'
+        ],
         correctAnswer: 'He wanted a more balanced society in which government restrained abuses without destroying business.',
-        explanation: 'Roosevelt believed reform should make capitalism fairer and more stable rather than abolish it.',
+        explanation: 'Roosevelt believed in capitalism but argued that unchecked corporate power threatened both workers and consumers — government should referee, not replace, the market.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q12',
         text: 'Why were consumer protection laws such as the Pure Food and Drug Act significant?',
-        choices: ['They showed that the federal government would step in when private industry endangered the public.', 'They showed that the federal government would step in only to protect foreign producers from competition.', 'They showed that the federal government would step in mainly by eliminating all product labeling rules.', 'They showed that the federal government would step in after Progressives gave up regulatory reform.'],
+        choices: [
+          'They showed that the federal government would step in when private industry endangered the public.',
+          'The laws were mainly significant because they helped American exporters meet European food standards.',
+          'They were the first federal laws ever to regulate any aspect of American business activity.',
+          'Consumer protection laws were significant mainly because they created thousands of new government jobs.'
+        ],
         correctAnswer: 'They showed that the federal government would step in when private industry endangered the public.',
-        explanation: 'These laws reflected the Progressive belief that public welfare justified stronger national regulation.',
+        explanation: 'These laws established a lasting precedent: when private industry created public health risks, the federal government had both the authority and the responsibility to regulate it.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q13',
-        text: 'How did Roosevelt’s conservation policies reflect Progressive thinking?',
-        choices: ['They used federal expertise and planning to manage resources for long-term public benefit.', 'They used federal expertise and planning mainly to open every protected forest to private exploitation.', 'They used federal expertise and planning only after Congress abolished national reserves and parks.', 'They used federal expertise and planning while rejecting all scientific management of land and water.'],
+        text: 'How did Roosevelt\'s conservation policies reflect Progressive thinking?',
+        choices: [
+          'They used federal expertise and planning to manage resources for long-term public benefit.',
+          'Roosevelt\'s conservation policies reflected Progressive distrust of science and technical expertise.',
+          'His approach showed that Progressives believed natural resources should be owned by private industry.',
+          'Conservation reflected Progressive thinking mainly by returning western land to Native American nations.'
+        ],
         correctAnswer: 'They used federal expertise and planning to manage resources for long-term public benefit.',
-        explanation: 'Conservation policy showed how Progressives trusted government experts to address modern national problems.',
+        explanation: 'Roosevelt\'s conservation policy embodied the Progressive belief in using trained experts within government agencies to manage public resources efficiently and for future generations.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q14',
         text: 'Why did Roosevelt and Taft end up splitting the Republican Party?',
-        choices: ['They differed over tariffs, conservation, and how far the federal government should go in reform.', 'They differed over tariffs, conservation, and whether the United States should abolish the presidency.', 'They differed over tariffs, conservation only after Taft joined the Democratic Party permanently.', 'They differed over tariffs, conservation mainly because Roosevelt opposed all antitrust law enforcement.'],
+        choices: [
+          'They differed over tariffs, conservation, and how far the federal government should go in reform.',
+          'The split was mainly personal — Roosevelt disliked Taft and challenged him to prove his popularity.',
+          'Taft broke with Roosevelt primarily by supporting the Sixteenth Amendment, which Roosevelt opposed.',
+          'They disagreed mainly over immigration policy — Taft wanted strict limits while Roosevelt favored open borders.'
+        ],
         correctAnswer: 'They differed over tariffs, conservation, and how far the federal government should go in reform.',
-        explanation: 'Their conflict revealed that even Progressives disagreed strongly about leadership and the direction of reform.',
+        explanation: 'Taft\'s acceptance of high tariffs and reversal of some conservation decisions convinced Roosevelt that Taft had abandoned the Progressive agenda, leading Roosevelt to run again in 1912.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q15',
-        text: 'What was Wilson’s New Freedom designed to do?',
-        choices: ['It sought to reduce monopoly power and make the economic system more open and competitive.', 'It sought to reduce monopoly power only by ending bank reform and keeping tariffs high.', 'It sought to reduce monopoly power mainly by restoring party bosses to control of elections.', 'It sought to reduce monopoly power after Wilson rejected all Progressive economic ideas.'],
+        text: 'What was Wilson\'s New Freedom designed to do?',
+        choices: [
+          'It sought to reduce monopoly power and make the economic system more open and competitive.',
+          'Wilson\'s New Freedom was designed to expand federal ownership of railroads and utilities.',
+          'It focused primarily on civil rights reform and reducing racial segregation in federal agencies.',
+          'The New Freedom was a military preparedness program responding to European instability before World War I.'
+        ],
         correctAnswer: 'It sought to reduce monopoly power and make the economic system more open and competitive.',
-        explanation: 'Wilson’s reform program focused on tariffs, banking, and antitrust policy as ways to reshape the economy.',
+        explanation: 'Wilson\'s vision was to restore economic freedom by breaking up trusts, reforming banking, and lowering tariffs — not to have government regulate big business, but to eliminate the unfair advantages that made it powerful.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q16',
         text: 'Why is the Federal Reserve Act often considered one of the most lasting Progressive reforms?',
-        choices: ['It reorganized the banking system and gave the nation a more stable structure for managing credit.', 'It reorganized the banking system mainly by ending all federal influence over money and interest rates.', 'It reorganized the banking system only for western farmers while excluding urban businesses.', 'It reorganized the banking system after repeated calls to return currency control to party machines.'],
+        choices: [
+          'It reorganized the banking system and gave the nation a more stable structure for managing credit.',
+          'The act was lasting because it created thousands of federal banking jobs that still exist today.',
+          'It was important mainly because it allowed the government to nationalize banks during emergencies.',
+          'The Federal Reserve Act is significant because Wilson personally designed the entire system himself.'
+        ],
         correctAnswer: 'It reorganized the banking system and gave the nation a more stable structure for managing credit.',
-        explanation: 'The Federal Reserve created institutions that continued to shape American economic life long after the Progressive Era.',
+        explanation: 'The Federal Reserve System — still the basis of American monetary policy — addressed the banking panics that had destabilized the economy for decades by creating a central bank with flexible credit tools.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q17',
         text: 'Why were the Federal Trade Commission and Clayton Antitrust Act important?',
-        choices: ['They gave the federal government stronger tools to monitor business behavior and curb unfair practices.', 'They gave the federal government stronger tools mainly to protect trusts from investigation and lawsuits.', 'They gave the federal government stronger tools only in foreign colonies rather than within the United States.', 'They gave the federal government stronger tools after Wilson ended his interest in economic reform.'],
+        choices: [
+          'They gave the federal government stronger tools to monitor business behavior and curb unfair practices.',
+          'Both laws were mainly significant because they gave workers the right to form unions without prosecution.',
+          'They replaced the Sherman Antitrust Act, which had proven entirely ineffective against monopolies.',
+          'The FTC and Clayton Act were important because they created the first federal income tax.'
+        ],
         correctAnswer: 'They gave the federal government stronger tools to monitor business behavior and curb unfair practices.',
-        explanation: 'These measures expanded the national government’s role in shaping fairer competition.',
+        explanation: 'These measures strengthened the government\'s antitrust arsenal by defining specific illegal business practices and creating a permanent agency empowered to investigate and challenge them.',
         standard: 'SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q18',
         text: 'What belief united many local and national Progressive reformers?',
-        choices: ['Modern industrial problems required a more active government guided by expertise and public responsibility.', 'Modern industrial problems required a more active government only in foreign affairs rather than domestic life.', 'Modern industrial problems required a more active government mainly to restore machine politics in cities.', 'Modern industrial problems required a more active government by ending regulation and dismantling public agencies.'],
+        choices: [
+          'Modern industrial problems required a more active government guided by expertise and public responsibility.',
+          'Most Progressives believed that reducing immigration was the key to solving urban and industrial problems.',
+          'Reformers shared the belief that capitalism itself was fundamentally corrupt and needed to be replaced.',
+          'The common belief was that democracy had already given Americans enough tools and no new laws were needed.'
+        ],
         correctAnswer: 'Modern industrial problems required a more active government guided by expertise and public responsibility.',
-        explanation: 'Across many issues, Progressives believed that modern life demanded organized, informed public action.',
+        explanation: 'From city managers to federal regulators, Progressives consistently argued that government, guided by trained professionals, was the right instrument for addressing the social costs of industrialization.',
         standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q19',
         text: 'What is one reason historians describe Progressivism as both influential and limited?',
-        choices: ['It achieved major reforms but often failed to confront segregation, racism, and deeper inequality fully.', 'It achieved major reforms but often failed only because voters rejected food safety and labor laws.', 'It achieved major reforms but often failed mainly because presidents refused any role in reform.', 'It achieved major reforms but often failed after machine politics disappeared everywhere in the country.'],
+        choices: [
+          'It achieved major reforms but often failed to confront segregation, racism, and deeper inequality fully.',
+          'Progressivism was influential because it achieved every goal reformers set out to accomplish.',
+          'It was limited mainly because the Supreme Court struck down every major Progressive law as unconstitutional.',
+          'The movement failed to influence politics at all because Progressives could never win a national election.'
+        ],
         correctAnswer: 'It achieved major reforms but often failed to confront segregation, racism, and deeper inequality fully.',
-        explanation: 'The era produced real change, but it also left major exclusions and injustices in place.',
+        explanation: 'The Progressive Era produced genuine and lasting change in regulation, democracy, and government capacity — but its failures on race and economic inequality left important problems for future generations to address.',
         standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
       {
         id: '2B-EOC-Q20',
         text: 'Which statement best summarizes the Progressive Era as a whole?',
-        choices: ['Americans used reform journalism, activism, and government power to address the problems of modern industrial life.', 'Americans used reform journalism, activism, and government power only to expand overseas empire and avoid domestic change.', 'Americans used reform journalism, activism, and government power mainly to restore older political machines.', 'Americans used reform journalism, activism, and government power without any disagreements over goals or methods.'],
+        choices: [
+          'Americans used reform journalism, activism, and government power to address the problems of modern industrial life.',
+          'The Progressive Era showed that private charity and voluntary business reform could solve social problems without government.',
+          'Progressivism was primarily a conservative movement that resisted the changes brought by industrialization.',
+          'The era ended in complete failure because reformers could not overcome the power of corporations and political machines.'
+        ],
         correctAnswer: 'Americans used reform journalism, activism, and government power to address the problems of modern industrial life.',
-        explanation: 'The Progressive Era was defined by the effort to use modern reform tools against the social and political costs of industrialization.',
+        explanation: 'The Progressive Era established a lasting precedent: that democratic government, armed with expertise and public accountability, could and should intervene to protect citizens from the downsides of industrial capitalism.',
         standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
     ]
