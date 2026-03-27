@@ -913,97 +913,147 @@ const LESSONS = [
     label: 'LESSON 9',
     title: 'A Dividing Nation',
     sub: 'Sectional Crisis and Secession · 1820-1861',
-    icon: '🦣',
+    icon: '⚔️',
     type: 'lesson',
     briefing: {
-      location: 'Sectional Crisis and Secession',
+      location: 'Washington D.C. and the Border States',
       date: '1820-1861',
-      role: 'newspaper editor',
+      role: 'political correspondent',
       text: 'The Union is under strain. Debates over slavery, western expansion, federal power, and political compromise are tearing the nation apart. Your mission is to follow how sectional disagreements deepened into secession and pushed the United States toward civil war.',
       tags: ['SS.912.A.2.1', 'SS.912.A.2.2']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'A Dividing Nation', cards: ['Compromise of 1850', 'Election of 1860'] },
+    rewards: { badge: 'A Dividing Nation', cards: ['Missouri Compromise', 'Dred Scott'] },
     bank: [
       {
         id: '1-L9-Q1',
         text: 'Why did slavery in the western territories create so much tension before the Civil War?',
-        choices: ['Each new territory raised the question of whether slave-state and free-state power would stay balanced.', 'Each new territory raised the question only after both sections had agreed to end compromise permanently.', 'Each new territory raised the question mainly because the South wanted to abolish slavery everywhere.', 'Each new territory raised the question while making congressional conflict less important than before.'],
+        choices: [
+          'Each new territory raised the question of whether slave-state and free-state power would stay balanced.',
+          'Western settlers refused to follow federal law, making it impossible to enforce any compromise.',
+          'Most western territories were already settled by free Black communities that opposed slavery.',
+          'Congress could not agree on how to tax western land, which created economic tension between regions.'
+        ],
         correctAnswer: 'Each new territory raised the question of whether slave-state and free-state power would stay balanced.',
-        explanation: 'Western expansion kept reopening the slavery debate because it affected political power as well as morality and economics.',
+        explanation: 'Every new state admitted to the Union had the potential to shift the balance of power in Congress between slaveholding and free states.',
         standard: 'SS.912.A.2.1'
       },
       {
         id: '1-L9-Q2',
         text: 'What was the purpose of the Missouri Compromise?',
-        choices: ['To maintain the balance between slave and free states by admitting Missouri as slave, Maine as free, and banning slavery above the 36°30′ line.', 'To permanently resolve the slavery debate by granting Congress full authority to immediately abolish it in all current states and every future territory added to the union.', 'To expand popular sovereignty by allowing each new state to hold a referendum on slavery without any geographic restriction imposed by the national legislature.', 'To resolve western land disputes by granting statehood only to territories that had already abolished slavery voluntarily through their own state constitutions.'],
+        choices: [
+          'To maintain the balance between slave and free states by admitting Missouri as slave, Maine as free, and banning slavery above the 36°30′ line.',
+          'To give Congress permanent authority to abolish slavery in any state that requested federal help.',
+          'To allow Missouri settlers to vote directly on whether to permit slavery within the territory.',
+          'To prevent any new western territories from applying for statehood for twenty years.'
+        ],
         correctAnswer: 'To maintain the balance between slave and free states by admitting Missouri as slave, Maine as free, and banning slavery above the 36°30′ line.',
-        explanation: 'The Missouri Compromise was an early attempt to calm sectional conflict through geographic compromise.',
+        explanation: 'The Missouri Compromise temporarily eased sectional tension by preserving the balance between slave and free states and drawing a geographic line.',
         standard: 'SS.912.A.2.1'
       },
       {
         id: '1-L9-Q3',
         text: 'Why did the Compromise of 1850 fail to settle sectional conflict for long?',
-        choices: ['It postponed major issues, and the Fugitive Slave Act made northern anger over slavery even stronger.', 'It postponed major issues only after both northern and southern leaders stopped debating slavery entirely.', 'It postponed major issues mainly by giving abolitionists and secessionists full agreement on policy.', 'It postponed major issues while ending all disputes over California and western territorial expansion.'],
+        choices: [
+          'It postponed major issues, and the Fugitive Slave Act made northern anger over slavery even stronger.',
+          'The compromise was rejected by southern states and was never actually put into effect.',
+          'It admitted California as a slave state, which outraged northern abolitionists and politicians.',
+          'Most Americans ignored the compromise because Congress lacked the power to enforce it.'
+        ],
         correctAnswer: 'It postponed major issues, and the Fugitive Slave Act made northern anger over slavery even stronger.',
-        explanation: 'The compromise bought time, but it also intensified resentment, especially in the North.',
+        explanation: 'The Fugitive Slave Act required northerners to assist in capturing escaped slaves, which deepened northern hostility toward the slave power.',
         standard: 'SS.912.A.2.1'
       },
       {
         id: '1-L9-Q4',
         text: 'Why was the Kansas-Nebraska Act so controversial?',
-        choices: ['It reopened the slavery issue by allowing popular sovereignty in territory once closed to slavery.', 'It reopened the slavery issue only after Kansas and Nebraska had already entered as free states.', 'It reopened the slavery issue mainly by requiring the Supreme Court to rule on secession immediately.', 'It reopened the slavery issue while preserving the Missouri Compromise line without any changes.'],
+        choices: [
+          'It reopened the slavery issue by allowing popular sovereignty in territory once closed to slavery.',
+          'It banned all immigration to the Kansas and Nebraska territories, angering European settlers.',
+          'The act removed Native American tribes from their land without any treaty or compensation.',
+          'It gave railroad companies the power to decide whether new territories would allow slavery.'
+        ],
         correctAnswer: 'It reopened the slavery issue by allowing popular sovereignty in territory once closed to slavery.',
-        explanation: 'By undoing earlier limits on slavery, the law helped intensify sectional conflict and violence.',
+        explanation: 'By replacing the Missouri Compromise line with popular sovereignty, the act reignited the debate over slavery\'s expansion into the territories.',
         standard: 'SS.912.A.2.1'
       },
       {
         id: '1-L9-Q5',
-        text: 'What did ‘Bleeding Kansas’ show about the sectional crisis?',
-        choices: ['That the conflict over slavery had turned violent — proslavery and antislavery settlers were literally fighting for control of the territory.', 'That popular sovereignty had successfully resolved the sectional crisis by letting settlers decide the issue without congressional interference.', 'That most Kansas residents opposed slavery but lacked the political power to prevent Congress from admitting it as a slave state.', 'That the federal government had effectively contained sectional violence by enforcing the terms of the Kansas-Nebraska Act.'],
+        text: 'What did "Bleeding Kansas" show about the sectional crisis?',
+        choices: [
+          'That the conflict over slavery had turned violent — proslavery and antislavery settlers were literally fighting for control of the territory.',
+          'That the federal government was willing to use military force to impose slavery on reluctant territories.',
+          'That most Kansas settlers were indifferent to slavery and simply wanted to farm in peace.',
+          'That the Kansas violence convinced Congress to abandon popular sovereignty as a policy.'
+        ],
         correctAnswer: 'That the conflict over slavery had turned violent — proslavery and antislavery settlers were literally fighting for control of the territory.',
-        explanation: 'Kansas demonstrated that compromise was weakening as both sides mobilized around slavery’s expansion.',
+        explanation: '"Bleeding Kansas" demonstrated that political compromise was breaking down and that Americans were willing to kill over the slavery question.',
         standard: 'SS.912.A.2.1'
       },
       {
         id: '1-L9-Q6',
         text: 'Why did the Dred Scott decision deepen sectional tensions?',
-        choices: ['It ruled against Black citizenship and limited Congress’s power to restrict slavery in the territories.', 'It ruled against Black citizenship only after southern states had rejoined the Union under Reconstruction.', 'It ruled against Black citizenship mainly by confirming that popular sovereignty would settle the issue fairly.', 'It ruled against Black citizenship while strengthening the Missouri Compromise as permanent law.'],
-        correctAnswer: 'It ruled against Black citizenship and limited Congress’s power to restrict slavery in the territories.',
-        explanation: 'The decision outraged many northerners because it appeared to favor slaveholding interests at the national level.',
+        choices: [
+          'It ruled against Black citizenship and limited Congress\'s power to restrict slavery in the territories.',
+          'The decision freed Dred Scott and enraged southern slave owners who opposed any judicial interference.',
+          'It declared the Missouri Compromise constitutional, which angered those who favored popular sovereignty.',
+          'The ruling ordered federal troops into Kansas to suppress antislavery settlers.'
+        ],
+        correctAnswer: 'It ruled against Black citizenship and limited Congress\'s power to restrict slavery in the territories.',
+        explanation: 'The Supreme Court\'s decision that Congress could not prohibit slavery in the territories outraged northerners and strengthened the Republican Party.',
         standard: 'SS.912.A.2.1'
       },
       {
         id: '1-L9-Q7',
-        text: 'Why did Lincoln’s election in 1860 trigger secession in the Deep South?',
-        choices: ['Southern leaders feared his victory threatened the future expansion and security of slavery.', 'Southern leaders feared his victory only after he promised to end slavery immediately in every state.', 'Southern leaders feared his victory mainly because he supported the expansion of slavery into all territories.', 'Southern leaders feared his victory while believing that Congress had no power to debate slavery.'],
+        text: 'Why did Lincoln\'s election in 1860 trigger secession in the Deep South?',
+        choices: [
+          'Southern leaders feared his victory threatened the future expansion and security of slavery.',
+          'Lincoln had publicly promised to abolish slavery immediately if elected, alarming the South.',
+          'His election was seen as unconstitutional because he only appeared on northern state ballots.',
+          'Southern planters feared Lincoln would use the army to seize their land and redistribute it.'
+        ],
         correctAnswer: 'Southern leaders feared his victory threatened the future expansion and security of slavery.',
-        explanation: 'Even though Lincoln did not begin by calling for immediate abolition everywhere, many southern leaders saw his election as a direct threat.',
+        explanation: 'Though Lincoln did not promise immediate abolition, his opposition to slavery\'s expansion and the total absence of southern electoral votes convinced slave-state leaders he was a threat.',
         standard: 'SS.912.A.2.1 · SS.912.A.2.2'
       },
       {
         id: '1-L9-Q8',
         text: 'What was the central reason southern states gave for seceding from the Union?',
-        choices: ['They wanted to protect slavery and the political order they believed depended on it.', 'They wanted to protect slavery only after the Union had abolished tariffs and interstate trade.', 'They wanted to protect slavery mainly because northern states had agreed to expand it westward.', 'They wanted to protect slavery while also supporting stronger federal control over all state laws.'],
+        choices: [
+          'They wanted to protect slavery and the political order they believed depended on it.',
+          'Southern states seceded mainly over high tariffs that harmed their agricultural exports.',
+          'They argued that the Constitution required any state to leave if the president was elected without southern votes.',
+          'Southern leaders wanted a separate nation to pursue independent foreign trade agreements with Britain.'
+        ],
         correctAnswer: 'They wanted to protect slavery and the political order they believed depended on it.',
-        explanation: 'Secession documents repeatedly show that slavery stood at the center of the sectional crisis.',
+        explanation: 'Secession declarations from southern states explicitly named the protection of slavery as their primary justification for leaving the Union.',
         standard: 'SS.912.A.2.2'
       },
       {
         id: '1-L9-Q9',
         text: 'Why did the attack on Fort Sumter matter so much in 1861?',
-        choices: ['It marked the opening of open war and ended any remaining hope that the crisis would stay political.', 'It marked the opening of open war only after the Confederacy had already surrendered at Appomattox.', 'It marked the opening of open war mainly because Congress had restored the Missouri Compromise first.', 'It marked the opening of open war while persuading all border states to join the Confederacy immediately.'],
+        choices: [
+          'It marked the opening of open war and ended any remaining hope that the crisis would stay political.',
+          'The attack killed hundreds of Union soldiers, giving Lincoln justification to suspend the Constitution.',
+          'It convinced Britain and France to intervene militarily on the side of the Confederacy.',
+          'Fort Sumter\'s fall forced Lincoln to abandon Washington and move the capital to Philadelphia.'
+        ],
         correctAnswer: 'It marked the opening of open war and ended any remaining hope that the crisis would stay political.',
-        explanation: 'After Fort Sumter, the conflict shifted from secession and debate to full-scale military war.',
+        explanation: 'The Confederate bombardment of Fort Sumter transformed the secession crisis into an armed conflict and forced both sides to mobilize for war.',
         standard: 'SS.912.A.2.2'
       },
       {
         id: '1-L9-Q10',
         text: 'What best summarizes why the United States became a dividing nation before the Civil War?',
-        choices: ['Repeated compromises failed because slavery and sectional power had become too divisive to contain.', 'Repeated compromises failed only after both North and South agreed to stop debating western expansion.', 'Repeated compromises failed mainly because industrial growth made slavery less important to politics.', 'Repeated compromises failed while making secession less likely and national unity stronger than before.'],
+        choices: [
+          'Repeated compromises failed because slavery and sectional power had become too divisive to contain.',
+          'Economic competition between northern factories and southern farms made peaceful resolution impossible.',
+          'The federal government was too weak to enforce any compromise, so conflict became inevitable.',
+          'Most Americans wanted war because they believed political compromise was a form of cowardice.'
+        ],
         correctAnswer: 'Repeated compromises failed because slavery and sectional power had become too divisive to contain.',
-        explanation: 'By 1861, the conflict over slavery had outgrown earlier political settlements and broken the Union apart.',
+        explanation: 'Each compromise — Missouri, 1850, Kansas-Nebraska — bought time but deepened underlying tensions until political solutions collapsed entirely.',
         standard: 'SS.912.A.2.1 · SS.912.A.2.2'
       },
     ]
@@ -1017,97 +1067,147 @@ const LESSONS = [
     label: 'LESSON 10',
     title: 'The Civil War',
     sub: 'War, Emancipation, and Union Victory · 1861-1865',
-    icon: '⚔️',
+    icon: '🎖️',
     type: 'lesson',
     briefing: {
-      location: 'War, Emancipation, and Union Victory',
+      location: 'The American Battlefield',
       date: '1861-1865',
-      role: 'Union field correspondent',
+      role: 'war correspondent',
       text: 'War has begun, and both sides expect a struggle that will decide the future of the nation. Battles, strategy, leadership, emancipation, and life on the home front will all shape the outcome. Your task is to track how the war unfolded and why the Union ultimately prevailed.',
       tags: ['SS.912.A.2.2', 'SS.912.A.2.3']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'The Civil War', cards: ['Gettysburg', 'Emancipation Proclamation'] },
+    rewards: { badge: 'The Civil War', cards: ['Emancipation Proclamation', 'Ulysses S. Grant'] },
     bank: [
       {
         id: '1-L10-Q1',
         text: 'What was one major advantage the Union held over the Confederacy at the start of the Civil War?',
-        choices: ['The Union had a larger population, more industry, and stronger transportation networks.', 'The Union had a larger population only after the Confederacy gained control of northern factories.', 'The Union had a larger population mainly because southern states had more railroads and ports.', 'The Union had a larger population while the Confederacy controlled most banks and shipbuilding.'],
+        choices: [
+          'The Union had a larger population, more industry, and stronger transportation networks.',
+          'Union soldiers had more combat experience because they had fought in the Mexican-American War.',
+          'The Confederacy had no trained military officers, leaving it without effective battlefield leadership.',
+          'Most European nations immediately blockaded Confederate ports to prevent the South from exporting cotton.'
+        ],
         correctAnswer: 'The Union had a larger population, more industry, and stronger transportation networks.',
-        explanation: 'Northern advantages in manpower and industrial capacity became increasingly important as the war continued.',
+        explanation: 'The Union\'s industrial capacity, railroad network, and larger population gave it significant advantages for sustaining a long war.',
         standard: 'SS.912.A.2.2'
       },
       {
         id: '1-L10-Q2',
         text: 'What was one important strength of the Confederacy early in the war?',
-        choices: ['Many southern leaders believed superior generals and defensive fighting could offset Union advantages.', 'Many southern leaders believed superior generals only after the Union had captured Richmond in 1861.', 'Many southern leaders believed superior generals mainly because the South had more factories and immigrants.', 'Many southern leaders believed superior generals while expecting Britain to annex the Confederacy directly.'],
+        choices: [
+          'Many southern leaders believed superior generals and defensive fighting could offset Union advantages.',
+          'The Confederacy had a larger and more experienced navy that could break the Union blockade.',
+          'Southern factories outproduced northern ones in weapons and ammunition during the first year of war.',
+          'Confederate leaders had already secured formal alliances with Britain and France before the war began.'
+        ],
         correctAnswer: 'Many southern leaders believed superior generals and defensive fighting could offset Union advantages.',
-        explanation: 'The South hoped military leadership, motivation, and home-ground defense could help it resist a stronger opponent.',
+        explanation: 'The Confederacy planned to fight a defensive war on home ground and hoped that talented officers like Robert E. Lee could overcome the Union\'s material advantages.',
         standard: 'SS.912.A.2.2'
       },
       {
         id: '1-L10-Q3',
-        text: 'Why were the border states so important during the Civil War?',
-        choices: ['Their loyalty affected manpower, geography, and the balance between Union and Confederate power.', 'Their loyalty affected manpower only after the war had already been decided at Gettysburg and Vicksburg.', 'Their loyalty affected manpower mainly because all of them joined the Confederacy after Fort Sumter.', 'Their loyalty affected manpower while having little impact on rivers, railroads, or military position.'],
+        text: 'Why were the border states so strategically important to both sides?',
+        choices: [
+          'Their loyalty affected manpower, geography, and the balance between Union and Confederate power.',
+          'Border states contained most of the nation\'s railroad infrastructure and could control supply lines.',
+          'They were the only states where slavery was genuinely popular among white voters.',
+          'The border states controlled access to the Mississippi River, making them essential to western strategy.'
+        ],
         correctAnswer: 'Their loyalty affected manpower, geography, and the balance between Union and Confederate power.',
-        explanation: 'The border states mattered because they were strategically located and politically uncertain early in the war.',
+        explanation: 'States like Kentucky and Missouri held strategic territory and significant populations, and their allegiance was crucial to both sides\' military and political calculations.',
         standard: 'SS.912.A.2.2'
       },
       {
         id: '1-L10-Q4',
-        text: 'What was the basic goal of the Union’s Anaconda Plan?',
-        choices: ['To cut off and strangle the Confederacy by blockading southern ports, seizing control of the Mississippi River, and applying steady military pressure.', 'To win the war as quickly as possible through a single overwhelming invasion of Virginia that would capture Richmond and force an immediate Confederate surrender in the east.', 'To avoid a prolonged conflict by opening diplomatic negotiations that would allow Confederate states to return voluntarily without full military occupation of their territory.', 'To concentrate Union resources entirely on western campaigns while keeping the eastern front defensive until Confederate civilian morale collapsed under economic pressure.'],
+        text: 'What was the basic goal of the Union\'s Anaconda Plan?',
+        choices: [
+          'To cut off and strangle the Confederacy by blockading southern ports, seizing control of the Mississippi River, and applying steady military pressure.',
+          'To quickly capture Richmond, the Confederate capital, and force an immediate southern surrender.',
+          'The plan called for arming and organizing enslaved people to launch uprisings across the South.',
+          'Union strategists planned to trade western land to Mexico in exchange for troops and supplies.'
+        ],
         correctAnswer: 'To cut off and strangle the Confederacy by blockading southern ports, seizing control of the Mississippi River, and applying steady military pressure.',
-        explanation: 'The Union strategy sought to divide and weaken the South economically and militarily.',
+        explanation: 'Winfield Scott\'s Anaconda Plan aimed to economically strangle the Confederacy rather than rely on a single decisive battle.',
         standard: 'SS.912.A.2.2'
       },
       {
         id: '1-L10-Q5',
-        text: 'Why was Antietam important to Lincoln’s war leadership?',
-        choices: ['It gave him the opportunity to issue the Emancipation Proclamation from a position of strength.', 'It gave him the opportunity only after Britain had formally recognized the Confederacy as a nation.', 'It gave him the opportunity mainly to cancel the draft and end fighting in the western theater.', 'It gave him the opportunity while proving that slavery would remain untouched by the conflict.'],
-        correctAnswer: 'It gave him the opportunity to issue the Emancipation Proclamation from a position of strength.',
-        explanation: 'Lincoln waited for a Union success before announcing emancipation as a wartime measure.',
+        text: 'Why was Antietam important to Lincoln\'s war leadership?',
+        choices: [
+          'It gave Lincoln enough of a victory to issue the Emancipation Proclamation on stronger political ground.',
+          'The battle convinced Lincoln to fire General McClellan and replace him with Ulysses S. Grant.',
+          'Antietam was the first Union victory and restored northern public support after a series of defeats.',
+          'Lincoln used the battle\'s outcome to justify asking Congress to double the size of the Union army.'
+        ],
+        correctAnswer: 'It gave Lincoln enough of a victory to issue the Emancipation Proclamation on stronger political ground.',
+        explanation: 'Lincoln had been waiting for a significant Union success so the Emancipation Proclamation would not appear to be issued out of desperation.',
         standard: 'SS.912.A.2.3'
       },
       {
         id: '1-L10-Q6',
         text: 'How did the Emancipation Proclamation change the meaning of the Civil War?',
-        choices: ['It made ending slavery a central Union war aim and discouraged foreign support for the Confederacy.', 'It made ending slavery a central Union war aim only after slavery had already ended nationwide by law.', 'It made ending slavery a central Union war aim mainly by freeing enslaved people in loyal border states immediately.', 'It made ending slavery a central Union war aim while reducing the role of Black soldiers in the war.'],
+        choices: [
+          'It made ending slavery a central Union war aim and discouraged foreign support for the Confederacy.',
+          'The proclamation immediately freed all enslaved people in every state, including the border states.',
+          'It was primarily a military order that required freed Black men to serve in the Union army.',
+          'The proclamation convinced Confederate soldiers to desert in large numbers by offering them amnesty.'
+        ],
         correctAnswer: 'It made ending slavery a central Union war aim and discouraged foreign support for the Confederacy.',
-        explanation: 'Emancipation transformed the war politically and morally, even though it did not instantly free every enslaved person.',
+        explanation: 'By reframing the war as a fight against slavery, Lincoln made it politically impossible for Britain and France — where slavery was unpopular — to support the Confederacy.',
         standard: 'SS.912.A.2.3'
       },
       {
         id: '1-L10-Q7',
         text: 'Why are Gettysburg and Vicksburg often called turning points in the Civil War?',
-        choices: ['Together they weakened Confederate momentum and gave the Union stronger military control and confidence.', 'Together they weakened Confederate momentum only after Richmond had already fallen and the war had ended.', 'Together they weakened Confederate momentum mainly by restoring southern control of the Mississippi River.', 'Together they weakened Confederate momentum while persuading Europe to recognize Confederate independence.'],
+        choices: [
+          'Together they weakened Confederate momentum and gave the Union stronger military control and confidence.',
+          'Both battles resulted in the capture of major Confederate generals, leaving the South without leadership.',
+          'The twin victories persuaded Britain and France to formally recognize the United States as the legitimate government.',
+          'They were the first battles in which Black Union soldiers played a decisive combat role.'
+        ],
         correctAnswer: 'Together they weakened Confederate momentum and gave the Union stronger military control and confidence.',
-        explanation: 'These 1863 victories damaged the Confederacy’s position in both the East and the West.',
+        explanation: 'Gettysburg ended Lee\'s northern invasion and Vicksburg gave the Union control of the Mississippi River, effectively splitting the Confederacy.',
         standard: 'SS.912.A.2.2 · SS.912.A.2.3'
       },
       {
         id: '1-L10-Q8',
         text: 'Why was the service of Black soldiers significant to the Union war effort?',
-        choices: ['It added critical manpower to the Union army and demonstrated that African Americans were willing to fight and die for their own freedom.', 'It had little immediate military impact but served mainly as a symbolic gesture by Lincoln to appease abolitionist critics in Congress.', 'It was significant primarily because it convinced Britain and France to withhold diplomatic recognition from the Confederate government.', 'It allowed the Union to reassign white soldiers from combat roles to supply and logistics, significantly improving overall military efficiency.'],
+        choices: [
+          'It added critical manpower to the Union army and demonstrated that African Americans were willing to fight and die for their own freedom.',
+          'Black soldiers were used primarily as laborers and rarely saw combat during the war.',
+          'Their service was controversial in the North and nearly caused a political crisis for the Lincoln administration.',
+          'Most Black soldiers were volunteers from northern free communities who had no personal stake in emancipation.'
+        ],
         correctAnswer: 'It added critical manpower to the Union army and demonstrated that African Americans were willing to fight and die for their own freedom.',
-        explanation: 'Black military service helped the Union and strengthened the case for a broader redefinition of freedom.',
+        explanation: 'Nearly 180,000 Black men served in the Union army, providing essential manpower and powerfully making the case for Black citizenship and equality.',
         standard: 'SS.912.A.2.3'
       },
       {
         id: '1-L10-Q9',
-        text: 'What was the purpose of Union ‘total war’ tactics late in the conflict?',
-        choices: ['Union leaders wanted to destroy the South’s ability and willingness to keep fighting.', 'Union leaders wanted to destroy the South’s ability only after the Confederacy had won foreign recognition.', 'Union leaders wanted to destroy the South’s ability mainly by abandoning railroads and supply lines.', 'Union leaders wanted to destroy the South’s ability while preserving all Confederate resources for later use.'],
-        correctAnswer: 'Union leaders wanted to destroy the South’s ability and willingness to keep fighting.',
-        explanation: 'Campaigns such as Sherman’s march targeted infrastructure and morale as well as armies in the field.',
+        text: 'What was the purpose of Union "total war" tactics late in the conflict?',
+        choices: [
+          'Union leaders wanted to destroy the South\'s ability and willingness to keep fighting.',
+          'Total war was a response to Confederate atrocities — the Union matched southern brutality to deter future attacks.',
+          'Sherman\'s march was designed to free enslaved people rather than to damage Confederate military capacity.',
+          'The tactic was mainly symbolic, meant to show European observers that the Union was winning decisively.'
+        ],
+        correctAnswer: 'Union leaders wanted to destroy the South\'s ability and willingness to keep fighting.',
+        explanation: 'Sherman\'s March to the Sea targeted Confederate infrastructure, supplies, and morale to undermine the South\'s capacity to sustain the war.',
         standard: 'SS.912.A.2.2'
       },
       {
         id: '1-L10-Q10',
         text: 'What best explains why the Union won the Civil War?',
-        choices: ['Its greater resources, effective strategy, and growing commitment to emancipation helped wear down the Confederacy.', 'Its greater resources, effective strategy, and growing commitment to emancipation mattered only after secession ended peacefully.', 'Its greater resources, effective strategy, and growing commitment to emancipation mainly came from southern industrial power.', 'Its greater resources, effective strategy, and growing commitment to emancipation reduced the importance of military leadership.'],
+        choices: [
+          'Its greater resources, effective strategy, and growing commitment to emancipation helped wear down the Confederacy.',
+          'The Confederacy lost because its generals made too many tactical mistakes in battle.',
+          'Britain and France intervened on the Union\'s side after the Emancipation Proclamation.',
+          'Most white southerners never truly supported secession, which caused the Confederate cause to collapse from within.'
+        ],
         correctAnswer: 'Its greater resources, effective strategy, and growing commitment to emancipation helped wear down the Confederacy.',
-        explanation: 'Union victory came from a mix of material strength, leadership, military success, and a changing war purpose.',
+        explanation: 'Union victory resulted from the combination of industrial strength, military strategy, capable leadership, and the broadening of war aims to include emancipation.',
         standard: 'SS.912.A.2.2 · SS.912.A.2.3'
       },
     ]
@@ -1124,117 +1224,177 @@ const LESSONS = [
     icon: '🏛️',
     type: 'capstone',
     briefing: {
-      location: 'Freedom, Citizenship, and the Struggle After War',
+      location: 'The American South',
       date: '1865-1877',
-      role: 'Freedmen’s Bureau adviser',
+      role: 'Reconstruction journalist',
       text: 'The war is over, but the struggle to define freedom is only beginning. Reconstruction raises huge questions about citizenship, voting rights, federal authority, and the future of the South. This capstone follows both the achievements and the failures of rebuilding the nation after slavery.',
       tags: ['SS.912.A.2.4', 'SS.912.A.2.5', 'SS.912.A.2.6']
     },
     displayCount: 5,
     goldRules: { perCorrect: 25, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Reconstruction', cards: ['Fourteenth Amendment', 'Freedmen’s Bureau'] },
+    rewards: { badge: 'Reconstruction', cards: ['Freedmen\'s Bureau', 'Frederick Douglass'] },
     bank: [
       {
         id: '1-CAP-Q1',
         text: 'What was the central challenge of Reconstruction after the Civil War?',
-        choices: ['The nation had to rebuild the South while deciding how freedom and citizenship would be defined.', 'The nation had to rebuild the South only after slavery had been fully restored across former Confederate states.', 'The nation had to rebuild the South mainly by giving ex-Confederate leaders immediate control without limits.', 'The nation had to rebuild the South while keeping the Constitution unchanged after the war.'],
+        choices: [
+          'The nation had to rebuild the South while deciding how freedom and citizenship would be defined.',
+          'Congress had to prevent Confederate leaders from rejoining the army and starting a second war.',
+          'The main challenge was economic — paying off the enormous debts the Union had accumulated during the war.',
+          'Reconstruction was primarily about deciding which Confederate states would be allowed to keep their land.'
+        ],
         correctAnswer: 'The nation had to rebuild the South while deciding how freedom and citizenship would be defined.',
-        explanation: 'Reconstruction was about more than rebuilding roads or cities; it was about the political meaning of victory and freedom.',
+        explanation: 'Reconstruction involved much more than physical rebuilding — it required fundamental decisions about what freedom meant and who counted as a citizen.',
         standard: 'SS.912.A.2.4'
       },
       {
         id: '1-CAP-Q2',
-        text: 'Why did many Radical Republicans oppose President Johnson’s Reconstruction policies?',
-        choices: ['They believed his approach was too lenient toward former Confederates and too weak in protecting freedpeople.', 'They believed his approach was too lenient only after he fully enforced Black voting rights across the South.', 'They believed his approach was too lenient mainly because he wanted immediate land redistribution to former slaves.', 'They believed his approach was too lenient while also giving Congress complete control over Reconstruction at once.'],
+        text: 'Why did many Radical Republicans oppose President Johnson\'s Reconstruction policies?',
+        choices: [
+          'They believed his approach was too lenient toward former Confederates and too weak in protecting freedpeople.',
+          'Johnson\'s plan required former Confederate states to pay heavy war reparations, which Congress thought was too harsh.',
+          'Radical Republicans opposed Johnson primarily because he wanted to abolish the Freedmen\'s Bureau immediately.',
+          'They disagreed with Johnson\'s decision to hold military tribunals for Confederate officers.'
+        ],
         correctAnswer: 'They believed his approach was too lenient toward former Confederates and too weak in protecting freedpeople.',
-        explanation: 'Congressional Republicans wanted stronger guarantees for civil rights and firmer conditions for readmitting the South.',
+        explanation: 'Johnson quickly restored southern states without demanding protections for freedpeople, alarming Republicans who wanted stronger guarantees.',
         standard: 'SS.912.A.2.4'
       },
       {
         id: '1-CAP-Q3',
         text: 'Why did southern states pass Black Codes after the Civil War?',
-        choices: ['They were trying to limit the freedom and independence of formerly enslaved people.', 'They were trying to limit the freedom only after Black citizenship had already been fully protected by all states.', 'They were trying to limit the freedom mainly by expanding land ownership and voting access for freedpeople.', 'They were trying to limit the freedom while ending forced labor practices and racial control immediately.'],
+        choices: [
+          'They were trying to limit the freedom and independence of formerly enslaved people.',
+          'Black Codes were intended to help freedpeople transition to paid labor by regulating their contracts.',
+          'Southern legislators passed them to comply with federal requirements about labor organization.',
+          'The codes were designed to encourage freedpeople to remain in the South rather than migrating north.'
+        ],
         correctAnswer: 'They were trying to limit the freedom and independence of formerly enslaved people.',
-        explanation: 'Black Codes attempted to preserve a racial hierarchy even after slavery had been abolished.',
+        explanation: 'Black Codes restricted where freedpeople could live and work, and they were explicitly designed to recreate conditions close to slavery under different legal language.',
         standard: 'SS.912.A.2.4'
       },
       {
         id: '1-CAP-Q4',
-        text: 'What was the purpose of the Freedmen’s Bureau?',
-        choices: ['To help formerly enslaved people and poor southerners by providing food, education, legal assistance, and help negotiating labor contracts.', 'To manage the redistribution of former plantation land to freedpeople as promised by Union generals during the final campaigns of the war.', 'To enforce the Black Codes passed by southern state governments and ensure that formerly enslaved people returned to agricultural labor quickly.', 'To serve primarily as a military agency responsible for maintaining order in the South during the period of federal troop occupation after the war.'],
+        text: 'What was the purpose of the Freedmen\'s Bureau?',
+        choices: [
+          'To help formerly enslaved people and poor southerners by providing food, education, legal assistance, and help negotiating labor contracts.',
+          'It was a military agency responsible for disarming former Confederate soldiers across the South.',
+          'The bureau was created to manage the sale of abandoned Confederate plantations to northern investors.',
+          'It supervised elections in southern states to ensure that former Confederates did not run for office.'
+        ],
         correctAnswer: 'To help formerly enslaved people and poor southerners by providing food, education, legal assistance, and help negotiating labor contracts.',
-        explanation: 'The Freedmen’s Bureau became one of the most important federal efforts to support transition after emancipation.',
+        explanation: 'The Freedmen\'s Bureau was one of the federal government\'s first social welfare agencies, providing critical support to freedpeople in the chaotic postwar South.',
         standard: 'SS.912.A.2.4'
       },
       {
         id: '1-CAP-Q5',
         text: 'Why was the Thirteenth Amendment so important to Reconstruction?',
-        choices: ['It abolished slavery throughout the United States and made emancipation permanent in law.', 'It abolished slavery only after southern states had voluntarily restored rights to formerly enslaved people.', 'It abolished slavery mainly by leaving involuntary labor fully available under all state laws.', 'It abolished slavery while preserving the legal authority of masters over enslaved families.'],
+        choices: [
+          'It abolished slavery throughout the United States and made emancipation permanent in law.',
+          'The amendment gave formerly enslaved people the right to vote and hold political office.',
+          'It overturned the Dred Scott decision and recognized African Americans as citizens.',
+          'The Thirteenth Amendment required former Confederate states to pay reparations to freedpeople.'
+        ],
         correctAnswer: 'It abolished slavery throughout the United States and made emancipation permanent in law.',
-        explanation: 'The amendment ensured that slavery could not return after the war ended.',
+        explanation: 'The Emancipation Proclamation only freed enslaved people in Confederate states during wartime — the Thirteenth Amendment made abolition a permanent constitutional reality nationwide.',
         standard: 'SS.912.A.2.4'
       },
       {
         id: '1-CAP-Q6',
         text: 'What did the Fourteenth Amendment do?',
-        choices: ['It established birthright citizenship and required states to respect equal protection and due process.', 'It established birthright citizenship only after every southern state had ended racial violence completely.', 'It established birthright citizenship mainly by returning citizenship rules to former Confederate governments.', 'It established birthright citizenship while keeping Black Americans outside constitutional protection.'],
+        choices: [
+          'It established birthright citizenship and required states to respect equal protection and due process.',
+          'The amendment gave African American men the right to vote and penalized states that denied it.',
+          'It abolished slavery in the United States and gave Congress the power to enforce the prohibition.',
+          'The Fourteenth Amendment banned former Confederate officials from ever holding federal office.'
+        ],
         correctAnswer: 'It established birthright citizenship and required states to respect equal protection and due process.',
-        explanation: 'The Fourteenth Amendment redefined national citizenship and expanded federal protection of civil rights.',
+        explanation: 'The Fourteenth Amendment overturned Dred Scott and established that all persons born in the United States were citizens entitled to equal protection under the law.',
         standard: 'SS.912.A.2.5'
       },
       {
         id: '1-CAP-Q7',
         text: 'Why was the Fifteenth Amendment a major Reconstruction measure?',
-        choices: ['It prohibited denying the vote based on race, color, or previous condition of servitude.', 'It prohibited denying the vote only after southern states had agreed to universal equality in practice.', 'It prohibited denying the vote mainly by ending all literacy tests, taxes, and intimidation at once.', 'It prohibited denying the vote while restricting Black officeholding and political participation.'],
-        correctAnswer: 'It prohibited denying the vote based on race, color, or previous condition of servitude.',
-        explanation: 'The amendment aimed to secure political rights for Black men, even though later resistance weakened those rights.',
+        choices: [
+          'It prohibited denying the right to vote based on race, color, or previous condition of servitude.',
+          'It gave Congress the power to break up large plantations and redistribute land to freedpeople.',
+          'The amendment required southern states to integrate their public schools within five years.',
+          'It extended the jurisdiction of federal courts to hear all civil rights cases from southern states.'
+        ],
+        correctAnswer: 'It prohibited denying the right to vote based on race, color, or previous condition of servitude.',
+        explanation: 'The Fifteenth Amendment was a landmark expansion of democracy, though states later found many ways to circumvent it through literacy tests, poll taxes, and violence.',
         standard: 'SS.912.A.2.5'
       },
       {
         id: '1-CAP-Q8',
         text: 'What did Black political participation during Reconstruction demonstrate?',
-        choices: ['Formerly enslaved people were actively shaping new governments and definitions of citizenship.', 'Formerly enslaved people were actively shaping new governments only after segregation had already been overturned for good.', 'Formerly enslaved people were actively shaping new governments mainly by rejecting schools and officeholding.', 'Formerly enslaved people were actively shaping new governments while refusing to support constitutional change.'],
+        choices: [
+          'Formerly enslaved people were actively shaping new governments and definitions of citizenship.',
+          'Most Black politicians during Reconstruction were northern-born free people rather than freedpeople.',
+          'Black voters consistently supported the Democratic Party because Republicans were slow to help them.',
+          'Political participation was limited mainly to a small educated elite and had little broader impact.'
+        ],
         correctAnswer: 'Formerly enslaved people were actively shaping new governments and definitions of citizenship.',
-        explanation: 'Reconstruction opened a brief but important period of Black voting, organizing, and officeholding in the South.',
+        explanation: 'Black men voted, held office, and served in Congress — demonstrating both the possibilities of Reconstruction and the reason white supremacists worked so hard to end it.',
         standard: 'SS.912.A.2.5'
       },
       {
         id: '1-CAP-Q9',
         text: 'Why did white supremacist groups such as the Ku Klux Klan emerge during Reconstruction?',
-        choices: ['They used terror to undermine Black rights and restore white control over southern society.', 'They used terror only after Black political participation had completely disappeared from the South.', 'They used terror mainly because Congress had stopped enforcing any law against racial violence.', 'They used terror while supporting equal citizenship and federal protection of freedpeople.'],
+        choices: [
+          'They used terror to undermine Black rights and restore white control over southern society.',
+          'These groups formed mainly to oppose northern business interests moving into the South after the war.',
+          'They emerged as a response to the federal government\'s plan to redistribute Confederate land to freedpeople.',
+          'The Klan was founded primarily to intimidate Republican politicians who had supported secession.'
+        ],
         correctAnswer: 'They used terror to undermine Black rights and restore white control over southern society.',
-        explanation: 'Violence became a major tool of counterrevolution against Reconstruction reforms.',
+        explanation: 'Klan violence targeted Black voters, officeholders, and community leaders, and was part of a broader campaign to destroy Reconstruction from below.',
         standard: 'SS.912.A.2.5 · SS.912.A.2.6'
       },
       {
         id: '1-CAP-Q10',
         text: 'Why did sharecropping keep many southern families, especially freedpeople, in economic hardship?',
-        choices: ['It often trapped workers in debt and dependence even though they were no longer legally enslaved.', 'It often trapped workers in debt only after plantations had stopped producing cash crops entirely.', 'It often trapped workers in debt mainly because they received equal land ownership from the government first.', 'It often trapped workers in debt while guaranteeing stable profits and independence for most families.'],
+        choices: [
+          'It often trapped workers in debt and dependence even though they were no longer legally enslaved.',
+          'Sharecroppers earned good wages during successful harvests but had no income in bad years.',
+          'The system was controlled by the federal government, which took most of the crop as payment for land.',
+          'Sharecropping was mainly used by white southern farmers and rarely involved freedpeople directly.'
+        ],
         correctAnswer: 'It often trapped workers in debt and dependence even though they were no longer legally enslaved.',
-        explanation: 'Economic freedom after emancipation was limited by systems that tied laborers to landowners and credit networks.',
+        explanation: 'Sharecropping arrangements kept many freedpeople in a cycle of debt to landlords and merchants, creating a system of economic coercion that replaced the legal bondage of slavery.',
         standard: 'SS.912.A.2.6'
       },
       {
         id: '1-CAP-Q11',
         text: 'What happened politically when Reconstruction ended in 1877?',
-        choices: ['Federal protection in the South weakened, allowing white Democrats to regain control more fully.', 'Federal protection in the South weakened only after Congress permanently guaranteed Black civil equality there.', 'Federal protection in the South weakened mainly because the Fifteenth Amendment had been repealed at once.', 'Federal protection in the South weakened while land redistribution to freedpeople expanded nationwide.'],
+        choices: [
+          'Federal protection in the South weakened, allowing white Democrats to regain control more fully.',
+          'The end of Reconstruction led immediately to the passage of the Jim Crow laws across the South.',
+          'Former Confederate states were formally readmitted to the Union for the first time after 1877.',
+          'Congress transferred Reconstruction authority to the Supreme Court, which quickly ended federal oversight.'
+        ],
         correctAnswer: 'Federal protection in the South weakened, allowing white Democrats to regain control more fully.',
-        explanation: 'The end of Reconstruction marked a retreat from federal enforcement of many postwar reforms.',
+        explanation: 'The withdrawal of federal troops after the Compromise of 1877 left Black southerners increasingly vulnerable to violence, disenfranchisement, and political exclusion.',
         standard: 'SS.912.A.2.6'
       },
       {
         id: '1-CAP-Q12',
         text: 'What best summarizes Reconstruction as a historical era?',
-        choices: ['It expanded freedom and citizenship in law, but fierce resistance limited how fully those gains lasted.', 'It expanded freedom and citizenship in law only after the South accepted racial equality without resistance.', 'It expanded freedom and citizenship in law mainly by restoring the antebellum social order immediately.', 'It expanded freedom and citizenship in law while ending all debates about federal power and civil rights.'],
+        choices: [
+          'It expanded freedom and citizenship in law, but fierce resistance limited how fully those gains lasted.',
+          'Reconstruction was primarily a northern economic project that used freedpeople as a political excuse.',
+          'The era failed entirely — it produced no lasting constitutional or legal changes of any significance.',
+          'Reconstruction successfully integrated the South into the national economy while protecting Black rights.'
+        ],
         correctAnswer: 'It expanded freedom and citizenship in law, but fierce resistance limited how fully those gains lasted.',
-        explanation: 'Reconstruction was both revolutionary and incomplete, reshaping the Constitution while falling short in practice.',
+        explanation: 'Reconstruction produced genuinely revolutionary constitutional changes, but organized violence, northern fatigue, and political compromise prevented those changes from being fully realized for nearly a century.',
         standard: 'SS.912.A.2.4 · SS.912.A.2.5 · SS.912.A.2.6'
       },
     ]
   },
 
   // ==================================================
-  // EOC REVIEW — EOC Practice Quiz
+  // EOC REVIEW — Civil War and Reconstruction
   // ==================================================
   {
     id: 'eoc',
@@ -1248,170 +1408,270 @@ const LESSONS = [
       date: '',
       role: 'state exam coach',
       text: 'This review covers the full unit arc from sectional crisis to Reconstruction. Expect questions about the collapse of compromise, military turning points, emancipation, Union victory, the Reconstruction amendments, and the unfinished struggle over freedom and citizenship.',
-      tags: ['SS.912.A.2.1', 'SS.912.A.2.2', 'SS.912.A.2.3', 'SS.912.A.2.4', 'SS.912.A.2.5']
+      tags: ['SS.912.A.2.1', 'SS.912.A.2.2', 'SS.912.A.2.3', 'SS.912.A.2.4', 'SS.912.A.2.5', 'SS.912.A.2.6']
     },
     displayCount: 15,
     goldRules: { perCorrect: 15, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Civil War Era Mastery', cards: ['Thirteenth Amendment', 'Compromise of 1877'] },
+    rewards: { badge: 'Civil War Mastery', cards: ['Abraham Lincoln', 'Reconstruction Era'] },
     bank: [
       {
         id: '1-EOC-Q1',
         text: 'Why did westward expansion intensify sectional conflict before the Civil War?',
-        choices: ['Each new territory forced the nation to debate whether slavery would expand and affect political balance.', 'Each new territory forced the nation to debate only after both sections had accepted secession peacefully.', 'Each new territory forced the nation to debate mainly because slavery no longer mattered politically.', 'Each new territory forced the nation to debate while making congressional compromise easier than before.'],
+        choices: [
+          'Each new territory forced the nation to debate whether slavery would expand and affect political balance.',
+          'Western expansion divided the country mainly over trade routes and which region would control Pacific ports.',
+          'Most western settlers were antislavery, which alarmed southern states that feared losing congressional power.',
+          'Expansion created conflict because northern and southern states both wanted to extend their railroad systems west.'
+        ],
         correctAnswer: 'Each new territory forced the nation to debate whether slavery would expand and affect political balance.',
-        explanation: 'Territorial growth kept reopening the issue of slavery and made sectional rivalry harder to contain.',
+        explanation: 'Every new western territory raised the question of whether it would enter the Union as free or slave, threatening the balance of power in Congress.',
         standard: 'SS.912.A.2.1'
       },
       {
         id: '1-EOC-Q2',
         text: 'Why did the major compromises before 1861 fail to prevent war permanently?',
-        choices: ['They delayed conflict for a time, but they did not resolve the deeper dispute over slavery and power.', 'They delayed conflict for a time only after both parties had agreed to abolish slavery nationwide.', 'They delayed conflict for a time mainly because the Supreme Court settled territorial questions for good.', 'They delayed conflict for a time while making secession unnecessary and regional trust much stronger.'],
+        choices: [
+          'They delayed conflict for a time, but they did not resolve the deeper dispute over slavery and power.',
+          'The compromises were all rejected by Congress and never actually became law.',
+          'Most Americans refused to accept any compromise, preferring to resolve the slavery question by force.',
+          'Each compromise made the conflict worse by granting too many concessions to antislavery northerners.'
+        ],
         correctAnswer: 'They delayed conflict for a time, but they did not resolve the deeper dispute over slavery and power.',
-        explanation: 'Compromise became less effective as distrust deepened and slavery remained at the center of national politics.',
+        explanation: 'The Missouri Compromise, Compromise of 1850, and Kansas-Nebraska Act all bought time without addressing slavery\'s fundamental incompatibility with free society.',
         standard: 'SS.912.A.2.1'
       },
       {
         id: '1-EOC-Q3',
         text: 'What made the Kansas-Nebraska Act such an important turning point?',
-        choices: ['It reopened the slavery question in the territories and helped push sectional conflict toward violence.', 'It reopened the slavery question only after Kansas had already entered the Union as a free state.', 'It reopened the slavery question mainly by restoring the Missouri Compromise without any controversy.', 'It reopened the slavery question while reducing the importance of popular sovereignty in western politics.'],
+        choices: [
+          'It reopened the slavery question in the territories and helped push sectional conflict toward violence.',
+          'The act permanently resolved the slavery debate by establishing popular sovereignty as national policy.',
+          'It admitted two new free states simultaneously, upsetting the Senate balance and angering the South.',
+          'Kansas-Nebraska was the first law that openly called for the abolition of slavery in the United States.'
+        ],
         correctAnswer: 'It reopened the slavery question in the territories and helped push sectional conflict toward violence.',
-        explanation: 'The act intensified political division and helped produce the violence seen in ‘Bleeding Kansas.’',
+        explanation: 'By overturning the Missouri Compromise line, the Kansas-Nebraska Act reignited sectional conflict and contributed directly to the birth of the Republican Party.',
         standard: 'SS.912.A.2.1'
       },
       {
         id: '1-EOC-Q4',
         text: 'Why did many northerners react strongly against the Dred Scott decision?',
-        choices: ['They believed it strengthened slaveholding interests and denied Black people basic citizenship rights.', 'They believed it strengthened slaveholding interests only after the South had abandoned secession entirely.', 'They believed it strengthened slaveholding interests mainly by guaranteeing free-soil victories in the West.', 'They believed it strengthened slaveholding interests while preserving Congress’s full power over slavery.'],
+        choices: [
+          'They believed it strengthened slaveholding interests and denied Black people basic citizenship rights.',
+          'Northerners were outraged because the decision required them to return escaped slaves to their owners.',
+          'The ruling angered the North by declaring popular sovereignty the only constitutional method for deciding slavery.',
+          'Many northerners were upset because the decision dissolved the Missouri Compromise boundary line they favored.'
+        ],
         correctAnswer: 'They believed it strengthened slaveholding interests and denied Black people basic citizenship rights.',
-        explanation: 'The ruling deepened the crisis by limiting congressional restriction of slavery and denying Black citizenship.',
+        explanation: 'The Dred Scott ruling that Black people could never be citizens and Congress could not restrict slavery in territories outraged antislavery northerners and fueled Republican growth.',
         standard: 'SS.912.A.2.1'
       },
       {
         id: '1-EOC-Q5',
         text: 'Why did the election of 1860 lead directly to secession by several southern states?',
-        choices: ['Southern leaders saw Lincoln’s victory as a threat to slavery’s future and their section’s political power.', 'Southern leaders saw Lincoln’s victory only after he announced immediate abolition in every state by decree.', 'Southern leaders saw Lincoln’s victory mainly because he promised to expand slavery into all territories.', 'Southern leaders saw Lincoln’s victory while believing the federal government would protect secession peacefully.'],
-        correctAnswer: 'Southern leaders saw Lincoln’s victory as a threat to slavery’s future and their section’s political power.',
-        explanation: 'Secession followed because many slaveholding leaders believed the Union was no longer safe for their interests.',
+        choices: [
+          'Southern leaders saw Lincoln\'s victory as a threat to slavery\'s future and their section\'s political power.',
+          'Lincoln had promised immediate abolition in his platform, leaving southern states no choice but to leave.',
+          'The election was decided by electoral fraud in key northern states, which southerners refused to accept.',
+          'Lincoln won with southern votes, which convinced Deep South leaders that slavery had no political future.'
+        ],
+        correctAnswer: 'Southern leaders saw Lincoln\'s victory as a threat to slavery\'s future and their section\'s political power.',
+        explanation: 'Lincoln opposed slavery\'s expansion, received no southern electoral votes, and represented a party hostile to slaveholder interests, making secession feel necessary to Deep South leaders.',
         standard: 'SS.912.A.2.2'
       },
       {
         id: '1-EOC-Q6',
         text: 'What did the attack on Fort Sumter make clear to the nation?',
-        choices: ['The sectional crisis had become a shooting war, and compromise was giving way to military conflict.', 'The sectional crisis had become a shooting war only after the Confederacy had already been defeated.', 'The sectional crisis had become a shooting war mainly because all border states had joined the South.', 'The sectional crisis had become a shooting war while Congress restored peace through new territorial compromise.'],
+        choices: [
+          'The sectional crisis had become a shooting war, and compromise was giving way to military conflict.',
+          'The Confederate attack proved that southern states had been planning war since Lincoln\'s election.',
+          'Fort Sumter showed that Union forces were too weak to defend federal installations in the South.',
+          'The attack convinced the border states to join the Confederacy and abandon their neutral positions.'
+        ],
         correctAnswer: 'The sectional crisis had become a shooting war, and compromise was giving way to military conflict.',
-        explanation: 'Fort Sumter marked the formal beginning of the Civil War.',
+        explanation: 'Fort Sumter\'s fall transformed a political crisis into open war and forced citizens on both sides to choose where their loyalty lay.',
         standard: 'SS.912.A.2.2'
       },
       {
         id: '1-EOC-Q7',
         text: 'Which factor most strengthened the Union war effort over time?',
-        choices: ['Its larger population, industrial base, and transportation system gave it greater staying power.', 'Its larger population, industrial base, and transportation system mattered only after 1877.', 'Its larger population, industrial base, and transportation system were weaker than those of the Confederacy.', 'Its larger population, industrial base, and transportation system reduced the need for military strategy.'],
+        choices: [
+          'Its larger population, industrial base, and transportation system gave it greater staying power.',
+          'The Union\'s naval superiority allowed it to blockade Confederate ports from the very first month of the war.',
+          'Foreign nations provided the Union with weapons and supplies that the North could not produce itself.',
+          'Superior Union generalship in the early battles of the war discouraged Confederate soldiers from fighting on.'
+        ],
         correctAnswer: 'Its larger population, industrial base, and transportation system gave it greater staying power.',
-        explanation: 'The Union could replace losses, produce supplies, and sustain long campaigns more effectively than the Confederacy.',
+        explanation: 'Over a long war, the Union\'s industrial capacity, railroad network, and ability to mobilize large armies proved decisive advantages.',
         standard: 'SS.912.A.2.2'
       },
       {
         id: '1-EOC-Q8',
         text: 'What early strength gave the Confederacy hope despite Union advantages?',
-        choices: ['It expected strong military leadership and believed defensive war on home ground could be effective.', 'It expected strong military leadership only after it captured Washington, D.C., in the first months.', 'It expected strong military leadership mainly because it had more industry and railroads than the North.', 'It expected strong military leadership while planning to avoid defending southern territory at all.'],
+        choices: [
+          'It expected strong military leadership and believed defensive war on home ground could be effective.',
+          'Confederate states had far more experienced soldiers because of earlier conflicts with Mexico and Native nations.',
+          'Britain had secretly promised military support if the Confederacy could win two major battles.',
+          'The South\'s cotton economy gave it enormous international credit to purchase weapons from Europe.'
+        ],
         correctAnswer: 'It expected strong military leadership and believed defensive war on home ground could be effective.',
-        explanation: 'Confederate hopes rested in part on generals, morale, and the challenge of conquering southern territory.',
+        explanation: 'The Confederacy hoped that officers like Lee and Jackson could use defensive tactics and southern terrain to wear down northern will to fight.',
         standard: 'SS.912.A.2.2'
       },
       {
         id: '1-EOC-Q9',
         text: 'How did the Emancipation Proclamation reshape the Union cause?',
-        choices: ['It linked Union victory to the destruction of slavery and gave the war a stronger moral purpose.', 'It linked Union victory to the destruction of slavery only after the Thirteenth Amendment had passed first.', 'It linked Union victory to the destruction of slavery mainly by freeing people in every loyal border state immediately.', 'It linked Union victory to the destruction of slavery while reducing the importance of international opinion.'],
+        choices: [
+          'It linked Union victory to the destruction of slavery and gave the war a stronger moral purpose.',
+          'The proclamation immediately freed all enslaved people throughout the United States.',
+          'It was primarily a military tactic to cripple southern agriculture by removing its labor force.',
+          'The proclamation had little effect because most northerners were indifferent to ending slavery.'
+        ],
         correctAnswer: 'It linked Union victory to the destruction of slavery and gave the war a stronger moral purpose.',
-        explanation: 'The proclamation turned emancipation into a central war aim and changed the conflict’s meaning.',
+        explanation: 'By making emancipation a Union war aim, Lincoln transformed the conflict into a fight for human freedom and made it politically impossible for Britain to support the Confederacy.',
         standard: 'SS.912.A.2.3'
       },
       {
         id: '1-EOC-Q10',
         text: 'Why were Gettysburg and Vicksburg so important in 1863?',
-        choices: ['They damaged Confederate momentum and improved Union control in both the East and the West.', 'They damaged Confederate momentum only after the Confederacy had already accepted emancipation peacefully.', 'They damaged Confederate momentum mainly by restoring southern dominance of the Mississippi River.', 'They damaged Confederate momentum while persuading Britain and France to recognize Confederate independence.'],
+        choices: [
+          'They damaged Confederate momentum and improved Union control in both the East and the West.',
+          'Both battles were Union defeats that showed Lincoln he needed to negotiate a peace settlement.',
+          'Gettysburg and Vicksburg convinced France and Britain to formally recognize the Confederacy.',
+          'Together they produced the highest casualty totals of the war, exhausting both armies completely.'
+        ],
         correctAnswer: 'They damaged Confederate momentum and improved Union control in both the East and the West.',
-        explanation: 'Together, these battles marked a major shift in the balance of the war.',
+        explanation: 'Gettysburg stopped Lee\'s northern invasion and Vicksburg gave the Union control of the Mississippi River, together marking a decisive shift in the war\'s momentum.',
         standard: 'SS.912.A.2.2 · SS.912.A.2.3'
       },
       {
         id: '1-EOC-Q11',
         text: 'Why was the participation of Black soldiers important during the Civil War?',
-        choices: ['It strengthened Union forces at a critical moment and powerfully demonstrated that African Americans were willing to fight and die to claim their own freedom.', 'It was decisive primarily because it compelled the Confederate government to arm its own enslaved population in response, fundamentally destabilizing the southern social and economic order.', 'It helped Lincoln secure victory in the 1864 presidential election by demonstrating to northern voters that the war enjoyed broad support across racial and regional lines.', 'It gave Union commanders access to detailed geographic and logistical knowledge of the southern interior that proved critical to planning several of the war\'s most decisive campaigns.'],
+        choices: [
+          'It strengthened Union forces at a critical moment and powerfully demonstrated that African Americans were willing to fight and die to claim their own freedom.',
+          'Black soldiers served primarily as support troops and rarely saw direct combat during the war.',
+          'Their participation was mainly symbolic — Lincoln used it to embarrass the Confederacy internationally.',
+          'Black soldiers were critical mainly in the western theater and had little impact on major eastern campaigns.'
+        ],
         correctAnswer: 'It strengthened Union forces at a critical moment and powerfully demonstrated that African Americans were willing to fight and die to claim their own freedom.',
-        explanation: 'Black military service mattered both practically and symbolically in the fight over slavery and citizenship.',
+        explanation: 'The nearly 180,000 Black men who served in the Union army provided essential military strength and made the strongest possible argument for Black citizenship and freedom.',
         standard: 'SS.912.A.2.3'
       },
       {
         id: '1-EOC-Q12',
         text: 'What best explains why the Union ultimately won the Civil War?',
-        choices: ['It combined superior resources with effective strategy, sustained leadership, and a broader war purpose.', 'It combined superior resources only after the Confederacy willingly gave up Richmond without resistance.', 'It combined superior resources mainly because the South had no experienced officers or defensive advantages.', 'It combined superior resources while making emancipation and military strategy mostly unimportant.'],
+        choices: [
+          'It combined superior resources with effective strategy, sustained leadership, and a broader war purpose.',
+          'The Confederacy\'s decision to invade the North repeatedly cost them the men and supplies needed to defend their own territory.',
+          'Union victory was mainly a result of European powers refusing to sell weapons to the Confederacy.',
+          'The South lost primarily because most Confederate soldiers deserted after the Emancipation Proclamation.'
+        ],
         correctAnswer: 'It combined superior resources with effective strategy, sustained leadership, and a broader war purpose.',
-        explanation: 'Victory came from multiple strengths working together rather than from one single battle or policy.',
+        explanation: 'Union victory came from the combination of greater industrial capacity, able commanders like Grant and Sherman, and the moral clarity that emancipation gave the Union cause.',
         standard: 'SS.912.A.2.2 · SS.912.A.2.3'
       },
       {
         id: '1-EOC-Q13',
         text: 'Why was the Thirteenth Amendment a foundational Reconstruction change?',
-        choices: ['It ended slavery in national law and made wartime emancipation permanent after the conflict.', 'It ended slavery in national law only after former Confederate states had restored equal rights voluntarily.', 'It ended slavery in national law mainly by preserving forced labor under all state legal systems.', 'It ended slavery in national law while leaving the status of freedom completely undefined.'],
+        choices: [
+          'It ended slavery in national law and made wartime emancipation permanent after the conflict.',
+          'The amendment gave Black men the right to vote and required southern states to hold fair elections.',
+          'It established the Freedmen\'s Bureau and authorized federal oversight of southern labor contracts.',
+          'The Thirteenth Amendment redefined citizenship to include all persons born on American soil.'
+        ],
         correctAnswer: 'It ended slavery in national law and made wartime emancipation permanent after the conflict.',
-        explanation: 'The amendment formally abolished slavery and closed the legal path for its return.',
+        explanation: 'Because the Emancipation Proclamation was a wartime order, the Thirteenth Amendment was necessary to constitutionally abolish slavery forever throughout the entire country.',
         standard: 'SS.912.A.2.4'
       },
       {
         id: '1-EOC-Q14',
         text: 'Why is the Fourteenth Amendment considered one of the most important changes of Reconstruction?',
-        choices: ['It expanded citizenship and made equal protection a major constitutional principle for the nation.', 'It expanded citizenship only after all southern states had fully accepted interracial democracy in practice.', 'It expanded citizenship mainly by allowing states to define rights without federal constitutional limits.', 'It expanded citizenship while excluding formerly enslaved people from national legal protection.'],
+        choices: [
+          'It expanded citizenship and made equal protection a major constitutional principle for the nation.',
+          'The amendment abolished slavery and gave Congress new power to enforce civil rights nationally.',
+          'It guaranteed Black men the right to vote by prohibiting racial discrimination at the polls.',
+          'The Fourteenth Amendment created the Freedmen\'s Bureau and funded public education in the South.'
+        ],
         correctAnswer: 'It expanded citizenship and made equal protection a major constitutional principle for the nation.',
-        explanation: 'The Fourteenth Amendment permanently reshaped the relationship between citizens, states, and the federal government.',
+        explanation: 'The Fourteenth Amendment overturned Dred Scott, established birthright citizenship, and created the constitutional basis for civil rights law that would be used for generations.',
         standard: 'SS.912.A.2.5'
       },
       {
         id: '1-EOC-Q15',
         text: 'What right was the Fifteenth Amendment intended to protect?',
-        choices: ['It was meant to protect voting rights from racial discrimination against Black men.', 'It was meant to protect voting rights only after intimidation and violent suppression had already ended.', 'It was meant to protect voting rights mainly by granting women nationwide suffrage during Reconstruction.', 'It was meant to protect voting rights while allowing states to bar Black officeholding freely.'],
+        choices: [
+          'It was meant to protect voting rights from racial discrimination against Black men.',
+          'The amendment protected Black Americans\' right to hold any state or federal office.',
+          'It guaranteed equal pay for Black workers employed on government-funded projects.',
+          'The Fifteenth Amendment protected freedpeople from being re-enslaved under state labor laws.'
+        ],
         correctAnswer: 'It was meant to protect voting rights from racial discrimination against Black men.',
-        explanation: 'The amendment sought to secure political participation, even though later southern resistance undercut that goal.',
+        explanation: 'The Fifteenth Amendment specifically prohibited denying the vote based on race, color, or previous condition of servitude, though many states found ways to circumvent it.',
         standard: 'SS.912.A.2.5'
       },
       {
         id: '1-EOC-Q16',
-        text: 'What did the Freedmen’s Bureau try to accomplish in the South after the war?',
-        choices: ['It worked to support freedpeople through education, contracts, relief, and legal assistance.', 'It worked to support freedpeople only after Reconstruction had ended and federal policy retreated.', 'It worked to support freedpeople mainly by returning them to plantation labor without negotiation.', 'It worked to support freedpeople while avoiding schools, courts, and labor disputes entirely.'],
+        text: 'What did the Freedmen\'s Bureau try to accomplish in the South after the war?',
+        choices: [
+          'It worked to support freedpeople through education, contracts, relief, and legal assistance.',
+          'The bureau\'s main function was redistributing confiscated Confederate land to formerly enslaved people.',
+          'It focused primarily on disarming former Confederate soldiers and monitoring potential violence.',
+          'The Freedmen\'s Bureau was an employment agency that placed freedpeople in northern factory jobs.'
+        ],
         correctAnswer: 'It worked to support freedpeople through education, contracts, relief, and legal assistance.',
-        explanation: 'The bureau was a major federal effort to help former slaves and war refugees build new lives.',
+        explanation: 'The Freedmen\'s Bureau established schools, arbitrated labor disputes, provided food and supplies, and gave freedpeople a place to seek legal protection in the chaotic postwar South.',
         standard: 'SS.912.A.2.4'
       },
       {
         id: '1-EOC-Q17',
         text: 'Why did Black Codes alarm congressional Republicans during Reconstruction?',
-        choices: ['They showed that southern governments were trying to preserve white control and limit real freedom.', 'They showed that southern governments were trying to preserve white control only after equal rights had fully taken hold.', 'They showed that southern governments were trying to preserve white control mainly by expanding Black voting rights.', 'They showed that southern governments were trying to preserve white control while rejecting labor contracts for whites.'],
+        choices: [
+          'They showed that southern governments were trying to preserve white control and limit real freedom.',
+          'The codes alarmed Republicans mainly because they imposed harsh taxes on northern businesses in the South.',
+          'Congress was concerned the codes would encourage freed people to migrate north in large numbers.',
+          'Republican leaders feared the codes violated Confederate surrender terms and could restart the war.'
+        ],
         correctAnswer: 'They showed that southern governments were trying to preserve white control and limit real freedom.',
-        explanation: 'Black Codes revealed that emancipation alone did not guarantee civil equality or independence.',
+        explanation: 'Black Codes revealed that many southern states intended to recreate slavery in all but name, convincing Congress to take a harder line on Reconstruction.',
         standard: 'SS.912.A.2.4 · SS.912.A.2.5'
       },
       {
         id: '1-EOC-Q18',
         text: 'How did white supremacist violence affect Reconstruction?',
-        choices: ['It intimidated Black voters and weakened federal efforts to create a more equal southern order.', 'It intimidated Black voters only after the federal government had permanently secured Reconstruction’s gains.', 'It intimidated Black voters mainly because Congress had banned all enforcement laws against terror.', 'It intimidated Black voters while helping expand interracial democracy across the former Confederacy.'],
+        choices: [
+          'It intimidated Black voters and weakened federal efforts to create a more equal southern order.',
+          'The violence mainly caused northern outrage that strengthened federal commitment to Reconstruction.',
+          'White supremacist groups were quickly suppressed by federal troops and had little lasting impact.',
+          'Klan violence was directed mainly at northern business interests rather than Black political participation.'
+        ],
         correctAnswer: 'It intimidated Black voters and weakened federal efforts to create a more equal southern order.',
-        explanation: 'Violence and intimidation were major reasons Reconstruction reforms became so difficult to sustain.',
+        explanation: 'Organized terror against Black voters, officeholders, and community leaders was central to "Redeemer" Democrats\' strategy to overthrow Reconstruction state governments.',
         standard: 'SS.912.A.2.5 · SS.912.A.2.6'
       },
       {
         id: '1-EOC-Q19',
         text: 'What was one major consequence of the end of Reconstruction in 1877?',
-        choices: ['Federal protection for Black rights declined, and white southern Democrats regained greater control.', 'Federal protection for Black rights declined only after southern states had guaranteed equal voting access.', 'Federal protection for Black rights declined mainly because the Reconstruction amendments had been repealed.', 'Federal protection for Black rights declined while land reform for freedpeople expanded across the South.'],
+        choices: [
+          'Federal protection for Black rights declined, and white southern Democrats regained greater control.',
+          'Most southern states immediately passed constitutional amendments disenfranchising Black voters.',
+          'The Freedmen\'s Bureau was replaced by a stronger federal agency with more resources and authority.',
+          'The end of Reconstruction caused a mass migration of freedpeople to northern and western cities.'
+        ],
         correctAnswer: 'Federal protection for Black rights declined, and white southern Democrats regained greater control.',
-        explanation: 'When Reconstruction ended, many of its political gains became more vulnerable to reversal and suppression.',
+        explanation: 'The removal of federal troops as part of the Compromise of 1877 left southern Black communities without protection and enabled the systematic dismantling of Reconstruction gains.',
         standard: 'SS.912.A.2.6'
       },
       {
         id: '1-EOC-Q20',
         text: 'Which statement best ties together the full Civil War and Reconstruction unit?',
-        choices: ['The Civil War ended slavery and preserved the Union, but Reconstruction showed how difficult it was to turn legal freedom into real equality.', 'The Civil War resolved every major constitutional question about federal power and slavery, leaving Reconstruction as a largely peaceful process.', 'Reconstruction successfully transformed the South by ensuring that formerly enslaved people gained full political and economic equality by 1877.', 'The Civil War and Reconstruction together eliminated sectional tensions so completely that the nation entered the Gilded Age without significant racial conflict.'],
+        choices: [
+          'The Civil War ended slavery and preserved the Union, but Reconstruction showed how difficult it was to turn legal freedom into real equality.',
+          'The Civil War and Reconstruction together successfully created a racially equal society that lasted through the twentieth century.',
+          'Reconstruction failed completely because it tried to change southern society too rapidly without enough popular support.',
+          'The era proved that military victory is always enough to secure lasting social and political change in a democracy.'
+        ],
         correctAnswer: 'The Civil War ended slavery and preserved the Union, but Reconstruction showed how difficult it was to turn legal freedom into real equality.',
-        explanation: 'The era transformed the nation, yet it also showed that legal change and lived equality were not the same thing.',
+        explanation: 'The unit\'s central lesson is that constitutional change — abolition, citizenship, voting rights — did not automatically translate into equal status, as fierce resistance limited how fully those gains were realized.',
         standard: 'SS.912.A.2.1 · SS.912.A.2.2 · SS.912.A.2.3 · SS.912.A.2.4 · SS.912.A.2.5 · SS.912.A.2.6'
       },
     ]
