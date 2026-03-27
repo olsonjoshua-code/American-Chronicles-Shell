@@ -551,15 +551,28 @@ body::before{content:'';position:fixed;inset:0;
         </div>
       </div>
 
-      <!-- midterm checkpoint -->
-      <div id="midterm-card" onclick="openPreview('eoc_midterm')" style="margin-top:14px;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(40,80,160,.18) 0%,rgba(20,16,13,.95) 60%);border:1.5px solid var(--blue2);padding:10px 16px;display:flex;align-items:center;gap:12px;transition:all .2s" onmouseenter="this.style.boxShadow='0 0 30px rgba(72,120,208,.35)';this.style.borderColor='#6aa0ff'" onmouseleave="this.style.boxShadow='none';this.style.borderColor='var(--blue2)'">
-        <div style="font-size:22px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(72,120,208,.5))">📋</div>
-        <div style="flex:1;min-width:0">
-          <div style="font-family:var(--bebas);font-size:9px;color:var(--blue2);letter-spacing:3px">MIDTERM CHECKPOINT</div>
-          <div style="font-family:var(--playfair);font-size:13px;color:var(--cream)">Midterm &amp; EOC Practice</div>
+      <!-- midterm & eoc checkpoint cards -->
+      <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <!-- Midterm Checkpoint -->
+        <div id="midterm-card" onclick="openPreview('eoc_midterm')" style="cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(40,80,160,.18) 0%,rgba(20,16,13,.95) 60%);border:1.5px solid var(--blue2);padding:10px 14px;display:flex;align-items:center;gap:10px;transition:all .2s" onmouseenter="this.style.boxShadow='0 0 30px rgba(72,120,208,.35)';this.style.borderColor='#6aa0ff'" onmouseleave="this.style.boxShadow='none';this.style.borderColor='var(--blue2)'">
+          <div style="font-size:20px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(72,120,208,.5))">📋</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-family:var(--bebas);font-size:9px;color:var(--blue2);letter-spacing:3px">MIDTERM CHECKPOINT</div>
+            <div style="font-family:var(--playfair);font-size:12px;color:var(--cream)">Midterm Practice</div>
+          </div>
+          <span id="midterm-card-status" class="unit-status us-play" style="flex-shrink:0;font-size:8px;animation:glowPulse 2.5s infinite">▶ Play Now</span>
+          <div style="position:absolute;top:0;right:0;width:80px;height:100%;background:linear-gradient(90deg,transparent,rgba(72,120,208,.05));pointer-events:none"></div>
         </div>
-        <span id="midterm-card-status" class="unit-status us-play" style="flex-shrink:0;font-size:8px;animation:glowPulse 2.5s infinite">▶ Play Now</span>
-        <div style="position:absolute;top:0;right:0;width:120px;height:100%;background:linear-gradient(90deg,transparent,rgba(72,120,208,.05));pointer-events:none"></div>
+        <!-- EOC Practice -->
+        <div id="eoc-practice-card" onclick="openPreview('eoc_practice')" style="cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(160,40,40,.18) 0%,rgba(20,16,13,.95) 60%);border:1.5px solid #d06040;padding:10px 14px;display:flex;align-items:center;gap:10px;transition:all .2s" onmouseenter="this.style.boxShadow='0 0 30px rgba(208,96,64,.35)';this.style.borderColor='#ff8060'" onmouseleave="this.style.boxShadow='none';this.style.borderColor='#d06040'">
+          <div style="font-size:20px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(208,96,64,.5))">📝</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-family:var(--bebas);font-size:9px;color:#d06040;letter-spacing:3px">EOC PRACTICE TEST</div>
+            <div style="font-family:var(--playfair);font-size:12px;color:var(--cream)">Full EOC Practice</div>
+          </div>
+          <span id="eoc-practice-card-status" class="unit-status us-play" style="flex-shrink:0;font-size:8px;animation:glowPulse 2.5s infinite">▶ Play Now</span>
+          <div style="position:absolute;top:0;right:0;width:80px;height:100%;background:linear-gradient(90deg,transparent,rgba(208,96,64,.05));pointer-events:none"></div>
+        </div>
       </div>
     </div>
 
@@ -1387,6 +1400,25 @@ function eraTrophyScene(unitId, c, tier){
       <!-- star / seal -->
       <polygon points="50,62 52,68 58,68 53,72 55,78 50,74 45,78 47,72 42,68 48,68" fill="${col}" opacity=".3"/>
       <text x="50" y="89" font-family="'Bebas Neue',serif" font-size="9" fill="${col}" opacity=".45" text-anchor="middle" letter-spacing="2">EOC REVIEW</text>`,
+    eoc_practice:`
+      <rect width="100" height="90" fill="${col2}18"/>
+      <!-- pencil / test paper -->
+      <g opacity="${g ? .45 : .7}" transform="translate(22,6)">
+        <rect x="4" y="4" width="38" height="50" rx="2" fill="${col}" opacity=".15" stroke="${col}" stroke-width="1.2"/>
+        <rect x="4" y="4" width="38" height="9" rx="2" fill="${col}" opacity=".3"/>
+        <!-- answer bubbles -->
+        <circle cx="13" cy="22" r="2.5" fill="${col}" opacity=".5"/>
+        <line x1="18" y1="22" x2="36" y2="22" stroke="${col}" stroke-width=".9" opacity=".4"/>
+        <circle cx="13" cy="30" r="2.5" fill="none" stroke="${col}" stroke-width="1" opacity=".4"/>
+        <line x1="18" y1="30" x2="36" y2="30" stroke="${col}" stroke-width=".9" opacity=".35"/>
+        <circle cx="13" cy="38" r="2.5" fill="none" stroke="${col}" stroke-width="1" opacity=".4"/>
+        <line x1="18" y1="38" x2="36" y2="38" stroke="${col}" stroke-width=".9" opacity=".35"/>
+        <circle cx="13" cy="46" r="2.5" fill="${col}" opacity=".5"/>
+        <line x1="18" y1="46" x2="36" y2="46" stroke="${col}" stroke-width=".9" opacity=".4"/>
+      </g>
+      <!-- score star -->
+      <polygon points="50,60 52,66 58,66 53,70 55,76 50,72 45,76 47,70 42,66 48,66" fill="${col}" opacity=".35"/>
+      <text x="50" y="89" font-family="'Bebas Neue',serif" font-size="9" fill="${col}" opacity=".45" text-anchor="middle" letter-spacing="2">EOC PRACTICE</text>`,
     };
   return scenes[unitId]||scenes.unit1;
 }
@@ -1411,7 +1443,8 @@ const UNIT_DATA=[
   {id:'theme_economy', num:'Theme: Economy',  title:'Engines of Change',   years:'1861–Present',icon:'⚙️',eraColor:'#80c880',url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/theme-economy/',   desc:'Track how economic systems, labor, and industry have driven and disrupted American life.',topics:['Industrialization','Labor movement','New Deal','Postwar boom','Globalization'],themes:['economy'],changed:'The economy transformed from agrarian to industrial to postindustrial.',continued:'Persistent inequality alongside overall growth.',emerged:'Who benefits when the economy grows — and who gets left behind?'},
   {id:'theme_conflict',num:'Theme: Conflict', title:'Conflict & Change',   years:'1861–Present',icon:'⚔️',eraColor:'#e07070',url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/theme-conflict/',      desc:'Examine how wars, reform movements, and upheaval have shaped the nation.',topics:['Civil War','WWI & WWII','Cold War','Civil Rights struggle','Vietnam & beyond'],themes:['conflict'],changed:"Each major conflict redefined America's role at home and abroad.",continued:'Violence and resistance as engines of change.',emerged:'Can lasting change come without conflict?'},
   {id:'theme_identity',num:'Theme: Identity', title:'We the People',       years:'1861–Present',icon:'🌎',eraColor:'#b890d8',url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/theme-identity/',        desc:'Explore how American identity has been defined, contested, and reimagined across eras.',topics:['Immigration','Nativism','Cultural movements','Pluralism','National mythology'],themes:['identity'],changed:'The definition of “American” has been continuously renegotiated.',continued:'Tension between e pluribus unum and exclusion.',emerged:'Who gets to be American — and who decides?'},
-  {id:'eoc_midterm',  num:'Midterm',         title:'Midterm Checkpoint',    years:'1861–1929',icon:'📋',eraColor:'#4878d0',url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/midterm-checkpoint/',           desc:'A cumulative Semester 1 checkpoint covering Civil War through the Roaring Twenties across 6 progressive sections.',topics:['All eras','All themes','Document analysis','Causation','Continuity & change'],themes:['power','freedom','economy','conflict','identity'],changed:'Your understanding of U.S. history — tested across the full arc.',continued:'The recurring questions that define the American story.',emerged:'How do all the pieces connect?'},
+  {id:'eoc_midterm',  num:'Midterm',         title:'Midterm Checkpoint',    years:'1861–1929',icon:'📋',eraColor:'#4878d0',url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/midterm-checkpoint/',           desc:'A cumulative Semester 1 checkpoint covering Civil War through the Roaring Twenties across 6 progressive sections.',topics:['All eras','All themes','Document analysis','Causation','Continuity & change'],themes:['power','freedom','economy','conflict','identity'],changed:'Your understanding of U.S. history — tested across the full arc.',continued:'The recurring questions that define the American story.',emerged:'How do all the pieces connect?'},,
+  {id:'eoc_practice', num:'EOC Practice', title:'EOC Practice Test', years:'1861–Present', icon:'📝', eraColor:'#d06040', url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/practice-eoc/eoc_practice.html', desc:'A full 50-question EOC practice test covering all eras from Reconstruction to the present. Earn your estimated scale score and achievement level 1–5.', topics:['All eras','All themes','Document analysis','Charts & cartoons','Cause & effect','Continuity & change'], themes:['power','freedom','economy','conflict','identity'], changed:'Your readiness for the Florida U.S. History EOC.', continued:'The big questions across 150 years of American history.', emerged:'How prepared are you for the real thing?'},
   {id:'unit_ac_rpg', num:'Campaign', title:'American Chronicles RPG', years:'1861–Present', icon:'🗃️', eraColor:'#c8a020', url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/rpg/', desc:'The ultimate history campaign. Battle through 18 chapters, theme operations, and the EOC Final Challenge across the full sweep of U.S. history. Earn your place as a Master Historian.', topics:['Civil War','Reconstruction','Industrialization','Progressive Era','WWI & WWII','Cold War','Civil Rights','Modern America','All 5 Themes','EOC Final Challenge'], themes:['power','freedom','economy','conflict','identity'], changed:'The entire arc of American history from 1861 to the present — mastered through combat.', continued:'The big questions that run through every era of American history.', emerged:'Can you master the full sweep of U.S. history and earn the rank of Master Historian?', isCampaign:true, unlockGoldTrophies:3},
 ];
 const ERAS=[
@@ -1419,6 +1452,7 @@ const ERAS=[
   {name:'Gilded Age & Progressive',years:'1865–1920',units:['unit2a','unit2b'],color:'#7a5a10'},
   {name:'Empire & WWI',years:'1898–1920',units:['unit3a','unit3b'],color:'#1a4a7a'},
   {name:'Boom & Bust',years:'1920–1933',units:['unit4a','eoc_midterm'],color:'#5a3a0a'},
+  {name:'EOC Prep',years:'1861–Present',units:['eoc_practice'],color:'#7a2a18'},
   {name:'New Deal & WWII',years:'1933–1945',units:['unit4b','unit5a'],color:'#2a3a1a'},
   {name:'Cold War & Civil Rights',years:'1945–1968',units:['unit5b','unit6','unit7a'],color:'#7a2010'},
   {name:'Vietnam & Watergate',years:'1965–1975',units:['unit7b'],color:'#1a2a1a'},
@@ -1846,7 +1880,7 @@ function _returnFromGame(){
   } catch(e) {}
   return false;
 }
-function enterShell(){document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name){syncFromSupabase().then(()=>{if(!_returnFromGame())openWelcome();});}else{if(!_returnFromGame())setTimeout(()=>openWelcome(),600);}}}else{if(!S.isGuest&&S.name)syncFromSupabase();}}
+function enterShell(){document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name){syncFromSupabase().then(()=>{if(!_returnFromGame())openWelcome();});}else{if(!_returnFromGame())setTimeout(()=>openWelcome(),600);}}}else{if(!S.isGuest&&S.name)syncFromSupabase();}}
 
 // ── SETUP ─────────────────────────────────────────────
 const STARTERS=CHARS.filter(c=>c.unlockMethod==='free');
@@ -1903,7 +1937,7 @@ async function syncFromSupabase(){
   let changed=false;
   rows.forEach(r=>{if(!S.unitsCompleted.includes(r.unit_id)&&r.best_accuracy>=60){S.unitsCompleted.push(r.unit_id);changed=true;}});
   awardBadges();checkUnlocks();
-  if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();
+  if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();
   // Refresh new views if they are currently open
   const activeView=document.querySelector('.view.active');
   if(activeView&&activeView.id==='view-archive')renderArchive();
@@ -1917,7 +1951,7 @@ async function syncFromSupabase(){
 }
 
 function awardBadges(){
-  const bmap={unit1:'unit1',unit2a:'unit2a',unit2b:'unit2b',unit3a:'unit3a',unit3b:'unit3b',unit4a:'unit4a',unit4b:'unit4b',unit5a:'unit5a',unit5b:'unit5b',unit6:'unit6',unit7a:'unit7a',unit7b:'unit7b',unit8:'unit8',theme_power:'theme_power',theme_freedom:'theme_freedom',theme_economy:'theme_economy',theme_conflict:'theme_conflict',theme_identity:'theme_identity',eoc_midterm:'eoc_midterm'};
+  const bmap={unit1:'unit1',unit2a:'unit2a',unit2b:'unit2b',unit3a:'unit3a',unit3b:'unit3b',unit4a:'unit4a',unit4b:'unit4b',unit5a:'unit5a',unit5b:'unit5b',unit6:'unit6',unit7a:'unit7a',unit7b:'unit7b',unit8:'unit8',theme_power:'theme_power',theme_freedom:'theme_freedom',theme_economy:'theme_economy',theme_conflict:'theme_conflict',theme_identity:'theme_identity',eoc_midterm:'eoc_midterm',eoc_practice:'eoc_practice'};
   S.unitsCompleted.forEach(uid=>{const b=bmap[uid];if(b&&!S.badgesEarned.includes(b))S.badgesEarned.push(b);});
   if(S.unitsCompleted.length>=1&&!S.badgesEarned.includes('first_unit'))S.badgesEarned.push('first_unit');
   if(S.unitsCompleted.length>=6&&!S.badgesEarned.includes('half'))S.badgesEarned.push('half');
@@ -2007,6 +2041,26 @@ function refreshMidtermCard(){
   }
 }
 
+function refreshEOCPracticeCard(){
+  const el=document.getElementById('eoc-practice-card');
+  const st=document.getElementById('eoc-practice-card-status');
+  if(!el||!st)return;
+  const done=S.unitsCompleted.includes('eoc_practice');
+  if(done){
+    st.className='unit-status us-done';
+    st.style.animation='none';
+    st.textContent='\u2713 Completed';
+    el.style.borderColor='var(--green2)';
+    el.style.background='linear-gradient(135deg,rgba(42,122,58,.18) 0%,rgba(20,16,13,.95) 60%)';
+  } else {
+    st.className='unit-status us-play';
+    st.style.animation='glowPulse 2.5s infinite';
+    st.textContent='\u25b6 Play Now';
+    el.style.borderColor='#d06040';
+    el.style.background='linear-gradient(135deg,rgba(160,40,40,.18) 0%,rgba(20,16,13,.95) 60%)';
+  }
+}
+
 
 function renderTimeline(){
   const inner=document.getElementById('tl-inner');if(!inner)return;
@@ -2039,7 +2093,7 @@ function renderTimeline(){
   if(ebi){ebi.innerHTML='';ebi.style.width=(x+PAD)+'px';const sp=document.createElement('div');sp.style.cssText=`width:${PAD}px;flex-shrink:0`;ebi.appendChild(sp);
     eraSegs.forEach(s=>{const el=document.createElement('div');el.className='era-seg';el.style.cssText=`width:${s.endX-s.startX+20}px;background:${s.color}ee;border-left:3px solid ${s.color}`;el.textContent=s.name.toUpperCase()+' · '+s.years;ebi.appendChild(el);});}
   initDrag();initMinimap(x+PAD);
-  refreshMidtermCard();
+  refreshMidtermCard();refreshEOCPracticeCard();
 
   renderCampaignRPG();
   renderHubRPGMini();
@@ -2197,7 +2251,7 @@ function openPreview(uid){
   if(themesRow)themesRow.style.display=isTheme?'none':'';
   if(mapRow)mapRow.style.display=isTheme?'none':'';
   if(!isTheme){document.getElementById('pv-themes').innerHTML=u.themes.slice(0,4).map(t=>`<span class="theme-chip ${THEME_CLASS[t]}">${THEME_MAP[t]||t}</span>`).join('');document.getElementById('pv-map').innerHTML=buildMiniMap(u);}
-  buildLaunchArea(u, u.id==='eoc_midterm' ? 'avail' : st);
+  buildLaunchArea(u, (u.id==='eoc_midterm'||u.id==='eoc_practice') ? 'avail' : st);
   document.getElementById('preview-panel').classList.add('open');document.getElementById('pv-backdrop').style.display='block';
   document.querySelectorAll('.unit-card').forEach(c=>c.classList.remove('selected'));
   document.querySelector(`[data-uid="${uid}"]`)?.classList.add('selected');
@@ -2227,6 +2281,7 @@ const DECK_MAP={
   'theme_identity' :'theme_american_identity',          // We the People
   // Review decks
   'eoc_midterm'    :'midterm_review',                   // Midterm Checkpoint
+  'eoc_practice'   :'eoc_review',                      // EOC Practice Test
 };
 const FC_BASE='https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/flashcards/';
 
@@ -2425,6 +2480,7 @@ const UNIT_REWARDS={
   theme_conflict: {badges:[{id:'theme_conflict_complete',label:'Conflict Theme',icon:'⚔️'}],cards:[]},
   theme_identity: {badges:[{id:'theme_identity_complete',label:'Identity Theme',icon:'🌎'}],cards:[]},
   eoc_midterm:    {badges:[{id:'midterm_complete',label:'Midterm Checkpoint',icon:'📋'}],cards:[]},
+  eoc_practice:   {badges:[{id:'eoc_practice_complete',label:'EOC Practice Test',icon:'📝'}],cards:[]},
 };
 
 function renderArchive(){
@@ -2598,7 +2654,7 @@ function renderArchive(){
       if(S.setupDone){
         // Refresh data from Supabase and re-render — no title screen
         if(S.name&&!S.isGuest)syncFromSupabase();
-        renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();
+        renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();
         renderCampaignRPG();renderHubRPGMini();
         updateHUD();
       }
@@ -2646,7 +2702,7 @@ function renderArchive(){
           awardBadges();
           saveS();
           updateHUD();
-          renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();
+          renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();
         }
       }catch(err){}
     }
