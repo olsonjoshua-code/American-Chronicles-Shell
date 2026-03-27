@@ -878,7 +878,7 @@ async function saveProfileToDB(){
     unit_badges:     JSON.stringify(S.unitBadges||{}),
     unit_cards:      JSON.stringify(S.unitCards||{}),
     vocab_passed:    JSON.stringify(S.vocabPassed||{}),
-    vocab_best_score:JSON.stringify(S.vocabBestScore||{}),
+    vocab_best_score:JSON.stringify({...(S.vocabBestScore||{}), _eoc_pct: S.eocBest||null, _eoc_scale: S.eocBestScale||null}),
     flashcards_studied:JSON.stringify(S.flashcardsStudied||{}),
     updated_at:    new Date().toISOString()
   };
@@ -909,7 +909,13 @@ function applyProfileFromDB(profile){
   try { S.unitBadges        = JSON.parse(profile.unit_badges||'{}'); }      catch(e){}
   try { S.unitCards         = JSON.parse(profile.unit_cards||'{}'); }       catch(e){}
   try { S.vocabPassed       = JSON.parse(profile.vocab_passed||'{}'); }     catch(e){}
-  try { S.vocabBestScore    = JSON.parse(profile.vocab_best_score||'{}'); } catch(e){}
+  try {
+    const vbs = JSON.parse(profile.vocab_best_score||'{}');
+    // strip EOC piggyback fields before storing in vocabBestScore
+    if(vbs._eoc_pct  != null){ S.eocBest      = vbs._eoc_pct;   delete vbs._eoc_pct; }
+    if(vbs._eoc_scale!= null){ S.eocBestScale = vbs._eoc_scale; delete vbs._eoc_scale; }
+    S.vocabBestScore = vbs;
+  } catch(e){}
   try { S.flashcardsStudied = JSON.parse(profile.flashcards_studied||'{}');} catch(e){}
   S.setupDone = true;
   S.isGuest   = false;
@@ -2742,18 +2748,21 @@ function buildMiniMap(u){
 //  TROPHY ROOM
 // ══════════════════════════════════════════════════════
 async function renderTrophyRoom(){
+  // Re-read eocBest from localStorage in case student just returned from EOC
+  try{
+    const fresh=localStorage.getItem(SHELL_KEY);
+    if(fresh){const f=JSON.parse(fresh);if(f.eocBest!=null)S.eocBest=f.eocBest;if(f.eocBestScale!=null)S.eocBestScale=f.eocBestScale;}
+  }catch(e){}
   const grid=document.getElementById('trophy-grid');
   grid.innerHTML=`<div style="grid-column:1/-1;padding:14px;font-family:var(--dm);font-size:10px;color:var(--text3)">Loading from Supabase…</div>`;
   if(!S.isGuest&&S.name){const rows=await sfetch(`/rest/v1/ac_results?name=eq.${encodeURIComponent(S.name)}&select=*`);if(Array.isArray(rows))_trophyData=rows;}
   const rmap={};_trophyData.forEach(r=>rmap[r.unit_id]=r);
 
-  grid.innerHTML=UNIT_DATA.filter(u=>!u.isCampaign&&!u.isCheckpoint).map((u,idx)=>{
+  const unitCards=UNIT_DATA.filter(u=>!u.isCampaign&&!u.isCheckpoint).map((u,idx)=>{
     const r=rmap[u.id];
     const tier=r?calcTier(r.best_accuracy):'empty';
     const tc=TIER_COLOR[tier],te=TIER_EMOJI[tier],tl=TIER_LABEL[tier];
     const grey=tier==='empty';
-
-    // Era trophy medallion: SVG art strip + center medallion bubble
     const eraArt=eraTrophyScene(u.id,u.eraColor,tier);
     const medalColor=grey?'var(--border)':tc;
 
@@ -2762,7 +2771,6 @@ async function renderTrophyRoom(){
         <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" width="100%" height="96">
           ${eraArt}
         </svg>
-        <!-- center medallion -->
         <div class="trophy-medallion-wrap">
           <div style="width:46px;height:46px;border-radius:50%;background:var(--bg2);border:2.5px solid ${medalColor};display:flex;align-items:center;justify-content:center;font-size:22px;${tier==='historian'?'animation:historianShimmer 3s infinite':''}">
             ${te}
@@ -2779,7 +2787,44 @@ async function renderTrophyRoom(){
         :`<div style="font-family:var(--dm);font-size:8px;color:var(--text3);font-style:italic;margin-top:4px">Play this unit to earn a trophy</div>`}
       </div>
     </div>`;
-  }).join('');
+  });
+
+  // ── EOC PRACTICE TROPHY (last card — reads from localStorage, not Supabase) ──
+  const eocPct = S.eocBest || null;
+  const eocScale = S.eocBestScale || null;
+  const eocTier = eocPct !== null ? calcTier(eocPct) : 'empty';
+  const eocTc = TIER_COLOR[eocTier], eocTe = TIER_EMOJI[eocTier], eocTl = TIER_LABEL[eocTier];
+  const eocGrey = eocTier === 'empty';
+  const eocArt = eraTrophyScene('eoc_practice', '#d06040', eocTier);
+  const eocMedalColor = eocGrey ? 'var(--border)' : eocTc;
+  const eocIdx = unitCards.length;
+  const eocCard = `<div class="trophy-card tier-${eocTier}" style="animation:floatIn .3s ease ${eocIdx*.04}s both;border-top:2px solid #d06040;">
+    <div class="trophy-era">
+      <svg viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" width="100%" height="96">
+        ${eocArt}
+      </svg>
+      <div class="trophy-medallion-wrap">
+        <div style="width:46px;height:46px;border-radius:50%;background:var(--bg2);border:2.5px solid ${eocMedalColor};display:flex;align-items:center;justify-content:center;font-size:22px;${eocTier==='historian'?'animation:historianShimmer 3s infinite':''}">
+          ${eocTe}
+        </div>
+      </div>
+      ${!eocGrey?`<div class="trophy-tier-badge" style="border-color:${eocTc};color:${eocTc}"><span style="font-size:9px;font-family:var(--bebas);letter-spacing:.5px">${eocTier.toUpperCase().substring(0,3)}</span></div>`:''}
+    </div>
+    <div class="trophy-body">
+      <div class="trophy-unit-lbl" style="color:#d06040;letter-spacing:3px">EOC PRACTICE</div>
+      <div class="trophy-unit-title">Full EOC Practice Test</div>
+      <div class="trophy-tier-name" style="color:${eocTc}">${eocTl}</div>
+      ${eocPct !== null
+        ? `<div class="trophy-stats">
+            Accuracy: <strong style="color:${eocTc}">${eocPct}%</strong>${eocScale?` &nbsp; Scale: <strong>${eocScale}</strong>`:''}
+          </div>
+          <button class="cert-btn" onclick="printEOCShellCert()">🎓 Print Certificate</button>`
+        : `<div style="font-family:var(--dm);font-size:8px;color:var(--text3);font-style:italic;margin-top:4px">Complete the EOC Practice Test to earn a trophy</div>`
+      }
+    </div>
+  </div>`;
+
+  grid.innerHTML = unitCards.join('') + eocCard;
 
   await renderLeaderboard();
 }
@@ -2895,6 +2940,66 @@ function printCert(uid){
       <div><div class="stat-val">${r.best_accuracy}%</div><div class="stat-lbl">ACCURACY</div></div>
       <div><div class="stat-val">${r.attempts||1}</div><div class="stat-lbl">ATTEMPTS</div></div>
       <div><div class="stat-val">${r.cards||0}</div><div class="stat-lbl">CARDS</div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="sigs">
+      <div><div class="sig-line"></div><div class="sig-name">${S.name}</div><div class="sig-title">STUDENT${S.period?' · PERIOD '+S.period:''}</div></div>
+      <div><div class="sig-line"></div><div class="sig-name">Joshua Olson</div><div class="sig-title">U.S. HISTORY TEACHER</div></div>
+      <div><div class="sig-line"></div><div class="sig-name">${date}</div><div class="sig-title">DATE COMPLETED</div></div>
+    </div>
+  </div>
+  <div class="np" style="text-align:center;margin-top:14px">
+    <button class="pbtn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    <button class="pbtn" onclick="window.close()" style="margin-left:9px;background:#5a4520;color:#faf7f0">✕ Close</button>
+  </div></body></html>`);w.document.close();
+}
+
+// ── EOC PRACTICE CERTIFICATE (reads from shell localStorage) ─────────────
+function printEOCShellCert(){
+  const pct=S.eocBest;const scale=S.eocBestScale;
+  if(!pct){notify('Complete the EOC Practice Test first!');return;}
+  const tier=calcTier(pct);
+  const tc=TIER_COLOR[tier].replace('var(--gold)','#ffd700').replace('var(--silver)','#c8c8d8').replace('var(--bronze)','#cd7f32').replace('var(--green2)','#38a050').replace('var(--red2)','#e04040').replace('var(--historian)','#e8d0ff').replace('var(--text3)','#584840');
+  // Achievement level from scale score
+  function eocLevel(s){if(s>=453)return[5,'Advanced'];if(s>=432)return[4,'Above Average'];if(s>=397)return[3,'Satisfactory'];if(s>=375)return[2,'Below Average'];return[1,'Inadequate'];}
+  const [lvl,lvlDesc]=scale?eocLevel(scale):[pct>=90?5:pct>=80?4:pct>=70?3:pct>=60?2:1,''];
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const w=window.open('','_blank','width=920,height=680');
+  if(!w){notify('Allow popups to print certificate.');return;}
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>EOC Certificate</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700&family=Inter:wght@400;600&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}body{background:#faf7f0;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+  .cert{width:840px;min-height:580px;background:#faf7f0;border:3px solid ${tc};padding:42px 52px;position:relative;text-align:center;box-shadow:0 0 0 8px #faf7f0,0 0 0 11px ${tc},0 0 0 15px #faf7f0,0 0 0 17px #8a6a2a}
+  .unit-icon{font-size:52px;margin:6px 0;filter:drop-shadow(0 2px 8px rgba(0,0,0,.2))}
+  .main-title{font-family:'Cinzel Decorative',serif;font-size:24px;font-weight:700;color:#1a1208;letter-spacing:.1em;margin:7px 0;line-height:1.2}
+  .divider{height:2px;background:linear-gradient(90deg,transparent,${tc},transparent);margin:13px auto;width:80%}
+  .student-name{font-family:'Cinzel Decorative',serif;font-size:32px;font-weight:700;color:#1a1208;margin:9px 0;letter-spacing:.05em}
+  .tier-badge{font-family:'Cinzel Decorative',serif;font-size:18px;color:${tc};letter-spacing:.1em;margin:9px 0}
+  .stats{display:flex;justify-content:center;gap:30px;margin:14px 0;padding:11px 18px;background:rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.1)}
+  .stat-val{font-size:20px;font-weight:700;color:#8a4820;font-family:'Cinzel Decorative',serif}
+  .stat-lbl{font-size:8px;letter-spacing:.12em;color:#8a6a2a;margin-top:2px;font-family:'Inter',sans-serif}
+  .sigs{display:flex;justify-content:space-around;margin-top:18px;padding-top:12px;border-top:1px solid rgba(0,0,0,.2)}
+  .sig-line{width:155px;height:1px;background:#8a6a2a;margin:0 auto 4px}
+  .sig-name{font-family:'Cinzel',serif;font-size:11px;color:#1a1208;font-weight:700}
+  .sig-title{font-size:8px;color:#8a6a2a;letter-spacing:.08em;font-family:'Inter',sans-serif}
+  .pbtn{margin-top:18px;padding:10px 26px;background:${tc};border:none;color:#1a1208;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.08em;cursor:pointer}
+  @media print{body{padding:0}.np{display:none!important}}</style></head><body>
+  <div class="cert">
+    <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;color:#8a6a2a;margin-bottom:5px">AMERICAN CHRONICLES · U.S. HISTORY</div>
+    <div class="unit-icon">📝</div>
+    <div class="main-title">EOC Practice Test Certificate</div>
+    <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:.15em;color:#8a6a2a;margin:4px 0">Florida U.S. History End-of-Course · 1861–Present</div>
+    <div class="divider"></div>
+    <div style="font-size:12px;letter-spacing:.15em;color:#5a4520;margin:7px 0">This certifies that</div>
+    <div class="student-name">${S.name}</div>
+    <div style="font-size:12px;color:#5a4520;margin:7px 0;line-height:1.7;font-style:italic">has completed the full 50-question EOC Practice Assessment</div>
+    <div style="font-size:34px;margin:9px 0">${TIER_EMOJI[tier]}</div>
+    <div class="tier-badge">${TIER_LABEL[tier].toUpperCase()} — ACHIEVEMENT LEVEL ${lvl}</div>
+    <div class="stats">
+      <div><div class="stat-val">${pct}%</div><div class="stat-lbl">ACCURACY</div></div>
+      ${scale?`<div><div class="stat-val">${scale}</div><div class="stat-lbl">SCALE SCORE</div></div>`:''}
+      <div><div class="stat-val">Level ${lvl}</div><div class="stat-lbl">ACHIEVEMENT</div></div>
+      <div><div class="stat-val">${lvlDesc}</div><div class="stat-lbl">RATING</div></div>
     </div>
     <div class="divider"></div>
     <div class="sigs">
