@@ -4,14 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>U.S. History EOC Practice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     * { -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none; box-sizing:border-box; margin:0; padding:0; }
-    html, body { height:100%; overflow:hidden; font-family:Arial,Helvetica,sans-serif; background:#e8e8e8; color:#111; font-size:15px; }
+    html, body { height:100%; overflow:hidden; font-family:'Crimson Text',Georgia,serif; background:#e8e8e8; color:#111; font-size:16px; }
 
     .header { background:#fff; border-bottom:2px solid #222; padding:10px 28px; display:flex; justify-content:space-between; align-items:center; flex-shrink:0; height:52px; }
-    .header-title { font-size:0.95rem; font-weight:bold; }
-    .header-sub { font-size:0.72rem; color:#666; margin-top:1px; }
-    .header-right { text-align:right; font-size:0.78rem; color:#444; }
+    .header-title { font-family:'Bebas Neue',sans-serif; font-size:1.15rem; letter-spacing:0.08em; }
+    .header-sub { font-family:'DM Sans',sans-serif; font-size:0.68rem; color:#666; margin-top:1px; letter-spacing:0.03em; }
+    .header-right { text-align:right; font-family:'DM Sans',sans-serif; font-size:0.75rem; color:#444; }
     .progress-bar-wrap { width:200px; height:5px; background:#ddd; border-radius:3px; margin-top:5px; margin-left:auto; }
     .progress-bar-fill { height:100%; background:#333; border-radius:3px; transition:width 0.3s ease; }
 
@@ -22,28 +23,25 @@
     .question-card { background:#fff; border:1px solid #bbb; height:100%; display:grid; grid-template-columns:1fr; grid-template-rows:auto 1fr auto; overflow:hidden; }
     .question-card.has-stimulus { grid-template-columns:1fr 1fr; }
 
-    .q-number-bar { grid-column:1/-1; background:#222; color:#fff; padding:7px 20px; display:flex; align-items:center; gap:12px; font-size:0.78rem; font-weight:bold; }
-    .q-num-badge { background:#fff; color:#222; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.72rem; font-weight:bold; flex-shrink:0; }
-
     .col-left { border-right:1px solid #ddd; overflow-y:auto; padding:18px 20px; display:flex; flex-direction:column; }
     .question-card:not(.has-stimulus) .col-left { display:none; }
     .col-right { display:flex; flex-direction:column; overflow:hidden; grid-column:1; }
     .question-card.has-stimulus .col-right { grid-column:2; }
     .col-right-inner { flex:1; overflow-y:auto; padding:18px 20px 10px; }
 
-    .excerpt-box { border:1px solid #aaa; background:#fafafa; font-size:0.85rem; line-height:1.65; flex:1; }
-    .excerpt-label { background:#e8e8e8; border-bottom:1px solid #aaa; padding:6px 12px; font-size:0.7rem; font-weight:bold; letter-spacing:0.05em; color:#333; text-transform:uppercase; }
-    .excerpt-body { padding:12px 14px; color:#222; white-space:pre-line; }
-    .excerpt-source { padding:5px 12px 8px; font-size:0.68rem; color:#777; font-style:italic; border-top:1px solid #ddd; }
-    .excerpt-headline .excerpt-body { font-size:1.15rem; font-weight:bold; text-align:center; padding:24px 14px; line-height:1.5; letter-spacing:0.02em; }
+    .excerpt-box { border:1px solid #aaa; background:#fafafa; font-size:0.88rem; line-height:1.7; flex:1; }
+    .excerpt-label { background:#e8e8e8; border-bottom:1px solid #aaa; padding:6px 12px; font-family:'DM Sans',sans-serif; font-size:0.65rem; font-weight:600; letter-spacing:0.08em; color:#333; text-transform:uppercase; }
+    .excerpt-body { padding:12px 14px; color:#222; white-space:pre-line; font-family:'Crimson Text',Georgia,serif; font-size:0.95rem; line-height:1.7; }
+    .excerpt-source { padding:5px 12px 8px; font-family:'DM Sans',sans-serif; font-size:0.65rem; color:#777; font-style:italic; border-top:1px solid #ddd; }
+    .excerpt-headline .excerpt-body { font-family:'Playfair Display',Georgia,serif; font-size:1.1rem; font-weight:700; text-align:center; padding:24px 14px; line-height:1.5; letter-spacing:0.02em; }
 
     .stimulus-img { width:100%; max-height:calc(100vh - 220px); object-fit:contain; display:block; border:1px solid #ccc; background:#fff; cursor:zoom-in; }
     .img-missing { padding:16px; background:#f5f5f5; border:1px dashed #ccc; font-size:0.8rem; color:#888; font-style:italic; }
     .zoom-hint { font-size:0.68rem; color:#999; margin-top:4px; font-style:italic; }
     .no-stimulus { flex:1; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:0.85rem; font-style:italic; text-align:center; padding:20px; }
 
-    .question-text { font-size:1rem; line-height:1.6; margin-bottom:14px; }
-    .hint { font-size:0.7rem; color:#999; font-style:italic; margin-bottom:12px; }
+    .question-text { font-family:'Crimson Text',Georgia,serif; font-size:1.05rem; line-height:1.65; margin-bottom:14px; }
+    .hint { font-family:'DM Sans',sans-serif; font-size:0.68rem; color:#999; font-style:italic; margin-bottom:12px; }
 
     .options { display:flex; flex-direction:column; gap:8px; }
     .option { display:flex; align-items:flex-start; gap:10px; padding:9px 12px; border:1px solid #ccc; background:#fafafa; cursor:pointer; transition:background 0.15s, border-color 0.15s; }
@@ -51,21 +49,24 @@
     .option.selected { background:#e8f0fe; border-color:#3a5fcb; }
     .option.struck { opacity:0.45; }
     .option.struck .option-text { text-decoration:line-through; color:#999; }
-    .option-bubble { width:20px; height:20px; border:2px solid #555; border-radius:50%; flex-shrink:0; margin-top:1px; display:flex; align-items:center; justify-content:center; font-size:0.68rem; font-weight:bold; color:#333; transition:all 0.15s; }
+    .option-bubble { width:20px; height:20px; border:2px solid #555; border-radius:50%; flex-shrink:0; margin-top:2px; display:flex; align-items:center; justify-content:center; font-family:'DM Sans',sans-serif; font-size:0.65rem; font-weight:600; color:#333; transition:all 0.15s; }
     .option.selected .option-bubble { background:#3a5fcb; border-color:#3a5fcb; color:#fff; }
     .option.struck .option-bubble { border-color:#bbb; color:#bbb; }
-    .option-text { font-size:0.92rem; line-height:1.5; flex:1; }
-    .strike-btn { font-size:0.62rem; color:#aaa; background:none; border:1px solid #ddd; padding:2px 6px; cursor:pointer; flex-shrink:0; margin-top:2px; font-family:Arial,sans-serif; transition:color 0.15s, border-color 0.15s; }
+    .option-text { font-family:'Crimson Text',Georgia,serif; font-size:1rem; line-height:1.5; flex:1; }
+    .strike-btn { font-family:'DM Sans',sans-serif; font-size:0.6rem; color:#aaa; background:none; border:1px solid #ddd; padding:2px 6px; cursor:pointer; flex-shrink:0; margin-top:2px; transition:color 0.15s, border-color 0.15s; letter-spacing:0.03em; }
     .strike-btn:hover { color:#c0392b; border-color:#c0392b; }
     .option.struck .strike-btn { color:#3a5fcb; border-color:#3a5fcb; }
 
     .controls { grid-column:1/-1; display:flex; justify-content:space-between; align-items:center; padding:10px 20px; border-top:1px solid #e0e0e0; background:#fafafa; flex-shrink:0; }
-    .btn-review { font-family:Arial,sans-serif; font-size:0.78rem; padding:8px 14px; border:1px solid #bbb; cursor:pointer; background:#fff; color:#555; transition:all 0.2s; }
+    .btn-review { font-family:'DM Sans',sans-serif; font-size:0.75rem; padding:8px 14px; border:1px solid #bbb; cursor:pointer; background:#fff; color:#555; transition:all 0.2s; letter-spacing:0.02em; }
     .btn-review:hover { border-color:#e6a817; color:#b07c00; }
-    .btn-review.flagged { background:#fff8e1; border-color:#e6a817; color:#b07c00; font-weight:bold; }
-    .btn-next { font-family:Arial,sans-serif; font-size:0.88rem; font-weight:bold; padding:10px 28px; border:none; cursor:pointer; background:#222; color:#fff; transition:background 0.2s; }
+    .btn-review.flagged { background:#fff8e1; border-color:#e6a817; color:#b07c00; font-weight:600; }
+    .btn-next { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.1em; padding:10px 28px; border:none; cursor:pointer; background:#222; color:#fff; transition:background 0.2s; }
     .btn-next:hover:not(:disabled) { background:#444; }
     .btn-next:disabled { background:#aaa; cursor:default; }
+
+    .q-number-bar { grid-column:1/-1; background:#222; color:#fff; padding:7px 20px; display:flex; align-items:center; gap:12px; font-family:'DM Sans',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.05em; }
+    .q-num-badge { background:#fff; color:#222; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'DM Sans',sans-serif; font-size:0.68rem; font-weight:700; flex-shrink:0; }
 
     #zoom-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.85); z-index:1000; align-items:center; justify-content:center; cursor:zoom-out; }
     #zoom-overlay.open { display:flex; }
@@ -73,54 +74,54 @@
 
     #start-screen { flex:1; display:flex; align-items:center; justify-content:center; padding:20px; }
     .start-box { background:#fff; border:1px solid #bbb; padding:44px 48px; text-align:center; max-width:600px; width:100%; }
-    .start-title { font-size:1.3rem; font-weight:bold; margin-bottom:10px; }
-    .start-sub { font-size:0.9rem; color:#555; margin-bottom:22px; line-height:1.7; }
+    .start-title { font-family:'Playfair Display',Georgia,serif; font-size:1.4rem; font-weight:700; margin-bottom:10px; }
+    .start-sub { font-family:'Crimson Text',Georgia,serif; font-size:1rem; color:#555; margin-bottom:22px; line-height:1.7; }
     .start-rules { list-style:none; text-align:left; max-width:420px; margin:0 auto 28px; display:flex; flex-direction:column; gap:9px; }
-    .start-rules li { font-size:0.86rem; color:#444; padding-left:20px; position:relative; }
+    .start-rules li { font-family:'Crimson Text',Georgia,serif; font-size:0.95rem; color:#444; padding-left:20px; position:relative; }
     .start-rules li::before { content:"•"; position:absolute; left:5px; color:#222; }
-    .start-note { font-size:0.75rem; color:#999; margin-bottom:24px; font-style:italic; }
-    .btn-start { font-family:Arial,sans-serif; font-size:0.95rem; font-weight:bold; padding:12px 40px; border:none; cursor:pointer; background:#222; color:#fff; letter-spacing:0.04em; }
+    .start-note { font-family:'DM Sans',sans-serif; font-size:0.72rem; color:#999; margin-bottom:24px; font-style:italic; }
+    .btn-start { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.1em; padding:12px 40px; border:none; cursor:pointer; background:#222; color:#fff; }
     .btn-start:hover { background:#444; }
 
     #review-screen { display:none; flex:1; overflow-y:auto; padding:28px; }
     .review-box { background:#fff; border:1px solid #bbb; padding:28px; max-width:900px; margin:0 auto; }
-    .review-title { font-size:1.1rem; font-weight:bold; margin-bottom:6px; }
-    .review-sub { font-size:0.86rem; color:#666; margin-bottom:20px; }
+    .review-title { font-family:'Playfair Display',Georgia,serif; font-size:1.2rem; font-weight:700; margin-bottom:6px; }
+    .review-sub { font-family:'Crimson Text',Georgia,serif; font-size:0.95rem; color:#666; margin-bottom:20px; }
     .review-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(48px,1fr)); gap:7px; margin-bottom:24px; }
-    .review-item { padding:7px 4px; border:1px solid #ccc; text-align:center; font-size:0.78rem; font-weight:bold; cursor:pointer; background:#fafafa; }
+    .review-item { padding:7px 4px; border:1px solid #ccc; text-align:center; font-family:'DM Sans',sans-serif; font-size:0.75rem; font-weight:600; cursor:pointer; background:#fafafa; }
     .review-item:hover { border-color:#333; background:#f0f0f0; }
     .review-item.answered { background:#e8f0fe; border-color:#3a5fcb; color:#3a5fcb; }
     .review-item.flagged { background:#fff8e1; border-color:#e6a817; color:#b07c00; }
     .review-item.flagged.answered { background:#fff3cd; border-color:#e6a817; }
-    .review-legend { display:flex; gap:18px; flex-wrap:wrap; margin-bottom:20px; font-size:0.78rem; color:#555; }
+    .review-legend { display:flex; gap:18px; flex-wrap:wrap; margin-bottom:20px; font-family:'DM Sans',sans-serif; font-size:0.72rem; color:#555; }
     .legend-dot { display:inline-block; width:12px; height:12px; border:1px solid; margin-right:4px; vertical-align:middle; }
     .legend-dot.answered { background:#e8f0fe; border-color:#3a5fcb; }
     .legend-dot.flagged { background:#fff8e1; border-color:#e6a817; }
     .legend-dot.unanswered { background:#fafafa; border-color:#ccc; }
     .review-actions { display:flex; gap:10px; justify-content:flex-end; }
-    .btn-submit { font-family:Arial,sans-serif; font-size:0.9rem; font-weight:bold; padding:11px 32px; border:none; cursor:pointer; background:#222; color:#fff; }
+    .btn-submit { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.1em; padding:11px 32px; border:none; cursor:pointer; background:#222; color:#fff; }
     .btn-submit:hover { background:#444; }
 
     #results-screen { display:none; flex:1; overflow-y:auto; padding:28px; }
     .results-box { background:#fff; border:1px solid #bbb; padding:40px; text-align:center; max-width:700px; margin:0 auto; }
-    .results-title { font-size:1.3rem; font-weight:bold; margin-bottom:20px; }
-    .results-score { font-size:3.5rem; font-weight:bold; color:#222; margin-bottom:6px; }
-    .results-pct { font-size:1rem; color:#555; margin-bottom:24px; }
+    .results-title { font-family:'Playfair Display',Georgia,serif; font-size:1.4rem; font-weight:700; margin-bottom:20px; }
+    .results-score { font-family:'Bebas Neue',sans-serif; font-size:4rem; letter-spacing:0.05em; color:#222; margin-bottom:6px; }
+    .results-pct { font-family:'DM Sans',sans-serif; font-size:0.9rem; color:#555; margin-bottom:24px; letter-spacing:0.04em; }
     .results-bar-wrap { width:100%; max-width:380px; height:14px; background:#e0e0e0; border-radius:7px; margin:0 auto 28px; overflow:hidden; }
     .results-bar-fill { height:100%; border-radius:7px; background:#222; transition:width 1s ease; }
     .eoc-scores { display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:360px; margin:0 auto 22px; }
     .eoc-box { padding:14px; border:2px solid #222; text-align:center; }
-    .eoc-box-label { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:#888; margin-bottom:4px; }
-    .eoc-box-value { font-size:1.8rem; font-weight:bold; color:#222; }
-    .eoc-box-sub { font-size:0.72rem; color:#888; margin-top:2px; }
+    .eoc-box-label { font-family:'DM Sans',sans-serif; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.12em; color:#888; margin-bottom:4px; }
+    .eoc-box-value { font-family:'Bebas Neue',sans-serif; font-size:2.2rem; letter-spacing:0.04em; color:#222; line-height:1; }
+    .eoc-box-sub { font-family:'DM Sans',sans-serif; font-size:0.68rem; color:#888; margin-top:4px; }
     .results-breakdown { display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:360px; margin:0 auto 24px; text-align:left; }
     .breakdown-item { padding:12px 16px; border:1px solid #ddd; background:#fafafa; }
-    .breakdown-label { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:#888; margin-bottom:4px; }
-    .breakdown-value { font-size:1.4rem; font-weight:bold; }
+    .breakdown-label { font-family:'DM Sans',sans-serif; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.12em; color:#888; margin-bottom:4px; }
+    .breakdown-value { font-family:'Bebas Neue',sans-serif; font-size:1.7rem; letter-spacing:0.04em; }
     .breakdown-value.correct { color:#2e7d4f; }
     .breakdown-value.incorrect { color:#b0231a; }
-    .results-msg { font-size:0.9rem; color:#555; margin-bottom:28px; max-width:440px; margin-left:auto; margin-right:auto; }
-    .btn-restart { font-family:Arial,sans-serif; font-size:0.88rem; font-weight:bold; padding:11px 32px; border:none; cursor:pointer; background:#222; color:#fff; }
+    .results-msg { font-family:'Crimson Text',Georgia,serif; font-size:1rem; color:#555; margin-bottom:28px; max-width:440px; margin-left:auto; margin-right:auto; line-height:1.6; }
+    .btn-restart { font-family:'Bebas Neue',sans-serif; font-size:0.95rem; letter-spacing:0.08em; padding:11px 28px; border:none; cursor:pointer; background:#222; color:#fff; }
     .btn-restart:hover { background:#444; }
   </style>
 </head>
@@ -179,7 +180,7 @@
       <div class="results-bar-wrap"><div class="results-bar-fill" id="results-bar" style="width:0%"></div></div>
       <div class="eoc-scores">
         <div class="eoc-box"><div class="eoc-box-label">Estimated Scale Score</div><div class="eoc-box-value" id="res-scale">—</div><div class="eoc-box-sub">Range: 325–475</div></div>
-        <div class="eoc-box"><div class="eoc-box-label">Achievement Level</div><div class="eoc-box-value" id="res-level">—</div><div class="eoc-box-sub" id="res-level-desc">—</div></div>
+        <div class="eoc-box"><div class="eoc-box-label">Achievement Level</div><div class="eoc-box-value" id="res-level" style="display:flex;align-items:baseline;justify-content:center;gap:4px;"><span style="font-family:'DM Sans',sans-serif;font-size:0.7rem;letter-spacing:0.08em;color:#888;">LEVEL</span><span id="res-level-num">—</span></div><div class="eoc-box-sub" id="res-level-desc">—</div></div>
       </div>
       <div class="results-breakdown">
         <div class="breakdown-item"><div class="breakdown-label">Correct</div><div class="breakdown-value correct" id="res-correct">0</div></div>
@@ -265,7 +266,7 @@
     {text:"After World War I, what did the U.S. government hope to achieve by lending money to Germany?",options:["technological and military assistance from Europe","political and economic stability in Europe","investments for United States industries","profits for United States banks"],correct:1},
     {img:IMG+"q45-nixon-china-photo.jpg",text:"What was a long-term consequence of the event shown in the photograph?",options:["the easing of Cold War tensions","the easing of Vietnam War protests","a commitment to preserve historical landmarks","a commitment to continue humanitarian missions"],correct:0},
     {img:IMG+"q46-great-migration-table.jpg",text:"Which condition in society was primarily responsible for the change in urban population?",options:["absence of agricultural employment in Southern communities","lack of political representation in Southern communities","availability of job opportunities in Northern cities","prevalence of racial equality in Northern cities"],correct:2},
-    {img:IMG+"q47-lusitania-newspaper.jpg",text:"How did this event contribute to the United States' entry into World War I?",options:["It furthered anti-government protests in the United States.","It encouraged anti-immigration campaigns in the United States.","It became necessary for President Wilson to propose a plan for peace.","It became difficult for President Wilson to defend a policy of neutrality."],correct:3},
+    {img:IMG+"q47-lusitania-cartoon.jpg",text:"How did this event contribute to the United States' entry into World War I?",options:["It furthered anti-government protests in the United States.","It encouraged anti-immigration campaigns in the United States.","It became necessary for President Wilson to propose a plan for peace.","It became difficult for President Wilson to defend a policy of neutrality."],correct:3},
     {img:IMG+"q48-big-business-cartoon.jpg",text:"With which social issue is this cartoon associated?",options:["the power of political machines during the Second Industrial Revolution","the power of big businesses during the Second Industrial Revolution","the influence of immigration quotas during the Gilded Age","the influence of suffrage reformers during the Gilded Age"],correct:1},
     {img:IMG+"q49-oil-reserves-chart.jpg",text:"How has the relationship between oil reserves, production, and consumption influenced U.S. foreign policy?",options:["The United States maintains military bases in Western European countries.","The United States contributes humanitarian aid to Central African countries.","The United States is committed to trade relations with Central Asian countries.","The United States is interested in maintaining stability in Middle Eastern countries."],correct:3},
     {text:"Which development best represents the impact of industrialization on U.S. labor in the late 1800s?",options:["The government passed laws limiting the workday to eight hours.","Workers organized unions to advocate for better wages and conditions.","Factories voluntarily reduced hours to attract more skilled workers.","Immigration declined as industrial wages improved living standards."],correct:1}
@@ -423,7 +424,10 @@
     document.getElementById("res-correct").textContent=score;
     document.getElementById("res-incorrect").textContent=questions.length-score;
     document.getElementById("res-scale").textContent=scale;
-    document.getElementById("res-level").textContent=`Level ${level}`;
+    document.getElementById("res-level-num").textContent=level;
+    // Color the level number by achievement
+    const levelColors={5:'#2e7d4f',4:'#2aaa98',3:'#b07c00',2:'#b0231a',1:'#888'};
+    document.getElementById("res-level-num").style.color=levelColors[level]||'#222';
     document.getElementById("res-level-desc").textContent=levelDesc;
     setTimeout(()=>{document.getElementById("results-bar").style.width=`${pct}%`;},100);
     const msgs=[[453,"Achievement Level 5 — Excellent! You have an advanced command of U.S. History."],[432,"Achievement Level 4 — Great work! You are above average and well prepared for the EOC."],[397,"Achievement Level 3 — Passing! You met the standard. Review any weak areas to aim higher."],[375,"Achievement Level 2 — Below passing. Focus on the topics you missed and try again."],[0,"Achievement Level 1 — Keep studying! Review your notes and briefings, then give it another try."]];
