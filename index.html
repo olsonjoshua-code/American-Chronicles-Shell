@@ -1879,7 +1879,7 @@ function _returnFromGame(){
   } catch(e) {}
   return false;
 }
-function enterShell(){document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name){syncFromSupabase().then(()=>{if(!_returnFromGame())openWelcome();});}else{if(!_returnFromGame())setTimeout(()=>openWelcome(),600);}}}else{if(!S.isGuest&&S.name)syncFromSupabase();}}
+function enterShell(){document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name){syncFromSupabase().then(()=>{if(!_returnFromGame())openWelcome();});}else{if(!_returnFromGame())setTimeout(()=>openWelcome(),600);}}}else{if(!S.isGuest&&S.name)syncFromSupabase();}}
 
 // ── SETUP ─────────────────────────────────────────────
 const STARTERS=CHARS.filter(c=>c.unlockMethod==='free');
@@ -1936,7 +1936,7 @@ async function syncFromSupabase(){
   let changed=false;
   rows.forEach(r=>{if(!S.unitsCompleted.includes(r.unit_id)&&r.best_accuracy>=60){S.unitsCompleted.push(r.unit_id);changed=true;}});
   awardBadges();checkUnlocks();
-  if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();
+  if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();
   // Refresh new views if they are currently open
   const activeView=document.querySelector('.view.active');
   if(activeView&&activeView.id==='view-archive')renderArchive();
@@ -2060,6 +2060,26 @@ function refreshEOCPracticeCard(){
   }
 }
 
+function refreshEOCPracticeCard(){
+  const el=document.getElementById('eoc-practice-card');
+  const st=document.getElementById('eoc-practice-card-status');
+  if(!el||!st)return;
+  const done=S.unitsCompleted.includes('eoc_practice');
+  if(done){
+    st.className='unit-status us-done';
+    st.style.animation='none';
+    st.textContent='\u2713 Completed';
+    el.style.borderColor='var(--green2)';
+    el.style.background='linear-gradient(135deg,rgba(42,122,58,.18) 0%,rgba(20,16,13,.95) 60%)';
+  } else {
+    st.className='unit-status us-play';
+    st.style.animation='glowPulse 2.5s infinite';
+    st.textContent='\u25b6 Play Now';
+    el.style.borderColor='#d06040';
+    el.style.background='linear-gradient(135deg,rgba(160,40,40,.18) 0%,rgba(20,16,13,.95) 60%)';
+  }
+}
+
 
 function renderTimeline(){
   const inner=document.getElementById('tl-inner');if(!inner)return;
@@ -2092,7 +2112,7 @@ function renderTimeline(){
   if(ebi){ebi.innerHTML='';ebi.style.width=(x+PAD)+'px';const sp=document.createElement('div');sp.style.cssText=`width:${PAD}px;flex-shrink:0`;ebi.appendChild(sp);
     eraSegs.forEach(s=>{const el=document.createElement('div');el.className='era-seg';el.style.cssText=`width:${s.endX-s.startX+20}px;background:${s.color}ee;border-left:3px solid ${s.color}`;el.textContent=s.name.toUpperCase()+' · '+s.years;ebi.appendChild(el);});}
   initDrag();initMinimap(x+PAD);
-  refreshMidtermCard();refreshEOCPracticeCard();
+  refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();
 
   renderCampaignRPG();
   renderHubRPGMini();
@@ -2653,7 +2673,7 @@ function renderArchive(){
       if(S.setupDone){
         // Refresh data from Supabase and re-render — no title screen
         if(S.name&&!S.isGuest)syncFromSupabase();
-        renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();
+        renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();
         renderCampaignRPG();renderHubRPGMini();
         updateHUD();
       }
@@ -2701,7 +2721,7 @@ function renderArchive(){
           awardBadges();
           saveS();
           updateHUD();
-          renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();
+          renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();
         }
       }catch(err){}
     }
