@@ -37,7 +37,7 @@
     .excerpt-source { padding:5px 12px 8px; font-size:0.68rem; color:#777; font-style:italic; border-top:1px solid #ddd; }
     .excerpt-headline .excerpt-body { font-size:1.15rem; font-weight:bold; text-align:center; padding:24px 14px; line-height:1.5; letter-spacing:0.02em; }
 
-    .stimulus-img { width:100%; display:block; border:1px solid #ccc; background:#fff; cursor:zoom-in; }
+    .stimulus-img { width:100%; max-height:calc(100vh - 220px); object-fit:contain; display:block; border:1px solid #ccc; background:#fff; cursor:zoom-in; }
     .img-missing { padding:16px; background:#f5f5f5; border:1px dashed #ccc; font-size:0.8rem; color:#888; font-style:italic; }
     .zoom-hint { font-size:0.68rem; color:#999; margin-top:4px; font-style:italic; }
     .no-stimulus { flex:1; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:0.85rem; font-style:italic; text-align:center; padding:20px; }
@@ -188,8 +188,22 @@
         <div class="breakdown-item"><div class="breakdown-label">Passing (Level 3+)</div><div class="breakdown-value">397+</div></div>
       </div>
       <p class="results-msg" id="results-msg"></p>
-      <button class="btn-restart" onclick="restartQuiz()">Try Again</button>
-      <button class="btn-restart" onclick="returnToShell()" style="margin-left:10px;background:#5a4520;">← Return to Shell</button>
+      <!-- Gold reward block -->
+      <div id="results-gold-block" style="display:none;margin:0 auto 22px;max-width:380px;padding:14px 18px;background:#fffdf0;border:2px solid #e6a817;text-align:center;">
+        <div id="results-gold-amount" style="font-size:1.3rem;font-weight:bold;color:#b07c00;margin-bottom:3px;"></div>
+        <div id="results-gold-detail" style="font-size:0.72rem;color:#888;"></div>
+      </div>
+      <!-- Trophy block -->
+      <div id="results-trophy-block" style="display:none;margin:0 auto 22px;max-width:380px;padding:16px 18px;border:2px solid #ccc;text-align:center;">
+        <div id="results-trophy-icon" style="font-size:2.5rem;margin-bottom:6px;"></div>
+        <div id="results-trophy-label" style="font-size:1rem;font-weight:bold;margin-bottom:4px;"></div>
+        <div id="results-trophy-msg" style="font-size:0.8rem;color:#555;"></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-restart" onclick="restartQuiz()">↺ Try Again</button>
+        <button id="btn-print-cert" class="btn-restart" onclick="printEOCCertificate()" style="display:none;background:#5a4520;">🏆 Print Certificate</button>
+        <button class="btn-restart" onclick="returnToShell()" style="background:#5a4520;">← Return to Shell</button>
+      </div>
     </div>
   </div>
 </div>
@@ -251,7 +265,7 @@
     {text:"After World War I, what did the U.S. government hope to achieve by lending money to Germany?",options:["technological and military assistance from Europe","political and economic stability in Europe","investments for United States industries","profits for United States banks"],correct:1},
     {img:IMG+"q45-nixon-china-photo.jpg",text:"What was a long-term consequence of the event shown in the photograph?",options:["the easing of Cold War tensions","the easing of Vietnam War protests","a commitment to preserve historical landmarks","a commitment to continue humanitarian missions"],correct:0},
     {img:IMG+"q46-great-migration-table.jpg",text:"Which condition in society was primarily responsible for the change in urban population?",options:["absence of agricultural employment in Southern communities","lack of political representation in Southern communities","availability of job opportunities in Northern cities","prevalence of racial equality in Northern cities"],correct:2},
-    {...p("Daily News — May 7, 1915","LUSITANIA SUNK:\nOVER ONE HUNDRED\nAMERICANS LOST AT SEA","Source: Public Domain"),isHeadline:true,text:"How did this event contribute to the United States' entry into World War I?",options:["It furthered anti-government protests in the United States.","It encouraged anti-immigration campaigns in the United States.","It became necessary for President Wilson to propose a plan for peace.","It became difficult for President Wilson to defend a policy of neutrality."],correct:3},
+    {img:IMG+"q47-lusitania-newspaper.jpg",text:"How did this event contribute to the United States' entry into World War I?",options:["It furthered anti-government protests in the United States.","It encouraged anti-immigration campaigns in the United States.","It became necessary for President Wilson to propose a plan for peace.","It became difficult for President Wilson to defend a policy of neutrality."],correct:3},
     {img:IMG+"q48-big-business-cartoon.jpg",text:"With which social issue is this cartoon associated?",options:["the power of political machines during the Second Industrial Revolution","the power of big businesses during the Second Industrial Revolution","the influence of immigration quotas during the Gilded Age","the influence of suffrage reformers during the Gilded Age"],correct:1},
     {img:IMG+"q49-oil-reserves-chart.jpg",text:"How has the relationship between oil reserves, production, and consumption influenced U.S. foreign policy?",options:["The United States maintains military bases in Western European countries.","The United States contributes humanitarian aid to Central African countries.","The United States is committed to trade relations with Central Asian countries.","The United States is interested in maintaining stability in Middle Eastern countries."],correct:3},
     {text:"Which development best represents the impact of industrialization on U.S. labor in the late 1800s?",options:["The government passed laws limiting the workday to eight hours.","Workers organized unions to advocate for better wages and conditions.","Factories voluntarily reduced hours to attract more skilled workers.","Immigration declined as industrial wages improved living standards."],correct:1}
@@ -362,6 +376,43 @@
     showResults();
   }
 
+  // ── Trophy tier helper (matches shell/unit game logic) ──────────────
+  function calcEOCTier(pct){
+    if(pct===100)return{label:'Historian',color:'#7a40c8',icon:'🏛️'};
+    if(pct>=90) return{label:'Gold',     color:'#b07c00',icon:'🥇'};
+    if(pct>=80) return{label:'Silver',   color:'#666',   icon:'🥈'};
+    if(pct>=70) return{label:'Bronze',   color:'#8a4a10',icon:'🥉'};
+    if(pct>=60) return{label:'Completed',color:'#2e7d4f',icon:'✅'};
+    return            {label:'Try Again',color:'#b0231a',icon:'🔄'};
+  }
+
+  // ── Gold wallet helpers (writes to same SHELL_KEY the unit games use) ─
+  const SHELL_KEY='ac_shell_state';
+  function getShellGold(){
+    try{const r=localStorage.getItem(SHELL_KEY);if(r){const s=JSON.parse(r);return s.gold||0;}}catch(e){}return 0;
+  }
+  function awardGoldToShell(amount,source){
+    if(!amount||amount<=0)return;
+    try{
+      const raw=localStorage.getItem(SHELL_KEY);
+      const shell=raw?JSON.parse(raw):{};
+      shell.gold=(shell.gold||0)+amount;
+      shell.goldEarned=(shell.goldEarned||0)+amount;
+      if(!Array.isArray(shell.goldLedger))shell.goldLedger=[];
+      shell.goldLedger.unshift({ts:Date.now(),source,unitId:'eoc_practice',amount,type:'earn'});
+      if(shell.goldLedger.length>50)shell.goldLedger=shell.goldLedger.slice(0,50);
+      localStorage.setItem(SHELL_KEY,JSON.stringify(shell));
+    }catch(e){console.warn('Gold write failed',e);}
+  }
+  function spawnGoldParticle(text){
+    const el=document.createElement('div');
+    el.style.cssText=`position:fixed;top:40%;left:50%;transform:translateX(-50%);font-size:18px;font-weight:bold;color:#b07c00;pointer-events:none;z-index:9200;animation:_gpf 1.8s ease-out forwards;`;
+    el.textContent=text;
+    if(!document.getElementById('_gp-style')){const s=document.createElement('style');s.id='_gp-style';s.textContent=`@keyframes _gpf{0%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}100%{opacity:0;transform:translateX(-50%) translateY(-70px) scale(1.3)}}`;document.head.appendChild(s);}
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),2000);
+  }
+
   function showResults(){
     document.getElementById("quiz-wrap").style.display="none";
     document.getElementById("main-header").style.display="none";
@@ -377,7 +428,129 @@
     setTimeout(()=>{document.getElementById("results-bar").style.width=`${pct}%`;},100);
     const msgs=[[453,"Achievement Level 5 — Excellent! You have an advanced command of U.S. History."],[432,"Achievement Level 4 — Great work! You are above average and well prepared for the EOC."],[397,"Achievement Level 3 — Passing! You met the standard. Review any weak areas to aim higher."],[375,"Achievement Level 2 — Below passing. Focus on the topics you missed and try again."],[0,"Achievement Level 1 — Keep studying! Review your notes and briefings, then give it another try."]];
     document.getElementById("results-msg").textContent=msgs.find(([t])=>scale>=t)[1];
-    try{const ss=localStorage.getItem('ac_shell_state');if(ss){const s=JSON.parse(ss);s.unitsCompleted=s.unitsCompleted||[];if(!s.unitsCompleted.includes('eoc_practice'))s.unitsCompleted.push('eoc_practice');localStorage.setItem('ac_shell_state',JSON.stringify(s));}if(window.opener)window.opener.postMessage({type:'unitComplete',unitId:'eoc_practice'},'*');if(window.parent!==window)window.parent.postMessage({type:'unitComplete',unitId:'eoc_practice'},'*');}catch(e){}
+
+    // ── Trophy tier display ──────────────────────────────────────────────
+    const tier=calcEOCTier(pct);
+    const trophyBlock=document.getElementById('results-trophy-block');
+    document.getElementById('results-trophy-icon').textContent=tier.icon;
+    document.getElementById('results-trophy-label').textContent=tier.label+' — '+pct+'%';
+    document.getElementById('results-trophy-label').style.color=tier.color;
+    document.getElementById('results-trophy-msg').textContent=
+      pct>=60?'Trophy earned! This result has been saved to your American Chronicles profile.':
+              'Score 60% or higher to earn a trophy. Keep studying and try again!';
+    trophyBlock.style.borderColor=tier.color;
+    trophyBlock.style.display='block';
+
+    // ── Gold awarding ────────────────────────────────────────────────────
+    // Per correct answer: 5 gold each; completion bonus if ≥60%; high score bonus if ≥90%
+    const perCorrectGold=5;
+    const totalCorrectGold=score*perCorrectGold;
+    let bonusGold=0,bonusLabel='';
+    if(pct>=90){bonusGold=150;bonusLabel='High Score Bonus!';}
+    else if(pct>=60){bonusGold=75;bonusLabel='Completion Bonus';}
+    const totalGold=totalCorrectGold+bonusGold;
+
+    awardGoldToShell(totalCorrectGold,'EOC Practice — Correct Answers');
+    if(bonusGold>0)awardGoldToShell(bonusGold,bonusLabel+' — EOC Practice');
+    if(totalGold>0){
+      const goldBlock=document.getElementById('results-gold-block');
+      document.getElementById('results-gold-amount').textContent='+'+totalGold+' 🪙 Gold Earned';
+      document.getElementById('results-gold-detail').textContent=
+        score+' correct × '+perCorrectGold+' 🪙'+(bonusGold>0?' + '+bonusGold+' 🪙 '+bonusLabel:'')+' · Shell balance: '+getShellGold().toLocaleString()+' 🪙';
+      goldBlock.style.display='block';
+      setTimeout(()=>spawnGoldParticle('+'+totalGold+' 🪙'),500);
+    }
+
+    // ── Show print certificate button if passing ─────────────────────────
+    const certBtn=document.getElementById('btn-print-cert');
+    if(certBtn)certBtn.style.display=pct>=60?'inline-block':'none';
+
+    // ── Push to shell state ──────────────────────────────────────────────
+    try{
+      const ss=localStorage.getItem(SHELL_KEY);
+      const s=ss?JSON.parse(ss):{};
+      s.unitsCompleted=s.unitsCompleted||[];
+      if(!s.unitsCompleted.includes('eoc_practice'))s.unitsCompleted.push('eoc_practice');
+      // Save best EOC score
+      if(!s.eocBest||pct>s.eocBest)s.eocBest=pct;
+      if(!s.eocBestScale||scale>s.eocBestScale)s.eocBestScale=scale;
+      localStorage.setItem(SHELL_KEY,JSON.stringify(s));
+      if(window.opener)window.opener.postMessage({type:'unitComplete',unitId:'eoc_practice'},'*');
+      if(window.parent!==window)window.parent.postMessage({type:'unitComplete',unitId:'eoc_practice'},'*');
+    }catch(e){}
+  }
+
+  // ── Print certificate ────────────────────────────────────────────────────
+  function printEOCCertificate(){
+    const pct=Math.round((score/questions.length)*100);
+    const scale=rawToScale(score);
+    const [level,levelDesc]=getLevel(scale);
+    const tier=calcEOCTier(pct);
+    let studentName='Student';
+    try{const raw=localStorage.getItem(SHELL_KEY);if(raw){const s=JSON.parse(raw);studentName=s.name||'Student';}}catch(e){}
+    const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    const w=window.open('','_blank','width=800,height=680');
+    if(!w){alert('Allow popups to print your certificate.');return;}
+    w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>EOC Certificate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+      *{margin:0;padding:0;box-sizing:border-box;}
+      body{background:#faf7f0;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:24px;font-family:Georgia,serif;}
+      .cert{width:720px;background:#faf7f0;border:4px double #7a4010;padding:44px 52px;text-align:center;position:relative;}
+      .cert::before{content:'';position:absolute;inset:10px;border:1px solid rgba(122,64,16,.25);pointer-events:none;}
+      .ac-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.2em;color:#888;text-transform:uppercase;margin-bottom:6px;}
+      .seal{font-size:52px;margin:0 0 10px;}
+      .cert-title{font-family:'Cinzel Decorative',serif;font-size:20px;color:#1a0a08;letter-spacing:.06em;margin-bottom:6px;}
+      .divider{height:2px;background:linear-gradient(90deg,transparent,#7a4010,transparent);margin:14px auto;width:75%;}
+      .presents{font-family:'Crimson Text',serif;font-style:italic;font-size:15px;color:#666;margin-bottom:6px;}
+      .student-name{font-family:'Cinzel Decorative',serif;font-size:30px;color:#1a0a08;margin:8px 0;}
+      .achievement{font-family:'Cinzel',serif;font-size:13px;color:#7a4010;letter-spacing:.08em;margin:6px 0 16px;}
+      .score-row{display:flex;justify-content:center;gap:32px;margin:16px 0;}
+      .score-box{text-align:center;}
+      .score-val{font-family:'Cinzel',serif;font-size:28px;color:#1a0a08;}
+      .score-lbl{font-family:'Cinzel',serif;font-size:8px;color:#888;letter-spacing:.12em;text-transform:uppercase;margin-top:2px;}
+      .trophy-row{font-size:36px;margin:12px 0 6px;}
+      .trophy-label{font-family:'Cinzel',serif;font-size:14px;color:${tier.color};letter-spacing:.1em;margin-bottom:16px;}
+      .sig-line{margin-top:24px;padding-top:14px;border-top:1px solid #ddd;display:flex;justify-content:space-between;align-items:flex-end;}
+      .sig-block{text-align:center;min-width:160px;}
+      .sig-name{font-family:'Cinzel',serif;font-size:11px;color:#333;letter-spacing:.05em;}
+      .sig-title{font-family:'Crimson Text',serif;font-style:italic;font-size:11px;color:#888;margin-top:2px;}
+      .date-block{font-family:'Crimson Text',serif;font-style:italic;font-size:11px;color:#888;text-align:center;}
+      .print-btn{margin-top:20px;padding:12px 36px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:.08em;background:#7a4010;color:#fff;border:none;cursor:pointer;}
+      @media print{.print-btn{display:none;}}
+    </style></head><body>
+    <div class="cert">
+      <div class="ac-label">American Chronicles</div>
+      <div class="seal">🎓</div>
+      <div class="cert-title">U.S. History End-of-Course</div>
+      <div class="cert-title" style="font-size:15px;margin-top:4px;">Practice Assessment Certificate</div>
+      <div class="divider"></div>
+      <div class="presents">This certifies that</div>
+      <div class="student-name">${studentName}</div>
+      <div class="achievement">has successfully completed the EOC Practice Test</div>
+      <div class="score-row">
+        <div class="score-box"><div class="score-val">${score}/${questions.length}</div><div class="score-lbl">Score</div></div>
+        <div class="score-box"><div class="score-val">${pct}%</div><div class="score-lbl">Accuracy</div></div>
+        <div class="score-box"><div class="score-val">${scale}</div><div class="score-lbl">Scale Score</div></div>
+      </div>
+      <div class="trophy-row">${tier.icon}</div>
+      <div class="trophy-label">${tier.label} — Achievement Level ${level}</div>
+      <div class="divider"></div>
+      <div class="sig-line">
+        <div class="sig-block">
+          <div class="sig-name">American Chronicles</div>
+          <div class="sig-title">U.S. History Course Platform</div>
+        </div>
+        <div class="date-block">Issued ${date}</div>
+        <div class="sig-block">
+          <div class="sig-name">${levelDesc}</div>
+          <div class="sig-title">EOC Achievement Level ${level}</div>
+        </div>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">🖨️ Print Certificate</button>
+    </body></html>`);
+    w.document.close();
   }
 
   function restartQuiz(){
