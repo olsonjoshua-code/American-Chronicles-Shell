@@ -1444,7 +1444,7 @@ const UNIT_DATA=[
   {id:'theme_conflict',num:'Theme: Conflict', title:'Conflict & Change',   years:'1861–Present',icon:'⚔️',eraColor:'#e07070',url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/theme-conflict/',      desc:'Examine how wars, reform movements, and upheaval have shaped the nation.',topics:['Civil War','WWI & WWII','Cold War','Civil Rights struggle','Vietnam & beyond'],themes:['conflict'],changed:"Each major conflict redefined America's role at home and abroad.",continued:'Violence and resistance as engines of change.',emerged:'Can lasting change come without conflict?'},
   {id:'theme_identity',num:'Theme: Identity', title:'We the People',       years:'1861–Present',icon:'🌎',eraColor:'#b890d8',url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/theme-identity/',        desc:'Explore how American identity has been defined, contested, and reimagined across eras.',topics:['Immigration','Nativism','Cultural movements','Pluralism','National mythology'],themes:['identity'],changed:'The definition of “American” has been continuously renegotiated.',continued:'Tension between e pluribus unum and exclusion.',emerged:'Who gets to be American — and who decides?'},
   {id:'eoc_midterm',  num:'Midterm',         title:'Midterm Checkpoint',    years:'1861–1929',icon:'📋',eraColor:'#4878d0',url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/midterm-checkpoint/',           desc:'A cumulative Semester 1 checkpoint covering Civil War through the Roaring Twenties across 6 progressive sections.',topics:['All eras','All themes','Document analysis','Causation','Continuity & change'],themes:['power','freedom','economy','conflict','identity'],changed:'Your understanding of U.S. history — tested across the full arc.',continued:'The recurring questions that define the American story.',emerged:'How do all the pieces connect?'},,
-  {id:'eoc_practice', num:'EOC Practice', title:'EOC Practice Test', years:'1861–Present', icon:'📝', eraColor:'#d06040', url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/practice%20EOC/index.html', desc:'A full 50-question EOC practice test covering all eras from Reconstruction to the present. Earn your estimated scale score and achievement level 1–5.', topics:['All eras','All themes','Document analysis','Charts & cartoons','Cause & effect','Continuity & change'], themes:['power','freedom','economy','conflict','identity'], changed:'Your readiness for the Florida U.S. History EOC.', continued:'The big questions across 150 years of American history.', emerged:'How prepared are you for the real thing?'},
+  {id:'eoc_practice', num:'EOC Practice', title:'EOC Practice Test', years:'1861–Present', icon:'📝', eraColor:'#d06040', url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/practice%20EOC/index.html', isCheckpoint:true, desc:'A full 50-question EOC practice test covering all eras from Reconstruction to the present. Earn your estimated scale score and achievement level 1–5.', topics:['All eras','All themes','Document analysis','Charts & cartoons','Cause & effect','Continuity & change'], themes:['power','freedom','economy','conflict','identity'], changed:'Your readiness for the Florida U.S. History EOC.', continued:'The big questions across 150 years of American history.', emerged:'How prepared are you for the real thing?'},
   {id:'unit_ac_rpg', num:'Campaign', title:'American Chronicles RPG', years:'1861–Present', icon:'🗃️', eraColor:'#c8a020', url:'https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/rpg/', desc:'The ultimate history campaign. Battle through 18 chapters, theme operations, and the EOC Final Challenge across the full sweep of U.S. history. Earn your place as a Master Historian.', topics:['Civil War','Reconstruction','Industrialization','Progressive Era','WWI & WWII','Cold War','Civil Rights','Modern America','All 5 Themes','EOC Final Challenge'], themes:['power','freedom','economy','conflict','identity'], changed:'The entire arc of American history from 1861 to the present — mastered through combat.', continued:'The big questions that run through every era of American history.', emerged:'Can you master the full sweep of U.S. history and earn the rank of Master Historian?', isCampaign:true, unlockGoldTrophies:3},
 ];
 const ERAS=[
@@ -1452,7 +1452,6 @@ const ERAS=[
   {name:'Gilded Age & Progressive',years:'1865–1920',units:['unit2a','unit2b'],color:'#7a5a10'},
   {name:'Empire & WWI',years:'1898–1920',units:['unit3a','unit3b'],color:'#1a4a7a'},
   {name:'Boom & Bust',years:'1920–1933',units:['unit4a','eoc_midterm'],color:'#5a3a0a'},
-  {name:'EOC Prep',years:'1861–Present',units:['eoc_practice'],color:'#7a2a18'},
   {name:'New Deal & WWII',years:'1933–1945',units:['unit4b','unit5a'],color:'#2a3a1a'},
   {name:'Cold War & Civil Rights',years:'1945–1968',units:['unit5b','unit6','unit7a'],color:'#7a2010'},
   {name:'Vietnam & Watergate',years:'1965–1975',units:['unit7b'],color:'#1a2a1a'},
@@ -2239,7 +2238,7 @@ const THEME_CLASS={power:'tc-power',freedom:'tc-freedom',economy:'tc-economy',co
 function openPreview(uid){
   const u=UNIT_DATA.find(x=>x.id===uid);if(!u)return;
   const st=unitStatus(uid);
-  const isTheme=uid.startsWith('theme_');
+  const isTheme=uid.startsWith('theme_');const isCheckpoint=!!(UNIT_DATA.find(x=>x.id===uid)?.isCheckpoint);
   document.getElementById('pv-num').textContent=u.num;document.getElementById('pv-title').textContent=u.title;document.getElementById('pv-years').textContent=u.years;
   document.getElementById('pv-desc').textContent=u.desc;document.getElementById('pv-changed').textContent=u.changed;document.getElementById('pv-continued').textContent=u.continued;document.getElementById('pv-emerged').textContent=u.emerged;
   document.getElementById('pv-hero').style.background=`linear-gradient(135deg,${u.eraColor}55,#0d0a08)`;
@@ -2248,9 +2247,9 @@ function openPreview(uid){
   // Hide themes row and map for theme units — they don't apply
   const themesRow=document.getElementById('pv-themes').closest('div');
   const mapRow=document.getElementById('pv-map').closest('div');
-  if(themesRow)themesRow.style.display=isTheme?'none':'';
-  if(mapRow)mapRow.style.display=isTheme?'none':'';
-  if(!isTheme){document.getElementById('pv-themes').innerHTML=u.themes.slice(0,4).map(t=>`<span class="theme-chip ${THEME_CLASS[t]}">${THEME_MAP[t]||t}</span>`).join('');document.getElementById('pv-map').innerHTML=buildMiniMap(u);}
+  if(themesRow)themesRow.style.display=(isTheme||isCheckpoint)?'none':'';
+  if(mapRow)mapRow.style.display=(isTheme||isCheckpoint)?'none':'';
+  if(!isTheme&&!isCheckpoint){document.getElementById('pv-themes').innerHTML=u.themes.slice(0,4).map(t=>`<span class="theme-chip ${THEME_CLASS[t]}">${THEME_MAP[t]||t}</span>`).join('');document.getElementById('pv-map').innerHTML=buildMiniMap(u);}
   buildLaunchArea(u, (u.id==='eoc_midterm'||u.id==='eoc_practice') ? 'avail' : st);
   document.getElementById('preview-panel').classList.add('open');document.getElementById('pv-backdrop').style.display='block';
   document.querySelectorAll('.unit-card').forEach(c=>c.classList.remove('selected'));
@@ -2728,7 +2727,7 @@ async function renderTrophyRoom(){
   if(!S.isGuest&&S.name){const rows=await sfetch(`/rest/v1/ac_results?name=eq.${encodeURIComponent(S.name)}&select=*`);if(Array.isArray(rows))_trophyData=rows;}
   const rmap={};_trophyData.forEach(r=>rmap[r.unit_id]=r);
 
-  grid.innerHTML=UNIT_DATA.filter(u=>!u.isCampaign).map((u,idx)=>{
+  grid.innerHTML=UNIT_DATA.filter(u=>!u.isCampaign&&!u.isCheckpoint).map((u,idx)=>{
     const r=rmap[u.id];
     const tier=r?calcTier(r.best_accuracy):'empty';
     const tc=TIER_COLOR[tier],te=TIER_EMOJI[tier],tl=TIER_LABEL[tier];
