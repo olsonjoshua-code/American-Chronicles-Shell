@@ -35,15 +35,18 @@
       color: var(--text);
       display: flex;
       justify-content: center;
-      padding: 36px 20px 60px;
+      padding: 0;
     }
 
     .app {
-      width: min(1100px, 100%);
+      width: 100%;
+      height: 100vh;
       background: linear-gradient(170deg, #221510 0%, #160e09 58%, #0d0806 100%);
       border: 1px solid var(--rule);
       overflow: hidden;
       position: relative;
+      display: flex;
+      flex-direction: column;
     }
 
     .app::before,
@@ -153,16 +156,18 @@
     .main {
       display: grid;
       grid-template-columns: 1.35fr 0.8fr;
-      min-height: 640px;
+      flex: 1;
+      overflow: hidden;
     }
 
     .slide-area {
       padding: 32px;
       border-right: 1px solid var(--rule);
+      overflow-y: auto;
     }
 
     .slide-shell {
-      min-height: 540px;
+      height: 100%;
       background: linear-gradient(160deg, rgba(33, 20, 15, 0.97) 0%, rgba(16, 10, 7, 0.99) 100%);
       border: 1px solid var(--rule);
       display: flex;
@@ -171,11 +176,11 @@
     }
 
     .image-band {
-      height: 240px;
+      height: 200px;
       background-color: #000;
       background-repeat: no-repeat;
       background-position: center;
-      background-size: contain;
+      background-size: 75%;
       border-bottom: 1px solid var(--rule);
       position: relative;
       display: flex;
@@ -363,6 +368,7 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
+      overflow-y: auto;
     }
 
     .section-label {
