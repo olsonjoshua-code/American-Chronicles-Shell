@@ -1265,21 +1265,23 @@ window.addEventListener('DOMContentLoaded', function() {
     var saved = loadGame();
     if (saved) G = saved;
     // Check for shell session — skip login gate if already logged in
-    try {
-      var shellRaw = localStorage.getItem('ac_shell_state');
-      if (shellRaw) {
+    var shellRaw = localStorage.getItem('ac_shell_state');
+    var hasSession = false;
+    if (shellRaw) {
+      try {
         var shell = JSON.parse(shellRaw);
-        if (shell && shell.name && shell.name !== 'Guest') {  // setupDone not required — top-of-page redirect already blocks guests
-          document.getElementById('welcome-gate').style.display = 'none';
-          document.getElementById('welcome-gate').classList.remove('show');
+        if (shell && shell.name && shell.name !== 'Guest') {
           G = Object.assign({}, G || {}, { name: shell.name, period: shell.period || '', fromShell: true });
-          afterLogin();
-          return;
+          hasSession = true;
         }
-      }
-    } catch(se) {}
-    // No shell session — redirect to shell to login with Google
-  window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/';
+      } catch(se) {}
+    }
+    if (hasSession) {
+      afterLogin();
+    } else {
+      // No shell session — redirect to shell to login with Google
+      window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/';
+    }
   } catch(e) {
     // Show error visibly if JS fails
     document.body.innerHTML = '<div style="position:fixed;inset:0;background:#0d0a08;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:sans-serif;color:#e8a020;padding:20px;text-align:center">' +
