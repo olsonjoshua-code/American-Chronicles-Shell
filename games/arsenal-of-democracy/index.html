@@ -46,7 +46,7 @@ body::before{content:'';position:fixed;inset:0;
   pointer-events:none;z-index:9999;}
 
 /* ── ROOT / LAYOUT ── */
-#root{max-width:640px;margin:0 auto;padding:0 16px 100px;min-height:100vh;position:relative;z-index:1;}
+#root{max-width:860px;margin:0 auto;padding:0 24px 100px;min-height:100vh;position:relative;z-index:1;}
 /* When HUD is visible, push content down so it isn't hidden behind the fixed bar */
 body.hud-active #root{padding-top:68px;}
 
@@ -86,7 +86,7 @@ body.hud-active #root{padding-top:68px;}
   border-bottom:1px solid var(--border2);border-left:1px solid var(--border2);border-right:1px solid var(--border2);
   padding:10px 14px;
   position:fixed;top:0;left:50%;transform:translateX(-50%);
-  width:100%;max-width:640px;
+  width:100%;max-width:860px;
   z-index:200;backdrop-filter:blur(12px);
   display:none;}
 .hud-inner{display:flex;align-items:center;gap:12px;}
@@ -170,7 +170,7 @@ body.hud-active #root{padding-top:68px;}
 #briefing-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);
   z-index:500;overflow-y:auto;padding:20px 16px 60px;}
 #briefing-modal.show{display:block;animation:fadeIn .3s ease;}
-.briefing-inner{max-width:560px;margin:0 auto;}
+.briefing-inner{max-width:760px;margin:0 auto;}
 .briefing-header{display:flex;align-items:flex-start;justify-content:space-between;
   gap:10px;margin-bottom:20px;padding-top:10px;}
 .briefing-eyebrow{font-family:var(--bebas);font-size:10px;color:var(--text3);
@@ -221,16 +221,16 @@ body.hud-active #root{padding-top:68px;}
 
 /* THE QUESTION — primary visual weight */
 .q-block{background:var(--bg2);border:1px solid var(--border2);
-  border-left:3px solid var(--gold);padding:20px 18px;margin-bottom:18px;}
+  border-left:3px solid var(--gold);padding:24px 22px;margin-bottom:18px;}
 .q-number{font-family:var(--bebas);font-size:10px;color:var(--text3);
   letter-spacing:3px;margin-bottom:8px;}
-.q-text{font-family:var(--playfair);font-size:clamp(15px,2.8vw,18px);
-  color:var(--cream);line-height:1.55;}
+.q-text{font-family:var(--playfair);font-size:clamp(16px,2.4vw,20px);
+  color:var(--cream);line-height:1.6;}
 
 /* Answer choices */
-.choices-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.choices-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
 .choice-btn{display:block;width:100%;background:var(--bg2);border:1px solid var(--border2);
-  color:var(--text);padding:14px 16px;cursor:pointer;text-align:left;
+  color:var(--text);padding:16px 20px;cursor:pointer;text-align:left;
   transition:all .2s;position:relative;overflow:hidden;}
 .choice-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
   background:var(--gold);transform:scaleY(0);transition:transform .2s;pointer-events:none;}
@@ -241,9 +241,9 @@ body.hud-active #root{padding-top:68px;}
 .choice-btn.incorrect{border-color:var(--red2)!important;background:rgba(128,16,16,.06)!important;opacity:.6;}
 .choice-btn.incorrect::before{background:var(--red2)!important;transform:scaleY(1)!important;}
 .choice-btn.answered{cursor:default;}
-.choice-letter{font-family:var(--bebas);font-size:13px;color:var(--gold2);
-  margin-right:10px;display:inline-block;width:20px;}
-.choice-text{font-family:var(--crimson);font-size:16px;line-height:1.4;}
+.choice-letter{font-family:var(--bebas);font-size:14px;color:var(--gold2);
+  margin-right:12px;display:inline-block;width:20px;}
+.choice-text{font-family:var(--crimson);font-size:17px;line-height:1.5;}
 
 /* Feedback */
 .feedback-panel{display:none;border-left:3px solid var(--gold);
@@ -942,7 +942,7 @@ const LESSONS = [
       {
         id: '5A-L34-Q4',
         text: 'Why did Germany’s invasion of Poland trigger the start of World War II in Europe?',
-        choices: ['Britain and France finally declared war after concluding Hitler would not stop with negotiated gains.', 'The United States immediately invaded Germany and forced the rest of Europe into a wider conflict.', 'The Soviet Union demanded that Britain and France surrender Poland rather than defend it militarily.', 'Italy switched sides at once and launched attacks on both Germany and Japan across the continent.'],
+        choices: ['Britain and France finally declared war after concluding Hitler would not stop with negotiated gains.', 'The United States immediately invaded Germany and forced the rest of Europe into a wider conflict.', 'The Soviet Union formally demanded that Britain and France surrender Poland rather than militarily defend it against German aggression.', 'Italy switched sides at once and launched attacks on both Germany and Japan across the continent.'],
         correctAnswer: 'Britain and France finally declared war after concluding Hitler would not stop with negotiated gains.',
         explanation: 'Appeasement ended when Hitler invaded Poland, and Britain and France responded with declarations of war instead of more concessions.',
         standard: 'SS.912.A.6.3'
@@ -950,7 +950,7 @@ const LESSONS = [
       {
         id: '5A-L34-Q5',
         text: 'Why did many Americans support the Neutrality Acts before Pearl Harbor?',
-        choices: ['They wanted to avoid being drawn into another overseas war like the one they associated with World War I.', 'They believed Nazi Germany had a legitimate claim to most of Europe and should be left alone.', 'They expected the League of Nations to defeat Japan and Italy without any American economic pressure.', 'They wanted to block all trade permanently so the United States could become completely self-sufficient.'],
+        choices: ['They wanted to avoid being drawn into another overseas war like the one they associated with World War I.', 'They believed Nazi Germany had a legitimate claim to most of Europe and should be left alone.', 'They expected the League of Nations to defeat Japan and Italy without any American economic pressure.', 'They wanted to permanently block all overseas trade so the United States could become entirely self-sufficient and economically independent.'],
         correctAnswer: 'They wanted to avoid being drawn into another overseas war like the one they associated with World War I.',
         explanation: 'Isolationist sentiment remained strong in the 1930s, and many Americans feared arms sales and loans would once again pull the nation into war.',
         standard: 'SS.912.A.6.4'
@@ -958,7 +958,7 @@ const LESSONS = [
       {
         id: '5A-L34-Q6',
         text: 'How did Lend-Lease signal a shift in U.S. policy before formal entry into World War II?',
-        choices: ['It let the United States aid Allied nations materially while officially remaining out of direct combat.', 'It required American troops to fight under British command before Congress had declared war on Germany.', 'It ended all trade with Europe so American industry could focus entirely on domestic civilian needs.', 'It forced Britain to repay World War I debts immediately before receiving any new military supplies.'],
+        choices: ['It let the United States aid Allied nations materially while officially remaining out of direct combat.', 'It required American combat troops to serve under British military command before Congress had issued any formal declaration of war against the Axis powers.', 'It ended all trade with Europe so American industry could focus entirely on domestic civilian needs.', 'It forced Britain to repay World War I debts immediately before receiving any new military supplies.'],
         correctAnswer: 'It let the United States aid Allied nations materially while officially remaining out of direct combat.',
         explanation: 'Lend-Lease showed that the United States was moving away from strict neutrality by supplying nations fighting the Axis powers.',
         standard: 'SS.912.A.6.4'
@@ -966,7 +966,7 @@ const LESSONS = [
       {
         id: '5A-L34-Q7',
         text: 'Why did the attack on Pearl Harbor transform U.S. policy so quickly?',
-        choices: ['It ended support for neutrality by bringing the United States directly into the war after a direct attack.', 'It convinced Americans to avoid war in Europe and focus only on diplomatic pressure in the Pacific.', 'It proved Japan had already surrendered, leaving Congress to declare war mainly as a symbolic gesture.', 'It led Britain and France to withdraw from Asia so the United States could remain formally neutral.'],
+        choices: ['It ended support for neutrality by bringing the United States directly into the war after a direct attack.', 'It convinced Americans to avoid war in Europe and focus only on diplomatic pressure in the Pacific.', 'It proved that Japan had already agreed to surrender terms, leaving Congress to declare war afterward mainly as a symbolic gesture of national unity.', 'It led Britain and France to withdraw from Asia so the United States could remain formally neutral.'],
         correctAnswer: 'It ended support for neutrality by bringing the United States directly into the war after a direct attack.',
         explanation: 'After Pearl Harbor, debate over staying out of the war collapsed because the United States had been attacked directly.',
         standard: 'SS.912.A.6.4'
@@ -1046,7 +1046,7 @@ const LESSONS = [
       {
         id: '5A-L35-Q6',
         text: 'Why did wartime labor shortages change who could find work in the United States?',
-        choices: ['The draft and military mobilization opened jobs for women, minorities, and migrant laborers in new numbers.', 'The draft reduced demand for workers because defense industries shut down most civilian production lines.', 'The draft pushed the government to ban migration between states so local labor markets remained stable.', 'The draft led employers to replace wages with food vouchers, which discouraged new groups from applying.'],
+        choices: ['The draft and military mobilization opened jobs for women, minorities, and migrant laborers in new numbers.', 'The military draft actually reduced overall demand for civilian workers because major defense industries immediately shut down most of their non-essential civilian production lines.', 'The draft pushed the government to ban migration between states so local labor markets remained stable.', 'The draft led employers to replace wages with food vouchers, which discouraged new groups from applying.'],
         correctAnswer: 'The draft and military mobilization opened jobs for women, minorities, and migrant laborers in new numbers.',
         explanation: 'With millions of men in uniform and production expanding rapidly, employers turned to groups that had often been excluded or limited before the war.',
         standard: 'SS.912.A.6.6'
@@ -1102,7 +1102,7 @@ const LESSONS = [
       {
         id: '5A-L36-Q2',
         text: 'Why is the Battle of Midway considered a turning point in the Pacific war?',
-        choices: ['It badly damaged Japan’s carrier force and shifted the strategic initiative to the United States.', 'It allowed Japan to destroy most of the American fleet and threaten the West Coast directly.', 'It ended naval warfare in the Pacific by proving submarines mattered more than aircraft carriers.', 'It forced the Soviet Union to enter the Pacific war years earlier than planned by Allied leaders.'],
+        choices: ['It badly damaged Japan’s carrier force and shifted the strategic initiative to the United States.', 'It allowed Japan to destroy most of the American fleet and threaten the West Coast directly.', 'It permanently ended traditional naval warfare in the entire Pacific theater by conclusively proving that submarines were far more decisive than aircraft carriers.', 'It forced the Soviet Union to enter the Pacific war years earlier than planned by Allied leaders.'],
         correctAnswer: 'It badly damaged Japan’s carrier force and shifted the strategic initiative to the United States.',
         explanation: 'Midway weakened Japan’s offensive power and marked the point where the United States began taking the strategic lead in the Pacific.',
         standard: 'SS.912.A.6.4'
@@ -1118,7 +1118,7 @@ const LESSONS = [
       {
         id: '5A-L36-Q4',
         text: 'Why was D-Day so important to the Allied war effort in Europe?',
-        choices: ['It opened a major western front against Nazi Germany and accelerated the liberation of Western Europe.', 'It ended the war in Europe immediately by forcing Germany to surrender on the Normandy beaches.', 'It prevented the Soviet Union from fighting Germany by taking over all combat on the eastern front.', 'It persuaded Italy and Japan to abandon the Axis alliance within days of the Normandy landings.'],
+        choices: ['It opened a major western front against Nazi Germany and accelerated the liberation of Western Europe.', 'It ended the war in Europe immediately by forcing Germany to surrender on the Normandy beaches.', 'D-Day prevented the Soviet Union from continuing to fight Germany by having Allied forces take over all ground combat operations on the entire eastern front.', 'It persuaded Italy and Japan to abandon the Axis alliance within days of the Normandy landings.'],
         correctAnswer: 'It opened a major western front against Nazi Germany and accelerated the liberation of Western Europe.',
         explanation: 'The Normandy invasion was crucial because it established a large Allied foothold in France and increased pressure on Germany from the west.',
         standard: 'SS.912.A.6.4'
@@ -1206,7 +1206,7 @@ const LESSONS = [
       {
         id: '5A-CAP-Q4',
         text: 'What was the importance of the Nuremberg Trials after World War II?',
-        choices: ['They established that national leaders could be held accountable for war crimes and crimes against humanity.', 'They restored the Nazi government so Germany could rebuild more quickly under familiar leadership.', 'They settled borders in Eastern Europe by allowing defeated states to redraw their own frontiers.', 'They replaced military occupation with immediate democratic elections across all Axis countries at once.'],
+        choices: ['They established that national leaders could be held accountable for war crimes and crimes against humanity.', 'They restored the Nazi government so Germany could rebuild more quickly under familiar leadership.', 'They settled borders in Eastern Europe by allowing defeated states to redraw their own frontiers.', 'The Nuremberg Trials replaced military occupation with immediate internationally supervised democratic elections held across all of the former Axis-controlled countries.'],
         correctAnswer: 'They established that national leaders could be held accountable for war crimes and crimes against humanity.',
         explanation: 'Nuremberg was historically important because it treated aggressive war and mass atrocity as punishable international crimes.',
         standard: 'SS.912.A.6.5'
@@ -1374,7 +1374,7 @@ const LESSONS = [
       {
         id: '5A-EOC-Q12',
         text: 'Why did the Battle of Midway matter so much in the Pacific theater?',
-        choices: ['It damaged Japan’s offensive strength and helped shift momentum toward the United States.', 'It allowed Japan to seize Hawaii and force American retreat to the West Coast.', 'It marked the first Soviet naval victory against Japan in support of American carriers.', 'It ended the Pacific war instantly by forcing Tokyo to accept unconditional surrender.'],
+        choices: ['It damaged Japan’s offensive strength and helped shift momentum toward the United States.', 'It allowed Japan to seize Hawaii and force American retreat to the West Coast.', 'It marked the first major Soviet naval victory against Japanese forces in the Pacific in direct support of American aircraft carrier operations.', 'It ended the Pacific war instantly by forcing Tokyo to accept unconditional surrender.'],
         correctAnswer: 'It damaged Japan’s offensive strength and helped shift momentum toward the United States.',
         explanation: 'Midway reduced Japanese carrier power and marked a major strategic turning point in the Pacific war.',
         standard: 'SS.912.A.6.4'
@@ -1430,7 +1430,7 @@ const LESSONS = [
       {
         id: '5A-EOC-Q19',
         text: 'Why did the end of World War II lead quickly into tensions between the United States and the Soviet Union?',
-        choices: ['They had defeated a common enemy, but they disagreed deeply about postwar power and political systems.', 'They agreed completely on the future of Eastern Europe, which made conflict unnecessary after 1945.', 'They stopped competing for influence because Britain remained the strongest military power in Europe.', 'They entered a formal alliance to share occupation zones permanently under one combined command.'],
+        choices: ['They had defeated a common enemy, but they disagreed deeply about postwar power and political systems.', 'They agreed completely on the future of Eastern Europe, which made conflict unnecessary after 1945.', 'The two nations stopped competing for global influence entirely because Britain still remained the world's strongest and most experienced military power after the war.', 'They entered a formal alliance to share occupation zones permanently under one combined command.'],
         correctAnswer: 'They had defeated a common enemy, but they disagreed deeply about postwar power and political systems.',
         explanation: 'The wartime alliance was temporary and practical, and postwar disagreements soon pushed both powers into rivalry.',
         standard: 'SS.912.A.6.5'
@@ -1438,7 +1438,7 @@ const LESSONS = [
       {
         id: '5A-EOC-Q20',
         text: 'Which idea best connects the entire World War II unit from the road to war through the postwar settlement?',
-        choices: ['World War II changed both global power and American society, creating victories, sacrifices, and new tensions.', 'World War II mattered mainly as a military event and had little effect on politics or life at home.', 'World War II ended international rivalry so completely that the postwar world became politically stable.', 'World War II proved democracies should avoid alliances because cooperation always weakens national strength.'],
+        choices: ['World War II changed both global power and American society, creating victories, sacrifices, and new tensions.', 'World War II mattered mainly as a military event and had little effect on politics or life at home.', 'World War II ended international rivalry so completely that the postwar world became politically stable.', 'World War II conclusively proved that democratic nations should avoid all military alliances because wartime cooperation always ultimately weakens each individual nation's sovereignty.'],
         correctAnswer: 'World War II changed both global power and American society, creating victories, sacrifices, and new tensions.',
         explanation: 'The war reshaped diplomacy, military power, civil liberties, social roles, and the international order all at once.',
         standard: 'SS.912.A.6.3 · SS.912.A.6.4 · SS.912.A.6.5 · SS.912.A.6.6'
