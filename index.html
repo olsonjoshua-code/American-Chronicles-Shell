@@ -908,7 +908,15 @@ function applyProfileFromDB(profile){
   S.goldEarned   = Math.max(S.goldEarned||0, profile.gold_earned||0);
   S.goldSpent    = profile.gold_spent  || 0;
   S.goldBestRun  = profile.gold_best_run || 0;
-  try { S.goldLedger        = JSON.parse(profile.gold_ledger||'[]'); }    catch(e){}
+  try {
+    const gl=JSON.parse(profile.gold_ledger||'[]');
+    S.goldLedger=Array.isArray(gl)?gl:[];
+    // Backfill: if student has gold but no ledger entries (earned before ledger feature existed),
+    // synthesize a single summary entry so the wallet isn't blank
+    if(!S.goldLedger.length&&(S.gold||0)>0){
+      S.goldLedger=[{ts:Date.now(),source:'Prior earnings (pre-ledger)',unitId:'',amount:S.gold,type:'earn'}];
+    }
+  } catch(e){}
   try { S.unitsCompleted    = JSON.parse(profile.units_completed||'[]'); } catch(e){}
   try { S.badgesEarned      = JSON.parse(profile.badges_earned||'[]'); }   catch(e){}
   try { S.unlocked          = JSON.parse(profile.unlocked||'[]'); }         catch(e){}
@@ -1791,6 +1799,7 @@ if(!S.goldEarned)S.goldEarned=S.gold||0;
 if(!S.goldSpent)S.goldSpent=0;
 if(!S.goldBestRun)S.goldBestRun=0;
 if(!Array.isArray(S.goldLedger))S.goldLedger=[];
+if(!S.goldLedger.length&&(S.gold||0)>0)S.goldLedger=[{ts:Date.now(),source:'Prior earnings (pre-ledger)',unitId:'',amount:S.gold,type:'earn'}];
 if(!S.unitBadges)S.unitBadges={};
 if(!S.unitCards)S.unitCards={};
 }}catch(e){}}
@@ -2704,12 +2713,19 @@ function renderArchive(){
         const prevGold=S.gold||0;
         // Merge only the wallet fields — don't clobber profile state
         if(updated.gold!==undefined&&updated.gold>prevGold){
+          const gained=updated.gold-prevGold;
           S.gold=updated.gold;
           S.goldEarned=updated.goldEarned||S.goldEarned;
           S.goldBestRun=updated.goldBestRun||S.goldBestRun;
-          if(Array.isArray(updated.goldLedger))S.goldLedger=updated.goldLedger;
+          // Prefer the game's own ledger if it wrote one; otherwise synthesize an entry
+          if(Array.isArray(updated.goldLedger)&&updated.goldLedger.length){
+            S.goldLedger=updated.goldLedger;
+          } else {
+            _pushGoldLedger({ts:Date.now(),source:'Unit Game',unitId:'',amount:gained,type:'earn'});
+          }
+          saveS();
           updateHUDGold();
-          spawnGoldParticle('+'+(updated.gold-prevGold)+' 🪙');
+          spawnGoldParticle('+'+gained+' 🪙');
         }
         // Merge unit badges and cards
         if(updated.unitBadges){
@@ -3036,17 +3052,35 @@ function printCourseCert(){
   const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
 
   // ── 1. UNIT GAMES (50%) ───────────────────────────────
+  // Standard units count as 1.0 each; theme games count as 0.5 each.
+  // Total possible weight = 13 standard + 5×0.5 themes = 15.5
   const standardUnits=UNIT_DATA.filter(u=>!u.isCampaign&&!u.isCheckpoint&&!u.id.startsWith('theme_')&&u.id!=='eoc_midterm');
-  const totalUnits=standardUnits.length;
+  const themeUnits=UNIT_DATA.filter(u=>u.id.startsWith('theme_'));
+  const totalWeight=standardUnits.length+(themeUnits.length*0.5); // 15.5
+
   const completedUnitRows=_trophyData.filter(r=>{
     const u=UNIT_DATA.find(x=>x.id===r.unit_id);
     return u&&!u.isCampaign&&!u.isCheckpoint&&!u.id.startsWith('theme_')&&u.id!=='eoc_midterm';
   });
-  const completedCount=completedUnitRows.length;
-  if(completedCount===0){notify('Complete at least one unit to print your Course Certificate!');return;}
-  const completionRate=completedCount/totalUnits;
-  const avgUnitAccuracy=completedUnitRows.reduce((a,r)=>a+(r.best_accuracy||0),0)/completedCount;
-  const unitScore=Math.round(avgUnitAccuracy*completionRate); // penalizes partial completion
+  const completedThemeRows=_trophyData.filter(r=>{
+    const u=UNIT_DATA.find(x=>x.id===r.unit_id);
+    return u&&u.id.startsWith('theme_');
+  });
+  const completedCount=completedUnitRows.length; // standard units only (for display)
+  const completedThemeCount=completedThemeRows.length;
+  if(completedCount===0&&completedThemeCount===0){notify('Complete at least one unit to print your Course Certificate!');return;}
+
+  // Weighted accuracy: standard rows × 1.0, theme rows × 0.5
+  const weightedAccuracySum=
+    completedUnitRows.reduce((a,r)=>a+(r.best_accuracy||0)*1.0,0)+
+    completedThemeRows.reduce((a,r)=>a+(r.best_accuracy||0)*0.5,0);
+  const completedWeight=completedUnitRows.length*1.0+completedThemeRows.length*0.5;
+  const avgUnitAccuracy=completedWeight>0?weightedAccuracySum/completedWeight:0;
+  const completionRate=completedWeight/totalWeight;
+  const unitScore=Math.round(avgUnitAccuracy*completionRate);
+
+  // For display: total units including themes at half-weight
+  const totalUnits=standardUnits.length; // shown as X/13 in note
 
   // ── 2. STUDY / VOCAB (20%) ────────────────────────────
   // All decks that exist in DECK_MAP (standard units + themes + checkpoints)
@@ -3092,14 +3126,17 @@ function printCourseCert(){
   const completionPct=Math.round(completionRate*100);
 
   // ── UNIT TABLE ROWS ───────────────────────────────────
-  const unitRows=completedUnitRows.map(r=>{
+  // Standard units first, then completed themes (marked as ½ weight)
+  const allDisplayRows=[...completedUnitRows,...completedThemeRows];
+  const unitRows=allDisplayRows.map(r=>{
     const u=UNIT_DATA.find(x=>x.id===r.unit_id);if(!u)return'';
+    const isTheme=u.id.startsWith('theme_');
     const ut=calcTier(r.best_accuracy);
     const deckId=DECK_MAP[u.id]||null;
     const vScore=deckId&&S.vocabBestScore?S.vocabBestScore[deckId]:null;
     const fStudied=deckId&&S.flashcardsStudied?S.flashcardsStudied[deckId]:false;
-    return`<tr>
-      <td style="padding:2px 6px;font-size:9px;color:#5a4520">${u.num}</td>
+    return`<tr${isTheme?' style="opacity:.88"':''}>
+      <td style="padding:2px 6px;font-size:9px;color:#5a4520">${u.num}${isTheme?' <span style="font-size:7px;color:#8a6a2a">(½)</span>':''}</td>
       <td style="padding:2px 6px;font-size:9px;color:#1a1208">${u.title}</td>
       <td style="padding:2px 6px;font-size:9px;color:${utColors[ut]};text-align:center">${TIER_EMOJI[ut]}</td>
       <td style="padding:2px 6px;font-size:9px;color:${utColors[ut]};text-align:center;font-weight:700">${r.best_accuracy}%</td>
@@ -3110,7 +3147,7 @@ function printCourseCert(){
 
   // ── COMPONENT SUMMARY ROWS ────────────────────────────
   const compRows=[
-    {label:'Unit Games',weight:'50%',score:unitScore,note:`${completedCount}/${totalUnits} units · avg ${Math.round(avgUnitAccuracy)}% × ${completionPct}% completion`,attempted:true},
+    {label:'Unit Games + Themes',weight:'50%',score:unitScore,note:`${completedCount}/${totalUnits} units · ${completedThemeCount}/5 themes (½ wt ea) · avg ${Math.round(avgUnitAccuracy)}% × ${Math.round(completionRate*100)}% completion`,attempted:true},
     {label:'Study (Vocab + Flashcards)',weight:'20%',score:studyScoreFinal,note:`${vocabScores.length} quiz${vocabScores.length!==1?'zes':''},  ${decksStudied} deck${decksStudied!==1?'s':''} studied · +${flashcardBonus}pt flashcard bonus`,attempted:studyAttempted},
     {label:'EOC Practice Test',weight:'15%',score:eocScore,note:eocAttempted?`Best accuracy: ${eocScore}%`:'Not yet attempted — worth 15%',attempted:eocAttempted},
     {label:'RPG Campaign',weight:'10%',score:rpgScore,note:rpgAttempted?`Best accuracy: ${rpgScore}%`:'Not yet attempted — worth 10%',attempted:rpgAttempted},
