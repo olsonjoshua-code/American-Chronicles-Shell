@@ -1501,7 +1501,7 @@ const CHARS=[
   {id:'rosa_parks',      label:'Rosa Parks',         cat:'historical', passive:'Quiet Courage: Streak bonuses doubled',
    unlockMethod:'trophy:silver:unit6', unlockHint:'Silver+ on Unit 6',
    svg:()=>svgMedallion('#060810','#c9a84c',face('#7a4828','#0a0a0a',hair_bun('#1a1a1a'),'#1a0a0a'))},
-  {id:'sojourner_truth', label:'Sojourner Truth',    cat:'historical', passive:'Ain\'t I a Woman: +20% on women\'s history',
+  {id:'sojourner_truth', label:'Sojourner Truth',    cat:'historical', passive:"Ain't I a Woman: +20% on women's history",
    unlockMethod:'complete:unit2b', unlockHint:'Complete Unit 2B',
    svg:()=>svgMedallion('#060808','#c9a84c',face('#6a3018','#0a0808',hair_bun('#0a0808'),'#2a1a1a'))},
   {id:'cesar_chavez',    label:'César Chávez',       cat:'historical', passive:'Sí Se Puede: +15% on labor questions',
@@ -1541,7 +1541,7 @@ const CHARS=[
   {id:'serena',          label:'Serena Williams',    cat:'athlete', passive:'Grand Slam: +25% XP on modern era units',
    unlockMethod:'trophy:gold:unit8', unlockHint:'Gold on Unit 8',
    svg:()=>svgMedallion('#040810','#c9a84c',face('#6a3818','#0a0a0a',hair_long('#1a0808'),'#000080'))},
-  {id:'billie_jean',     label:'Billie Jean King',   cat:'athlete', passive:'Battle of Sexes: +20% on women\'s history',
+  {id:'billie_jean',     label:'Billie Jean King',   cat:'athlete', passive:"Battle of Sexes: +20% on women's history",
    unlockMethod:'complete:unit7a', unlockHint:'Complete Unit 7A',
    svg:()=>svgMedallion('#060810','#c9a84c',face('#d4b090','#2a1a0a',hair_short('#8b6a30',11),'#1a2a4a',glasses()))},
 
@@ -2735,7 +2735,7 @@ function renderArchive(){
 })();
 function buildMiniMap(u){
   const c=u.eraColor||'#3d2e1e';
-  return `<svg viewBox="0 55 520 155" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+  return `<svg viewBox="0 55 520 155" width="100%" xmlns="http://www.w3.org/2000/svg">
     <path d="M82,82 L152,73 L202,68 L262,65 L322,67 L382,72 L432,82 L440,102 L444,132 L438,165 L418,184 L390,196 L350,204 L300,207 L250,204 L200,196 L158,183 L118,168 L90,148 L80,124 Z" fill="#14100d" stroke="#2e2118" stroke-width="1.5"/>
     <path d="M340,178 L352,200 L347,218 L337,224 L330,208 L333,192 Z" fill="#14100d" stroke="#2e2118" stroke-width="1"/>
     <rect x="248" y="85" width="48" height="30" rx="4" fill="${c}" opacity=".15" stroke="${c}" stroke-width="1.5"/>
