@@ -46,7 +46,7 @@ body::before{content:'';position:fixed;inset:0;
   pointer-events:none;z-index:9999;}
 
 /* ── ROOT / LAYOUT ── */
-#root{max-width:640px;margin:0 auto;padding:0 16px 100px;min-height:100vh;position:relative;z-index:1;}
+#root{max-width:860px;margin:0 auto;padding:0 24px 100px;min-height:100vh;position:relative;z-index:1;}
 /* When HUD is visible, push content down so it isn't hidden behind the fixed bar */
 body.hud-active #root{padding-top:68px;}
 
@@ -86,7 +86,7 @@ body.hud-active #root{padding-top:68px;}
   border-bottom:1px solid var(--border2);border-left:1px solid var(--border2);border-right:1px solid var(--border2);
   padding:10px 14px;
   position:fixed;top:0;left:50%;transform:translateX(-50%);
-  width:100%;max-width:640px;
+  width:100%;max-width:860px;
   z-index:200;backdrop-filter:blur(12px);
   display:none;}
 .hud-inner{display:flex;align-items:center;gap:12px;}
@@ -170,7 +170,7 @@ body.hud-active #root{padding-top:68px;}
 #briefing-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);
   z-index:500;overflow-y:auto;padding:20px 16px 60px;}
 #briefing-modal.show{display:block;animation:fadeIn .3s ease;}
-.briefing-inner{max-width:560px;margin:0 auto;}
+.briefing-inner{max-width:760px;margin:0 auto;}
 .briefing-header{display:flex;align-items:flex-start;justify-content:space-between;
   gap:10px;margin-bottom:20px;padding-top:10px;}
 .briefing-eyebrow{font-family:var(--bebas);font-size:10px;color:var(--text3);
@@ -221,16 +221,16 @@ body.hud-active #root{padding-top:68px;}
 
 /* THE QUESTION — primary visual weight */
 .q-block{background:var(--bg2);border:1px solid var(--border2);
-  border-left:3px solid var(--gold);padding:20px 18px;margin-bottom:18px;}
+  border-left:3px solid var(--gold);padding:24px 22px;margin-bottom:18px;}
 .q-number{font-family:var(--bebas);font-size:10px;color:var(--text3);
   letter-spacing:3px;margin-bottom:8px;}
-.q-text{font-family:var(--playfair);font-size:clamp(15px,2.8vw,18px);
-  color:var(--cream);line-height:1.55;}
+.q-text{font-family:var(--playfair);font-size:clamp(16px,2.4vw,20px);
+  color:var(--cream);line-height:1.6;}
 
 /* Answer choices */
-.choices-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.choices-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
 .choice-btn{display:block;width:100%;background:var(--bg2);border:1px solid var(--border2);
-  color:var(--text);padding:14px 16px;cursor:pointer;text-align:left;
+  color:var(--text);padding:16px 20px;cursor:pointer;text-align:left;
   transition:all .2s;position:relative;overflow:hidden;}
 .choice-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
   background:var(--gold);transform:scaleY(0);transition:transform .2s;pointer-events:none;}
@@ -241,9 +241,9 @@ body.hud-active #root{padding-top:68px;}
 .choice-btn.incorrect{border-color:var(--red2)!important;background:rgba(128,16,16,.06)!important;opacity:.6;}
 .choice-btn.incorrect::before{background:var(--red2)!important;transform:scaleY(1)!important;}
 .choice-btn.answered{cursor:default;}
-.choice-letter{font-family:var(--bebas);font-size:13px;color:var(--gold2);
-  margin-right:10px;display:inline-block;width:20px;}
-.choice-text{font-family:var(--crimson);font-size:16px;line-height:1.4;}
+.choice-letter{font-family:var(--bebas);font-size:14px;color:var(--gold2);
+  margin-right:12px;display:inline-block;width:20px;}
+.choice-text{font-family:var(--crimson);font-size:17px;line-height:1.5;}
 
 /* Feedback */
 .feedback-panel{display:none;border-left:3px solid var(--gold);
@@ -905,78 +905,118 @@ const LESSONS = [
     icon: '🔥',
     type: 'lesson',
     briefing: {
-      location: 'Understanding Postwar Tensions',
+      location: 'American Cities and Factory Towns',
       date: '1919-1921',
-      role: 'city newspaper correspondent',
+      role: 'investigative correspondent',
       text: 'World War I has ended, but peace has not brought calm. Fear of radicalism, labor unrest, racial violence, nativism, and political suspicion are reshaping American society. In this opening section, students trace the tensions that defined the years immediately after the war and set the tone for the decade that followed.',
       tags: ['SS.912.A.5.6']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Red Summer', cards: ['First Red Scare', 'Great Migration'] },
+    rewards: { badge: 'Red Summer', cards: ['Palmer Raids', 'Great Migration'] },
     bank: [
       {
         id: '4A-L26-Q1',
         text: 'Why did the First Red Scare spread so quickly in the United States after World War I?',
-        choices: ['Labor unrest, bomb scares, and fear of revolution made many Americans suspect radical threats were growing.', 'The Supreme Court required newspapers to support socialist movements and defend violent political protests.', 'European monarchies urged Americans to join a new alliance against democracy and industrial unions.', 'Most elected officials openly supported communism, which caused a backlash from private businesses.'],
+        choices: [
+          'The Russian Revolution inspired genuine fears that radicalism could destabilize governments in other industrialized countries.',
+          'Labor unrest, bomb scares, and fear of revolution made many Americans suspect radical threats were growing.',
+          'Most Americans had personally met foreign-born radicals who openly discussed plans to overthrow the government.',
+          'Congress passed laws requiring citizens to report any neighbor they believed held communist sympathies.'
+        ],
         correctAnswer: 'Labor unrest, bomb scares, and fear of revolution made many Americans suspect radical threats were growing.',
-        explanation: 'The Bolshevik Revolution, strikes, and bomb incidents led many Americans to fear that radical ideas might spread into the United States.',
+        explanation: 'A wave of strikes, mail bombs sent to politicians, and the Bolshevik Revolution in Russia all combined to convince many Americans that a radical uprising was imminent.',
         standard: 'SS.912.A.5.6'
       },
       {
         id: '4A-L26-Q2',
         text: 'Why were the Palmer Raids controversial even though many Americans supported them at first?',
-        choices: ['Federal agents targeted suspected radicals aggressively, often ignoring civil liberties and due process protections.', 'Federal agents refused to investigate bomb plots, which made the raids seem weak and ineffective.', 'Federal agents focused only on foreign diplomats, leaving labor organizers completely untouched by arrests.', 'Federal agents were blocked by Congress from deporting anyone accused of radical political beliefs.'],
+        choices: [
+          'Federal agents targeted suspected radicals aggressively, often ignoring civil liberties and due process protections.',
+          'The raids were criticized mainly because agents ignored foreign nationals entirely and only targeted native-born American citizens.',
+          'Palmer acted without any congressional authority, which caused a constitutional crisis between the branches.',
+          'Most of the people arrested were American-born citizens rather than the foreign immigrants officials had targeted.'
+        ],
         correctAnswer: 'Federal agents targeted suspected radicals aggressively, often ignoring civil liberties and due process protections.',
-        explanation: 'The Palmer Raids reflected postwar fear, but critics argued that mass arrests and deportations violated constitutional protections.',
+        explanation: 'The raids swept up thousands of people — many with no criminal record — through warrantless searches and mass arrests, raising serious concerns about government overreach even among those who feared radicalism.',
         standard: 'SS.912.A.5.6'
       },
       {
         id: '4A-L26-Q3',
         text: 'What did the Red Summer of 1919 reveal about the United States after World War I?',
-        choices: ['Racial tensions were intense as migration, jobs, and housing pressures contributed to violent conflict.', 'Racial tensions had largely faded because wartime service produced nationwide support for integration.', 'Racial tensions mattered only in rural areas because northern cities avoided major conflict altogether.', 'Racial tensions were caused mainly by foreign governments trying to destabilize American industry.'],
+        choices: [
+          'Racial tensions were intense as migration, jobs, and housing pressures contributed to violent conflict.',
+          'Most racial violence was concentrated in southern rural areas far from the industrial cities of the North.',
+          'White Americans broadly welcomed Black veterans as heroes and supported their efforts to gain equal rights.',
+          'Black communities remained politically passive despite the violence, choosing legal over confrontational responses.'
+        ],
         correctAnswer: 'Racial tensions were intense as migration, jobs, and housing pressures contributed to violent conflict.',
-        explanation: 'The Red Summer showed that wartime migration and competition for opportunity sharpened racial hostility instead of reducing it.',
+        explanation: 'More than three dozen race riots erupted across the country in 1919, including in Chicago and Washington D.C., revealing that racial inequality was a national problem, not just a southern one.',
         standard: 'SS.912.A.5.6'
       },
       {
         id: '4A-L26-Q4',
         text: 'Why did the Great Migration contribute to postwar tensions in many northern cities?',
-        choices: ['Rapid demographic change increased competition over jobs, housing, and political power in urban areas.', 'Rapid demographic change ended industrial growth and caused cities to lose most of their factory workers.', 'Rapid demographic change persuaded white political leaders to support immediate federal anti-lynching laws.', 'Rapid demographic change allowed southern landowners to regain control of labor through higher wages.'],
+        choices: [
+          'Rapid demographic change increased competition over jobs, housing, and political power in urban areas.',
+          'Southern Black families found immediate acceptance in the North, but their accents caused misunderstandings.',
+          'Northern employers refused to hire Black migrants, forcing them into poverty and dependence on charity.',
+          'Most tension came from Black migrants who organized unions and demanded wages that undercut existing workers.'
+        ],
         correctAnswer: 'Rapid demographic change increased competition over jobs, housing, and political power in urban areas.',
-        explanation: 'As African Americans moved north, new opportunities emerged, but so did backlash from residents who resisted social and economic change.',
+        explanation: 'As hundreds of thousands of Black southerners moved to northern cities, competition for factory jobs and housing in segregated neighborhoods created friction that sometimes turned violent.',
         standard: 'SS.912.A.5.6'
       },
       {
         id: '4A-L26-Q5',
         text: 'Why did the Sacco and Vanzetti case become a symbol of postwar tension and prejudice?',
-        choices: ['Many people believed fear of immigrants and radical ideas influenced how the defendants were treated.', 'Many people believed the case proved every state court was controlled directly by immigrant political groups.', 'Many people believed the case ended nativism because the defendants were quickly pardoned without protest.', 'Many people believed the case showed American juries always ignored public opinion in criminal trials.'],
+        choices: [
+          'Many people believed fear of immigrants and radical ideas influenced how the defendants were treated.',
+          'The case proved that Italian immigrants dominated organized crime in every major American city.',
+          'It showed that anarchist political groups had successfully infiltrated the federal judicial system.',
+          'Sacco and Vanzetti confessed under questioning but were convicted anyway, proving the trial was corrupt.'
+        ],
         correctAnswer: 'Many people believed fear of immigrants and radical ideas influenced how the defendants were treated.',
-        explanation: 'The case raised lasting questions about fairness, nativism, and whether political fear shaped the justice system.',
+        explanation: 'The trial and execution of two Italian immigrant anarchists drew international attention and left many convinced that the men were condemned as much for their background and politics as for the crime itself.',
         standard: 'SS.912.A.5.6'
       },
       {
         id: '4A-L26-Q6',
         text: 'Why did immigration restriction gain support in the early 1920s?',
-        choices: ['Nativism and fears about radicals led many Americans to favor tighter control over who could enter.', 'Nativism and fears about radicals disappeared, so lawmakers relaxed quotas on southern and eastern Europe.', 'Nativism and fears about radicals mattered little because labor unions demanded a larger immigrant workforce.', 'Nativism and fears about radicals pushed Congress to open borders and speed citizenship for newcomers.'],
+        choices: [
+          'Nativism and fears about radicals led many Americans to favor tighter control over who could enter.',
+          'Factory owners lobbied Congress for restrictions because immigrants were joining unions and demanding higher wages.',
+          'Congress acted mainly to reduce overcrowding in ports of entry that had become dangerously overwhelmed.',
+          'The restrictions were supported only in the South and had almost no political backing in industrial states.'
+        ],
         correctAnswer: 'Nativism and fears about radicals led many Americans to favor tighter control over who could enter.',
-        explanation: 'Postwar suspicion of foreigners, especially immigrants from southern and eastern Europe, helped drive new quota laws.',
+        explanation: 'The Immigration Acts of 1921 and 1924 reflected a mix of nativist prejudice, economic anxiety, and the belief that immigrants from Southern and Eastern Europe brought dangerous ideologies with them.',
         standard: 'SS.912.A.5.6'
       },
       {
         id: '4A-L26-Q7',
         text: 'Why were major strikes after World War I often treated as political threats rather than only workplace disputes?',
-        choices: ['Many Americans connected labor unrest to radical movements and feared revolution rather than negotiation.', 'Many Americans believed strikes were required by the Constitution whenever wages fell after wartime inflation.', 'Many Americans welcomed strikes because they expected socialist parties to stabilize prices and employment.', 'Many Americans saw strikes as unrelated to politics because unions avoided public demands during the period.'],
+        choices: [
+          'Many Americans connected labor unrest to radical movements and feared revolution rather than negotiation.',
+          'Strikers openly announced in public statements that they were attempting to overthrow the U.S. government.',
+          'The strikes were organized by foreign governments trying to weaken American industrial production deliberately.',
+          'Labor unions had passed resolutions praising the Russian Revolution, which confirmed suspicions of disloyalty.'
+        ],
         correctAnswer: 'Many Americans connected labor unrest to radical movements and feared revolution rather than negotiation.',
-        explanation: 'In the climate of the First Red Scare, strikes were often interpreted through fear of subversion rather than through economic grievance.',
+        explanation: 'In the atmosphere of the Red Scare, strikes in key industries like steel and the police walkout in Boston were portrayed as steps toward Bolshevism rather than ordinary demands for better wages and conditions.',
         standard: 'SS.912.A.5.6'
       },
       {
         id: '4A-L26-Q8',
         text: 'What best explains why the years after World War I felt unstable even though the fighting had ended?',
-        choices: ['Peace brought anxiety over race, labor, immigration, and radicalism instead of immediate social calm.', 'Peace brought broad confidence because Americans agreed on civil rights, labor policy, and foreign affairs.', 'Peace brought less conflict because federal courts quickly settled every dispute over race and immigration.', 'Peace brought isolation from the world economy, which shielded Americans from political and cultural change.'],
+        choices: [
+          'Peace brought anxiety over race, labor, immigration, and radicalism instead of immediate social calm.',
+          'The U.S. economy entered a severe recession immediately after the war that lasted through 1925.',
+          'Returning veterans found no jobs available and launched a series of violent protests in major cities.',
+          'Political instability resulted from Congress refusing to ratify any postwar domestic legislation at all.'
+        ],
         correctAnswer: 'Peace brought anxiety over race, labor, immigration, and radicalism instead of immediate social calm.',
-        explanation: 'The postwar years were marked by fear and conflict, showing that the end of war did not automatically produce stability at home.',
+        explanation: 'The end of the war released pent-up tensions — returning veterans, racial competition, labor conflict, fear of foreign ideas — that made the immediate postwar period deeply unsettled.',
         standard: 'SS.912.A.5.6'
       },
     ]
@@ -990,81 +1030,121 @@ const LESSONS = [
     label: 'LESSON 27',
     title: 'Normalcy',
     sub: 'The Politics of Normalcy · 1920s',
-    icon: '🏦',
+    icon: '🇺🇸',
     type: 'lesson',
     briefing: {
-      location: 'The Politics of Normalcy',
+      location: 'Washington D.C.',
       date: '1920s',
-      role: 'Washington policy aide',
-      text: 'After years of war and unrest, many Americans want a return to stability. Republican leaders promise normalcy, lower taxes, limited government, and support for business growth. Yet beneath that calm surface, the decade’s politics also reveal rising inequality, government scandal, and deep disagreements over who should benefit from prosperity.',
+      role: 'political journalist',
+      text: 'After years of war and unrest, many Americans want a return to stability. Republican leaders promise normalcy, lower taxes, limited government, and support for business growth. Yet beneath that calm surface, the decade\'s politics also reveal rising inequality, government scandal, and deep disagreements over who should benefit from prosperity.',
       tags: ['SS.912.A.5.8']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Normalcy', cards: ['Warren Harding', 'Calvin Coolidge'] },
+    rewards: { badge: 'Normalcy', cards: ['Calvin Coolidge', 'Teapot Dome'] },
     bank: [
       {
         id: '4A-L27-Q1',
         text: 'What did Warren Harding mean by a return to normalcy?',
-        choices: ['He meant a move away from wartime activism toward business growth, limited government, and stability.', 'He meant a return to Progressive reform through stronger federal regulation and higher wartime taxes.', 'He meant a renewed push for international intervention and a permanent military mobilization abroad.', 'He meant a plan to replace party politics with nonpartisan commissions chosen by labor unions.'],
+        choices: [
+          'He meant a move away from wartime activism toward business growth, limited government, and stability.',
+          'Coolidge made the statement in response to critics who accused him of secretly attempting to nationalize the largest industrial corporations in the country.',
+          'He was calling for renewed federal investment in infrastructure, farming, and public education programs.',
+          'Normalcy referred to restoring military strength after the demobilization that followed the armistice.'
+        ],
         correctAnswer: 'He meant a move away from wartime activism toward business growth, limited government, and stability.',
-        explanation: 'Harding’s slogan appealed to voters tired of war and reform by promising a calmer, more business-friendly political environment.',
+        explanation: 'Harding\'s campaign slogan captured voters\' exhaustion with Wilson\'s crusading foreign policy and Progressive-era regulation — they wanted calm, prosperity, and less government interference.',
         standard: 'SS.912.A.5.8'
       },
       {
         id: '4A-L27-Q2',
         text: 'How did Republican leaders like Harding and Coolidge generally approach the economy in the 1920s?',
-        choices: ['They favored low taxes, light regulation, and policies that encouraged business expansion.', 'They favored public ownership of major industries and strong wage controls across the economy.', 'They favored aggressive antitrust breakups and a large expansion of labor union bargaining power.', 'They favored cutting industrial production so agricultural prices would rise back to wartime levels.'],
+        choices: [
+          'They favored low taxes, light regulation, and policies that encouraged business expansion.',
+          'Republicans raised corporate taxes sharply to fund infrastructure projects across the South and Midwest.',
+          'They pursued aggressive antitrust enforcement to break up the monopolies created during the Gilded Age.',
+          'Republican economic policy focused mainly on expanding the federal reserve system to control inflation.'
+        ],
         correctAnswer: 'They favored low taxes, light regulation, and policies that encouraged business expansion.',
-        explanation: 'Republican administrations of the 1920s generally aligned with business interests and emphasized limited federal interference.',
+        explanation: 'Treasury Secretary Andrew Mellon championed deep tax cuts for the wealthy, arguing that money freed from taxes would be reinvested in business, creating broadly shared prosperity.',
         standard: 'SS.912.A.5.8'
       },
       {
         id: '4A-L27-Q3',
-        text: 'Why is Calvin Coolidge often associated with the phrase ‘the business of America is business’?',
-        choices: ['He reflected the decade’s belief that prosperity would grow if government supported private enterprise.', 'He rejected private enterprise and argued that national prosperity required full public ownership instead.', 'He believed culture and religion mattered more than economics, so government should ignore business entirely.', 'He wanted Congress to replace corporate leaders with experts appointed by the League of Nations.'],
-        correctAnswer: 'He reflected the decade’s belief that prosperity would grow if government supported private enterprise.',
-        explanation: 'Coolidge symbolized the pro-business mood of the era, which linked economic growth to tax cuts and limited regulation.',
+        text: 'Why is Calvin Coolidge often associated with the phrase "the business of America is business"?',
+        choices: [
+          'He reflected the decade\'s belief that prosperity would grow if government supported private enterprise.',
+          'Coolidge used the phrase to announce that he was personally investing his salary in the stock market.',
+          'He was responding to critics who accused him of trying to nationalize major American corporations.',
+          'The quote was meant to argue that citizens owed their primary loyalty to their employers rather than their country.'
+        ],
+        correctAnswer: 'He reflected the decade\'s belief that prosperity would grow if government supported private enterprise.',
+        explanation: 'Coolidge\'s statement captured the governing philosophy of the decade: that what was good for American business was good for America, and that government\'s job was to stay out of the way.',
         standard: 'SS.912.A.5.8'
       },
       {
         id: '4A-L27-Q4',
         text: 'Why was the Teapot Dome scandal politically important during the Harding administration?',
-        choices: ['It showed that pro-business government could also be vulnerable to corruption and abuse of office.', 'It proved federal regulation had become too strict for oil companies to operate on public lands.', 'It convinced Congress to nationalize all domestic energy production for the rest of the decade.', 'It demonstrated that voters had become more interested in foreign policy than in government ethics.'],
+        choices: [
+          'It showed that pro-business government could also be vulnerable to corruption and abuse of office.',
+          'The scandal forced Congress to pass sweeping campaign finance laws that transformed American politics.',
+          'It revealed that foreign governments had bribed American officials to gain access to military technology.',
+          'Teapot Dome caused Harding to resign and led directly to Coolidge serving two full presidential terms.'
+        ],
         correctAnswer: 'It showed that pro-business government could also be vulnerable to corruption and abuse of office.',
-        explanation: 'Teapot Dome damaged the administration’s reputation by revealing bribery and misuse of public resources.',
+        explanation: 'Interior Secretary Albert Fall\'s scheme to lease naval oil reserves to private companies in exchange for bribes exposed the dark side of an administration that celebrated private enterprise and minimal oversight.',
         standard: 'SS.912.A.5.8'
       },
       {
         id: '4A-L27-Q5',
         text: 'What was the main argument for cutting taxes during the 1920s?',
-        choices: ['Lower taxes would encourage investment and business growth, helping maintain prosperity.', 'Lower taxes would reduce industrial output and protect small farmers from global competition.', 'Lower taxes would eliminate consumer spending so inflation would disappear from the economy.', 'Lower taxes would shift government revenue entirely onto tariffs and labor union membership dues.'],
+        choices: [
+          'Lower taxes would encourage investment and business growth, helping maintain prosperity.',
+          'Tax cuts were primarily intended to help struggling farmers recover from postwar agricultural prices.',
+          'Republicans argued that high taxes caused the 1919 strikes and that cuts would prevent future labor unrest.',
+          'The main argument was that lower taxes would allow the government to pay off World War I debt more quickly.'
+        ],
         correctAnswer: 'Lower taxes would encourage investment and business growth, helping maintain prosperity.',
-        explanation: 'Supporters of tax cuts believed that keeping more money in private hands would strengthen business confidence and economic expansion.',
+        explanation: 'Secretary Mellon\'s supply-side argument was that wealthy individuals and corporations would invest their tax savings in new businesses and jobs, spreading prosperity throughout the economy.',
         standard: 'SS.912.A.5.8'
       },
       {
         id: '4A-L27-Q6',
         text: 'What was one major limit of the prosperity celebrated during the politics of normalcy?',
-        choices: ['Not all groups shared equally in the boom, especially farmers, industrial workers, and many minorities.', 'Not all groups shared equally because most urban professionals lost jobs while farm prices soared steadily.', 'Not all groups shared equally since the federal government banned consumer credit and auto ownership nationwide.', 'Not all groups shared equally because nearly all business growth took place outside the United States.'],
+        choices: [
+          'Not all groups shared equally in the boom, especially farmers, industrial workers, and many minorities.',
+          'The prosperity of the 1920s was an illusion — most economic indicators actually declined throughout the decade.',
+          'Republican policies caused inflation so severe that real wages declined for most workers after 1923.',
+          'Prosperity was limited mainly to coastal states, while the interior of the country saw no growth at all.'
+        ],
         correctAnswer: 'Not all groups shared equally in the boom, especially farmers, industrial workers, and many minorities.',
-        explanation: 'Beneath the image of broad prosperity, many Americans remained economically insecure or excluded from its benefits.',
+        explanation: 'While urban consumers and investors enjoyed rising prosperity, farmers faced falling crop prices, many factory workers saw wages stagnate, and most Black Americans and recent immigrants gained little from the decade\'s growth.',
         standard: 'SS.912.A.5.8'
       },
       {
         id: '4A-L27-Q7',
         text: 'How did 1920s politics connect pro-business policies with immigration restriction?',
-        choices: ['Many leaders paired economic optimism with nativist policies meant to preserve a preferred social order.', 'Many leaders paired economic optimism with open borders and equal treatment for all arriving workers.', 'Many leaders paired economic optimism with international labor guarantees enforced by the United Nations.', 'Many leaders paired economic optimism with the end of all tariffs on goods from Asia and Europe.'],
+        choices: [
+          'Many leaders paired economic optimism with nativist policies meant to preserve a preferred social order.',
+          'Business leaders pushed for immigration restriction because immigrants demanded wages above the market rate.',
+          'The connection was purely coincidental — immigration and economic policy were handled by separate agencies.',
+          'Immigration restriction was meant to protect foreign markets, not to shape the domestic workforce or culture.'
+        ],
         correctAnswer: 'Many leaders paired economic optimism with nativist policies meant to preserve a preferred social order.',
-        explanation: 'The decade’s politics often blended confidence in markets with social conservatism and restrictive ideas about citizenship and belonging.',
+        explanation: 'Republican leaders who championed prosperity also championed a vision of America as racially and culturally homogeneous — immigration restriction was as central to their platform as tax cuts and deregulation.',
         standard: 'SS.912.A.5.8'
       },
       {
         id: '4A-L27-Q8',
         text: 'What best explains why the politics of normalcy appealed to so many voters in the 1920s?',
-        choices: ['It promised order, prosperity, and a break from the turmoil of war, reform, and postwar unrest.', 'It promised a dramatic expansion of federal reform to correct every problem left by industrialization.', 'It promised constant intervention overseas so the United States could remake the global balance of power.', 'It promised to replace capitalism with a planned economy built around labor ownership and federal boards.'],
+        choices: [
+          'It promised order, prosperity, and a break from the turmoil of war, reform, and postwar unrest.',
+          'Voters backed normalcy mainly because they believed strong government had saved the economy during wartime.',
+          'Most Americans in 1920 wanted a more active federal government to address inequality and racial violence.',
+          'The appeal was largely regional — normalcy was popular only in small towns and rural areas of the Midwest.'
+        ],
         correctAnswer: 'It promised order, prosperity, and a break from the turmoil of war, reform, and postwar unrest.',
-        explanation: 'Normalcy was politically powerful because it offered reassurance after years of upheaval, even if the calm it promised was incomplete.',
+        explanation: 'After two decades of Progressive reform, a world war, postwar chaos, and economic instability, millions of voters were genuinely exhausted and wanted stability, growth, and a government that left them alone.',
         standard: 'SS.912.A.5.8'
       },
     ]
@@ -1081,78 +1161,118 @@ const LESSONS = [
     icon: '🎷',
     type: 'lesson',
     briefing: {
-      location: 'Popular Culture in the Roaring Twenties',
+      location: 'American Cities and Airwaves',
       date: '1920s',
-      role: 'radio and culture critic',
-      text: 'The 1920s transformed the way Americans spent, listened, watched, and imagined themselves. Radio, movies, jazz, sports heroes, advertising, and consumer goods created a new mass culture with powerful urban energy. This section explores how technology and entertainment helped define a new national style while also widening generational and social divides.',
+      role: 'culture reporter',
+      text: 'The 1920s are transforming how Americans entertain themselves, communicate, travel, and imagine who they are. New technologies, consumer goods, urban nightlife, and a flowering of African American culture are reshaping everyday life. This lesson explores the popular culture that gave the decade its nickname.',
       tags: ['SS.912.A.5.9']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'The Jazz Age', cards: ['Harlem Renaissance', 'Mass Media'] },
+    rewards: { badge: 'Jazz Age', cards: ['Harlem Renaissance', 'Radio Broadcasting'] },
     bank: [
       {
         id: '4A-L28-Q1',
         text: 'Why was radio such a powerful cultural force in the 1920s?',
-        choices: ['It brought news, music, sports, and advertising into homes and helped create a shared mass culture.', 'It remained too expensive for most families, so print newspapers and vaudeville kept total dominance.', 'It was used mainly by the federal government, which limited private broadcasting and entertainment programming.', 'It weakened national culture because stations were banned from airing the same content across regions.'],
+        choices: [
+          'It brought news, music, sports, and advertising into homes and helped create a shared mass culture.',
+          'Radio was primarily important for military communication and was not widely used by ordinary citizens.',
+          'It gave rural farmers access to agricultural prices that they had previously been unable to obtain at all.',
+          'Radio replaced newspapers entirely, forcing print journalism to pivot to photography and illustration.'
+        ],
         correctAnswer: 'It brought news, music, sports, and advertising into homes and helped create a shared mass culture.',
-        explanation: 'Radio connected Americans to the same voices, songs, and events, making it one of the most influential technologies of the decade.',
+        explanation: 'By the late 1920s millions of American households owned a radio, allowing the same songs, sports events, political speeches, and advertisements to reach audiences from coast to coast simultaneously.',
         standard: 'SS.912.A.5.9'
       },
       {
         id: '4A-L28-Q2',
         text: 'How did advertising and installment buying shape life in the Roaring Twenties?',
-        choices: ['They encouraged people to buy more goods and linked personal identity to consumption and style.', 'They discouraged spending by warning consumers that debt and luxury were always signs of moral decline.', 'They ended brand competition because federal agencies required identical products in every major industry.', 'They mattered little because most families still rejected manufactured goods and relied on barter instead.'],
+        choices: [
+          'They encouraged people to buy more goods and linked personal identity to consumption and style.',
+          'Advertising had very limited effect because most Americans distrusted commercial messages in newspapers.',
+          'Installment buying was mainly a rural practice used to purchase farm equipment like tractors and plows.',
+          'Both were discouraged by Republican administrations that worried about consumers accumulating too much debt.'
+        ],
         correctAnswer: 'They encouraged people to buy more goods and linked personal identity to consumption and style.',
-        explanation: 'Consumer culture expanded as advertising promoted desire and installment plans made more products seem immediately affordable.',
+        explanation: 'Advertisers persuaded Americans that buying the right products meant living the right life, and installment plans made radios, cars, and appliances available to families who could not afford them outright.',
         standard: 'SS.912.A.5.9'
       },
       {
         id: '4A-L28-Q3',
         text: 'Why was the automobile so important to social change in the 1920s?',
-        choices: ['It changed work, leisure, and geography by increasing mobility and supporting related industries.', 'It remained a luxury novelty with little effect on travel, dating, or suburban development.', 'It reduced consumer demand because families spent less on fuel, roads, and industrial products.', 'It was used mainly in rural farming, so cities saw almost no cultural or economic impact from cars.'],
+        choices: [
+          'It changed work, leisure, and geography by increasing mobility and supporting related industries.',
+          'The automobile was mainly significant as a military technology that was later adapted for civilian use.',
+          'Cars mattered primarily to wealthy families and had little impact on working-class life or daily routines.',
+          'Automobile travel was too expensive and unreliable for most Americans to use on a regular basis.'
+        ],
         correctAnswer: 'It changed work, leisure, and geography by increasing mobility and supporting related industries.',
-        explanation: 'Cars helped transform dating, recreation, commuting, and business, while also stimulating sectors like oil, steel, and road construction.',
+        explanation: 'Henry Ford\'s assembly line made cars affordable, enabling suburban growth, tourism, the expansion of roads, and new patterns of dating and social life that transformed American culture fundamentally.',
         standard: 'SS.912.A.5.9'
       },
       {
         id: '4A-L28-Q4',
         text: 'Why did jazz become such an important symbol of the 1920s?',
-        choices: ['It reflected creativity, urban energy, and the growing influence of African American culture.', 'It became popular mainly because rural churches promoted it as the best expression of traditional values.', 'It replaced all other music forms so completely that dance halls and classical venues quickly disappeared.', 'It stayed isolated in one region because recording and radio prevented it from spreading nationally.'],
+        choices: [
+          'It reflected creativity, urban energy, and the growing influence of African American culture.',
+          'Jazz spread mainly because the federal government funded music programs in schools across the country.',
+          'It was important primarily in rural southern communities before gradually spreading to northern cities.',
+          'Jazz became symbolic mainly because it was the first American music performed by racially integrated bands.'
+        ],
         correctAnswer: 'It reflected creativity, urban energy, and the growing influence of African American culture.',
-        explanation: 'Jazz represented innovation and freedom for many Americans while also highlighting the cultural power of Black artists in the decade.',
+        explanation: 'Rooted in African American musical traditions, jazz spread from New Orleans and Chicago to dance halls and radio stations nationwide, embodying the freedom, improvisation, and urban energy of the decade.',
         standard: 'SS.912.A.5.9'
       },
       {
         id: '4A-L28-Q5',
         text: 'What was the significance of the Harlem Renaissance during the 1920s?',
-        choices: ['It was a major flowering of African American art, literature, and music that reshaped national culture.', 'It was a federal housing program designed to reduce racial conflict by moving writers into public apartments.', 'It was a conservative movement that rejected jazz and promoted a return to nineteenth-century cultural forms.', 'It was a political machine that controlled New York elections by suppressing new immigrant neighborhoods.'],
+        choices: [
+          'It was a major flowering of African American art, literature, and music that reshaped national culture.',
+          'The Harlem Renaissance was mainly a political movement focused on winning voting rights in the South.',
+          'It was significant primarily as an economic development program that created jobs for Black New Yorkers.',
+          'The movement was limited to Harlem and had almost no influence on the rest of American cultural life.'
+        ],
         correctAnswer: 'It was a major flowering of African American art, literature, and music that reshaped national culture.',
-        explanation: 'The Harlem Renaissance made Black intellectual and artistic achievement central to the story of modern American culture.',
+        explanation: 'Writers like Langston Hughes and Zora Neale Hurston, musicians like Duke Ellington, and artists like Aaron Douglas produced works that changed how Black Americans saw themselves and how white Americans saw Black culture.',
         standard: 'SS.912.A.5.9'
       },
       {
         id: '4A-L28-Q6',
         text: 'Why did sports figures and movie stars become national celebrities in the 1920s?',
-        choices: ['Mass media allowed millions of Americans to follow the same performers, teams, and public personalities.', 'Mass media declined sharply, so local communities turned athletes into celebrities through word of mouth alone.', 'Mass media mattered less than party politics, which chose most actors and athletes for national publicity.', 'Mass media focused only on war news, leaving entertainment figures with little influence over popular culture.'],
+        choices: [
+          'Mass media allowed millions of Americans to follow the same performers, teams, and public personalities.',
+          'Celebrity culture grew mainly because Congress passed laws requiring newspapers to cover major sporting events.',
+          'Sports and movies became popular mainly as a reaction against the religious moralism of the Prohibition era.',
+          'Most celebrities came from immigrant backgrounds, and their fame reflected the cultural power of ethnic communities.'
+        ],
         correctAnswer: 'Mass media allowed millions of Americans to follow the same performers, teams, and public personalities.',
-        explanation: 'Radio, film, newspapers, and magazines turned entertainers and athletes into shared national reference points.',
+        explanation: 'Radio, newsreels, and illustrated magazines gave Babe Ruth, Charlie Chaplin, and other performers national audiences of a scale that had been impossible before, creating the modern celebrity.',
         standard: 'SS.912.A.5.9'
       },
       {
         id: '4A-L28-Q7',
         text: 'How did urban life shape the culture of the Roaring Twenties?',
-        choices: ['Cities encouraged experimentation in fashion, music, nightlife, and social behavior for many young Americans.', 'Cities became less important because most cultural change happened in isolated rural communities instead.', 'Cities discouraged entertainment by banning dance clubs, theaters, and commercial sports competitions nationwide.', 'Cities lost population rapidly, which caused the decade’s major cultural trends to disappear by mid-decade.'],
+        choices: [
+          'Cities encouraged experimentation in fashion, music, nightlife, and social behavior for many young Americans.',
+          'City life made Americans more conservative as the density and economic competition of urban areas pushed residents toward traditional family values.',
+          'City life made Americans more conservative as density and competition pushed them toward traditional values.',
+          'Urban culture was mainly shaped by immigrant groups who kept their European customs rather than assimilating.'
+        ],
         correctAnswer: 'Cities encouraged experimentation in fashion, music, nightlife, and social behavior for many young Americans.',
-        explanation: 'Urban centers were engines of cultural innovation, helping shape what later generations remembered as the Jazz Age.',
+        explanation: 'The anonymity of city life, combined with accessible entertainment and consumer goods, made cities hotbeds of social experimentation — new dress styles, dating norms, music venues, and nightlife that defined the decade.',
         standard: 'SS.912.A.5.9'
       },
       {
         id: '4A-L28-Q8',
         text: 'What best explains why popular culture expanded so dramatically in the 1920s?',
-        choices: ['New technology, rising consumer markets, and urban entertainment combined to create a broader mass audience.', 'New technology mattered little because Americans relied mainly on local traditions and rejected national trends.', 'New technology reduced leisure time so sharply that entertainment industries lost most of their customers.', 'New technology helped only government agencies, which prevented private companies from shaping popular taste.'],
+        choices: [
+          'New technology, rising consumer markets, and urban entertainment combined to create a broader mass audience.',
+          'The federal government invested heavily in arts and entertainment to distract citizens from economic inequality.',
+          'Popular culture grew mainly because immigration ended, which made Americans more culturally unified.',
+          'Entertainment expanded because working hours fell sharply, giving most Americans far more leisure time than before.'
+        ],
         correctAnswer: 'New technology, rising consumer markets, and urban entertainment combined to create a broader mass audience.',
-        explanation: 'The 1920s saw mass culture grow because communication, production, and consumer demand all expanded at once.',
+        explanation: 'Radio, film, recorded music, the automobile, and rising wages all came together in the 1920s to create a genuinely mass consumer culture for the first time in American history.',
         standard: 'SS.912.A.5.9'
       },
     ]
@@ -1169,101 +1289,151 @@ const LESSONS = [
     icon: '⚖️',
     type: 'capstone',
     briefing: {
-      location: 'The Clash Between Traditionalism and Modernism',
+      location: 'Dayton, Tennessee and Across America',
       date: '1920s',
-      role: 'public debate moderator',
-      text: 'The Roaring Twenties was not simply an age of prosperity and entertainment. It was also an argument over morality, religion, science, gender roles, race, immigration, and the meaning of American identity. This capstone examines the decade’s most important cultural conflict: whether the United States would embrace modern ways of thinking or cling to older traditions.',
+      role: 'cultural historian',
+      text: 'The Roaring Twenties was not simply an age of prosperity and entertainment. It was also an argument over morality, religion, science, gender roles, race, immigration, and the meaning of American identity. This capstone examines the decade\'s most important cultural conflict: whether the United States would embrace modern ways of thinking or cling to older traditions.',
       tags: ['SS.912.A.5.10']
     },
     displayCount: 5,
     goldRules: { perCorrect: 25, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Tradition vs. Modernity', cards: ['Scopes Trial', 'Flappers'] },
+    rewards: { badge: 'Tradition vs. Modernity', cards: ['Scopes Trial', 'Ku Klux Klan Revival'] },
     bank: [
       {
         id: '4A-CAP-Q1',
         text: 'Why did the Scopes Trial become a national symbol of the clash between traditionalism and modernism?',
-        choices: ['It turned a local dispute over teaching evolution into a larger debate about science, religion, and culture.', 'It resolved the issue of evolution immediately by creating a national law requiring every school to teach it.', 'It focused mainly on prohibition enforcement and had little connection to religion or education policy.', 'It ended public debate because both sides accepted the court’s verdict as a final moral settlement.'],
+        choices: [
+          'It turned a local dispute over teaching evolution into a larger debate about science, religion, and culture.',
+          'It became national news only because William Jennings Bryan unexpectedly collapsed and died during the cross-examination portion of the proceedings.',
+          'It became national news only because William Jennings Bryan unexpectedly died during the proceedings.',
+          'The case attracted attention mainly as a legal precedent about whether states could regulate curriculum.'
+        ],
         correctAnswer: 'It turned a local dispute over teaching evolution into a larger debate about science, religion, and culture.',
-        explanation: 'The trial became famous because it represented a broader conflict over who would define truth and values in modern America.',
+        explanation: 'The presence of Clarence Darrow for the defense and William Jennings Bryan for the prosecution transformed a Tennessee classroom case into a nationally covered clash between scientific modernity and religious tradition.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-CAP-Q2',
         text: 'How did Prohibition reveal the tensions of the 1920s?',
-        choices: ['It showed that moral reform efforts collided with urban resistance, illegal markets, and changing lifestyles.', 'It showed that moral reform efforts quickly eliminated alcohol use and united the country behind enforcement.', 'It showed that moral reform efforts were supported mainly by organized crime and bootlegging networks.', 'It showed that moral reform efforts had little cultural meaning because drinking was already disappearing.'],
+        choices: [
+          'It showed that moral reform efforts collided with urban resistance, illegal markets, and changing lifestyles.',
+          'It revealed that the federal government had the administrative capacity to successfully regulate personal conduct across a large and diverse nation.',
+          'It revealed that most Americans had little interest in alcohol before the ban made it suddenly appealing.',
+          'Prohibition succeeded in eliminating most alcohol consumption, but failed to reduce organized crime overall.'
+        ],
         correctAnswer: 'It showed that moral reform efforts collided with urban resistance, illegal markets, and changing lifestyles.',
-        explanation: 'Prohibition exposed the gap between traditional reform ideals and the realities of enforcement in a changing society.',
+        explanation: 'Prohibition was a traditionalist triumph on paper, but its enforcement was a failure — speakeasies multiplied, bootlegging fueled organized crime, and millions of urban Americans simply ignored the law.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-CAP-Q3',
         text: 'Why did flappers become such a visible symbol of modernity in the 1920s?',
-        choices: ['They represented changing ideas about fashion, independence, gender roles, and public behavior.', 'They represented a rural religious revival that rejected nightlife and new forms of entertainment.', 'They represented a political movement to restore nineteenth-century laws on family and education.', 'They represented a temporary advertising trend that had little effect on how young women were viewed.'],
+        choices: [
+          'They represented changing ideas about fashion, independence, gender roles, and public behavior.',
+          'Flappers were mainly celebrities from film and radio whose style had no real connection to everyday women.',
+          'They were seen as symbols of modernity only by critics — most Americans admired the flapper lifestyle.',
+          'The flapper image was invented by advertisers to sell cosmetics and clothing to young urban women.'
+        ],
         correctAnswer: 'They represented changing ideas about fashion, independence, gender roles, and public behavior.',
-        explanation: 'Flappers became a cultural symbol because they challenged older expectations about how women should act and appear.',
+        explanation: 'With their short hair, short skirts, smoking, dancing, and social freedom, flappers embodied the decade\'s challenge to Victorian norms about how women should look, behave, and occupy public space.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-CAP-Q4',
         text: 'What did the rural-urban divide reveal about the 1920s?',
-        choices: ['Americans often disagreed sharply about morality, culture, religion, and the pace of social change.', 'Americans agreed broadly that modern city life should replace older local and religious traditions at once.', 'Americans disagreed only about taxes, while culture and religion played little role in public debate.', 'Americans resolved their differences quickly after 1925, ending most conflict over values and identity.'],
+        choices: [
+          'Americans often disagreed sharply about morality, culture, religion, and the pace of social change.',
+          'Rural areas were economically prosperous and had no major cultural grievances against urban America.',
+          'The divide was mainly economic — rural poverty and urban wealth created political but not cultural conflict.',
+          'Rural and urban Americans had nearly identical values but disagreed mainly about immigration policy.'
+        ],
         correctAnswer: 'Americans often disagreed sharply about morality, culture, religion, and the pace of social change.',
-        explanation: 'The decade’s culture wars often mapped onto tensions between urban modernism and more traditional rural values.',
+        explanation: 'The same decade that produced jazz clubs and flappers in cities also produced Prohibition enforcement, the Klan revival, and fundamentalist religious movements in rural and small-town America.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-CAP-Q5',
         text: 'Why did changing roles for women become part of the conflict between tradition and modernity?',
-        choices: ['New expectations about voting, work, leisure, and appearance challenged older assumptions about womanhood.', 'New expectations about voting, work, leisure, and appearance quickly disappeared after World War I ended.', 'New expectations about voting, work, leisure, and appearance were accepted equally in every region and class.', 'New expectations about voting, work, leisure, and appearance mattered only in Europe and not in the United States.'],
+        choices: [
+          'New expectations about voting, work, leisure, and appearance challenged older assumptions about womanhood.',
+          'The conflict was mainly legal — traditionalists and modernists disagreed mainly about the suffrage amendment.',
+          'Women\'s roles were controversial only in cities, while rural women continued to accept traditional expectations.',
+          'Most traditionalists supported women\'s new roles because they believed women would vote conservatively.'
+        ],
         correctAnswer: 'New expectations about voting, work, leisure, and appearance challenged older assumptions about womanhood.',
-        explanation: 'Women’s expanded visibility in public life made gender a central part of the decade’s argument over change and continuity.',
+        explanation: 'From the ballot box to the dance hall, from the factory floor to the college campus, women in the 1920s were pushing against traditional boundaries — and traditionalists pushed back vigorously.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-CAP-Q6',
-        text: 'What did the revival of the Ku Klux Klan in the 1920s suggest about the decade’s conflicts?',
-        choices: ['Nativism, racism, and religious intolerance remained powerful even during an era of cultural innovation.', 'Nativism, racism, and religious intolerance faded as consumer culture created a more inclusive national identity.', 'Nativism, racism, and religious intolerance survived only in secret because mass politics rejected them completely.', 'Nativism, racism, and religious intolerance were mostly unrelated to immigration, religion, or race during the decade.'],
+        text: 'What did the revival of the Ku Klux Klan in the 1920s suggest about the decade\'s conflicts?',
+        choices: [
+          'Nativism, racism, and religious intolerance remained powerful even during an era of cultural innovation.',
+          'It showed that most white Americans in every region of the country openly and actively supported organized racial violence against minorities.',
+          'It showed that most Americans were turning away from the racial progress made during Reconstruction.',
+          'The Klan was popular mainly among economic elites who feared competition from immigrant labor.'
+        ],
         correctAnswer: 'Nativism, racism, and religious intolerance remained powerful even during an era of cultural innovation.',
-        explanation: 'The decade’s modern image coexisted with reactionary movements that defended exclusion and social hierarchy.',
+        explanation: 'The 1920s Klan reached millions of members across northern and midwestern states, targeting not just Black Americans but also Catholics, Jews, and immigrants — reflecting how deeply anxious many Americans were about cultural change.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-CAP-Q7',
         text: 'What did modernists generally emphasize in 1920s debates over culture and knowledge?',
-        choices: ['They emphasized science, experimentation, and adaptation to changing social realities.', 'They emphasized strict rejection of new technology and a return to preindustrial local economies.', 'They emphasized that entertainment and consumer goods should be replaced with moral censorship.', 'They emphasized that democracy worked best when only religious leaders shaped public education.'],
+        choices: [
+          'They emphasized science, experimentation, and adaptation to changing social realities.',
+          'Modernists focused mainly on preserving traditional religious values in a changing urban environment.',
+          'They were concerned primarily with economic reform and had little interest in cultural or religious debates.',
+          'Modernists generally opposed immigration, believing only native-born Americans could produce genuine culture.'
+        ],
         correctAnswer: 'They emphasized science, experimentation, and adaptation to changing social realities.',
-        explanation: 'Modernists tended to welcome new ideas and technologies, even when those challenged older cultural assumptions.',
+        explanation: 'Modernists embraced evolution, psychology, new gender norms, and urban culture, arguing that society should evolve with knowledge rather than cling to traditions that science and experience had challenged.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-CAP-Q8',
         text: 'What did traditionalists generally fear about rapid cultural change in the 1920s?',
-        choices: ['They feared that urban modern culture was weakening moral standards, religion, and social order.', 'They feared that stronger church attendance would eliminate science, democracy, and public education completely.', 'They feared that consumer goods were disappearing, leaving families without movies, radios, or automobiles.', 'They feared that labor unions were becoming too weak to protect immigrant factory workers in northern cities.'],
+        choices: [
+          'They feared that urban modern culture was weakening moral standards, religion, and social order.',
+          'Traditionalists were mainly concerned about economic competition from immigrants and new industries.',
+          'Their primary fear was that science would make religious education illegal in American public schools.',
+          'Most traditionalists feared cultural change mainly because it threatened their investments in rural land.'
+        ],
         correctAnswer: 'They feared that urban modern culture was weakening moral standards, religion, and social order.',
-        explanation: 'Traditionalists often saw modern trends as a threat to established values, especially in matters of faith, family, and public behavior.',
+        explanation: 'For many traditionalists, jazz, flappers, evolution, Prohibition violations, and urban immigration all pointed to the same terrifying conclusion: the Christian, Anglo-Saxon social order they valued was being swept away.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-CAP-Q9',
         text: 'How did the Harlem Renaissance contribute to debates about modern American identity?',
-        choices: ['It challenged older stereotypes by presenting Black creativity and intellectual life as central to modern culture.', 'It supported older stereotypes by arguing that art should avoid politics, race, and urban experience entirely.', 'It mattered little outside New York because radio and publishing could not spread its influence nationally.', 'It ended controversy over race by convincing all Americans to reject segregation and nativism immediately.'],
+        choices: [
+          'It challenged older stereotypes by presenting Black creativity and intellectual life as central to modern culture.',
+          'The Harlem Renaissance contributed mainly by inspiring Black Americans to seek political office in large numbers.',
+          'It was important to identity debates primarily because it led to the integration of major cultural institutions.',
+          'The Harlem Renaissance was important to identity debates primarily because it led directly to the racial integration of major museums, concert halls, and cultural institutions.'
+        ],
         correctAnswer: 'It challenged older stereotypes by presenting Black creativity and intellectual life as central to modern culture.',
-        explanation: 'The Harlem Renaissance expanded who could be seen as defining American culture and helped push debates over race and modernity into public view.',
+        explanation: 'By producing celebrated literature, art, and music on a national stage, Harlem Renaissance artists asserted that Black Americans were not marginal to American culture but essential and innovative contributors to it.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-CAP-Q10',
         text: 'What best explains why the 1920s can be described as a conflict between tradition and modernity?',
-        choices: ['The decade mixed new freedoms and technologies with fierce resistance from people defending older values.', 'The decade mixed new freedoms and technologies with almost no resistance because Americans embraced change equally.', 'The decade mixed new freedoms and technologies only in cities, while politics and religion stayed unchanged.', 'The decade mixed new freedoms and technologies after lawmakers abolished debate over culture and morality.'],
+        choices: [
+          'The decade mixed new freedoms and technologies with fierce resistance from people defending older values.',
+          'The conflict was mainly economic — those who benefited from new industries opposed those left behind by them.',
+          'Tradition and modernity coexisted peacefully, with different Americans simply choosing their own preferred way.',
+          'The decade\'s main conflict was political, between the Republican and Democratic parties rather than cultural.'
+        ],
         correctAnswer: 'The decade mixed new freedoms and technologies with fierce resistance from people defending older values.',
-        explanation: 'The cultural story of the 1920s is not just change, but the argument over what that change should mean.',
+        explanation: 'Every element of 1920s culture — jazz and Prohibition, flappers and the Klan, the Scopes Trial and fundamentalism, the Harlem Renaissance and immigration restriction — reflects this same underlying tension.',
         standard: 'SS.912.A.5.10'
       },
     ]
   },
 
   // ==================================================
-  // EOC REVIEW — EOC Practice Quiz
+  // EOC REVIEW — Roaring Twenties
   // ==================================================
   {
     id: 'eoc',
@@ -1274,173 +1444,273 @@ const LESSONS = [
     type: 'eoc',
     briefing: {
       location: 'Roaring Twenties Review',
-      date: 'postwar tension through cultural conflict',
-      role: 'exam prep coach',
-      text: 'This review section brings together the entire Unit 4A arc. Expect questions that connect postwar fears, Republican politics, mass culture, and the clash between traditionalism and modernism. The emphasis is on synthesis, so students should be ready to connect political change, social tension, and cultural transformation across the decade.',
+      date: '',
+      role: 'state exam coach',
+      text: 'This review covers the full Roaring Twenties arc. Expect questions that connect postwar tensions, the politics of normalcy, popular culture, and the clash between tradition and modernity. The focus is on how economic prosperity, cultural innovation, and social anxiety all shaped the 1920s together.',
       tags: ['SS.912.A.5.6', 'SS.912.A.5.8', 'SS.912.A.5.9', 'SS.912.A.5.10']
     },
     displayCount: 15,
     goldRules: { perCorrect: 15, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Roaring Twenties Mastery', cards: ['Roaring Twenties Review'] },
+    rewards: { badge: 'Roaring Twenties Mastery', cards: ['Immigration Restriction', 'Prohibition'] },
     bank: [
       {
         id: '4A-EOC-Q1',
         text: 'Why did many Americans fear radicalism after World War I?',
-        choices: ['Strikes, bomb scares, and the Russian Revolution made some people fear upheaval at home.', 'Strikes, bomb scares, and the Russian Revolution convinced most leaders to support socialism openly.', 'Strikes, bomb scares, and the Russian Revolution ended labor conflict by calming employers and workers.', 'Strikes, bomb scares, and the Russian Revolution mattered little because the economy had fully stabilized.'],
+        choices: [
+          'Strikes, bomb scares, and the Russian Revolution made some people fear upheaval at home.',
+          'Returning veterans had brought communist literature back from Europe and were distributing it widely.',
+          'Congress had passed a law defining socialism as illegal, making any radical activity appear criminal.',
+          'Most fear was driven by actual evidence of organized plots to overthrow the federal government.'
+        ],
         correctAnswer: 'Strikes, bomb scares, and the Russian Revolution made some people fear upheaval at home.',
-        explanation: 'The Red Scare grew from the belief that global revolution and domestic unrest might combine into a threat inside the United States.',
+        explanation: 'The combination of domestic labor unrest and the visible example of Bolshevik revolution in Russia convinced many Americans that radical change could happen here too.',
         standard: 'SS.912.A.5.6'
       },
       {
         id: '4A-EOC-Q2',
         text: 'Why were the Palmer Raids later criticized by many Americans?',
-        choices: ['They often violated civil liberties in the name of security and anti-radical enforcement.', 'They failed because agents refused to arrest anyone accused of bombing or conspiracy.', 'They were criticized mainly for protecting labor unions from business retaliation and court review.', 'They were criticized because Congress had required federal agents to ignore immigration law entirely.'],
+        choices: [
+          'They often violated civil liberties in the name of security and anti-radical enforcement.',
+          'The raids were criticized mainly because they failed to find any evidence of radical activity.',
+          'Palmer was accused of conducting the raids to boost his own presidential ambitions rather than protect security.',
+          'Most criticism focused on the fact that the raids targeted wealthy business owners rather than actual radicals.'
+        ],
         correctAnswer: 'They often violated civil liberties in the name of security and anti-radical enforcement.',
-        explanation: 'The raids became a cautionary example of how fear can lead governments to overreach and ignore due process.',
+        explanation: 'As the immediate fear faded, critics including federal judges and civil liberties advocates condemned the raids for illegal searches, mass arrests without evidence, and deportations that ignored basic legal rights.',
         standard: 'SS.912.A.5.6'
       },
       {
         id: '4A-EOC-Q3',
         text: 'What did the Red Summer of 1919 demonstrate about American society after World War I?',
-        choices: ['Racial conflict remained severe, especially where migration and competition increased local tensions.', 'Racial conflict faded as wartime patriotism produced broad support for interracial cooperation everywhere.', 'Racial conflict disappeared in northern cities and survived only in isolated rural areas of the South.', 'Racial conflict mattered less than international diplomacy because the League of Nations settled domestic unrest.'],
+        choices: [
+          'Racial conflict remained severe, especially where migration and competition increased local tensions.',
+          'Most racial violence was concentrated in rural southern towns that had been largely unaffected by migration.',
+          'Black veterans returned from war prepared to peacefully accept the same racial hierarchy they had left.',
+          'The riots were isolated incidents with no common cause and no connection to postwar social conditions.'
+        ],
         correctAnswer: 'Racial conflict remained severe, especially where migration and competition increased local tensions.',
-        explanation: 'The violence of 1919 showed how deeply race shaped housing, labor, and political life after the war.',
+        explanation: 'The Red Summer\'s race riots spread from Washington D.C. to Chicago to Tulsa, demonstrating that the Great Migration had brought racial conflict north and that Black Americans\' wartime service had not translated into social equality.',
         standard: 'SS.912.A.5.6'
       },
       {
         id: '4A-EOC-Q4',
         text: 'What did voters generally hope to gain from a return to normalcy in the 1920 election?',
-        choices: ['More stability and less upheaval after war, reform, and postwar conflict.', 'More federal reform and a larger wartime government to manage every sector of the economy.', 'More international intervention so the United States could lead Europe through reconstruction directly.', 'More labor unrest so workers could pressure Congress into nationalizing major industries.'],
+        choices: [
+          'More stability and less upheaval after war, reform, and postwar conflict.',
+          'A stronger government that would use new federal powers to guarantee economic equality.',
+          'An aggressive foreign policy that would defend American interests in Europe and Asia.',
+          'Continuation of the Progressive reforms that had transformed government in the previous decade.'
+        ],
         correctAnswer: 'More stability and less upheaval after war, reform, and postwar conflict.',
-        explanation: 'Normalcy appealed because it promised a break from the strain and uncertainty of the previous decade.',
+        explanation: 'After two decades of Progressive activism, a world war, and a turbulent postwar period, Harding\'s vague promise of quiet stability resonated with voters exhausted by constant crisis and change.',
         standard: 'SS.912.A.5.8'
       },
       {
         id: '4A-EOC-Q5',
         text: 'How did Republican administrations of the 1920s generally support business growth?',
-        choices: ['They favored tax cuts, light regulation, and policies that encouraged investment and expansion.', 'They favored public ownership of banks, railroads, and factories to coordinate the national economy.', 'They favored strong labor protections above all else, even when corporations resisted federal rules.', 'They favored ending consumer credit and advertising so prosperity would rest only on cash purchases.'],
+        choices: [
+          'They favored tax cuts, light regulation, and policies that encouraged investment and expansion.',
+          'Republicans mainly helped business by building new federal infrastructure projects across the country.',
+          'The government supported growth primarily by establishing price controls to prevent market instability.',
+          'Republican policy focused on restricting imports to protect American manufacturers from foreign competition.'
+        ],
         correctAnswer: 'They favored tax cuts, light regulation, and policies that encouraged investment and expansion.',
-        explanation: 'The politics of the 1920s often reflected faith in business-led growth and suspicion of heavy federal intervention.',
+        explanation: 'The Mellon tax cuts, reduced antitrust enforcement, and close relationships between cabinet officials and industry gave American businesses an unusually favorable policy environment throughout the decade.',
         standard: 'SS.912.A.5.8'
       },
       {
         id: '4A-EOC-Q6',
         text: 'Why did the Teapot Dome scandal matter?',
-        choices: ['It exposed corruption inside a government that publicly celebrated efficiency and business confidence.', 'It exposed corruption inside a labor union that had taken over federal oil reserves during wartime.', 'It exposed corruption inside the Supreme Court, which then lost the power of judicial review.', 'It exposed corruption inside the Federal Reserve, which ended all private banking in response.'],
+        choices: [
+          'It exposed corruption inside a government that publicly celebrated efficiency and business confidence.',
+          'The scandal forced Congress to pass the first federal ethics laws governing executive branch officials.',
+          'It mattered mainly because it proved that the oil industry controlled every major decision in Washington.',
+          'Teapot Dome was significant primarily because it led to Harding\'s impeachment and removal from office.'
+        ],
         correctAnswer: 'It exposed corruption inside a government that publicly celebrated efficiency and business confidence.',
-        explanation: 'Teapot Dome undercut the moral credibility of an administration associated with pro-business normalcy.',
+        explanation: 'The contrast between the Harding administration\'s pro-business rhetoric and the reality of officials accepting bribes for oil leases undercut the image of businesslike, clean Republican governance.',
         standard: 'SS.912.A.5.8'
       },
       {
         id: '4A-EOC-Q7',
         text: 'Why did radio and film matter so much to popular culture in the 1920s?',
-        choices: ['They helped create a shared national culture by spreading the same entertainment and public figures widely.', 'They remained minor forms of communication because most Americans refused to spend money on them.', 'They reduced the popularity of sports and music by replacing leisure with government educational programming.', 'They mattered little because local traditions prevented national celebrities from emerging during the decade.'],
+        choices: [
+          'They helped create a shared national culture by spreading the same entertainment and public figures widely.',
+          'Radio and film mattered mainly because they gave immigrants a way to maintain connections to their homelands.',
+          'Both were controlled by the government to spread patriotic messages after the disruptions of the war.',
+          'They mattered primarily in cities, while rural communities continued to rely entirely on print journalism.'
+        ],
         correctAnswer: 'They helped create a shared national culture by spreading the same entertainment and public figures widely.',
-        explanation: 'Mass media helped unify American popular culture while also accelerating the influence of advertising and celebrity.',
+        explanation: 'When millions of Americans could listen to the same radio program or watch the same film, it created a genuinely national popular culture for the first time — the same songs, celebrities, and stories from coast to coast.',
         standard: 'SS.912.A.5.9'
       },
       {
         id: '4A-EOC-Q8',
         text: 'How did consumer culture change everyday life in the Roaring Twenties?',
-        choices: ['Advertising and installment credit encouraged Americans to buy more goods and imagine new lifestyles.', 'Advertising and installment credit disappeared as families returned to self-sufficient household production.', 'Advertising and installment credit were tightly banned, so consumer culture remained weak in urban areas.', 'Advertising and installment credit mattered mainly to rural farmers and had little effect in cities.'],
+        choices: [
+          'Advertising and installment credit encouraged Americans to buy more goods and imagine new lifestyles.',
+          'Consumer culture mainly affected wealthy Americans — most working families bought only basic necessities.',
+          'The change was primarily negative, as easy credit caused most families to go deeply into permanent debt.',
+          'Consumer culture grew mainly in the South and West and had little impact on northeastern urban workers.'
+        ],
         correctAnswer: 'Advertising and installment credit encouraged Americans to buy more goods and imagine new lifestyles.',
-        explanation: 'Consumer culture linked identity, aspiration, and modern living to mass-produced products and media images.',
+        explanation: 'Monthly payment plans made cars, refrigerators, and radios available to middle-income families, while advertising taught Americans to see consumption as self-expression — both trends that reshaped the economy and social life.',
         standard: 'SS.912.A.5.9'
       },
       {
         id: '4A-EOC-Q9',
         text: 'What was one major contribution of the Harlem Renaissance?',
-        choices: ['It made African American artistic and intellectual life a central part of national culture.', 'It ended debates over race by convincing white politicians to support immediate equality everywhere.', 'It rejected modern forms of expression and promoted a complete return to Victorian cultural norms.', 'It focused mainly on banking reform rather than on literature, art, music, and public identity.'],
+        choices: [
+          'It made African American artistic and intellectual life a central part of national culture.',
+          'The movement successfully ended racial segregation in the cultural institutions of New York City.',
+          'It was primarily a political movement that organized Black voters into a powerful electoral bloc.',
+          'The Harlem Renaissance had its greatest impact in the South, where Black cultural life was most restricted.'
+        ],
         correctAnswer: 'It made African American artistic and intellectual life a central part of national culture.',
-        explanation: 'The Harlem Renaissance helped redefine who could shape American culture and what modern creativity looked like.',
+        explanation: 'Through literature, poetry, painting, jazz, and intellectual writing, the Harlem Renaissance asserted that Black creativity was not marginal but essential to what America was and was becoming.',
         standard: 'SS.912.A.5.9'
       },
       {
         id: '4A-EOC-Q10',
         text: 'Why did flappers become controversial cultural symbols during the 1920s?',
-        choices: ['They seemed to challenge older expectations about women’s behavior, fashion, and independence.', 'They seemed to support stricter dress codes and stronger parental control over urban youth culture.', 'They seemed to represent rural religious revival more than modern music and city nightlife.', 'They seemed to reject consumer culture by refusing movies, automobiles, and commercial dance halls.'],
-        correctAnswer: 'They seemed to challenge older expectations about women’s behavior, fashion, and independence.',
-        explanation: 'Flappers symbolized new female visibility and autonomy, which many Americans celebrated and many others resisted.',
+        choices: [
+          'They seemed to challenge older expectations about women\'s behavior, fashion, and independence.',
+          'Flappers were controversial mainly because they openly violated Prohibition by drinking in public.',
+          'Most controversy came from Black communities who objected to flappers copying African American dance styles.',
+          'The flapper was controversial primarily as an economic symbol of wasteful upper-class consumer spending.'
+        ],
+        correctAnswer: 'They seemed to challenge older expectations about women\'s behavior, fashion, and independence.',
+        explanation: 'Short skirts, bobbed hair, smoking, dancing in mixed-gender venues, and driving automobiles unescorted all represented visible defiance of Victorian norms about respectable female behavior.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-EOC-Q11',
         text: 'Why did the Scopes Trial draw nationwide attention?',
-        choices: ['It became a public argument over science, religion, education, and the meaning of modern life.', 'It became a public argument over labor law and industrial wages in southern textile mills.', 'It became a public argument over whether radio broadcasting should be nationalized by Congress.', 'It became a public argument over whether prohibition should be enforced by the U.S. Navy.'],
+        choices: [
+          'It became a public argument over science, religion, education, and the meaning of modern life.',
+          'The trial attracted attention mainly because Clarence Darrow was attempting to have Scopes executed.',
+          'It drew national coverage because it was the first case in which radio broadcast a live courtroom proceeding.',
+          'The case was important mainly as a test of states\' rights to control their own educational standards.'
+        ],
         correctAnswer: 'It became a public argument over science, religion, education, and the meaning of modern life.',
-        explanation: 'The Scopes Trial mattered because it turned a state law into a national debate about culture and authority.',
+        explanation: 'With Bryan and Darrow facing off before newspaper and radio reporters, the Scopes Trial gave the nation a dramatic public stage for the culture war between evolution and creationism that divided the decade.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-EOC-Q12',
         text: 'What did Prohibition reveal about the 1920s?',
-        choices: ['Moral reform could collide with changing behavior, weak enforcement, and organized crime.', 'Moral reform could eliminate alcohol quickly once cities and rural communities fully cooperated.', 'Moral reform could succeed only by ending immigration and restricting radio advertising nationwide.', 'Moral reform could unify urban youth and church leaders behind the same idea of public morality.'],
+        choices: [
+          'Moral reform could collide with changing behavior, weak enforcement, and organized crime.',
+          'Prohibition proved that most Americans would accept major restrictions on personal behavior if asked.',
+          'It revealed that the federal government had the power to successfully regulate personal conduct nationwide.',
+          'Prohibition mainly revealed disagreements between the two major parties rather than deeper cultural conflicts.'
+        ],
         correctAnswer: 'Moral reform could collide with changing behavior, weak enforcement, and organized crime.',
-        explanation: 'Prohibition exposed the gap between reform ideals and the realities of a diverse, modern consumer society.',
+        explanation: 'The Eighteenth Amendment was a triumph of the temperance movement, but its enforcement collapsed under urban resistance, widespread flouting of the law, and the enrichment of bootleggers like Al Capone.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-EOC-Q13',
         text: 'What does the growth of the Ku Klux Klan in the 1920s suggest about the era?',
-        choices: ['Prosperity and modern culture existed alongside strong currents of nativism, racism, and intolerance.', 'Prosperity and modern culture ended nativism, racism, and intolerance in most parts of the country.', 'Prosperity and modern culture mattered only to immigrants because native-born Protestants rejected mass politics.', 'Prosperity and modern culture made race and religion less politically important than at any earlier time.'],
+        choices: [
+          'Prosperity and modern culture existed alongside strong currents of nativism, racism, and intolerance.',
+          'The Klan\'s growth proved that most white Americans in every region openly supported racial violence.',
+          'It suggests the 1920s were primarily defined by racial hatred rather than the economic growth of the period.',
+          'The Klan revival showed that southern white supremacist politics had spread northward for the first time.'
+        ],
         correctAnswer: 'Prosperity and modern culture existed alongside strong currents of nativism, racism, and intolerance.',
-        explanation: 'The 1920s combined innovation and exclusion, showing that modernity did not automatically produce tolerance.',
+        explanation: 'At its 1920s peak the Klan had four to five million members across the country — including in Oregon, Indiana, and Ohio — proving that racial and ethnic anxiety was a national, not regional, phenomenon.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-EOC-Q14',
         text: 'What best describes the rural-urban divide during the Roaring Twenties?',
-        choices: ['It reflected different attitudes about religion, morality, gender, immigration, and cultural change.', 'It reflected only disagreements about farming prices and had little to do with values or identity.', 'It disappeared once automobiles and radios made city culture equally popular in all communities.', 'It mattered only in the South because northern states fully agreed on modern social values.'],
+        choices: [
+          'It reflected different attitudes about religion, morality, gender, immigration, and cultural change.',
+          'The divide was purely economic — cities were prosperous while farms and small towns were not.',
+          'Rural and urban Americans shared most values but disagreed mainly about how to manage the economy.',
+          'The divide was mainly regional, pitting the South against the urban Northeast rather than rural against urban.'
+        ],
         correctAnswer: 'It reflected different attitudes about religion, morality, gender, immigration, and cultural change.',
-        explanation: 'The divide was cultural as well as geographic, making it one of the most important tensions of the decade.',
+        explanation: 'Urban Americans who embraced jazz, flappers, and evolution often clashed with rural and small-town Americans who supported Prohibition, fundamentalism, immigration restriction, and the Klan.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-EOC-Q15',
         text: 'Why did immigration restriction fit both postwar tensions and the larger traditionalist reaction of the 1920s?',
-        choices: ['It reflected fear that newcomers and foreign ideas threatened the nation’s social and cultural order.', 'It reflected a belief that open immigration would strengthen urban modernism and expand labor protections.', 'It reflected a consensus that the United States should welcome all cultures equally after World War I.', 'It reflected a plan to reduce racism by ending all legal distinctions between immigrants and citizens.'],
-        correctAnswer: 'It reflected fear that newcomers and foreign ideas threatened the nation’s social and cultural order.',
-        explanation: 'Restrictionist policy connected the fears of the Red Scare era to the broader politics of cultural defensiveness in the 1920s.',
+        choices: [
+          'It reflected fear that newcomers and foreign ideas threatened the nation\'s social and cultural order.',
+          'Immigration restriction was supported mainly by labor unions seeking to protect wages from competition.',
+          'The restrictions fit the era mainly because Congress needed to reduce overcrowding in major port cities.',
+          'It was primarily an economic policy unconnected to the cultural and racial anxieties of the decade.'
+        ],
+        correctAnswer: 'It reflected fear that newcomers and foreign ideas threatened the nation\'s social and cultural order.',
+        explanation: 'Immigration restriction in the 1920s was driven by the same nativist anxieties that fed the Klan revival and the Red Scare — the belief that the Anglo-Protestant character of America was under threat.',
         standard: 'SS.912.A.5.6 · SS.912.A.5.10'
       },
       {
         id: '4A-EOC-Q16',
         text: 'Why was the automobile important to the economic and social life of the 1920s?',
-        choices: ['It created jobs and new industries while reshaping mobility, leisure, and daily routines.', 'It reduced jobs and new industries by weakening demand for roads, steel, and petroleum products.', 'It created little social change because most Americans still traveled mainly by horse and rail only.', 'It created little economic change because cars were used almost entirely by wealthy tourists abroad.'],
+        choices: [
+          'It created jobs and new industries while reshaping mobility, leisure, and daily routines.',
+          'The automobile was mainly important to wealthy families and had little broader economic or social impact.',
+          'Cars mattered primarily as military technology — civilian use was still quite limited throughout the decade.',
+          'The automobile was significant mainly as a symbol of American industrial power rather than for practical use.'
+        ],
         correctAnswer: 'It created jobs and new industries while reshaping mobility, leisure, and daily routines.',
-        explanation: 'Automobiles influenced where Americans lived, how they spent free time, and how related industries expanded.',
+        explanation: 'The auto industry drove demand for steel, glass, rubber, oil, and roads; enabled suburban growth; created new patterns of dating and leisure; and helped define the consumer economy of the decade.',
         standard: 'SS.912.A.5.9'
       },
       {
         id: '4A-EOC-Q17',
         text: 'What was one major weakness in the image of normalcy and prosperity during the 1920s?',
-        choices: ['Prosperity was uneven, and many groups remained excluded from its benefits or social acceptance.', 'Prosperity was weak because factories had stopped growing and unemployment stayed near Depression levels.', 'Prosperity was evenly shared because federal redistribution removed nearly all economic inequality.', 'Prosperity was secure because speculative finance and consumer debt had disappeared from the economy.'],
+        choices: [
+          'Prosperity was uneven, and many groups remained excluded from its benefits or social acceptance.',
+          'The image was entirely false — the economy was actually contracting throughout most of the decade.',
+          'The main weakness was that Prohibition undermined the economy by outlawing a major industry.',
+          'Prosperity was undermined mainly by foreign competition that eroded American manufacturing jobs rapidly.'
+        ],
         correctAnswer: 'Prosperity was uneven, and many groups remained excluded from its benefits or social acceptance.',
-        explanation: 'Even during the boom, many Americans faced inequality, prejudice, or economic insecurity beneath the decade’s glittering surface.',
+        explanation: 'While investors and urban consumers prospered, farmers struggled with falling prices, industrial workers saw modest wage gains at best, and Black Americans and recent immigrants remained largely outside the boom.',
         standard: 'SS.912.A.5.8'
       },
       {
         id: '4A-EOC-Q18',
         text: 'What did modernists generally celebrate in the 1920s?',
-        choices: ['They celebrated new ideas, science, technology, and more flexible social and cultural norms.', 'They celebrated a full return to older religious authority in schools and public life above all else.', 'They celebrated strict censorship of movies, jazz, and advertising as the path to national unity.', 'They celebrated the end of urban life and a return to isolated local economies and traditions.'],
-        correctAnswer: 'They celebrated new ideas, science, technology, and more flexible social and cultural norms.',
-        explanation: 'Modernists tended to embrace innovation and social change, often in ways that alarmed traditionalists.',
+        choices: [
+          'Science, experimentation, and the new freedoms that urban life and technology made possible.',
+          'The restoration of religious values to a nation they believed had been corrupted by industrialization.',
+          'A return to the simpler social structures of rural America before immigration and urbanization.',
+          'Government intervention in the economy to protect workers and farmers from corporate exploitation.'
+        ],
+        correctAnswer: 'Science, experimentation, and the new freedoms that urban life and technology made possible.',
+        explanation: 'Modernists in the 1920s embraced evolution, psychological theories of human behavior, new gender norms, and the creative energy of cities — all of which traditionalists viewed as attacks on established values.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-EOC-Q19',
-        text: 'What did many traditionalists most fear about the decade’s cultural shifts?',
-        choices: ['They feared that modern culture was weakening religion, morality, and familiar social boundaries.', 'They feared that modern culture would make cities too rural and end most forms of popular entertainment.', 'They feared that modern culture would strengthen labor unions at the expense of church attendance only.', 'They feared that modern culture would eliminate immigration quotas and force national integration overnight.'],
+        text: 'What did many traditionalists most fear about the decade\'s cultural shifts?',
+        choices: [
+          'They feared that modern culture was weakening religion, morality, and familiar social boundaries.',
+          'Traditionalists mainly feared that rapid economic growth was widening inequality between rich and poor.',
+          'Their primary concern was that immigration would eventually outnumber the native-born population.',
+          'Most traditionalists were focused on foreign policy threats rather than domestic cultural changes.'
+        ],
         correctAnswer: 'They feared that modern culture was weakening religion, morality, and familiar social boundaries.',
-        explanation: 'Traditionalists often interpreted the decade’s changes as evidence that the nation was losing its moral center.',
+        explanation: 'Flappers, jazz, evolution in schools, immigration, and Prohibition violations all seemed to traditionalists like symptoms of the same disease — the erosion of the Christian moral order they believed had made America great.',
         standard: 'SS.912.A.5.10'
       },
       {
         id: '4A-EOC-Q20',
         text: 'Which theme best ties together the entire Roaring Twenties unit?',
-        choices: ['The decade mixed prosperity and innovation with deep conflict over who belonged and what America should become.', 'The decade mixed prosperity and innovation with almost no conflict because most Americans embraced change equally.', 'The decade mixed prosperity and innovation only in big cities, while politics and identity stayed mostly fixed.', 'The decade mixed prosperity and innovation after reformers solved racial, religious, and immigration disputes.'],
+        choices: [
+          'The decade mixed prosperity and innovation with deep conflict over who belonged and what America should become.',
+          'The 1920s were primarily an era of prosperity and cultural freedom with little significant social conflict.',
+          'The decade was mainly defined by foreign policy challenges that forced Americans to reconsider isolationism.',
+          'Prosperity was the decade\'s only real story — the cultural conflicts of the era had no lasting political or social consequences whatsoever.'
+        ],
         correctAnswer: 'The decade mixed prosperity and innovation with deep conflict over who belonged and what America should become.',
-        explanation: 'The 1920s were defined not just by glamour and growth, but by struggles over identity, citizenship, culture, and power.',
+        explanation: 'The Roaring Twenties was simultaneously an age of jazz, flappers, and consumer abundance AND an age of racial violence, immigration restriction, Prohibition, and the Klan — both are essential to understanding the decade.',
         standard: 'SS.912.A.5.6 · SS.912.A.5.8 · SS.912.A.5.9 · SS.912.A.5.10'
       },
     ]
