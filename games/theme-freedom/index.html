@@ -46,7 +46,7 @@ body::before{content:'';position:fixed;inset:0;
   pointer-events:none;z-index:9999;}
 
 /* ── ROOT / LAYOUT ── */
-#root{max-width:640px;margin:0 auto;padding:0 16px 100px;min-height:100vh;position:relative;z-index:1;}
+#root{max-width:860px;margin:0 auto;padding:0 24px 100px;min-height:100vh;position:relative;z-index:1;}
 /* When HUD is visible, push content down so it isn't hidden behind the fixed bar */
 body.hud-active #root{padding-top:68px;}
 
@@ -86,7 +86,7 @@ body.hud-active #root{padding-top:68px;}
   border-bottom:1px solid var(--border2);border-left:1px solid var(--border2);border-right:1px solid var(--border2);
   padding:10px 14px;
   position:fixed;top:0;left:50%;transform:translateX(-50%);
-  width:100%;max-width:640px;
+  width:100%;max-width:860px;
   z-index:200;backdrop-filter:blur(12px);
   display:none;}
 .hud-inner{display:flex;align-items:center;gap:12px;}
@@ -170,7 +170,7 @@ body.hud-active #root{padding-top:68px;}
 #briefing-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);
   z-index:500;overflow-y:auto;padding:20px 16px 60px;}
 #briefing-modal.show{display:block;animation:fadeIn .3s ease;}
-.briefing-inner{max-width:560px;margin:0 auto;}
+.briefing-inner{max-width:760px;margin:0 auto;}
 .briefing-header{display:flex;align-items:flex-start;justify-content:space-between;
   gap:10px;margin-bottom:20px;padding-top:10px;}
 .briefing-eyebrow{font-family:var(--bebas);font-size:10px;color:var(--text3);
@@ -221,16 +221,16 @@ body.hud-active #root{padding-top:68px;}
 
 /* THE QUESTION — primary visual weight */
 .q-block{background:var(--bg2);border:1px solid var(--border2);
-  border-left:3px solid var(--gold);padding:20px 18px;margin-bottom:18px;}
+  border-left:3px solid var(--gold);padding:24px 22px;margin-bottom:18px;}
 .q-number{font-family:var(--bebas);font-size:10px;color:var(--text3);
   letter-spacing:3px;margin-bottom:8px;}
-.q-text{font-family:var(--playfair);font-size:clamp(15px,2.8vw,18px);
-  color:var(--cream);line-height:1.55;}
+.q-text{font-family:var(--playfair);font-size:clamp(16px,2.4vw,20px);
+  color:var(--cream);line-height:1.6;}
 
 /* Answer choices */
-.choices-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.choices-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
 .choice-btn{display:block;width:100%;background:var(--bg2);border:1px solid var(--border2);
-  color:var(--text);padding:14px 16px;cursor:pointer;text-align:left;
+  color:var(--text);padding:16px 20px;cursor:pointer;text-align:left;
   transition:all .2s;position:relative;overflow:hidden;}
 .choice-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
   background:var(--gold);transform:scaleY(0);transition:transform .2s;pointer-events:none;}
@@ -241,9 +241,9 @@ body.hud-active #root{padding-top:68px;}
 .choice-btn.incorrect{border-color:var(--red2)!important;background:rgba(128,16,16,.06)!important;opacity:.6;}
 .choice-btn.incorrect::before{background:var(--red2)!important;transform:scaleY(1)!important;}
 .choice-btn.answered{cursor:default;}
-.choice-letter{font-family:var(--bebas);font-size:13px;color:var(--gold2);
-  margin-right:10px;display:inline-block;width:20px;}
-.choice-text{font-family:var(--crimson);font-size:16px;line-height:1.4;}
+.choice-letter{font-family:var(--bebas);font-size:14px;color:var(--gold2);
+  margin-right:12px;display:inline-block;width:20px;}
+.choice-text{font-family:var(--crimson);font-size:17px;line-height:1.5;}
 
 /* Feedback */
 .feedback-panel{display:none;border-left:3px solid var(--gold);
@@ -974,7 +974,7 @@ const LESSONS = [
       {
         id: 'POL-C1-Q8',
         text: 'Which statement best captures continuity and change in freedom from emancipation through Reconstruction?',
-        choices: ['Slavery ended, but the struggle shifted toward whether freedom would include protection, land, and real autonomy.', 'Slavery ended, and all major arguments over labor, rights, and citizenship disappeared almost immediately.', 'Slavery ended only after southern states had willingly protected equal treatment for freedpeople in every area.', 'Slavery ended while the federal government stopped shaping debates over liberty and civil status altogether.'],
+        choices: ['Slavery ended, but the struggle shifted toward whether freedom would include protection, land, and real autonomy.', 'Slavery ended, and all major arguments over labor, rights, and citizenship disappeared almost immediately.', 'Slavery ended only after southern states had voluntarily and willingly protected equal treatment for all formerly enslaved people.', 'Slavery ended while the federal government stopped shaping debates over liberty and civil status altogether.'],
         correctAnswer: 'Slavery ended, but the struggle shifted toward whether freedom would include protection, land, and real autonomy.',
         explanation: 'Emancipation changed the law, but liberty still depended on whether freedpeople could exercise power, security, and independence.',
         standard: 'SS.912.A.2.3 · SS.912.A.2.4 · SS.912.A.2.6'
@@ -989,7 +989,7 @@ const LESSONS = [
       },
       {
         id: 'POL-C1-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Who Counts as Free?’',
+        text: 'What broad pattern best answers the chapter question \'Who Counts as Free?\'',
         choices: ['Freedom grows when excluded people gain legal personhood and citizenship, but those gains are often contested.', 'Freedom grows only after local authorities accept equality without any federal pressure or constitutional change.', 'Freedom grows mainly by separating liberty from citizenship, law, and political status across all eras.', 'Freedom grows while Americans steadily stop arguing over who belongs in the political community at all.'],
         correctAnswer: 'Freedom grows when excluded people gain legal personhood and citizenship, but those gains are often contested.',
         explanation: 'This chapter shows liberty as a fight over recognition, law, and belonging, not just a slogan about freedom in the abstract.',
@@ -1030,7 +1030,7 @@ const LESSONS = [
       {
         id: 'POL-C2-Q2',
         text: 'How did Brown v. Board of Education most directly challenge Plessy v. Ferguson?',
-        choices: ['Brown rejected the idea that legally enforced separation could still be equal in public education.', 'Brown rejected the idea only after Plessy had already been overturned by the Voting Rights Act.', 'Brown rejected the idea mainly by restoring segregation to local control rather than ending it.', 'Brown rejected the idea while leaving public education outside constitutional debate over liberty.'],
+        choices: ['Brown rejected the idea that legally enforced separation could still be equal in public education.', 'Brown rejected the idea only after Plessy had already been overturned by the Voting Rights Act.', 'Brown rejected the idea mainly by restoring segregation to local control rather than ending it.', 'Brown rejected the idea of separate-but-equal while leaving all public education permanently outside constitutional debate and federal review.'],
         correctAnswer: 'Brown rejected the idea that legally enforced separation could still be equal in public education.',
         explanation: 'Brown reversed the logic of Plessy in education by declaring segregation inherently unequal in that sphere.',
         standard: 'SS.912.A.2.6 · SS.912.A.7.3'
@@ -1046,7 +1046,7 @@ const LESSONS = [
       {
         id: 'POL-C2-Q4',
         text: 'Which statement best captures continuity and change in federal enforcement of rights from Reconstruction to the 1960s?',
-        choices: ['Federal commitment rose and fell, but rights were most secure when Washington enforced them against local resistance.', 'Federal commitment rose and fell only after local resistance had already disappeared from southern politics.', 'Federal commitment rose and fell mainly because courts and Congress never mattered to civil-rights enforcement.', 'Federal commitment rose and fell while states consistently protected voting and equal treatment on their own.'],
+        choices: ['Federal commitment rose and fell, but rights were most secure when Washington enforced them against local resistance.', 'Federal commitment rose and fell only after local resistance had already disappeared from southern politics.', 'Federal commitment rose and fell mainly because courts and Congress never truly mattered to enforcing rights during the Reconstruction era.', 'Federal commitment rose and fell while states consistently protected voting and equal treatment on their own.'],
         correctAnswer: 'Federal commitment rose and fell, but rights were most secure when Washington enforced them against local resistance.',
         explanation: 'A key theme is that national guarantees mattered most when backed by real federal power and institutional will.',
         standard: 'SS.912.A.2.5 · SS.912.A.7.3'
@@ -1054,7 +1054,7 @@ const LESSONS = [
       {
         id: 'POL-C2-Q5',
         text: 'Which development is the best example of rights existing on paper while being denied in practice?',
-        choices: ['Literacy tests and poll taxes blocking Black voting despite constitutional amendments protecting citizenship.', 'The Homestead Act encouraging western settlement by giving land claims to those who improved property.', 'The New Deal coalition bringing more workers and immigrants into Democratic electoral politics over time.', 'The Free Speech Movement expanding student political activity on college campuses during the 1960s.'],
+        choices: ['Literacy tests and poll taxes blocking Black voting despite constitutional amendments protecting citizenship.', 'The Homestead Act encouraging western settlement by giving land claims to those who improved property.', 'The New Deal coalition bringing more workers and immigrants into the Democratic electoral base during the 1930s and 1940s.', 'The Free Speech Movement expanding student political activity on college campuses during the 1960s.'],
         correctAnswer: 'Literacy tests and poll taxes blocking Black voting despite constitutional amendments protecting citizenship.',
         explanation: 'These tools show how liberty can be formally recognized but practically denied by state and local systems.',
         standard: 'SS.912.A.2.6'
@@ -1080,7 +1080,7 @@ const LESSONS = [
         text: 'What broad pattern best explains the relationship between rights written in law and rights experienced in daily life?',
         choices: ['Legal change matters, but it often takes enforcement, activism, and time before rights become real.', 'Legal change matters only after social equality has already been fully accepted without resistance.', 'Legal change matters mainly because rights become real automatically once amendments are ratified.', 'Legal change matters while activism and enforcement play only a minor role in actual historical change.'],
         correctAnswer: 'Legal change matters, but it often takes enforcement, activism, and time before rights become real.',
-        explanation: 'The chapter’s core idea is that liberty on paper is not the same as liberty in lived experience.',
+        explanation: 'The chapter\'s core idea is that liberty on paper is not the same as liberty in lived experience.',
         standard: 'SS.912.A.2.5 · SS.912.A.2.6 · SS.912.A.7.3'
       },
       {
@@ -1133,7 +1133,7 @@ const LESSONS = [
       },
       {
         id: 'POL-C3-Q2',
-        text: 'How did the women’s suffrage movement and the disability-rights movement most clearly compare?',
+        text: 'How did the women\'s suffrage movement and the disability-rights movement most clearly compare?',
         choices: ['Both argued that citizenship was incomplete if whole groups were denied equal public participation.', 'Both argued that citizenship was incomplete only after courts had ended the need for protest entirely.', 'Both argued that citizenship was incomplete mainly by rejecting federal law as a source of reform.', 'Both argued that citizenship was incomplete while avoiding demands about voting, access, or representation.'],
         correctAnswer: 'Both argued that citizenship was incomplete if whole groups were denied equal public participation.',
         explanation: 'Each movement insisted that formal membership in society meant little without access to its institutions.',
@@ -1165,8 +1165,8 @@ const LESSONS = [
       },
       {
         id: 'POL-C3-Q6',
-        text: 'Which statement best captures continuity and change between women’s suffrage and the later women’s rights movement?',
-        choices: ['Both challenged exclusion, but the later movement widened the fight from voting rights to broader equality.', 'Both challenged exclusion only after all legal barriers to women’s work, pay, and education had already ended.', 'Both challenged exclusion mainly by insisting that politics mattered less than private family decisions.', 'Both challenged exclusion while treating constitutional change as less important than cultural conformity.'],
+        text: 'Which statement best captures continuity and change between women\'s suffrage and the later women\'s rights movement?',
+        choices: ['Both challenged exclusion, but the later movement widened the fight from voting rights to broader equality.', 'Both challenged exclusion only after all legal barriers to women\'s work, pay, and education had already ended.', 'Both challenged exclusion mainly by insisting that politics mattered less than private family decisions.', 'Both challenged exclusion while treating constitutional change as less important than cultural conformity.'],
         correctAnswer: 'Both challenged exclusion, but the later movement widened the fight from voting rights to broader equality.',
         explanation: 'The later movement built on suffrage by pushing for change across work, family, law, and social expectation.',
         standard: 'SS.912.A.3.10 · SS.912.A.7.17'
@@ -1248,7 +1248,7 @@ const LESSONS = [
         text: 'What recurring pattern appears when Americans feel threatened by war or ideological danger?',
         choices: ['Public fear often makes it easier for government to restrict liberty in the name of security.', 'Public fear often makes it easier only after courts have permanently prohibited all emergency measures.', 'Public fear often makes it easier mainly for protest movements to expand liberty without resistance.', 'Public fear often makes it easier while reducing support for surveillance, censorship, and loyalty campaigns.'],
         correctAnswer: 'Public fear often makes it easier for government to restrict liberty in the name of security.',
-        explanation: 'This chapter’s main pattern is that liberty becomes more vulnerable when people believe national survival is at stake.',
+        explanation: 'This chapter\'s main pattern is that liberty becomes more vulnerable when people believe national survival is at stake.',
         standard: 'SS.912.A.4.6 · SS.912.A.6.15 · SS.912.A.7.15'
       },
       {
@@ -1270,7 +1270,7 @@ const LESSONS = [
       {
         id: 'POL-C4-Q6',
         text: 'Which development is the strongest example of post-9/11 security expansion affecting civil liberties?',
-        choices: ['The PATRIOT Act broadening surveillance and investigative powers in the name of preventing terrorism.', 'The GI Bill expanding educational and housing opportunity for veterans after World War II.', 'The Brown decision striking at school segregation during the Civil Rights era.', 'The Populist movement criticizing railroads and financial power in the late nineteenth century.'],
+        choices: ['The PATRIOT Act broadening surveillance and investigative powers in the name of preventing terrorism.', 'The GI Bill expanding educational and housing opportunity for veterans after World War II.', 'The Brown decision striking at school segregation during the Civil Rights era.', 'The Populist movement criticizing railroad monopolies and concentrated financial power in the late nineteenth century.'],
         correctAnswer: 'The PATRIOT Act broadening surveillance and investigative powers in the name of preventing terrorism.',
         explanation: 'The PATRIOT Act became a central symbol of how the security state expanded after September 11.',
         standard: 'SS.912.A.7.15'
@@ -1278,7 +1278,7 @@ const LESSONS = [
       {
         id: 'POL-C4-Q7',
         text: 'Which statement best captures continuity and change in liberty during moments of fear?',
-        choices: ['The justifications change, but crisis repeatedly makes exclusion, censorship, and surveillance seem more acceptable.', 'The justifications change only after Americans stop connecting security policy to liberty and civil rights.', 'The justifications change mainly because emergency powers steadily disappear from national life after 1945.', 'The justifications change while government becomes less interested in dissent, intelligence, and political loyalty.'],
+        choices: ['The justifications change, but crisis repeatedly makes exclusion, censorship, and surveillance seem more acceptable.', 'The justifications change only after Americans stop connecting security policy to liberty and civil rights.', 'The justifications change mainly because emergency powers steadily disappear from national life after 1945.', 'The justifications change while government becomes progressively less interested in dissent, intellectual life, or political speech over time.'],
         correctAnswer: 'The justifications change, but crisis repeatedly makes exclusion, censorship, and surveillance seem more acceptable.',
         explanation: 'The language of danger shifts across eras, but the pressure on liberty remains strikingly familiar.',
         standard: 'SS.912.A.4.6 · SS.912.A.6.4 · SS.912.A.7.15'
@@ -1301,7 +1301,7 @@ const LESSONS = [
       },
       {
         id: 'POL-C4-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Liberty in Times of Fear’?',
+        text: 'What broad pattern best answers the chapter question \'Liberty in Times of Fear\'?',
         choices: ['Fear often narrows liberty by enlarging state power, but each era also generates arguments for protecting rights.', 'Fear often narrows liberty only after Americans have settled every constitutional debate about emergency power.', 'Fear often narrows liberty mainly because government stops caring about loyalty, surveillance, and internal dissent.', 'Fear often narrows liberty while public resistance to emergency measures becomes less important over time.'],
         correctAnswer: 'Fear often narrows liberty by enlarging state power, but each era also generates arguments for protecting rights.',
         explanation: 'The chapter is not only about restriction; it is also about the recurring effort to defend liberty when people feel unsafe.',
@@ -1358,7 +1358,7 @@ const LESSONS = [
       {
         id: 'POL-C5-Q4',
         text: 'Which development is the best example of the federal government widening formal inclusion in immigration policy?',
-        choices: ['The Immigration Act of 1965 replacing the older national-origins quota system with a different framework.', 'The Chinese Exclusion Act targeting migration from China during the late nineteenth century.', 'The Emergency Quota Act of the 1920s sharply limiting arrivals from many parts of Europe and Asia.', 'The detention process at Angel Island applying intense scrutiny to many Asian immigrants seeking entry.'],
+        choices: ['The Immigration Act of 1965 replacing the older national-origins quota system with a different framework.', 'The Chinese Exclusion Act targeting migration from China during the late nineteenth century.', 'The Emergency Quota Act of the 1920s sharply limiting arrivals from many parts of Europe and Asia.', 'The detention process at Angel Island applying intense and lengthy scrutiny to many Asian immigrants seeking entry.'],
         correctAnswer: 'The Immigration Act of 1965 replacing the older national-origins quota system with a different framework.',
         explanation: 'This law is a key turning point because it moved away from the older openly restrictive quota hierarchy.',
         standard: 'SS.912.A.7.17'
@@ -1366,7 +1366,7 @@ const LESSONS = [
       {
         id: 'POL-C5-Q5',
         text: 'Why is belonging a larger concept than citizenship alone?',
-        choices: ['Because formal legal status does not always guarantee social acceptance, equal treatment, or political trust.', 'Because formal legal status does not matter once immigration law is written and border policy is enforced.', 'Because formal legal status mainly concerns taxes and employment rather than liberty or national identity.', 'Because formal legal status disappears as an issue whenever the economy is strong and migration is rising.'],
+        choices: ['Because formal legal status does not always guarantee social acceptance, equal treatment, or political trust.', 'Because formal legal status does not matter at all once immigration law is written and border enforcement is established.', 'Because formal legal status mainly concerns taxes and employment rather than liberty or national identity.', 'Because formal legal status disappears as an issue whenever the economy is strong and migration is rising.'],
         correctAnswer: 'Because formal legal status does not always guarantee social acceptance, equal treatment, or political trust.',
         explanation: 'The chapter treats belonging as a political and cultural question, not only a legal checkbox.',
         standard: 'SS.912.A.3.7 · SS.912.A.7.17'
@@ -1374,7 +1374,7 @@ const LESSONS = [
       {
         id: 'POL-C5-Q6',
         text: 'What is the strongest comparison between Japanese American incarceration and some post-9/11 debates over Arab and Muslim belonging?',
-        choices: ['Both show how fear can cast whole communities as suspect even when many members are citizens or longtime residents.', 'Both show how fear disappears quickly once leaders invoke liberty and therefore leaves law and policy unchanged.', 'Both show how fear mainly expands civil liberties by convincing Americans to distrust national-security agencies.', 'Both show how fear matters only in foreign policy and not in domestic arguments about identity or citizenship.'],
+        choices: ['Both show how fear can cast whole communities as suspect even when many members are citizens or longtime residents.', 'Both show how fear disappears quickly once leaders invoke liberty and therefore leaves law and policy unchanged.', 'Both show how fear mainly expands civil liberties by convincing Americans to distrust all government authority during crisis.', 'Both show how fear matters only in foreign policy and not in domestic arguments about identity or citizenship.'],
         correctAnswer: 'Both show how fear can cast whole communities as suspect even when many members are citizens or longtime residents.',
         explanation: 'This comparison highlights how national anxiety can narrow liberty by blurring the line between membership and suspicion.',
         standard: 'SS.912.A.6.4 · SS.912.A.7.15'
@@ -1405,7 +1405,7 @@ const LESSONS = [
       },
       {
         id: 'POL-C5-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Equality, Belonging, and the Unfinished Promise’?',
+        text: 'What broad pattern best answers the chapter question \'Equality, Belonging, and the Unfinished Promise\'?',
         choices: ['American liberty expands when inclusion widens, but belonging remains vulnerable to fear, hierarchy, and exclusion.', 'American liberty expands only after immigration and citizenship stop shaping public argument and political identity.', 'American liberty expands mainly because legal equality makes social acceptance automatic across all eras.', 'American liberty expands while disputes over who belongs become less important than economic growth alone.'],
         correctAnswer: 'American liberty expands when inclusion widens, but belonging remains vulnerable to fear, hierarchy, and exclusion.',
         explanation: 'The chapter shows that liberty is incomplete when legal membership and lived acceptance do not fully align.',
@@ -1438,7 +1438,7 @@ const LESSONS = [
       {
         id: 'POL-REV-Q1',
         text: 'Which statement best captures a long-term pattern in the history of liberty and personhood?',
-        choices: ['Liberty expands most clearly when groups once denied full personhood gain legal recognition and enforceable rights.', 'Liberty expands most clearly only after all Americans agree on equality before reform begins politically.', 'Liberty expands most clearly mainly by separating citizenship from rights and public protection altogether.', 'Liberty expands most clearly while debates over belonging become less important to national life over time.'],
+        choices: ['Liberty expands most clearly when groups once denied full personhood gain legal recognition and enforceable rights.', 'Liberty expands most clearly only after all Americans agree on equality before reform begins politically.', 'Liberty expands most clearly mainly by separating citizenship from rights and public life rather than by connecting them more fully.', 'Liberty expands most clearly while debates over belonging become less important to national life over time.'],
         correctAnswer: 'Liberty expands most clearly when groups once denied full personhood gain legal recognition and enforceable rights.',
         explanation: 'From slavery to citizenship struggles, liberty becomes more real when excluded people are recognized as rights-bearing members of the community.',
         standard: 'SS.912.A.2.1 · SS.912.A.2.5'
@@ -1478,7 +1478,7 @@ const LESSONS = [
       {
         id: 'POL-REV-Q6',
         text: 'Which development best shows that liberty often depends on enforcement rather than principle alone?',
-        choices: ['The Voting Rights Act targeting local barriers that had survived despite earlier constitutional change.', 'The Seneca Falls Convention declaring women’s grievances before the Civil War in a reform manifesto.', 'The Bessemer process making steel cheaper for construction and transportation during industrial growth.', 'The Berlin Wall falling as communist regimes weakened at the end of the Cold War.'],
+        choices: ['The Voting Rights Act targeting local barriers that had survived despite earlier constitutional change.', 'The Seneca Falls Convention declaring women\'s grievances before the Civil War in a reform manifesto.', 'The Bessemer process making steel dramatically cheaper for construction, manufacturing, and transportation during the industrial era.', 'The Berlin Wall falling as communist regimes weakened at the end of the Cold War.'],
         correctAnswer: 'The Voting Rights Act targeting local barriers that had survived despite earlier constitutional change.',
         explanation: 'This is a strong example because it shows federal tools being used to make existing promises real.',
         standard: 'SS.912.A.7.3'
@@ -1494,7 +1494,7 @@ const LESSONS = [
       {
         id: 'POL-REV-Q8',
         text: 'What is the strongest comparison between the Emancipation Proclamation and Brown v. Board of Education?',
-        choices: ['Both were turning points that challenged entrenched systems, though each required further action to become fully real.', 'Both were turning points only after Congress had already permanently solved the issue each one addressed.', 'Both were turning points mainly because they immediately ended all resistance from states and local communities.', 'Both were turning points while avoiding moral arguments about equality, liberty, and public justice.'],
+        choices: ['Both were turning points that challenged entrenched systems, though each required further action to become fully real.', 'Both were turning points only after Congress had already permanently solved the issue each one addressed.', 'Both were turning points mainly because they immediately and permanently ended all resistance from states and local authorities.', 'Both were turning points while avoiding moral arguments about equality, liberty, and public justice.'],
         correctAnswer: 'Both were turning points that challenged entrenched systems, though each required further action to become fully real.',
         explanation: 'Neither development finished the work alone, but each changed the framework of the struggle over liberty.',
         standard: 'SS.912.A.2.3 · SS.912.A.7.3'
@@ -1550,14 +1550,14 @@ const LESSONS = [
       {
         id: 'POL-REV-Q15',
         text: 'Which case is the strongest example of liberty being denied to people who were already inside the nation rather than kept outside it?',
-        choices: ['Japanese American incarceration removing liberty from citizens and residents already living in the United States.', 'The Immigration Act of 1965 changing national immigration rules during the modern era.', 'Ellis Island processing large numbers of immigrants entering through New York Harbor.', 'The Open Door Policy defending equal trade access in China at the turn of the century.'],
+        choices: ['Japanese American incarceration removing liberty from citizens and residents already living in the United States.', 'The Immigration Act of 1965 changing the national immigration rules and framework during the modern civil rights era.', 'Ellis Island processing large numbers of immigrants entering through New York Harbor.', 'The Open Door Policy defending equal trade access in China at the turn of the century.'],
         correctAnswer: 'Japanese American incarceration removing liberty from citizens and residents already living in the United States.',
         explanation: 'This example is especially powerful because it shows liberty revoked from people already inside the political community.',
         standard: 'SS.912.A.2.6 · SS.912.A.6.4'
       },
       {
         id: 'POL-REV-Q16',
-        text: 'What is the strongest comparison between women’s suffrage activism and Civil Rights movement activism?',
+        text: 'What is the strongest comparison between women\'s suffrage activism and Civil Rights movement activism?',
         choices: ['Both translated protest into pressure for national rules that would expand liberty more broadly.', 'Both translated protest only after local governments had already accepted equality without coercion or conflict.', 'Both translated protest mainly by avoiding amendments, courts, and congressional action as reform tools.', 'Both translated protest while arguing that political rights mattered less than private cultural identity.'],
         correctAnswer: 'Both translated protest into pressure for national rules that would expand liberty more broadly.',
         explanation: 'Each movement shows that organized activism often matters most when it pushes institutions to formalize rights.',
@@ -1589,10 +1589,10 @@ const LESSONS = [
       },
       {
         id: 'POL-REV-Q20',
-        text: 'Which statement best answers the game’s essential question about the promise of liberty across American history?',
+        text: 'Which statement best answers the game\'s essential question about the promise of liberty across American history?',
         choices: ['Liberty has widened through struggle, but it has also been denied, defended, and repeatedly redefined over time.', 'Liberty has widened through struggle only after conflict over race, rights, and belonging disappeared from national life.', 'Liberty has widened through struggle mainly because law automatically produced equality once reform was announced.', 'Liberty has widened through struggle while becoming less connected to citizenship, power, and public institutions.'],
         correctAnswer: 'Liberty has widened through struggle, but it has also been denied, defended, and repeatedly redefined over time.',
-        explanation: 'That answer best captures the campaign’s central theme: liberty is a contested historical process, not a fixed inheritance.',
+        explanation: 'That answer best captures the campaign\'s central theme: liberty is a contested historical process, not a fixed inheritance.',
         standard: 'SS.912.A.2.1 · SS.912.A.2.5 · SS.912.A.3.10 · SS.912.A.4.6 · SS.912.A.6.4 · SS.912.A.7.3 · SS.912.A.7.15 · SS.912.A.7.17'
       },
     ]
@@ -2676,11 +2676,11 @@ function showLoginGate() {
 
 const HIST_CARDS = {
   douglass:    {icon:'✊', name:'Frederick Douglass',       role:'Abolitionist · Orator · Writer',
-    desc:'Escaped slavery to become the nation’s most powerful voice against it. His life and words forced Americans to confront the contradiction between liberty and slavery. Later fought for Black suffrage and women’s rights.', unlockLesson:'ch1'},
+    desc:'Escaped slavery to become the nation\'s most powerful voice against it. His life and words forced Americans to confront the contradiction between liberty and slavery. Later fought for Black suffrage and women\'s rights.', unlockLesson:'ch1'},
   tubman:      {icon:'🗺️', name:'Harriet Tubman',            role:'Underground Railroad · Suffragist',
-    desc:'Risked her life thirteen times to lead approximately seventy people to freedom. Later served as a Union spy and supported the women’s suffrage movement, embodying lifelong resistance to every form of unfreedom.', unlockLesson:'ch1'},
-  anthony:     {icon:'🗳️', name:'Susan B. Anthony',          role:'Women’s Suffrage · Civil Rights',
-    desc:'Devoted fifty years to the fight for women’s suffrage. Arrested for voting in 1872. Died fourteen years before the 19th Amendment was ratified — her work passed the finish line without her.', unlockLesson:'ch3'},
+    desc:'Risked her life thirteen times to lead approximately seventy people to freedom. Later served as a Union spy and supported the women\'s suffrage movement, embodying lifelong resistance to every form of unfreedom.', unlockLesson:'ch1'},
+  anthony:     {icon:'🗳️', name:'Susan B. Anthony',          role:'Women\'s Suffrage · Civil Rights',
+    desc:'Devoted fifty years to the fight for women\'s suffrage. Arrested for voting in 1872. Died fourteen years before the 19th Amendment was ratified — her work passed the finish line without her.', unlockLesson:'ch3'},
   korematsu:   {icon:'⛓️', name:'Fred Korematsu',           role:'Internment Resister · Civil Liberties',
     desc:'Refused to report to a Japanese American internment camp and was convicted. His Supreme Court case became one of the most condemned decisions in legal history. Received the Presidential Medal of Freedom in 1998.', unlockLesson:'ch4'},
   marshall:    {icon:'⚖️', name:'Thurgood Marshall',         role:'NAACP Attorney · Supreme Court Justice',
