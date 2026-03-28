@@ -46,7 +46,7 @@ body::before{content:'';position:fixed;inset:0;
   pointer-events:none;z-index:9999;}
 
 /* ── ROOT / LAYOUT ── */
-#root{max-width:640px;margin:0 auto;padding:0 16px 100px;min-height:100vh;position:relative;z-index:1;}
+#root{max-width:860px;margin:0 auto;padding:0 24px 100px;min-height:100vh;position:relative;z-index:1;}
 /* When HUD is visible, push content down so it isn't hidden behind the fixed bar */
 body.hud-active #root{padding-top:68px;}
 
@@ -86,7 +86,7 @@ body.hud-active #root{padding-top:68px;}
   border-bottom:1px solid var(--border2);border-left:1px solid var(--border2);border-right:1px solid var(--border2);
   padding:10px 14px;
   position:fixed;top:0;left:50%;transform:translateX(-50%);
-  width:100%;max-width:640px;
+  width:100%;max-width:860px;
   z-index:200;backdrop-filter:blur(12px);
   display:none;}
 .hud-inner{display:flex;align-items:center;gap:12px;}
@@ -170,7 +170,7 @@ body.hud-active #root{padding-top:68px;}
 #briefing-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);
   z-index:500;overflow-y:auto;padding:20px 16px 60px;}
 #briefing-modal.show{display:block;animation:fadeIn .3s ease;}
-.briefing-inner{max-width:560px;margin:0 auto;}
+.briefing-inner{max-width:760px;margin:0 auto;}
 .briefing-header{display:flex;align-items:flex-start;justify-content:space-between;
   gap:10px;margin-bottom:20px;padding-top:10px;}
 .briefing-eyebrow{font-family:var(--bebas);font-size:10px;color:var(--text3);
@@ -221,16 +221,16 @@ body.hud-active #root{padding-top:68px;}
 
 /* THE QUESTION — primary visual weight */
 .q-block{background:var(--bg2);border:1px solid var(--border2);
-  border-left:3px solid var(--gold);padding:20px 18px;margin-bottom:18px;}
+  border-left:3px solid var(--gold);padding:24px 22px;margin-bottom:18px;}
 .q-number{font-family:var(--bebas);font-size:10px;color:var(--text3);
   letter-spacing:3px;margin-bottom:8px;}
-.q-text{font-family:var(--playfair);font-size:clamp(15px,2.8vw,18px);
-  color:var(--cream);line-height:1.55;}
+.q-text{font-family:var(--playfair);font-size:clamp(16px,2.4vw,20px);
+  color:var(--cream);line-height:1.6;}
 
 /* Answer choices */
-.choices-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.choices-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
 .choice-btn{display:block;width:100%;background:var(--bg2);border:1px solid var(--border2);
-  color:var(--text);padding:14px 16px;cursor:pointer;text-align:left;
+  color:var(--text);padding:16px 20px;cursor:pointer;text-align:left;
   transition:all .2s;position:relative;overflow:hidden;}
 .choice-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
   background:var(--gold);transform:scaleY(0);transition:transform .2s;pointer-events:none;}
@@ -241,9 +241,9 @@ body.hud-active #root{padding-top:68px;}
 .choice-btn.incorrect{border-color:var(--red2)!important;background:rgba(128,16,16,.06)!important;opacity:.6;}
 .choice-btn.incorrect::before{background:var(--red2)!important;transform:scaleY(1)!important;}
 .choice-btn.answered{cursor:default;}
-.choice-letter{font-family:var(--bebas);font-size:13px;color:var(--gold2);
-  margin-right:10px;display:inline-block;width:20px;}
-.choice-text{font-family:var(--crimson);font-size:16px;line-height:1.4;}
+.choice-letter{font-family:var(--bebas);font-size:14px;color:var(--gold2);
+  margin-right:12px;display:inline-block;width:20px;}
+.choice-text{font-family:var(--crimson);font-size:17px;line-height:1.5;}
 
 /* Feedback */
 .feedback-panel{display:none;border-left:3px solid var(--gold);
@@ -894,438 +894,608 @@ const AC_HEADERS  = {'Content-Type':'application/json','apikey':AC_SUPA_KEY,'Aut
 
 const LESSONS = [
 
-  // ==================================================
-  // CHAPTER 1 — Who Owns the Future?
-  // ==================================================
+  // ── CHAPTER 1: Who Owns the Future? ───────────────────────
   {
-    id: 'ch1',
-    label: 'CHAPTER 1',
-    title: 'Who Owns the Future?',
-    sub: 'Land, capital, property, and control of opportunity',
-    icon: '🏭',
-    type: 'lesson',
+    id: 'ch1', label: 'CHAPTER 1', title: 'Who Owns the Future?',
+    icon: '🏭', type: 'lesson',
     briefing: {
-      location: 'Land, capital, property, and control of opportunity',
-      date: '',
-      role: 'economic systems analyst',
+      location: 'American History: Land, Capital, and Control',
+      date: 'Gilded Age to Industrial Era',
+      role: 'economic historian',
       text: 'Opportunity is never distributed evenly. In this chapter, students compare how land, railroads, industry, credit, and corporate power shaped who could build wealth and who got pushed aside. The focus is not just growth, but who controlled the engines of that growth.',
-      tags: ['SS.912.A.3.1', 'SS.912.A.3.4', 'SS.912.A.3.2']
+      tags: ['SS.912.A.3.1', 'SS.912.A.3.2', 'SS.912.A.3.4']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Who Owns the Future?', cards: ['Homestead Act', 'Standard Oil'] },
+    rewards: { badge: 'Who Owns the Future?', cards: ['Railroads', 'Gilded Age Capitalism'] },
     bank: [
       {
         id: 'EOC-C1-Q1',
         text: 'What is the strongest comparison between homesteading policy and federal railroad land grants?',
-        choices: ['One offered land to individuals, while the other gave enormous resources to corporations shaping western growth.', 'One offered land to individuals only after railroads had stopped influencing settlement and western trade.', 'One offered land to individuals, while the other mainly transferred power from corporations back to small farmers.', 'One offered land to individuals while the other focused mostly on education reform and urban public housing.'],
+        choices: [
+          'One offered land to individuals, while the other gave enormous resources to corporations shaping western growth.',
+          'Both distributed land equally to all Americans regardless of wealth, race, or prior economic status.',
+          'Both were failures that produced no significant western settlement or economic development of any kind.',
+          'Both primarily benefited small farmers and homesteaders rather than wealthy investors or large corporate interests of any kind.'
+        ],
         correctAnswer: 'One offered land to individuals, while the other gave enormous resources to corporations shaping western growth.',
-        explanation: 'Both policies created opportunity, but they distributed power very differently between ordinary settlers and large businesses.',
+        explanation: 'The Homestead Act offered 160 acres to individual settlers; railroad land grants gave corporations tens of millions of acres and enormous leverage over western development — both shaped the West, but through very different beneficiaries.',
         standard: 'SS.912.A.3.1 · SS.912.A.3.4'
       },
       {
         id: 'EOC-C1-Q2',
         text: 'How did opportunity differ for homesteaders and large industrial capitalists in the late nineteenth century?',
-        choices: ['Homesteaders often lacked credit and security, while industrialists had better access to capital, networks, and influence.', 'Homesteaders often lacked credit only after industrialists had already lost control of banks and investment markets.', 'Homesteaders often lacked credit, while industrialists depended mostly on free land rather than financing or investors.', 'Homesteaders often lacked credit because western farming was easier and less risky than industrial ownership.'],
+        choices: [
+          'Homesteaders often lacked credit and security, while industrialists had better access to capital, networks, and influence.',
+          'Homesteaders had more opportunity than industrialists because land was more valuable than industrial investment.',
+          'Both groups faced identical challenges and had equal access to credit, capital, and political influence throughout the era.',
+          'Industrialists actually had less opportunity than homesteaders because government regulation limited their profits severely.'
+        ],
         correctAnswer: 'Homesteaders often lacked credit and security, while industrialists had better access to capital, networks, and influence.',
-        explanation: 'Economic opportunity was shaped not just by effort, but by who had access to money, transportation, and political connections.',
+        explanation: 'Homesteaders faced debt, drought, railroad pricing power, and distant markets; Carnegie and Rockefeller had access to investment capital, political connections, and the ability to control supply chains — a fundamental asymmetry in who could actually build lasting wealth.',
         standard: 'SS.912.A.3.1 · SS.912.A.3.4'
       },
       {
         id: 'EOC-C1-Q3',
         text: 'Which development is the best example of a private industry controlling economic opportunity for many other Americans?',
-        choices: ['Railroad companies setting shipping access and rates that farmers and businesses often had to accept.', 'The Nineteenth Amendment extending voting rights regardless of sex during the Progressive Era.', 'The Voting Rights Act protecting ballot access in the South during the Civil Rights era.', 'The Fourteenth Amendment defining national citizenship after the Civil War and Reconstruction.'],
+        choices: [
+          'Railroad companies setting shipping access and rates that farmers and businesses often had to accept.',
+          'The federal government setting agricultural prices that farmers were legally required to accept.',
+          'Labor unions controlling wages in ways that prevented any businesses from competing in industrial markets.',
+          'Congress regulating corporate profits so thoroughly that no private industry could control economic conditions.'
+        ],
         correctAnswer: 'Railroad companies setting shipping access and rates that farmers and businesses often had to accept.',
-        explanation: 'Railroads became gatekeepers because access to markets often depended on routes and prices they controlled.',
+        explanation: 'Railroads were natural monopolies — if your grain had to travel by rail to market, you paid whatever rate the railroad set or your crops rotted. This captive-customer dynamic gave railroad companies extraordinary control over the economic fate of farmers and merchants.',
         standard: 'SS.912.A.3.4'
       },
       {
         id: 'EOC-C1-Q4',
         text: 'What recurring pattern appears when land, transport, or industry become concentrated in a few hands?',
-        choices: ['Those who control key systems often shape who else can compete, expand, or profit in the economy.', 'Those who control key systems usually lose influence because smaller businesses set the rules for access.', 'Those who control key systems only matter when government completely withdraws from law and regulation.', 'Those who control key systems mainly reduce inequality by distributing opportunity evenly across all regions.'],
+        choices: [
+          'Those who control key systems often shape who else can compete, expand, or profit in the economy.',
+          'Concentrated control consistently produces lower prices and greater access to goods and services for all consumers.',
+          'Concentration of economic power always leads immediately to government regulation that restores equal competition.',
+          'Economic concentration benefits everyone equally because efficiency gains are always passed along to all consumers.'
+        ],
         correctAnswer: 'Those who control key systems often shape who else can compete, expand, or profit in the economy.',
-        explanation: 'The chapter’s central idea is that opportunity often follows control over infrastructure, property, and capital.',
+        explanation: 'Railroad monopolies over shipping, Standard Oil\'s control of refining, Carnegie\'s vertical integration — all showed that whoever controls critical infrastructure or supply chains can determine the economic fate of those who depend on them.',
         standard: 'SS.912.A.3.2 · SS.912.A.3.4'
       },
       {
         id: 'EOC-C1-Q5',
         text: 'How did Carnegie and Rockefeller most clearly compare as economic actors?',
-        choices: ['Both built vast enterprises by concentrating control over production and limiting the power of rivals.', 'Both built vast enterprises only after the federal government took ownership of steel and oil for them.', 'Both built vast enterprises mainly by dividing their industries into many small firms with equal influence.', 'Both built vast enterprises while refusing to use railroads, investors, or large corporate structures.'],
+        choices: [
+          'Both built vast enterprises by concentrating control over production and limiting the power of rivals.',
+          'Both were primarily philanthropists who focused on giving away wealth rather than building large industrial empires.',
+          'Both relied mainly on government contracts and federal subsidies rather than private investment and market competition.',
+          'Both built their empires by sharing profits generously with workers and smaller competitors throughout the economy.'
+        ],
         correctAnswer: 'Both built vast enterprises by concentrating control over production and limiting the power of rivals.',
-        explanation: 'Even though their methods differed, both men became symbols of how industrial expansion could centralize opportunity.',
+        explanation: 'Carnegie used vertical integration to control every stage of steel production from ore to finished product; Rockefeller used horizontal consolidation and predatory pricing to eliminate competitors in refining — both strategies concentrated market power in ways that limited rivals.',
         standard: 'SS.912.A.3.4'
       },
       {
         id: 'EOC-C1-Q6',
         text: 'Which statement best captures continuity and change in economic opportunity from western settlement to industrial expansion?',
-        choices: ['Opportunity shifted from land ownership toward wage labor and corporate systems, but unequal access remained central.', 'Opportunity shifted from land ownership only after industrial capitalism had already removed inequality from the economy.', 'Opportunity shifted from land ownership mainly because western settlement had little connection to business growth.', 'Opportunity shifted from land ownership while credit, property, and transportation became less important than before.'],
+        choices: [
+          'Opportunity shifted from land ownership toward wage labor and corporate systems, but unequal access remained central.',
+          'Economic opportunity became fully equal during the industrial era because rising wages eliminated all class differences.',
+          'Opportunity remained completely static as the same groups dominated both the agricultural and industrial economies.',
+          'The shift from land to industry eliminated all previous inequalities by creating entirely new paths to wealth for everyone.'
+        ],
         correctAnswer: 'Opportunity shifted from land ownership toward wage labor and corporate systems, but unequal access remained central.',
-        explanation: 'The form of opportunity changed, but the basic question of who could control or enter the system did not disappear.',
+        explanation: 'The locus of opportunity moved from the frontier to the factory, from land to wages — but the structural reality of unequal access to capital, credit, and political influence persisted, keeping the promise of opportunity more real for some than others.',
         standard: 'SS.912.A.3.1 · SS.912.A.3.2'
       },
       {
         id: 'EOC-C1-Q7',
         text: 'Which evidence best supports the claim that industrial expansion distributed benefits unevenly?',
-        choices: ['Railroad and industrial leaders gained wealth while many farmers, workers, and Indigenous peoples paid major costs.', 'Railroad and industrial leaders gained wealth only after small farmers and wage workers became equally prosperous.', 'Railroad and industrial leaders gained wealth, proving expansion removed conflict over land and labor permanently.', 'Railroad and industrial leaders gained wealth while government prevented any region from dominating markets or transport.'],
+        choices: [
+          'Railroad and industrial leaders gained wealth while many farmers, workers, and Indigenous peoples paid major costs.',
+          'Industrial expansion raised all wages equally and eliminated poverty throughout the United States by 1900.',
+          'The only people who suffered from industrial expansion were foreign competitors rather than domestic workers.',
+          'Industrial benefits were distributed unevenly mainly because workers consistently refused to accept better wages and safer working conditions when offered.'
+        ],
         correctAnswer: 'Railroad and industrial leaders gained wealth while many farmers, workers, and Indigenous peoples paid major costs.',
-        explanation: 'Growth brought new wealth, but it also brought displacement, exploitation, and unequal bargaining power.',
+        explanation: 'Gilded Age inequality was stark — Carnegie and Rockefeller accumulated fortunes while factory workers faced dangerous conditions and low wages, farmers faced railroad price gouging, and Indigenous peoples were displaced as railroads crossed their territories.',
         standard: 'SS.912.A.3.1 · SS.912.A.3.4'
       },
       {
         id: 'EOC-C1-Q8',
         text: 'Which development is the strongest example of government widening economic opportunity while still doing so unevenly?',
-        choices: ['The Homestead Act opening western land to many settlers even as access stayed unequal and contested.', 'The Pullman Strike showing federal involvement in a major labor conflict during the 1890s.', 'The Fourteenth Amendment redefining citizenship after the Civil War and Reconstruction.', 'The Free Speech Movement challenging campus restrictions during the 1960s.'],
+        choices: [
+          'The Homestead Act opening western land to many settlers even as access stayed unequal and contested.',
+          'The Sherman Antitrust Act, which immediately and completely eliminated all corporate concentration of power.',
+          'The Interstate Commerce Act, which gave farmers equal power over railroad companies across the entire nation.',
+          'The creation of the Federal Reserve, which ensured that all Americans had equal access to credit and investment capital.'
+        ],
         correctAnswer: 'The Homestead Act opening western land to many settlers even as access stayed unequal and contested.',
-        explanation: 'Homesteading widened opportunity for some, but not on equal terms and not without major conflict over land and power.',
+        explanation: 'The Homestead Act genuinely enabled many families to acquire land — but land speculators grabbed the best tracts, women and minorities faced significant barriers, and the physical demands of frontier farming made success far from guaranteed.',
         standard: 'SS.912.A.3.1'
       },
       {
         id: 'EOC-C1-Q9',
-        text: 'Why do railroads belong in a chapter titled ‘Who Owns the Future?’',
-        choices: ['Because control of routes, rates, and land values helped determine who could prosper in the modern economy.', 'Because control of routes, rates, and land values mattered only after railroads stopped shaping national markets.', 'Because control of routes, rates, and land values mainly weakened the influence of capital and corporate power.', 'Because control of routes, rates, and land values turned transportation into a minor issue beside local farming alone.'],
+        text: 'Why do railroads belong in a chapter titled "Who Owns the Future?"',
+        choices: [
+          'Because control of routes, rates, and land values helped determine who could prosper in the modern economy.',
+          'Because railroads were owned by the federal government and therefore represented equal public investment for all citizens.',
+          'Because railroads primarily benefited small farmers by reducing shipping costs and connecting them to profitable markets.',
+          'Because railroad companies had no real economic power and served mainly as neutral transportation providers.'
+        ],
         correctAnswer: 'Because control of routes, rates, and land values helped determine who could prosper in the modern economy.',
-        explanation: 'Infrastructure ownership is economic power because it structures access for everyone else using the system.',
+        explanation: 'Railroads shaped where towns grew, which farmers could reach markets profitably, which regions developed economically, and which industrialists could build national enterprises — whoever controlled the rails had enormous leverage over others\' economic futures.',
         standard: 'SS.912.A.3.4'
       },
       {
         id: 'EOC-C1-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Who Owns the Future?’',
-        choices: ['Economic opportunity usually flows toward those who control land, capital, transport, and large institutions.', 'Economic opportunity usually flows only after government removes all links between wealth and political influence.', 'Economic opportunity usually flows mainly to small producers once industrial concentration begins to grow.', 'Economic opportunity usually flows while property, credit, and infrastructure matter less than individual ambition alone.'],
+        text: 'What broad pattern best answers the chapter question "Who Owns the Future?"',
+        choices: [
+          'Economic opportunity usually flows toward those who control land, capital, transport, and large institutions.',
+          'Economic opportunity is always distributed equally in market economies because competition prevents concentration.',
+          'The future is owned collectively because democratic governments always prevent any individual from gaining too much power.',
+          'Opportunity flows randomly in market economies and cannot be predicted or influenced by existing wealth or power.'
+        ],
         correctAnswer: 'Economic opportunity usually flows toward those who control land, capital, transport, and large institutions.',
-        explanation: 'The chapter’s cross-era argument is that ownership and control matter as much as labor or effort in shaping opportunity.',
+        explanation: 'The Gilded Age demonstrated that whoever controls the infrastructure of economic life — railroads, refineries, steel mills, financial networks — has disproportionate power to shape the opportunities available to everyone else in the economy.',
         standard: 'SS.912.A.3.1 · SS.912.A.3.2 · SS.912.A.3.4'
       },
     ]
   },
 
-  // ==================================================
-  // CHAPTER 2 — Workers and Wealth
-  // ==================================================
+  // ── CHAPTER 2: Workers and Wealth ─────────────────────────
   {
-    id: 'ch2',
-    label: 'CHAPTER 2',
-    title: 'Workers and Wealth',
-    sub: 'Labor, wages, class conflict, and the fight for dignity',
-    icon: '✊',
-    type: 'lesson',
+    id: 'ch2', label: 'CHAPTER 2', title: 'Workers and Wealth',
+    icon: '✊', type: 'lesson',
     briefing: {
-      location: 'Labor, wages, class conflict, and the fight for dignity',
-      date: '',
-      role: 'labor correspondent',
+      location: 'American History: Labor and Capital',
+      date: 'Gilded Age through New Deal',
+      role: 'labor historian',
       text: 'Factories and corporations created enormous wealth, but workers rarely controlled how that wealth was shared. This chapter follows wages, dangerous workplaces, unions, strikes, and reform, asking how labor challenged systems that favored owners and managers.',
-      tags: ['SS.912.A.3.2', 'SS.912.A.3.9', 'SS.912.A.3.4', 'SS.912.A.5.12']
+      tags: ['SS.912.A.3.2', 'SS.912.A.3.9', 'SS.912.A.5.12']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Workers and Wealth', cards: ['Knights of Labor', 'Triangle Shirtwaist Fire'] },
+    rewards: { badge: 'Workers and Wealth', cards: ['Triangle Shirtwaist', 'New Deal Labor'] },
     bank: [
       {
         id: 'EOC-C2-Q1',
         text: 'How did the Knights of Labor differ most clearly from the American Federation of Labor?',
-        choices: ['The Knights sought broad reform and wider membership, while the AFL focused more narrowly on skilled workers and workplace gains.', 'The Knights sought broad reform only after the AFL had already organized every major industrial worker in the country.', 'The Knights sought broad reform, while the AFL mainly rejected wages, hours, and safety as labor concerns.', 'The Knights sought broad reform while the AFL argued unions should stay out of bargaining and strikes entirely.'],
+        choices: [
+          'The Knights sought broad reform and wider membership, while the AFL focused more narrowly on skilled workers and workplace gains.',
+          'The Knights of Labor focused exclusively on organizing skilled craft workers, while the AFL sought to organize all industrial workers broadly.',
+          'Both organizations had identical goals and strategies, differing only in which geographic regions they organized.',
+          'The AFL sought radical political change while the Knights focused only on wages without any broader reform agenda.'
+        ],
         correctAnswer: 'The Knights sought broad reform and wider membership, while the AFL focused more narrowly on skilled workers and workplace gains.',
-        explanation: 'The two groups reflect different labor strategies, one broader and more idealistic, the other more practical and focused.',
+        explanation: 'The Knights of Labor organized across skill levels, including women and Black workers, and pushed for broad social reform including an eight-hour day; the AFL under Gompers focused on skilled craft workers and "pure and simple" unionism — better wages and conditions, not systemic change.',
         standard: 'SS.912.A.3.2'
       },
       {
         id: 'EOC-C2-Q2',
         text: 'What recurring pattern appears in discussions of factory labor from the Gilded Age into the Progressive Era?',
-        choices: ['Workers often faced long hours and danger while employers benefited from rules that kept labor weak.', 'Workers often faced long hours only after government had already guaranteed safe factories and fair wages.', 'Workers often faced long hours mainly because unions controlled hiring, pay, and scheduling in most industries.', 'Workers often faced long hours while industrial reform became less connected to politics and public law.'],
+        choices: [
+          'Workers often faced long hours and danger while employers benefited from rules that kept labor weak.',
+          'Factory labor was generally well-compensated and safe, with employers competing to attract and retain skilled workers.',
+          'Government consistently intervened on the side of workers, preventing employers from imposing unsafe conditions.',
+          'Workers consistently had the upper hand in labor disputes because their skills gave them irreplaceable bargaining power.'
+        ],
         correctAnswer: 'Workers often faced long hours and danger while employers benefited from rules that kept labor weak.',
-        explanation: 'The chapter emphasizes that harsh conditions were not accidental; they grew from unequal power in the workplace.',
+        explanation: 'From Gilded Age steel mills to Progressive Era textile factories, the pattern was similar — twelve-hour shifts, dangerous equipment, no job security, no unions in most industries, and legal doctrines like "assumption of risk" that protected employers from liability.',
         standard: 'SS.912.A.3.2'
       },
       {
         id: 'EOC-C2-Q3',
         text: 'Which case is the strongest example of economic growth depending on the weak bargaining power of vulnerable workers?',
-        choices: ['Child labor in factories and mills, where children often worked long hours for low pay in unsafe conditions.', 'The Federal Reserve Act stabilizing banking and credit through a new national financial structure.', 'The GI Bill helping many veterans move into college and homeownership after World War II.', 'The Immigration Act of 1965 changing national-origin rules in federal immigration law.'],
+        choices: [
+          'Child labor in factories and mills, where children often worked long hours for low pay in unsafe conditions.',
+          'Skilled artisans in guild systems, who commanded high wages because of their specialized and irreplaceable expertise.',
+          'Federal employees, who had strong job protections and could not be dismissed for organizing or striking.',
+          'Unionized mine workers, who successfully negotiated wages that reflected the full market value of their labor.'
+        ],
         correctAnswer: 'Child labor in factories and mills, where children often worked long hours for low pay in unsafe conditions.',
-        explanation: 'Child labor reveals how economic systems can rely on groups with very little power to protect themselves.',
+        explanation: 'Child workers could not organize, could be paid less than adults, could not sue, and had no political voice — their vulnerability was precisely what made them economically attractive to employers, demonstrating how extreme labor weakness enabled profit at workers\' expense.',
         standard: 'SS.912.A.3.2 · SS.912.A.3.9'
       },
       {
         id: 'EOC-C2-Q4',
         text: 'What is the strongest comparison between Haymarket and Pullman as labor-history events?',
-        choices: ['Both became moments when labor protest was linked to disorder, making public support for unions harder to sustain.', 'Both became moments only after the federal government had openly committed itself to protecting every major strike.', 'Both became moments mainly because employers surrendered quickly and unions won broad national reforms at once.', 'Both became moments while courts and newspapers treated labor activism as fully legitimate and nonthreatening.'],
+        choices: [
+          'Both became moments when labor protest was linked to disorder, making public support for unions harder to sustain.',
+          'Both were complete union victories that immediately produced major federal labor protections for all workers.',
+          'Both demonstrated that peaceful strikes were the most effective method for workers to achieve economic justice.',
+          'Both produced bipartisan political support for legislation that permanently strengthened workers\' bargaining rights.'
+        ],
         correctAnswer: 'Both became moments when labor protest was linked to disorder, making public support for unions harder to sustain.',
-        explanation: 'Each crisis damaged labor’s image in part because opponents used fear and instability to turn public opinion against unions.',
+        explanation: 'The Haymarket bombing in 1886 associated the labor movement with anarchist violence; the Pullman Strike in 1894 led to federal intervention and Eugene Debs\' imprisonment — both events became weapons in the argument that labor organizing threatened social order.',
         standard: 'SS.912.A.3.2 · SS.912.A.3.4'
       },
       {
         id: 'EOC-C2-Q5',
-        text: 'Why should strikes and union campaigns be understood as class conflict rather than just workplace disagreements?',
-        choices: ['They were fights over who controlled profits, time, safety, and power in the industrial economy.', 'They were fights only after workers had already gained equal control over ownership and decision-making.', 'They were fights mainly because unions wanted to eliminate wages and return industry to small farms.', 'They were fights while questions of wealth and power stayed mostly separate from labor protest.'],
+        text: 'What did Gilded Age labor struggles ultimately represent beyond just wages and hours?',
+        choices: [
+          'They were fights over who controlled profits, time, safety, and power in the industrial economy.',
+          'They were primarily about immigration restriction, as workers mainly sought to reduce competition from new arrivals.',
+          'They were mainly about political power, as labor leaders sought elected office rather than workplace improvements.',
+          'They were entirely about wages and had no broader implications for power, dignity, or social organization.'
+        ],
         correctAnswer: 'They were fights over who controlled profits, time, safety, and power in the industrial economy.',
-        explanation: 'Labor struggles mattered because they challenged the deeper distribution of authority and wealth, not just a single contract.',
+        explanation: 'Demands for the eight-hour day were demands for control over workers\' time; safety regulations were demands for power over working conditions; profit-sharing proposals were demands for a voice in how wealth was distributed — all were disputes over power, not merely compensation.',
         standard: 'SS.912.A.3.2'
       },
       {
         id: 'EOC-C2-Q6',
         text: 'Which development is the strongest example of tragedy pushing economic reform forward?',
-        choices: ['The Triangle Shirtwaist Fire exposing unsafe labor conditions and helping build support for regulation.', 'The Compromise of 1877 settling a disputed presidential election after Reconstruction politics had stalled.', 'The Open Door Policy asserting equal trade access in China at the turn of the century.', 'The Marshall Plan sending American aid to Europe after World War II.'],
+        choices: [
+          'The Triangle Shirtwaist Fire exposing unsafe labor conditions and helping build support for regulation.',
+          'The Great Railroad Strike of 1877, which immediately produced comprehensive federal labor safety legislation.',
+          'The Homestead Strike, which convinced Carnegie Steel to voluntarily adopt all union safety demands.',
+          'The Pullman Strike, which produced immediate Supreme Court rulings protecting workers\' right to organize.'
+        ],
         correctAnswer: 'The Triangle Shirtwaist Fire exposing unsafe labor conditions and helping build support for regulation.',
-        explanation: 'The fire became a powerful symbol of why workplace safety could not be left to employers alone.',
+        explanation: 'The 1911 fire killed 146 garment workers — most of them young immigrant women — because doors were locked and fire escapes inadequate. The public outrage it generated was a direct catalyst for New York labor reform legislation and helped build broader Progressive Era regulatory momentum.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: 'EOC-C2-Q7',
         text: 'Which statement best captures continuity and change in labor reform from the Progressive Era to the New Deal?',
-        choices: ['Reformers moved from exposing abuse toward building stronger federal protections for unions and workers.', 'Reformers moved from exposing abuse only after unions had already become more powerful than employers nationwide.', 'Reformers moved from exposing abuse mainly by ending all government involvement in wages, hours, and bargaining.', 'Reformers moved from exposing abuse while making labor rights less important to national economic politics.'],
+        choices: [
+          'Reformers moved from exposing abuse toward building stronger federal protections for unions and workers.',
+          'Labor reform made no progress between the Progressive Era and the New Deal because Congress blocked all legislation.',
+          'The New Deal actually weakened labor protections compared to the Progressive Era by eliminating workplace regulations.',
+          'Both eras produced identical labor reforms because all Progressive Era gains were simply extended by the New Deal.'
+        ],
         correctAnswer: 'Reformers moved from exposing abuse toward building stronger federal protections for unions and workers.',
-        explanation: 'The New Deal deepened earlier labor reform by giving workers more legal standing within the national economy.',
+        explanation: 'Progressive Era muckrakers and reformers exposed problems and produced state-level regulations; the New Deal\'s Wagner Act, Fair Labor Standards Act, and NLRB created federal protections for collective bargaining and minimum wages — a shift from exposure to structural reform.',
         standard: 'SS.912.A.3.9 · SS.912.A.5.12'
       },
       {
         id: 'EOC-C2-Q8',
         text: 'Which evidence best supports the claim that government did not always stand in the same place between labor and capital?',
-        choices: ['Federal power helped suppress strikes in the 1890s, but New Deal policy later recognized labor rights more openly.', 'Federal power helped suppress strikes in the 1890s, and New Deal policy later banned collective bargaining completely.', 'Federal power helped suppress strikes in the 1890s only because labor had already won equal protection nationwide.', 'Federal power helped suppress strikes in the 1890s, proving that government never shaped labor relations at all.'],
+        choices: [
+          'Federal power helped suppress strikes in the 1890s, but New Deal policy later recognized labor rights more openly.',
+          'The federal government consistently supported labor throughout all eras because democratic majorities always sided with workers.',
+          'The federal government always sided with capital across all eras, making workers\' eventual gains entirely the result of strikes alone.',
+          'Government stayed completely neutral between labor and capital in all eras, refusing to intervene in any dispute.'
+        ],
         correctAnswer: 'Federal power helped suppress strikes in the 1890s, but New Deal policy later recognized labor rights more openly.',
-        explanation: 'This contrast shows that state power could reinforce inequality in one era and partly rebalance it in another.',
+        explanation: 'Cleveland sent troops against the Pullman Strike and courts issued injunctions against unions in the Gilded Age; the Wagner Act (1935) made collective bargaining a protected right and created the NLRB to enforce it — the same federal power that once crushed strikes later protected them.',
         standard: 'SS.912.A.3.2 · SS.912.A.5.12'
       },
       {
         id: 'EOC-C2-Q9',
         text: 'Why does this chapter treat wages and working conditions as questions of dignity as well as economics?',
-        choices: ['Because daily work shapes freedom, security, and whether people have real control over their lives.', 'Because daily work shapes freedom only after income becomes more important than citizenship or law.', 'Because daily work shapes freedom mainly when unions reject hours, safety, and contracts as reform goals.', 'Because daily work shapes freedom while questions of power and inequality stay outside the workplace.'],
+        choices: [
+          'Because daily work shapes freedom, security, and whether people have real control over their lives.',
+          'Because wages are primarily a moral issue and have no practical economic consequences for workers or employers.',
+          'Because working conditions only affect workers\' feelings and have no measurable impact on health or longevity.',
+          'Because the Constitution explicitly defines labor rights as matters of personal dignity rather than economic regulation.'
+        ],
         correctAnswer: 'Because daily work shapes freedom, security, and whether people have real control over their lives.',
-        explanation: 'Work is not only about income; it is also about time, safety, respect, and power over daily life.',
+        explanation: 'A twelve-hour shift leaves no time for family, civic participation, or self-improvement; unsafe conditions risk life and limb; low wages leave workers dependent on employers and unable to plan their futures — labor conditions determine whether workers have the autonomy that defines real freedom.',
         standard: 'SS.912.A.3.2 · SS.912.A.5.12'
       },
       {
         id: 'EOC-C2-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Workers and Wealth’?',
-        choices: ['Wealth rarely flowed fairly to workers without collective action, public pressure, and reform.', 'Wealth rarely flowed fairly only after labor unions had already disappeared from national economic life.', 'Wealth rarely flowed fairly mainly because workers consistently controlled industry more than employers did.', 'Wealth rarely flowed fairly while labor protest became less connected to law, politics, and public debate.'],
+        text: 'What broad pattern best answers the chapter question "Workers and Wealth"?',
+        choices: [
+          'Wealth rarely flowed fairly to workers without collective action, public pressure, and reform.',
+          'Wealth flows naturally to workers in market economies because competition between employers drives wages to fair levels.',
+          'Labor reform has always been immediately successful whenever workers organized strikes or political movements.',
+          'Workers\' share of wealth has consistently grown in every era regardless of whether unions or reform legislation existed.'
+        ],
         correctAnswer: 'Wealth rarely flowed fairly to workers without collective action, public pressure, and reform.',
-        explanation: 'This chapter’s cross-era point is that labor usually had to organize to challenge unequal distribution of wealth and power.',
+        explanation: 'From Gilded Age labor struggles through Progressive Era regulation to New Deal labor law, the historical record shows that improvements in wages, hours, and safety came through strikes, organizing, political pressure, and legislation — not spontaneously from market competition alone.',
         standard: 'SS.912.A.3.2 · SS.912.A.3.9 · SS.912.A.5.12'
       },
     ]
   },
 
-  // ==================================================
-  // CHAPTER 3 — Boom, Bust, and Survival
-  // ==================================================
+  // ── CHAPTER 3: Boom, Bust, and Survival ───────────────────
   {
-    id: 'ch3',
-    label: 'CHAPTER 3',
-    title: 'Boom, Bust, and Survival',
-    sub: 'Economic instability, hardship, and adaptation across eras',
-    icon: '📉',
-    type: 'lesson',
+    id: 'ch3', label: 'CHAPTER 3', title: 'Boom, Bust, and Survival',
+    icon: '📉', type: 'lesson',
     briefing: {
-      location: 'Economic instability, hardship, and adaptation across eras',
-      date: '',
-      role: 'crisis reporter',
+      location: 'American History: Economic Instability',
+      date: 'Gilded Age through Late Twentieth Century',
+      role: 'economic historian',
       text: 'Economic growth is never smooth. Panic, depression, dust storms, layoffs, inflation, and industrial collapse have all forced Americans to improvise new ways to survive. This chapter asks what economic instability looks like across time and who bears its heaviest burdens.',
-      tags: ['SS.912.A.3.2', 'SS.912.A.5.11', 'SS.912.A.7.17', 'SS.912.A.5.12', 'SS.912.A.6.3']
+      tags: ['SS.912.A.3.2', 'SS.912.A.5.11', 'SS.912.A.5.12', 'SS.912.A.7.17']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Boom, Bust, and Survival', cards: ['Great Depression', 'Hooverville'] },
+    rewards: { badge: 'Boom, Bust, Survival', cards: ['Great Depression', 'Dust Bowl'] },
     bank: [
       {
         id: 'EOC-C3-Q1',
         text: 'What is the strongest comparison between the Panic of 1893 and the Great Depression?',
-        choices: ['Both exposed instability in the economy, but the Great Depression reached deeper and lasted far longer.', 'Both exposed instability only after the federal government had already guaranteed full employment nationwide.', 'Both exposed instability mainly because farmers and workers had become wealthier than industrial investors.', 'Both exposed instability while causing little change in how Americans thought about business or government.'],
+        choices: [
+          'Both exposed instability in the economy, but the Great Depression reached deeper and lasted far longer.',
+          'Both were equally severe crises of identical duration that required the same scale of government response.',
+          'The Panic of 1893 was actually more severe than the Great Depression because it affected a larger share of workers.',
+          'Both crises ended quickly without government intervention as market forces naturally restored prosperity within months.'
+        ],
         correctAnswer: 'Both exposed instability in the economy, but the Great Depression reached deeper and lasted far longer.',
-        explanation: 'Each crisis hurt workers and communities, but the Great Depression reshaped national life on a much larger scale.',
+        explanation: 'The Panic of 1893 was severe — over 15% unemployment and hundreds of bank failures — but it resolved within a few years; the Great Depression sent unemployment above 25%, shrank GDP by nearly a third, and lasted a decade, a fundamentally different scale of collapse.',
         standard: 'SS.912.A.3.2 · SS.912.A.5.11'
       },
       {
         id: 'EOC-C3-Q2',
         text: 'Which development is the strongest example of widespread visible hardship during economic collapse?',
-        choices: ['Hoovervilles appearing as unemployed and displaced people created makeshift communities for survival.', 'The Federal Reserve creating a national banking structure in the early twentieth century.', 'The GI Bill expanding access to college and homeownership after World War II.', 'The Interstate Commerce Act regulating railroad rates during the Gilded Age.'],
+        choices: [
+          'Hoovervilles appearing as unemployed and displaced people created makeshift communities for survival.',
+          'The stock market crash of 1929, which was entirely invisible to working-class Americans and affected only investors.',
+          'The Dust Bowl, which created hardship only in agricultural areas without affecting industrial or urban workers.',
+          'The Panic of 1893, which produced only brief and minor disruption before prosperity quickly returned to everyone.'
+        ],
         correctAnswer: 'Hoovervilles appearing as unemployed and displaced people created makeshift communities for survival.',
-        explanation: 'Hoovervilles became a powerful symbol of how economic collapse altered daily life for ordinary Americans.',
+        explanation: 'Hoovervilles — shantytowns of cardboard and scrap built by the unemployed — appeared in cities across America during the Depression, making poverty literally visible and undeniable in a way that challenged both government inaction and the myth of American prosperity.',
         standard: 'SS.912.A.5.11'
       },
       {
         id: 'EOC-C3-Q3',
         text: 'How did Dust Bowl migration and later deindustrialization most clearly compare?',
-        choices: ['Both displaced communities and forced families to rebuild economic life under harsh new conditions.', 'Both displaced communities only after the federal government had fully prevented unemployment and migration pressure.', 'Both displaced communities mainly by increasing wages and job security in regions that lost industry.', 'Both displaced communities while leaving housing, schooling, and local identity mostly untouched.'],
+        choices: [
+          'Both displaced communities and forced families to rebuild economic life under harsh new conditions.',
+          'Both were caused entirely by government policy errors rather than any natural or market forces.',
+          'Both ended quickly as displaced workers immediately found equivalent employment in new regions and industries.',
+          'Deindustrialization was actually far less disruptive than the Dust Bowl because factory workers had more savings.'
+        ],
         correctAnswer: 'Both displaced communities and forced families to rebuild economic life under harsh new conditions.',
-        explanation: 'The details differed, but both crises uprooted workers and communities rather than harming only abstract markets.',
+        explanation: 'Dust Bowl Okies fled to California to find a different and often hostile economy; Rust Belt workers faced plant closures in communities built around single industries — both involved communities stripped of their economic base and forced to start over under difficult conditions.',
         standard: 'SS.912.A.5.11 · SS.912.A.7.17'
       },
       {
         id: 'EOC-C3-Q4',
         text: 'What recurring pattern appears when major economic systems break down?',
-        choices: ['Those with the least savings and weakest protection usually face the hardest choices first.', 'Those with the least savings usually recover fastest because instability protects the poor more than the wealthy.', 'Those with the least savings struggle only after government has already removed every form of relief or support.', 'Those with the least savings matter less because national crises mainly affect banks and investors alone.'],
+        choices: [
+          'Those with the least savings and weakest protection usually face the hardest choices first.',
+          'Economic collapse affects all Americans equally regardless of wealth, savings, or social position.',
+          'Economic crises always hit the wealthiest Americans hardest because they have the most to lose.',
+          'Market downturns resolve themselves quickly and evenly because the economy naturally self-corrects without harm.'
+        ],
         correctAnswer: 'Those with the least savings and weakest protection usually face the hardest choices first.',
-        explanation: 'Economic crisis is uneven: vulnerable groups often feel collapse earlier and more severely than those with more resources.',
+        explanation: 'In every economic crisis — 1893, the Depression, the 1970s, deindustrialization — workers without savings, sharecroppers without land, and communities without economic diversification faced the earliest and harshest consequences while wealthier Americans had more time and resources to adapt.',
         standard: 'SS.912.A.3.2 · SS.912.A.5.11 · SS.912.A.7.17'
       },
       {
         id: 'EOC-C3-Q5',
-        text: 'What is the strongest comparison between Hoover’s response to the Depression and New Deal relief efforts?',
-        choices: ['Hoover favored more limited intervention, while the New Deal used broader federal action to address mass hardship.', 'Hoover favored more limited intervention only after the New Deal had already built a national safety net first.', 'Hoover favored more limited intervention, while the New Deal tried to reduce government involvement in relief.', 'Hoover favored more limited intervention while the New Deal focused mainly on foreign trade instead of domestic crisis.'],
+        text: 'What is the strongest comparison between Hoover\'s response to the Depression and New Deal relief efforts?',
+        choices: [
+          'Hoover favored more limited intervention, while the New Deal used broader federal action to address mass hardship.',
+          'Both responses were identical in scale and philosophy, differing only in which specific programs they funded.',
+          'Hoover\'s response was actually more expansive than the New Deal because he created more federal agencies.',
+          'The New Deal was actually far more limited than Hoover\'s response because FDR was philosophically opposed to direct federal relief programs.'
+        ],
         correctAnswer: 'Hoover favored more limited intervention, while the New Deal used broader federal action to address mass hardship.',
-        explanation: 'This comparison shows how crisis can alter expectations about what government should do when markets fail.',
+        explanation: 'Hoover believed in voluntary cooperation and that direct federal relief would undermine character; FDR created the CCC, PWA, WPA, and Social Security — a fundamental philosophical shift about whether the federal government bore responsibility for individual economic security.',
         standard: 'SS.912.A.5.11 · SS.912.A.5.12'
       },
       {
         id: 'EOC-C3-Q6',
         text: 'Which statement best captures continuity and change from postwar recession fears to 1970s stagflation?',
-        choices: ['Americans kept fearing instability, but the form shifted from depression-era unemployment to inflation and stagnation together.', 'Americans kept fearing instability only after prosperity had ended all debate about wages, prices, and job security.', 'Americans kept fearing instability mainly because the federal government stopped influencing the economy after 1945.', 'Americans kept fearing instability while inflation and unemployment became less important to household life over time.'],
+        choices: [
+          'Americans kept fearing instability, but the form shifted from depression-era unemployment to inflation and stagnation together.',
+          'Economic fears entirely disappeared after WWII prosperity and did not reappear in any form until after the 1970s oil shock ended growth.',
+          'The 1970s produced no economic anxiety because stagflation was too technical for most Americans to understand.',
+          'Economic instability fears remained completely identical across both eras with no change in type or intensity.'
+        ],
         correctAnswer: 'Americans kept fearing instability, but the form shifted from depression-era unemployment to inflation and stagnation together.',
-        explanation: 'Economic anxiety persisted even in a richer society, though the character of the crisis changed.',
+        explanation: 'Post-WWII Americans feared another depression; the 1970s brought a new and more confusing threat — inflation combined with unemployment, which existing economic theory said couldn\'t happen simultaneously — requiring new frameworks for understanding economic instability.',
         standard: 'SS.912.A.6.3 · SS.912.A.7.17'
       },
       {
         id: 'EOC-C3-Q7',
         text: 'Which evidence best supports the claim that survival during collapse sometimes depends on collective or public support, not just private effort?',
-        choices: ['New Deal relief programs showed that many families depended on public aid when jobs and local charity failed.', 'New Deal relief programs showed that many families depended only on private markets once banks stabilized themselves.', 'New Deal relief programs mattered little because unemployment disappeared before federal help could reach people.', 'New Deal relief programs proved Americans no longer needed work, wages, or long-term economic recovery.'],
+        choices: [
+          'New Deal relief programs showed that many families depended on public aid when jobs and local charity failed.',
+          'The Great Depression ended mainly because individual Americans worked harder and saved more aggressively.',
+          'Dust Bowl families all survived through personal initiative without any government assistance of any kind.',
+          'Economic collapses always end faster in communities that reject government programs and rely solely on self-help.'
+        ],
         correctAnswer: 'New Deal relief programs showed that many families depended on public aid when jobs and local charity failed.',
-        explanation: 'The crisis revealed that private resilience alone could not carry millions of people through systemic collapse.',
+        explanation: 'When 25% of workers are unemployed and private charity cannot scale to meet need, individual effort and voluntary giving cannot substitute for collective public response — the New Deal\'s survival programs demonstrated that scale of crisis requires scale of response.',
         standard: 'SS.912.A.5.12'
       },
       {
         id: 'EOC-C3-Q8',
         text: 'Which case is the strongest example of families adapting to economic disaster by moving rather than staying put?',
-        choices: ['Dust Bowl migration as environmental and economic collapse pushed many farm families westward.', 'The Federal Reserve Act creating a new banking system to manage money and credit nationally.', 'The Sherman Antitrust Act responding to monopoly power during the late nineteenth century.', 'The PATCO strike signaling a harder line toward unions in the early 1980s.'],
+        choices: [
+          'Dust Bowl migration as environmental and economic collapse pushed many farm families westward.',
+          'Immigration from Europe in the early twentieth century, as most immigrants came primarily for economic opportunities.',
+          'The Great Migration during WWI, which was driven primarily by military recruitment rather than economic necessity.',
+          'Postwar suburban migration, which was driven by preference and prosperity rather than any economic collapse.'
+        ],
         correctAnswer: 'Dust Bowl migration as environmental and economic collapse pushed many farm families westward.',
-        explanation: 'Migration became a survival strategy when land, weather, and the economy all failed at once.',
+        explanation: 'Drought and wind erosion destroyed the agricultural economies of Oklahoma, Arkansas, and Texas — the "Okies" who migrated to California were not chasing opportunity but fleeing collapse, making their movement a clear example of disaster-driven displacement.',
         standard: 'SS.912.A.5.11'
       },
       {
         id: 'EOC-C3-Q9',
         text: 'Why does deindustrialization belong in a chapter about boom, bust, and survival rather than only one about technology or trade?',
-        choices: ['Because plant closures reshaped work, neighborhoods, identity, and survival for entire communities.', 'Because plant closures mattered only after industry had already stopped influencing local tax bases or schools.', 'Because plant closures mainly increased job security and wages for workers left behind in old factory regions.', 'Because plant closures left daily life unchanged even though production moved and employment disappeared.'],
+        choices: [
+          'Because plant closures reshaped work, neighborhoods, identity, and survival for entire communities.',
+          'Because deindustrialization was primarily a technological story with no significant human or economic consequences.',
+          'Because deindustrialization only affected large corporations and had no impact on individual workers or their families.',
+          'Because the survival challenges of deindustrialization were entirely resolved within two years by government retraining.'
+        ],
         correctAnswer: 'Because plant closures reshaped work, neighborhoods, identity, and survival for entire communities.',
-        explanation: 'Deindustrialization was not just an economic statistic; it transformed everyday life in places built around manufacturing.',
+        explanation: 'When a steel mill or auto plant closes, entire communities — not just workers — face the consequences: tax revenues fall, schools deteriorate, retail closes, families split, and the social fabric built around the plant unravels — making deindustrialization a survival story, not merely an economic one.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'EOC-C3-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Boom, Bust, and Survival’?',
-        choices: ['Economic growth brings instability as well as prosperity, and ordinary people repeatedly adapt to shocks they did not create.', 'Economic growth brings instability only after modern government stops affecting markets, relief, and employment.', 'Economic growth brings instability mainly because downturns affect investors far more than workers or families.', 'Economic growth brings instability while crisis steadily becomes less important to daily life across time.'],
+        text: 'What broad pattern best answers the chapter question "Boom, Bust, and Survival"?',
+        choices: [
+          'Economic growth brings instability as well as prosperity, and ordinary people repeatedly adapt to shocks they did not create.',
+          'Economic booms are always permanent and busts are always temporary because market forces restore growth reliably.',
+          'Economic instability only affects the very poor and has no meaningful impact on working-class or middle-class families.',
+          'Survival during every economic collapse has always depended entirely on individual savings and personal effort without any collective or public support.'
+        ],
         correctAnswer: 'Economic growth brings instability as well as prosperity, and ordinary people repeatedly adapt to shocks they did not create.',
-        explanation: 'The chapter’s synthesis is that instability is part of economic history, and its burdens are felt most sharply in daily life.',
+        explanation: 'The same capitalist dynamism that built industrial prosperity also created the Panic of 1893, the Great Depression, the Dust Bowl, and deindustrialization — and in each case, ordinary Americans bore the heaviest burdens of crises they played little role in creating.',
         standard: 'SS.912.A.3.2 · SS.912.A.5.11 · SS.912.A.5.12 · SS.912.A.7.17'
       },
     ]
   },
 
-  // ==================================================
-  // CHAPTER 4 — Government and the Economy
-  // ==================================================
+  // ── CHAPTER 4: Government and the Economy ─────────────────
   {
-    id: 'ch4',
-    label: 'CHAPTER 4',
-    title: 'Government and the Economy',
-    sub: 'Regulation, reform, intervention, and rollback',
-    icon: '🏛️',
-    type: 'lesson',
+    id: 'ch4', label: 'CHAPTER 4', title: 'Government and the Economy',
+    icon: '🏛️', type: 'lesson',
     briefing: {
-      location: 'Regulation, reform, intervention, and rollback',
-      date: '',
+      location: 'American History: Regulation and Reform',
+      date: 'Progressive Era to Reagan Era',
       role: 'policy historian',
       text: 'Economic life in the United States has never been purely private. Regulation, central banking, relief programs, wartime mobilization, tax policy, and deregulation all changed how much power government would use to shape markets. This chapter tracks those shifting answers.',
-      tags: ['SS.912.A.3.9', 'SS.912.A.7.17', 'SS.912.A.3.10', 'SS.912.A.5.12', 'SS.912.A.6.3', 'SS.912.A.7.3']
+      tags: ['SS.912.A.3.9', 'SS.912.A.3.10', 'SS.912.A.5.12', 'SS.912.A.6.3', 'SS.912.A.7.17']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Government and the Economy', cards: ['Federal Reserve', 'Reaganomics'] },
+    rewards: { badge: 'Government and the Economy', cards: ['New Deal Regulation', 'Reaganomics'] },
     bank: [
       {
         id: 'EOC-C4-Q1',
         text: 'What is the strongest comparison between Progressive Era regulation and Reagan-era economics?',
-        choices: ['Progressives trusted government more to restrain corporate power, while Reagan-era policy favored lighter regulation.', 'Progressives trusted government more only after Reagan had already reduced taxes and deregulated major industries.', 'Progressives trusted government more mainly by abolishing antitrust law and removing consumer protections.', 'Progressives trusted government more while Reagan-era policy called for direct public ownership of major firms.'],
+        choices: [
+          'Progressives trusted government more to restrain corporate power, while Reagan-era policy favored lighter regulation.',
+          'Both eras produced identical levels of regulation because the Constitution prevents any significant change in oversight.',
+          'Reagan-era policy was actually more interventionist than Progressive Era regulation because defense spending increased.',
+          'Progressive Era regulation and Reagan-era policy were identical in their approach to corporate power and markets.'
+        ],
         correctAnswer: 'Progressives trusted government more to restrain corporate power, while Reagan-era policy favored lighter regulation.',
-        explanation: 'The comparison captures a long-running argument over whether markets should be corrected by government or freed from it.',
+        explanation: 'Progressive Era thinkers believed unchecked corporate power damaged democracy and required federal regulation; Reagan\'s supply-side philosophy argued that regulation stifled growth and that markets produced better outcomes when government stepped back — a fundamental ideological difference about the proper role of public power.',
         standard: 'SS.912.A.3.9 · SS.912.A.7.17'
       },
       {
         id: 'EOC-C4-Q2',
         text: 'Which development is the best example of government acting directly to restrain concentrated corporate power?',
-        choices: ['Theodore Roosevelt’s trust-busting campaigns against corporations seen as harmful to the public interest.', 'The Homestead Act opening western land claims to settlers during the post-Civil War era.', 'The GI Bill supporting education and mortgages for many veterans after World War II.', 'The PATCO strike demonstrating conflict between organized labor and the Reagan administration.'],
-        correctAnswer: 'Theodore Roosevelt’s trust-busting campaigns against corporations seen as harmful to the public interest.',
-        explanation: 'Roosevelt symbolized the idea that government could intervene to limit private economic domination.',
+        choices: [
+          'Theodore Roosevelt\'s trust-busting campaigns against corporations seen as harmful to the public interest.',
+          'The GI Bill, which expanded economic opportunity by offering veterans education and homeownership subsidies.',
+          'The Federal Reserve Act, which created a central bank to stabilize the money supply and banking system.',
+          'Reagan\'s deregulation of the airline and telecommunications industries to increase competition and lower prices.'
+        ],
+        correctAnswer: 'Theodore Roosevelt\'s trust-busting campaigns against corporations seen as harmful to the public interest.',
+        explanation: 'Roosevelt used the Sherman Antitrust Act to break up Northern Securities and pursued Standard Oil and other trusts — directly using government power to dismantle corporate concentration, as distinct from regulating behavior or managing markets through other means.',
         standard: 'SS.912.A.3.9 · SS.912.A.3.10'
       },
       {
         id: 'EOC-C4-Q3',
         text: 'How did the Federal Reserve and Social Security most clearly compare as economic reforms?',
-        choices: ['Both expanded federal responsibility, though one stabilized finance while the other protected people from insecurity.', 'Both expanded federal responsibility only after wartime mobilization had already solved banking and retirement issues.', 'Both expanded federal responsibility mainly by shrinking national power and returning policy to local banks.', 'Both expanded federal responsibility while rejecting any role for long-term planning or economic stability.'],
+        choices: [
+          'Both expanded federal responsibility, though one stabilized finance while the other protected people from insecurity.',
+          'Both the Federal Reserve and Social Security were temporary emergency measures created only for the duration of World War I and the Depression.',
+          'Both were created to serve the same purpose of preventing banking panics and were eventually merged into one agency.',
+          'Both reduced federal economic involvement by transferring responsibility to private insurance companies and banks.'
+        ],
         correctAnswer: 'Both expanded federal responsibility, though one stabilized finance while the other protected people from insecurity.',
-        explanation: 'These reforms show that government intervention can target both the structure of markets and the risks faced by individuals.',
+        explanation: 'The Federal Reserve (1913) took responsibility for monetary policy and bank stability; Social Security (1935) took responsibility for income security in old age and disability — both represented the federal government accepting new obligations that had not previously been considered public responsibilities.',
         standard: 'SS.912.A.3.10 · SS.912.A.5.12'
       },
       {
         id: 'EOC-C4-Q4',
         text: 'What recurring pattern appears when the economy enters severe crisis or total war?',
-        choices: ['Government usually takes on a larger role in directing resources, labor, and production.', 'Government usually takes on a larger role only after markets have already solved the emergency on their own.', 'Government usually takes on a larger role mainly by reducing planning and ending national coordination.', 'Government usually takes on a larger role while becoming less visible in taxes, prices, and production.'],
+        choices: [
+          'Government usually takes on a larger role in directing resources, labor, and production.',
+          'Government consistently reduces its economic role during crises to allow markets to self-correct more quickly.',
+          'Severe economic crisis always leads to permanent deregulation as government acknowledges the limits of intervention.',
+          'Crisis produces no change in government\'s economic role because the Constitution prevents emergency powers.'
+        ],
         correctAnswer: 'Government usually takes on a larger role in directing resources, labor, and production.',
-        explanation: 'When markets alone cannot manage crisis, Americans often accept a stronger federal role.',
+        explanation: 'The pattern is consistent — banking panics led to the Federal Reserve; the Depression led to the New Deal; WWII led to the War Production Board and price controls; each major economic or military crisis produced new federal economic intervention.',
         standard: 'SS.912.A.5.12 · SS.912.A.6.3'
       },
       {
         id: 'EOC-C4-Q5',
         text: 'What is the strongest comparison between the New Deal and Great Society as economic reform efforts?',
-        choices: ['Both used federal action to widen security and opportunity, though they responded to different kinds of inequality.', 'Both used federal action only after conservative politics had already rejected any public role in welfare or reform.', 'Both used federal action mainly to reduce labor rights and weaken public support for social insurance programs.', 'Both used federal action while insisting that poverty and inequality should be handled only by private charity.'],
+        choices: [
+          'Both used federal action to widen security and opportunity, though they responded to different kinds of inequality.',
+          'Both were identical programs that addressed the same economic problems through the same policy mechanisms.',
+          'The Great Society was actually a rollback of New Deal programs rather than an extension of the reform tradition.',
+          'Both focused exclusively on economic stability without addressing any social inequalities related to race or poverty.'
+        ],
         correctAnswer: 'Both used federal action to widen security and opportunity, though they responded to different kinds of inequality.',
-        explanation: 'The New Deal focused on collapse and insecurity, while the Great Society targeted poverty and access within a richer society.',
+        explanation: 'The New Deal addressed mass unemployment and economic collapse — security in old age, banking stability, labor rights; the Great Society addressed poverty amid prosperity — Medicare, Medicaid, food stamps, education funding — but both used the federal government to address inequalities the market had not resolved.',
         standard: 'SS.912.A.5.12 · SS.912.A.7.3'
       },
       {
         id: 'EOC-C4-Q6',
         text: 'Which statement best captures continuity and change in the role of government in the economy across these eras?',
-        choices: ['Federal power expanded dramatically in the twentieth century, though later leaders pushed to roll some of it back.', 'Federal power expanded dramatically only after the 1980s had already ended regulation and tax policy debates.', 'Federal power expanded dramatically mainly because Americans stopped arguing over markets, welfare, and inequality.', 'Federal power expanded dramatically while the presidency and Congress lost interest in economic management.'],
+        choices: [
+          'Federal power expanded dramatically in the twentieth century, though later leaders pushed to roll some of it back.',
+          'The federal government\'s economic role remained completely constant because the Constitution prevented any change.',
+          'Federal economic power steadily declined from the Progressive Era onward as courts struck down all regulation.',
+          'Government\'s economic role expanded and then completely disappeared when Reagan eliminated all federal programs.'
+        ],
         correctAnswer: 'Federal power expanded dramatically in the twentieth century, though later leaders pushed to roll some of it back.',
-        explanation: 'This chapter highlights both the growth of federal intervention and the later backlash against it.',
+        explanation: 'The Progressive Era, New Deal, and Great Society built an ever-larger administrative state; Reagan\'s deregulation and tax cuts represented a deliberate rollback — but Social Security, Medicare, the FDIC, and the Federal Reserve survived, showing that the expansion was only partially reversed.',
         standard: 'SS.912.A.3.9 · SS.912.A.5.12 · SS.912.A.7.17'
       },
       {
         id: 'EOC-C4-Q7',
         text: 'Which development is the strongest example of the federal government coordinating the economy on a massive scale?',
-        choices: ['World War II mobilization directing production, labor, and industry toward military needs.', 'The Pendleton Act reforming civil service appointments during the Gilded Age.', 'The Seneca Falls Convention calling for broader rights in the nineteenth century.', 'The Voting Rights Act targeting disenfranchisement in the Civil Rights era.'],
+        choices: [
+          'World War II mobilization directing production, labor, and industry toward military needs.',
+          'The Interstate Commerce Act of 1887, which gave farmers modest protection against railroad rate discrimination.',
+          'Progressive Era child labor laws, which protected children from exploitation without directing industrial production.',
+          'Reagan\'s tax cuts, which reduced government revenue and encouraged private investment rather than public direction.'
+        ],
         correctAnswer: 'World War II mobilization directing production, labor, and industry toward military needs.',
-        explanation: 'Wartime mobilization showed how extensively the federal government could shape the economy when national priorities demanded it.',
+        explanation: 'The War Production Board converted auto factories to tank production, rationed consumer goods, set wages and prices, and coordinated labor allocation across the entire economy — the most comprehensive federal direction of economic activity in American history.',
         standard: 'SS.912.A.6.3'
       },
       {
         id: 'EOC-C4-Q8',
         text: 'Which development is the best example of a rollback in faith that federal regulation should guide economic life?',
-        choices: ['Reagan-era deregulation and tax policy arguing that markets work better with less federal interference.', 'The Sherman Antitrust Act expressing concern about concentrated economic power during the Gilded Age.', 'The Wagner Act strengthening workers’ bargaining rights during the New Deal.', 'The Pure Food and Drug Act increasing federal consumer protections in the Progressive Era.'],
+        choices: [
+          'Reagan-era deregulation and tax policy arguing that markets work better with less federal interference.',
+          'The Progressive Era\'s antitrust campaigns, which reduced corporate power through stronger federal enforcement.',
+          'New Deal banking regulation, which strengthened oversight of financial institutions after the Depression.',
+          'Great Society legislation, which expanded federal responsibility for health care and education access.'
+        ],
         correctAnswer: 'Reagan-era deregulation and tax policy arguing that markets work better with less federal interference.',
-        explanation: 'This is the clearest example here of a political turn toward deregulation and skepticism about government intervention.',
+        explanation: 'Reagan\'s deregulation of airlines, trucking, and financial services, combined with supply-side tax cuts, represented the most explicit political argument since the Gilded Age that government intervention in the economy was itself the problem rather than the solution.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'EOC-C4-Q9',
         text: 'Which evidence best supports the claim that Americans have often turned to government when private economic power seemed too concentrated or unstable?',
-        choices: ['Trust-busting, banking reform, and New Deal regulation all expanded public power when markets seemed insufficient.', 'Trust-busting, banking reform, and New Deal regulation all proved government never mattered to the economy at all.', 'Trust-busting, banking reform, and New Deal regulation only appeared after corporate power had already declined permanently.', 'Trust-busting, banking reform, and New Deal regulation mainly aimed to remove Washington from economic management.'],
+        choices: [
+          'Trust-busting, banking reform, and New Deal regulation all expanded public power when markets seemed insufficient.',
+          'Americans have consistently rejected any federal economic intervention regardless of market conditions or corporate power.',
+          'Government intervention has always been motivated by electoral politics rather than any genuine economic necessity.',
+          'Private market forces have consistently resolved all economic crises without any need for government intervention.'
+        ],
         correctAnswer: 'Trust-busting, banking reform, and New Deal regulation all expanded public power when markets seemed insufficient.',
-        explanation: 'These reforms share a common logic: when private systems fail or dominate too strongly, public power grows.',
+        explanation: 'Standard Oil\'s monopoly power produced antitrust action; banking panics produced the Federal Reserve and FDIC; the Depression produced the New Deal — in each case, the scale and harm of market failure generated political support for expanding public oversight.',
         standard: 'SS.912.A.3.10 · SS.912.A.5.12'
       },
       {
         id: 'EOC-C4-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Government and the Economy’?',
-        choices: ['Americans repeatedly argue over how much public power should shape markets, security, and opportunity.', 'Americans repeatedly argue only after the economy stops affecting daily life, work, and inequality.', 'Americans repeatedly argue mainly because government has no real influence on regulation, taxes, or welfare.', 'Americans repeatedly argue while questions of public versus private power become less important over time.'],
+        text: 'What broad pattern best answers the chapter question "Government and the Economy"?',
+        choices: [
+          'Americans repeatedly argue over how much public power should shape markets, security, and opportunity.',
+          'Government\'s role in the economy has always been fixed by the Constitution and never changed across eras.',
+          'Americans have consistently agreed that government should play no role in the economy under any circumstances.',
+          'The debate over government\'s economic role was permanently resolved by the New Deal and has not recurred since.'
+        ],
         correctAnswer: 'Americans repeatedly argue over how much public power should shape markets, security, and opportunity.',
-        explanation: 'That debate ties together regulation, relief, central banking, social insurance, wartime planning, and deregulation.',
+        explanation: 'From Gilded Age laissez-faire to Progressive Era regulation to New Deal expansion to Reagan-era rollback, the debate about government\'s proper economic role has recurred in every generation — reflecting genuine disagreement about markets, power, and the public good.',
         standard: 'SS.912.A.3.9 · SS.912.A.3.10 · SS.912.A.5.12 · SS.912.A.6.3 · SS.912.A.7.17'
       },
     ]
   },
 
-  // ==================================================
-  // CHAPTER 5 — Opportunity and Inequality
-  // ==================================================
+  // ── CHAPTER 5: Opportunity and Inequality ─────────────────
   {
-    id: 'ch5',
-    label: 'CHAPTER 5',
-    title: 'Opportunity and Inequality',
-    sub: 'Mobility, access, exclusion, and unequal outcomes',
-    icon: '⚖️',
-    type: 'lesson',
+    id: 'ch5', label: 'CHAPTER 5', title: 'Opportunity and Inequality',
+    icon: '⚖️', type: 'lesson',
     briefing: {
-      location: 'Mobility, access, exclusion, and unequal outcomes',
-      date: '',
-      role: 'opportunity researcher',
+      location: 'American History: Access and Exclusion',
+      date: 'Immigration Era through Modern America',
+      role: 'social historian',
       text: 'Americans often celebrate opportunity, but access to it has always been unequal. Immigration, race, gender, housing, education, and geography all shaped who could move upward and who stayed locked out. This chapter treats opportunity as a historical system, not just a personal dream.',
-      tags: ['SS.912.A.3.6', 'SS.912.A.3.7', 'SS.912.A.7.17', 'SS.912.A.7.3']
+      tags: ['SS.912.A.3.6', 'SS.912.A.3.7', 'SS.912.A.7.3', 'SS.912.A.7.17']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
@@ -1334,265 +1504,409 @@ const LESSONS = [
       {
         id: 'EOC-C5-Q1',
         text: 'How did Ellis Island and Angel Island most clearly compare as gateways to opportunity?',
-        choices: ['Both processed newcomers, but Angel Island often reflected harsher suspicion that limited opportunity more sharply.', 'Both processed newcomers only after federal law had already guaranteed equal treatment to all immigrants.', 'Both processed newcomers mainly by removing inspection and legal screening from the immigration process.', 'Both processed newcomers while keeping immigration separate from labor, race, and national identity debates.'],
+        choices: [
+          'Both processed newcomers, but Angel Island often reflected harsher suspicion that limited opportunity more sharply.',
+          'Both provided identical welcome and opportunity to all immigrants regardless of national origin or race.',
+          'Ellis Island was far stricter than Angel Island, rejecting a much higher percentage of arriving immigrants.',
+          'Both Ellis Island and Angel Island were equally welcoming because American immigration policy treated all national and racial groups with complete fairness.'
+        ],
         correctAnswer: 'Both processed newcomers, but Angel Island often reflected harsher suspicion that limited opportunity more sharply.',
-        explanation: 'The two stations illustrate that opportunity in America was filtered differently depending on race, region, and law.',
+        explanation: 'Ellis Island processed mostly European immigrants with relatively brief inspections; Angel Island held Chinese and other Asian immigrants for weeks or months under the Chinese Exclusion Act\'s framework — demonstrating how immigration policy itself shaped the unevenness of the American welcome.',
         standard: 'SS.912.A.3.6 · SS.912.A.3.7'
       },
       {
         id: 'EOC-C5-Q2',
         text: 'What is the strongest comparison between the GI Bill and redlining?',
-        choices: ['One expanded opportunity for many families, while the other blocked wealth-building unevenly along racial lines.', 'One expanded opportunity for many families only after redlining had already ended residential inequality completely.', 'One expanded opportunity for many families, while the other focused mainly on factory safety and union bargaining.', 'One expanded opportunity for many families while the other made suburbs more accessible to everyone equally.'],
+        choices: [
+          'One expanded opportunity for many families, while the other blocked wealth-building unevenly along racial lines.',
+          'Both were policies that blocked opportunity for all Americans regardless of race or veteran status.',
+          'Both expanded opportunity equally for all Americans because both were federal programs with no racial distinctions.',
+          'Redlining actually expanded opportunity for Black Americans by concentrating investment in their neighborhoods.'
+        ],
         correctAnswer: 'One expanded opportunity for many families, while the other blocked wealth-building unevenly along racial lines.',
-        explanation: 'Taken together, they show that government policy could widen mobility for some while limiting it for others.',
+        explanation: 'The GI Bill\'s college benefits and mortgage guarantees built the postwar middle class — but FHA redlining and VA lending practices excluded Black veterans from the suburban housing wealth those benefits created, so the same policy era that expanded opportunity for many also systematically denied it to others.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'EOC-C5-Q3',
         text: 'What recurring pattern appears in the history of opportunity in the United States?',
-        choices: ['Access depends on institutions such as housing, schools, credit, and law, not only on individual effort.', 'Access depends on institutions only after all major debates over race, gender, and immigration have ended.', 'Access depends on institutions mainly because hard work has never mattered to mobility in any historical period.', 'Access depends on institutions while inequality becomes less connected to policy, geography, and discrimination.'],
+        choices: [
+          'Access depends on institutions such as housing, schools, credit, and law, not only on individual effort.',
+          'Opportunity is purely a function of individual effort and talent with no structural or institutional determinants.',
+          'Opportunity has been perfectly equal for all Americans since the founding because the Constitution guarantees it.',
+          'Access to opportunity always improves steadily over time regardless of specific policies or institutional structures.'
+        ],
         correctAnswer: 'Access depends on institutions such as housing, schools, credit, and law, not only on individual effort.',
-        explanation: 'The chapter rejects the idea that opportunity is simply personal; it shows how systems structure mobility.',
+        explanation: 'Whether a person can get a mortgage, access a good school, secure a business loan, or enter a profession depends on institutional rules — and those rules have historically distributed access unevenly, making institutions rather than individual effort the key determinant of who moves ahead.',
         standard: 'SS.912.A.3.7 · SS.912.A.7.17'
       },
       {
         id: 'EOC-C5-Q4',
         text: 'Which development is the strongest example of formal opportunity existing but being distributed unequally?',
-        choices: ['The GI Bill, which offered mobility for many veterans but was implemented unevenly across racial lines.', 'The Homestead Act, which opened western land claims during post-Civil War settlement and migration.', 'The Federal Reserve Act, which restructured banking and monetary policy in the early twentieth century.', 'The Wagner Act, which strengthened collective bargaining in the New Deal labor system.'],
+        choices: [
+          'The GI Bill, which offered mobility for many veterans but was implemented unevenly across racial lines.',
+          'The Chinese Exclusion Act, which explicitly and formally denied all opportunity to Chinese immigrants.',
+          'Jim Crow laws, which made racial inequality explicit in law with no pretense of equal formal opportunity.',
+          'The Homestead Act, which was available only to White Americans and formally excluded all non-White applicants.'
+        ],
         correctAnswer: 'The GI Bill, which offered mobility for many veterans but was implemented unevenly across racial lines.',
-        explanation: 'The GI Bill is powerful because it complicates the story of opportunity by showing access and exclusion operating together.',
+        explanation: 'The GI Bill nominally applied to all veterans equally — but in practice, Black veterans were steered away from college and homeownership benefits through local administration, lending discrimination, and housing segregation, making it the clearest example of formal equality producing unequal outcomes.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'EOC-C5-Q5',
         text: 'How did immigrant labor in the early industrial era compare with later wage inequality in a globalized economy?',
-        choices: ['Both offered opportunity to some workers while also leaving many vulnerable to low pay and insecure conditions.', 'Both offered opportunity only after the federal government had eliminated all barriers to fair wages and promotion.', 'Both offered opportunity mainly by making race, language, and legal status irrelevant to economic outcomes.', 'Both offered opportunity while ending political conflict over class, labor markets, and economic mobility.'],
+        choices: [
+          'Both offered opportunity to some workers while also leaving many vulnerable to low pay and insecure conditions.',
+          'Both eliminated poverty by creating enough industrial jobs to raise all workers into the middle class eventually.',
+          'Globalization produced far greater equality than early industrial immigration because technology raised all wages.',
+          'Early industrial immigration was far more exploitative than globalization, which has consistently protected worker rights.'
+        ],
         correctAnswer: 'Both offered opportunity to some workers while also leaving many vulnerable to low pay and insecure conditions.',
-        explanation: 'The comparison shows that opportunity and exploitation often exist side by side in changing labor systems.',
+        explanation: 'Immigrant factory workers in 1900 and low-wage service workers in the globalized 2000s both illustrate the same pattern — economic participation offers a degree of opportunity while also maintaining vulnerability, with the structure of wages, unionization, and worker rights determining how much of the economic gains actually reach working people.',
         standard: 'SS.912.A.3.6 · SS.912.A.7.17'
       },
       {
         id: 'EOC-C5-Q6',
         text: 'Which statement best captures continuity and change in racial economic inequality from the Civil Rights era to the present?',
-        choices: ['Legal barriers weakened, but wealth, schooling, housing, and labor-market gaps continued in new forms.', 'Legal barriers weakened only after economic inequality had already disappeared across race and region.', 'Legal barriers weakened mainly because housing, credit, and school access stopped affecting mobility after 1965.', 'Legal barriers weakened while economic outcomes became unrelated to policy, discrimination, or history.'],
-        correctAnswer: 'Legal barriers weakened, but wealth, schooling, housing, and labor-market gaps continued in new forms.',
-        explanation: 'The chapter emphasizes that equality in law does not automatically produce equality in outcomes.',
+        choices: [
+          'Legal barriers fell, but institutional patterns of unequal wealth, credit, and school access have persisted.',
+          'Racial economic inequality was completely eliminated by the Civil Rights Act and required no further policy attention.',
+          'Racial economic inequality worsened continuously from the Civil Rights era through the present with no improvement.',
+          'All racial economic gaps closed permanently by 1980 because affirmative action eliminated all institutional barriers.'
+        ],
+        correctAnswer: 'Legal barriers fell, but institutional patterns of unequal wealth, credit, and school access have persisted.',
+        explanation: 'The Civil Rights Act and Voting Rights Act removed formal legal barriers; but wealth gaps built by generations of exclusion, school quality differences tied to property taxes, and ongoing patterns in lending and housing have maintained significant racial economic inequality even without explicit legal discrimination.',
         standard: 'SS.912.A.7.3 · SS.912.A.7.17'
       },
       {
         id: 'EOC-C5-Q7',
         text: 'Why do suburbs and redlining belong in a chapter on opportunity rather than only one on housing?',
-        choices: ['Because where families could live shaped wealth, schools, security, and long-term mobility across generations.', 'Because where families could live mattered only after housing had stopped affecting schools, taxes, and local jobs.', 'Because where families could live mainly influenced architecture and transportation rather than opportunity itself.', 'Because where families could live made economic inequality less important once homeownership began to spread.'],
+        choices: [
+          'Because where families could live shaped wealth, schools, security, and long-term mobility across generations.',
+          'Because housing is purely a private matter with no connection to economic opportunity or social mobility.',
+          'Because suburban growth created equal opportunities for all Americans regardless of race or income level.',
+          'Because redlining only affected a small number of families and had no significant long-term economic consequences.'
+        ],
         correctAnswer: 'Because where families could live shaped wealth, schools, security, and long-term mobility across generations.',
-        explanation: 'Housing policy mattered because it affected much more than shelter; it structured access to future opportunity.',
+        explanation: 'Homeownership is the primary wealth-building mechanism for most American families; school quality is tied to property values; neighborhood stability affects everything from business investment to health — so where a family could live determined far more than shelter alone.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'EOC-C5-Q8',
         text: 'Why do affirmative action debates fit the theme of opportunity and inequality?',
-        choices: ['They ask whether fair opportunity means equal rules alone or stronger remedies for unequal starting points.', 'They ask whether fair opportunity matters only in colleges and has little to do with work or public policy.', 'They ask whether fair opportunity is best achieved by ignoring history, exclusion, and access to institutions.', 'They ask whether fair opportunity should be replaced entirely by private privilege and inherited advantage.'],
+        choices: [
+          'They ask whether fair opportunity means equal rules alone or stronger remedies for unequal starting points.',
+          'They are mainly debates about test scores and grades rather than about the structural distribution of opportunity.',
+          'They represent a debate about whether opportunity should be eliminated entirely rather than expanded or reformed.',
+          'Affirmative action debates are only relevant to education and have no connection to broader economic opportunity.'
+        ],
         correctAnswer: 'They ask whether fair opportunity means equal rules alone or stronger remedies for unequal starting points.',
-        explanation: 'These debates belong here because they center on how societies define fairness in unequal conditions.',
+        explanation: 'The affirmative action debate is precisely the debate about what opportunity means in practice — whether treating everyone by identical rules is sufficient when starting points are unequal, or whether active remediation is needed to make formal equality meaningful.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'EOC-C5-Q9',
-        text: 'Which evidence best supports the claim that modern opportunity gaps are tied to long historical systems rather than only individual choices?',
-        choices: ['Persistent differences in wealth, neighborhood resources, school access, and wages reflect earlier unequal institutions.', 'Persistent differences in wealth prove that schooling, housing, and policy have little effect on life outcomes.', 'Persistent differences in wealth only appear after all major legal and historical barriers have been fully removed.', 'Persistent differences in wealth mainly show that immigration and race no longer affect economic mobility.'],
+        text: 'Why does economic inequality persist even after legal barriers to opportunity are removed?',
+        choices: [
+          'Persistent differences in wealth, neighborhood resources, school access, and wages reflect earlier unequal institutions.',
+          'Economic inequality persists only because of individual choices and has no connection to historical or institutional factors.',
+          'Legal barriers are the only cause of inequality, so removing them immediately eliminates all economic gaps.',
+          'Economic inequality persists because it is a natural and inevitable feature of all economic systems with no institutional causes.'
+        ],
         correctAnswer: 'Persistent differences in wealth, neighborhood resources, school access, and wages reflect earlier unequal institutions.',
-        explanation: 'This evidence connects present inequality to earlier systems of exclusion rather than to effort alone.',
+        explanation: 'Wealth builds on itself — families that were excluded from homeownership, good schools, and business credit for generations enter the present with lower wealth, weaker networks, and less access to the institutions that reproduce advantage, even after explicit legal barriers are removed.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'EOC-C5-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Opportunity and Inequality’?',
-        choices: ['Opportunity grows when access widens, but unequal systems keep shaping who can actually move ahead.', 'Opportunity grows only after race, housing, immigration, and education stop affecting economic life altogether.', 'Opportunity grows mainly because mobility becomes disconnected from policy, law, and institutional access.', 'Opportunity grows while inequality steadily loses influence over work, wealth, and community life.'],
+        text: 'What broad pattern best answers the chapter question "Opportunity and Inequality"?',
+        choices: [
+          'Opportunity grows when access widens, but unequal systems keep shaping who can actually move ahead.',
+          'Opportunity is purely a matter of individual effort that institutions and policies cannot meaningfully affect.',
+          'Opportunity has been perfectly equal throughout American history because the market naturally rewards merit.',
+          'Inequality only exists because government programs created it by helping some groups while ignoring others.'
+        ],
         correctAnswer: 'Opportunity grows when access widens, but unequal systems keep shaping who can actually move ahead.',
-        explanation: 'This chapter argues that opportunity is real but uneven, and that institutions help decide who benefits most.',
+        explanation: 'From immigration gates to factory labor to GI Bill access to school funding inequities, the pattern across American history is that opportunity is real but structurally constrained — widening when institutions open and narrowing when they exclude, with individual effort operating within those structural limits.',
         standard: 'SS.912.A.3.6 · SS.912.A.3.7 · SS.912.A.7.3 · SS.912.A.7.17'
       },
     ]
   },
 
-  // ==================================================
-  // CUMULATIVE REVIEW — Cumulative Review
-  // ==================================================
+  // ── CUMULATIVE REVIEW ──────────────────────────────────────
   {
-    id: 'eoc',
-    label: 'CUMULATIVE REVIEW',
-    title: 'Cumulative Review',
-    sub: 'Cross-era synthesis of work, wealth, inequality, and opportunity',
-    icon: '📋',
-    type: 'eoc',
+    id: 'eoc', label: 'CUMULATIVE REVIEW', title: 'Cumulative Review',
+    icon: '📋', type: 'eoc',
     briefing: {
-      location: 'Cross-era synthesis of work, wealth, inequality, and opportunity',
+      location: 'Engines of Change — Full Campaign Review',
       date: '',
-      role: 'economic themes moderator',
+      role: 'state exam coach',
       text: 'This review pulls together the whole Engines of Change campaign. Students should compare how land, labor, crisis, government policy, and unequal access shaped daily life and opportunity across American history.',
-      tags: ['SS.912.A.3.1', 'SS.912.A.7.17', 'SS.912.A.3.7', 'SS.912.A.3.4', 'SS.912.A.3.2', 'SS.912.A.5.12']
+      tags: ['SS.912.A.3.1', 'SS.912.A.3.2', 'SS.912.A.3.4', 'SS.912.A.3.6', 'SS.912.A.3.9', 'SS.912.A.5.11', 'SS.912.A.5.12', 'SS.912.A.6.3', 'SS.912.A.7.17']
     },
     displayCount: 15,
     goldRules: { perCorrect: 15, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Engines of Change Mastery', cards: ['Work and Wealth', 'Economic Inequality'] },
+    rewards: { badge: 'Economy Synthesis', cards: ['Economic Systems', 'Inequality Patterns'] },
     bank: [
       {
         id: 'EOC-REV-Q1',
         text: 'What is the strongest comparison between the Homestead Act and the GI Bill?',
-        choices: ['Both used public policy to widen opportunity, though access and outcomes remained unequal in practice.', 'Both used public policy only after private markets had already made property and schooling equally available.', 'Both used public policy mainly to reduce land ownership and homeownership among ordinary families.', 'Both used public policy while avoiding any connection to wealth-building or long-term mobility.'],
+        choices: [
+          'Both used public policy to widen opportunity, though access and outcomes remained unequal in practice.',
+          'Both provided completely equal opportunity to all Americans with no racial or class distinctions of any kind.',
+          'Both were failures that produced no significant economic mobility for any of their intended beneficiaries.',
+          'Both were exclusively wartime measures that had no lasting effect on peacetime economic opportunity.'
+        ],
         correctAnswer: 'Both used public policy to widen opportunity, though access and outcomes remained unequal in practice.',
-        explanation: 'Each policy expanded opportunity for many Americans while still leaving important groups at a disadvantage.',
+        explanation: 'Both were genuine expansions of opportunity — land for settlers, college and homeownership for veterans — but both also operated within systems of inequality that limited who could fully benefit, whether through the barriers facing women and minorities in westward settlement or Black veterans\' exclusion from GI Bill benefits.',
         standard: 'SS.912.A.3.1 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q2',
-        text: 'What broad pattern connects western land access, suburban homeownership, and modern wealth gaps?',
-        choices: ['Access to assets like land, housing, and credit shapes opportunity more deeply than effort alone.', 'Access to assets shapes opportunity only after government stops affecting markets, schools, and neighborhoods.', 'Access to assets shapes opportunity mainly because wages and labor conditions rarely affect mobility over time.', 'Access to assets shapes opportunity while inequality becomes less tied to family wealth or public policy.'],
+        text: 'Why has wealth often concentrated in America despite the promise of economic opportunity?',
+        choices: [
+          'Access to assets like land, housing, and credit shapes opportunity more deeply than effort alone.',
+          'Wealth concentration is caused entirely by individual laziness among those who fail to accumulate savings.',
+          'Concentrated wealth results mainly from government redistribution programs that take from earners and give to non-earners.',
+          'The Constitution requires wealth concentration because it protects property rights without any redistributive mechanisms.'
+        ],
         correctAnswer: 'Access to assets like land, housing, and credit shapes opportunity more deeply than effort alone.',
-        explanation: 'Across eras, ownership and access to wealth-building systems repeatedly influence who can move ahead.',
+        explanation: 'Those who can get a mortgage build equity; those who can get a business loan can start enterprises; those who inherit land, connections, or education have advantages that compound over generations — making asset access the structural foundation of wealth, not just individual effort.',
         standard: 'SS.912.A.3.1 · SS.912.A.3.7 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q3',
         text: 'How do railroads in the Gilded Age and globalization in the modern era most clearly compare?',
-        choices: ['Both reorganized economic opportunity by connecting markets in ways that benefited some groups more than others.', 'Both reorganized economic opportunity only after small local producers had already become stronger than large firms.', 'Both reorganized economic opportunity mainly by reducing the importance of transport, trade, and labor mobility.', 'Both reorganized economic opportunity while making inequality less tied to geography, industry, or infrastructure.'],
+        choices: [
+          'Both reorganized economic opportunity by connecting markets in ways that benefited some groups more than others.',
+          'Both distributed economic benefits equally across all regions and social groups without creating any winners or losers.',
+          'Both were government programs that deliberately disadvantaged private business in favor of public institutions.',
+          'Globalization was far more equitable than railroad development because international trade always benefits everyone equally.'
+        ],
         correctAnswer: 'Both reorganized economic opportunity by connecting markets in ways that benefited some groups more than others.',
-        explanation: 'Large economic systems can expand growth while also redistributing advantage unevenly across regions and workers.',
+        explanation: 'Railroads connected national markets but concentrated power in railroad corporations at farmers\' expense; globalization connected world markets but displaced manufacturing workers while benefiting consumers and financial capital — both transformed economic opportunity while distributing gains unevenly.',
         standard: 'SS.912.A.3.4 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q4',
         text: 'Which development best shows concentrated private power shaping the economic future of others?',
-        choices: ['Standard Oil dominating a major industry and narrowing the space for smaller competitors.', 'The Voting Rights Act protecting ballot access in the South during the 1960s.', 'The Seneca Falls Convention demanding broader political rights before the Civil War.', 'The Brown decision challenging school segregation in the mid-twentieth century.'],
+        choices: [
+          'Standard Oil dominating a major industry and narrowing the space for smaller competitors.',
+          'The federal government funding public schools, which gave all Americans equal access to education.',
+          'Labor unions collectively bargaining for higher wages, which increased workers\' share of industrial profits.',
+          'The Homestead Act distributing land to settlers, which reduced the concentration of western land ownership.'
+        ],
         correctAnswer: 'Standard Oil dominating a major industry and narrowing the space for smaller competitors.',
-        explanation: 'This example most directly captures how large firms can shape whole markets rather than just individual businesses.',
+        explanation: 'Rockefeller\'s Standard Oil controlled 90% of refining by 1880 through predatory pricing, secret railroad rebates, and vertical integration — demonstrating how concentrated private power could eliminate competition and shape the economic options available to everyone else in the industry.',
         standard: 'SS.912.A.3.4'
       },
       {
         id: 'EOC-REV-Q5',
         text: 'What is the strongest comparison between factory labor during the Gilded Age and deindustrialization in the late twentieth century?',
-        choices: ['In both eras, workers often had little control over economic decisions that profoundly shaped their lives.', 'In both eras, workers had little control only after unions had become stronger than employers across every industry.', 'In both eras, workers had little control mainly because government had fully guaranteed wages and job security.', 'In both eras, workers had little control while class conflict became less connected to economic change.'],
+        choices: [
+          'In both eras, workers often had little control over economic decisions that profoundly shaped their lives.',
+          'Both eras provided workers with strong union protections and significant influence over industrial decisions.',
+          'Factory workers in both eras consistently earned wages that allowed comfortable middle-class lives without struggle.',
+          'Deindustrialization was actually far more beneficial for workers than Gilded Age factory labor in every respect.'
+        ],
         correctAnswer: 'In both eras, workers often had little control over economic decisions that profoundly shaped their lives.',
-        explanation: 'Whether facing dangerous factories or plant closures, workers often lived with decisions made by owners and larger systems.',
+        explanation: 'Gilded Age workers had no say over wages, hours, or safety; deindustrialization-era workers had no say over plant closure decisions made by executives and shareholders in distant boardrooms — in both cases, the most consequential economic decisions were made by those who controlled capital, not labor.',
         standard: 'SS.912.A.3.2 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q6',
         text: 'What broad pattern connects unions, strikes, and labor reform across these eras?',
-        choices: ['Workers usually had to organize collectively before wealth and power were shared more fairly.', 'Workers usually had to organize collectively only after government had already guaranteed equal bargaining power.', 'Workers usually had to organize collectively mainly because wages and safety were unrelated to political reform.', 'Workers usually had to organize collectively while employers steadily lost influence over law and public opinion.'],
+        choices: [
+          'Workers usually had to organize collectively before wealth and power were shared more fairly.',
+          'Wealth and power were always shared fairly in American industry without any need for collective action.',
+          'Unions consistently failed to improve conditions because employers always successfully defeated all labor organizing.',
+          'Labor reform always came from government initiative rather than worker organizing or collective action.'
+        ],
         correctAnswer: 'Workers usually had to organize collectively before wealth and power were shared more fairly.',
-        explanation: 'The review keeps returning to the idea that labor power did not emerge automatically from economic growth.',
+        explanation: 'The eight-hour day, child labor laws, workplace safety regulations, and the Wagner Act\'s labor rights all came after decades of strikes, organizing, and political pressure — the historical record consistently shows that labor gains required collective action, not just individual negotiation.',
         standard: 'SS.912.A.3.2 · SS.912.A.5.12'
       },
       {
         id: 'EOC-REV-Q7',
         text: 'How did the Great Depression and the 1970s era of stagflation most clearly compare?',
-        choices: ['Both shook confidence in the economy, though one centered on mass collapse and the other on inflation with stagnation.', 'Both shook confidence in the economy only after federal policy had already eliminated unemployment and recession fears.', 'Both shook confidence in the economy mainly because workers and consumers were becoming more secure than before.', 'Both shook confidence in the economy while making government policy seem less relevant to daily life.'],
+        choices: [
+          'Both shook confidence in the economy, though one centered on mass collapse and the other on inflation with stagnation.',
+          'Both crises were identical in cause, duration, and the government\'s policy response to each.',
+          'The 1970s stagflation was actually more economically severe than the Great Depression in terms of unemployment, hardship, and lasting social consequences.',
+          'Both crises ended quickly when government reduced spending and allowed markets to correct without intervention.'
+        ],
         correctAnswer: 'Both shook confidence in the economy, though one centered on mass collapse and the other on inflation with stagnation.',
-        explanation: 'The nature of the crisis changed, but both eras produced major anxiety about how the economy was functioning.',
+        explanation: 'The Depression\'s 25% unemployment and bank failures produced mass hardship; the 1970s produced a different but also disorienting crisis — inflation and unemployment rising simultaneously, which existing Keynesian economics couldn\'t explain or address — both eroding public confidence in economic management.',
         standard: 'SS.912.A.5.11 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q8',
         text: 'Which development best shows the federal government trying to stabilize economic life after systemic collapse?',
-        choices: ['New Deal relief and reform programs responding to unemployment, insecurity, and banking failure.', 'The Haymarket affair intensifying conflict between labor radicals and the public in the 1880s.', 'The Chinese Exclusion Act restricting migration from a targeted group in the late nineteenth century.', 'The Free Speech Movement challenging university restrictions on political organizing in the 1960s.'],
+        choices: [
+          'New Deal relief and reform programs responding to unemployment, insecurity, and banking failure.',
+          'Reagan\'s tax cuts, which reduced government revenue to stimulate investment during the 1980s recovery.',
+          'Progressive Era antitrust action, which broke up corporate monopolies before any major economic collapse.',
+          'The Homestead Act, which provided land to settlers as an economic development strategy in peacetime.'
+        ],
         correctAnswer: 'New Deal relief and reform programs responding to unemployment, insecurity, and banking failure.',
-        explanation: 'The New Deal is the clearest example here of government trying to rebuild economic stability on a national scale.',
+        explanation: 'The New Deal\'s response to the Depression — FDIC deposit insurance, WPA employment, Social Security, SEC securities regulation — was specifically designed to address the mechanisms of economic collapse and prevent recurrence, not just provide charity.',
         standard: 'SS.912.A.5.12'
       },
       {
         id: 'EOC-REV-Q9',
         text: 'Why does the history of regulation, relief, and deregulation fit together in one theme game?',
-        choices: ['They are different answers to the same question of how much government should shape economic life.', 'They are different answers only after Americans stop linking markets to inequality, labor, and social welfare.', 'They are different answers mainly because government has rarely influenced banking, wages, or corporate behavior.', 'They are different answers while public debate over taxes, regulation, and welfare becomes less important.'],
+        choices: [
+          'They are different answers to the same question of how much government should shape economic life.',
+          'They are unrelated topics that only appear together because the game needed more chapters to fill the curriculum.',
+          'They represent a single continuous policy with no ideological disagreements between Progressive Era and Reagan era.',
+          'They fit together only because they all occurred during the same decade of American economic history.'
+        ],
         correctAnswer: 'They are different answers to the same question of how much government should shape economic life.',
-        explanation: 'This theme game treats policy shifts as part of one long national argument over public and private economic power.',
+        explanation: 'Antitrust regulation, the Federal Reserve, the New Deal, and Reagan deregulation are all positions in the same recurring debate — should government constrain market power and protect against instability, or does government intervention itself cause the problems it claims to solve?',
         standard: 'SS.912.A.3.9 · SS.912.A.5.12 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q10',
         text: 'Which evidence best supports the claim that housing policy shaped long-term wealth inequality?',
-        choices: ['The contrast between GI Bill opportunity and redlining shows how homeownership gains were distributed unevenly.', 'The contrast between GI Bill opportunity and redlining proves housing had little connection to school access or savings.', 'The contrast between GI Bill opportunity and redlining only mattered after suburbs lost their role in family wealth.', 'The contrast between GI Bill opportunity and redlining mainly shows that labor markets are unrelated to place.'],
+        choices: [
+          'The contrast between GI Bill opportunity and redlining shows how homeownership gains were distributed unevenly.',
+          'Housing has never been a significant source of wealth because homes depreciate rather than appreciate over time.',
+          'All Americans benefited equally from postwar housing policy because the FHA made loans available to everyone.',
+          'Housing policy only matters for very wealthy Americans and has no significant effect on middle-class wealth building.'
+        ],
         correctAnswer: 'The contrast between GI Bill opportunity and redlining shows how homeownership gains were distributed unevenly.',
-        explanation: 'Housing became a major route to wealth, so unequal access there had long-term effects across generations.',
+        explanation: 'White veterans who bought suburban homes in the 1950s built equity that grew dramatically over fifty years; Black veterans excluded by redlining and discriminatory lending from the same purchases were locked out of that wealth creation — a divergence in asset accumulation that compounded across generations.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q11',
         text: 'Which statement best captures continuity and change from western land opportunity to postwar suburban opportunity?',
-        choices: ['Property remained a key path to mobility, but access stayed shaped by policy, race, and unequal institutions.', 'Property remained a key path to mobility only after government stopped shaping land, credit, and housing markets.', 'Property remained a key path to mobility mainly because homeownership replaced all importance of wages and jobs.', 'Property remained a key path to mobility while wealth-building became less tied to family assets over time.'],
+        choices: [
+          'Property remained a key path to mobility, but access stayed shaped by policy, race, and unequal institutions.',
+          'Opportunity became completely equal between the Homestead Act era and the postwar era because policy eliminated all barriers.',
+          'Suburban opportunity was entirely unrelated to western land settlement because different groups were involved.',
+          'Postwar suburban opportunity was less significant than western settlement because suburbs were less valuable as economic assets.'
+        ],
         correctAnswer: 'Property remained a key path to mobility, but access stayed shaped by policy, race, and unequal institutions.',
-        explanation: 'Different forms of property mattered in different eras, but access to them remained politically structured.',
+        explanation: 'Land was the Homestead Act\'s mechanism for building economic security; homeownership was the GI Bill\'s mechanism — but in both eras, who could access the property that built wealth was shaped by institutional rules that excluded women, minorities, and the poor from full participation.',
         standard: 'SS.912.A.3.1 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q12',
         text: 'What is the strongest comparison between Hoovervilles during the Depression and later Rust Belt decline?',
-        choices: ['Both show that economic crisis can transform whole communities, not just household income or market numbers.', 'Both show that economic crisis only mattered after federal policy had already guaranteed local prosperity.', 'Both show that economic crisis mainly improved neighborhood stability by encouraging new long-term investment.', 'Both show that economic crisis had little influence on identity, place, schools, or family decisions.'],
-        correctAnswer: 'Both show that economic crisis can transform whole communities, not just household income or market numbers.',
-        explanation: 'The impact of economic change is social and geographic as well as financial.',
+        choices: [
+          'Both made economic hardship visibly present in the landscape, challenging the idea that prosperity was universal.',
+          'Both were entirely solved within two years by government programs that fully restored economic stability.',
+          'Both only affected rural areas and had no significant impact on urban or industrial communities.',
+          'Both proved that individual effort was insufficient to survive economic collapse without collective or public support.'
+        ],
+        correctAnswer: 'Both made economic hardship visibly present in the landscape, challenging the idea that prosperity was universal.',
+        explanation: 'Hoovervilles of cardboard shacks and shuttered Rust Belt factories with overgrown parking lots both physically inscribed economic failure in the landscape — making poverty and decline impossible to ignore and challenging official narratives of American prosperity and progress.',
         standard: 'SS.912.A.5.11 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q13',
         text: 'Which case is the strongest example of a workplace disaster changing national attitudes about reform?',
-        choices: ['The Triangle Shirtwaist Fire exposing how unsafe labor systems could become without stronger regulation.', 'The Open Door Policy challenging imperial competition in China at the turn of the century.', 'The Compromise of 1850 delaying sectional conflict over slavery and western expansion.', 'The PATCO strike showing conflict between government and organized labor in the 1980s.'],
+        choices: [
+          'The Triangle Shirtwaist Fire exposing how unsafe labor systems could become without stronger regulation.',
+          'The Pullman Strike, which produced immediate federal legislation requiring safe railroad passenger cars.',
+          'The Great Railroad Strike of 1877, which led directly to comprehensive federal workplace safety standards.',
+          'The Haymarket affair, which convinced Congress to pass the first federal child labor protection laws.'
+        ],
         correctAnswer: 'The Triangle Shirtwaist Fire exposing how unsafe labor systems could become without stronger regulation.',
-        explanation: 'It remains a powerful example of reform pressure growing out of visible industrial tragedy.',
+        explanation: 'The 1911 fire killed 146 workers and generated enormous public outrage — within a year, New York had passed forty new labor protection laws. The fire became a defining moment demonstrating how industrial tragedy could translate into reform momentum when it received public attention.',
         standard: 'SS.912.A.3.9'
       },
       {
         id: 'EOC-REV-Q14',
         text: 'What broad pattern connects the Gilded Age and the age of globalization?',
-        choices: ['Periods of rapid growth can widen opportunity for some while also increasing inequality and insecurity for others.', 'Periods of rapid growth only widen opportunity after labor conflict and wealth concentration have fully disappeared.', 'Periods of rapid growth mainly reduce inequality because large firms steadily lose influence over the economy.', 'Periods of rapid growth make questions of wages, mobility, and access less important to everyday life.'],
+        choices: [
+          'Periods of rapid growth can widen opportunity for some while also increasing inequality and insecurity for others.',
+          'Both eras produced perfect economic equality because market competition consistently distributed gains to all workers.',
+          'Both eras were characterized by declining economic growth that reduced opportunity for all Americans simultaneously.',
+          'Globalization eliminated all the inequalities created during the Gilded Age by opening markets to all participants equally.'
+        ],
         correctAnswer: 'Periods of rapid growth can widen opportunity for some while also increasing inequality and insecurity for others.',
-        explanation: 'This theme game keeps emphasizing that growth and fairness do not automatically move together.',
+        explanation: 'Gilded Age industrialization built vast wealth and raised living standards while also producing Hoovervilles, child labor, and unsafe factories; globalization built international prosperity and lowered consumer prices while also displacing manufacturing workers and widening wealth gaps — growth and inequality coexisting in both eras.',
         standard: 'SS.912.A.3.4 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q15',
         text: 'Why does a game about work and opportunity include immigration stations, exclusion, and affirmative action debates?',
-        choices: ['Because opportunity depends on who can enter institutions, not just on how hard people work once inside them.', 'Because opportunity depends on entry only after labor markets stop shaping wages, schooling, and promotion.', 'Because opportunity depends on entry mainly when race, nationality, and policy become irrelevant to mobility.', 'Because opportunity depends on entry while wealth and inequality stay separate from law and public systems.'],
+        choices: [
+          'Because opportunity depends on who can enter institutions, not just on how hard people work once inside them.',
+          'Because immigration and affirmative action are completely unrelated to work and belong only in civil rights history.',
+          'Because including these topics is required by state standards regardless of their connection to the theme.',
+          'Because exclusion and affirmative action represent identical policies that both restrict economic opportunity equally.'
+        ],
         correctAnswer: 'Because opportunity depends on who can enter institutions, not just on how hard people work once inside them.',
-        explanation: 'The chapter argues that barriers to access are themselves part of economic history.',
+        explanation: 'The Chinese Exclusion Act, Angel Island detentions, redlining, and affirmative action debates all ask the same fundamental question the game explores — who gets access to the institutions that distribute wealth, education, and mobility, and on what terms?',
         standard: 'SS.912.A.3.6 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q16',
         text: 'Which evidence best supports the claim that Americans sometimes turn to public power when markets alone seem inadequate?',
-        choices: ['Trust-busting, New Deal reform, and wartime mobilization all expanded the federal role during major economic strain.', 'Trust-busting, New Deal reform, and wartime mobilization all proved that federal action weakens when crisis grows worse.', 'Trust-busting, New Deal reform, and wartime mobilization only appeared after private firms solved instability by themselves.', 'Trust-busting, New Deal reform, and wartime mobilization mainly aimed to remove Washington from economic planning.'],
+        choices: [
+          'Trust-busting, New Deal reform, and wartime mobilization all expanded the federal role during major economic strain.',
+          'Americans have never supported federal economic intervention because they consistently prefer market solutions.',
+          'The federal government has always played a minimal economic role because the Constitution prohibits such intervention.',
+          'Americans only supported public economic power during wartime and never during peacetime economic crises.'
+        ],
         correctAnswer: 'Trust-busting, New Deal reform, and wartime mobilization all expanded the federal role during major economic strain.',
-        explanation: 'These examples share the idea that private markets alone were not enough in moments of concentration or crisis.',
+        explanation: 'Each major moment of market failure or concentration — Gilded Age monopolies, the Great Depression, WWII mobilization needs — produced political support for expanding public oversight, demonstrating a recurring American pragmatism that turns to government when markets demonstrably fail.',
         standard: 'SS.912.A.3.10 · SS.912.A.5.12 · SS.912.A.6.3'
       },
       {
         id: 'EOC-REV-Q17',
         text: 'Which development best shows that opportunity can be expanded and restricted at the same time?',
-        choices: ['The postwar housing boom, when some families built wealth rapidly while redlining excluded many others.', 'The Homestead Strike, when labor conflict turned violent in a steel town during the 1890s.', 'The Federal Reserve Act, which reorganized banking and monetary authority in the early twentieth century.', 'The PATCO strike, when the Reagan administration took a hard line against federal workers.'],
+        choices: [
+          'The postwar housing boom, when some families built wealth rapidly while redlining excluded many others.',
+          'The Homestead Act, which was entirely unavailable to any minority group and produced no economic opportunity.',
+          'The New Deal, which provided completely equal benefits to all Americans regardless of race or region.',
+          'Progressive Era labor reform, which raised wages equally for all workers and eliminated all workplace inequality.'
+        ],
         correctAnswer: 'The postwar housing boom, when some families built wealth rapidly while redlining excluded many others.',
-        explanation: 'This example is especially useful because it combines upward mobility and structural exclusion in the same era.',
+        explanation: 'The postwar housing boom was genuinely transformative — creating the largest expansion of middle-class homeownership in American history — but it was built on explicit racial exclusion, demonstrating that opportunity can expand dramatically for some while contracting for others at the exact same moment.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q18',
         text: 'Which statement best captures continuity and change in the balance between labor and capital across these eras?',
-        choices: ['Workers gained more protection in some periods, but business power remained a major force in shaping the rules.', 'Workers gained more protection only after business influence had disappeared from law and public policy completely.', 'Workers gained more protection mainly because unions replaced government as the main economic authority nationwide.', 'Workers gained more protection while wages, hours, and safety became less important to public debate.'],
+        choices: [
+          'Workers gained more protection in some periods, but business power remained a major force in shaping the rules.',
+          'Labor has consistently dominated capital throughout American history because democratic majorities always protect workers.',
+          'Capital has always completely dominated labor with no meaningful gains for workers at any point in American history.',
+          'The balance between labor and capital was permanently resolved by the Wagner Act and has not shifted since 1935.'
+        ],
         correctAnswer: 'Workers gained more protection in some periods, but business power remained a major force in shaping the rules.',
-        explanation: 'The review links labor history to the wider question of who has enough power to shape economic systems.',
+        explanation: 'The Wagner Act and minimum wage created real protections; the Taft-Hartley Act limited unions; deregulation reduced worker protections in some sectors; globalization shifted bargaining power toward capital — the balance has shifted but never fully settled in favor of either side.',
         standard: 'SS.912.A.3.2 · SS.912.A.5.12 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q19',
         text: 'Why does the essential question include daily life rather than only wealth, markets, and policy?',
-        choices: ['Because economic systems shape where people live, how they work, what they fear, and what futures seem possible.', 'Because economic systems shape daily life only after politics, schooling, and family structure stop mattering.', 'Because economic systems shape daily life mainly through stock prices rather than housing, work, or security.', 'Because economic systems shape daily life while leaving community identity and personal risk mostly unchanged.'],
+        choices: [
+          'Because economic systems shape where people live, how they work, what they fear, and what futures seem possible.',
+          'Because daily life is more interesting than policy and helps students stay engaged with otherwise boring material.',
+          'Because the standards require discussion of daily life regardless of its connection to economic themes or questions.',
+          'Because daily life and economic systems are entirely separate topics that only appear together for convenience.'
+        ],
         correctAnswer: 'Because economic systems shape where people live, how they work, what they fear, and what futures seem possible.',
-        explanation: 'The theme game is about lived history, so it connects economic systems to ordinary experience rather than abstract numbers alone.',
+        explanation: 'A factory town\'s daily life, a Dust Bowl farm family\'s migration, a Black veteran\'s denied mortgage application — all are daily-life manifestations of economic systems. Understanding the human meaning of economic history requires connecting market forces to lived experience.',
         standard: 'SS.912.A.3.2 · SS.912.A.5.11 · SS.912.A.7.17'
       },
       {
         id: 'EOC-REV-Q20',
-        text: 'Which statement best answers the game’s essential question about work, wealth, and opportunity across American history?',
-        choices: ['Economic systems created opportunity and growth, but they also repeatedly concentrated power and produced unequal outcomes.', 'Economic systems created opportunity and growth only after government stopped shaping markets, labor, and access to assets.', 'Economic systems created opportunity and growth mainly because inequality became less important over time to ordinary life.', 'Economic systems created opportunity and growth while leaving daily work, mobility, and security mostly unaffected.'],
+        text: 'Which statement best answers the game\'s essential question about work, wealth, and opportunity across American history?',
+        choices: [
+          'Economic systems created opportunity and growth, but they also repeatedly concentrated power and produced unequal outcomes.',
+          'American economic systems have always distributed opportunity perfectly equally without any concentration of power.',
+          'Economic growth has always been shared so broadly that inequality has never been a significant problem in America.',
+          'Work, wealth, and opportunity are purely individual matters that economic systems and government policies cannot meaningfully affect in any significant way.'
+        ],
         correctAnswer: 'Economic systems created opportunity and growth, but they also repeatedly concentrated power and produced unequal outcomes.',
-        explanation: 'That answer best captures the campaign’s central theme: growth and opportunity have always been tied to conflict over power, access, and inequality.',
+        explanation: 'From Gilded Age industrialization to the Great Depression to postwar prosperity to deindustrialization, the American economic story is one of genuine growth and real opportunity alongside persistent concentration, exclusion, and unequal distribution — both sides of that story are necessary for an honest answer.',
         standard: 'SS.912.A.3.1 · SS.912.A.3.2 · SS.912.A.3.4 · SS.912.A.3.6 · SS.912.A.3.9 · SS.912.A.5.11 · SS.912.A.5.12 · SS.912.A.6.3 · SS.912.A.7.17'
       },
     ]
@@ -2666,7 +2980,7 @@ function showLoginGate() {
 
 const HIST_CARDS = {
   carnegie:    {icon:'🏭', name:'Andrew Carnegie',         role:'Steel Magnate · Gilded Age',
-    desc:'Built the largest steel empire in America and then gave most of it away. His rise from immigrant poverty to world’s richest man was held up as proof that capitalism rewarded hard work. His workers’ conditions at Homestead told a different story.', unlockLesson:'ch1'},
+    desc:'Built the largest steel empire in America and then gave most of it away. His rise from immigrant poverty to world\'s richest man was held up as proof that capitalism rewarded hard work. His workers\' conditions at Homestead told a different story.', unlockLesson:'ch1'},
   gompers:     {icon:'✊', name:'Samuel Gompers',           role:'AFL Founder · Labor Organizer',
     desc:'Founded the American Federation of Labor and spent four decades building the most durable labor organization in U.S. history. Focused on concrete gains — wages, hours, safety — rather than socialist politics, winning what workers could actually keep.', unlockLesson:'ch2'},
   triangle:    {icon:'🔥', name:'Triangle Shirtwaist Workers', role:'Reform Symbol · 1911',
