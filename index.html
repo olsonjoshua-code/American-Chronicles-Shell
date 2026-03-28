@@ -2365,7 +2365,7 @@ function buildStudyBlock(u){
     <div class="vocab-status-row">${studyLabel}</div>
     ${briefingUrl?`<a href="${briefingUrl}" target="_blank" style="text-decoration:none;display:block"><button class="btn full amber-dim sm"><span>📋 Open Briefing</span></button></a>`:''}
     <a href="${studyUrl}" target="_blank" style="text-decoration:none;display:block"><button class="btn full teal sm" onclick="markStudied('${deckId}')"><span>🃏 Study Flashcards</span></button></a>
-    <a href="${quizUrl}" target="_blank" style="text-decoration:none;display:block"><button class="btn full ${passed?'green':'blue'} sm"><span>${passed?'↺ Retake Vocab Check':'⚡ Take Vocab Check'}</span></button></a>
+    <button class="btn full ${passed?'green':'blue'} sm" onclick="launchVocabQuiz('${deckId}')" style="width:100%"><span>${passed?'↺ Retake Vocab Check':'⚡ Take Vocab Check'}</span></button>
     <div style="font-family:var(--dm);font-size:8px;color:var(--text3);margin-top:2px;line-height:1.6">Complete the Vocab Check to earn <span style="color:var(--gold)">🪙 Gold</span>. Rewards require 60%+ to qualify.</div>
   </div>`;
 }
@@ -2374,6 +2374,51 @@ function markStudied(deckId){
   if(!S.flashcardsStudied)S.flashcardsStudied={};
   S.flashcardsStudied[deckId]=true;
   saveS();
+}
+
+function launchVocabQuiz(deckId){
+  // Open quiz in a popup so window.opener is set and postMessage works
+  const url=`${FC_BASE}?deck=${encodeURIComponent(deckId)}&mode=quiz&from=hub`;
+  const popup=window.open(url,'vocab_quiz','width=900,height=700,scrollbars=yes,resizable=yes');
+  if(!popup){
+    // Popup blocked — fall back to new tab and poll localStorage for result
+    window.open(url,'_blank');
+    _pollVocabResult(deckId);
+    return;
+  }
+  // Also start polling in case browser strips window.opener cross-origin
+  _pollVocabResult(deckId);
+}
+
+function _pollVocabResult(deckId){
+  // Poll localStorage every 2s for up to 10 min for a vocab result written by the quiz page
+  const key='ac_vocab_result';
+  const started=Date.now();
+  const iv=setInterval(()=>{
+    if(Date.now()-started>600000){clearInterval(iv);return;}
+    try{
+      const raw=localStorage.getItem(key);
+      if(!raw)return;
+      const d=JSON.parse(raw);
+      if(d.deckId!==deckId)return;
+      // Found a result — consume it
+      localStorage.removeItem(key);
+      clearInterval(iv);
+      if(!S.vocabPassed)S.vocabPassed={};
+      if(!S.vocabBestScore)S.vocabBestScore={};
+      if(!S.vocabFirstPass)S.vocabFirstPass={};
+      if(d.passed){
+        const wasFirst=!S.vocabPassed[deckId];
+        S.vocabPassed[deckId]=true;
+        if(wasFirst)S.vocabFirstPass[deckId]=true;
+      }
+      if(d.score!==undefined)S.vocabBestScore[deckId]=Math.max(d.score,S.vocabBestScore[deckId]||0);
+      if(d.gold){S.gold=(S.gold||0)+d.gold;awardGold(d.gold,'Vocab Check',deckId,true);}
+      saveS();
+      updateHUDGold();
+      notify(`✅ Vocab Check recorded: ${d.score}%${d.passed?' — Passed!':''}`);
+    }catch(e){}
+  },2000);
 }
 
 function buildLaunchArea(u,st){
@@ -2395,6 +2440,8 @@ function buildLaunchArea(u,st){
 window.addEventListener('message',e=>{
   if(e.data?.type==='vocabReward'&&e.data.deckId){
     const{deckId,gold:g,xp:x,score,passed}=e.data;
+    // Clear localStorage result key so the poller doesn't double-award
+    try{localStorage.removeItem('ac_vocab_result');}catch(err){}
     if(!S.vocabPassed)S.vocabPassed={};
     if(!S.vocabBestScore)S.vocabBestScore={};
     if(!S.vocabFirstPass)S.vocabFirstPass={};
