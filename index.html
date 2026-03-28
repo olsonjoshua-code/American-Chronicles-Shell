@@ -1908,7 +1908,9 @@ function buildStarterGrid(){
   document.getElementById('starter-grid').innerHTML=STARTERS.map(c=>`<div class="starter-opt ${S.avatar===c.id?'selected':''}" onclick="pickAvatar('${c.id}',this)"><div style="width:60px;height:60px">${c.svg()}</div><div class="starter-label">${c.label}</div></div>`).join('');
 }
 function buildPeriodGrid(){
-  document.getElementById('period-grid').innerHTML=[1,2,3,4,5,6,7].map(p=>`<div onclick="pickPeriod(${p})" style="background:${S.period==p?'rgba(232,160,32,.08)':'var(--bg2)'};border:1.5px solid ${S.period==p?'var(--amber)':'var(--border2)'};color:${S.period==p?'var(--amber)':'var(--text2)'};font-family:var(--bebas);font-size:19px;padding:9px 4px;text-align:center;cursor:pointer;transition:all .15s">${p}</div>`).join('');
+  const nums=[1,2,3,4,5,6,7].map(p=>`<div onclick="pickPeriod(${p})" style="background:${S.period==p?'rgba(232,160,32,.08)':'var(--bg2)'};border:1.5px solid ${S.period==p?'var(--amber)':'var(--border2)'};color:${S.period==p?'var(--amber)':'var(--text2)'};font-family:var(--bebas);font-size:19px;padding:9px 4px;text-align:center;cursor:pointer;transition:all .15s">${p}</div>`).join('');
+  const guestBtn=`<div onclick="pickPeriod('guest')" style="grid-column:1/-1;background:${S.period==='guest'?'rgba(232,160,32,.08)':'var(--bg2)'};border:1.5px solid ${S.period==='guest'?'var(--amber)':'var(--border2)'};color:${S.period==='guest'?'var(--amber)':'var(--text3)'};font-family:var(--bebas);font-size:14px;padding:8px 4px;text-align:center;cursor:pointer;transition:all .15s;letter-spacing:2px">GUEST — Not in a class period</div>`;
+  document.getElementById('period-grid').innerHTML=nums+guestBtn;
 }
 function pickAvatar(id,el){S.avatar=id;document.querySelectorAll('.starter-opt').forEach(e=>e.classList.remove('selected'));el.classList.add('selected');previewSetup();}
 function pickPeriod(p){S.period=p;buildPeriodGrid();previewSetup();}
@@ -1920,7 +1922,7 @@ function previewSetup(){
   if(ni)ni.value=n;
   document.getElementById('setup-avatar').innerHTML=getChar(S.avatar).svg().replace(/width="\d+"/,'width="80"').replace(/height="\d+"/,'height="80"');
   document.getElementById('setup-name-disp').textContent=n;
-  document.getElementById('setup-sub').textContent=S.period?`Curious Citizen · Period ${S.period}`:'Curious Citizen';
+  document.getElementById('setup-sub').textContent=S.period==='guest'?'Guest Player':(S.period?`Curious Citizen · Period ${S.period}`:'Curious Citizen');
 }
 async function confirmProfile(){
   const n=S.name||(document.getElementById('name-input').value.trim());
@@ -2008,7 +2010,7 @@ function updateHUD(){
   const ch=getChar(S.avatar);
   document.getElementById('hud-avatar').innerHTML=ch.svg().replace(/width="\d+"/,'width="44"').replace(/height="\d+"/,'height="44"');
   document.getElementById('hud-name').textContent=S.isGuest?'👤 Guest':(S.name||'Historian');
-  document.getElementById('hud-rank').textContent=S.isGuest?'Guest Session':`${getRank()}${S.period?' · Period '+S.period:''}`;
+  document.getElementById('hud-rank').textContent=S.isGuest?'Guest Session':(S.period==='guest'?`${getRank()} · Guest Player`:`${getRank()}${S.period?' · Period '+S.period:''}`);
   const pct=Math.round((S.unitsCompleted.length/UNIT_DATA.length)*100);
   document.getElementById('hud-bar-fill').style.width=pct+'%';
   document.getElementById('hstat-units').textContent=S.unitsCompleted.length;
@@ -2870,7 +2872,7 @@ async function renderLeaderboard(){
   });
   const sts=Object.values(sm).sort((a,b)=>b.score-a.score);
   // tabs
-  const periods=[...new Set(sts.filter(s=>s.period&&!s.is_teacher&&s.period!=='teacher').map(s=>String(s.period)))].sort((a,b)=>+a-+b);
+  const periods=[...new Set(sts.filter(s=>s.period&&!s.is_teacher&&s.period!=='teacher'&&s.period!=='guest').map(s=>String(s.period)))].sort((a,b)=>+a-+b);
   const tabs=document.getElementById('lb-tabs');
   tabs.innerHTML=[{k:'all',l:'All'},...periods.map(p=>({k:p,l:'Pd '+p}))].map(t=>`<button class="lb-tab ${_lbPeriod===t.k?'active':''}" onclick="setLbPeriod('${t.k}',${JSON.stringify(sts)})">${t.l}</button>`).join('');
   drawLbTable(sts,_lbPeriod);
@@ -2915,7 +2917,7 @@ function drawLbTable(sts,period){
     return `<tr class="${isMe?'me':''}">
       <td style="font-family:var(--bebas);font-size:13px;color:${rc}">${i<3?med[i]:'#'+(i+1)}</td>
       <td style="font-family:var(--playfair);font-size:12px;color:var(--cream)">${isTeacherRow?'★ ':''}${s.name}${isMe?' <span style="color:var(--amber);font-size:9px">(you)</span>':''}</td>
-      <td style="color:${isTeacherRow?'var(--amber)':'var(--text3)'};font-size:10px">${isTeacherRow?'Teacher':s.period?'Pd '+s.period:'—'}</td>
+      <td style="color:${isTeacherRow?'var(--amber)':s.period==='guest'?'var(--teal2)':'var(--text3)'};font-size:10px">${isTeacherRow?'Teacher':s.period==='guest'?'Guest':s.period?'Pd '+s.period:'—'}</td>
       <td style="color:var(--teal2)">${s.units}</td>
       <td style="color:var(--amber);font-weight:600">${s.score.toLocaleString()}</td>
       <td style="color:var(--gold)">${s.golds}</td>
