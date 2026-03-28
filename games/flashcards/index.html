@@ -42,7 +42,7 @@ body::before{content:'';position:fixed;inset:0;
 ::-webkit-scrollbar-thumb{background:var(--border2)}::-webkit-scrollbar-thumb:hover{background:var(--amber2)}
 
 /* ── LAYOUT ── */
-#app{max-width:720px;margin:0 auto;padding:14px 16px 60px;min-height:100vh;}
+#app{max-width:860px;margin:0 auto;padding:14px 24px 60px;min-height:100vh;}
 
 /* ── TOPBAR ── */
 #topbar{display:flex;align-items:center;gap:12px;padding:10px 0 14px;border-bottom:1px solid var(--border2);margin-bottom:18px}
@@ -121,9 +121,9 @@ body::before{content:'';position:fixed;inset:0;
 .quiz-progress-bar{height:3px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;margin-bottom:18px}
 .quiz-progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue2));transition:width .4s;border-radius:2px}
 
-.quiz-question{font-family:var(--playfair);font-size:clamp(15px,3vw,19px);color:var(--cream);line-height:1.55;margin-bottom:18px;padding:16px 18px;background:var(--bg2);border:1px solid var(--border2);font-style:italic}
-.quiz-choices{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
-.quiz-choice{background:var(--bg2);border:1.5px solid var(--border);padding:13px 16px;cursor:pointer;transition:all .18s;display:flex;align-items:flex-start;gap:12px;font-family:var(--dm);font-size:13px;color:var(--text2);line-height:1.45}
+.quiz-question{font-family:var(--playfair);font-size:clamp(16px,2.4vw,20px);color:var(--cream);line-height:1.6;margin-bottom:18px;padding:18px 22px;background:var(--bg2);border:1px solid var(--border2);font-style:italic}
+.quiz-choices{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.quiz-choice{background:var(--bg2);border:1.5px solid var(--border);padding:15px 20px;cursor:pointer;transition:all .18s;display:flex;align-items:flex-start;gap:12px;font-family:var(--dm);font-size:14px;color:var(--text2);line-height:1.5}
 .quiz-choice:hover:not(.answered){border-color:var(--amber2);color:var(--cream);background:rgba(232,160,32,.04)}
 .quiz-choice.correct{border-color:var(--green2);background:rgba(56,160,80,.1);color:var(--green2)}
 .quiz-choice.wrong{border-color:var(--red2);background:rgba(192,48,48,.1);color:var(--red2);animation:shake .4s ease}
