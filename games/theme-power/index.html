@@ -46,7 +46,7 @@ body::before{content:'';position:fixed;inset:0;
   pointer-events:none;z-index:9999;}
 
 /* ── ROOT / LAYOUT ── */
-#root{max-width:640px;margin:0 auto;padding:0 16px 100px;min-height:100vh;position:relative;z-index:1;}
+#root{max-width:860px;margin:0 auto;padding:0 24px 100px;min-height:100vh;position:relative;z-index:1;}
 /* When HUD is visible, push content down so it isn't hidden behind the fixed bar */
 body.hud-active #root{padding-top:68px;}
 
@@ -86,7 +86,7 @@ body.hud-active #root{padding-top:68px;}
   border-bottom:1px solid var(--border2);border-left:1px solid var(--border2);border-right:1px solid var(--border2);
   padding:10px 14px;
   position:fixed;top:0;left:50%;transform:translateX(-50%);
-  width:100%;max-width:640px;
+  width:100%;max-width:860px;
   z-index:200;backdrop-filter:blur(12px);
   display:none;}
 .hud-inner{display:flex;align-items:center;gap:12px;}
@@ -170,7 +170,7 @@ body.hud-active #root{padding-top:68px;}
 #briefing-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);
   z-index:500;overflow-y:auto;padding:20px 16px 60px;}
 #briefing-modal.show{display:block;animation:fadeIn .3s ease;}
-.briefing-inner{max-width:560px;margin:0 auto;}
+.briefing-inner{max-width:760px;margin:0 auto;}
 .briefing-header{display:flex;align-items:flex-start;justify-content:space-between;
   gap:10px;margin-bottom:20px;padding-top:10px;}
 .briefing-eyebrow{font-family:var(--bebas);font-size:10px;color:var(--text3);
@@ -221,16 +221,16 @@ body.hud-active #root{padding-top:68px;}
 
 /* THE QUESTION — primary visual weight */
 .q-block{background:var(--bg2);border:1px solid var(--border2);
-  border-left:3px solid var(--gold);padding:20px 18px;margin-bottom:18px;}
+  border-left:3px solid var(--gold);padding:24px 22px;margin-bottom:18px;}
 .q-number{font-family:var(--bebas);font-size:10px;color:var(--text3);
   letter-spacing:3px;margin-bottom:8px;}
-.q-text{font-family:var(--playfair);font-size:clamp(15px,2.8vw,18px);
-  color:var(--cream);line-height:1.55;}
+.q-text{font-family:var(--playfair);font-size:clamp(16px,2.4vw,20px);
+  color:var(--cream);line-height:1.6;}
 
 /* Answer choices */
-.choices-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.choices-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
 .choice-btn{display:block;width:100%;background:var(--bg2);border:1px solid var(--border2);
-  color:var(--text);padding:14px 16px;cursor:pointer;text-align:left;
+  color:var(--text);padding:16px 20px;cursor:pointer;text-align:left;
   transition:all .2s;position:relative;overflow:hidden;}
 .choice-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
   background:var(--gold);transform:scaleY(0);transition:transform .2s;pointer-events:none;}
@@ -241,9 +241,9 @@ body.hud-active #root{padding-top:68px;}
 .choice-btn.incorrect{border-color:var(--red2)!important;background:rgba(128,16,16,.06)!important;opacity:.6;}
 .choice-btn.incorrect::before{background:var(--red2)!important;transform:scaleY(1)!important;}
 .choice-btn.answered{cursor:default;}
-.choice-letter{font-family:var(--bebas);font-size:13px;color:var(--gold2);
-  margin-right:10px;display:inline-block;width:20px;}
-.choice-text{font-family:var(--crimson);font-size:16px;line-height:1.4;}
+.choice-letter{font-family:var(--bebas);font-size:14px;color:var(--gold2);
+  margin-right:12px;display:inline-block;width:20px;}
+.choice-text{font-family:var(--crimson);font-size:17px;line-height:1.5;}
 
 /* Feedback */
 .feedback-panel{display:none;border-left:3px solid var(--gold);
@@ -894,542 +894,756 @@ const AC_HEADERS  = {'Content-Type':'application/json','apikey':AC_SUPA_KEY,'Aut
 
 const LESSONS = [
 
-  // ==================================================
-  // CHAPTER 1 — Who Holds Power?
-  // ==================================================
+  // ── CHAPTER 1: Who Holds Power? ───────────────────────────
   {
-    id: 'ch1',
-    label: 'CHAPTER 1',
-    title: 'Who Holds Power?',
-    sub: 'Political inclusion, exclusion, and democratic participation across eras',
-    icon: '🏛️',
-    type: 'lesson',
+    id: 'ch1', label: 'CHAPTER 1', title: 'Who Holds Power?',
+    icon: '🏛️', type: 'lesson',
     briefing: {
-      location: 'Political inclusion, exclusion, and democratic participation across eras',
-      date: '',
-      role: 'democracy analyst',
+      location: 'American History: Democracy and Exclusion',
+      date: 'Reconstruction to Modern Era',
+      role: 'political historian',
       text: 'Power in American politics has never been shared equally. This chapter asks who has been allowed to vote, govern, and shape public policy, and how those boundaries have shifted from Reconstruction to the modern era. Look for patterns of inclusion, exclusion, and federal-state struggle over democracy itself.',
-      tags: ['SS.912.A.2.5', 'SS.912.A.2.6', 'SS.912.A.3.10', 'SS.912.A.7.3', 'SS.912.A.7.17', 'SS.912.A.5.12']
+      tags: ['SS.912.A.2.5', 'SS.912.A.2.6', 'SS.912.A.3.10', 'SS.912.A.5.12', 'SS.912.A.7.3', 'SS.912.A.7.17']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Power at the Polls', cards: ['Reconstruction Congress', 'Voting Rights Act'] },
+    rewards: { badge: 'Who Holds Power?', cards: ['Voting Rights', 'Democratic Participation'] },
     bank: [
       {
         id: 'BOP-C1-Q1',
         text: 'How did Black political power during Reconstruction differ most sharply from Black political life under Jim Crow?',
-        choices: ['Reconstruction briefly expanded Black voting and officeholding, while Jim Crow used law and violence to crush both.', 'Reconstruction briefly expanded Black voting, while Jim Crow protected the same rights through stricter federal enforcement.', 'Reconstruction briefly expanded Black voting, while Jim Crow shifted political power mainly from cities to suburbs.', 'Reconstruction briefly expanded Black voting, while Jim Crow focused mostly on limiting immigration rather than elections.'],
+        choices: [
+          'Reconstruction briefly expanded Black voting and officeholding, while Jim Crow used law and violence to crush both.',
+          'Reconstruction briefly expanded Black voting, while Jim Crow protected the same rights through stricter federal enforcement.',
+          'Reconstruction briefly expanded Black voting, while Jim Crow shifted political power mainly from cities to suburbs.',
+          'Reconstruction briefly expanded Black voting, while Jim Crow focused mostly on limiting immigration rather than elections.'
+        ],
         correctAnswer: 'Reconstruction briefly expanded Black voting and officeholding, while Jim Crow used law and violence to crush both.',
-        explanation: 'The contrast shows how political inclusion can expand dramatically and then be reversed through organized backlash.',
+        explanation: 'Reconstruction produced Black senators, representatives, and state officials; Jim Crow\'s literacy tests, poll taxes, grandfather clauses, and White primary systems systematically destroyed that political presence — backed by the constant threat of lynching and economic retaliation.',
         standard: 'SS.912.A.2.5 · SS.912.A.2.6'
       },
       {
         id: 'BOP-C1-Q2',
         text: 'What is the strongest comparison between the Nineteenth Amendment and the Voting Rights Act of 1965?',
-        choices: ['Both expanded political participation by using federal action to overcome entrenched exclusion.', 'Both expanded political participation mainly by giving state governments more freedom to set voter rules.', 'Both expanded political participation only after courts ruled that elections no longer mattered much.', 'Both expanded political participation by limiting national power and returning control to party machines.'],
+        choices: [
+          'Both expanded political participation by using federal action to overcome entrenched exclusion.',
+          'Both expanded political participation mainly by giving state governments more freedom to set voter rules.',
+          'Both expanded political participation only after courts ruled that elections no longer mattered much.',
+          'Both expanded political participation by limiting national power and returning control to party machines.'
+        ],
         correctAnswer: 'Both expanded political participation by using federal action to overcome entrenched exclusion.',
-        explanation: 'Each reform widened access to power by challenging barriers that states or local systems had protected.',
+        explanation: 'The Nineteenth Amendment used a constitutional amendment to override state laws excluding women; the VRA used federal law with enforcement mechanisms to override state practices excluding Black voters — both mobilized federal authority against entrenched local exclusion.',
         standard: 'SS.912.A.3.10 · SS.912.A.7.3'
       },
       {
         id: 'BOP-C1-Q3',
         text: 'What recurring pattern appears when voting rights expand in American history?',
-        choices: ['Federal action often becomes stronger when state governments are protecting exclusion instead of participation.', 'Federal action often becomes stronger only after state governments have already removed every voting barrier.', 'Federal action often becomes stronger mainly when Americans want to reduce the importance of elections.', 'Federal action often becomes stronger while Congress gives up authority over citizenship and civil rights.'],
+        choices: [
+          'Federal action often becomes stronger when state governments are protecting exclusion instead of participation.',
+          'Federal action often becomes stronger only after state governments have already voluntarily removed every voting barrier.',
+          'Federal action often becomes stronger mainly when Americans want to reduce the importance of elections.',
+          'Federal action often becomes stronger while Congress gives up authority over citizenship and civil rights.'
+        ],
         correctAnswer: 'Federal action often becomes stronger when state governments are protecting exclusion instead of participation.',
-        explanation: 'From Reconstruction to the Voting Rights Act, national power has often expanded when states limited democratic access.',
+        explanation: 'The pattern is consistent — when southern states used Black Codes after the Civil War, Congress passed Reconstruction amendments; when states used Jim Crow disenfranchisement, Congress passed the VRA; federal power expands to override state exclusion when political pressure demands it.',
         standard: 'SS.912.A.2.5 · SS.912.A.7.3'
       },
       {
         id: 'BOP-C1-Q4',
         text: 'Which statement best captures continuity and change in democratic participation over time?',
-        choices: ['Participation expanded overall, but struggles over who counts fully in democracy never disappeared.', 'Participation expanded overall, and conflict over voting rights largely vanished after the Progressive Era.', 'Participation expanded overall only because local governments stopped shaping elections after 1900.', 'Participation expanded overall while the meaning of citizenship stayed politically unimportant across eras.'],
+        choices: [
+          'Participation expanded overall, but struggles over who counts fully in democracy never disappeared.',
+          'Participation expanded overall, and conflict over voting rights largely vanished after the Progressive Era.',
+          'Participation expanded overall only because local governments stopped shaping elections after 1900.',
+          'Participation expanded overall while the meaning of citizenship stayed politically unimportant across eras.'
+        ],
         correctAnswer: 'Participation expanded overall, but struggles over who counts fully in democracy never disappeared.',
-        explanation: 'More groups gained access, but the fight over inclusion and exclusion remained a constant feature of American politics.',
+        explanation: 'Each expansion — emancipation, women\'s suffrage, VRA — was followed by new exclusions, loopholes, or contested definitions of who could fully exercise political rights, demonstrating that democratic participation is an ongoing political contest rather than a settled achievement.',
         standard: 'SS.912.A.2.6 · SS.912.A.3.10 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C1-Q5',
         text: 'Which development is the best example of the federal government stepping in directly to protect democratic participation?',
-        choices: ['The Voting Rights Act placing federal power behind access to the ballot in the South.', 'The Missouri Compromise balancing free and slave states in Congress before the Civil War.', 'The New Deal coalition bringing new urban groups into Democratic Party voting blocs over time.', 'The Free Speech Movement expanding student protest rights on college campuses during the 1960s.'],
+        choices: [
+          'The Voting Rights Act placing federal power behind access to the ballot in the South.',
+          'The Missouri Compromise balancing free and slave states in Congress before the Civil War.',
+          'The New Deal coalition bringing new urban groups into Democratic Party voting blocs over time.',
+          'The Free Speech Movement expanding student protest rights on college campuses during the 1960s.'
+        ],
         correctAnswer: 'The Voting Rights Act placing federal power behind access to the ballot in the South.',
-        explanation: 'This law most directly shows federal intervention against local and state systems of disenfranchisement.',
+        explanation: 'The VRA\'s preclearance requirements and federal registrars directly overrode state and local systems that had disenfranchised Black voters for nearly a century — the clearest example of federal power being deployed to make democratic participation a reality rather than just a constitutional promise.',
         standard: 'SS.912.A.7.3'
       },
       {
         id: 'BOP-C1-Q6',
         text: 'How did the New Deal coalition and post-1965 participation both change political power?',
-        choices: ['Both widened who could shape national politics by bringing in groups long treated as peripheral.', 'Both widened who could shape national politics only by reducing the role of voters in elections.', 'Both widened who could shape national politics mainly by ending conflict over race, class, and region.', 'Both widened who could shape national politics while weakening party competition across the whole country.'],
+        choices: [
+          'Both widened who could shape national politics by bringing in groups long treated as peripheral.',
+          'Both widened who could shape national politics only by reducing the role of voters in elections.',
+          'Both widened who could shape national politics mainly by ending conflict over race, class, and region.',
+          'Both widened who could shape national politics while weakening party competition across the whole country.'
+        ],
         correctAnswer: 'Both widened who could shape national politics by bringing in groups long treated as peripheral.',
-        explanation: 'Coalitions and participation shifts can redistribute political influence even when formal voting rules stay the same.',
+        explanation: 'The New Deal coalition incorporated urban workers, immigrants, and southern Blacks into a new Democratic majority; post-VRA participation brought millions of Black and later Latino voters into competitive electoral politics — both fundamentally altered who had the power to shape national outcomes.',
         standard: 'SS.912.A.5.12 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C1-Q7',
-        text: 'Why has ‘local control’ over elections often been politically contested in U.S. history?',
-        choices: ['Because local authority has sometimes protected democratic participation and sometimes protected exclusion instead.', 'Because local authority has almost always expanded voting rights faster than any national reform effort.', 'Because local authority became irrelevant once the Constitution settled every voting question permanently.', 'Because local authority has usually mattered only in presidential campaigns and rarely in access to the ballot.'],
+        text: 'Why has "local control" over elections often been politically contested in U.S. history?',
+        choices: [
+          'Because local authority has sometimes protected democratic participation and sometimes protected exclusion instead.',
+          'Because local authority has almost always expanded voting rights faster than any national reform effort.',
+          'Because local authority became irrelevant once the Constitution settled every voting question permanently.',
+          'Because local authority has usually mattered only in presidential campaigns and rarely in determining actual access to the ballot.'
+        ],
         correctAnswer: 'Because local authority has sometimes protected democratic participation and sometimes protected exclusion instead.',
-        explanation: 'The phrase sounds neutral, but historically it has often hidden struggles over who gets real political access.',
+        explanation: 'Local control of elections was the mechanism that preserved Black suffrage in some northern states before the Civil War — and also the mechanism that dismantled it through Jim Crow in the South after Reconstruction. Whether local control expands or restricts participation depends entirely on who holds local power and with what intent.',
         standard: 'SS.912.A.2.5 · SS.912.A.7.3'
       },
       {
         id: 'BOP-C1-Q8',
         text: 'Which evidence best supports the claim that political inclusion can expand without ending deeper inequality?',
-        choices: ['Black officeholding during Reconstruction and later voting gains both existed alongside major backlash and limitation.', 'Black officeholding during Reconstruction and later voting gains both ended all conflict over power almost immediately.', 'Black officeholding during Reconstruction and later voting gains mattered little because law never shaped politics.', 'Black officeholding during Reconstruction and later voting gains show equality always follows automatically from turnout.'],
+        choices: [
+          'Black officeholding during Reconstruction and later voting gains both existed alongside major backlash and limitation.',
+          'Black officeholding during Reconstruction and later voting gains both ended all conflict over power almost immediately.',
+          'Black officeholding during Reconstruction and later voting gains mattered little because law never shaped politics.',
+          'Black officeholding during Reconstruction and later voting gains show equality always follows automatically from turnout.'
+        ],
         correctAnswer: 'Black officeholding during Reconstruction and later voting gains both existed alongside major backlash and limitation.',
-        explanation: 'Formal access to power matters greatly, but it does not guarantee that all other forms of inequality disappear.',
+        explanation: 'Reconstruction senators and representatives coexisted with the Ku Klux Klan\'s violence and eventual Redemption; post-VRA voting gains coexisted with economic inequality, housing segregation, and new voter suppression tactics — political inclusion and full equality are not the same thing.',
         standard: 'SS.912.A.2.5 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C1-Q9',
-        text: 'What is the best comparison between women’s suffrage and Black voting-rights activism?',
-        choices: ['Both challenged exclusion by arguing democracy was incomplete while major groups remained outside full participation.', 'Both challenged exclusion only after federal leaders declared that states should control all suffrage rules forever.', 'Both challenged exclusion mainly by avoiding constitutional change and relying only on local custom.', 'Both challenged exclusion while insisting that political equality mattered less than economic growth or foreign policy.'],
+        text: 'What is the best comparison between women\'s suffrage and Black voting-rights activism?',
+        choices: [
+          'Both challenged exclusion by arguing democracy was incomplete while major groups remained outside full participation.',
+          'Both challenged exclusion only after federal leaders declared that states should control all suffrage rules forever.',
+          'Both challenged exclusion mainly by avoiding constitutional change and relying only on local custom.',
+          'Both challenged exclusion while insisting that political equality mattered less than economic growth or foreign policy.'
+        ],
         correctAnswer: 'Both challenged exclusion by arguing democracy was incomplete while major groups remained outside full participation.',
-        explanation: 'These movements differed in context, but both exposed the gap between democratic ideals and actual political access.',
+        explanation: 'Suffragists argued that a republic excluding half its adult population was a contradiction; civil rights activists argued that democracy excluding Black citizens was a sham — both used the nation\'s own ideals to expose the hypocrisy of claiming democracy while practicing systematic exclusion.',
         standard: 'SS.912.A.3.10 · SS.912.A.7.3'
       },
       {
         id: 'BOP-C1-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Who holds power?’',
-        choices: ['Political power expands when movements and federal action break old exclusions, but those gains are often contested.', 'Political power expands only when state governments act alone without pressure from movements or national institutions.', 'Political power expands mainly by shrinking the electorate and limiting who can influence public decisions.', 'Political power expands while conflict over democracy steadily fades from national life after the nineteenth century.'],
+        text: 'What broad pattern best answers the chapter question "Who holds power?"',
+        choices: [
+          'Political power expands when movements and federal action break old exclusions, but those gains are often contested.',
+          'Political power expands only when state governments act alone without pressure from movements or national institutions.',
+          'Political power expands mainly by shrinking the electorate and limiting who can influence public decisions.',
+          'Political power expands while conflict over democracy steadily fades from national life after the nineteenth century.'
+        ],
         correctAnswer: 'Political power expands when movements and federal action break old exclusions, but those gains are often contested.',
-        explanation: 'Across eras, power has widened through struggle rather than automatic progress, and backlash has remained a recurring force.',
+        explanation: 'From Reconstruction through women\'s suffrage to the VRA, the pattern is consistent: organized movements create political pressure, federal action follows, inclusion expands — and then backlash, reinterpretation, and new restrictions emerge, showing that democratic power is never finally settled.',
         standard: 'SS.912.A.2.5 · SS.912.A.3.10 · SS.912.A.7.3 · SS.912.A.7.17'
       },
     ]
   },
 
-  // ==================================================
-  // CHAPTER 2 — Wealth and Power
-  // ==================================================
+  // ── CHAPTER 2: Wealth and Power ───────────────────────────
   {
-    id: 'ch2',
-    label: 'CHAPTER 2',
-    title: 'Wealth and Power',
-    sub: 'Business, labor, regulation, and inequality across eras',
-    icon: '🏭',
-    type: 'lesson',
+    id: 'ch2', label: 'CHAPTER 2', title: 'Wealth and Power',
+    icon: '🏭', type: 'lesson',
     briefing: {
-      location: 'Business, labor, regulation, and inequality across eras',
-      date: '',
+      location: 'American History: Capital, Labor, and Reform',
+      date: 'Gilded Age through Late Twentieth Century',
       role: 'economic historian',
       text: 'Political power often follows wealth. In this chapter, students compare monopolies, unions, regulation, corporate growth, and the changing balance between labor and business. The goal is not to memorize isolated events, but to trace how economic power has been defended, challenged, and restructured over time.',
-      tags: ['SS.912.A.3.4', 'SS.912.A.7.17', 'SS.912.A.3.2', 'SS.912.A.5.12', 'SS.912.A.3.9']
+      tags: ['SS.912.A.3.2', 'SS.912.A.3.4', 'SS.912.A.3.9', 'SS.912.A.5.12', 'SS.912.A.7.17']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Economic Power', cards: ['Sherman Antitrust Act', 'Wagner Act'] },
+    rewards: { badge: 'Titans and Trusts', cards: ['Trust-Busting', 'New Deal Labor'] },
     bank: [
       {
         id: 'BOP-C2-Q1',
         text: 'What is the strongest comparison between Gilded Age monopolies and postwar corporate growth?',
-        choices: ['Both concentrated economic power, though later corporate dominance often looked more bureaucratic than openly monopolistic.', 'Both concentrated economic power only after labor unions had become the strongest force in national politics.', 'Both concentrated economic power mainly because federal regulation disappeared completely in every major industry.', 'Both concentrated economic power while reducing inequality and weakening the influence of business over government.'],
+        choices: [
+          'Both concentrated economic power, though later corporate dominance often looked more bureaucratic than openly monopolistic.',
+          'Both concentrated economic power only after labor unions had become the strongest force in national politics.',
+          'Both concentrated economic power mainly because federal regulation disappeared completely in every major industry.',
+          'Both concentrated economic power while simultaneously reducing inequality and weakening the influence of business over government.'
+        ],
         correctAnswer: 'Both concentrated economic power, though later corporate dominance often looked more bureaucratic than openly monopolistic.',
-        explanation: 'The form changed over time, but large institutions continued to shape who benefited most from the economy.',
+        explanation: 'Gilded Age trusts were openly predatory — Standard Oil\'s secret railroad rebates, Carnegie\'s vertical integration. Postwar corporate concentration was more diffuse — oligopolies, conglomerates, advertising — but both represented enormous concentrations of economic power that shaped politics and markets.',
         standard: 'SS.912.A.3.4 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C2-Q2',
-        text: 'How did the position of organized labor in the 1930s differ from that of labor in the late nineteenth century?',
-        choices: ['New Deal protections gave unions stronger federal backing than workers usually had during the strike era of the 1890s.', 'New Deal protections gave unions stronger federal backing only after all major labor conflict had already ended permanently.', 'New Deal protections gave unions stronger federal backing mainly by abolishing collective bargaining across industries.', 'New Deal protections gave unions stronger federal backing while pushing labor completely out of party politics.'],
+        text: 'How did the New Deal labor protections compare with labor\'s position during the strike era of the 1890s?',
+        choices: [
+          'New Deal protections gave unions stronger federal backing than workers usually had during the strike era of the 1890s.',
+          'New Deal protections gave unions stronger federal backing only after all major labor conflict had already ended permanently.',
+          'New Deal protections gave unions stronger federal backing mainly by abolishing collective bargaining across industries.',
+          'New Deal protections gave unions stronger federal backing while pushing labor completely out of party politics.'
+        ],
         correctAnswer: 'New Deal protections gave unions stronger federal backing than workers usually had during the strike era of the 1890s.',
-        explanation: 'A major shift in the 1930s was that the federal government became more willing to recognize labor rights.',
+        explanation: 'In the 1890s, federal troops crushed the Pullman Strike; courts issued injunctions against unions; employers used lockouts and Pinkertons. The Wagner Act (1935) made collective bargaining a protected right and created the NLRB to enforce it — a fundamental shift in which side of labor disputes federal power supported.',
         standard: 'SS.912.A.3.2 · SS.912.A.5.12'
       },
       {
         id: 'BOP-C2-Q3',
         text: 'What recurring pattern appears in debates over regulation and laissez-faire economics?',
-        choices: ['Periods of concentrated private power often produce reform movements, followed later by pressure to roll regulation back.', 'Periods of concentrated private power usually make both parties reject regulation and support labor equally.', 'Periods of concentrated private power almost always end debate because inequality becomes politically unimportant.', 'Periods of concentrated private power mainly convince Americans that government has no relationship to the economy.'],
+        choices: [
+          'Periods of concentrated private power often produce reform movements, followed later by pressure to roll regulation back.',
+          'Periods of concentrated private power usually make both parties reject regulation and support labor equally.',
+          'Periods of concentrated private power almost always end debate because inequality becomes politically unimportant.',
+          'Periods of concentrated private power mainly convince Americans that government has no meaningful relationship to the economy.'
+        ],
         correctAnswer: 'Periods of concentrated private power often produce reform movements, followed later by pressure to roll regulation back.',
-        explanation: 'American economic politics often swings between calls for control of private power and efforts to loosen state oversight.',
+        explanation: 'Gilded Age monopolies → Progressive Era antitrust; Depression → New Deal regulation; postwar stability → Reagan-era deregulation. The pendulum swings: concentrated power generates reform, reform creates new interests and ideologies that eventually push back toward deregulation.',
         standard: 'SS.912.A.3.9 · SS.912.A.5.12 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C2-Q4',
         text: 'Which statement best captures continuity and change in American economic inequality?',
-        choices: ['Reforms altered the balance at times, but large gaps in wealth and power repeatedly returned in new forms.', 'Reforms altered the balance at times, and economic inequality disappeared permanently after the New Deal.', 'Reforms altered the balance at times only because business leaders stopped influencing public policy after 1900.', 'Reforms altered the balance at times while labor steadily became more powerful than capital in every era.'],
+        choices: [
+          'Reforms altered the balance at times, but large gaps in wealth and power repeatedly returned in new forms.',
+          'Reforms altered the balance at times, and economic inequality disappeared permanently after the New Deal.',
+          'Reforms altered the balance at times only because business leaders stopped influencing public policy after 1900.',
+          'Reforms altered the balance at times while labor steadily became more powerful than capital in every era.'
+        ],
         correctAnswer: 'Reforms altered the balance at times, but large gaps in wealth and power repeatedly returned in new forms.',
-        explanation: 'The details changed, yet the concentration of economic advantage remained a long-running feature of U.S. history.',
+        explanation: 'Progressive Era antitrust and the New Deal did reduce the most extreme Gilded Age inequalities — but postwar corporate concentration, Reagan-era deregulation, and deindustrialization all produced new forms of wealth concentration, demonstrating that reform creates equilibria, not permanent solutions.',
         standard: 'SS.912.A.3.4 · SS.912.A.5.12 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C2-Q5',
         text: 'Which development is the best example of the federal government shifting power toward workers rather than employers?',
-        choices: ['The Wagner Act protecting collective bargaining and strengthening the legal position of unions.', 'The Homestead Strike showing how employers could defeat unions with private force and public support.', 'Supply-side tax policy encouraging investment by reducing the burdens placed on large corporations.', 'The Sherman Antitrust Act expressing concern about monopoly power without focusing mainly on unions.'],
+        choices: [
+          'The Wagner Act protecting collective bargaining and strengthening the legal position of unions.',
+          'The Homestead Strike showing how employers could defeat unions with private force and public support.',
+          'Supply-side tax policy encouraging investment by reducing the burdens placed on large corporations.',
+          'The Sherman Antitrust Act expressing concern about monopoly power without focusing mainly on unions.'
+        ],
         correctAnswer: 'The Wagner Act protecting collective bargaining and strengthening the legal position of unions.',
-        explanation: 'Among these examples, the Wagner Act most directly empowered labor in its struggle with capital.',
+        explanation: 'The National Labor Relations Act of 1935 guaranteed workers\' rights to organize, bargain collectively, and strike — and created the NLRB to enforce those rights against employer interference. It was the most direct shift of federal power toward workers in American history.',
         standard: 'SS.912.A.5.12'
       },
       {
         id: 'BOP-C2-Q6',
         text: 'How did Progressive regulation differ from the deregulation trend of the late twentieth century?',
-        choices: ['Progressives trusted government more to restrain private power, while deregulators trusted markets more heavily.', 'Progressives trusted government more only after the 1980s had already reduced federal oversight everywhere.', 'Progressives trusted government more mainly by rejecting consumer protection and antitrust policy altogether.', 'Progressives trusted government more while deregulators argued labor unions should run national industries directly.'],
+        choices: [
+          'Progressives trusted government more to restrain private power, while deregulators trusted markets more heavily.',
+          'Progressives trusted government more only after the 1980s had already reduced federal oversight everywhere.',
+          'Progressives trusted government more mainly by rejecting consumer protection and antitrust policy altogether.',
+          'Progressives trusted government more while deregulators argued labor unions should run national industries directly.'
+        ],
         correctAnswer: 'Progressives trusted government more to restrain private power, while deregulators trusted markets more heavily.',
-        explanation: 'The contrast reflects two different answers to the same question: how much should public power limit economic concentration?',
+        explanation: 'Progressive Era thinkers like Brandeis and TR believed unchecked corporate power required government restraint; Reagan-era supply-siders believed regulation itself was the problem and that market competition produced better outcomes — a fundamental ideological reversal about government\'s proper role.',
         standard: 'SS.912.A.3.9 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C2-Q7',
         text: 'Which evidence best supports the claim that government has not always favored the same side in labor disputes?',
-        choices: ['Federal force helped crush strikes in the 1890s, while the New Deal later recognized labor rights more directly.', 'Federal force helped crush strikes in the 1890s, and the New Deal later banned most unions nationwide.', 'Federal force helped crush strikes in the 1890s only because workers had already gained equal bargaining power.', 'Federal force helped crush strikes in the 1890s, proving government has always been neutral in labor conflict.'],
+        choices: [
+          'Federal force helped crush strikes in the 1890s, while the New Deal later recognized labor rights more directly.',
+          'Federal force helped crush strikes in the 1890s, and the New Deal later banned most unions nationwide.',
+          'Federal force helped crush strikes in the 1890s only because workers had already gained fully equal bargaining power.',
+          'Federal force helped crush strikes in the 1890s, proving government has always been neutral in labor conflict.'
+        ],
         correctAnswer: 'Federal force helped crush strikes in the 1890s, while the New Deal later recognized labor rights more directly.',
-        explanation: 'This contrast shows that state power can reinforce business dominance in one era and partially empower labor in another.',
+        explanation: 'Cleveland sent troops against the Pullman Strike in 1894; courts issued labor injunctions routinely in the Gilded Age. The Wagner Act (1935) and NLRB flipped this — making collective bargaining a federally protected right and giving unions legal standing to challenge employer interference.',
         standard: 'SS.912.A.3.2 · SS.912.A.5.12'
       },
       {
         id: 'BOP-C2-Q8',
         text: 'Why can corporate power remain strong even after major reform periods?',
-        choices: ['Large firms adapt to new rules, influence politics, and often reassert power through changing institutions.', 'Large firms adapt to new rules only after reformers permanently remove wealth from politics entirely.', 'Large firms adapt to new rules mainly because regulation always eliminates competition and labor organizing.', 'Large firms adapt to new rules while avoiding courts, lobbying, media influence, and campaign politics.'],
+        choices: [
+          'Large firms adapt to new rules, influence politics, and often reassert power through changing institutions.',
+          'Large firms adapt to new rules only after reformers permanently remove wealth from politics entirely.',
+          'Large firms adapt to new rules mainly because regulation always eliminates competition and labor organizing.',
+          'Large firms adapt to new rules while avoiding courts, lobbying, media influence, and campaign politics.'
+        ],
         correctAnswer: 'Large firms adapt to new rules, influence politics, and often reassert power through changing institutions.',
-        explanation: 'Reform can limit concentrated power, but powerful institutions often survive by changing strategy rather than disappearing.',
+        explanation: 'Standard Oil was broken up but its successor companies remained dominant; New Deal banking regulations were worked around; antitrust enforcement weakened after 1980 as corporations used lobbying, campaign contributions, and regulatory capture to reshape the rules governing them.',
         standard: 'SS.912.A.3.4 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C2-Q9',
         text: 'What is the clearest comparison between the New Deal order and the later neoliberal turn?',
-        choices: ['The New Deal expanded government’s role in balancing the economy, while neoliberalism pushed toward market solutions.', 'The New Deal expanded government’s role only after neoliberal ideas had already reshaped labor and taxation.', 'The New Deal expanded government’s role mainly by rejecting all unemployment programs and labor protections.', 'The New Deal expanded government’s role while neoliberalism demanded full public ownership of large corporations.'],
-        correctAnswer: 'The New Deal expanded government’s role in balancing the economy, while neoliberalism pushed toward market solutions.',
-        explanation: 'These two eras reflect different assumptions about whether public power or private markets should lead economic life.',
+        choices: [
+          'The New Deal expanded government\'s role in balancing the economy, while neoliberalism pushed toward market solutions.',
+          'The New Deal expanded government\'s role only after neoliberal ideas had already reshaped labor and taxation.',
+          'The New Deal expanded government\'s role mainly by rejecting all unemployment programs and labor protections.',
+          'The New Deal expanded government\'s role while neoliberalism demanded full public ownership of large corporations.'
+        ],
+        correctAnswer: 'The New Deal expanded government\'s role in balancing the economy, while neoliberalism pushed toward market solutions.',
+        explanation: 'The New Deal built Social Security, the NLRB, the FDIC, the SEC, and agricultural supports — government as economic stabilizer and equalizer. Reaganomics\' deregulation, tax cuts, and skepticism of unions represented a fundamental reversal, arguing markets were more efficient than government management.',
         standard: 'SS.912.A.5.12 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C2-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Wealth and Power’?',
-        choices: ['Economic power tends to concentrate, but workers and reformers repeatedly push government to rebalance it.', 'Economic power tends to concentrate only when labor unions control national politics and regulation disappears.', 'Economic power tends to concentrate while Americans steadily lose interest in inequality and workplace conflict.', 'Economic power tends to concentrate because regulation always strengthens workers more than corporations.'],
+        text: 'What broad pattern best answers the chapter question "Wealth and Power"?',
+        choices: [
+          'Economic power tends to concentrate, but workers and reformers repeatedly push government to rebalance it.',
+          'Economic power tends to concentrate only when labor unions control national politics and regulation disappears.',
+          'Economic power tends to concentrate while Americans steadily lose interest in inequality and workplace conflict.',
+          'Economic power tends to concentrate because regulation always strengthens workers more than corporations.'
+        ],
         correctAnswer: 'Economic power tends to concentrate, but workers and reformers repeatedly push government to rebalance it.',
-        explanation: 'This chapter shows that economic systems distribute power unevenly, and that those imbalances are continually challenged.',
+        explanation: 'The dynamic from Gilded Age monopolies through New Deal regulation through Reagan deregulation shows that wealth concentration is a persistent tendency of capitalist economies — and that countering it requires ongoing political effort from workers, reformers, and government, not a one-time solution.',
         standard: 'SS.912.A.3.2 · SS.912.A.3.4 · SS.912.A.3.9 · SS.912.A.5.12 · SS.912.A.7.17'
       },
     ]
   },
 
-  // ==================================================
-  // CHAPTER 3 — Crisis and Control
-  // ==================================================
+  // ── CHAPTER 3: Crisis and Control ─────────────────────────
   {
-    id: 'ch3',
-    label: 'CHAPTER 3',
-    title: 'Crisis and Control',
-    sub: 'War, depression, emergency, and state authority across eras',
-    icon: '📻',
-    type: 'lesson',
+    id: 'ch3', label: 'CHAPTER 3', title: 'Crisis and Control',
+    icon: '📻', type: 'lesson',
     briefing: {
-      location: 'War, depression, emergency, and state authority across eras',
-      date: '',
-      role: 'crisis-state observer',
+      location: 'American History: Government and Emergency',
+      date: 'Civil War through Post-9/11',
+      role: 'constitutional historian',
       text: 'Moments of danger often expand state power. Civil war, depression, world war, Cold War rivalry, and terrorism have all tested how much authority Americans are willing to grant government in the name of survival or order. This chapter asks when that power feels necessary, and when it feels dangerous.',
-      tags: ['SS.912.A.2.2', 'SS.912.A.6.3', 'SS.912.A.4.6', 'SS.912.A.7.15', 'SS.912.A.5.12', 'SS.912.A.6.15']
+      tags: ['SS.912.A.2.2', 'SS.912.A.4.6', 'SS.912.A.5.12', 'SS.912.A.6.3', 'SS.912.A.6.15', 'SS.912.A.7.15', 'SS.912.A.7.16']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Emergency Powers', cards: ['New Deal State', 'PATRIOT Act'] },
+    rewards: { badge: 'Crisis and Control', cards: ['War Powers', 'New Deal State'] },
     bank: [
       {
         id: 'BOP-C3-Q1',
         text: 'What is the strongest comparison between federal power in the Civil War and in World War II?',
-        choices: ['Both crises expanded national authority because survival required large-scale mobilization and coordination.', 'Both crises expanded national authority only after Congress ended all executive influence over wartime policy.', 'Both crises expanded national authority mainly by weakening military command and reducing federal taxation.', 'Both crises expanded national authority while leaving civil liberties and home-front policy mostly untouched.'],
+        choices: [
+          'Both crises expanded national authority because survival required large-scale mobilization and coordination.',
+          'Both crises expanded national authority only after Congress ended all executive influence over wartime policy.',
+          'Both crises expanded national authority mainly by weakening military command and reducing federal taxation.',
+          'Both crises expanded national authority while leaving civil liberties and home-front policy mostly untouched.'
+        ],
         correctAnswer: 'Both crises expanded national authority because survival required large-scale mobilization and coordination.',
-        explanation: 'Major wars often centralize power by forcing national governments to manage manpower, resources, and strategy.',
+        explanation: 'Lincoln\'s draft, income tax, and suspension of habeas corpus; FDR\'s War Production Board, rationing, internment, and economic direction — both presidents exercised unprecedented federal authority justified by the scale of the national emergency they faced.',
         standard: 'SS.912.A.2.2 · SS.912.A.6.3'
       },
       {
         id: 'BOP-C3-Q2',
         text: 'How do World War I speech restrictions and post-9/11 surveillance debates compare?',
-        choices: ['Both show crises prompting government to claim broader security powers that raise civil-liberties concerns.', 'Both show crises prompting government only after public fear had disappeared and dissent had become minor.', 'Both show crises prompting government mainly to reduce intelligence gathering and expand privacy rights immediately.', 'Both show crises prompting government while courts and Congress refused to consider security arguments at all.'],
+        choices: [
+          'Both show crises prompting government to claim broader security powers that raise civil-liberties concerns.',
+          'Both show crises prompting government only after public fear had disappeared and dissent had become minor.',
+          'Both show crises prompting government mainly to reduce intelligence gathering and expand privacy rights immediately.',
+          'Both show crises prompting government while courts and Congress refused to consider security arguments at all.'
+        ],
         correctAnswer: 'Both show crises prompting government to claim broader security powers that raise civil-liberties concerns.',
-        explanation: 'Different tools were used, but both eras reveal the recurring tension between security and constitutional freedom.',
+        explanation: 'The Espionage and Sedition Acts criminalized antiwar speech; the PATRIOT Act expanded surveillance and weakened warrant requirements — both show the same dynamic of crisis generating government claims to broader authority over speech, privacy, and due process.',
         standard: 'SS.912.A.4.6 · SS.912.A.7.15'
       },
       {
         id: 'BOP-C3-Q3',
         text: 'What recurring pattern appears when the United States faces severe national crisis?',
-        choices: ['Americans often accept stronger federal action first, then later argue over whether that power went too far.', 'Americans often accept stronger federal action only after all danger has passed and politics has stabilized.', 'Americans often accept stronger federal action mainly by ending the presidency’s role in national response.', 'Americans often accept stronger federal action while ignoring questions about law, liberty, and accountability.'],
+        choices: [
+          'Americans often accept stronger federal action first, then later argue over whether that power went too far.',
+          'Americans often accept stronger federal action only after all danger has passed and politics has stabilized.',
+          'Americans often accept stronger federal action mainly by ending the presidency\'s role in national response.',
+          'Americans often accept stronger federal action while ignoring questions about law, liberty, and accountability.'
+        ],
         correctAnswer: 'Americans often accept stronger federal action first, then later argue over whether that power went too far.',
-        explanation: 'Emergency power usually gains support in the moment, but it often triggers later political or constitutional backlash.',
+        explanation: 'WWII internment was supported at the time and repudiated later; Cold War surveillance was built in secrecy and debated after revelations; PATRIOT Act passed 98-1 in 2001 and was debated for years after — the pattern of emergency acceptance followed by constitutional reckoning recurs across crises.',
         standard: 'SS.912.A.2.2 · SS.912.A.5.12 · SS.912.A.7.15'
       },
       {
         id: 'BOP-C3-Q4',
         text: 'Which statement best captures continuity and change in civil-liberties debates during crises?',
-        choices: ['The tools change, but Americans repeatedly argue over how much freedom should be limited for security.', 'The tools change only after government permanently stops using emergency powers in any national crisis.', 'The tools change mainly because civil liberties no longer matter once foreign threats become serious.', 'The tools change while security policy stays entirely outside constitutional and democratic debate.'],
+        choices: [
+          'The tools change, but Americans repeatedly argue over how much freedom should be limited for security.',
+          'The tools change only after government permanently stops using emergency powers in any national crisis.',
+          'The tools change mainly because civil liberties no longer matter once foreign threats become serious.',
+          'The tools change while security policy stays entirely outside constitutional and democratic debate.'
+        ],
         correctAnswer: 'The tools change, but Americans repeatedly argue over how much freedom should be limited for security.',
-        explanation: 'From sedition laws to surveillance policy, the technology and law evolve, but the underlying debate remains familiar.',
+        explanation: 'The specific mechanisms evolve — from suspension of habeas corpus to loyalty oaths to mass surveillance — but the constitutional tension between security and liberty recurs in every crisis, generating the same fundamental argument about how much freedom government may sacrifice in the name of safety.',
         standard: 'SS.912.A.4.6 · SS.912.A.7.15'
       },
       {
         id: 'BOP-C3-Q5',
         text: 'Which development is the best example of a domestic crisis expanding federal power in the economy?',
-        choices: ['The New Deal creating national programs and regulations in response to economic collapse.', 'The Missouri Compromise balancing sectional interests before the Civil War broke out.', 'The Free Speech Movement challenging university authority during the 1960s counterculture.', 'The Immigration Act of 1965 changing national-origin quotas in immigration policy.'],
+        choices: [
+          'The New Deal creating national programs and regulations in response to economic collapse.',
+          'The Missouri Compromise balancing sectional interests before the Civil War broke out.',
+          'The Free Speech Movement challenging university authority during the 1960s counterculture.',
+          'The Immigration Act of 1965 changing national-origin quotas in immigration policy.'
+        ],
         correctAnswer: 'The New Deal creating national programs and regulations in response to economic collapse.',
-        explanation: 'The Great Depression led to one of the largest expansions of federal domestic authority in U.S. history.',
+        explanation: 'The Great Depression was a domestic economic crisis — not a foreign war — that expanded federal power dramatically through the CCC, WPA, Social Security, SEC, FDIC, and NLRB, demonstrating that domestic emergencies can be as powerful as military ones in driving federal expansion.',
         standard: 'SS.912.A.5.12'
       },
       {
         id: 'BOP-C3-Q6',
         text: 'What is the strongest comparison between the Cold War containment state and the post-9/11 security state?',
-        choices: ['Both expanded national security institutions by treating danger as long-term and requiring constant vigilance.', 'Both expanded national security institutions only after Americans rejected intelligence, alliances, and military planning.', 'Both expanded national security institutions mainly by reducing surveillance and shrinking executive authority.', 'Both expanded national security institutions while making foreign policy far less central to domestic politics.'],
+        choices: [
+          'Both expanded national security institutions by treating danger as long-term and requiring constant vigilance.',
+          'Both expanded national security institutions only after Americans rejected intelligence, alliances, and military planning.',
+          'Both expanded national security institutions mainly by reducing surveillance and shrinking executive authority.',
+          'Both expanded national security institutions while making foreign policy far less central to domestic politics.'
+        ],
         correctAnswer: 'Both expanded national security institutions by treating danger as long-term and requiring constant vigilance.',
-        explanation: 'Each era normalized durable security structures rather than brief emergency measures alone.',
+        explanation: 'Cold War containment produced the CIA, NSA, and a large permanent military establishment designed for sustained global competition; post-9/11 produced the DHS, expanded NSA surveillance, and the PATRIOT Act — both treated the threat as permanent rather than temporary, justifying lasting institutional expansion.',
         standard: 'SS.912.A.6.15 · SS.912.A.7.15'
       },
       {
         id: 'BOP-C3-Q7',
         text: 'Which evidence best supports the claim that Americans sometimes accept stronger government when the crisis feels overwhelming?',
-        choices: ['Support for New Deal intervention and broad wartime mobilization showed willingness to trade autonomy for stability.', 'Support for New Deal intervention and wartime mobilization proved Americans rejected federal planning in every form.', 'Support for New Deal intervention and wartime mobilization mattered little because crises never change public expectations.', 'Support for New Deal intervention and wartime mobilization only appeared after both crises had already passed completely.'],
+        choices: [
+          'Support for New Deal intervention and broad wartime mobilization showed willingness to trade autonomy for stability.',
+          'Support for New Deal intervention and wartime mobilization proved Americans rejected federal planning in every form.',
+          'Support for New Deal intervention and wartime mobilization mattered little because crises never change public expectations.',
+          'Support for New Deal intervention and wartime mobilization only appeared after both crises had already passed completely.'
+        ],
         correctAnswer: 'Support for New Deal intervention and broad wartime mobilization showed willingness to trade autonomy for stability.',
-        explanation: 'When the stakes seem existential, many citizens accept expanded state power that would be controversial in calmer times.',
+        explanation: 'Roosevelt\'s landslide reelections during the Depression and near-unanimous WWII mobilization both reflect how overwhelming crisis can shift Americans\' normal resistance to federal power — the same individuals who might oppose regulation in normal times accept it when survival seems at stake.',
         standard: 'SS.912.A.5.12 · SS.912.A.6.3'
       },
       {
         id: 'BOP-C3-Q8',
         text: 'Why is the War Powers Act best understood as a backlash measure rather than a crisis-expansion measure?',
-        choices: ['It reflected concern that presidents had accumulated too much unilateral war authority during earlier conflicts.', 'It reflected concern only after Congress had completely given up its constitutional role in military decisions.', 'It reflected concern mainly because Americans wanted presidents to act even more freely without oversight.', 'It reflected concern while ending debate over executive power and foreign policy once and for all.'],
+        choices: [
+          'It reflected concern that presidents had accumulated too much unilateral war authority during earlier conflicts.',
+          'It reflected Congress wanting to give the executive branch even faster and more flexible authority to respond to military threats.',
+          'It reflected mainly the desire to eliminate all military spending and return to peacetime neutrality.',
+          'It reflected fear that the Supreme Court had accumulated too much power over foreign policy decisions.'
+        ],
         correctAnswer: 'It reflected concern that presidents had accumulated too much unilateral war authority during earlier conflicts.',
-        explanation: 'The act shows that emergency power can provoke later efforts to restore checks and balance.',
+        explanation: 'Vietnam was fought under the Gulf of Tonkin Resolution rather than a declaration of war — the War Powers Act (1973) was a congressional reaction to decades of presidential war-making without formal authorization, attempting to restore the constitutional balance that crises had tilted toward the executive.',
         standard: 'SS.912.A.7.16'
       },
       {
         id: 'BOP-C3-Q9',
-        text: 'How did the New Deal and World War II both reshape Americans’ expectations of government?',
-        choices: ['Both made large-scale federal planning seem more normal when national survival or recovery was at stake.', 'Both made large-scale federal planning seem normal only after the government withdrew from economic management entirely.', 'Both made large-scale federal planning seem normal mainly by proving markets could solve crises without state help.', 'Both made large-scale federal planning seem normal while weakening Washington’s influence over national production.'],
+        text: 'How did the New Deal and World War II both reshape Americans\' expectations of government?',
+        choices: [
+          'Both made large-scale federal planning seem more normal when national survival or recovery was at stake.',
+          'Both made large-scale federal planning seem less acceptable by demonstrating its failures comprehensively.',
+          'Both made large-scale federal planning permanent only in foreign policy rather than in domestic economic life.',
+          'Both made large-scale federal planning disappear after each crisis by transferring power entirely to states.'
+        ],
         correctAnswer: 'Both made large-scale federal planning seem more normal when national survival or recovery was at stake.',
-        explanation: 'Together, these crises helped expand the accepted reach of federal authority in economic and social life.',
+        explanation: 'Before the Depression, direct federal relief and economic management were politically unthinkable; after WWII mobilization, Americans took for granted that government could and should manage large-scale challenges — shifting the baseline of what federal action was considered appropriate.',
         standard: 'SS.912.A.5.12 · SS.912.A.6.3'
       },
       {
         id: 'BOP-C3-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Crisis and Control’?',
-        choices: ['Crises often expand state power, but Americans repeatedly debate how temporary, lawful, or dangerous that power should be.', 'Crises often expand state power only after all constitutional conflict over executive authority has disappeared.', 'Crises often expand state power mainly because citizens stop caring about liberty during emergencies.', 'Crises often expand state power while making questions of federal authority less important than before.'],
+        text: 'What broad pattern best answers the chapter question "Crisis and Control"?',
+        choices: [
+          'Crises often expand state power, but Americans repeatedly debate how temporary, lawful, or dangerous that power should be.',
+          'Crises often expand state power permanently with no subsequent debate or rollback of any emergency authority.',
+          'Crises often expand state power only during foreign wars, while domestic emergencies always consistently reduce federal authority.',
+          'Crises often expand state power mainly to benefit corporations rather than address the causes of the emergency.'
+        ],
         correctAnswer: 'Crises often expand state power, but Americans repeatedly debate how temporary, lawful, or dangerous that power should be.',
-        explanation: 'Emergency power is never just about effectiveness; it also raises enduring questions about constitutional limits and democratic trust.',
+        explanation: 'Every crisis from the Civil War through 9/11 produced new federal authority — and every era also produced civil liberties arguments, congressional pushback, and eventually some rollback or reckoning with how that power was exercised.',
         standard: 'SS.912.A.2.2 · SS.912.A.4.6 · SS.912.A.5.12 · SS.912.A.6.3 · SS.912.A.7.15 · SS.912.A.7.16'
       },
     ]
   },
 
-  // ==================================================
-  // CHAPTER 4 — Rights, Backlash, and Power
-  // ==================================================
+  // ── CHAPTER 4: Rights, Backlash, and Power ────────────────
   {
-    id: 'ch4',
-    label: 'CHAPTER 4',
-    title: 'Rights, Backlash, and Power',
-    sub: 'Movements, reform, resistance, and competing definitions of equality',
-    icon: '✊',
-    type: 'lesson',
+    id: 'ch4', label: 'CHAPTER 4', title: 'Rights, Backlash, and Power',
+    icon: '☢️', type: 'lesson',
     briefing: {
-      location: 'Movements, reform, resistance, and competing definitions of equality',
-      date: '',
-      role: 'rights movement researcher',
+      location: 'American History: Equality and Resistance',
+      date: 'Reconstruction through Late Twentieth Century',
+      role: 'civil rights historian',
       text: 'Rights do not expand automatically. Movements challenge entrenched power, governments respond unevenly, and backlash often follows reform. This chapter compares how Americans have fought over equality from Reconstruction to later struggles over race, gender, disability, and sexuality.',
-      tags: ['SS.912.A.2.5', 'SS.912.A.7.3', 'SS.912.A.3.10', 'SS.912.A.7.17', 'SS.912.A.2.6', 'SS.912.A.7.9']
+      tags: ['SS.912.A.2.5', 'SS.912.A.2.6', 'SS.912.A.3.10', 'SS.912.A.7.3', 'SS.912.A.7.9', 'SS.912.A.7.17']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Rights in Motion', cards: ['Fourteenth Amendment', 'Civil Rights Act'] },
+    rewards: { badge: 'Rights, Backlash, Power', cards: ['Civil Rights', 'Backlash Politics'] },
     bank: [
       {
         id: 'BOP-C4-Q1',
         text: 'What is the strongest comparison between the Reconstruction amendments and the Civil Rights movement of the 1950s and 1960s?',
-        choices: ['Both used federal power to redefine equality, though each faced fierce resistance at the local and state level.', 'Both used federal power only after local governments had already accepted racial equality without conflict.', 'Both used federal power mainly to reduce citizenship protections and return authority to former elites.', 'Both used federal power while avoiding courts, Congress, and constitutional arguments about rights.'],
+        choices: [
+          'Both used federal power to redefine equality, though each faced fierce resistance at the local and state level.',
+          'Both used federal power to redefine equality, and each produced immediate compliance from all state governments.',
+          'Both used federal power to redefine equality mainly by reducing the role of courts in constitutional interpretation.',
+          'Both used federal power to redefine equality while making local and state officials the primary enforcement agents.'
+        ],
         correctAnswer: 'Both used federal power to redefine equality, though each faced fierce resistance at the local and state level.',
-        explanation: 'Each era shows rights expansion working through national law while encountering powerful backlash on the ground.',
+        explanation: 'The Fourteenth and Fifteenth Amendments faced the Ku Klux Klan, Black Codes, and Redemption; the Civil Rights and Voting Rights Acts faced massive resistance, bombings, and murder — in both eras, the federal legal statement outpaced local willingness to comply, requiring sustained enforcement.',
         standard: 'SS.912.A.2.5 · SS.912.A.7.3'
       },
       {
         id: 'BOP-C4-Q2',
         text: 'How did second-wave feminism differ from the earlier suffrage movement?',
-        choices: ['Suffrage focused on the vote, while second-wave feminism challenged inequality across work, family, and law.', 'Suffrage focused on the vote only after second-wave feminism had already won equal workplace protections.', 'Suffrage focused on the vote mainly by rejecting legal reform and avoiding public protest altogether.', 'Suffrage focused on the vote while second-wave feminism centered mostly on restoring traditional gender roles.'],
+        choices: [
+          'Suffrage focused on the vote, while second-wave feminism challenged inequality across work, family, and law.',
+          'Suffrage focused on the vote, while second-wave feminism focused exclusively on eliminating the draft for women.',
+          'Suffrage focused on the vote, and second-wave feminism largely abandoned any legal or political strategy.',
+          'Suffrage focused on the vote only in local elections, while second-wave feminism focused only on federal appointments.'
+        ],
         correctAnswer: 'Suffrage focused on the vote, while second-wave feminism challenged inequality across work, family, and law.',
-        explanation: 'The later movement expanded the argument from political rights alone to broader forms of social and legal equality.',
+        explanation: 'The suffrage movement\'s central goal was the Nineteenth Amendment; second-wave feminism in the 1960s–70s pushed for equal pay, reproductive rights, Title IX, the ERA, and an end to legal discrimination in credit, property, and employment — a far broader conception of what equality required.',
         standard: 'SS.912.A.3.10 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C4-Q3',
         text: 'What recurring pattern appears after major expansions of rights in U.S. history?',
-        choices: ['Backlash often follows reform, as opponents try to slow, reinterpret, or reverse new definitions of equality.', 'Backlash often follows reform only after all political disagreement over equality has already disappeared.', 'Backlash often follows reform mainly because federal law usually stops mattering once movements succeed.', 'Backlash often follows reform while institutions immediately enforce every new right without resistance.'],
+        choices: [
+          'Backlash often follows reform, as opponents try to slow, reinterpret, or reverse new definitions of equality.',
+          'Backlash never follows genuine reform because constitutional changes are always immediately accepted by all parties permanently.',
+          'Backlash follows reform only when courts strike down all legislation within two years of passage.',
+          'Backlash follows reform mainly by expanding rather than restricting the rights that reformers sought.'
+        ],
         correctAnswer: 'Backlash often follows reform, as opponents try to slow, reinterpret, or reverse new definitions of equality.',
-        explanation: 'Rights advances rarely end conflict; they often reshape the conflict into new legal and political forms.',
+        explanation: 'Reconstruction amendments → Redemption and Jim Crow; Civil Rights Act → massive resistance and later rollback of affirmative action; women\'s rights → anti-ERA movement and later reproductive rights restrictions — reform creates counterreaction as defenders of the old order reorganize.',
         standard: 'SS.912.A.2.6 · SS.912.A.7.3 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C4-Q4',
         text: 'Which statement best captures continuity and change in rights enforcement across eras?',
-        choices: ['National law can expand rights, but enforcement remains uneven when local power resists those changes.', 'National law can expand rights only after local power has completely accepted reform in advance.', 'National law can expand rights mainly by staying symbolic and avoiding any role in enforcement.', 'National law can expand rights while making courts, executive action, and protest mostly unnecessary.'],
+        choices: [
+          'National law can expand rights, but enforcement remains uneven when local power resists those changes.',
+          'National law can expand rights, and local power always complies immediately once legislation passes.',
+          'National law can expand rights mainly by transferring all enforcement authority to state governments.',
+          'National law can expand rights only when courts and local governments collaboratively design the legislation together.'
+        ],
         correctAnswer: 'National law can expand rights, but enforcement remains uneven when local power resists those changes.',
-        explanation: 'Rights on paper are most secure when institutions have both the will and the power to enforce them.',
+        explanation: 'The Fourteenth Amendment existed for 70 years before Brown; Brown existed for 15 years before meaningful desegregation began in many districts; the VRA was contested from passage through Shelby County v. Holder — the gap between rights on paper and rights in practice is determined by who enforces them and how.',
         standard: 'SS.912.A.2.5 · SS.912.A.7.3'
       },
       {
         id: 'BOP-C4-Q5',
         text: 'Which development is the best example of rights requiring federal enforcement to become meaningful in practice?',
-        choices: ['Federal action to enforce school desegregation despite local refusal to comply.', 'Woodstock becoming a symbol of youth culture and anti-Establishment identity in the late 1960s.', 'The PATCO strike showing executive toughness toward labor during the Reagan presidency.', 'The Open Door Policy demanding equal trade access in China at the turn of the century.'],
+        choices: [
+          'Federal action to enforce school desegregation despite local refusal to comply.',
+          'State governments voluntarily desegregating schools before any federal court ordered them to do so.',
+          'Local communities establishing their own civil rights commissions independently of federal oversight.',
+          'Congress passing civil rights legislation without any subsequent need for implementation or enforcement.'
+        ],
         correctAnswer: 'Federal action to enforce school desegregation despite local refusal to comply.',
-        explanation: 'This example shows that legal rights often depend on state power willing to confront local resistance.',
+        explanation: 'Eisenhower sending the 101st Airborne to Little Rock in 1957 and Kennedy federalizing the National Guard in Alabama demonstrated that Brown\'s legal mandate meant nothing without the willingness to use federal power against local resistance — the clearest example of rights requiring enforcement.',
         standard: 'SS.912.A.7.3'
       },
       {
         id: 'BOP-C4-Q6',
         text: 'How did Black Power differ from earlier Civil Rights strategies?',
-        choices: ['It placed greater emphasis on self-determination, community control, and skepticism toward gradual integration.', 'It placed greater emphasis only after nonviolent protest had already ended all racial inequality nationwide.', 'It placed greater emphasis mainly on abandoning political change in favor of private cultural expression alone.', 'It placed greater emphasis while rejecting all concern with voting, institutions, or economic power.'],
+        choices: [
+          'It placed greater emphasis on self-determination, community control, and skepticism toward gradual integration.',
+          'It placed greater emphasis on working within the existing two-party system without any confrontational protest.',
+          'It placed greater emphasis on achieving integration through federal court cases rather than direct-action protest.',
+          'It placed greater emphasis on economic growth alone rather than any political or legal rights claims.'
+        ],
         correctAnswer: 'It placed greater emphasis on self-determination, community control, and skepticism toward gradual integration.',
-        explanation: 'Black Power reflected frustration with the limits of earlier gains and sought different ways to confront unequal power.',
+        explanation: 'Where King\'s SCLC sought integration into American institutions, Black Power advocates like Carmichael and the Black Panthers argued for Black community control of institutions in Black neighborhoods, cultural pride, and skepticism about whether integration on White America\'s terms was either achievable or desirable.',
         standard: 'SS.912.A.7.3 · SS.912.A.7.9'
       },
       {
         id: 'BOP-C4-Q7',
         text: 'Why do affirmative action debates reveal competing definitions of equality?',
-        choices: ['Some see equality as equal formal rules, while others argue history requires stronger corrective action.', 'Some see equality as equal formal rules only after race and discrimination have vanished from society entirely.', 'Some see equality as equal formal rules mainly by rejecting any role for education or employment policy.', 'Some see equality as equal formal rules while agreeing that past exclusion has no bearing on present institutions.'],
+        choices: [
+          'Some see equality as equal formal rules, while others argue history requires stronger corrective action.',
+          'Some see equality as a legal matter only, while others argue it is purely an economic question.',
+          'Some see equality as already fully achieved, while others argue it has never been relevant to American life.',
+          'Some see equality as requiring more exclusion, while others argue for even stricter formal inequality instead.'
+        ],
         correctAnswer: 'Some see equality as equal formal rules, while others argue history requires stronger corrective action.',
-        explanation: 'The disagreement centers on whether fairness means neutrality alone or active efforts to address unequal starting conditions.',
+        explanation: 'Opponents of affirmative action argue that treating everyone by identical rules is constitutional equality; supporters argue that centuries of exclusion mean identical rules produce unequal outcomes — the debate is fundamentally about whether formal equality or substantive equality is the right standard.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'BOP-C4-Q8',
         text: 'Which evidence best supports the claim that local resistance has repeatedly limited national reform?',
-        choices: ['Black Codes after emancipation and segregationist resistance after Brown both worked against federal change.', 'Black Codes after emancipation and segregationist resistance after Brown both immediately disappeared without enforcement.', 'Black Codes after emancipation and segregationist resistance after Brown mattered little because courts lacked authority.', 'Black Codes after emancipation and segregationist resistance after Brown mainly strengthened equal schooling and voting.'],
+        choices: [
+          'Black Codes after emancipation and segregationist resistance after Brown both worked against federal change.',
+          'Black Codes after emancipation and segregationist resistance after Brown both immediately expanded equality.',
+          'Black Codes were challenged only in the North, while Brown was resisted only in northern urban school districts.',
+          'Black Codes and post-Brown resistance both showed that the federal government never had any enforcement authority.'
+        ],
         correctAnswer: 'Black Codes after emancipation and segregationist resistance after Brown both worked against federal change.',
-        explanation: 'Both cases show that rights expansion at the national level often meets organized resistance in states and communities.',
+        explanation: 'Southern states passed Black Codes to restore labor control immediately after the Civil War, neutralizing emancipation before Reconstruction could fully take hold; "massive resistance" to Brown and desegregation orders delayed integration for over a decade — both demonstrate local power\'s capacity to blunt federal reform.',
         standard: 'SS.912.A.2.6 · SS.912.A.7.3'
       },
       {
         id: 'BOP-C4-Q9',
         text: 'What is the strongest comparison between disability-rights activism and later LGBTQ-rights activism?',
-        choices: ['Both pushed institutions to rethink exclusion by arguing that citizenship requires equal access and recognition.', 'Both pushed institutions only after courts had ruled that social movements no longer influenced public policy.', 'Both pushed institutions mainly by avoiding federal law and rejecting constitutional claims about equality.', 'Both pushed institutions while claiming that private prejudice had no connection to public rights at all.'],
+        choices: [
+          'Both pushed institutions to rethink exclusion by arguing that citizenship requires equal access and recognition.',
+          'Both pushed institutions to rethink exclusion only after Congress had already granted full equality in law.',
+          'Both pushed institutions to rethink exclusion mainly through economic boycotts rather than legal or political action.',
+          'Both pushed institutions to rethink exclusion while insisting that other civil rights movements were irrelevant.'
+        ],
         correctAnswer: 'Both pushed institutions to rethink exclusion by arguing that citizenship requires equal access and recognition.',
-        explanation: 'These later movements extended the long American debate over who receives full legal dignity and participation.',
+        explanation: 'Disability-rights activists used sit-ins and legal challenges to win the ADA (1990); LGBTQ activists used protests, litigation, and visibility campaigns to win marriage equality and employment protections — both argued that full citizenship requires institutions to include rather than exclude people defined as different.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'BOP-C4-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Rights, Backlash, and Power’?',
-        choices: ['Rights expand through struggle, but institutions and opponents keep redefining how far equality will actually go.', 'Rights expand through struggle only after backlash disappears and all groups agree on one meaning of equality.', 'Rights expand through struggle mainly because reform movements avoid federal law and constitutional language.', 'Rights expand through struggle while local resistance steadily becomes less important than symbolism alone.'],
+        text: 'What broad pattern best answers the chapter question "Rights, Backlash, and Power"?',
+        choices: [
+          'Rights expand through struggle, but institutions and opponents keep redefining how far equality will actually go.',
+          'Rights expand automatically once constitutional language is established without any further political effort or enforcement.',
+          'Rights expand only through court decisions rather than through social movements or political pressure.',
+          'Rights expand permanently after each reform era with no subsequent narrowing or backlash of any kind.'
+        ],
         correctAnswer: 'Rights expand through struggle, but institutions and opponents keep redefining how far equality will actually go.',
-        explanation: 'The history of rights is not a straight line; it is a repeated contest over whether reform will become durable power.',
+        explanation: 'The pattern from Reconstruction through civil rights through later movements is consistent: struggle produces legal expansion, opponents regroup and use courts, legislatures, and local power to narrow or reinterpret those gains — making each expansion a beginning of the next struggle rather than a final resolution.',
         standard: 'SS.912.A.2.5 · SS.912.A.3.10 · SS.912.A.7.3 · SS.912.A.7.9 · SS.912.A.7.17'
       },
     ]
   },
 
-  // ==================================================
-  // CHAPTER 5 — Who Gets Included?
-  // ==================================================
+  // ── CHAPTER 5: Who Gets Included? ─────────────────────────
   {
-    id: 'ch5',
-    label: 'CHAPTER 5',
-    title: 'Who Gets Included?',
-    sub: 'Citizenship, immigration, belonging, and the boundaries of America',
-    icon: '⚖️',
-    type: 'lesson',
+    id: 'ch5', label: 'CHAPTER 5', title: 'Who Gets Included?',
+    icon: '✊', type: 'lesson',
     briefing: {
-      location: 'Citizenship, immigration, belonging, and the boundaries of America',
-      date: '',
-      role: 'citizenship archivist',
+      location: 'American History: Belonging and Exclusion',
+      date: 'Immigration Era through Modern America',
+      role: 'immigration historian',
       text: 'American power is also the power to decide who belongs. This chapter explores immigration law, citizenship, exclusion, incarceration, and belonging across eras. Watch for how race, nationality, war, and security fears have shaped who gets treated as fully American.',
-      tags: ['SS.912.A.3.6', 'SS.912.A.3.7', 'SS.912.A.7.17', 'SS.912.A.6.4', 'SS.912.A.7.15']
+      tags: ['SS.912.A.3.6', 'SS.912.A.3.7', 'SS.912.A.6.4', 'SS.912.A.7.15', 'SS.912.A.7.17']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Belonging and Boundaries', cards: ['Ellis Island', 'Immigration Act of 1965'] },
+    rewards: { badge: 'Power Challenged', cards: ['Immigration Policy', 'Belonging and Exclusion'] },
     bank: [
       {
         id: 'BOP-C5-Q1',
         text: 'What is the strongest comparison between Ellis Island and Angel Island?',
-        choices: ['Both processed immigrants, but Angel Island often reflected harsher suspicion and restriction toward Asians.', 'Both processed immigrants only after the United States had fully ended racial restrictions in immigration law.', 'Both processed immigrants mainly by granting identical treatment to all arrivals regardless of origin.', 'Both processed immigrants while discouraging entry through the East and West coasts entirely.'],
+        choices: [
+          'Both processed immigrants, but Angel Island often reflected harsher suspicion and restriction toward Asians.',
+          'Both processed immigrants equally by treating all arrivals with exactly the same legal standards and processing times.',
+          'Both processed immigrants mainly to restrict European immigration rather than Asian arrivals.',
+          'Both processed immigrants primarily by offering them immediate citizenship rather than temporary status.'
+        ],
         correctAnswer: 'Both processed immigrants, but Angel Island often reflected harsher suspicion and restriction toward Asians.',
-        explanation: 'The contrast highlights how race and nationality shaped which immigrants were welcomed and which were treated as threats.',
+        explanation: 'Ellis Island processed European immigrants with relatively brief inspections — most were admitted within hours or days; Angel Island held Chinese and other Asian immigrants for weeks or months under the Chinese Exclusion Act\'s restrictive framework — the contrast reveals how immigration policy embedded racial hierarchy.',
         standard: 'SS.912.A.3.6 · SS.912.A.3.7'
       },
       {
         id: 'BOP-C5-Q2',
         text: 'How did the Chinese Exclusion Act and the immigration quotas of the 1920s compare?',
-        choices: ['Both used federal law to limit belonging, though one targeted a group directly and the other ranked national origins.', 'Both used federal law only after Americans had rejected all ideas about race and nationality in immigration policy.', 'Both used federal law mainly to increase immigration from Asia and southern and eastern Europe.', 'Both used federal law while treating citizenship and national identity as unrelated to immigration rules.'],
+        choices: [
+          'Both used federal law to limit belonging, though one targeted a group directly and the other ranked national origins.',
+          'Both used federal law to limit belonging while giving courts full authority to override any individual exclusion decision.',
+          'Both used federal law to limit belonging only during wartime emergencies rather than in peacetime policy.',
+          'Both used federal law to limit belonging while actively encouraging immigration from all Asian nations.'
+        ],
         correctAnswer: 'Both used federal law to limit belonging, though one targeted a group directly and the other ranked national origins.',
-        explanation: 'The methods differed, but both laws show the federal government actively drawing boundaries around who counted as desirable.',
+        explanation: 'The Chinese Exclusion Act explicitly named one nationality for exclusion; the 1924 Immigration Act used national-origin quotas that effectively blocked southern and eastern Europeans and nearly all Asians — different mechanisms, same underlying logic of deciding which groups were least welcome.',
         standard: 'SS.912.A.3.6'
       },
       {
         id: 'BOP-C5-Q3',
         text: 'Which statement best captures continuity and change in immigration inclusion over time?',
-        choices: ['Rules became less openly race-based in some eras, but the nation kept debating who truly belongs.', 'Rules became less openly race-based, and conflict over immigration largely disappeared after 1965.', 'Rules became less openly race-based only because citizenship stopped mattering in national identity debates.', 'Rules became less openly race-based while federal immigration law became politically irrelevant.'],
+        choices: [
+          'Rules became less openly race-based in some eras, but the nation kept debating who truly belongs.',
+          'Rules became progressively more open in every era until immigration was completely unrestricted by 1970.',
+          'Rules became more restrictive in every era without exception, closing the nation permanently to newcomers.',
+          'Rules became irrelevant once the Fourteenth Amendment established that all people born here are citizens.'
+        ],
         correctAnswer: 'Rules became less openly race-based in some eras, but the nation kept debating who truly belongs.',
-        explanation: 'Legal reforms changed the rules, yet arguments over identity, security, and cultural belonging continued.',
+        explanation: 'The 1965 Immigration Act removed national-origin quotas; the Refugee Act of 1980 broadened admissions; but debates over undocumented immigration, asylum, and border policy show that the question of who truly belongs — and on what terms — has never been settled.',
         standard: 'SS.912.A.3.6 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C5-Q4',
         text: 'What is the strongest comparison between Japanese American incarceration and post-9/11 suspicion toward some Muslim, Arab, and South Asian Americans?',
-        choices: ['Both reveal how fear can narrow belonging by treating whole groups as potential security threats.', 'Both reveal how fear can narrow belonging only after courts have fully prohibited discrimination in wartime.', 'Both reveal how fear can narrow belonging mainly by expanding civil liberties and reducing government surveillance.', 'Both reveal how fear can narrow belonging while separating foreign policy completely from domestic identity.'],
+        choices: [
+          'Both reveal how fear can narrow belonging by treating whole groups as potential security threats.',
+          'Both reveal how fear strengthened constitutional protections by producing immediate court intervention.',
+          'Both reveal how fear only affected foreign nationals rather than any American citizens or residents.',
+          'Both reveal how fear was quickly rejected by the public before any significant harm could occur.'
+        ],
         correctAnswer: 'Both reveal how fear can narrow belonging by treating whole groups as potential security threats.',
-        explanation: 'In each era, national fear encouraged suspicion that blurred the line between enemy and citizen.',
+        explanation: 'Over 120,000 Japanese Americans — most of them citizens — were incarcerated without individual evidence of disloyalty; post-9/11, profiling, surveillance, and travel restrictions targeted Muslim, Arab, and South Asian Americans as a group — both show how security fears transform belonging from a matter of law into a matter of suspicion.',
         standard: 'SS.912.A.6.4 · SS.912.A.7.15'
       },
       {
         id: 'BOP-C5-Q5',
         text: 'Which development is the best example of the federal government widening formal inclusion in immigration policy?',
-        choices: ['The Immigration Act of 1965 replacing older national-origins quotas with a different admissions framework.', 'The Chinese Exclusion Act sharply restricting immigration from a targeted group in the late nineteenth century.', 'Japanese American incarceration removing citizens and residents from their homes during World War II.', 'The emergency detention process at Angel Island applying stricter questioning to many Asian immigrants.'],
+        choices: [
+          'The Immigration Act of 1965 replacing older national-origins quotas with a different admissions framework.',
+          'The Chinese Exclusion Act restricting entry for specific national groups deemed culturally incompatible with American values.',
+          'The Emergency Quota Act of 1921 limiting annual immigration to protect cultural homogeneity.',
+          'The internment of Japanese Americans during WWII removing citizens from their communities.'
+        ],
         correctAnswer: 'The Immigration Act of 1965 replacing older national-origins quotas with a different admissions framework.',
-        explanation: 'This law is a major marker of formal expansion because it weakened an older exclusionary national-origins system.',
+        explanation: 'The Hart-Celler Act abolished the national-origins quota system that had heavily favored northern Europeans since 1924, replacing it with preferences for family reunification and skills — a genuine expansion of formal inclusion that dramatically changed the demographics of American immigration.',
         standard: 'SS.912.A.7.17'
       },
       {
         id: 'BOP-C5-Q6',
         text: 'What recurring pattern appears in debates over who counts as fully American?',
-        choices: ['Race, nationality, and security fears often shape inclusion even when the language of citizenship sounds universal.', 'Race, nationality, and security fears disappear whenever the economy grows or war ends successfully.', 'Race, nationality, and security fears matter only in foreign policy and not in domestic law or identity.', 'Race, nationality, and security fears usually weaken the federal role in immigration and national belonging.'],
+        choices: [
+          'Race, nationality, and security fears often shape inclusion even when the language of citizenship sounds universal.',
+          'Race, nationality, and security fears always disappear once a new immigration law is officially enacted.',
+          'Race, nationality, and security fears only appear in debates about immigration and not in citizenship or belonging debates.',
+          'Race, nationality, and security fears consistently push Americans toward greater inclusion in every era.'
+        ],
         correctAnswer: 'Race, nationality, and security fears often shape inclusion even when the language of citizenship sounds universal.',
-        explanation: 'Belonging is not decided by abstract ideals alone; it is repeatedly influenced by fear and hierarchy.',
+        explanation: 'The Fourteenth Amendment sounds universal but was applied unevenly; naturalization law excluded Asians until 1952; citizenship existed for Japanese Americans who were still incarcerated — the universalist language of American belonging has repeatedly been qualified by race, origin, and fear.',
         standard: 'SS.912.A.3.6 · SS.912.A.6.4 · SS.912.A.7.15'
       },
       {
         id: 'BOP-C5-Q7',
         text: 'Which evidence best supports the claim that legal status alone does not always guarantee full belonging?',
-        choices: ['Japanese American citizens were incarcerated, showing that citizenship itself did not erase suspicion.', 'Japanese American citizens were incarcerated, proving that legal status has never mattered in any era.', 'Japanese American citizens were incarcerated only after the Constitution had been suspended permanently.', 'Japanese American citizens were incarcerated mainly because wartime courts had no authority to review federal policy.'],
+        choices: [
+          'Japanese American citizens were incarcerated, showing that citizenship itself did not erase suspicion.',
+          'European immigrants gained full belonging immediately upon becoming citizens during the Progressive Era.',
+          'Legal citizenship has always produced complete social acceptance and equal treatment throughout history.',
+          'Only non-citizens have ever faced discrimination, proving that legal status determines belonging fully.'
+        ],
         correctAnswer: 'Japanese American citizens were incarcerated, showing that citizenship itself did not erase suspicion.',
-        explanation: 'This example demonstrates that formal membership in the nation does not always protect people from exclusion or fear.',
+        explanation: 'The 70,000 American-born Japanese Americans interned in 1942 were citizens who had done nothing wrong — their incarceration demonstrated that legal citizenship provided no protection when wartime fear was strong enough, showing that belonging is not simply a matter of legal status.',
         standard: 'SS.912.A.3.7 · SS.912.A.7.15'
       },
       {
         id: 'BOP-C5-Q8',
         text: 'How did immigrant adaptation in the Ellis Island era compare with immigrant adaptation after 1965?',
-        choices: ['In both eras, newcomers built communities and adapted gradually rather than instantly abandoning old identities.', 'In both eras, newcomers adapted only after federal law required every immigrant to settle outside major cities.', 'In both eras, newcomers adapted mainly by avoiding family networks, ethnic institutions, and cultural continuity.', 'In both eras, newcomers adapted while immigration ceased to influence labor markets or national politics.'],
+        choices: [
+          'In both eras, newcomers built communities and adapted gradually rather than instantly abandoning old identities.',
+          'In both eras, immigrants were required to abandon all cultural identity within one year of arrival.',
+          'In the Ellis Island era, immigrants assimilated instantly and completely, while post-1965 immigrants have never adapted at all.',
+          'In both eras, immigrants were completely rejected and had no ability to build stable communities.'
+        ],
         correctAnswer: 'In both eras, newcomers built communities and adapted gradually rather than instantly abandoning old identities.',
-        explanation: 'Assimilation has usually been a process of negotiation, not a one-step replacement of one identity with another.',
+        explanation: 'Italian, Polish, and Jewish immigrants built ethnic neighborhoods, churches, newspapers, and mutual aid societies while gradually integrating; post-1965 Latino, Asian, and African immigrants followed similar patterns — building communities that maintained distinct identities while also participating in American life.',
         standard: 'SS.912.A.3.6 · SS.912.A.3.7 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C5-Q9',
-        text: 'Why is ‘belonging’ a larger idea than legal citizenship alone?',
-        choices: ['Because social acceptance, cultural identity, and political trust affect whether people are treated as fully American.', 'Because social acceptance, cultural identity, and political trust matter only when someone lacks legal status entirely.', 'Because social acceptance, cultural identity, and political trust are unrelated to immigration and national identity.', 'Because social acceptance, cultural identity, and political trust disappear once Congress changes a statute.'],
+        text: 'Why is "belonging" a larger idea than legal citizenship alone?',
+        choices: [
+          'Because social acceptance, cultural identity, and political trust affect whether people are treated as fully American.',
+          'Because belonging is purely a cultural matter with no connection to legal rights or political participation of any kind.',
+          'Because legal citizenship completely determines belonging and no other factors matter in practice.',
+          'Because belonging only matters to recent immigrants and has no relevance to native-born citizens.'
+        ],
         correctAnswer: 'Because social acceptance, cultural identity, and political trust affect whether people are treated as fully American.',
-        explanation: 'Law matters, but belonging also depends on how institutions and communities recognize or withhold full acceptance.',
+        explanation: 'Citizenship grants legal rights but not social trust, cultural acceptance, or equal treatment — Black Americans who were citizens faced Jim Crow; Japanese Americans who were citizens were interned; undocumented immigrants who have lived in the U.S. for decades raise questions about community belonging that citizenship law alone cannot answer.',
         standard: 'SS.912.A.3.6 · SS.912.A.7.17'
       },
       {
         id: 'BOP-C5-Q10',
-        text: 'What broad pattern best answers the chapter question ‘Who Gets Included?’',
-        choices: ['American inclusion expands over time, but belonging is repeatedly narrowed by fear, hierarchy, and legal exclusion.', 'American inclusion expands over time only because national identity stops mattering after immigration reform begins.', 'American inclusion expands over time mainly by removing federal authority from immigration and citizenship policy.', 'American inclusion expands over time while debates over race, religion, and nationality lose political importance.'],
+        text: 'What broad pattern best answers the chapter question "Who Gets Included?"',
+        choices: [
+          'American inclusion expands over time, but belonging is repeatedly narrowed by fear, hierarchy, and legal exclusion.',
+          'American inclusion expands permanently in every era with no meaningful narrowing or backlash at any point.',
+          'American inclusion depends entirely on economic conditions rather than on law, politics, culture, or any other factor.',
+          'American inclusion has always been fully universal because the Constitution grants equal rights to everyone.'
+        ],
         correctAnswer: 'American inclusion expands over time, but belonging is repeatedly narrowed by fear, hierarchy, and legal exclusion.',
-        explanation: 'The history of inclusion is real, but it is never automatic or complete, and it remains vulnerable to new forms of exclusion.',
+        explanation: 'From Chinese Exclusion through the 1924 quota act through Japanese internment through post-9/11 profiling, the pattern is that moments of fear, nativist pressure, or security anxiety repeatedly narrow the practical meaning of American belonging — even as formal law sometimes expands it.',
         standard: 'SS.912.A.3.6 · SS.912.A.3.7 · SS.912.A.6.4 · SS.912.A.7.15 · SS.912.A.7.17'
       },
     ]
   },
 
-  // ==================================================
-  // CUMULATIVE REVIEW — Power Synthesis
-  // ==================================================
+  // ── CUMULATIVE REVIEW ──────────────────────────────────────
   {
-    id: 'eoc',
-    label: 'CUMULATIVE REVIEW',
-    title: 'Power Synthesis',
-    sub: 'Cross-Era Review · Reconstruction through the Late 20th Century',
-    icon: '📋',
-    type: 'eoc',
+    id: 'eoc', label: 'CUMULATIVE REVIEW', title: 'Power Synthesis',
+    icon: '📋', type: 'eoc',
     briefing: {
-      location: 'Cross-Era Review',
+      location: 'Balance of Power — Full Campaign Review',
       date: 'Reconstruction through the Late 20th Century',
       role: 'Historical analyst',
-      text: 'You have completed all five chapters of the Balance of Power campaign. Now synthesize the full arc: how power has been held, contested, and redefined across American history. Expect cross-era comparison questions. Final content will be loaded from JSON.',
-      tags: ['Cross-Era Synthesis','Continuity and Change','Historical Reasoning']
+      text: 'You have completed all five chapters of the Balance of Power campaign. Now synthesize the full arc: how power has been held, contested, and redefined across American history. Expect cross-era comparison questions.',
+      tags: ['SS.912.A.2.5', 'SS.912.A.3.2', 'SS.912.A.3.4', 'SS.912.A.3.6', 'SS.912.A.4.6', 'SS.912.A.5.12', 'SS.912.A.6.4', 'SS.912.A.7.3', 'SS.912.A.7.15', 'SS.912.A.7.17']
     },
     displayCount: 15,
     goldRules: { perCorrect: 15, completionBonus: 50, highScoreBonus: 50 },
@@ -1437,203 +1651,328 @@ const LESSONS = [
     bank: [
       {
         id: 'THEME-EOC-Q01',
-        text: '[EOC PLACEHOLDER Q1]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'What recurring pattern connects how voting rights have expanded across American history?',
+        choices: [
+          'Federal action repeatedly overcame state and local exclusion when movements created enough political pressure.',
+          'Voting rights expanded automatically through market competition without any need for organized protest.',
+          'Each voting rights expansion was entirely unique with no connection to earlier or later civil rights struggles.',
+          'States always led voting rights expansion, with the federal government following state initiatives passively.'
+        ],
+        correctAnswer: 'Federal action repeatedly overcame state and local exclusion when movements created enough political pressure.',
+        explanation: 'Reconstruction amendments, the Nineteenth Amendment, and the VRA all follow the same pattern — organized movements created political pressure that overcame state-level resistance through federal constitutional or legislative action.',
+        standard: 'SS.912.A.2.5 · SS.912.A.3.10 · SS.912.A.7.3'
       },
       {
         id: 'THEME-EOC-Q02',
-        text: '[EOC PLACEHOLDER Q2]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Which statement best compares Gilded Age monopolies with modern corporate concentration?',
+        choices: [
+          'Both concentrated economic power, with later versions using more sophisticated legal and political tools.',
+          'Both reduced economic inequality by distributing corporate profits broadly among all workers and consumers.',
+          'Modern corporations actually have far less power than Gilded Age monopolies because of antitrust regulation.',
+          'Gilded Age monopolies were unique events with no meaningful connection to later economic concentration.'
+        ],
+        correctAnswer: 'Both concentrated economic power, with later versions using more sophisticated legal and political tools.',
+        explanation: 'Standard Oil used predatory pricing and secret railroad rebates; modern concentration uses lobbying, regulatory capture, acquisitions, and patent law — the economic power is equally real, just exercised through more institutionalized channels.',
+        standard: 'SS.912.A.3.4 · SS.912.A.7.17'
       },
       {
         id: 'THEME-EOC-Q03',
-        text: '[EOC PLACEHOLDER Q3]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'What is the strongest comparison between the New Deal and the Voting Rights Act as exercises of federal power?',
+        choices: [
+          'Both used federal authority to protect people from entrenched private or local power that had denied them real rights.',
+          'Both were temporary emergency measures that expired automatically once the immediate crisis was resolved.',
+          'The New Deal expanded federal power while the VRA actually reduced it by giving states complete control over elections.',
+          'Both were primarily economic measures with no connection to civil rights or political participation.'
+        ],
+        correctAnswer: 'Both used federal authority to protect people from entrenched private or local power that had denied them real rights.',
+        explanation: 'The New Deal used federal power against concentrated private economic power; the VRA used federal power against state and local governments denying political participation — both represent the same basic logic: when private or local power systematically denies rights, federal authority intervenes.',
+        standard: 'SS.912.A.5.12 · SS.912.A.7.3'
       },
       {
         id: 'THEME-EOC-Q04',
-        text: '[EOC PLACEHOLDER Q4]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Which pattern best describes how crises have shaped federal power across American history?',
+        choices: [
+          'Crises consistently expanded federal authority, with some rollback later but rarely to pre-crisis levels.',
+          'Crises consistently reduced federal authority as Americans rejected government intervention under pressure.',
+          'Each crisis produced a completely isolated federal response with no connection to earlier or later expansions.',
+          'Crises produced no lasting changes because all emergency powers were automatically repealed after each one.'
+        ],
+        correctAnswer: 'Crises consistently expanded federal authority, with some rollback later but rarely to pre-crisis levels.',
+        explanation: 'Civil War income tax and draft powers; New Deal agencies; WWII mobilization; Cold War security state; post-9/11 surveillance — each crisis ratcheted federal authority upward. Some powers were reduced afterward, but the baseline kept rising with each successive emergency.',
+        standard: 'SS.912.A.2.2 · SS.912.A.5.12 · SS.912.A.6.15 · SS.912.A.7.15'
       },
       {
         id: 'THEME-EOC-Q05',
-        text: '[EOC PLACEHOLDER Q5]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'What is the strongest comparison between Reconstruction\'s failure to protect Black rights and resistance to the Civil Rights movement?',
+        choices: [
+          'Both show that federal legal gains can be undermined when local power, violence, or political will fails to enforce them.',
+          'Both show that federal legal gains always succeed immediately because law automatically changes behavior.',
+          'Both show that the Supreme Court consistently expanded civil rights beyond what Congress intended.',
+          'Both show that local governments always comply immediately with federal civil rights requirements without any enforcement.'
+        ],
+        correctAnswer: 'Both show that federal legal gains can be undermined when local power, violence, or political will fails to enforce them.',
+        explanation: 'Reconstruction\'s constitutional gains were hollowed out by Redemption violence, Supreme Court narrowing, and northern political abandonment; Civil Rights legislation faced massive resistance, foot-dragging, and backlash — both demonstrate the gap between rights on paper and rights in practice.',
+        standard: 'SS.912.A.2.5 · SS.912.A.7.3'
       },
       {
         id: 'THEME-EOC-Q06',
-        text: '[EOC PLACEHOLDER Q6]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'How did Progressive Era regulation and New Deal regulation most clearly compare?',
+        choices: [
+          'Progressives attacked concentrated corporate power through antitrust; the New Deal focused more on economic stabilization and labor rights.',
+          'Both were identical in scope and philosophy, differing only in the specific industries they targeted.',
+          'Progressive regulation was far more comprehensive and ambitious than the New Deal, which actually reduced federal oversight of industries.. consistently.',
+          'The New Deal replaced all Progressive Era regulation with more effective market-based alternatives.'
+        ],
+        correctAnswer: 'Progressives attacked concentrated corporate power through antitrust; the New Deal focused more on economic stabilization and labor rights.',
+        explanation: 'TR\'s trust-busting and Wilson\'s FTC focused on preventing monopoly power; the New Deal\'s Wagner Act, Social Security, and banking regulation focused on managing the consequences of economic collapse and protecting workers and consumers — both expanded federal power but with different targets.',
+        standard: 'SS.912.A.3.9 · SS.912.A.5.12'
       },
       {
         id: 'THEME-EOC-Q07',
-        text: '[EOC PLACEHOLDER Q7]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Which evidence best supports the claim that belonging in America has been contested through both law and fear?',
+        choices: [
+          'The Chinese Exclusion Act, the 1924 quota system, and Japanese internment all used law or fear to narrow who belongs.',
+          'These policies all actually expanded belonging by clarifying precisely who was legally entitled to American citizenship.',
+          'Only fear — not law — has ever shaped belonging, as courts always struck down discriminatory legislation.',
+          'Only law — not fear — has shaped belonging, as public opinion has always supported full inclusion.'
+        ],
+        correctAnswer: 'The Chinese Exclusion Act, the 1924 quota system, and Japanese internment all used law or fear to narrow who belongs.',
+        explanation: 'Chinese Exclusion was enacted by law; the 1924 quota system was law designed to preserve ethnic ratios; internment was an executive order driven by wartime fear — all three demonstrate that exclusion operates through both formal legal mechanisms and fear-based emergency powers.',
+        standard: 'SS.912.A.3.6 · SS.912.A.6.4 · SS.912.A.7.15'
       },
       {
         id: 'THEME-EOC-Q08',
-        text: '[EOC PLACEHOLDER Q8]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'What broad pattern connects civil liberties debates from World War I through the post-9/11 era?',
+        choices: [
+          'Crises repeatedly made restrictions on liberty seem justified, while defenders of rights argued against each expansion.',
+          'Civil liberties expanded consistently during every crisis as courts reliably and fully protected all constitutional rights.',
+          'Each crisis was entirely unique, with no recurring tension between security and constitutional protections.',
+          'Civil liberties restrictions during crisis were always immediately reversed once the emergency passed.'
+        ],
+        correctAnswer: 'Crises repeatedly made restrictions on liberty seem justified, while defenders of rights argued against each expansion.',
+        explanation: 'Espionage Act → ACLU challenges; internment → Korematsu dissents; McCarthyism → Senate censure and later reform; PATRIOT Act → civil liberties litigation — in every era, government expanded security powers and defenders of liberty argued against the expansion, creating a recurring constitutional tension.',
+        standard: 'SS.912.A.4.6 · SS.912.A.6.15 · SS.912.A.7.15'
       },
       {
         id: 'THEME-EOC-Q09',
-        text: '[EOC PLACEHOLDER Q9]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Which statement best captures how economic power and political power have interacted across American history?',
+        choices: [
+          'Economic concentration often produces political influence, but reform movements and government action have sometimes rebalanced it.',
+          'Economic and political power are entirely separate and have never significantly influenced each other.',
+          'Political power has always completely dominated economic power, with business having no influence over policy.',
+          'Economic concentration consistently reduces political influence because wealthy groups consistently disengage from politics entirely.'
+        ],
+        correctAnswer: 'Economic concentration often produces political influence, but reform movements and government action have sometimes rebalanced it.',
+        explanation: 'Gilded Age robber barons bought Senate seats; Progressive Era antitrust and later New Deal regulation pushed back; Reagan-era deregulation reflected business political influence reasserting itself — the relationship between economic and political power is a recurring contest, not a settled hierarchy.',
+        standard: 'SS.912.A.3.4 · SS.912.A.3.9 · SS.912.A.5.12'
       },
       {
         id: 'THEME-EOC-Q10',
-        text: '[EOC PLACEHOLDER Q10]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'What is the strongest comparison between women\'s suffrage activism and the Civil Rights movement?',
+        choices: [
+          'Both translated organized protest into federal legal changes that expanded democratic participation.',
+          'Both immediately achieved complete equality without any subsequent backlash or limitation.',
+          'Both relied exclusively on litigation rather than any form of public protest or political organizing.',
+          'Both were successful mainly because existing law already required the changes they were demanding.'
+        ],
+        correctAnswer: 'Both translated organized protest into federal legal changes that expanded democratic participation.',
+        explanation: 'Decades of suffrage organizing produced the Nineteenth Amendment; years of civil rights activism produced the Civil Rights Act and VRA — both demonstrate that sustained, organized protest can translate moral claims and political pressure into structural legal changes that reshape democratic participation.',
+        standard: 'SS.912.A.3.10 · SS.912.A.7.3'
       },
       {
         id: 'THEME-EOC-Q11',
-        text: '[EOC PLACEHOLDER Q11]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'What recurring pattern connects backlash movements across American history?',
+        choices: [
+          'Expansions of rights or inclusion consistently trigger organized resistance from those who feel threatened by change.',
+          'Backlash movements always succeed in completely and permanently reversing every reform within five years of its initial passage.',
+          'Backlash movements only appear when courts impose changes without any legislative or popular support.',
+          'Backlash is always marginal and fringe, with no ability to shape mainstream political outcomes.'
+        ],
+        correctAnswer: 'Expansions of rights or inclusion consistently trigger organized resistance from those who feel threatened by change.',
+        explanation: 'Redemption after Reconstruction; Jim Crow after the 14th Amendment; massive resistance after Brown; anti-ERA after second-wave feminism; anti-affirmative action after the civil rights era — each expansion of equality or inclusion produced organized resistance from those who saw their relative power or status threatened.',
+        standard: 'SS.912.A.2.6 · SS.912.A.7.3 · SS.912.A.7.17'
       },
       {
         id: 'THEME-EOC-Q12',
-        text: '[EOC PLACEHOLDER Q12]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Which development best illustrates how the same institution can both expand and narrow liberty depending on who controls it?',
+        choices: [
+          'The federal government suppressing strikes in the 1890s, then protecting union rights under the New Deal.',
+          'Congress passing immigration law in 1924, which expanded the rights of all immigrants equally.',
+          'The Supreme Court ruling in Brown v. Board, which immediately ended all school segregation nationwide.',
+          'State governments consistently expanding voting rights faster than the federal government in every era of American history.'
+        ],
+        correctAnswer: 'The federal government suppressing strikes in the 1890s, then protecting union rights under the New Deal.',
+        explanation: 'Federal troops crushing the Pullman Strike and courts issuing labor injunctions in 1894; the Wagner Act protecting collective bargaining in 1935 — the same federal power was used to suppress workers and then to protect them, demonstrating that institutions are tools whose effects depend on who wields them and toward what ends.',
+        standard: 'SS.912.A.3.2 · SS.912.A.5.12'
       },
       {
         id: 'THEME-EOC-Q13',
-        text: '[EOC PLACEHOLDER Q13]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'How did Japanese American incarceration most clearly compare with McCarthyism as exercises of government power?',
+        choices: [
+          'Both used security fears to narrow the rights of groups defined by identity rather than by individual evidence.',
+          'Both were unanimously supported by Congress, the courts, and the public throughout the entire period.',
+          'Both targeted only foreign nationals and had no effect on any American citizens or their rights.',
+          'Both were quickly and unanimously reversed by the Supreme Court before causing any significant harm to the groups targeted.'
+        ],
+        correctAnswer: 'Both used security fears to narrow the rights of groups defined by identity rather than by individual evidence.',
+        explanation: 'Japanese Americans were incarcerated based on ancestry; McCarthy targeted people based on political beliefs or associations — both treated group identity rather than individual behavior as the basis for suspicion, demonstrating how security fear can suspend the normal requirement of individualized proof.',
+        standard: 'SS.912.A.6.4 · SS.912.A.6.15 · SS.912.A.7.15'
       },
       {
         id: 'THEME-EOC-Q14',
-        text: '[EOC PLACEHOLDER Q14]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'What is the strongest comparison between the War Powers Act (1973) and the post-WWII debate over whether to join international organizations?',
+        choices: [
+          'Both reflected congressional desire to limit the executive\'s ability to commit the nation without legislative approval.',
+          'Both expanded executive power by eliminating all congressional oversight of foreign and military policy.',
+          'Both were primarily driven by economic concerns about the cost of military commitments abroad.',
+          'Both showed that Americans consistently support giving presidents unlimited authority in foreign affairs.'
+        ],
+        correctAnswer: 'Both reflected congressional desire to limit the executive\'s ability to commit the nation without legislative approval.',
+        explanation: 'Senate rejection of the League reflected fear of open-ended international commitments; the War Powers Act reflected concern about presidents waging undeclared war — both were assertions of congressional authority against executive overreach in foreign policy.',
+        standard: 'SS.912.A.7.16'
       },
       {
         id: 'THEME-EOC-Q15',
-        text: '[EOC PLACEHOLDER Q15]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Which evidence best supports the claim that immigration policy has been one of the most contested sites of American power?',
+        choices: [
+          'From Chinese Exclusion through the 1924 quotas through the 1965 Act, the nation kept reshaping who could enter and belong.',
+          'Immigration policy has always been uniformly and consistently open and welcoming with no significant restrictions in any era.',
+          'Immigration policy has always been uniformly restrictive and has never expanded inclusion in any era.',
+          'Immigration policy has been settled by the courts and requires no ongoing political or legislative attention.'
+        ],
+        correctAnswer: 'From Chinese Exclusion through the 1924 quotas through the 1965 Act, the nation kept reshaping who could enter and belong.',
+        explanation: 'Chinese Exclusion (1882) → Emergency Quota Act (1921) → Immigration Act (1924) → Hart-Celler Act (1965) → ongoing debates over undocumented immigration — the repeated reshaping of immigration law across very different ideological frameworks shows that who can enter and belong is never finally settled.',
+        standard: 'SS.912.A.3.6 · SS.912.A.7.17'
       },
       {
         id: 'THEME-EOC-Q16',
-        text: '[EOC PLACEHOLDER Q16]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'What does the history of Black political power — from Reconstruction through Jim Crow through the VRA — reveal about democracy?',
+        choices: [
+          'Democracy can be formally established and then practically dismantled, requiring ongoing struggle to maintain.',
+          'Democracy once established is permanent and self-sustaining without any need for continued political effort.',
+          'Democracy is primarily a legal concept with no connection to whether citizens can actually exercise political rights.',
+          'Democracy expands naturally over time without political action because constitutional ideals are self-enforcing.'
+        ],
+        correctAnswer: 'Democracy can be formally established and then practically dismantled, requiring ongoing struggle to maintain.',
+        explanation: 'The Fifteenth Amendment guaranteed voting rights in 1870; Jim Crow had effectively eliminated Black political participation by 1900; the VRA was needed to restore it in 1965 — three constitutional moments spanning a century reveal that democratic rights require active defense and enforcement, not just formal enactment.',
+        standard: 'SS.912.A.2.5 · SS.912.A.2.6 · SS.912.A.7.3'
       },
       {
         id: 'THEME-EOC-Q17',
-        text: '[EOC PLACEHOLDER Q17]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Which statement best captures continuity across all five chapters of the Balance of Power campaign?',
+        choices: [
+          'Power in America has repeatedly been contested, with excluded groups challenging those who hold it.',
+          'Power in America has been perfectly balanced throughout history with no significant inequalities persisting.',
+          'Power in America has been held exclusively by government, with private economic power playing no role.',
+          'Power in America has expanded consistently and peacefully without any backlash or resistance.'
+        ],
+        correctAnswer: 'Power in America has repeatedly been contested, with excluded groups challenging those who hold it.',
+        explanation: 'Workers challenged capital; Black Americans challenged Jim Crow; women challenged exclusion; immigrants challenged nativism; civil libertarians challenged security-state overreach — across all five chapters, the thread is the same: power concentrates, and those excluded from it contest that concentration.',
+        standard: 'SS.912.A.2.5 · SS.912.A.3.2 · SS.912.A.7.3 · SS.912.A.7.17'
       },
       {
         id: 'THEME-EOC-Q18',
-        text: '[EOC PLACEHOLDER Q18]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Which development best shows how one crisis can produce lasting institutional changes that shape future crises?',
+        choices: [
+          'The Cold War security state built institutions that were then used to respond to post-9/11 terrorism.',
+          'Each crisis has always required completely new institutions built from scratch without any inherited structures.',
+          'Crisis institutions have never outlasted their original emergency because Congress dismantles them immediately.',
+          'WWII mobilization institutions were all dissolved within one year of the armistice without exception.'
+        ],
+        correctAnswer: 'The Cold War security state built institutions that were then used to respond to post-9/11 terrorism.',
+        explanation: 'The CIA, NSA, and military-intelligence apparatus built for Cold War competition were expanded and redirected after 9/11 rather than replaced — demonstrating that crisis institutions accumulate and shape how future crises are perceived and managed.',
+        standard: 'SS.912.A.6.15 · SS.912.A.7.15'
       },
       {
         id: 'THEME-EOC-Q19',
-        text: '[EOC PLACEHOLDER Q19]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Why do reform movements often face pushback even after winning major legal victories?',
+        choices: [
+          'Because entrenched interests use legal, political, and cultural tools to slow or reverse the practical impact of reform.',
+          'Because reform victories automatically satisfy all parties involved and permanently eliminate further political conflict.',
+          'Because courts always strike down reform legislation within five years of passage as unconstitutional.',
+          'Because reform movements consistently lose all political support immediately after achieving legal victories.'
+        ],
+        correctAnswer: 'Because entrenched interests use legal, political, and cultural tools to slow or reverse the practical impact of reform.',
+        explanation: 'Plantation owners used Black Codes after emancipation; segregationists used massive resistance after Brown; business interests used lobbying and deregulation after the New Deal; anti-civil-rights groups used courts to narrow affirmative action — reform creates a new landscape in which opponents reorganize.',
+        standard: 'SS.912.A.2.6 · SS.912.A.7.3 · SS.912.A.7.17'
       },
       {
         id: 'THEME-EOC-Q20',
-        text: '[EOC PLACEHOLDER Q20]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'What is the strongest comparison between abolitionism and the labor movement as challenges to concentrated power?',
+        choices: [
+          'Both challenged systems that denied full humanity and autonomy to people with little power over their conditions.',
+          'Both focused primarily on electoral politics rather than on the direct economic or social conditions they opposed.',
+          'Both were quickly and completely successful in eliminating the systems they challenged without lasting resistance.',
+          'Both relied exclusively on moral persuasion without any use of organized protest, strikes, or legal challenges.'
+        ],
+        correctAnswer: 'Both challenged systems that denied full humanity and autonomy to people with little power over their conditions.',
+        explanation: 'Abolitionism challenged the slave system that treated humans as property and denied them any autonomy; labor activism challenged wage systems that treated workers as inputs to be exploited without dignity, safety, or bargaining power — both argued that concentrated power over others\' lives required reform.',
+        standard: 'SS.912.A.2.1 · SS.912.A.3.2'
       },
       {
         id: 'THEME-EOC-Q21',
-        text: '[EOC PLACEHOLDER Q21]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Which pattern best explains why belonging in America has been so persistently contested?',
+        choices: [
+          'Because defining who belongs determines who gets rights, resources, and political voice — making it always worth fighting over.',
+          'Because belonging is a purely cultural matter that has no connection to law, economics, or political power.',
+          'Because belonging has been contested only in immigration debates and is otherwise completely uncontested in all other American life.',
+          'Because belonging was fully resolved by the Fourteenth Amendment and requires no further political attention.'
+        ],
+        correctAnswer: 'Because defining who belongs determines who gets rights, resources, and political voice — making it always worth fighting over.',
+        explanation: 'Whether defined through citizenship rules, immigration law, racial classification, or cultural acceptance, belonging determines access to legal protection, economic opportunity, and political participation — making it one of the highest-stakes questions in American political life.',
+        standard: 'SS.912.A.2.5 · SS.912.A.3.6 · SS.912.A.7.17'
       },
       {
         id: 'THEME-EOC-Q22',
-        text: '[EOC PLACEHOLDER Q22]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'How did the deregulation of the late twentieth century most clearly compare with the Gilded Age laissez-faire period?',
+        choices: [
+          'Both reflected ideological arguments that markets produce better outcomes than government regulation.',
+          'Both were driven by labor unions seeking to eliminate government interference in collective bargaining.',
+          'Both produced immediate economic collapse that required a massive New Deal-style government response.',
+          'Both were policies imposed by courts rather than by elected legislators or executive branch officials.'
+        ],
+        correctAnswer: 'Both reflected ideological arguments that markets produce better outcomes than government regulation.',
+        explanation: 'Gilded Age laissez-faire rested on Social Darwinism and property rights absolutism; Reagan-era supply-side economics rested on monetarist and public-choice theory — different intellectual frameworks, but both argued that government intervention distorts markets and should be minimized.',
+        standard: 'SS.912.A.3.9 · SS.912.A.7.17'
       },
       {
         id: 'THEME-EOC-Q23',
-        text: '[EOC PLACEHOLDER Q23]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'What does the role of the federal government in this game suggest about the relationship between power and protection?',
+        choices: [
+          'Federal power has been used to both protect and deny rights, showing it is a tool whose effects depend on who wields it.',
+          'Federal power has always protected rights and never been used to deny or restrict them in any era.',
+          'Federal power has always denied rights and never protected them regardless of who controlled the government at any point.',
+          'Federal power is irrelevant to rights because courts alone determine what protections citizens receive.'
+        ],
+        correctAnswer: 'Federal power has been used to both protect and deny rights, showing it is a tool whose effects depend on who wields it.',
+        explanation: 'Federal troops crushed strikes in 1894 and enforced school desegregation in 1957; federal law created Japanese internment and the VRA — the same federal power capacity has been directed at suppression and protection in different eras, demonstrating that government is a tool whose effects depend on political context.',
+        standard: 'SS.912.A.2.5 · SS.912.A.5.12 · SS.912.A.7.3'
       },
       {
         id: 'THEME-EOC-Q24',
-        text: '[EOC PLACEHOLDER Q24]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Which statement best summarizes the overall story of the Balance of Power campaign?',
+        choices: [
+          'Power in America is never permanently settled — it is continuously contested by those who hold it and those who challenge it.',
+          'Power in America has been perfectly and equally distributed throughout all of history with no significant concentrations or inequalities.',
+          'Power in America flows only downward from government to citizens, with no upward challenges ever succeeding.',
+          'Power in America was permanently settled by the Constitution and has required no further political contest.'
+        ],
+        correctAnswer: 'Power in America is never permanently settled — it is continuously contested by those who hold it and those who challenge it.',
+        explanation: 'From Reconstruction through the Gilded Age through civil rights through the modern era, power has been held, challenged, redistributed, and reconcentrated — the game\'s through-line is that democratic power requires ongoing contest, not a single settlement that holds forever.',
+        standard: 'SS.912.A.2.5 · SS.912.A.3.4 · SS.912.A.7.3 · SS.912.A.7.17'
       },
       {
         id: 'THEME-EOC-Q25',
-        text: '[EOC PLACEHOLDER Q25]',
-        choices: ['[A]','[B]','[C]','[D]'],
-        correctAnswer: '[A]',
-        explanation: '[F]',
-        standard: 'SS.912.A'
+        text: 'Which single question most clearly ties together all five chapters of the Balance of Power campaign?',
+        choices: [
+          'Who decides who gets to participate, benefit, and belong — and how does that change when power is challenged?',
+          'Which specific battles and military campaigns most shaped the geographic boundaries of the United States?',
+          'How many constitutional amendments have been passed and which ones were most controversial to ratify?',
+          'What were the exact economic statistics comparing wages, prices, and productivity across different historical eras?'
+        ],
+        correctAnswer: 'Who decides who gets to participate, benefit, and belong — and how does that change when power is challenged?',
+        explanation: 'All five chapters — who votes, who controls wealth, who sets the rules in crisis, who defines equality, who belongs — are variations of this central question about the distribution of power and the contests that reshape it across American history.',
+        standard: 'SS.912.A.2.5 · SS.912.A.3.2 · SS.912.A.5.12 · SS.912.A.7.3 · SS.912.A.7.17'
       },
     ]
   },
@@ -2726,9 +3065,9 @@ const HIST_CARDS = {
   mlk:         {icon:'✊', name:'Martin Luther King Jr.',    role:'Civil Rights Leader',
     desc:'Demonstrated that nonviolent mass movements could force a democratic government to confront its contradictions. His campaigns showed how citizens could leverage the gap between American ideals and American reality.', unlockLesson:'ch5'},
   nixon:       {icon:'📼', name:'Richard Nixon',             role:'37th President · Watergate',
-    desc:'His presidency showed both the expansion and the abuse of executive power. Détente, SALT, and the EPA expanded government’s reach; Watergate proved that even presidents must answer to constitutional limits.', unlockLesson:'ch5'},
+    desc:'His presidency showed both the expansion and the abuse of executive power. Détente, SALT, and the EPA expanded government\'s reach; Watergate proved that even presidents must answer to constitutional limits.', unlockLesson:'ch5'},
   reagan:      {icon:'🇺🇸', name:'Ronald Reagan',            role:'40th President · Conservative Revolution',
-    desc:'Led a deliberate rollback of New Deal-era assumptions about government’s role. His revolution shifted the center of political gravity rightward and redefined what it meant to be powerful in American politics.', unlockLesson:'eoc'},
+    desc:'Led a deliberate rollback of New Deal-era assumptions about government\'s role. His revolution shifted the center of political gravity rightward and redefined what it meant to be powerful in American politics.', unlockLesson:'eoc'},
 };
 
 const UNIT_BADGES = [
