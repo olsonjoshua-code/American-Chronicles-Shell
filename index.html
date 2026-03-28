@@ -2110,13 +2110,12 @@ function renderTimeline(){
         :`<div class="unit-card-status-row"><div class="unit-status us-play">▶ Play Now</div></div>`;
       const tRow=_trophyData.find(r=>r.unit_id===u.id);
       const tTier=tRow?calcTier(tRow.best_accuracy):'empty';
-      const trophyBadge=(tTier!=='empty')?`<div style="text-align:center;padding:3px 0 2px;font-size:13px;line-height:1" title="${TIER_LABEL[tTier]}">${TIER_EMOJI[tTier]}</div>`:'';
+      const trophyBadge=(tTier!=='empty')?`<div style="position:absolute;bottom:5px;right:6px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,.8))" title="${TIER_LABEL[tTier]}">${TIER_EMOJI[tTier]}</div>`:'';
       card.innerHTML=`<div class="unit-card-strip" style="background:${u.eraColor}"></div>
         <div class="unit-card-art"><div class="unit-card-icon">${u.icon}</div><div class="unit-card-year">${u.years.split('–')[0]}</div></div>
         <div class="unit-card-body"><div class="unit-card-num">${u.num}</div><div class="unit-card-title">${u.title}</div>
-        ${statusBadge}</div>
-        <div class="unit-card-prog"><div class="unit-card-prog-fill" style="width:${st==='done'?100:0}%"></div></div>
-        ${trophyBadge}`;
+        ${statusBadge}${trophyBadge}</div>
+        <div class="unit-card-prog"><div class="unit-card-prog-fill" style="width:${st==='done'?100:0}%"></div></div>`;
       inner.appendChild(card);if(st==='done')doneX=x+NW;x+=NW;
     });
     eraSegs.push({name:era.name,years:era.years,startX:eraStartX,endX:x,color:era.color});x+=20;
