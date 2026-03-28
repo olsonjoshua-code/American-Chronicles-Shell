@@ -46,7 +46,7 @@ body::before{content:'';position:fixed;inset:0;
   pointer-events:none;z-index:9999;}
 
 /* ── ROOT / LAYOUT ── */
-#root{max-width:640px;margin:0 auto;padding:0 16px 100px;min-height:100vh;position:relative;z-index:1;}
+#root{max-width:860px;margin:0 auto;padding:0 24px 100px;min-height:100vh;position:relative;z-index:1;}
 /* When HUD is visible, push content down so it isn't hidden behind the fixed bar */
 body.hud-active #root{padding-top:68px;}
 
@@ -86,7 +86,7 @@ body.hud-active #root{padding-top:68px;}
   border-bottom:1px solid var(--border2);border-left:1px solid var(--border2);border-right:1px solid var(--border2);
   padding:10px 14px;
   position:fixed;top:0;left:50%;transform:translateX(-50%);
-  width:100%;max-width:640px;
+  width:100%;max-width:860px;
   z-index:200;backdrop-filter:blur(12px);
   display:none;}
 .hud-inner{display:flex;align-items:center;gap:12px;}
@@ -170,7 +170,7 @@ body.hud-active #root{padding-top:68px;}
 #briefing-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);
   z-index:500;overflow-y:auto;padding:20px 16px 60px;}
 #briefing-modal.show{display:block;animation:fadeIn .3s ease;}
-.briefing-inner{max-width:560px;margin:0 auto;}
+.briefing-inner{max-width:760px;margin:0 auto;}
 .briefing-header{display:flex;align-items:flex-start;justify-content:space-between;
   gap:10px;margin-bottom:20px;padding-top:10px;}
 .briefing-eyebrow{font-family:var(--bebas);font-size:10px;color:var(--text3);
@@ -221,16 +221,16 @@ body.hud-active #root{padding-top:68px;}
 
 /* THE QUESTION — primary visual weight */
 .q-block{background:var(--bg2);border:1px solid var(--border2);
-  border-left:3px solid var(--gold);padding:20px 18px;margin-bottom:18px;}
+  border-left:3px solid var(--gold);padding:24px 22px;margin-bottom:18px;}
 .q-number{font-family:var(--bebas);font-size:10px;color:var(--text3);
   letter-spacing:3px;margin-bottom:8px;}
-.q-text{font-family:var(--playfair);font-size:clamp(15px,2.8vw,18px);
-  color:var(--cream);line-height:1.55;}
+.q-text{font-family:var(--playfair);font-size:clamp(16px,2.4vw,20px);
+  color:var(--cream);line-height:1.6;}
 
 /* Answer choices */
-.choices-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.choices-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
 .choice-btn{display:block;width:100%;background:var(--bg2);border:1px solid var(--border2);
-  color:var(--text);padding:14px 16px;cursor:pointer;text-align:left;
+  color:var(--text);padding:16px 20px;cursor:pointer;text-align:left;
   transition:all .2s;position:relative;overflow:hidden;}
 .choice-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
   background:var(--gold);transform:scaleY(0);transition:transform .2s;pointer-events:none;}
@@ -241,9 +241,9 @@ body.hud-active #root{padding-top:68px;}
 .choice-btn.incorrect{border-color:var(--red2)!important;background:rgba(128,16,16,.06)!important;opacity:.6;}
 .choice-btn.incorrect::before{background:var(--red2)!important;transform:scaleY(1)!important;}
 .choice-btn.answered{cursor:default;}
-.choice-letter{font-family:var(--bebas);font-size:13px;color:var(--gold2);
-  margin-right:10px;display:inline-block;width:20px;}
-.choice-text{font-family:var(--crimson);font-size:16px;line-height:1.4;}
+.choice-letter{font-family:var(--bebas);font-size:14px;color:var(--gold2);
+  margin-right:12px;display:inline-block;width:20px;}
+.choice-text{font-family:var(--crimson);font-size:17px;line-height:1.5;}
 
 /* Feedback */
 .feedback-panel{display:none;border-left:3px solid var(--gold);
@@ -894,9 +894,9 @@ const AC_HEADERS  = {'Content-Type':'application/json','apikey':AC_SUPA_KEY,'Aut
 
 const LESSONS = [
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // LESSON 38 — A World Divided
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'lesson38',
     label: 'LESSON 38',
@@ -905,106 +905,152 @@ const LESSONS = [
     icon: '🌍',
     type: 'lesson',
     briefing: {
-      location: 'Washington, D.C. and Europe',
+      location: 'Washington D.C. and Europe',
       date: '1945–1949',
-      role: 'State Department aide',
+      role: 'diplomatic analyst',
       text: 'World War II has ended, but the alliance that defeated Hitler is breaking apart. At Yalta and Potsdam, American and Soviet leaders clashed over the future of Germany and Eastern Europe. As communist influence spreads and Britain can no longer support Greece and Turkey, U.S. officials are debating whether America must take the lead in containing Soviet expansion.',
-      tags: ['yalta-potsdam', 'greece-turkey', 'marshall-plan', 'iron-curtain', 'comparison', 'soviet-security']
+      tags: ['SS.912.A.6']
     },
     displayCount: 5,
-    goldRules: {
-      perCorrect: 20,
-      completionBonus: 25,
-      perfectBonus: 25
-    },
-    rewards: { badge: 'Iron Curtain', cards: ['Harry Truman', 'George Kennan'] },
+    goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
+    rewards: { badge: 'A World Divided', cards: ['Iron Curtain', 'Marshall Plan'] },
     bank: [
       {
         id: '5B-L38-Q1',
         text: 'Why did tensions between the United States and the Soviet Union grow sharper after the Yalta and Potsdam conferences?',
-        choices: ['The two nations disagreed over Eastern Europe, Germany, and whether free elections would actually take place after the war.', 'The two nations mainly argued about dividing Japan, while Europe had already been peacefully settled by both sides.', 'The two nations immediately agreed on postwar boundaries, but both worried that Britain would reject the final settlement.', 'The two nations were united on Poland and Germany, yet conflict grew because France demanded a larger occupation zone.'],
+        choices: [
+          'The two nations disagreed over Eastern Europe, Germany, and whether free elections would actually take place after the war.',
+          'Truman and Stalin had a personal quarrel at Potsdam that made any future diplomatic cooperation impossible.',
+          'The United States wanted to immediately demobilize all Allied forces while the Soviet Union insisted on keeping them mobilized.',
+          'Both sides agreed on the peace terms but disagreed about whether to put German war criminals on trial.'
+        ],
         correctAnswer: 'The two nations disagreed over Eastern Europe, Germany, and whether free elections would actually take place after the war.',
-        explanation: 'At Yalta and Potsdam, the wartime alliance began to erode as Truman and Stalin envisioned very different futures for Eastern Europe and Germany. Stalin wanted a Soviet buffer zone, while Truman favored self-government and free elections.',
+        explanation: 'At Yalta, Roosevelt accepted vague promises about free elections that Stalin had no intention of honoring — and at Potsdam, Truman found that Soviet-controlled governments were already being installed across Eastern Europe.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L38-Q2',
         text: 'Why did Stalin insist on maintaining Soviet influence over Eastern Europe after World War II?',
-        choices: ['He believed friendly governments on the Soviet border would help protect the USSR from future invasions through the region.', 'He wanted Eastern Europe mainly as a market for Soviet luxury goods and as a testing ground for industrial reforms.', 'He hoped Western Europe would invite the USSR into a shared military alliance that included democratic and communist states.', 'He expected Eastern Europe to become neutral territory where both the United States and the USSR would reduce troop levels.'],
-        correctAnswer: 'He believed friendly governments on the Soviet border would help protect the USSR from future invasions through the region.',
-        explanation: 'Stalin saw Eastern Europe as a security buffer. Germany had invaded the Soviet Union through that region, so he wanted communist governments on the USSR’s western border.',
+        choices: [
+          'He believed friendly buffer states on his western border were necessary to prevent future invasions of Soviet territory.',
+          'Stalin wanted Eastern Europe mainly as a source of raw materials and industrial workers to rebuild the Soviet economy.',
+          'Soviet ideology required the liberation of all European working classes, and Stalin was fulfilling a historical obligation.',
+          'Eastern European nations had requested Soviet protection after their own governments proved corrupt and unstable after the war.'
+        ],
+        correctAnswer: 'He believed friendly buffer states on his western border were necessary to prevent future invasions of Soviet territory.',
+        explanation: 'Russia had been invaded from the west three times in living memory — Napoleon, World War I, and Hitler. Stalin saw a ring of Soviet-controlled states as an essential defensive buffer against future attack.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L38-Q3',
-        text: 'What did Winston Churchill mean when he warned that an \'iron curtain\' had descended across Europe?',
-        choices: ['He meant that Soviet-controlled governments were isolating Eastern Europe from the democratic nations to the west.', 'He meant that the United Nations had created a formal trade barrier separating wartime allies until Germany paid reparations.', 'He meant that Western Europe had decided to isolate itself from Soviet trade until Poland regained complete independence.', 'He meant that Britain planned to establish a naval blockade in the Baltic and Adriatic to contain Soviet expansion.'],
+        text: 'What did Winston Churchill mean when he warned that an "iron curtain" had descended across Europe?',
+        choices: [
+          'He meant that Soviet-controlled governments were isolating Eastern Europe from the democratic nations to the west.',
+          'Churchill was warning that Britain had built physical border fortifications to keep Soviet spies from crossing westward.',
+          'The phrase referred to the literal steel fences and walls the Soviets were constructing along their new borders.',
+          'He was describing a cultural divide between the industrialized West and the agricultural societies of Eastern Europe.'
+        ],
         correctAnswer: 'He meant that Soviet-controlled governments were isolating Eastern Europe from the democratic nations to the west.',
-        explanation: 'Churchill used the phrase to describe the growing political and ideological barrier between East and West as Stalin tightened control over Eastern Europe.',
+        explanation: 'Churchill\'s 1946 Fulton, Missouri speech used the "iron curtain" metaphor to describe how Soviet-imposed regimes had cut Eastern European peoples off from free contact with Western democratic societies.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L38-Q4',
         text: 'Why did developments in Greece and Turkey help push the United States toward a policy of containment in 1947?',
-        choices: ['Britain could no longer support them, and U.S. leaders feared communist gains there would encourage further Soviet expansion.', 'Britain asked the United States to annex both countries temporarily, and Congress saw this as a chance to expand democracy.', 'The Soviet Union had already occupied both countries directly, forcing Truman to choose between war and complete withdrawal.', 'American officials wanted control of their colonies overseas, and Greece and Turkey offered valuable access to Asian markets.'],
+        choices: [
+          'Britain could no longer support either nation financially, and U.S. leaders feared that communist gains in both countries would signal weakness and encourage further Soviet expansion elsewhere.',
+          'Greece and Turkey had requested membership in NATO, which required a formal commitment of American military forces.',
+          'Both nations had elected communist governments, and the United States wanted to reverse those electoral outcomes.',
+          'A Soviet military attack on Greece had already begun, forcing the United States to respond with direct military aid.'
+        ],
         correctAnswer: 'Britain could no longer support them, and U.S. leaders feared communist gains there would encourage further Soviet expansion.',
-        explanation: 'When Britain said it could no longer aid Greece and Turkey, Truman feared communist success there would widen Soviet influence and threaten the region.',
+        explanation: 'Britain\'s economic exhaustion forced a sudden withdrawal of aid, and with communist insurgency threatening Greece and Soviet pressure on Turkey, Truman concluded the United States had to step into the vacuum.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L38-Q5',
         text: 'What was the central idea of the Truman Doctrine?',
-        choices: ['The United States should support free peoples resisting takeover by armed minorities or outside pressure.', 'The United States should withdraw from Europe and let the United Nations settle regional conflicts without intervention.', 'The United States should respond to communist movements only with trade sanctions and avoid military or financial aid.', 'The United States should divide Germany permanently and place all disputed regions under temporary Allied occupation.'],
+        choices: [
+          'The United States should support free peoples resisting takeover by armed minorities or outside pressure.',
+          'America had a duty to liberate any nation that had already fallen under communist rule anywhere in the world.',
+          'Military alliances with European nations were the primary tool for preventing Soviet expansion westward.',
+          'Economic aid to war-damaged nations was the most important way to prevent communism from spreading globally.'
+        ],
         correctAnswer: 'The United States should support free peoples resisting takeover by armed minorities or outside pressure.',
-        explanation: 'Truman argued that the United States had a duty to support free peoples resisting subjugation, beginning with Greece and Turkey.',
+        explanation: 'Truman\'s March 1947 speech to Congress established an open-ended commitment to support nations threatened by communist takeover — marking a decisive shift away from American isolationism.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L38-Q6',
         text: 'Which statement best explains the broader goal of containment in the early Cold War?',
-        choices: ['It aimed to prevent communism from spreading into additional countries without trying to roll it back everywhere by force.', 'It aimed to overthrow every communist government at once through direct invasion before Soviet power could expand further.', 'It aimed to ignore political struggles overseas and focus only on rebuilding American industry after the war had ended.', 'It aimed to replace the United Nations with a military alliance that could govern Europe during its economic recovery.'],
+        choices: [
+          'It aimed to prevent communism from spreading into additional countries without trying to roll it back everywhere by force.',
+          'Containment meant negotiating spheres of influence that would give the Soviet Union permanent control over Eastern Europe.',
+          'Containment required the United States to send military forces into any conflict anywhere in the world where communism threatened to make gains, regardless of the strategic or financial cost involved.',
+          'Containment was primarily a domestic policy designed to remove communist influence from American government institutions.'
+        ],
         correctAnswer: 'It aimed to prevent communism from spreading into additional countries without trying to roll it back everywhere by force.',
-        explanation: 'Containment meant stopping communist expansion into new places rather than launching immediate wars to destroy every communist regime.',
+        explanation: 'George Kennan\'s containment doctrine accepted Soviet control where it already existed while drawing lines beyond which further expansion would be resisted — a defensive strategy, not an offensive one.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L38-Q7',
         text: 'What was the main strategic purpose of the Marshall Plan?',
-        choices: ['To rebuild European economies so poverty and instability would be less likely to strengthen communist movements.', 'To place Western Europe under direct American political control until local governments could repay wartime loans in full.', 'To fund a joint invasion of Eastern Europe before the Soviet Union could complete its postwar military occupation there.', 'To replace all private industry in Europe with state planning supervised by the United States and the United Nations.'],
+        choices: [
+          'To rebuild European economies so poverty and instability would be less likely to strengthen communist movements.',
+          'The Marshall Plan was primarily a military program designed to rearm Western European nations against Soviet attack.',
+          'Its main goal was to open European markets to American exports and give U.S. companies new places to invest profitably.',
+          'Marshall wanted to punish Germany by forcing it to pay for European reconstruction rather than funding it with American money.'
+        ],
         correctAnswer: 'To rebuild European economies so poverty and instability would be less likely to strengthen communist movements.',
-        explanation: 'American leaders believed hunger, unemployment, and instability could make communism more attractive, so rebuilding Europe became part of containment.',
+        explanation: 'Secretary of State Marshall understood that hungry, desperate populations were more susceptible to communist appeals — economic recovery in Western Europe would remove the conditions that made communism attractive.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L38-Q8',
         text: 'Why did early efforts at international control of atomic weapons fail after World War II?',
-        choices: ['Neither side trusted the other, and the United States and the Soviet Union would not compromise over atomic control or inspections.', 'Britain refused to allow any discussion of nuclear weapons, because it wanted to build its own arsenal without outside oversight.', 'The United Nations banned all atomic research immediately, leaving no legal framework for negotiations between the superpowers.', 'Congress rejected all foreign policy agreements involving science, arguing that atomic energy should be regulated by the states.'],
+        choices: [
+          'Neither side trusted the other, and the United States and the Soviet Union would not compromise over atomic control or inspections.',
+          'The United Nations rejected the American proposal for atomic control because it gave the U.S. too much permanent authority.',
+          'Most nations initially supported the American-sponsored Baruch Plan for international atomic oversight, but Congress ultimately refused to ratify the agreement because it would have required sharing sensitive nuclear technology with potential adversaries.',
+          'Atomic control failed mainly because scientists from both superpowers refused to cooperate with government negotiators.'
+        ],
         correctAnswer: 'Neither side trusted the other, and the United States and the Soviet Union would not compromise over atomic control or inspections.',
-        explanation: 'The two superpowers distrusted each other and could not agree on inspection, sanctions, or control of atomic weapons.',
+        explanation: 'The United States proposed the Baruch Plan for international oversight, but the Soviets — who were secretly developing their own bomb — refused to accept the inspections it required, and the effort collapsed.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L38-Q9',
         text: 'How did communist takeovers in countries such as Romania, Bulgaria, Hungary, and Czechoslovakia deepen Cold War tensions?',
-        choices: ['They convinced many Americans and Britons that Stalin was expanding Soviet control rather than permitting genuine self-government.', 'They showed that communist parties could only succeed where voters freely chose them after years of stable coalition politics.', 'They reassured Western leaders that the Soviet Union was honoring wartime promises about free elections in Eastern Europe.', 'They proved that local nationalist movements, not Soviet influence, were fully responsible for reshaping postwar governments.'],
+        choices: [
+          'They convinced many Americans and Britons that Stalin was expanding Soviet control rather than permitting genuine self-government.',
+          'The takeovers deepened tensions mainly because those countries had all been U.S. allies during World War II.',
+          'The communist takeovers alarmed Western leaders primarily because each newly installed government immediately joined the Soviet military alliance structure and cut off all contact with democratic nations to the west.',
+          'The governments that were overthrown had been friendly to the United States and had signed economic treaties with Washington.'
+        ],
         correctAnswer: 'They convinced many Americans and Britons that Stalin was expanding Soviet control rather than permitting genuine self-government.',
-        explanation: 'Manipulated elections and one-party rule in Eastern Europe convinced Western leaders that Stalin was spreading Soviet domination.',
+        explanation: 'Each country that fell to a Soviet-backed government confirmed Western fears that Stalin had no intention of honoring his Yalta promises about free elections — and that Soviet expansion was an ongoing project.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L38-Q10',
         text: 'How did the Truman Doctrine and the Marshall Plan differ while still supporting the same larger Cold War goal?',
-        choices: ['The Truman Doctrine emphasized aid to resist immediate political pressure, while the Marshall Plan used economic recovery to reduce communist appeal.', 'The Truman Doctrine focused on rebuilding factories in Western Europe, while the Marshall Plan armed Greece and Turkey for border defense.', 'The Truman Doctrine created the United Nations, while the Marshall Plan divided Germany into zones to weaken Soviet influence there.', 'The Truman Doctrine relied on private charities, while the Marshall Plan committed only military advisors and no financial assistance.'],
+        choices: [
+          'The Truman Doctrine emphasized aid to resist immediate political pressure, while the Marshall Plan used economic recovery to reduce communist appeal.',
+          'The Truman Doctrine applied only to Europe while the Marshall Plan was designed to help developing nations in Asia and Africa.',
+          'The two approaches differed mainly in scale — the Marshall Plan spent far more money than the Truman Doctrine ever authorized.',
+          'The Marshall Plan was a purely military program focused on rearming Western European nations against a possible Soviet ground attack, while the Truman Doctrine was primarily an economic and diplomatic framework for containing communism.'
+        ],
         correctAnswer: 'The Truman Doctrine emphasized aid to resist immediate political pressure, while the Marshall Plan used economic recovery to reduce communist appeal.',
-        explanation: 'Both supported containment, but the Truman Doctrine responded directly to crisis, while the Marshall Plan used economic aid to stabilize Europe.',
+        explanation: 'Both served containment, but through different mechanisms — the Truman Doctrine provided immediate military and political support to nations under direct threat, while the Marshall Plan addressed the longer-term economic conditions that made communist movements attractive.',
         standard: 'SS.912.A.6'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // LESSON 39 — The Forgotten War
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'lesson39',
     label: 'LESSON 39',
@@ -1013,106 +1059,152 @@ const LESSONS = [
     icon: '⚔️',
     type: 'lesson',
     briefing: {
-      location: 'Korea and the Wider Cold War',
+      location: 'Berlin, Korea, and the Developing World',
       date: '1948–1955',
-      role: 'National Security Council analyst',
+      role: 'Cold War strategist',
       text: 'The Cold War is no longer confined to Europe. Berlin has become the first major test of resolve, Korea has erupted into war, and both superpowers are competing for allies across Asia, Latin America, and the developing world. At the same time, the arms race is accelerating, forcing American leaders to weigh containment, escalation, and the terrifying logic of nuclear deterrence.',
-      tags: ['berlin-airlift', 'korean-war', 'china-korea', 'berlin-blockade', 'warsaw-pact', 'mad']
+      tags: ['SS.912.A.6']
     },
     displayCount: 5,
-    goldRules: {
-      perCorrect: 20,
-      completionBonus: 25,
-      perfectBonus: 25
-    },
-    rewards: { badge: 'Korea Veteran', cards: ['Douglas MacArthur', 'Dean Acheson'] },
+    goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
+    rewards: { badge: 'The Forgotten War', cards: ['Berlin Airlift', 'Korean War'] },
     bank: [
       {
         id: '5B-L39-Q1',
         text: 'Why did the Soviet Union impose the Berlin Blockade in 1948?',
-        choices: ['It hoped to force the Western Allies to abandon Berlin or cancel plans to create a separate West Germany.', 'It hoped to punish France for resisting Soviet trade agreements and refusing to demilitarize the Ruhr Valley.', 'It hoped to provoke an immediate American air attack that would justify Soviet occupation of all Germany.', 'It hoped to transfer control of Berlin to the United Nations until German reunification could be negotiated.'],
+        choices: [
+          'It hoped to force the Western Allies to abandon Berlin or cancel plans to create a separate West Germany.',
+          'The Soviets blockaded Berlin mainly to prevent the United States from using the city as a military air base.',
+          'Stalin imposed the blockade as a punishment after West Germany refused to pay Soviet war reparations.',
+          'The blockade was a response to the Western Allies secretly arming West German citizens against Soviet forces.'
+        ],
         correctAnswer: 'It hoped to force the Western Allies to abandon Berlin or cancel plans to create a separate West Germany.',
-        explanation: 'The blockade was meant to pressure the Western Allies to leave Berlin and accept Soviet influence over Germany.',
+        explanation: 'The Western powers\' currency reform and plans for a West German state threatened to permanently divide Germany on Western terms — Stalin\'s blockade was designed to pressure them into abandoning both.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39-Q2',
         text: 'What did the Berlin Airlift demonstrate about the American response to Soviet pressure?',
-        choices: ['The United States would resist Soviet pressure firmly while avoiding direct military combat if another option existed.', 'The United States believed Berlin was too risky to defend and would eventually have to be surrendered to Soviet control.', 'The United States considered economic relief ineffective and preferred to answer Cold War crises only with armed force.', 'The United States intended to use Berlin mainly as a base for launching a preemptive invasion into Eastern Europe.'],
+        choices: [
+          'The United States would resist Soviet pressure firmly while avoiding direct military combat if another option existed.',
+          'America was willing to go to war with the Soviet Union over Berlin if the blockade was not lifted immediately.',
+          'The Berlin Airlift demonstrated conclusively that the American military lacked the logistical capacity to supply a besieged city and urgently needed immediate and substantial support from its full range of NATO partners and allies.',
+          'It showed that the United States preferred economic solutions over military ones in every Cold War confrontation.'
+        ],
         correctAnswer: 'The United States would resist Soviet pressure firmly while avoiding direct military combat if another option existed.',
-        explanation: 'The airlift supplied West Berlin without starting a shooting war, showing determination without immediate escalation.',
+        explanation: 'Rather than sending armed convoys that might trigger fighting, the West flew supplies into Berlin for nearly a year — successfully sustaining the city and embarrassing the Soviets without firing a shot.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39-Q3',
         text: 'Why was NATO created in 1949?',
-        choices: ['To form a collective defense alliance that would discourage or respond to possible Soviet aggression in Europe.', 'To coordinate economic reconstruction in Asia and Latin America after the devastation caused by World War II.', 'To replace the United Nations as the main organization for settling all disputes between democratic nations.', 'To supervise atomic research among Western countries and prevent any new member from building nuclear weapons.'],
+        choices: [
+          'To form a collective defense alliance that would discourage or respond to possible Soviet aggression in Europe.',
+          'NATO was created primarily to coordinate the economic reconstruction of Western Europe after the war.',
+          'NATO was formed mainly to manage the joint Allied occupation of Germany and to provide a legal framework for settling future disputes over Berlin and other contested territory through peaceful negotiation.',
+          'It was established mainly to give the United States a legal basis for maintaining military bases in Europe.'
+        ],
         correctAnswer: 'To form a collective defense alliance that would discourage or respond to possible Soviet aggression in Europe.',
-        explanation: 'NATO formalized collective defense among Western nations against possible Soviet aggression.',
+        explanation: 'NATO\'s Article 5 — that an attack on one member was an attack on all — was designed to deter Soviet aggression by making clear that any military move in Western Europe would trigger a collective American and European response.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39-Q4',
         text: 'How did the Warsaw Pact deepen the division of Europe during the Cold War?',
-        choices: ['It bound the Soviet Union and Eastern European states into a rival military alliance against the Western bloc.', 'It created a neutral zone in Central Europe where neither NATO nor Soviet troops were allowed to remain.', 'It joined communist and democratic states in a shared peacekeeping force under United Nations command.', 'It forced the United States to withdraw from Europe and leave the defense of West Germany to Britain alone.'],
+        choices: [
+          'It bound the Soviet Union and Eastern European states into a rival military alliance against the Western bloc.',
+          'The Warsaw Pact deepened division mainly by expelling all Western diplomats from Soviet-controlled capitals.',
+          'It forced Eastern European nations to adopt Soviet economic policies that made their markets incompatible with the West.',
+          'The pact deepened division by requiring its members to build physical barriers along their borders with Western nations.'
+        ],
         correctAnswer: 'It bound the Soviet Union and Eastern European states into a rival military alliance against the Western bloc.',
-        explanation: 'The Warsaw Pact was the Soviet-bloc answer to NATO and formalized Europe’s split into opposing military camps.',
+        explanation: 'Created in 1955 as a direct response to West Germany\'s admission to NATO, the Warsaw Pact formalized the Soviet military alliance and institutionalized the division of Europe into two armed camps.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39-Q5',
         text: 'What event directly began the Korean War in 1950?',
-        choices: ['North Korean forces crossed the 38th parallel and invaded South Korea in an effort to unify the peninsula by force.', 'South Korean troops crossed into North Korea after the United States ordered a surprise attack on communist positions.', 'Chinese troops occupied the entire Korean peninsula after Japan attempted to rebuild its empire in East Asia.', 'The Soviet Union attacked American naval forces near Korea after the United Nations imposed sanctions on North Korea.'],
+        choices: [
+          'North Korean forces crossed the 38th parallel and invaded South Korea in an effort to unify the peninsula by force.',
+          'South Korea launched a preemptive military invasion of North Korea after receiving detailed intelligence reports clearly indicating that a massive North Korean attack on the South was both planned and imminent.',
+          'The Korean War began when the Soviet Union deployed troops to defend North Korea from an American naval blockade.',
+          'China crossed the Korean border and attacked U.S. forces that had moved too close to the Chinese frontier.'
+        ],
         correctAnswer: 'North Korean forces crossed the 38th parallel and invaded South Korea in an effort to unify the peninsula by force.',
-        explanation: 'The Korean War began when North Korea invaded South Korea, bringing in U.S. and UN forces.',
+        explanation: 'On June 25, 1950, Kim Il-sung\'s forces swept across the 38th parallel in a massive surprise attack, quickly capturing Seoul and nearly overrunning the entire peninsula before the U.S.-led UN response.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39-Q6',
         text: 'Why did China enter the Korean War after UN forces advanced northward?',
-        choices: ['Chinese leaders feared a hostile army near their border and intervened when the conflict moved too close to China.', 'Chinese leaders wanted the United States to occupy Korea permanently so they could focus on rebuilding at home.', 'Chinese leaders had already signed a treaty requiring them to invade Japan if Korea became a United Nations protectorate.', 'Chinese leaders believed North Korea had become too independent and wanted to replace its government with Soviet advisors.'],
-        correctAnswer: 'Chinese leaders feared a hostile army near their border and intervened when the conflict moved too close to China.',
-        explanation: 'China saw UN forces near its border as a direct threat and entered the war, turning it into a stalemate.',
+        choices: [
+          'Chinese leaders feared that U.S. forces approaching the Yalu River posed a direct threat to China\'s own security and borders.',
+          'China entered because the Soviet Union threatened to cut off economic and military aid if Beijing stayed out of the conflict.',
+          'Mao wanted to use the Korean War as a test of China\'s new military to prepare for a future invasion of Taiwan.',
+          'China intervened mainly to honor a mutual defense treaty that required it to defend North Korea if attacked.'
+        ],
+        correctAnswer: 'Chinese leaders feared that U.S. forces approaching the Yalu River posed a direct threat to China\'s own security and borders.',
+        explanation: 'As MacArthur\'s forces drove northward toward the Chinese border, Mao Zedong concluded that a U.S. presence on the Yalu threatened China directly — sending hundreds of thousands of troops across the border in November 1950.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39-Q7',
-        text: 'What does the lesson mean by the Cold War struggle for \'hearts and minds\' in the Third World?',
-        choices: ['The superpowers competed for influence in developing nations through aid, propaganda, covert action, and intervention.', 'The superpowers agreed to keep all developing nations neutral and promised not to interfere in local politics or trade.', 'The superpowers focused mainly on persuading Germany and Japan to reject both democracy and communism after the war.', 'The superpowers limited their rivalry to Europe because leaders feared that conflict in poorer nations would be too expensive.'],
+        text: 'What does the lesson mean by the Cold War struggle for "hearts and minds" in the Third World?',
+        choices: [
+          'The superpowers competed for influence in developing nations through aid, propaganda, covert action, and intervention.',
+          'Both sides invested heavily in schools and universities in developing nations to promote their educational systems.',
+          'The Cold War struggle for hearts and minds in the Third World referred almost entirely to a global religious competition between American-supported Christianity and the officially atheistic communist ideology promoted by the Soviet Union worldwide.',
+          'It described the effort to persuade Third World leaders to adopt either American or Soviet constitutional models.'
+        ],
         correctAnswer: 'The superpowers competed for influence in developing nations through aid, propaganda, covert action, and intervention.',
-        explanation: 'Cold War competition spread into developing regions, where both superpowers sought allies and influence.',
+        explanation: 'As newly independent nations emerged in Asia, Africa, and Latin America, both the U.S. and USSR tried to pull them into their orbits through economic aid, cultural programs, covert operations, and sometimes military support.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39-Q8',
         text: 'Why did U.S. covert action in places such as Iran and Guatemala become controversial during the Cold War?',
-        choices: ['It helped overthrow governments in the name of containment, but often damaged America’s image and fueled resentment abroad.', 'It always failed to change events overseas and convinced U.S. leaders to abandon containment in the developing world.', 'It was openly directed by the United Nations, making many Americans fear that foreign powers controlled U.S. policy.', 'It focused only on humanitarian relief, yet critics argued that it neglected more urgent military alliances in Europe.'],
-        correctAnswer: 'It helped overthrow governments in the name of containment, but often damaged America’s image and fueled resentment abroad.',
-        explanation: 'CIA interventions sometimes produced short-term gains for containment but also created long-term hostility toward the United States.',
+        choices: [
+          'It helped overthrow governments in the name of containment, but often damaged America\'s image and fueled resentment abroad.',
+          'Covert actions were controversial mainly because Congress had never authorized them and they violated U.S. law.',
+          'The CIA operations failed in both countries, making the United States look weak and encouraging further Soviet expansion.',
+          'They were controversial primarily because they used American soldiers in secret, bypassing the formal declaration of war.'
+        ],
+        correctAnswer: 'It helped overthrow governments in the name of containment, but often damaged America\'s image and fueled resentment abroad.',
+        explanation: 'CIA operations that toppled Mossadegh in Iran and Árbenz in Guatemala achieved short-term strategic goals but replaced elected leaders with authoritarian ones, undermining American claims to support democracy and stoking anti-American feeling for decades.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39-Q9',
         text: 'How did the development of the H-bomb change the Cold War arms race?',
-        choices: ['It intensified the race by creating even more destructive weapons and increasing fear of a catastrophic nuclear conflict.', 'It reduced tensions immediately because both nations agreed to stop building large stockpiles once the new bomb existed.', 'It made conventional wars impossible and ended American interest in defending allies through military alliances overseas.', 'It shifted strategic attention away from Europe and toward naval competition over trade routes in the Pacific Ocean.'],
+        choices: [
+          'It intensified the race by creating even more destructive weapons and increasing fear of a catastrophic nuclear conflict.',
+          'The hydrogen bomb actually stabilized the arms race significantly because its extraordinary destructiveness finally convinced both Soviet and American leaders that any form of nuclear war between the superpowers had become completely impossible.',
+          'Development of the H-bomb mattered mainly as a propaganda victory rather than a genuine military advance.',
+          'It ended the arms race temporarily because both sides agreed that hydrogen weapons were too dangerous to actually build.'
+        ],
         correctAnswer: 'It intensified the race by creating even more destructive weapons and increasing fear of a catastrophic nuclear conflict.',
-        explanation: 'The H-bomb made the arms race even more dangerous by raising the possible scale of destruction.',
+        explanation: 'A hydrogen bomb could be a thousand times more powerful than the atomic bomb dropped on Hiroshima — its development transformed the arms race from a competition over numbers into a contest over weapons capable of destroying entire civilizations.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39-Q10',
         text: 'What was the strategic logic behind Mutual Assured Destruction, or MAD?',
-        choices: ['If either side launched a nuclear attack, both would suffer devastating retaliation, so neither had a rational reason to start one.', 'If one side built enough nuclear weapons to survive a first strike, it could win a nuclear war and impose peace afterward.', 'If both sides gave their nuclear arsenals to the United Nations, accidental war would become impossible in the future.', 'If the superpowers continued testing weapons openly, they could reduce fear by proving their missiles were mostly defensive.'],
+        choices: [
+          'If either side launched a nuclear attack, both would suffer devastating retaliation, so neither had a rational reason to start one.',
+          'The doctrine of MAD held that any conventional warfare between the nuclear superpowers was so likely to escalate to full nuclear exchange that even the smallest military conflicts between them should be avoided at almost any political cost.',
+          'The logic of MAD required both sides to build enough weapons to survive a first strike and still destroy the attacker.',
+          'It was a Soviet doctrine that the United States reluctantly accepted as a framework for arms control negotiations.'
+        ],
         correctAnswer: 'If either side launched a nuclear attack, both would suffer devastating retaliation, so neither had a rational reason to start one.',
-        explanation: 'MAD rested on deterrence: both sides would be destroyed in a nuclear exchange, which discouraged first strikes.',
+        explanation: 'MAD\'s grim logic was that the certainty of mutual annihilation made a first strike suicidal — as long as both sides maintained enough weapons to survive and retaliate, neither could "win" a nuclear war.',
         standard: 'SS.912.A.6'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // LESSON 40 — Fear on the Home Front
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'lesson40',
     label: 'LESSON 40',
@@ -1121,290 +1213,408 @@ const LESSONS = [
     icon: '🔍',
     type: 'lesson',
     briefing: {
-      location: 'The United States',
+      location: 'Washington D.C. and Across America',
       date: '1947–1958',
-      role: 'Congressional staffer',
+      role: 'civil liberties reporter',
       text: 'The Cold War is no longer only a struggle overseas. In the United States, fear of communist subversion and nuclear attack is reshaping daily life, politics, and civil liberties. Congress is investigating suspected communists, spies are on trial, children practice duck-and-cover drills, and families are told to prepare for atomic war. Your task is to determine how these anxieties changed life on the American home front.',
-      tags: ['fcda', 'civil-defense', 'civil-defense-limits', 'blacklist', 'freedom-vs-security', 'spy-trials']
+      tags: ['SS.912.A.6']
     },
     displayCount: 5,
-    goldRules: {
-      perCorrect: 20,
-      completionBonus: 25,
-      perfectBonus: 25
-    },
-    rewards: { badge: 'Red Scare Survivor', cards: ['Joseph McCarthy', 'HUAC'] },
+    goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
+    rewards: { badge: 'Fear on the Home Front', cards: ['McCarthy Era', 'Duck and Cover'] },
     bank: [
       {
         id: '5B-L40-Q1',
         text: 'What major dilemma did the Cold War create for Americans on the home front?',
-        choices: ['How to protect the nation from subversion and attack without abandoning civil liberties and constitutional freedoms.', 'How to return immediately to complete isolation from world affairs without weakening postwar trade and military recovery.', 'How to rebuild bombed American cities while deciding whether federal aid should be sent first to Europe or Japan.', 'How to replace the Bill of Rights with emergency war powers until the Soviet Union agreed to arms limitations.'],
+        choices: [
+          'Whether to pursue diplomatic negotiations with the Soviet Union or rely entirely on military deterrence to prevent a nuclear conflict from occurring on American soil.',
+          'Whether to pursue diplomatic negotiations with the Soviet Union or rely entirely on military deterrence.',
+          'The dilemma centered on how to fund the Cold War without raising taxes on ordinary working Americans.',
+          'Americans debated whether to trust the federal government to manage the arms race or demand more public oversight.'
+        ],
         correctAnswer: 'How to protect the nation from subversion and attack without abandoning civil liberties and constitutional freedoms.',
-        explanation: 'The home front raised a major tension between security and liberty as Americans feared spies, subversion, and nuclear attack.',
+        explanation: 'The fear of communist infiltration created enormous pressure to investigate, restrict, and punish suspected subversives — but doing so risked destroying the very freedoms that distinguished American democracy from Soviet communism.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L40-Q2',
         text: 'What was the main purpose of the House Un-American Activities Committee during the early Cold War?',
-        choices: ['To investigate suspected communist influence and question the loyalty of people in government, culture, and other occupations.', 'To direct civil defense drills in schools and factories and supervise the construction of local fallout shelters nationwide.', 'To negotiate spy exchanges with the Soviet Union and prosecute foreign agents caught transmitting military information.', 'To enforce loyalty oaths in every state legislature and remove local officials who opposed federal anti-communist laws.'],
+        choices: [
+          'To investigate suspected communist influence and question the loyalty of people in government, culture, and other occupations.',
+          'HUAC was established mainly to investigate foreign governments suspected of spying inside the United States.',
+          'The committee was created to prosecute individuals who had publicly criticized American foreign policy during World War II.',
+          'HUAC\'s primary purpose was to review all new immigration applications and systematically deny citizenship to any foreign-born person who had ever expressed socialist or communist political beliefs.'
+        ],
         correctAnswer: 'To investigate suspected communist influence and question the loyalty of people in government, culture, and other occupations.',
-        explanation: 'HUAC became a major instrument of anti-communist investigations, questioning loyalty in government and public life.',
+        explanation: 'HUAC held public hearings in which witnesses were asked to name suspected communists and answer questions about their political beliefs and associations — creating an atmosphere of suspicion and fear that spread far beyond actual espionage.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L40-Q3',
         text: 'Why did the Hollywood Ten become such an important symbol during the Red Scare?',
-        choices: ['They refused to cooperate with HUAC, and their punishment helped open the way for blacklisting in the film industry.', 'They admitted to running a Soviet spy ring inside movie studios, which convinced many Americans that treason was widespread.', 'They created the FCDA’s civil defense films, which critics claimed frightened children more than they prepared them for war.', 'They organized national protests against Truman’s loyalty program, leading Congress to suspend anti-communist investigations.'],
+        choices: [
+          'They refused to cooperate with HUAC, and their punishment helped open the way for blacklisting in the film industry.',
+          'The Hollywood Ten were famous directors who made films that openly celebrated communist ideology during the war.',
+          'The Hollywood Ten became nationally significant mainly because the Supreme Court ultimately ruled that the entire HUAC investigative process was unconstitutional and that the government had no right to question filmmakers about their beliefs.',
+          'They became symbolic mainly because their trial revealed a genuine Soviet espionage ring inside major film studios.'
+        ],
         correctAnswer: 'They refused to cooperate with HUAC, and their punishment helped open the way for blacklisting in the film industry.',
-        explanation: 'The Hollywood Ten became a symbol of anti-communist pressure and the rise of the blacklist.',
+        explanation: 'When ten writers and directors refused to answer HUAC\'s questions by invoking the First Amendment, they were cited for contempt of Congress and imprisoned — and the studios, fearing boycotts, began the blacklist that destroyed hundreds of careers.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L40-Q4',
         text: 'What did the Hollywood blacklist reveal about Cold War civil liberties in the United States?',
-        choices: ['Fear of communism led many institutions to punish political beliefs, past associations, or refusal to testify rather than proven crimes.', 'Fear of communism caused the Supreme Court to suspend the First Amendment for entertainment workers until the Korean War ended.', 'Fear of communism convinced most Americans that private employers had no right to question workers about their political views.', 'Fear of communism led studios to hire only government-approved writers who had passed formal federal loyalty investigations.'],
+        choices: [
+          'Fear of communism led many institutions to punish political beliefs, past associations, or refusal to testify rather than proven crimes.',
+          'The blacklist ultimately revealed that the American entertainment industry had been so deeply penetrated by actual Soviet intelligence agents and deliberate saboteurs that emergency government action to clean it out was fully justified.',
+          'It showed that most Americans supported strong restrictions on speech as a necessary price for national security.',
+          'The blacklist demonstrated that the federal government had the legal authority to regulate private industry hiring decisions.'
+        ],
         correctAnswer: 'Fear of communism led many institutions to punish political beliefs, past associations, or refusal to testify rather than proven crimes.',
-        explanation: 'The blacklist showed how Cold War fear could lead to punishment based on suspicion and association rather than proven wrongdoing.',
+        explanation: 'People were blacklisted not for crimes but for suspected beliefs, past memberships, or refusal to name others — the punishment was the loss of livelihood, not imprisonment, which made it difficult to challenge legally.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L40-Q5',
         text: 'Why did the Alger Hiss case and the Rosenberg trial intensify fears of communist subversion?',
-        choices: ['They seemed to confirm that spies or communist sympathizers might be operating inside important American institutions.', 'They proved that HUAC had fabricated most anti-communist accusations and could no longer be trusted by the public.', 'They showed that Soviet agents were mainly targeting private businesses instead of the government or atomic research.', 'They convinced Americans that nuclear secrets had never actually reached the Soviet Union despite years of public alarm.'],
+        choices: [
+          'They seemed to confirm that spies or communist sympathizers might be operating inside important American institutions.',
+          'Both cases proved definitively that the Soviets had stolen nuclear secrets years earlier than previously believed.',
+          'Both cases intensified widespread fears mainly because the defendants were ultimately acquitted of all charges by sympathetic juries, which many Americans took as disturbing evidence that the federal court system itself had been deeply compromised.',
+          'They were alarming primarily because they involved senior military officers who had direct access to war plans.'
+        ],
         correctAnswer: 'They seemed to confirm that spies or communist sympathizers might be operating inside important American institutions.',
-        explanation: 'These cases strengthened fears that communist agents or sympathizers had penetrated the government and scientific community.',
+        explanation: 'Hiss — a senior State Department official — was convicted of perjury related to spying, and the Rosenbergs were executed for passing atomic secrets to the Soviets, convincing many Americans that communist infiltration was a genuine and immediate danger.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L40-Q6',
         text: 'What does the term McCarthyism refer to most accurately?',
-        choices: ['The practice of making reckless accusations and personal attacks with little or no reliable evidence to support the charges.', 'The federal policy of limiting nuclear weapons research by placing all atomic laboratories under civilian university control.', 'The strategy of using military force instead of diplomacy whenever communist movements appeared anywhere in the world.', 'The effort to create a permanent anti-communist coalition between Congress, the Supreme Court, and the United Nations.'],
+        choices: [
+          'The practice of making reckless accusations and personal attacks with little or no reliable evidence to support the charges.',
+          'McCarthyism refers specifically to the formal congressional investigations of the State Department in 1950 and 1951.',
+          'The term describes any government policy that restricts immigration for reasons of national security during wartime.',
+          'It refers to the Cold War strategy of threatening nuclear escalation to force the Soviet Union to back down from confrontations.'
+        ],
         correctAnswer: 'The practice of making reckless accusations and personal attacks with little or no reliable evidence to support the charges.',
-        explanation: 'McCarthyism became synonymous with making unsupported accusations during anti-communist investigations.',
+        explanation: 'McCarthy\'s 1950 claim to have a list of known communists in the State Department — never substantiated — launched a period of accusation and fear in which the mere charge of communist sympathies could destroy careers.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L40-Q7',
         text: 'How did many Americans respond to the Atomic Age in the 1950s?',
-        choices: ['With a mix of fear about nuclear destruction and optimism about the peaceful uses of atomic power.', 'With almost complete indifference, because most people believed nuclear weapons could never reach the United States.', 'With strong opposition to science itself, leading Congress to shut down most federal research tied to atomic energy.', 'With broad confidence that local police and fire departments could easily handle the effects of an atomic bomb strike.'],
+        choices: [
+          'With a mix of fear about nuclear destruction and optimism about the peaceful uses of atomic power.',
+          'Most Americans were indifferent to nuclear weapons because they believed the military would always keep them safe.',
+          'The public responded with nearly universal panic that made normal daily life in American cities almost impossible.',
+          'Americans responded mainly with enthusiasm because atomic technology promised to solve the nation\'s energy shortage.'
+        ],
         correctAnswer: 'With a mix of fear about nuclear destruction and optimism about the peaceful uses of atomic power.',
-        explanation: 'Americans responded to the Atomic Age with both anxiety about war and hope for peaceful technological progress.',
+        explanation: 'The same decade that brought duck-and-cover drills and fallout shelter planning also saw "Atoms for Peace," nuclear-powered submarines, and predictions of cheap atomic electricity — Americans lived with both the terror and the promise of the atom.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L40-Q8',
         text: 'Why did Congress create the Federal Civil Defense Administration, or FCDA, in 1951?',
-        choices: ['To organize preparedness efforts and help Americans plan for survival in the event of a nuclear attack.', 'To oversee espionage trials and coordinate investigations of suspected communist infiltration in federal agencies.', 'To regulate atomic tourism in Nevada and restrict civilian travel near nuclear testing sites in the desert.', 'To supervise the loyalty program for teachers, filmmakers, and labor leaders considered politically unreliable.'],
+        choices: [
+          'To organize preparedness efforts and help Americans plan for survival in the event of a nuclear attack.',
+          'The FCDA was created mainly to coordinate evacuation of major cities in case of a conventional Soviet invasion.',
+          'Congress established it to oversee the construction of the interstate highway system for national defense purposes.',
+          'The FCDA was designed to regulate the production and testing of nuclear weapons by private contractors.'
+        ],
         correctAnswer: 'To organize preparedness efforts and help Americans plan for survival in the event of a nuclear attack.',
-        explanation: 'The FCDA promoted civil defense, including drills, manuals, and other preparedness measures.',
+        explanation: 'The FCDA produced public information films, distributed preparedness guides, coordinated warning siren networks, and encouraged families to build fallout shelters — all aimed at convincing Americans they could survive a nuclear attack with proper preparation.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L40-Q9',
         text: 'What was the purpose of duck-and-cover drills, dog tags, warning sirens, and fallout shelters during the Cold War?',
-        choices: ['They were part of a larger civil defense system designed to prepare ordinary Americans for the possibility of atomic attack.', 'They were mainly symbolic rituals created by Hollywood studios to support anti-communist films and patriotic advertising.', 'They were emergency measures used only in a few cities near military bases and were never adopted nationwide in schools.', 'They were meant to train children for military service by teaching them battlefield discipline and chain-of-command habits.'],
+        choices: [
+          'They were part of a larger civil defense system designed to prepare ordinary Americans for the possibility of atomic attack.',
+          'These measures were intended mainly to reassure the public psychologically rather than provide any actual physical protection.',
+          'Duck-and-cover drills were designed for chemical weapons attacks, not nuclear ones, and were later repurposed by the government.',
+          'They formed part of a training program for civilian volunteers who would assist the military in case of invasion.'
+        ],
         correctAnswer: 'They were part of a larger civil defense system designed to prepare ordinary Americans for the possibility of atomic attack.',
-        explanation: 'These were all elements of civil defense, which reflected the fear that nuclear war might strike American communities.',
+        explanation: 'The FCDA\'s entire apparatus — drills, dog tags for identification after attack, shelter stocking, evacuation plans — rested on the premise that civil preparedness could meaningfully reduce casualties in a nuclear war.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L40-Q10',
         text: 'Why did many Americans begin to question the usefulness of civil defense planning by the mid-1950s?',
-        choices: ['More powerful hydrogen bombs made people doubt whether drills, shelters, and evacuation plans could really save large populations.', 'The Soviet Union agreed to end its nuclear program, which made most civil defense programs seem unnecessary almost overnight.', 'Congress transferred all civil defense authority to state governments, ending federal guidance and leaving communities unprepared.', 'Television networks refused to broadcast emergency instructions, making civil defense impossible in suburbs and smaller towns.'],
+        choices: [
+          'More powerful hydrogen bombs made people doubt whether drills, shelters, and evacuation plans could really save large populations.',
+          'Americans questioned civil defense mainly because the government refused to fund adequate shelters for urban residents.',
+          'Public trust in civil defense collapsed almost entirely after a long series of aboveground nuclear weapons tests caused widespread and well-documented radiation sickness in numerous civilian communities across the American Southwest.',
+          'Public skepticism grew mainly because the Soviet Union announced it had developed missiles that could evade any defense system.'
+        ],
         correctAnswer: 'More powerful hydrogen bombs made people doubt whether drills, shelters, and evacuation plans could really save large populations.',
-        explanation: 'As nuclear weapons became far more destructive, many Americans doubted whether civil defense could offer real protection.',
+        explanation: 'When thermonuclear bombs capable of destroying entire metropolitan areas entered both arsenals, the idea that families hiding under desks or in backyard shelters could survive a nuclear exchange seemed increasingly absurd.',
         standard: 'SS.912.A.6'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // LESSON 39 EXTENSION — The New Look and the Nuclear Age
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'lesson39ext',
     label: 'LESSON 39 EXTENSION',
     title: 'The New Look and the Nuclear Age',
-    sub: 'Eisenhower’s Cold War · 1953–1961',
+    sub: 'Eisenhower\'s Cold War · 1953–1961',
     icon: '☢️',
     type: 'extension',
     briefing: {
-      location: 'Eisenhower’s Cold War',
+      location: 'Washington D.C. and the World',
       date: '1953–1961',
-      role: 'Defense policy analyst',
+      role: 'nuclear strategist',
       text: 'President Eisenhower wants to contain communism without bankrupting the United States. His New Look strategy relies more heavily on nuclear weapons and less on large conventional armies. Secretary of State John Foster Dulles calls this approach massive retaliation and brinkmanship. But as hydrogen bombs multiply and Sputnik circles overhead, Americans are forced to confront a terrifying truth: the same strategy meant to keep the peace might also make total destruction only minutes away.',
-      tags: ['massive-retaliation', 'new-look-risk', 'h-bomb', 'sputnik', 'mad', 'deterrence']
+      tags: ['SS.912.A.6']
     },
     displayCount: 5,
-    goldRules: {
-      perCorrect: 20,
-      completionBonus: 30,
-      perfectBonus: 30
-    },
-    rewards: { badge: 'Nuclear Age', cards: ['Dwight Eisenhower', 'John Foster Dulles'] },
+    goldRules: { perCorrect: 20, completionBonus: 30, perfectBonus: 30 },
+    rewards: { badge: 'Nuclear Age', cards: ['Sputnik', 'Eisenhower Doctrine'] },
     bank: [
       {
         id: '5B-L39X-Q1',
-        text: 'What was the main goal of Eisenhower’s New Look strategy during the Cold War?',
-        choices: ['To rely more on nuclear deterrence so the United States could contain communism without maintaining huge conventional forces.', 'To avoid all military commitments overseas and let European allies manage Cold War crises without American involvement.', 'To replace nuclear weapons with larger ground armies because conventional warfare was considered cheaper and more flexible.', 'To focus American foreign policy almost entirely on Latin America while reducing concern about Europe and Asia.'],
+        text: 'What was the main goal of Eisenhower\'s New Look strategy during the Cold War?',
+        choices: [
+          'To rely more on nuclear deterrence so the United States could contain communism without maintaining huge conventional forces.',
+          'The New Look aimed to withdraw American forces from Europe and rely entirely on local allied armies for continental defense.',
+          'Eisenhower wanted to dramatically expand the conventional U.S. Army to avoid dependence on risky nuclear weapons.',
+          'The strategy\'s main goal was to achieve superiority in space-based reconnaissance before the Soviets could develop satellites.'
+        ],
         correctAnswer: 'To rely more on nuclear deterrence so the United States could contain communism without maintaining huge conventional forces.',
-        explanation: 'The New Look emphasized nuclear deterrence as a less expensive alternative to maintaining very large conventional forces.',
+        explanation: 'Eisenhower worried that maintaining large conventional armies would bankrupt the United States over time — nuclear weapons offered "more bang for the buck" as a cheaper way to deter Soviet aggression.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39X-Q2',
         text: 'What did the policy of massive retaliation mean in practice?',
-        choices: ['The United States warned that communist aggression could be met with a large nuclear response rather than only a limited local war.', 'The United States promised to answer every Soviet move with an identical conventional troop deployment in the same region.', 'The United States agreed to use nuclear weapons only after receiving approval from the United Nations and all NATO members.', 'The United States planned to attack first in any crisis because American leaders believed deterrence could not stop communist expansion.'],
+        choices: [
+          'The United States warned that communist aggression could be met with a large nuclear response rather than only a limited local war.',
+          'Massive retaliation required the U.S. to match any Soviet military buildup with equal or greater conventional forces.',
+          'The policy meant launching an immediate nuclear strike on the Soviet Union if it crossed any national border anywhere.',
+          'Secretary Dulles specifically used the term massive retaliation to describe a comprehensive strategy of economic and diplomatic isolation applied to any nation anywhere in the world that openly supported or harbored communist political movements.'
+        ],
         correctAnswer: 'The United States warned that communist aggression could be met with a large nuclear response rather than only a limited local war.',
-        explanation: 'Massive retaliation meant relying on the threat of overwhelming nuclear force to deter aggression.',
+        explanation: 'By threatening nuclear escalation in response to even limited communist advances, the Eisenhower administration hoped to deter aggression cheaply — but critics argued this left Washington with no good options in smaller conflicts.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39X-Q3',
         text: 'What was brinkmanship during the Eisenhower years?',
-        choices: ['A strategy of pushing dangerous crises to the edge in order to pressure the other side into backing down.', 'A strategy of avoiding public threats and settling Cold War disputes only through quiet private negotiations.', 'A strategy of reducing military tensions by withdrawing American forces from exposed regions in Asia and Europe.', 'A strategy of replacing nuclear deterrence with trade agreements designed to make war too costly for both sides.'],
+        choices: [
+          'A strategy of pushing dangerous crises to the edge in order to pressure the other side into backing down.',
+          'Brinkmanship described the policy of building more nuclear weapons than the Soviet Union as a form of deterrence.',
+          'It was the practice of offering economic aid to neutral nations to bring them to the brink of joining the Western alliance.',
+          'The term referred to Eisenhower\'s willingness to engage in direct military confrontation with Soviet forces in Europe.'
+        ],
         correctAnswer: 'A strategy of pushing dangerous crises to the edge in order to pressure the other side into backing down.',
-        explanation: 'Brinkmanship tried to force an opponent to retreat by escalating pressure toward the edge of war.',
+        explanation: 'Dulles described brinkmanship as the willingness to go to the very edge of war — including credible nuclear threats — in the belief that the Soviets would always blink first rather than risk annihilation.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39X-Q4',
-        text: 'What was the biggest weakness or risk built into Eisenhower’s New Look strategy?',
-        choices: ['It left the United States with few good options in a limited crisis besides backing down or risking dangerous escalation.', 'It depended on the Soviet Union having no atomic weapons at all, which was already false by the early 1950s.', 'It required Congress to approve a declaration of war before any American troops could be moved during an emergency.', 'It forced the United States to dismantle NATO because European allies strongly opposed any role for nuclear weapons.'],
+        text: 'What was the biggest weakness or risk built into Eisenhower\'s New Look strategy?',
+        choices: [
+          'It left the United States with few good options in a limited crisis besides backing down or risking dangerous escalation.',
+          'The New Look was too expensive because nuclear weapons cost more to build and maintain than conventional armies.',
+          'It gave the Soviet Union an incentive to rapidly expand its own conventional forces to exploit American weakness there.',
+          'The strategy\'s main weakness was that it required congressional approval for every military response, creating dangerous delays.'
+        ],
         correctAnswer: 'It left the United States with few good options in a limited crisis besides backing down or risking dangerous escalation.',
-        explanation: 'A strategy centered on nuclear threats could be awkward in limited conflicts, where the choices often seemed too weak or too extreme.',
+        explanation: 'By threatening nuclear war for any Soviet transgression, the New Look created a credibility trap — in any actual crisis below the nuclear threshold, the United States either had to make a threat it couldn\'t deliver or back down and look weak.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39X-Q5',
         text: 'Why did the hydrogen bomb make the Cold War even more frightening than the earlier atomic age?',
-        choices: ['It produced weapons far more destructive than earlier bombs, making the human and physical costs of war even more catastrophic.', 'It made nuclear weapons too heavy to deliver efficiently, which increased pressure to return to conventional warfare instead.', 'It gave only the United States a permanent monopoly on nuclear force and ended fears of Soviet retaliation almost entirely.', 'It caused both superpowers to abandon missile research because leaders feared accidental launches during peacetime testing.'],
+        choices: [
+          'It produced weapons far more destructive than earlier bombs, making the human and physical costs of war even more catastrophic.',
+          'The hydrogen bomb was frightening mainly because it could be delivered by ordinary aircraft rather than specialized missiles.',
+          'Unlike the earlier generation of atomic weapons, hydrogen bombs had a fundamental design flaw that meant they could be triggered accidentally by electrical interference, dramatically raising the constant risk of nuclear war beginning by mistake.',
+          'Its main significance was psychological — it convinced the public that nuclear war was inevitable rather than merely possible.'
+        ],
         correctAnswer: 'It produced weapons far more destructive than earlier bombs, making the human and physical costs of war even more catastrophic.',
-        explanation: 'The H-bomb raised the destructive potential of nuclear war to an even more terrifying level.',
+        explanation: 'A thermonuclear weapon could generate an explosion measured in megatons rather than kilotons — the 1954 Castle Bravo test was 1,000 times more powerful than the bomb that destroyed Hiroshima, fundamentally changing the scale of potential destruction.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39X-Q6',
         text: 'What was the basic logic of nuclear deterrence during the 1950s?',
-        choices: ['If U.S. weapons were deadly enough, Soviet leaders would hesitate to attack because the response would be devastating.', 'If both sides continued building weapons, one would eventually win a safe nuclear war without suffering serious retaliation.', 'If the United States lowered defense spending enough, the Soviet Union would lose interest in global expansion and military rivalry.', 'If Americans practiced civil defense regularly, Soviet leaders would decide nuclear weapons were no longer politically useful.'],
+        choices: [
+          'If U.S. weapons were deadly enough, Soviet leaders would hesitate to attack because the response would be devastating.',
+          'Deterrence required building more nuclear weapons than the Soviets so that any exchange would favor American survival.',
+          'The logic held that sharing nuclear technology with allies would make the Soviet Union less likely to risk a confrontation.',
+          'Deterrence worked mainly by making the Soviet Union believe an American first strike could destroy its entire nuclear arsenal.'
+        ],
         correctAnswer: 'If U.S. weapons were deadly enough, Soviet leaders would hesitate to attack because the response would be devastating.',
-        explanation: 'Deterrence relied on convincing the opponent that any attack would bring unacceptable retaliation.',
+        explanation: 'Nuclear deterrence rested on the assumption that rational decision-makers would not initiate a war they could not survive — as long as the United States maintained an arsenal capable of devastating retaliation, the Soviets would be deterred.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39X-Q7',
         text: 'Why did the Soviet launch of Sputnik in 1957 alarm many Americans so deeply?',
-        choices: ['It suggested the Soviet Union had rocket technology that could also deliver nuclear warheads over long distances.', 'It proved the Soviet Union had already built more bomb shelters than the United States and could survive nuclear war more easily.', 'It showed the Soviet Union had secretly occupied Cape Canaveral and was preparing to challenge American control of Florida.', 'It convinced U.S. leaders that NATO had become obsolete because future wars would be fought only in outer space.'],
+        choices: [
+          'It suggested the Soviet Union had rocket technology that could also deliver nuclear warheads over long distances.',
+          'Sputnik alarmed Americans mainly because it proved Soviet scientists were more talented than American ones.',
+          'The satellite was alarming primarily because it gave the Soviets the ability to spy on American military installations.',
+          'Most Americans feared Sputnik because it suggested the Soviet economy had overtaken the American one in industrial output.'
+        ],
         correctAnswer: 'It suggested the Soviet Union had rocket technology that could also deliver nuclear warheads over long distances.',
-        explanation: 'Sputnik was alarming because it implied advanced Soviet missile capability, not just a space achievement.',
+        explanation: 'A rocket powerful enough to put a satellite in orbit was also powerful enough to carry a nuclear warhead to any American city — Sputnik meant the Soviet Union might soon be able to strike the United States directly with no warning.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-L39X-Q8',
         text: 'How did Mutual Assured Destruction shape superpower behavior in the nuclear age?',
-        choices: ['It discouraged all-out war because both sides knew a nuclear exchange would bring devastating destruction to each of them.', 'It encouraged each side to strike first, since waiting would only make it easier for the opponent to launch a surprise attack.', 'It allowed the United States to ignore Soviet missiles because American civil defense planners could now protect most major cities.', 'It ended the Cold War rivalry by convincing both sides to dismantle their nuclear arsenals during the Eisenhower administration.'],
+        choices: [
+          'It discouraged all-out war because both sides knew a nuclear exchange would bring devastating destruction to each of them.',
+          'MAD encouraged proxy wars because superpowers needed to fight somewhere without risking direct nuclear confrontation.',
+          'The doctrine shaped behavior mainly by convincing both sides to reduce their nuclear arsenals as quickly as possible.',
+          'Mutual Assured Destruction was primarily a theoretical concept that had little practical effect on actual Cold War decisions.'
+        ],
         correctAnswer: 'It discouraged all-out war because both sides knew a nuclear exchange would bring devastating destruction to each of them.',
-        explanation: 'MAD made nuclear war less likely because neither side could expect to survive without catastrophic loss.',
+        explanation: 'Once both superpowers had enough weapons to survive a first strike and still retaliate devastatingly, the certainty of mutual destruction made direct war irrational — creating a terrifying but stable deterrent.',
         standard: 'SS.912.A.6'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // UNIT 5B CAPSTONE — Thirteen Days
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'capstone',
     label: 'UNIT 5B CAPSTONE',
     title: 'Thirteen Days',
     sub: 'The Cuban Missile Crisis · October 1962',
-    icon: '🎯',
+    icon: '🌙',
     type: 'capstone',
     briefing: {
-      location: 'The Cuban Missile Crisis',
+      location: 'Washington D.C. and Havana',
       date: 'October 1962',
-      role: 'ExComm advisor',
+      role: 'ExComm adviser',
       text: 'For fifteen years, the Cold War has moved toward this moment. Containment, the arms race, the New Look, and the logic of brinkmanship have all narrowed the distance between pressure and catastrophe. Now U-2 photographs show Soviet nuclear missiles in Cuba, just ninety miles from Florida. Military leaders urge immediate air strikes, but President Kennedy fears that a surprise attack could trigger a wider war. Your task is to judge which decisions reduced the danger and which might have pushed the world into nuclear annihilation.',
-      tags: ['back-channel', 'quarantine', 'turkey-deal', 'resolution', 'discovery', 'brinkmanship']
+      tags: ['SS.912.A.6']
     },
     displayCount: 5,
-    goldRules: {
-      perCorrect: 25,
-      completionBonus: 50,
-      perfectBonus: 50
-    },
-    rewards: { badge: 'Thirteen Days', cards: ['John F. Kennedy', 'Nikita Khrushchev'] },
+    goldRules: { perCorrect: 25, completionBonus: 50, perfectBonus: 50 },
+    rewards: { badge: 'Thirteen Days', cards: ['Kennedy ExComm', 'Khrushchev Letters'] },
     bank: [
       {
         id: '5B-CAP-Q1',
         text: 'What development triggered the Cuban Missile Crisis in October 1962?',
-        choices: ['U-2 photographs revealed Soviet nuclear missile sites under construction in Cuba, close enough to threaten the United States.', 'American intelligence confirmed that Castro had agreed to let China station troops permanently in Cuba near the Florida coast.', 'Soviet submarines fired warning shots at U.S. destroyers during a routine patrol, causing Washington to prepare for invasion.', 'The United Nations announced that Cuba had violated an arms treaty by secretly testing long-range missiles in the Caribbean.'],
+        choices: [
+          'U-2 photographs revealed Soviet nuclear missile sites under construction in Cuba, close enough to threaten the United States.',
+          'Cuban President Castro publicly announced that his government had independently developed its own nuclear weapons program and issued a formal warning that Cuba would use those weapons against Florida if the United States attempted another military invasion.',
+          'Soviet submarines carrying nuclear missiles were discovered operating inside American territorial waters near Key West.',
+          'The CIA revealed that Khrushchev had secretly promised Cuba a nuclear umbrella against any future American invasion.'
+        ],
         correctAnswer: 'U-2 photographs revealed Soviet nuclear missile sites under construction in Cuba, close enough to threaten the United States.',
-        explanation: 'The crisis began when U-2 images confirmed Soviet missiles in Cuba.',
+        explanation: 'On October 14, 1962, U-2 spy plane photographs confirmed that medium and intermediate-range ballistic missile sites were being constructed in Cuba, giving the Soviet Union the ability to strike most of the eastern United States.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-CAP-Q2',
-        text: 'Why did Kennedy reject the Joint Chiefs’ recommendation for immediate air strikes and choose a naval blockade instead?',
-        choices: ['Air strikes might miss some missiles and make the United States look like the aggressor, while a blockade left room for negotiation.', 'Air strikes were illegal under the Constitution, and Congress had already voted to prohibit any use of force near Cuba.', 'Air strikes would have required British approval first, while a blockade could be launched by NATO without consulting the president.', 'Air strikes were considered too weak to matter, and Kennedy wanted a more dramatic show of force before opening diplomacy.'],
+        text: 'Why did Kennedy reject the Joint Chiefs\' recommendation for immediate air strikes and choose a naval blockade instead?',
+        choices: [
+          'Air strikes might miss some missiles and make the United States look like the aggressor, while a blockade left room for negotiation.',
+          'Kennedy rejected air strikes mainly because the Air Force admitted it could not guarantee destroying all the missile sites.',
+          'The blockade was chosen mainly because Congress had passed a law prohibiting unilateral air attacks on sovereign nations.',
+          'President Kennedy strongly preferred the naval blockade option mainly because it gave the Soviet Union a specific and unambiguous ultimatum accompanied by a clearly defined deadline by which Khrushchev had to demonstrate full compliance or face escalation.'
+        ],
         correctAnswer: 'Air strikes might miss some missiles and make the United States look like the aggressor, while a blockade left room for negotiation.',
-        explanation: 'Kennedy feared that air strikes could miss missiles, kill Soviet personnel, and trigger wider war, while a blockade was forceful but reversible.',
+        explanation: 'ExComm members worried that air strikes would be incomplete, kill Soviet personnel, and eliminate any diplomatic exit — the blockade stopped new weapons while keeping pressure on Khrushchev without triggering an irreversible exchange.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-CAP-Q3',
-        text: 'What was the main purpose of the naval blockade, or \'quarantine,\' during the Cuban Missile Crisis?',
-        choices: ['To stop additional Soviet military shipments from reaching Cuba while pressuring Khrushchev without launching an immediate war.', 'To isolate Cuba economically until Castro agreed to hold free elections supervised by the Organization of American States.', 'To prepare the way for a full invasion by trapping all Cuban forces on the island and cutting off food supplies first.', 'To seize Soviet submarines in the Atlantic and force Moscow to surrender control of its missile bases in Eastern Europe.'],
+        text: 'What was the main purpose of the naval blockade, or "quarantine," during the Cuban Missile Crisis?',
+        choices: [
+          'To stop additional Soviet military shipments from reaching Cuba while pressuring Khrushchev without launching an immediate war.',
+          'The quarantine was designed to cut off Cuba from all trade and force its government to expel Soviet military personnel.',
+          'Kennedy chose the naval quarantine mainly as a deliberate delaying tactic to postpone any immediate military action while he waited for a United Nations emergency negotiating team to travel to Havana and begin talks with Castro.',
+          'Its main purpose was to demonstrate American military superiority and convince Khrushchev to withdraw from Cuba voluntarily.'
+        ],
         correctAnswer: 'To stop additional Soviet military shipments from reaching Cuba while pressuring Khrushchev without launching an immediate war.',
-        explanation: 'The quarantine was designed to pressure the Soviets while avoiding the immediate escalation of a surprise attack.',
+        explanation: 'Kennedy deliberately called it a "quarantine" rather than a blockade to avoid the technical act of war that a blockade under international law implied — it was both a military measure and a political signal with room for negotiation.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-CAP-Q4',
         text: 'How did the Cuban Missile Crisis reveal the dangers of brinkmanship in the nuclear age?',
-        choices: ['Both sides pushed the confrontation to the edge, where one miscalculation could have turned a political crisis into nuclear war.', 'Both sides agreed in advance to avoid military movements, but the media exaggerated the risk of confrontation for political reasons.', 'Both sides relied mainly on economic sanctions, showing that Cold War crises no longer depended on military threats by 1962.', 'Both sides intended the crisis as a public relations test, because neither actually believed missiles in Cuba mattered strategically.'],
+        choices: [
+          'Both sides pushed the confrontation to the edge, where one miscalculation could have turned a political crisis into nuclear war.',
+          'The crisis showed that brinkmanship always worked, since the side with more resolve could force the other to back down.',
+          'It revealed that brinkmanship was mainly a bluff — neither superpower actually intended to use nuclear weapons.',
+          'The crisis demonstrated that nuclear weapons made military confrontations between superpowers less dangerous than conventional wars.'
+        ],
         correctAnswer: 'Both sides pushed the confrontation to the edge, where one miscalculation could have turned a political crisis into nuclear war.',
-        explanation: 'The Cuban Missile Crisis showed how brinkmanship could bring the world dangerously close to nuclear catastrophe.',
+        explanation: 'We now know how close the world came to disaster — an American U-2 was shot down, a Soviet submarine commander nearly launched a nuclear torpedo, and a Soviet officer had to override a launch order to prevent an accidental nuclear exchange.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-CAP-Q5',
-        text: 'Why was Robert Kennedy’s back-channel meeting with Soviet ambassador Anatoly Dobrynin so important to ending the crisis?',
-        choices: ['It allowed both sides to explore a settlement privately, including missile removal and a face-saving exit that public threats could not provide.', 'It gave the Soviet Union a formal chance to surrender to the United Nations before the United States began bombing Cuba.', 'It created a public alliance between Washington and Moscow against Castro, who had begun acting without Soviet approval.', 'It let American officials confirm that Soviet commanders in Cuba had already dismantled all missiles before the blockade began.'],
+        text: 'Why was Robert Kennedy\'s back-channel meeting with Soviet ambassador Anatoly Dobrynin so important to ending the crisis?',
+        choices: [
+          'It allowed both sides to explore a settlement privately, including missile removal and a face-saving exit that public threats could not provide.',
+          'The back-channel meeting was historically significant mainly because Dobrynin privately revealed to Robert Kennedy that Khrushchev had already made his final decision to withdraw all Soviet missiles from Cuba completely and without any conditions attached.',
+          'Robert Kennedy\'s meeting was significant because it was the first time a U.S. official had met secretly with a Soviet diplomat.',
+          'The back channel was critical mainly because it gave Kennedy confirmation that Soviet ships would not challenge the blockade line.'
+        ],
         correctAnswer: 'It allowed both sides to explore a settlement privately, including missile removal and a face-saving exit that public threats could not provide.',
-        explanation: 'Private diplomacy created room for compromise without publicly humiliating either side.',
+        explanation: 'Public communications were too rigid for compromise — Robert Kennedy\'s private meeting with Dobrynin allowed the United States to signal its secret willingness to remove Jupiter missiles from Turkey without making that concession publicly.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-CAP-Q6',
         text: 'What was the significance of the secret agreement involving U.S. missiles in Turkey?',
-        choices: ['It helped resolve the crisis by giving Khrushchev a private concession while allowing Kennedy to avoid a public trade that looked weak.', 'It proved that NATO had secretly planned to launch a first strike on the Soviet Union before missiles appeared in Cuba.', 'It allowed the United States to move missiles from Turkey into Cuba so the Soviet Union would feel less strategically threatened.', 'It forced Cuba to break with the Soviet Union after Castro learned that both superpowers had negotiated without consulting him.'],
+        choices: [
+          'It helped resolve the crisis by giving Khrushchev a private concession while allowing Kennedy to avoid a public trade that looked weak.',
+          'The Turkey agreement was significant mainly because it gave the Soviet Union formal veto power over future U.S. missile deployments in NATO.',
+          'It mattered primarily as a military concession — the Jupiter missiles in Turkey were the most capable weapons in the American arsenal.',
+          'The secret deal was important mainly because it was the first formal arms reduction agreement between the two superpowers.'
+        ],
         correctAnswer: 'It helped resolve the crisis by giving Khrushchev a private concession while allowing Kennedy to avoid a public trade that looked weak.',
-        explanation: 'The secret Turkey arrangement helped give Khrushchev a face-saving exit while protecting Kennedy publicly.',
+        explanation: 'The Jupiters in Turkey were already scheduled for removal and were strategically obsolete — their secret withdrawal gave Khrushchev something to show domestically while Kennedy maintained the public appearance of having made no concessions.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-CAP-Q7',
         text: 'What outcome best describes how the Cuban Missile Crisis ended?',
-        choices: ['The Soviets removed missiles from Cuba, the United States pledged not to invade Cuba, and both sides stepped back from direct confrontation.', 'The United States invaded Cuba after Soviet ships crossed the blockade line, forcing Castro to flee and Khrushchev to retreat publicly.', 'The United Nations took control of Cuba’s military bases, and both superpowers agreed to withdraw from the Caribbean entirely.', 'Kennedy accepted permanent Soviet missiles in Cuba in exchange for immediate Soviet recognition of West Berlin and West Germany.'],
+        choices: [
+          'The Soviets removed missiles from Cuba, the United States pledged not to invade Cuba, and both sides stepped back from direct confrontation.',
+          'The Soviet Union withdrew all its forces from Cuba unconditionally in exchange for an immediate American military withdrawal from West Germany.',
+          'The United States launched air strikes that destroyed the missile sites, after which Khrushchev agreed to normalization of relations.',
+          'A UN ceasefire ended the crisis with Cuba retaining the missiles under UN inspection to prevent further American intervention.'
+        ],
         correctAnswer: 'The Soviets removed missiles from Cuba, the United States pledged not to invade Cuba, and both sides stepped back from direct confrontation.',
-        explanation: 'The crisis ended with Soviet withdrawal of missiles, a U.S. non-invasion pledge, and a general pullback from immediate confrontation.',
+        explanation: 'Khrushchev\'s public offer — missiles out in exchange for no-invasion pledge — plus the secret Turkey arrangement gave both leaders a way to step back from the brink while claiming some measure of success.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-CAP-Q8',
         text: 'What larger lesson did many leaders take from the Cuban Missile Crisis?',
-        choices: ['In the nuclear age, restraint, communication, and arms control mattered because winning a superpower war could still mean mutual destruction.', 'In the nuclear age, presidents had to strike first in any crisis because hesitation only encouraged the opponent to escalate further.', 'In the nuclear age, civil defense planning was enough to make nuclear war survivable, so diplomacy became less important than readiness.', 'In the nuclear age, missile deployments no longer shaped diplomacy because each side had already accepted permanent global confrontation.'],
+        choices: [
+          'In the nuclear age, restraint, communication, and arms control mattered because winning a superpower war could still mean mutual destruction.',
+          'The Cuban Missile Crisis definitively proved that the policy of brinkmanship was by far the most reliable and effective available tool for managing dangerous superpower competition and should therefore be used far more aggressively and frequently.',
+          'Leaders concluded mainly that proxy conflicts in the developing world were safer than direct confrontations and should be encouraged.',
+          'The crisis showed that nuclear weapons were so dangerous that both superpowers should immediately disarm and rely on conventional forces.'
+        ],
         correctAnswer: 'In the nuclear age, restraint, communication, and arms control mattered because winning a superpower war could still mean mutual destruction.',
-        explanation: 'The crisis encouraged better communication and some arms control because both sides had seen how close they came to catastrophe.',
+        explanation: 'The crisis led directly to the Moscow-Washington hotline, the Limited Test Ban Treaty of 1963, and a broader movement toward arms control — evidence that both sides had been genuinely frightened by how close they had come to catastrophe.',
         standard: 'SS.912.A.6'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
-  // EOC REVIEW — EOC Practice Quiz
-  // ══════════════════════════════════════════════════
+  // ==================================================
+  // EOC REVIEW — Cold War
+  // ==================================================
   {
     id: 'eoc',
     label: 'EOC REVIEW',
@@ -1414,217 +1624,338 @@ const LESSONS = [
     type: 'eoc',
     briefing: {
       location: 'Cold War Review',
-      date: 'Cold War Review',
-      role: 'Historian in training',
+      date: '',
+      role: 'state exam coach',
       text: 'You have completed the major Cold War missions. Now you must review the causes, conflicts, policies, and home-front tensions that shaped the era. Expect questions from across the unit, including containment, Korea, anti-communism at home, nuclear strategy, and the Cuban Missile Crisis. Success here shows that you understand the whole story, not just one chapter.',
-      tags: ['warsaw-pact', 'china-intervention', 'korea', 'big-picture', 'mccarthyism', 'marshall-plan']
+      tags: ['SS.912.A.6']
     },
     displayCount: 15,
-    goldRules: {
-      perCorrect: 15,
-      completionBonus: 50,
-      perfectBonus: 50
-    },
-    rewards: { badge: 'Cold War Complete', cards: ['Containment', 'NATO', 'MAD'] },
+    goldRules: { perCorrect: 15, completionBonus: 50, perfectBonus: 50 },
+    rewards: { badge: 'Cold War Mastery', cards: ['George Kennan', 'Limited Test Ban Treaty'] },
     bank: [
       {
         id: '5B-EOC-Q1',
         text: 'What was the main purpose of the American policy of containment during the Cold War?',
-        choices: ['To prevent communism from spreading into additional countries without trying to conquer every communist state immediately.', 'To encourage all European nations to remain neutral so the United States could avoid any long-term involvement overseas.', 'To replace the United Nations with a military government that would supervise reconstruction across Europe and Asia.', 'To force the Soviet Union to adopt free elections by threatening a direct invasion of Eastern Europe after World War II.'],
+        choices: [
+          'To prevent communism from spreading into additional countries without trying to conquer every communist state immediately.',
+          'The formal policy of containment legally required the United States to organize and lead military invasions to liberate any nation anywhere in the world that had come under communist control, regardless of American interests there.',
+          'The policy was primarily economic — it used trade restrictions to prevent the Soviet Union from selling goods abroad.',
+          'Containment meant encircling the Soviet Union with American military bases so it could not project power outward.'
+        ],
         correctAnswer: 'To prevent communism from spreading into additional countries without trying to conquer every communist state immediately.',
-        explanation: 'Containment aimed to stop communist expansion into new regions rather than overthrow every communist government at once.',
+        explanation: 'George Kennan\'s containment doctrine accepted Soviet control where it already existed while drawing lines against further expansion — it was defensive and patient, not aggressive.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q2',
         text: 'Which situation most directly led President Truman to announce the Truman Doctrine in 1947?',
-        choices: ['Britain could no longer support Greece and Turkey, and American leaders feared communist gains in both nations.', 'The Soviet Union had already stationed nuclear missiles in Cuba, creating immediate pressure on the United States.', 'China had joined NATO, and Truman wanted to reassure Western Europe that the alliance would remain strong.', 'Congress had voted to cut all foreign aid, forcing Truman to defend European reconstruction with a new speech.'],
+        choices: [
+          'Britain could no longer support Greece and Turkey, and American leaders feared communist gains in both nations.',
+          'The Soviet Union had invaded Finland and was threatening to extend its military presence into Scandinavia.',
+          'Communist parties had won parliamentary elections in France and Italy, putting Western European governments at risk.',
+          'China\'s civil war had resumed, and Truman wanted to prevent Mao\'s forces from overrunning the Nationalist government.'
+        ],
         correctAnswer: 'Britain could no longer support Greece and Turkey, and American leaders feared communist gains in both nations.',
-        explanation: 'The immediate crisis in Greece and Turkey pushed Truman to declare that the United States should support free peoples resisting communist pressure.',
+        explanation: 'Britain\'s sudden withdrawal of support in February 1947 created an immediate crisis — communist insurgency threatened Greece and Soviet pressure bore down on Turkey, forcing Truman to ask Congress for $400 million in emergency aid.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q3',
         text: 'How did the Marshall Plan support the larger Cold War strategy of containment?',
-        choices: ['It used economic aid to rebuild Europe so hardship and instability would be less likely to strengthen communist movements.', 'It armed East European resistance groups and directed them to overthrow Soviet-backed governments through guerrilla warfare.', 'It required European nations to abolish elections until their economies became strong enough to resist Soviet influence.', 'It placed Germany and France under temporary American military rule until all communist parties were banned by law.'],
+        choices: [
+          'It used economic aid to rebuild Europe so hardship and instability would be less likely to strengthen communist movements.',
+          'The Marshall Plan supported containment mainly by funding military rearmament of Western European governments.',
+          'The Marshall Plan required every receiving European nation to maintain large standing armies and contribute troops to a unified Western military command as a mandatory condition for receiving any American economic reconstruction assistance.',
+          'The plan contained communism mainly by creating a common European market that excluded Soviet-bloc nations from trade.'
+        ],
         correctAnswer: 'It used economic aid to rebuild Europe so hardship and instability would be less likely to strengthen communist movements.',
-        explanation: 'The Marshall Plan used economic recovery as part of containment by reducing the appeal of communism.',
+        explanation: 'Marshall\'s insight was that communism flourished in desperation — by rebuilding European prosperity, the United States removed the conditions that made communist parties attractive to voters in France, Italy, and elsewhere.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q4',
-        text: 'What did Churchill’s phrase \'iron curtain\' describe in postwar Europe?',
-        choices: ['The political and ideological divide separating Soviet-dominated Eastern Europe from the democratic nations in the West.', 'The military wall built around Berlin after the Korean War to stop refugees from moving between East and West Germany.', 'The trade barrier imposed by the United Nations after Stalin rejected international control of atomic weapons in 1946.', 'The secret agreement between Britain and the Soviet Union dividing Europe into neutral zones after World War II ended.'],
+        text: 'What did Churchill\'s phrase "iron curtain" describe in postwar Europe?',
+        choices: [
+          'The political and ideological divide separating Soviet-dominated Eastern Europe from the democratic nations in the West.',
+          'A literal barrier of fences, minefields, and guard towers that the Soviet Union was constructing along its western borders.',
+          'The economic gap between the industrialized West and the agricultural economies of Eastern European nations.',
+          'Churchill used the term to describe the secrecy surrounding Soviet nuclear weapons development and testing programs.'
+        ],
         correctAnswer: 'The political and ideological divide separating Soviet-dominated Eastern Europe from the democratic nations in the West.',
-        explanation: 'Churchill’s phrase referred to the political and ideological barrier separating East and West.',
+        explanation: 'Churchill\'s vivid metaphor described how Soviet-installed governments had shut their populations off from free communication, travel, and political contact with the democratic West.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q5',
         text: 'What did the Berlin Airlift show about early American Cold War policy?',
-        choices: ['The United States would oppose Soviet pressure firmly while still trying to avoid a direct military war in Europe.', 'The United States had decided Berlin was indefensible and would eventually have to be surrendered to Soviet control.', 'The United States preferred to answer every Cold War crisis with an immediate ground invasion rather than negotiation.', 'The United States believed economic aid was useless and that Western Europe could be defended only by atomic weapons.'],
+        choices: [
+          'The United States would oppose Soviet pressure firmly while still trying to avoid a direct military war in Europe.',
+          'The Berlin Airlift proved that the United States was fully prepared to risk all-out full-scale military war with the Soviet Union over the symbolic and strategic status of a single divided city deep inside Soviet-controlled territory.',
+          'The airlift demonstrated that the United States could not defend Berlin militarily and needed European support.',
+          'It showed that economic tools were always more effective than military ones in responding to Soviet challenges.'
+        ],
         correctAnswer: 'The United States would oppose Soviet pressure firmly while still trying to avoid a direct military war in Europe.',
-        explanation: 'The airlift answered Soviet pressure without immediately triggering open war.',
+        explanation: 'Rather than challenging the blockade with armed convoys — which could have triggered fighting — the West found a non-military solution that sustained Berlin, embarrassed the Soviets, and demonstrated American resolve without escalation.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q6',
         text: 'Why was NATO significant in the development of the Cold War?',
-        choices: ['It made collective defense against Soviet aggression a formal commitment among the United States and Western allies.', 'It united communist and democratic nations in a common trade alliance designed to reduce European military spending.', 'It replaced the Marshall Plan with a civilian agency devoted to food relief and public health in postwar Europe.', 'It required every European country to remain neutral so that neither superpower could dominate the continent.'],
+        choices: [
+          'It made collective defense against Soviet aggression a formal commitment among the United States and Western allies.',
+          'NATO was historically significant mainly because it provided the United States with the clear and unambiguous legal authority to permanently station large numbers of nuclear weapons and delivery systems across multiple Western European nations.',
+          'The alliance was important primarily as an economic organization that coordinated Marshall Plan spending.',
+          'NATO mattered mainly because it gave Western European nations veto power over American military strategy globally.'
+        ],
         correctAnswer: 'It made collective defense against Soviet aggression a formal commitment among the United States and Western allies.',
-        explanation: 'NATO formalized collective security in Western Europe against Soviet aggression.',
+        explanation: 'Article 5\'s mutual defense pledge transformed the informal Western alignment into a binding treaty — for the first time in its history the United States entered a peacetime military alliance, committing itself to defend Europe.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q7',
         text: 'How did the Warsaw Pact affect the Cold War in Europe?',
-        choices: ['It formalized the Soviet bloc as a rival military alliance and deepened the continent’s division into two armed camps.', 'It created a neutral peacekeeping zone in Eastern Europe that kept Soviet and NATO troops equally far from Germany.', 'It allowed Western European states to join a shared defense treaty with the Soviet Union while remaining democratic.', 'It ended the Berlin dispute by placing all occupied German territory under temporary control of the United Nations.'],
-        correctAnswer: 'It formalized the Soviet bloc as a rival military alliance and deepened the continent’s division into two armed camps.',
-        explanation: 'The Warsaw Pact hardened Europe’s military division between East and West.',
+        choices: [
+          'It formalized the Soviet bloc as a rival military alliance and deepened the continent\'s division into two armed camps.',
+          'The Warsaw Pact reduced Cold War tensions by providing a formal channel for Soviet and Eastern European military coordination.',
+          'It affected the Cold War mainly by giving Soviet-bloc nations the right to refuse Soviet military bases on their soil.',
+          'The pact was mainly symbolic and had little practical military effect because Soviet forces already controlled Eastern Europe.'
+        ],
+        correctAnswer: 'It formalized the Soviet bloc as a rival military alliance and deepened the continent\'s division into two armed camps.',
+        explanation: 'Created as a direct mirror of NATO after West Germany\'s admission to the Western alliance, the Warsaw Pact institutionalized the military confrontation that had existed informally since the late 1940s.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q8',
         text: 'Why is the Korean War often described as a major turning point in the Cold War?',
-        choices: ['It turned containment into a shooting war and showed that Cold War rivalry could become a deadly military conflict.', 'It ended the rivalry between the superpowers by proving that the United Nations could settle all disputes peacefully.', 'It convinced the United States to abandon alliances in Asia and concentrate only on defending Western Europe.', 'It led the Soviet Union to dismantle its atomic program in return for a negotiated settlement on the Korean peninsula.'],
+        choices: [
+          'It turned containment into a shooting war and showed that Cold War rivalry could become a deadly military conflict.',
+          'Korea was a turning point mainly because the war ended in an American defeat that damaged U.S. credibility globally.',
+          'The war was significant mainly because it caused the Soviet Union to formally recognize the government of North Korea.',
+          'Korea turned the Cold War because it led directly to American diplomatic recognition of communist China.'
+        ],
         correctAnswer: 'It turned containment into a shooting war and showed that Cold War rivalry could become a deadly military conflict.',
-        explanation: 'Korea proved that the Cold War could erupt into actual warfare involving the superpowers and their allies.',
+        explanation: 'Korea transformed the Cold War from a political and economic competition into an armed conflict — demonstrating that proxy wars could kill hundreds of thousands and that containment might require actual fighting.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q9',
         text: 'Why did Chinese forces enter the Korean War after UN troops advanced northward?',
-        choices: ['Chinese leaders feared hostile forces near their border and saw the advance as a direct threat to their security.', 'Chinese leaders wanted to help Japan regain power in East Asia and push both Koreas into a separate alliance system.', 'Chinese leaders believed South Korea had already collapsed and hoped to occupy the peninsula before the Soviets did.', 'Chinese leaders had agreed with the United States to divide Korea permanently after MacArthur crossed the 38th parallel.'],
-        correctAnswer: 'Chinese leaders feared hostile forces near their border and saw the advance as a direct threat to their security.',
-        explanation: 'China intervened because it saw UN forces moving north as a direct security threat.',
+        choices: [
+          'Chinese leaders feared that advancing UN forces near their border posed a direct military threat to China itself.',
+          'China intervened because Mao had signed a mutual defense treaty requiring China to defend North Korea if invaded.',
+          'Chinese forces entered mainly to honor a Soviet request and demonstrate that communist nations would support each other.',
+          'China intervened because it wanted to use Korea as a training ground for its military before invading Taiwan.'
+        ],
+        correctAnswer: 'Chinese leaders feared that advancing UN forces near their border posed a direct military threat to China itself.',
+        explanation: 'MacArthur\'s drive northward toward the Yalu River convinced Mao that the United States might not stop at the Korean border — the result was a massive Chinese intervention that drove UN forces back and transformed the war.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q10',
         text: 'What does the Cold War struggle for influence in the Third World refer to?',
-        choices: ['Competition for allies in developing nations through aid, propaganda, covert action, and occasional military intervention.', 'An agreement by both superpowers to leave poorer nations alone while they focused instead on Europe and North America.', 'A United Nations campaign to create a single world government out of newly independent nations in Africa and Asia.', 'A policy requiring all developing countries to join either NATO or the Warsaw Pact before receiving foreign assistance.'],
+        choices: [
+          'Competition for allies in developing nations through aid, propaganda, covert action, and occasional military intervention.',
+          'A series of formal military conflicts between U.S. and Soviet forces in Asia, Africa, and Latin America.',
+          'Economic negotiations between the superpowers over access to raw materials in newly independent nations.',
+          'The Cold War struggle referred to a systematic diplomatic effort by both superpowers to persuade dozens of newly independent nations to formally adopt either American constitutional democratic models or Soviet-style communist single-party governmental structures.'
+        ],
         correctAnswer: 'Competition for allies in developing nations through aid, propaganda, covert action, and occasional military intervention.',
-        explanation: 'The Third World became a major arena of Cold War rivalry outside Europe.',
+        explanation: 'As dozens of new nations emerged from colonial rule in the 1950s and 1960s, both superpowers competed for their alignment through foreign aid, military assistance, covert operations, and cultural programs.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q11',
         text: 'Why did American covert actions in countries such as Iran and Guatemala become controversial?',
-        choices: ['They advanced containment in the short term but often damaged America’s reputation and fostered lasting resentment abroad.', 'They had no effect at all on local politics and were widely forgotten by the populations they were meant to influence.', 'They mainly focused on disaster relief, though critics argued too much money was spent on humanitarian missions overseas.', 'They were controlled entirely by NATO commanders, which made many Americans fear a loss of U.S. sovereignty at home.'],
-        correctAnswer: 'They advanced containment in the short term but often damaged America’s reputation and fostered lasting resentment abroad.',
-        explanation: 'Covert action could support containment, but often at the cost of America’s image and local trust.',
+        choices: [
+          'They advanced containment in the short term but often damaged America\'s reputation and fostered lasting resentment abroad.',
+          'The operations were controversial mainly because they were directed by the State Department without CIA authorization.',
+          'Covert actions became controversial mainly because they consistently failed and actually helped communists take power.',
+          'They were controversial primarily because Congress passed laws prohibiting covert action without a formal declaration of war.'
+        ],
+        correctAnswer: 'They advanced containment in the short term but often damaged America\'s reputation and fostered lasting resentment abroad.',
+        explanation: 'Overthrowing elected governments — even ones with communist ties — made the United States look hypocritical about its stated commitment to democracy and created anti-American sentiment that lasted generations.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q12',
         text: 'What was McCarthyism?',
-        choices: ['The use of reckless accusations and personal attacks with little reliable evidence during anti-communist investigations.', 'The official military doctrine requiring the United States to answer any Soviet move with immediate nuclear retaliation.', 'The federal program that taught children duck-and-cover procedures and encouraged suburban fallout shelter construction.', 'The postwar economic policy of reducing taxes and defense spending so the United States could avoid a permanent arms race.'],
+        choices: [
+          'The use of reckless accusations and personal attacks with little reliable evidence during anti-communist investigations.',
+          'McCarthyism was a set of formal laws passed by Congress that required government employees to undergo loyalty tests.',
+          'The term describes the broader Cold War strategy of using economic pressure to isolate communist nations internationally.',
+          'It refers specifically to McCarthy\'s successful effort to expose Soviet spies inside the State Department and Army.'
+        ],
         correctAnswer: 'The use of reckless accusations and personal attacks with little reliable evidence during anti-communist investigations.',
-        explanation: 'McCarthyism referred to unsupported accusations and political attacks during the Red Scare.',
+        explanation: 'McCarthy\'s method — making sweeping charges of communist infiltration without substantiating them — gave his name to a broader phenomenon of accusation-as-weapon that destroyed reputations without legal process.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q13',
         text: 'What was one important consequence of HUAC investigations into Hollywood?',
-        choices: ['The blacklist punished people suspected of communist ties or those who refused to cooperate with investigators.', 'The Supreme Court permanently banned Congress from questioning witnesses about political beliefs or past associations.', 'The federal government took direct control of all film studios to make anti-communist movies for civil defense education.', 'Hollywood unions formed an alliance with the Soviet Union and called for the United States to remain neutral in Europe.'],
+        choices: [
+          'The blacklist punished people suspected of communist ties or those who refused to cooperate with investigators.',
+          'HUAC investigations into Hollywood resulted in the criminal prosecution of more than two hundred studio executives.',
+          'The studios were required by law to submit all film scripts for government review before production could begin.',
+          'Hollywood investigations led to mandatory loyalty oaths that all Americans working in any creative field had to sign.'
+        ],
         correctAnswer: 'The blacklist punished people suspected of communist ties or those who refused to cooperate with investigators.',
-        explanation: 'HUAC’s investigations contributed directly to the Hollywood blacklist.',
+        explanation: 'Studios, fearing bad publicity and congressional pressure, refused to hire anyone named as a communist or suspected sympathizer — the blacklist ended careers without trials, convictions, or constitutional due process.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q14',
         text: 'Why did the Hiss and Rosenberg cases strengthen fears of communist subversion in the United States?',
-        choices: ['They appeared to show that spies or communist sympathizers might have penetrated major American institutions and secrets.', 'They proved that most anti-communist investigations had been fabricated by Congress for partisan political advantage.', 'They showed that only local officials, not federal workers or scientists, could ever be targets of Soviet recruitment.', 'They convinced the public that atomic secrets had remained secure and that Soviet technological progress was unrelated to espionage.'],
+        choices: [
+          'They appeared to show that spies or communist sympathizers might have penetrated major American institutions and secrets.',
+          'Both cases were proven frauds, which convinced many Americans that the government was manufacturing spy scares.',
+          'The cases were alarming mainly because they revealed Soviet agents had infiltrated the highest levels of the military.',
+          'Hiss and the Rosenbergs were diplomats who had negotiated secret treaties giving the Soviets access to American technology.'
+        ],
         correctAnswer: 'They appeared to show that spies or communist sympathizers might have penetrated major American institutions and secrets.',
-        explanation: 'These cases reinforced the fear that communist subversion had reached deep into American institutions.',
+        explanation: 'A senior State Department official convicted of perjury related to espionage, and a couple executed for passing atomic secrets, made it very difficult to dismiss warnings about communist infiltration as paranoia.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q15',
         text: 'What was the purpose of civil defense measures such as duck-and-cover drills, sirens, shelters, and public preparedness manuals?',
-        choices: ['To prepare ordinary Americans for the possibility of atomic attack and encourage some chance of survival in an emergency.', 'To train schoolchildren for future military service by introducing them early to battlefield discipline and command structures.', 'To convince the Soviet Union that American suburbs could continue normal life even during a prolonged nuclear exchange.', 'To replace conventional military spending by shifting national defense responsibility almost entirely onto local communities.'],
+        choices: [
+          'To prepare ordinary Americans for the possibility of atomic attack and encourage some chance of survival in an emergency.',
+          'Civil defense measures were designed mainly to reassure the public without providing any actual protection from nuclear weapons.',
+          'The programs were intended primarily to test local emergency management systems rather than to prepare the public.',
+          'Duck-and-cover and related measures were originally designed for conventional warfare and later adapted for the nuclear age.'
+        ],
         correctAnswer: 'To prepare ordinary Americans for the possibility of atomic attack and encourage some chance of survival in an emergency.',
-        explanation: 'Civil defense reflected efforts to prepare the public for nuclear attack, even if many doubted its effectiveness.',
+        explanation: 'Whether or not civil defense measures would actually save lives in a nuclear attack, they served both a practical and psychological purpose — giving Americans a sense of agency in a situation that otherwise felt entirely beyond their control.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q16',
         text: 'How did many Americans view the Atomic Age during the 1950s?',
-        choices: ['With both fear of nuclear destruction and optimism about the peaceful uses of atomic science and energy.', 'With indifference, because most people believed the superpowers would never risk using nuclear technology for war.', 'With broad confidence that conventional armies had made atomic weapons irrelevant to the future of global politics.', 'With strong support for ending scientific research, since most citizens believed atomic knowledge had no positive value.'],
+        choices: [
+          'With both fear of nuclear destruction and optimism about the peaceful uses of atomic science and energy.',
+          'Most Americans viewed the Atomic Age with uncomplicated pride as proof of American scientific and military superiority.',
+          'Public opinion was almost uniformly negative — the bomb\'s use in Japan had permanently poisoned its image at home.',
+          'Americans viewed the Atomic Age mainly with indifference, trusting the military to manage nuclear weapons responsibly.'
+        ],
         correctAnswer: 'With both fear of nuclear destruction and optimism about the peaceful uses of atomic science and energy.',
-        explanation: 'The Atomic Age inspired both anxiety about war and excitement about scientific progress.',
+        explanation: 'The 1950s held both realities simultaneously — civil defense drills and fallout shelter anxiety alongside Eisenhower\'s "Atoms for Peace" speech and predictions of nuclear-powered cars and abundant cheap electricity.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q17',
-        text: 'What was the main idea behind Eisenhower’s New Look strategy?',
-        choices: ['To rely more on nuclear deterrence and less on large conventional armies in order to contain communism at lower cost.', 'To withdraw from most foreign commitments and allow European and Asian allies to handle their own defense independently.', 'To replace all military alliances with trade agreements because nuclear weapons had made collective defense unnecessary.', 'To fight communist movements only with covert action while permanently ruling out any use of military force abroad.'],
+        text: 'What was the main idea behind Eisenhower\'s New Look strategy?',
+        choices: [
+          'To rely more on nuclear deterrence and less on large conventional armies in order to contain communism at lower cost.',
+          'The New Look strategy primarily involved withdrawing American forces from overseas bases to reduce Cold War tensions.',
+          'Eisenhower wanted to build the largest conventional army in American history to deter any Soviet conventional attack.',
+          'The strategy\'s main idea was using foreign aid and diplomacy to make military force entirely unnecessary in the Cold War.'
+        ],
         correctAnswer: 'To rely more on nuclear deterrence and less on large conventional armies in order to contain communism at lower cost.',
-        explanation: 'The New Look tried to contain communism while controlling defense spending by emphasizing nuclear deterrence.',
+        explanation: 'Eisenhower\'s military background made him acutely aware that maintaining a massive army over decades could bankrupt the republic — the New Look\'s nuclear emphasis was as much about fiscal conservatism as military strategy.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q18',
-        text: 'What did the phrase massive retaliation mean during the Eisenhower era?',
-        choices: ['The United States warned that aggression could be answered with a large nuclear response rather than only a limited local war.', 'The United States promised to meet Soviet power only with equal numbers of soldiers and tanks in every regional conflict.', 'The United States agreed to use force only after a formal declaration of war had been passed by all NATO legislatures.', 'The United States intended to attack first whenever a communist government was established by revolution or election abroad.'],
+        text: 'What did the phrase "massive retaliation" mean during the Eisenhower era?',
+        choices: [
+          'The United States warned that aggression could be answered with a large nuclear response rather than only a limited local war.',
+          'The policy of massive retaliation required dramatically increasing the overall size and capability of the conventional American Army in Europe to match or exceed the enormous Soviet ground forces stationed across Eastern Europe.',
+          'The phrase described the policy of rebuilding every nation damaged by communist aggression at U.S. expense.',
+          'It referred to the strategy of using economic sanctions massive enough to cause regime change in hostile states.'
+        ],
         correctAnswer: 'The United States warned that aggression could be answered with a large nuclear response rather than only a limited local war.',
-        explanation: 'Massive retaliation made nuclear threat central to deterrence under the New Look.',
+        explanation: 'Secretary Dulles\' massive retaliation doctrine threatened to respond to even conventional Soviet aggression with nuclear weapons — making every Cold War confrontation implicitly a nuclear one.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q19',
         text: 'What was brinkmanship in Cold War policy?',
-        choices: ['The practice of pushing dangerous crises to the edge in hopes that the other side would back down first.', 'The refusal to negotiate with communist leaders under any circumstances, even when nuclear war seemed possible.', 'The decision to avoid alliances and rely instead on world opinion to contain Soviet influence and military expansion.', 'The policy of placing all nuclear weapons under United Nations command so superpower tensions could be reduced peacefully.'],
+        choices: [
+          'The practice of pushing dangerous crises to the edge in hopes that the other side would back down first.',
+          'Brinkmanship described the policy of maintaining nuclear weapons just below the threshold needed to trigger arms control talks.',
+          'It referred to the diplomatic strategy of offering concessions at the very last moment to prevent wars from starting.',
+          'The term described the policy of building conventional forces large enough to prevent any crisis from reaching the nuclear level.'
+        ],
         correctAnswer: 'The practice of pushing dangerous crises to the edge in hopes that the other side would back down first.',
-        explanation: 'Brinkmanship relied on escalating pressure to the edge of war to force an opponent to retreat.',
+        explanation: 'Dulles described going to the brink as a necessary nerve — the willingness to risk war in order to avoid surrender — though critics worried that a miscalculation at the brink could mean the end of civilization.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q20',
         text: 'What was the logic behind Mutual Assured Destruction, or MAD?',
-        choices: ['Both sides knew a nuclear attack would bring devastating retaliation, so neither had a rational incentive to start one.', 'Both sides believed a large enough first strike would prevent retaliation and make a nuclear war winnable in practice.', 'Both sides agreed to dismantle their missiles because each accepted that civil defense was too weak to protect cities.', 'Both sides relied on missile defense systems so strong that nuclear weapons eventually lost most of their strategic value.'],
+        choices: [
+          'Both sides knew a nuclear attack would bring devastating retaliation, so neither had a rational incentive to start one.',
+          'MAD held that nuclear weapons were so expensive to maintain that both sides would eventually choose disarmament.',
+          'The doctrine required each superpower to destroy the other\'s weapons before they could be launched in an actual attack.',
+          'MAD was the theory that conventional wars between nuclear powers would automatically escalate to nuclear exchange.'
+        ],
         correctAnswer: 'Both sides knew a nuclear attack would bring devastating retaliation, so neither had a rational incentive to start one.',
-        explanation: 'MAD discouraged nuclear war by making clear that both sides would be destroyed in a full exchange.',
+        explanation: 'MAD created a stable deterrent through the guarantee of mutual destruction — a first strike made no sense if the second strike would be equally devastating, so the most rational choice was never to strike at all.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q21',
         text: 'Why did Sputnik create such intense anxiety in the United States?',
-        choices: ['It suggested that Soviet rockets might also be able to deliver nuclear warheads across long distances to American cities.', 'It showed that the Soviet Union had already built military bases in Cuba and could strike Florida with almost no warning.', 'It proved that American scientists had secretly fallen behind because Congress had outlawed federal support for research.', 'It forced NATO to dissolve after European allies concluded the United States could no longer protect them from attack.'],
+        choices: [
+          'It suggested that Soviet rockets might also be able to deliver nuclear warheads across long distances to American cities.',
+          'Sputnik alarmed Americans mainly because it proved the Soviet economy had surpassed America\'s in scientific investment.',
+          'Most American anxiety about Sputnik came directly from the well-founded fear that Soviet reconnaissance satellites in orbit were systematically photographing every major American military installation, naval base, and nuclear weapons facility.',
+          'The satellite was worrying mainly because it could broadcast propaganda directly into American radio receivers.'
+        ],
         correctAnswer: 'It suggested that Soviet rockets might also be able to deliver nuclear warheads across long distances to American cities.',
-        explanation: 'Sputnik mattered because it implied advanced Soviet missile technology.',
+        explanation: 'The same rocket that put a small sphere in orbit could put a nuclear warhead anywhere on earth — Sputnik made ballistic missile attack on the American homeland a sudden, terrifying reality rather than a distant future possibility.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q22',
         text: 'Why did Kennedy choose a naval blockade during the Cuban Missile Crisis instead of immediate air strikes?',
-        choices: ['A blockade applied pressure while preserving time for negotiation and avoiding the risks of a surprise attack that could escalate.', 'A blockade was the only legal option because the Constitution forbade presidents from ordering air strikes near Cuba.', 'A blockade was intended mainly to starve Cuba into submission because military planners considered Soviet missiles harmless.', 'A blockade guaranteed that Soviet ships would surrender quickly without forcing Washington to communicate with Moscow at all.'],
+        choices: [
+          'A blockade applied pressure while preserving time for negotiation and avoiding the risks of a surprise attack that could escalate.',
+          'Kennedy ultimately chose the blockade over air strikes mainly because his senior military advisers frankly admitted that even a massive and sustained air campaign could not guarantee the complete destruction of all the missile sites across Cuba.',
+          'The blockade was selected primarily because it was the only option that required no congressional authorization.',
+          'Kennedy preferred the blockade because it would give the Soviet ships time to turn around before the quarantine line was active.'
+        ],
         correctAnswer: 'A blockade applied pressure while preserving time for negotiation and avoiding the risks of a surprise attack that could escalate.',
-        explanation: 'Kennedy saw the blockade as a forceful but reversible alternative to immediate air strikes.',
+        explanation: 'Air strikes would be irreversible, might kill Soviet personnel, and could look like American aggression — the blockade stopped the clock, forced Khrushchev to make the next move, and kept diplomatic options open.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q23',
         text: 'Which outcome best describes the end of the Cuban Missile Crisis?',
-        choices: ['The Soviets removed missiles from Cuba, the United States pledged not to invade Cuba, and a secret Turkey arrangement helped seal the deal.', 'The United States invaded Cuba after Soviet ships crossed the quarantine line, forcing Khrushchev to retreat from the Caribbean.', 'The United Nations seized control of all Cuban military facilities and required both superpowers to withdraw from Latin America.', 'Kennedy accepted permanent Soviet missiles in Cuba in exchange for public Soviet recognition of West Berlin and NATO.'],
+        choices: [
+          'The Soviets removed missiles from Cuba, the United States pledged not to invade Cuba, and a secret Turkey arrangement helped seal the deal.',
+          'The United States ultimately launched a carefully targeted surgical air strike campaign that destroyed all the Soviet missile installations in Cuba, after which a chastened Khrushchev agreed to begin formal bilateral disarmament negotiations.',
+          'A UN ceasefire ended the standoff with Cuba retaining Soviet missiles under international inspection and monitoring.',
+          'Kennedy and Khrushchev met directly in Havana and negotiated a comprehensive nuclear disarmament agreement.'
+        ],
         correctAnswer: 'The Soviets removed missiles from Cuba, the United States pledged not to invade Cuba, and a secret Turkey arrangement helped seal the deal.',
-        explanation: 'The crisis ended through missile removal, a U.S. non-invasion pledge, and a private Turkey arrangement.',
+        explanation: 'Khrushchev\'s public concession — missile removal for no-invasion pledge — was made possible by the private assurance that obsolete Jupiter missiles in Turkey would also be removed, giving him a face-saving exit.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q24',
         text: 'What was one important result of the Cuban Missile Crisis in its aftermath?',
-        choices: ['It encouraged improved communication and limited arms control, including the hotline and the Limited Test Ban Treaty.', 'It led both superpowers to withdraw from all military alliances because nuclear brinkmanship had clearly failed as a strategy.', 'It convinced American leaders to rely mainly on civil defense rather than diplomacy or arms control in future confrontations.', 'It ended Soviet influence in Cuba entirely and restored the island to the political orbit of the United States.'],
+        choices: [
+          'It encouraged improved communication and limited arms control, including the hotline and the Limited Test Ban Treaty.',
+          'The crisis led the two superpowers to agree never to station nuclear weapons outside their own territories again.',
+          'Kennedy and Khrushchev both resigned within months of the crisis, citing the unbearable stress of nuclear responsibility.',
+          'The near-war convinced both nations to reduce their nuclear arsenals by fifty percent within five years of the crisis.'
+        ],
         correctAnswer: 'It encouraged improved communication and limited arms control, including the hotline and the Limited Test Ban Treaty.',
-        explanation: 'The crisis showed how dangerous miscalculation could be and pushed both sides toward better communication and some restraint.',
+        explanation: 'The Moscow-Washington hotline (the "red phone") was installed to prevent future communication failures, and the Limited Test Ban Treaty of 1963 ended atmospheric nuclear testing — both direct results of the crisis\'s sobering effect on both leaders.',
         standard: 'SS.912.A.6'
       },
       {
         id: '5B-EOC-Q25',
         text: 'Which statement best captures the overall nature of the Cold War era covered in this unit?',
-        choices: ['It was a global struggle shaped by containment, proxy wars, nuclear fear, ideological rivalry, and tensions between liberty and security.', 'It was a short regional conflict focused mainly on Germany, with little effect on American life, world politics, or military strategy.', 'It was an economic competition alone, because superpower leaders usually avoided military threats and rarely interfered outside Europe.', 'It was a period of steady cooperation between the United States and the Soviet Union interrupted only by isolated local misunderstandings.'],
+        choices: [
+          'It was a global struggle shaped by containment, proxy wars, nuclear fear, ideological rivalry, and tensions between liberty and security.',
+          'The Cold War was primarily an economic competition in which the United States and Soviet Union raced to industrialize the developing world.',
+          'It was mainly a European conflict that had little effect on American domestic life or the lives of ordinary citizens.',
+          'The era was primarily defined by military confrontation, with the two superpowers fighting each other directly in multiple theaters.'
+        ],
         correctAnswer: 'It was a global struggle shaped by containment, proxy wars, nuclear fear, ideological rivalry, and tensions between liberty and security.',
-        explanation: 'This unit’s major themes include containment, Korea, anti-communism at home, nuclear strategy, and the Cuban Missile Crisis.',
+        explanation: 'The unit\'s arc — from Truman Doctrine to Marshall Plan to Korea to McCarthyism to the nuclear arms race to the Cuban Missile Crisis — shows a conflict that was simultaneously military, economic, ideological, and deeply domestic.',
         standard: 'SS.912.A.6'
       },
     ]
