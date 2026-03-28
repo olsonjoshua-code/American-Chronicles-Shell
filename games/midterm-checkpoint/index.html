@@ -423,7 +423,7 @@ function getShellProfile() {
     var raw = localStorage.getItem(SHELL_KEY);
     if (!raw) return null;
     var p = JSON.parse(raw);
-    if (p && p.name && p.name !== 'Guest' && p.setupDone) return p;
+    if (p && p.name && p.name !== 'Guest') return p;  // setupDone not required — top-of-page redirect already blocks guests
   } catch(e) {}
   return null;
 }
@@ -1269,7 +1269,7 @@ window.addEventListener('DOMContentLoaded', function() {
       var shellRaw = localStorage.getItem('ac_shell_state');
       if (shellRaw) {
         var shell = JSON.parse(shellRaw);
-        if (shell && shell.name && shell.name !== 'Guest' && shell.setupDone) {
+        if (shell && shell.name && shell.name !== 'Guest') {  // setupDone not required — top-of-page redirect already blocks guests
           document.getElementById('welcome-gate').style.display = 'none';
           document.getElementById('welcome-gate').classList.remove('show');
           G = Object.assign({}, G || {}, { name: shell.name, period: shell.period || '', fromShell: true });
