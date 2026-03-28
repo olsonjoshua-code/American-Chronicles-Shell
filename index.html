@@ -904,8 +904,8 @@ function applyProfileFromDB(profile){
   S.name    = profile.name || S.name;
   S.period  = profile.period || S.period;
   S.avatar  = profile.avatar || S.avatar;
-  S.gold    = profile.gold || 0;
-  S.goldEarned   = profile.gold_earned || 0;
+  S.gold    = Math.max(S.gold||0, profile.gold||0);
+  S.goldEarned   = Math.max(S.goldEarned||0, profile.gold_earned||0);
   S.goldSpent    = profile.gold_spent  || 0;
   S.goldBestRun  = profile.gold_best_run || 0;
   try { S.goldLedger        = JSON.parse(profile.gold_ledger||'[]'); }    catch(e){}
