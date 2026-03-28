@@ -46,7 +46,7 @@ body::before{content:'';position:fixed;inset:0;
   pointer-events:none;z-index:9999;}
 
 /* ── ROOT / LAYOUT ── */
-#root{max-width:640px;margin:0 auto;padding:0 16px 100px;min-height:100vh;position:relative;z-index:1;}
+#root{max-width:860px;margin:0 auto;padding:0 24px 100px;min-height:100vh;position:relative;z-index:1;}
 /* When HUD is visible, push content down so it isn't hidden behind the fixed bar */
 body.hud-active #root{padding-top:68px;}
 
@@ -86,7 +86,7 @@ body.hud-active #root{padding-top:68px;}
   border-bottom:1px solid var(--border2);border-left:1px solid var(--border2);border-right:1px solid var(--border2);
   padding:10px 14px;
   position:fixed;top:0;left:50%;transform:translateX(-50%);
-  width:100%;max-width:640px;
+  width:100%;max-width:860px;
   z-index:200;backdrop-filter:blur(12px);
   display:none;}
 .hud-inner{display:flex;align-items:center;gap:12px;}
@@ -170,7 +170,7 @@ body.hud-active #root{padding-top:68px;}
 #briefing-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);
   z-index:500;overflow-y:auto;padding:20px 16px 60px;}
 #briefing-modal.show{display:block;animation:fadeIn .3s ease;}
-.briefing-inner{max-width:560px;margin:0 auto;}
+.briefing-inner{max-width:760px;margin:0 auto;}
 .briefing-header{display:flex;align-items:flex-start;justify-content:space-between;
   gap:10px;margin-bottom:20px;padding-top:10px;}
 .briefing-eyebrow{font-family:var(--bebas);font-size:10px;color:var(--text3);
@@ -221,16 +221,16 @@ body.hud-active #root{padding-top:68px;}
 
 /* THE QUESTION — primary visual weight */
 .q-block{background:var(--bg2);border:1px solid var(--border2);
-  border-left:3px solid var(--gold);padding:20px 18px;margin-bottom:18px;}
+  border-left:3px solid var(--gold);padding:24px 22px;margin-bottom:18px;}
 .q-number{font-family:var(--bebas);font-size:10px;color:var(--text3);
   letter-spacing:3px;margin-bottom:8px;}
-.q-text{font-family:var(--playfair);font-size:clamp(15px,2.8vw,18px);
-  color:var(--cream);line-height:1.55;}
+.q-text{font-family:var(--playfair);font-size:clamp(16px,2.4vw,20px);
+  color:var(--cream);line-height:1.6;}
 
 /* Answer choices */
-.choices-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.choices-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
 .choice-btn{display:block;width:100%;background:var(--bg2);border:1px solid var(--border2);
-  color:var(--text);padding:14px 16px;cursor:pointer;text-align:left;
+  color:var(--text);padding:16px 20px;cursor:pointer;text-align:left;
   transition:all .2s;position:relative;overflow:hidden;}
 .choice-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
   background:var(--gold);transform:scaleY(0);transition:transform .2s;pointer-events:none;}
@@ -241,9 +241,9 @@ body.hud-active #root{padding-top:68px;}
 .choice-btn.incorrect{border-color:var(--red2)!important;background:rgba(128,16,16,.06)!important;opacity:.6;}
 .choice-btn.incorrect::before{background:var(--red2)!important;transform:scaleY(1)!important;}
 .choice-btn.answered{cursor:default;}
-.choice-letter{font-family:var(--bebas);font-size:13px;color:var(--gold2);
-  margin-right:10px;display:inline-block;width:20px;}
-.choice-text{font-family:var(--crimson);font-size:16px;line-height:1.4;}
+.choice-letter{font-family:var(--bebas);font-size:14px;color:var(--gold2);
+  margin-right:12px;display:inline-block;width:20px;}
+.choice-text{font-family:var(--crimson);font-size:17px;line-height:1.5;}
 
 /* Feedback */
 .feedback-panel{display:none;border-left:3px solid var(--gold);
@@ -894,9 +894,9 @@ const AC_HEADERS  = {'Content-Type':'application/json','apikey':AC_SUPA_KEY,'Aut
 
 const LESSONS = [
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // LESSON 47 — Camelot
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'lesson47',
     label: 'LESSON 47',
@@ -905,102 +905,152 @@ const LESSONS = [
     icon: '🌙',
     type: 'lesson',
     briefing: {
-      location: 'The Kennedy Years',
+      location: 'Washington D.C. and the World',
       date: '1961–1963',
-      role: 'White House observer',
-      text: 'In 1961, John F. Kennedy entered the presidency as a symbol of youth, confidence, and national renewal. Many Americans linked his administration to the image of Camelot—a brief shining moment filled with glamour, culture, and promise. But Kennedy’s presidency was tested almost immediately by Cold War crises, legislative frustration, and the growing burden of Vietnam. Your task is to decide whether Camelot was mostly image, real achievement, or some uneasy mix of both.',
-      tags: []
+      role: 'White House correspondent',
+      text: 'In 1961, John F. Kennedy entered the presidency as a symbol of youth, confidence, and national renewal. Many Americans linked his administration to the image of Camelot—a brief shining moment filled with glamour, culture, and promise. But Kennedy\'s presidency was tested almost immediately by Cold War crises, legislative frustration, and the growing burden of Vietnam. Your task is to decide whether Camelot was mostly image, real achievement, or some uneasy mix of both.',
+      tags: ['SS.912.A.7.4', 'SS.912.A.7.11', 'SS.912.A.6.13']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Camelot', cards: ['John F. Kennedy', 'Jacqueline Kennedy'] },
+    rewards: { badge: 'Camelot', cards: ['Kennedy Space Race', 'Peace Corps'] },
     bank: [
       {
         id: '7A-L47-Q1',
-        text: 'Why did many Americans associate Kennedy’s White House with the idea of ‘Camelot’?',
-        choices: ['His administration projected youth, style, culture, and optimism, creating the image of a brief but inspiring national moment.', 'He publicly renamed the White House Camelot and required government agencies to use that title during his presidency.', 'He based most of his domestic policies on medieval English traditions and often compared Congress to the Round Table.', 'He won office by promising to restore the monarchy in American political life as a symbol of national unity.'],
+        text: 'Why did many Americans associate Kennedy\'s White House with the idea of "Camelot"?',
+        choices: [
+          'His administration projected youth, style, culture, and optimism, creating the image of a brief but inspiring national moment.',
+          'Kennedy had personally commissioned and funded a Broadway musical about his presidency specifically to build broad public support for his entire legislative agenda.',
+          'The Camelot image was created entirely by the press, which exaggerated his achievements to boost newspaper sales.',
+          'Kennedy\'s Irish Catholic background connected him to the medieval European traditions that the Camelot legend represented.'
+        ],
         correctAnswer: 'His administration projected youth, style, culture, and optimism, creating the image of a brief but inspiring national moment.',
-        explanation: 'The Camelot idea reflected the administration’s glamour, youth, and symbolism more than any formal policy.',
+        explanation: 'The Camelot myth — cultivated by Jacqueline Kennedy after the assassination — captured the sense that the Kennedy White House had been a brief flowering of youthful idealism cut tragically short.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7A-L47-Q2',
-        text: 'What was the main idea behind Kennedy’s New Frontier?',
-        choices: ['It called for energetic federal action in areas such as poverty, education, science, and public service at home and abroad.', 'It argued that the federal government should withdraw from domestic reform and leave most social problems to the states.', 'It proposed ending Cold War competition by abandoning foreign aid, NASA, and all major military commitments overseas.', 'It centered on cutting taxes dramatically while reducing the role of science and technology in national policy.'],
+        text: 'What was the main idea behind Kennedy\'s New Frontier?',
+        choices: [
+          'Kennedy believed the United States needed to return to the aggressive territorial expansion that had defined and shaped most of its nineteenth-century continental growth.',
+          'It called for energetic federal action in areas such as poverty, education, science, and public service at home and abroad.',
+          'The New Frontier was primarily a foreign policy doctrine focused on containing communism in newly independent nations.',
+          'It described Kennedy\'s plan to deregulate American industry and reduce federal involvement in the economy.'
+        ],
         correctAnswer: 'It called for energetic federal action in areas such as poverty, education, science, and public service at home and abroad.',
-        explanation: 'Kennedy’s New Frontier presented government activism as part of national renewal.',
+        explanation: 'Kennedy\'s New Frontier rhetoric challenged Americans to tackle domestic poverty, advance scientific achievement, and serve their country — capturing the spirit of idealistic activism that defined his campaign.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7A-L47-Q3',
-        text: 'Why is the Bay of Pigs invasion usually seen as a major early failure of Kennedy’s presidency?',
-        choices: ['He approved a CIA-backed invasion of Cuba that collapsed quickly, embarrassing the United States and strengthening Castro.', 'He refused to support Cuban exiles under any circumstances, which led Congress to accuse him of appeasing communism.', 'He launched a full U.S. invasion of Cuba without consulting advisers, causing a direct war with the Soviet Union.', 'He recognized Castro’s government formally, which ended American influence in Latin America almost overnight.'],
+        text: 'Why is the Bay of Pigs invasion usually seen as a major early failure of Kennedy\'s presidency?',
+        choices: [
+          'He approved a CIA-backed invasion of Cuba that collapsed quickly, embarrassing the United States and strengthening Castro.',
+          'The Bay of Pigs failed mainly because Congress refused to fund the operation at the last minute, leaving the invaders unsupported.',
+          'Kennedy\'s naval blockade of Cuba during the invasion accidentally prevented the CIA-trained forces from reaching the shore.',
+          'The invasion was launched by the Eisenhower administration without Kennedy\'s knowledge, but he received the blame for its failure.'
+        ],
         correctAnswer: 'He approved a CIA-backed invasion of Cuba that collapsed quickly, embarrassing the United States and strengthening Castro.',
-        explanation: 'The failed invasion hurt Kennedy’s credibility and pushed Cuba closer to the Soviet Union.',
+        explanation: 'Kennedy inherited the CIA plan from Eisenhower but approved it with reduced air support — the resulting disaster at the Bay of Pigs humiliated the United States, emboldened Castro, and gave Khrushchev reason to question Kennedy\'s resolve.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7A-L47-Q4',
         text: 'What did the building of the Berlin Wall symbolize during the Kennedy years?',
-        choices: ['It became a powerful symbol of Cold War division between the communist East and the democratic West.', 'It marked the final reunification of Germany under a shared government supported by both superpowers.', 'It ended the refugee crisis in Europe by opening free movement between eastern and western sectors of Berlin.', 'It showed that the Soviet Union had abandoned military pressure in Europe and accepted coexistence peacefully.'],
+        choices: [
+          'It became a powerful symbol of Cold War division between the communist East and the democratic West.',
+          'The wall symbolized Soviet military weakness, since building a barrier was an admission they could not stop people by force.',
+          'It symbolized Kennedy\'s success in forcing the Soviets to stop the flow of refugees out of East Germany permanently.',
+          'The Berlin Wall symbolized mainly an economic dispute over trade routes between East and West Germany.'
+        ],
         correctAnswer: 'It became a powerful symbol of Cold War division between the communist East and the democratic West.',
-        explanation: 'The wall became one of the clearest symbols of the Cold War.',
+        explanation: 'The wall — built in August 1961 to stop the flood of East Germans fleeing to the West — became the most concrete physical expression of the Iron Curtain and of communist governments\' need to imprison their own people.',
         standard: 'SS.912.A.7.4 · SS.912.A.6.13'
       },
       {
         id: '7A-L47-Q5',
         text: 'Why did Kennedy make the space race such a major national priority?',
-        choices: ['He believed space achievement would demonstrate American technological strength and ideological leadership in the Cold War.', 'He saw space exploration mainly as a way to reduce defense spending and avoid future rivalry with the Soviet Union.', 'He wanted NASA to replace the military as the nation’s main employer and shift workers out of industry and suburbs.', 'He considered the moon landing mostly a private scientific goal with little connection to Cold War competition.'],
+        choices: [
+          'He believed space achievement would demonstrate American technological strength and ideological leadership in the Cold War.',
+          'Kennedy made space exploration a top national priority mainly to create large numbers of high-paying jobs in the aerospace industry and thereby significantly reduce the stubborn postwar unemployment rate.',
+          'Space exploration was a Kennedy family passion, and he used the presidency to fund a program he had always admired.',
+          'He pushed the space race primarily because the military required orbital satellites to monitor Soviet nuclear sites.'
+        ],
         correctAnswer: 'He believed space achievement would demonstrate American technological strength and ideological leadership in the Cold War.',
-        explanation: 'The space race was tied to Cold War prestige and technological competition.',
+        explanation: 'After Sputnik and Gagarin\'s orbit, the Soviets led the space race — Kennedy\'s 1961 moon commitment was as much a Cold War statement as a scientific one, meant to prove that free societies could out-innovate communist ones.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7A-L47-Q6',
         text: 'What was the purpose of the Peace Corps under Kennedy?',
-        choices: ['To send Americans abroad to support education, health, and development while also building goodwill in poorer nations.', 'To train young Americans for military intervention in countries threatened by communist insurgencies and civil war.', 'To replace foreign aid with private charity so the federal government would not need to support developing nations directly.', 'To bring students from developing nations to the United States permanently as part of an anti-communist resettlement plan.'],
+        choices: [
+          'To send Americans abroad to support education, health, and development while also building goodwill in poorer nations.',
+          'The Peace Corps was primarily a covert military training program that sent American special forces soldiers abroad to train and equip the armies of strategically important developing nations.',
+          'It was designed primarily to gather intelligence in Third World countries for the CIA under civilian cover.',
+          'Kennedy created the Peace Corps mainly to give unemployed college graduates meaningful work in the domestic economy.'
+        ],
         correctAnswer: 'To send Americans abroad to support education, health, and development while also building goodwill in poorer nations.',
-        explanation: 'The Peace Corps linked service, diplomacy, and Cold War-era international influence.',
+        explanation: 'The Peace Corps sent thousands of young Americans to work in developing countries — reflecting Kennedy\'s belief that soft power, idealism, and direct human contact could win the Cold War\'s battle for hearts and minds.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7A-L47-Q7',
         text: 'Why do many historians see the Cuban Missile Crisis as both a success and a warning for Kennedy?',
-        choices: ['He avoided nuclear war and forced missile removal, but the crisis revealed how close brinkmanship could bring the world to catastrophe.', 'He solved the crisis quickly through military invasion, proving that direct force was always the best answer to Soviet pressure.', 'He accepted Soviet missiles in Cuba, but historians praise him for preventing public panic and protecting his political image.', 'He removed American missiles from Europe publicly before negotiations began, which convinced Khrushchev to surrender immediately.'],
+        choices: [
+          'He avoided nuclear war and forced missile removal, but the crisis revealed how close brinkmanship could bring the world to catastrophe.',
+          'It was a success because Kennedy forced Khrushchev to resign, but a warning because the Soviet military remained powerful.',
+          'Kennedy ultimately succeeded in his diplomatic objectives during the crisis but failed badly on the military side, since the U.S. Navy proved completely unable to enforce the blockade line effectively against Soviet submarines.',
+          'The crisis was a success for Kennedy personally but a warning for Congress, which had opposed his handling of the situation.'
+        ],
         correctAnswer: 'He avoided nuclear war and forced missile removal, but the crisis revealed how close brinkmanship could bring the world to catastrophe.',
-        explanation: 'Kennedy emerged stronger politically, but the crisis also exposed the terrifying risks of Cold War escalation.',
+        explanation: 'Kennedy navigated the crisis skillfully, but documents released decades later showed how close the world came to accidental nuclear war — making the outcome feel less like mastery and more like a very narrow escape.',
         standard: 'SS.912.A.7.4 · SS.912.A.6.13'
       },
       {
         id: '7A-L47-Q8',
         text: 'Why was the Test Ban Treaty of 1963 significant?',
-        choices: ['It showed that the United States and Soviet Union could cooperate by banning aboveground nuclear testing even amid Cold War rivalry.', 'It ended all nuclear weapons testing everywhere and began the complete dismantling of both superpowers’ arsenals.', 'It created NATO’s nuclear command structure and required American allies to share missile technology with one another.', 'It forced Cuba to allow permanent United Nations inspectors on the island after the missile crisis had ended.'],
+        choices: [
+          'It showed that the United States and Soviet Union could cooperate by banning aboveground nuclear testing even amid Cold War rivalry.',
+          'The Test Ban Treaty was historically significant mainly because it permanently eliminated all nuclear weapons from European soil within five years of its formal signing by the major nuclear powers.',
+          'It was the first formal agreement between the superpowers ever — no diplomatic contact had existed before 1963.',
+          'The Test Ban Treaty mattered primarily because it gave the United Nations authority to inspect all nuclear facilities worldwide.'
+        ],
         correctAnswer: 'It showed that the United States and Soviet Union could cooperate by banning aboveground nuclear testing even amid Cold War rivalry.',
-        explanation: 'The treaty showed that even rivals could pursue limited cooperation after the missile crisis.',
+        explanation: 'The Limited Test Ban Treaty — signed just months after the Missile Crisis — banned nuclear tests in the atmosphere, oceans, and space, reducing radioactive fallout and signaling a modest thaw in superpower relations.',
         standard: 'SS.912.A.7.4 · SS.912.A.6.13'
       },
       {
         id: '7A-L47-Q9',
-        text: 'What was one major weakness of Kennedy’s presidency on the domestic front?',
-        choices: ['Much of his agenda stalled in Congress, showing that popularity and style did not automatically produce legislative success.', 'He never proposed domestic reforms at all, because he believed the presidency should focus only on foreign affairs.', 'He had sweeping congressional majorities but refused to use them, preferring to govern mainly through executive orders.', 'He passed most of the Great Society before 1963, leaving little domestic work for Lyndon Johnson to continue later.'],
+        text: 'What was one major weakness of Kennedy\'s presidency on the domestic front?',
+        choices: [
+          'Much of his agenda stalled in Congress, showing that popularity and style did not automatically produce legislative success.',
+          'Kennedy\'s domestic weakness was mainly economic — his tax policies caused a severe recession in 1962 and 1963.',
+          'He refused to propose any domestic legislation at all, preferring to focus exclusively on foreign affairs and Cold War crises.',
+          'Kennedy was so unpopular with voters that he had no political capital to spend on any domestic reform agenda.'
+        ],
         correctAnswer: 'Much of his agenda stalled in Congress, showing that popularity and style did not automatically produce legislative success.',
-        explanation: 'Kennedy’s image often outpaced his legislative record.',
+        explanation: 'Despite his personal popularity, Kennedy struggled to pass major legislation — civil rights, Medicare, and education bills all faced determined conservative opposition in Congress that his charisma could not overcome.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7A-L47-Q10',
         text: 'Why do historians continue to debate whether Kennedy was a great president?',
-        choices: ['His presidency combined glamour, inspiration, and important Cold War moments with policy failures, unfinished goals, and an early death.', 'His record is unusually simple to evaluate because historians broadly agree that he either succeeded completely or failed completely.', 'There is little historical evidence about his presidency, so most arguments about Kennedy depend almost entirely on later myth.', 'The debate exists mainly because Kennedy served three full terms, making it hard to compare his presidency to shorter administrations.'],
+        choices: [
+          'His presidency combined glamour, inspiration, and important Cold War moments with policy failures, unfinished goals, and an early death.',
+          'Historians continue to debate Kennedy mainly because newly declassified documents provide strong and compelling evidence that he had secretly planned to dramatically escalate American military involvement in the Vietnam War.',
+          'The debate exists primarily because Kennedy\'s personal scandals made it impossible to evaluate his policy record objectively.',
+          'Historians disagree mainly because Kennedy served too short a time for any policy to have any measurable lasting effect.'
+        ],
         correctAnswer: 'His presidency combined glamour, inspiration, and important Cold War moments with policy failures, unfinished goals, and an early death.',
-        explanation: 'Kennedy’s legacy is debated because his presidency mixed symbolism and real impact with clear limits and unfinished work.',
+        explanation: 'Kennedy\'s assassination at 46 froze his legacy in idealism — historians must weigh his genuine achievements against his failures, his unrealized potential against the myth, and ask what he might have accomplished.',
         standard: 'SS.912.A.7.4'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // LESSON 48 — The Great Society
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'lesson48',
     label: 'LESSON 48',
@@ -1009,206 +1059,306 @@ const LESSONS = [
     icon: '🖊️',
     type: 'lesson',
     briefing: {
-      location: 'LBJ and Domestic Reform',
+      location: 'Washington D.C.',
       date: '1963–1966',
-      role: 'Congressional aide',
-      text: 'Lyndon Johnson takes the oath on Air Force One and transforms grief into legislation. Using his mastery of Congress, he pushes through the Civil Rights Act, the Voting Rights Act, Medicare, Medicaid, and a sweeping War on Poverty. He calls it the Great Society — the most ambitious expansion of federal government since the New Deal. But the same man who passes these laws also deepens American involvement in Vietnam, setting up a collision between his domestic vision and foreign entanglement.',
-      tags: []
+      role: 'policy journalist',
+      text: 'Lyndon Johnson is not interested in Camelot. He is interested in results. Using his mastery of Congress and the emotional momentum following Kennedy\'s assassination, he pushes through the most ambitious domestic reform program since the New Deal. But Johnson\'s Great Society will soon compete with Vietnam for money, attention, and the public\'s trust.',
+      tags: ['SS.912.A.7.4', 'SS.912.A.7.13', 'SS.912.A.7.16']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Great Society', cards: ['Lyndon B. Johnson', 'Martin Luther King Jr.'] },
+    rewards: { badge: 'Great Society', cards: ['Medicare', 'War on Poverty'] },
     bank: [
       {
         id: '7A-L48-Q1',
-        text: 'What was the central idea behind Lyndon Johnson’s Great Society?',
-        choices: ['The federal government should use its power to reduce poverty, expand opportunity, and improve the quality of American life.', 'The federal government should withdraw from domestic reform and leave education, health care, and poverty policy to the states.', 'The federal government should focus mainly on tax cuts and military expansion rather than social reform at home.', 'The federal government should end most New Deal programs because prosperity had already solved major social problems.'],
+        text: 'What was the central idea behind Lyndon Johnson\'s Great Society?',
+        choices: [
+          'The federal government should use its power to reduce poverty, expand opportunity, and improve the quality of American life.',
+          'Johnson believed the best way to improve American life was to reduce government spending and let private charities handle poverty.',
+          'The Great Society was primarily a foreign policy vision focused on spreading American prosperity to developing nations.',
+          'Johnson\'s central idea was that military preparedness was the foundation of domestic prosperity and social stability.'
+        ],
         correctAnswer: 'The federal government should use its power to reduce poverty, expand opportunity, and improve the quality of American life.',
-        explanation: 'Johnson’s Great Society used federal power aggressively to pursue reform in poverty, health, education, and quality of life.',
+        explanation: 'The Great Society represented the most ambitious expansion of federal domestic programs since the New Deal — built on the conviction that government had both the ability and the responsibility to attack poverty and inequality directly.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.13'
       },
       {
         id: '7A-L48-Q2',
-        text: 'What was the main purpose of Johnson’s War on Poverty?',
-        choices: ['To attack the causes of poverty through federal programs that expanded education, training, and community support.', 'To replace all welfare with private charity so poor families would rely less on government assistance over time.', 'To guarantee equal income for all Americans by requiring businesses to share profits with workers every year.', 'To eliminate poverty mainly by relocating low-income families from cities into newly built military communities.'],
+        text: 'What was the main purpose of Johnson\'s War on Poverty?',
+        choices: [
+          'To attack the causes of poverty through federal programs that expanded education, training, and community support.',
+          'The War on Poverty was mainly a public relations campaign designed to distract attention from the growing war in Vietnam.',
+          'Johnson intended to eliminate poverty by giving every poor American a guaranteed minimum income paid directly by the Treasury.',
+          'Its primary goal was to encourage poor communities to leave economically depressed areas and relocate to prospering cities.'
+        ],
         correctAnswer: 'To attack the causes of poverty through federal programs that expanded education, training, and community support.',
-        explanation: 'The War on Poverty aimed to address structural causes of poverty, not just relieve hardship temporarily.',
+        explanation: 'Programs like the Job Corps, VISTA, and community action agencies tried to address poverty\'s root causes — lack of skills, education, and economic opportunity — rather than simply providing relief payments.',
         standard: 'SS.912.A.7.13'
       },
       {
         id: '7A-L48-Q3',
         text: 'Why was Head Start considered an important part of the Great Society?',
-        choices: ['It tried to give disadvantaged young children educational support early in life so poverty would be less likely to shape their future.', 'It provided college scholarships only to students whose parents had served in the military during World War II or Korea.', 'It was created mainly to prepare suburban teenagers for technical work in NASA and other Cold War industries.', 'It focused on adult literacy among retired Americans who had not completed formal schooling during the Depression.'],
+        choices: [
+          'It tried to give disadvantaged young children educational support early in life so poverty would be less likely to shape their future.',
+          'Head Start was designed primarily as a federal jobs creation program for unemployed teachers that happened to provide some incidental educational benefits to the poor communities where those teachers worked.',
+          'The program aimed mainly to identify gifted poor children who could be selected for elite private school scholarships.',
+          'Head Start was designed mainly as a nutrition program, with educational components added later as a political compromise.'
+        ],
         correctAnswer: 'It tried to give disadvantaged young children educational support early in life so poverty would be less likely to shape their future.',
-        explanation: 'Head Start reflected the belief that early educational support could reduce the long-term effects of poverty.',
+        explanation: 'Head Start embodied the belief that early childhood intervention — nutrition, stimulation, and pre-school learning — could break the intergenerational cycle of poverty before it took hold.',
         standard: 'SS.912.A.7.13'
       },
       {
         id: '7A-L48-Q4',
-        text: 'What was the significance of Medicare and Medicaid in Johnson’s domestic reform program?',
-        choices: ['They expanded access to health care by creating major federal programs for the elderly and for many low-income Americans.', 'They replaced private doctors with federal clinics and ended all state authority over hospitals and public health spending.', 'They guaranteed free health care for every American regardless of age, income, or employment by the end of the 1960s.', 'They were temporary wartime programs created to deal with military hospital shortages caused by the Vietnam conflict.'],
+        text: 'What was the significance of Medicare and Medicaid in Johnson\'s domestic reform program?',
+        choices: [
+          'They expanded access to health care by creating major federal programs for the elderly and for many low-income Americans.',
+          'Medicare and Medicaid were mainly significant as symbolic gestures — they covered too few people to have any real impact.',
+          'The programs were important primarily because they replaced private insurance entirely and created a single-payer system.',
+          'Their main significance was financial — both programs were fully funded by state governments rather than federal taxpayers.'
+        ],
         correctAnswer: 'They expanded access to health care by creating major federal programs for the elderly and for many low-income Americans.',
-        explanation: 'Medicare and Medicaid became among the most durable Great Society programs because they broadened access to medical care.',
+        explanation: 'Before Medicare and Medicaid, millions of elderly and poor Americans had no health insurance — these programs fundamentally changed the federal government\'s role in health care and created lasting expectations of coverage.',
         standard: 'SS.912.A.7.13'
       },
       {
         id: '7A-L48-Q5',
         text: 'How did the Great Society try to use education as a tool of reform?',
-        choices: ['It increased federal support for schools and students, reflecting the belief that education could reduce inequality and expand opportunity.', 'It ended most federal involvement in schools because Johnson believed education policy should stay entirely local and private.', 'It focused mainly on elite universities and ignored elementary and secondary schools in poor communities and rural areas.', 'It replaced public education with job training programs so students could leave school earlier and enter the workforce faster.'],
+        choices: [
+          'It increased federal support for schools and students, reflecting the belief that education could reduce inequality and expand opportunity.',
+          'The Great Society fundamentally replaced all local and state control over school curriculum with a rigid national program of study designed exclusively by federal education bureaucrats and policy experts working in Washington D.C.',
+          'Johnson believed private religious schools were the most effective path out of poverty and redirected all funding to them.',
+          'Education reform focused mainly on universities because Johnson believed only college graduates could escape poverty permanently.'
+        ],
         correctAnswer: 'It increased federal support for schools and students, reflecting the belief that education could reduce inequality and expand opportunity.',
-        explanation: 'Education was central to Great Society reform because Johnson saw it as a path to mobility and equality.',
+        explanation: 'The Elementary and Secondary Education Act of 1965 provided federal funding to schools based on the number of low-income students — a landmark shift in federal educational involvement that shaped school funding for generations.',
         standard: 'SS.912.A.7.13'
       },
       {
         id: '7A-L48-Q6',
         text: 'Why was the Immigration and Nationality Act of 1965 a major turning point in U.S. history?',
-        choices: ['It ended the older quota system and reshaped immigration by opening the door more widely to people from Asia, Latin America, and elsewhere.', 'It sharply reduced immigration overall by restoring the strict national-origin quotas that had existed since the 1920s.', 'It granted automatic citizenship to all temporary workers, regardless of residence length or family connections in the United States.', 'It required new immigrants to settle only in rural states so that major cities would not experience rapid demographic change.'],
+        choices: [
+          'It ended the older quota system and reshaped immigration by opening the door more widely to people from Asia, Latin America, and elsewhere.',
+          'The act was important mainly because it reduced total immigration to the United States to its lowest levels since the 1920s.',
+          'It created the first-ever path to citizenship for undocumented immigrants already living in the United States.',
+          'The law\'s main significance was eliminating the English-language requirement that had previously restricted immigration from non-English-speaking nations.'
+        ],
         correctAnswer: 'It ended the older quota system and reshaped immigration by opening the door more widely to people from Asia, Latin America, and elsewhere.',
-        explanation: 'The 1965 law transformed immigration by replacing the old quota system and changing the country’s demographic future.',
+        explanation: 'The 1924 system had heavily favored Northern and Western Europeans — the 1965 act replaced it with a family reunification and skills-based system that dramatically changed the national origins of future immigrants.',
         standard: 'SS.912.A.7.13 · SS.912.A.7.16'
       },
       {
         id: '7A-L48-Q7',
         text: 'What does environmental reform reveal about the broader goals of the Great Society?',
-        choices: ['Johnson’s reform vision was not limited to poverty alone, but also included improving the physical quality of life and public resources.', 'Environmental policy was rejected by Johnson because he believed conservation conflicted with economic growth and urban development.', 'The Great Society treated pollution as a local issue only and avoided federal involvement in water, land, or natural resources.', 'Environmental reform was added only after Johnson left office and had no meaningful connection to his domestic vision.'],
-        correctAnswer: 'Johnson’s reform vision was not limited to poverty alone, but also included improving the physical quality of life and public resources.',
-        explanation: 'The Great Society reached beyond poverty into broader quality-of-life reforms, including the environment.',
+        choices: [
+          'Johnson\'s reform vision was not limited to poverty alone, but also included improving the physical quality of life and public resources.',
+          'Environmental laws were the Great Society\'s least important component and were passed mainly to satisfy a small activist minority.',
+          'Environmental reform revealed that Johnson\'s real priority was protecting corporate interests by reducing pollution lawsuits.',
+          'It showed that Great Society programs were mainly about rural America, where environmental problems caused the most harm.'
+        ],
+        correctAnswer: 'Johnson\'s reform vision was not limited to poverty alone, but also included improving the physical quality of life and public resources.',
+        explanation: 'The Clean Air Act, Water Quality Act, and creation of new national parks showed that the Great Society defined quality of life broadly — not just income and health care but also clean air, clean water, and preserved natural spaces.',
         standard: 'SS.912.A.7.13'
       },
       {
         id: '7A-L48-Q8',
         text: 'Why is the Warren Court often connected to the reform spirit of the 1960s?',
-        choices: ['Its decisions expanded civil liberties and rights, reinforcing the era’s broader effort to make American democracy more equal and inclusive.', 'Its rulings mainly limited civil rights claims and reversed most of the social reform momentum that had built since Brown.', 'It focused almost entirely on trade and taxation, avoiding major cases involving rights, representation, and criminal justice.', 'It was created by Johnson to pass legislation when Congress would not, giving judges a direct lawmaking role in domestic reform.'],
-        correctAnswer: 'Its decisions expanded civil liberties and rights, reinforcing the era’s broader effort to make American democracy more equal and inclusive.',
-        explanation: 'The Warren Court helped define the reform era by broadening rights in criminal justice, representation, and civil liberties.',
+        choices: [
+          'Its decisions expanded civil liberties and rights, reinforcing the era\'s broader effort to make American democracy more equal and inclusive.',
+          'The Warren Court was connected to the 1960s mainly because it ruled the Great Society programs were unconstitutional violations of states\' rights.',
+          'Chief Justice Warren was a close personal friend of Johnson\'s who used his Court position to advance the president\'s agenda directly.',
+          'The Court was important mainly for its foreign policy rulings, which gave Johnson legal cover for escalation in Vietnam.'
+        ],
+        correctAnswer: 'Its decisions expanded civil liberties and rights, reinforcing the era\'s broader effort to make American democracy more equal and inclusive.',
+        explanation: 'From Gideon to Miranda to decisions on school prayer and legislative apportionment, the Warren Court expanded individual rights in ways that aligned with the decade\'s broader push for equality and democratic accountability.',
         standard: 'SS.912.A.7.13'
       },
       {
         id: '7A-L48-Q9',
         text: 'What larger debate does the Great Society raise about the role of government in American life?',
-        choices: ['Whether federal power can and should be used aggressively to solve social problems such as poverty, inequality, and exclusion.', 'Whether the federal government should give up all responsibility for social welfare and return fully to the laissez-faire model of the 1920s.', 'Whether reform is possible only through military strength abroad, since domestic programs cannot influence social conditions at home.', 'Whether state governments should replace Congress and the presidency as the nation’s main source of public policy.'],
+        choices: [
+          'Whether federal power can and should be used aggressively to solve social problems such as poverty, inequality, and exclusion.',
+          'The debate it raises is mainly about states\' rights — whether governors or the president should control anti-poverty spending.',
+          'It raises questions about whether presidents can pass any major legislation without facing a Supreme Court challenge.',
+          'The Great Society mainly raises questions about whether military spending should be reduced to fund domestic programs.'
+        ],
         correctAnswer: 'Whether federal power can and should be used aggressively to solve social problems such as poverty, inequality, and exclusion.',
-        explanation: 'The Great Society sits at the center of a continuing debate over how active government should be in social reform.',
+        explanation: 'The Great Society extended a debate begun with the New Deal — critics argued it created dependency and overreached federal authority, while supporters argued only federal scale could address problems that states lacked the will or resources to solve.',
         standard: 'SS.912.A.7.13'
       },
       {
         id: '7A-L48-Q10',
         text: 'Why do historians often view the Great Society as both ambitious and unfinished?',
-        choices: ['It created major lasting reforms, but poverty, inequality, and social conflict remained, leaving debate over how much it truly achieved.', 'It failed to pass any important legislation at all, making it more of a campaign slogan than a real governing program.', 'It succeeded so completely by 1968 that later presidents had almost no need to address health care, education, or poverty again.', 'It was abandoned immediately after Johnson’s first speech, largely because Congress opposed every one of his domestic proposals.'],
+        choices: [
+          'It created major lasting reforms, but poverty, inequality, and social conflict remained, leaving debate over how much it truly achieved.',
+          'The Great Society remains historically unfinished mainly because Johnson was forced to resign from the presidency in disgrace before the majority of his ambitious reform legislation could actually be signed into law.',
+          'Most historians believe the Great Society was a complete failure that worsened poverty by creating destructive dependency.',
+          'It was unfinished mainly because the Supreme Court struck down most Great Society programs before they could be implemented.'
+        ],
         correctAnswer: 'It created major lasting reforms, but poverty, inequality, and social conflict remained, leaving debate over how much it truly achieved.',
-        explanation: 'The Great Society produced major reforms, but its ultimate success remains debated because it did not eliminate the problems it targeted.',
+        explanation: 'Medicare, Medicaid, the Voting Rights Act, and federal education funding are lasting legacies — but Vietnam drained the Great Society\'s resources and political support, and poverty and racial inequality persisted, fueling debate about its ultimate success.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.13'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
-  // LESSON 49 — The Times They Are A-Changin’
-  // ══════════════════════════════════════════════════
+  // ==================================================
+  // LESSON 49 — The Times They Are A-Changin'
+  // ==================================================
   {
     id: 'lesson49',
     label: 'LESSON 49',
-    title: 'The Times They Are A-Changin’',
+    title: 'The Times They Are A-Changin\'',
     sub: 'Youth, Protest, and Counterculture · 1964–1969',
     icon: '☮️',
     type: 'lesson',
     briefing: {
-      location: 'Youth, Protest, and Counterculture',
+      location: 'University Campuses and American Streets',
       date: '1964–1969',
-      role: 'Cultural journalist',
+      role: 'cultural critic',
       text: 'As the 1960s unfold, many young Americans begin to reject the assumptions of the world their parents built. They criticize war, conformity, racism, and materialism. On college campuses, the New Left demands a more democratic society. Beyond politics, hippies and other counterculture youth experiment with music, style, language, drugs, and personal freedom. Your task is to decide what this rebellion changed—and what it only seemed to change.',
-      tags: []
+      tags: ['SS.912.A.7.9']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Times A-Changin’', cards: ['Mario Savio'] },
+    rewards: { badge: 'Times A-Changin\'', cards: ['Woodstock', 'Students for a Democratic Society'] },
     bank: [
       {
         id: '7A-L49-Q1',
         text: 'Why did the baby boom generation play such a large role in the rise of the counterculture?',
-        choices: ['They were a huge generation coming of age at the same time, giving youth protest and cultural rebellion unusual visibility and influence.', 'They were the first Americans legally allowed to criticize the government openly, which made earlier protest movements impossible.', 'They were mostly excluded from colleges and jobs, which forced nearly all of them into full-time political activism by age eighteen.', 'They had grown up during the Depression, making them especially hostile to consumer culture and suburban comfort after World War II.'],
+        choices: [
+          'They were a huge generation coming of age at the same time, giving youth protest and cultural rebellion unusual visibility and influence.',
+          'The baby boom generation was historically unique as the first cohort raised entirely without access to television in their formative years, which made them substantially more receptive to unconventional and alternative ways of thinking about society.',
+          'The generation\'s large size gave them overwhelming political power through the voting booth, making protest unnecessary.',
+          'Boomers played a large role mainly because their parents had encouraged them to question authority from an early age.'
+        ],
         correctAnswer: 'They were a huge generation coming of age at the same time, giving youth protest and cultural rebellion unusual visibility and influence.',
-        explanation: 'The lesson states that the baby boom created the largest generation of children in U.S. history, and many of those young people came of age during the social crises of the 1960s.',
+        explanation: 'The baby boom produced an unusually large cohort of young people all reaching college age simultaneously in the 1960s — their sheer numbers amplified every cultural and political statement they made.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-L49-Q2',
-        text: 'How did the New Left differ from the older ‘Old Left’ described in the lesson?',
-        choices: ['The New Left rejected communism and instead tried to reform American society by expanding democracy and citizen participation.', 'The New Left supported worldwide communist revolution and saw democratic politics as hopelessly corrupt and beyond repair.', 'The New Left focused only on labor unions and factory workers, avoiding issues like civil rights, war, and student protest.', 'The New Left believed social change could happen only through courts, so it rejected protest and campus activism altogether.'],
+        text: 'How did the New Left differ from the older "Old Left" described in the lesson?',
+        choices: [
+          'The New Left rejected communism and instead tried to reform American society by expanding democracy and citizen participation.',
+          'The New Left differed mainly in tactics — it used armed protest rather than the legal and political approaches of the Old Left.',
+          'Old Left movements were mostly urban, while the New Left was primarily a rural and small-town phenomenon.',
+          'The New Left was focused entirely on foreign policy while the Old Left had concentrated mainly on economic reform.'
+        ],
         correctAnswer: 'The New Left rejected communism and instead tried to reform American society by expanding democracy and citizen participation.',
-        explanation: 'The lesson explicitly contrasts the New Left with the Old Left, noting that New Left students rejected communism and embraced democratic ideals.',
+        explanation: 'The Old Left had been tied to Marxism and labor organizing; the New Left, articulated in the Port Huron Statement, rejected Soviet communism and sought a more participatory democracy within the American framework.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-L49-Q3',
         text: 'What was Students for a Democratic Society, or SDS, trying to achieve?',
-        choices: ['It sought a more democratic and just society by challenging inequality, privilege, and the concentration of power.', 'It aimed to defend traditional campus rules and stop political groups from using universities for protest or organizing.', 'It wanted the federal government to ban all student demonstrations because protest was seen as harmful to national unity.', 'It focused mainly on restoring older religious values and discouraging criticism of mainstream American institutions.'],
+        choices: [
+          'It sought a more democratic and just society by challenging inequality, privilege, and the concentration of power.',
+          'SDS was primarily an anti-communist organization that wanted to root out Soviet influence on American university campuses.',
+          'The group sought mainly to replace the existing two-party system with a student-run third party that would contest elections.',
+          'SDS focused mainly on a single issue — ending the military draft — and had little broader political or social agenda.'
+        ],
         correctAnswer: 'It sought a more democratic and just society by challenging inequality, privilege, and the concentration of power.',
-        explanation: 'The lesson says SDS was the strongest subgroup of the New Left and quotes its founders’ vision of freedom, equality, and participatory democracy.',
+        explanation: 'The Port Huron Statement articulated SDS\'s vision of participatory democracy — a society where citizens had genuine power over decisions affecting their lives, not just periodic votes in a system controlled by elites.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-L49-Q4',
         text: 'Why was the Free Speech Movement at Berkeley historically important?',
-        choices: ['It became a major victory for student activism and First Amendment rights on college campuses.', 'It ended all university tuition nationwide and made public colleges free for every American by the late 1960s.', 'It convinced most student radicals to abandon campus politics and join mainstream political parties instead.', 'It created the first federal law banning political organizations like SDS from recruiting members at public universities.'],
+        choices: [
+          'It became a major victory for student activism and First Amendment rights on college campuses.',
+          'The Free Speech Movement was important mainly because it led to the permanent closure of the University of California system.',
+          'Berkeley was historically significant mainly as the first time a university president was removed by student protest.',
+          'The movement was important mainly as a model for student protests in the Soviet Union and Eastern Bloc countries.'
+        ],
         correctAnswer: 'It became a major victory for student activism and First Amendment rights on college campuses.',
-        explanation: 'The lesson describes Berkeley’s Free Speech Movement as a landmark student victory against a ban on campus political activity.',
+        explanation: 'When UC Berkeley banned political organizing on campus in 1964, the resulting protest led by Mario Savio forced the university to reverse course — establishing the principle that students had free speech rights even in academic settings.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-L49-Q5',
-        text: 'What does the term ‘counterculture’ mean in the context of the 1960s?',
-        choices: ['A group whose ideas and behaviors differed sharply from mainstream values, especially on war, conformity, and personal freedom.', 'A political party formed to oppose the Democratic and Republican parties in national elections during the Vietnam era.', 'A government-funded arts movement designed to encourage patriotic music and traditional family values among teenagers.', 'A legal campaign to overturn court decisions involving civil rights, free speech, and criminal procedure.'],
+        text: 'What does the term "counterculture" mean in the context of the 1960s?',
+        choices: [
+          'A group whose ideas and behaviors differed sharply from mainstream values, especially on war, conformity, and personal freedom.',
+          'The term counterculture specifically describes the organized conservative political movement that formed in direct reaction to the sweeping political and social reforms that characterized the turbulent decade of the 1960s.',
+          'Counterculture referred specifically to the underground music industry that competed with major record labels in the 1960s.',
+          'It describes the effort by older Americans to preserve traditional cultural institutions against the changes of the decade.'
+        ],
         correctAnswer: 'A group whose ideas and behaviors differed sharply from mainstream values, especially on war, conformity, and personal freedom.',
-        explanation: 'The lesson defines the counterculture as a group whose ideas and behaviors differed significantly from mainstream American culture.',
+        explanation: 'The counterculture rejected the dominant culture\'s emphasis on material success, conformity, and Cold War militarism — proposing instead peace, communal living, personal liberation, and spiritual exploration.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-L49-Q6',
         text: 'What did many hippies believe or seek in the 1960s?',
-        choices: ['They often rejected materialism and conventional authority in favor of peace, love, personal liberation, and doing their own thing.', 'They aimed to strengthen traditional family roles and defend the values of the Establishment against student radicals.', 'They organized primarily around court cases and election campaigns rather than lifestyle, music, or cultural experimentation.', 'They believed government planning and military discipline were the best ways to create equality and social peace.'],
+        choices: [
+          'They often rejected materialism and conventional authority in favor of peace, love, personal liberation, and doing their own thing.',
+          'The majority of hippies were in fact focused almost entirely on mainstream electoral politics and devoted most of their time and energy to working within the system to elect anti-war Democratic candidates to Congress.',
+          'Hippies mainly sought economic reform, arguing that American capitalism needed to be replaced with cooperative ownership.',
+          'They primarily sought legal reform, pushing for specific laws to protect free speech, drug use, and alternative lifestyles.'
+        ],
         correctAnswer: 'They often rejected materialism and conventional authority in favor of peace, love, personal liberation, and doing their own thing.',
-        explanation: 'The lesson describes hippies as valuing personal liberation and rejecting hypocrisy, phoniness, and mainstream norms.',
+        explanation: 'Hippie culture — expressed through communal living, psychedelic music, distinctive dress, and rejection of career-focused mainstream life — represented a wholesale rejection of the values of postwar consumer America.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-L49-Q7',
-        text: 'What does the lesson mean by a ‘generation gap’ in the 1960s?',
-        choices: ['A widening difference in attitudes and behavior between many young people and their parents over values, war, and culture.', 'A temporary decline in birthrates that created fewer teenagers than expected in the second half of the decade.', 'A legal separation between minors and adults that limited young people’s ability to attend protests or concerts.', 'A gap in educational opportunity caused mainly by older adults returning to college in greater numbers than young adults.'],
+        text: 'What does the lesson mean by a "generation gap" in the 1960s?',
+        choices: [
+          'A widening difference in attitudes and behavior between many young people and their parents over values, war, and culture.',
+          'The generation gap described the growing economic inequality between baby boomers and their parents\' more prosperous generation.',
+          'It referred to the difference in educational attainment between the college-educated young and their less-educated parents.',
+          'The term described the political gap between young voters who supported Kennedy and older voters who had supported Eisenhower.'
+        ],
         correctAnswer: 'A widening difference in attitudes and behavior between many young people and their parents over values, war, and culture.',
-        explanation: 'The lesson explicitly defines the generation gap as a growing difference in attitudes and behavior between youth and their parents.',
+        explanation: 'Many young people in the 1960s found themselves deeply at odds with parents who had lived through the Depression and World War II — the older generation valued stability, patriotism, and conformity that their children were actively rejecting.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-L49-Q8',
-        text: 'Who or what did many counterculture youth mean by ‘the Establishment’?',
-        choices: ['The dominant institutions and values of mainstream America, including authority figures, traditional norms, and political power.', 'Only the Supreme Court and Congress, because those were the only institutions students believed had any social influence.', 'A secret alliance between universities and television networks that tried to ban rock music and campus newspapers.', 'A loose coalition of labor unions and civil rights groups that opposed all forms of youth protest and experimentation.'],
+        text: 'Who or what did many counterculture youth mean by "the Establishment"?',
+        choices: [
+          'The dominant institutions and values of mainstream America, including authority figures, traditional norms, and political power.',
+          '"The Establishment" referred specifically to the network of defense contractors and military officials who supported the Vietnam War.',
+          'The term described the academic establishment — university administrators and professors who defended traditional curricula.',
+          'It was used mainly to describe wealthy businesspeople who funded conservative political candidates and causes.'
+        ],
         correctAnswer: 'The dominant institutions and values of mainstream America, including authority figures, traditional norms, and political power.',
-        explanation: 'The lesson uses the Establishment to describe the mainstream culture and authority structure that many young people challenged.',
+        explanation: 'The Establishment — a deliberately vague term — captured everything the counterculture opposed: corporations, government, the military, the media, universities, and the general enforcement of conformity and obedience.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-L49-Q9',
         text: 'Why did Woodstock become such an important symbol of the counterculture?',
-        choices: ['It represented the scale, music, communal spirit, and anti-Establishment mood of the youth culture at the end of the decade.', 'It was the first officially sponsored federal festival celebrating Johnson’s Great Society and support for the Vietnam War.', 'It marked the moment when most hippies abandoned music and protest to join traditional careers and suburban family life.', 'It was important mainly because it ended student activism on college campuses and redirected youth into electoral politics.'],
+        choices: [
+          'It represented the scale, music, communal spirit, and anti-Establishment mood of the youth culture at the end of the decade.',
+          'Woodstock was important mainly because it was the first outdoor music festival ever held in the United States.',
+          'The event became symbolic primarily because violence at Woodstock led Congress to pass new laws restricting public gatherings.',
+          'Woodstock symbolized the counterculture mainly because it raised millions of dollars for anti-war political campaigns.'
+        ],
         correctAnswer: 'It represented the scale, music, communal spirit, and anti-Establishment mood of the youth culture at the end of the decade.',
-        explanation: 'The lesson highlights Woodstock as a defining counterculture event and an emblem of the broader youth rebellion of the era.',
+        explanation: 'Half a million people gathering peacefully for music in upstate New York in August 1969 seemed — at least to participants — to prove that the counterculture\'s vision of community, peace, and freedom was genuinely possible.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-L49-Q10',
         text: 'What was one major impact of the counterculture on American society?',
-        choices: ['It pushed new ideas about music, speech, identity, protest, and personal freedom into mainstream public debate and media.', 'It immediately replaced mainstream American values, making counterculture beliefs the dominant view in most families by 1970.', 'It ended political activism by shifting young Americans away from protest and toward quiet acceptance of authority.', 'It had little lasting effect because radio, television, and popular culture ignored countercultural ideas almost completely.'],
+        choices: [
+          'It pushed new ideas about music, speech, identity, protest, and personal freedom into mainstream public debate and media.',
+          'The counterculture\'s main impact was that it permanently ended the conservative movement in American politics.',
+          'It transformed the American economy by creating an entirely new consumer market for youth-oriented goods and services.',
+          'The counterculture\'s greatest impact was political — it directly caused the passage of major civil rights and anti-poverty legislation.'
+        ],
         correctAnswer: 'It pushed new ideas about music, speech, identity, protest, and personal freedom into mainstream public debate and media.',
-        explanation: 'The lesson says the media broadcast countercultural values to mainstream America through television, radio, art, music, and theater.',
+        explanation: 'Whether in rock music, language, fashion, sexual norms, or protest tactics, the counterculture permanently expanded what was considered acceptable in American public life — even as the specific movement faded.',
         standard: 'SS.912.A.7.9'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // UNIT 7A CAPSTONE — Into Vietnam
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'capstone',
     label: 'UNIT 7A CAPSTONE',
@@ -1217,86 +1367,126 @@ const LESSONS = [
     icon: '🌿',
     type: 'capstone',
     briefing: {
-      location: 'Escalation and Debate',
+      location: 'Washington D.C. and Southeast Asia',
       date: '1945–1968',
-      role: 'National security analyst',
+      role: 'foreign policy analyst',
       text: 'Vietnam was not a sudden crisis. It was a chain of choices made by presidents who feared the political and strategic cost of appearing weak in the Cold War. What began as support for France became support for South Vietnam, then advisers, then bombing, then a widening war. Your task is to trace how containment, the domino theory, and the Gulf of Tonkin pushed the United States from caution into escalation.',
-      tags: []
+      tags: ['SS.912.A.6.14', 'SS.912.A.7.10', 'SS.912.A.7.11']
     },
     displayCount: 5,
     goldRules: { perCorrect: 25, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Into Vietnam', cards: ['Ho Chi Minh', 'Gulf of Tonkin'] },
+    rewards: { badge: 'Into Vietnam', cards: ['Gulf of Tonkin', 'Operation Rolling Thunder'] },
     bank: [
       {
         id: '7A-CAP-Q1',
         text: 'Why did President Truman support France in Vietnam during the First Indochina War?',
-        choices: ['He viewed the conflict mainly through Cold War containment and feared that a Viet Minh victory would strengthen communism in Asia.', 'He wanted to restore French colonial rule because the United States had promised to rebuild all European empires after World War II.', 'He believed Ho Chi Minh was a democratic ally who would work closely with the United States against China and the Soviet Union.', 'He expected Congress to declare war immediately and send large American combat forces to replace French troops in Indochina.'],
+        choices: [
+          'He viewed the conflict mainly through Cold War containment and feared that a Viet Minh victory would strengthen communism in Asia.',
+          'President Truman backed France in Indochina mainly to fulfill and honor the formal mutual defense military alliance between the two nations that stretched all the way back to their shared experience in World War I.',
+          'He acted primarily because American corporations had major investments in French Indochina that needed protection.',
+          'Truman backed France mainly because he believed Vietnamese independence would destabilize the entire Pacific region for decades.'
+        ],
         correctAnswer: 'He viewed the conflict mainly through Cold War containment and feared that a Viet Minh victory would strengthen communism in Asia.',
-        explanation: 'Truman chose to see the conflict through Cold War politics, treating the French struggle as part of a larger battle against communism.',
+        explanation: 'Though Ho Chi Minh was as much nationalist as communist, Truman\'s Cold War framework led him to see any communist victory as a strategic threat — providing France with financial and military aid that committed the U.S. to the region.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.11'
       },
       {
         id: '7A-CAP-Q2',
-        text: 'What was Eisenhower’s domino theory?',
-        choices: ['The idea that if Vietnam fell to communism, other countries in Southeast Asia might fall in sequence as well.', 'The idea that communist governments would collapse automatically if the United States refused to recognize them diplomatically.', 'The idea that France would continue controlling Indochina as long as American economic aid kept its empire financially stable.', 'The idea that nuclear weapons could prevent all guerrilla wars by intimidating smaller countries into neutrality.'],
+        text: 'What was Eisenhower\'s domino theory?',
+        choices: [
+          'The idea that if Vietnam fell to communism, other countries in Southeast Asia might fall in sequence as well.',
+          'Eisenhower believed that communist nations would inevitably collapse one after another as their economies failed.',
+          'The theory held that American military victories in one country would produce pro-American governments in neighboring nations.',
+          'Domino theory described Eisenhower\'s belief that nuclear deterrence in Europe would prevent conventional wars in Asia.'
+        ],
         correctAnswer: 'The idea that if Vietnam fell to communism, other countries in Southeast Asia might fall in sequence as well.',
-        explanation: 'Eisenhower warned that if Vietnam fell, the rest of Southeast Asia could topple like a row of dominoes.',
+        explanation: 'Eisenhower\'s domino metaphor — one falling domino toppling the next — expressed the fear that a communist Vietnam would trigger communist takeovers in Laos, Cambodia, Thailand, and beyond, making the entire region a Soviet or Chinese sphere.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.11'
       },
       {
         id: '7A-CAP-Q3',
         text: 'What was the result of the Geneva Accords of 1954?',
-        choices: ['Vietnam was temporarily divided at the 17th parallel, with the expectation that national elections would later reunify the country.', 'France kept control of all Vietnam, but the United States agreed to supervise military training in the north and south.', 'Vietnam became a permanent two-state settlement immediately recognized by all parties as the final and lasting solution.', 'The Soviet Union withdrew support from Ho Chi Minh and accepted direct U.S. military occupation of South Vietnam.'],
+        choices: [
+          'Vietnam was temporarily divided at the 17th parallel, with the expectation that national elections would later reunify the country.',
+          'The Geneva Accords permanently and formally divided Vietnam into two entirely separate, fully independent, and internationally recognized sovereign nations with their own governments and armies.',
+          'Geneva ended the French war and gave the United States formal authority to administer South Vietnam as a protectorate.',
+          'The accords required all foreign troops to leave Vietnam immediately and established a UN peacekeeping force along the border.'
+        ],
         correctAnswer: 'Vietnam was temporarily divided at the 17th parallel, with the expectation that national elections would later reunify the country.',
-        explanation: 'The Geneva Accords split Vietnam temporarily at the 17th parallel after the French defeat at Dien Bien Phu.',
+        explanation: 'The accords ended French rule and divided Vietnam temporarily — but the U.S. and Diem\'s South Vietnam refused to hold the promised 1956 elections, fearing Ho Chi Minh would win, turning the temporary division into a permanent conflict.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.11'
       },
       {
         id: '7A-CAP-Q4',
         text: 'How did Kennedy deepen U.S. involvement in Vietnam without committing to a full-scale war?',
-        choices: ['He sharply increased the number of military advisers sent to South Vietnam while avoiding a major deployment of combat troops.', 'He withdrew all American advisers from Vietnam and relied entirely on United Nations peacekeepers to stabilize the region.', 'He ordered an immediate invasion of North Vietnam after the Bay of Pigs damaged his Cold War credibility in Latin America.', 'He accepted communist unification of Vietnam but tried to contain its influence through naval power alone in the Pacific.'],
+        choices: [
+          'He sharply increased the number of military advisers sent to South Vietnam while avoiding a major deployment of combat troops.',
+          'Kennedy deepened involvement by authorizing the CIA to conduct covert bombing raids against North Vietnamese supply routes.',
+          'He approved a formal mutual defense treaty with South Vietnam that committed the United States to its full military defense.',
+          'Kennedy deepened involvement mainly by funding South Vietnam\'s military through loans while withdrawing all American personnel.'
+        ],
         correctAnswer: 'He sharply increased the number of military advisers sent to South Vietnam while avoiding a major deployment of combat troops.',
-        explanation: 'Kennedy expanded the advisory mission, which made later escalation easier.',
+        explanation: 'Kennedy expanded the American advisory presence from roughly 900 to over 16,000 — a significant escalation that blurred the line between advising and fighting, setting the stage for Johnson\'s far larger commitment.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7A-CAP-Q5',
         text: 'Why was the Gulf of Tonkin Resolution such a turning point in the Vietnam War?',
-        choices: ['It gave President Johnson broad authority to expand U.S. military involvement without a formal declaration of war.', 'It required Congress to approve every bombing mission individually, which sharply slowed American escalation in Vietnam.', 'It ended U.S. involvement by transferring responsibility for the war to South Vietnam and the United Nations.', 'It forced North Vietnam to withdraw all troops from the South in exchange for a temporary ceasefire and new elections.'],
+        choices: [
+          'It gave President Johnson broad authority to expand U.S. military involvement without a formal declaration of war.',
+          'The resolution was a turning point mainly because it finally gave Congress the power to override presidential war decisions.',
+          'It turned the war because it authorized the first use of nuclear weapons in a regional conflict by an American president.',
+          'The resolution was significant mainly because it required South Vietnam to take over all ground combat operations immediately.'
+        ],
         correctAnswer: 'It gave President Johnson broad authority to expand U.S. military involvement without a formal declaration of war.',
-        explanation: 'The Gulf of Tonkin Resolution was not a declaration of war, but it effectively enabled the president to widen the conflict.',
+        explanation: 'Based on disputed accounts of attacks on U.S. ships in the Gulf of Tonkin, Congress handed Johnson a near-blank check — the resolution effectively transferred war-making authority from Congress to the president.',
         standard: 'SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7A-CAP-Q6',
         text: 'Why did Johnson launch Operation Rolling Thunder in 1965?',
-        choices: ['He hoped sustained bombing would strengthen South Vietnam and pressure the North to stop supporting the war in the South.', 'He intended to end the war quickly by using nuclear weapons against Hanoi and the Ho Chi Minh Trail.', 'He was required by the Geneva Accords to assist French forces still fighting communist resistance in northern Vietnam.', 'He wanted to punish China directly for supplying North Vietnam and to prevent another Korean-style intervention in Asia.'],
+        choices: [
+          'He hoped sustained bombing would strengthen South Vietnam and pressure the North to stop supporting the war in the South.',
+          'Rolling Thunder was launched mainly to test American air power capabilities against a well-defended Soviet-supplied adversary.',
+          'Johnson authorized the bombing primarily to give the Air Force a combat mission and prevent military leaders from pushing for ground invasion.',
+          'The operation was launched mainly to destroy North Vietnamese nuclear facilities before they could become operational.'
+        ],
         correctAnswer: 'He hoped sustained bombing would strengthen South Vietnam and pressure the North to stop supporting the war in the South.',
-        explanation: 'Johnson ordered bombing to support South Vietnam, attack staging areas north of the 17th parallel, and sever supply routes.',
+        explanation: 'Johnson believed graduated air pressure would break Hanoi\'s will without requiring a massive ground commitment — but North Vietnam proved far more resilient than expected, and the bombing failed to stop infiltration or end the war.',
         standard: 'SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7A-CAP-Q7',
         text: 'What was the main difference between hawks and doves during the Vietnam debate?',
-        choices: ['Hawks favored expanding military involvement, while doves urged negotiation and a more limited or peaceful response.', 'Hawks wanted immediate withdrawal because they opposed containment, while doves wanted nuclear escalation to defend South Vietnam.', 'Hawks supported French colonial rule, while doves supported communist rule under Ho Chi Minh as the only stable alternative.', 'Hawks were mostly members of Congress, while doves were military officers who believed bombing would win the war quickly.'],
+        choices: [
+          'Hawks favored expanding military involvement, while doves urged negotiation and a more limited or peaceful response.',
+          'Hawks wanted to use nuclear weapons to end the war quickly, while doves supported only conventional military operations.',
+          'Doves supported the war effort but opposed the draft, while hawks favored both military escalation and conscription.',
+          'The main difference was generational — hawks were generally older veterans and doves were exclusively college students.'
+        ],
         correctAnswer: 'Hawks favored expanding military involvement, while doves urged negotiation and a more limited or peaceful response.',
-        explanation: 'Hawks advocated escalation and doves wanted peaceful means to resolve the conflict.',
+        explanation: 'The hawk-dove divide cut across party lines — hawks argued more force would win; doves argued the war was unwinnable and morally wrong, and the cost in lives was too high for an unclear strategic goal.',
         standard: 'SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7A-CAP-Q8',
         text: 'What best explains why U.S. involvement in Vietnam deepened over time under three different presidents?',
-        choices: ['Each administration feared that withdrawal would damage American credibility and encourage communist expansion elsewhere.', 'Each president believed South Vietnam had already become a stable democracy that could easily defeat communist forces alone.', 'Each administration planned from the beginning to fight a massive ground war, and escalation unfolded exactly as originally intended.', 'Each president was responding mainly to public pressure at home, since most Americans demanded immediate war from the late 1940s onward.'],
+        choices: [
+          'Each administration feared that withdrawal would damage American credibility and encourage communist expansion elsewhere.',
+          'Each president personally believed in Vietnam\'s strategic importance and independently chose escalation over all other options.',
+          'Involvement deepened mainly because the military gave presidents optimistic assessments that convinced them victory was near.',
+          'Congress pushed each administration to escalate because members feared appearing soft on communism in their home districts.'
+        ],
         correctAnswer: 'Each administration feared that withdrawal would damage American credibility and encourage communist expansion elsewhere.',
-        explanation: 'A pattern of incremental commitment shaped by containment, domino theory, and fear of appearing to lose Vietnam.',
+        explanation: 'Truman, Eisenhower, Kennedy, and Johnson all made different decisions, but shared the same underlying fear — that pulling out of Vietnam would be seen as American weakness that would embolden the Soviets, alarm allies, and trigger further communist advances.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.11'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
-  // EOC REVIEW — EOC Practice Quiz
-  // ══════════════════════════════════════════════════
+  // ==================================================
+  // EOC REVIEW — The 1960s
+  // ==================================================
   {
     id: 'eoc',
     label: 'EOC REVIEW',
@@ -1306,213 +1496,338 @@ const LESSONS = [
     type: 'eoc',
     briefing: {
       location: 'The 1960s Review',
-      date: 'The 1960s Review',
-      role: 'Historian in training',
-      text: 'You have completed the major missions of the 1960s unit. Now review the full story: Kennedy’s presidency, Johnson’s Great Society, the counterculture, and America’s deeper involvement in Vietnam. Expect questions from across the unit, not just one chapter.',
-      tags: []
+      date: '',
+      role: 'state exam coach',
+      text: 'You have completed the major missions of the 1960s unit. Now review the full story: Kennedy\'s presidency, Johnson\'s Great Society, the counterculture, and America\'s deeper involvement in Vietnam. Expect questions from across the unit, not just one chapter.',
+      tags: ['SS.912.A.7.4', 'SS.912.A.7.9', 'SS.912.A.7.10', 'SS.912.A.7.11', 'SS.912.A.7.13']
     },
     displayCount: 15,
     goldRules: { perCorrect: 15, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'The 1960s Complete', cards: ['Camelot', 'Great Society', 'Vietnam'] },
+    rewards: { badge: 'The 1960s Mastery', cards: ['LBJ Great Society', 'Vietnam Escalation'] },
     bank: [
       {
         id: '7A-EOC-Q1',
-        text: 'Why did many Americans remember the Kennedy years as ‘Camelot’?',
-        choices: ['The administration projected youth, culture, glamour, and optimism, creating the image of a brief but inspiring national moment.', 'Kennedy formally renamed the White House Camelot and used the term in major domestic policy speeches throughout his presidency.', 'The Supreme Court compared Kennedy’s leadership to King Arthur’s court when it praised his foreign policy achievements.', 'Congress used the term Camelot to describe Kennedy’s Great Society agenda after his 1964 reelection campaign.'],
+        text: 'Why did many Americans remember the Kennedy years as "Camelot"?',
+        choices: [
+          'The administration projected youth, culture, glamour, and optimism, creating the image of a brief but inspiring national moment.',
+          'Kennedy himself chose the Camelot label to describe his policy program and used it in every major speech.',
+          'The Camelot image was created mainly by foreign governments who admired Kennedy\'s handling of the Cuban Missile Crisis.',
+          'Most Americans strongly associated the entire Camelot image with Kennedy\'s unprecedented legislative record and the extraordinary volume of bills he signed into law.'
+        ],
         correctAnswer: 'The administration projected youth, culture, glamour, and optimism, creating the image of a brief but inspiring national moment.',
-        explanation: 'Camelot became shorthand for the mood and image of the Kennedy White House rather than a formal policy label.',
+        explanation: 'The Camelot myth emerged powerfully after Kennedy\'s assassination — Jacqueline Kennedy connected the White House to the musical, and the image of a brief, shining moment of idealism captured a nation\'s grief.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7A-EOC-Q2',
-        text: 'What was Kennedy’s New Frontier meant to represent?',
-        choices: ['A call for energetic federal action in science, education, poverty, and public service during a new era of national challenge.', 'A plan to shrink the federal government and leave domestic reform almost entirely to state and local authorities.', 'A strategy to end Cold War competition by cutting foreign aid, space funding, and overseas commitments all at once.', 'A proposal to replace most New Deal programs with private charities and volunteer religious organizations.'],
+        text: 'What was Kennedy\'s New Frontier meant to represent?',
+        choices: [
+          'A call for energetic federal action in science, education, poverty, and public service during a new era of national challenge.',
+          'The New Frontier described Kennedy\'s plan to restore traditional American values that had been lost during the Eisenhower years.',
+          'It represented a return to the isolationist foreign policy that had kept the United States out of foreign conflicts before World War II.',
+          'Kennedy used the term mainly to describe his proposal for territorial expansion through acquisition of Caribbean island nations.'
+        ],
         correctAnswer: 'A call for energetic federal action in science, education, poverty, and public service during a new era of national challenge.',
-        explanation: 'The New Frontier presented Kennedy’s presidency as one of activism, innovation, and national renewal.',
+        explanation: 'Kennedy\'s New Frontier rhetoric painted a portrait of an America ready to confront new challenges — poverty, space, communism, and civil rights — with the same energy that earlier generations had brought to geographical expansion.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7A-EOC-Q3',
         text: 'Why was the Bay of Pigs a serious setback for Kennedy?',
-        choices: ['The failed invasion embarrassed the United States, hurt Kennedy’s credibility, and strengthened Castro’s position in Cuba.', 'The invasion succeeded militarily, but Congress condemned Kennedy for using too much force without United Nations approval.', 'It led directly to the fall of Castro, which pushed the Soviet Union to break relations with Cuba permanently.', 'The crisis ended with Kennedy accepting Soviet missiles in Cuba in exchange for an American noninvasion pledge.'],
-        correctAnswer: 'The failed invasion embarrassed the United States, hurt Kennedy’s credibility, and strengthened Castro’s position in Cuba.',
-        explanation: 'Bay of Pigs is usually treated as an early Kennedy failure because it was poorly executed and politically damaging.',
+        choices: [
+          'A CIA-backed invasion of Cuba failed quickly, humiliating the United States and bolstering Castro\'s position domestically and internationally.',
+          'The Bay of Pigs was a setback mainly because it revealed that the CIA had been penetrated by Cuban spies who warned Castro.',
+          'It damaged Kennedy mainly because the invasion succeeded militarily but Congress refused to recognize the new Cuban government.',
+          'The setback was primarily domestic — the failed invasion caused a severe economic recession that lasted through 1963.'
+        ],
+        correctAnswer: 'A CIA-backed invasion of Cuba failed quickly, humiliating the United States and bolstering Castro\'s position domestically and internationally.',
+        explanation: 'The failed exile invasion at the Bay of Pigs in April 1961 left Kennedy politically embarrassed, strengthened Castro\'s nationalist credentials, and raised questions about American competence that Khrushchev would test months later in Berlin.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7A-EOC-Q4',
         text: 'Why did Kennedy push the space race so strongly?',
-        choices: ['He believed American success in space would prove technological strength and ideological leadership during the Cold War.', 'He wanted NASA to replace the armed forces as the main branch of national defense against Soviet expansion.', 'He saw space exploration mainly as a way to reduce federal spending and avoid competition with the Soviet Union.', 'He treated the moon landing as a private scientific issue with little connection to Cold War politics.'],
+        choices: [
+          'He believed American success in space would prove technological strength and ideological leadership during the Cold War.',
+          'Kennedy was personally passionate about astronomy and used the presidency to fund research he had championed since college.',
+          'Space exploration was pushed mainly by the military, which needed satellites to replace the U-2 spy planes shot down over the USSR.',
+          'Kennedy prioritized space mainly because the aerospace industry was a major employer in the swing states he needed to win reelection.'
+        ],
         correctAnswer: 'He believed American success in space would prove technological strength and ideological leadership during the Cold War.',
-        explanation: 'The space race was about prestige and Cold War competition as much as science.',
+        explanation: 'After Soviet cosmonauts beat Americans into orbit, Kennedy framed the moon goal as a Cold War imperative — proving that free societies could out-achieve communist ones in the most dramatic arena imaginable.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7A-EOC-Q5',
         text: 'What made the Cuban Missile Crisis both a success and a warning for Kennedy?',
-        choices: ['He avoided nuclear war and won missile removal, but the crisis showed how close Cold War brinkmanship could come to catastrophe.', 'He solved the crisis through immediate invasion, proving that military force was always the best answer to Soviet pressure.', 'He accepted Soviet missiles in Cuba while preserving his public image, which historians see as a clever diplomatic compromise.', 'He removed American missiles from Europe publicly before talks began, forcing Khrushchev to retreat without negotiation.'],
+        choices: [
+          'He avoided nuclear war and won missile removal, but the crisis showed how close Cold War brinkmanship could come to catastrophe.',
+          'It was a success because Kennedy obtained Soviet disarmament, but a warning because Congress challenged his handling of the crisis.',
+          'Kennedy succeeded in the crisis diplomatically but failed militarily, since the Navy could not actually enforce the blockade at sea.',
+          'The crisis was a success for Kennedy\'s public image but a warning for his allies, who believed he had been too aggressive with Khrushchev.'
+        ],
         correctAnswer: 'He avoided nuclear war and won missile removal, but the crisis showed how close Cold War brinkmanship could come to catastrophe.',
-        explanation: 'The crisis enhanced Kennedy’s reputation, but it also revealed the terrifying risks of nuclear escalation.',
+        explanation: 'Kennedy\'s management of the crisis is widely praised, but later revelations — about a Soviet submarine near launching a nuclear torpedo, about the secret Turkey concession — showed how much luck and back-channel diplomacy the outcome depended on.',
         standard: 'SS.912.A.7.4 · SS.912.A.6.13'
       },
       {
         id: '7A-EOC-Q6',
-        text: 'What was the main goal of Johnson’s Great Society?',
-        choices: ['To use federal power to reduce poverty, expand opportunity, and improve the quality of American life.', 'To end most New Deal and Fair Deal reforms because prosperity had already solved major social problems.', 'To focus almost entirely on military strength abroad while leaving poverty and education to state governments.', 'To replace federal reform with private charity and local volunteerism as the main tools of domestic improvement.'],
+        text: 'What was the main goal of Johnson\'s Great Society?',
+        choices: [
+          'To use federal power to reduce poverty, expand opportunity, and improve the quality of American life.',
+          'Johnson\'s main goal was proving that democratic capitalism could outperform the Soviet model in raising living standards.',
+          'The Great Society was designed mainly to reward the Democratic Party\'s political coalition by funding urban infrastructure.',
+          'Its primary goal was military — Johnson believed a strong domestic economy was necessary to sustain the war in Vietnam.'
+        ],
         correctAnswer: 'To use federal power to reduce poverty, expand opportunity, and improve the quality of American life.',
-        explanation: 'The Great Society envisioned an active federal government addressing poverty, education, health care, and quality of life.',
+        explanation: 'Johnson\'s vision was both personal and political — rooted in his Texas Hill Country upbringing and his belief that government could and should intervene directly to lift Americans out of poverty and expand the middle class.',
         standard: 'SS.912.A.7.13'
       },
       {
         id: '7A-EOC-Q7',
-        text: 'What did Johnson’s War on Poverty try to do?',
-        choices: ['Attack the causes of poverty through education, training, and community-based federal programs rather than rely only on relief.', 'Eliminate all welfare spending by replacing government support with private charities and local churches across the country.', 'Guarantee equal annual income for every American family regardless of work, education, or local economic conditions.', 'Move poor families out of cities permanently and resettle them in newly planned suburban communities.'],
+        text: 'What did Johnson\'s War on Poverty try to do?',
+        choices: [
+          'Attack the causes of poverty through education, training, and community-based federal programs rather than rely only on relief.',
+          'Johnson's War on Poverty functioned mainly as a massive federal public works program that prioritized the construction of roads, bridges, and hydroelectric dams in the most economically depressed rural and urban regions of the country.',
+          'Johnson believed he could end poverty permanently mainly by aggressively taxing the wealthiest Americans and distributing those collected funds directly and immediately to low-income households across the country.',
+          'The program aimed primarily to relocate poor families from rural areas into new federally constructed urban housing projects.'
+        ],
         correctAnswer: 'Attack the causes of poverty through education, training, and community-based federal programs rather than rely only on relief.',
-        explanation: 'The War on Poverty aimed at opportunity and structural reform, not just emergency aid.',
+        explanation: 'Programs like the Job Corps, VISTA, and Head Start tried to equip poor Americans with the skills and opportunities to escape poverty permanently — not just provide temporary assistance to maintain minimum living standards.',
         standard: 'SS.912.A.7.13'
       },
       {
         id: '7A-EOC-Q8',
         text: 'Why were Medicare and Medicaid major Great Society reforms?',
-        choices: ['They greatly expanded access to health care for the elderly and for many low-income Americans.', 'They ended private medicine in the United States and placed all hospitals under direct federal control.', 'They provided free health care to every American regardless of age or income by the end of the 1960s.', 'They were temporary wartime medical programs created in response to casualties from the Vietnam War.'],
+        choices: [
+          'They greatly expanded access to health care for the elderly and for many low-income Americans.',
+          'Medicare and Medicaid were major mainly because they replaced the private insurance system entirely with a government program.',
+          'They mattered mainly because they were funded entirely through state sales taxes rather than the federal income tax.',
+          'Both programs were significant mainly because they provided free prescription drugs to all Americans below the poverty line.'
+        ],
         correctAnswer: 'They greatly expanded access to health care for the elderly and for many low-income Americans.',
-        explanation: 'These programs became among the most lasting domestic reforms of the Johnson era.',
+        explanation: 'Before 1965, the elderly were the least insured age group in America and millions of poor families had no access to medical care — Medicare and Medicaid created a permanent federal commitment to healthcare access.',
         standard: 'SS.912.A.7.13'
       },
       {
         id: '7A-EOC-Q9',
         text: 'Why was the Immigration and Nationality Act of 1965 historically important?',
-        choices: ['It ended the old quota system and significantly reshaped immigration patterns to the United States.', 'It restored strict national-origin quotas from the 1920s and sharply reduced immigration from Asia and Latin America.', 'It granted automatic citizenship to all temporary workers and eliminated all limits on family-based migration.', 'It required new immigrants to settle only in rural states so major cities would avoid rapid demographic change.'],
+        choices: [
+          'It ended the old quota system and significantly reshaped immigration patterns to the United States.',
+          'The act was important mainly because it reduced overall immigration levels to protect American workers from job competition.',
+          'It established the first-ever guest worker program allowing seasonal laborers from Mexico to work legally in the United States.',
+          'The law was significant mainly because it granted immediate citizenship to all immigrants who had lived in the U.S. for five years.'
+        ],
         correctAnswer: 'It ended the old quota system and significantly reshaped immigration patterns to the United States.',
-        explanation: 'The 1965 law transformed American immigration by undoing the earlier quota regime.',
+        explanation: 'The 1924 quota system had deliberately favored Northern and Western Europeans — the 1965 act\'s shift to family reunification preferences opened the door to millions from Asia, Latin America, and Africa who transformed American demographics.',
         standard: 'SS.912.A.7.13 · SS.912.A.7.16'
       },
       {
         id: '7A-EOC-Q10',
-        text: 'What does ‘counterculture’ mean in the context of the 1960s?',
-        choices: ['A youth movement whose values and behavior differed sharply from mainstream American culture, especially on war, conformity, and freedom.', 'A political party created to replace both Democrats and Republicans during the protests of the late 1960s.', 'A federal arts campaign designed to encourage patriotic music and traditional family values among teenagers.', 'A legal movement devoted mainly to reversing Supreme Court rulings on civil rights and free speech.'],
+        text: 'What does "counterculture" mean in the context of the 1960s?',
+        choices: [
+          'A youth movement whose values and behavior differed sharply from mainstream American culture, especially on war, conformity, and freedom.',
+          'The term counterculture specifically described the powerful conservative political movement that formed across American suburbs and small towns specifically to oppose both the civil rights movement and the growing anti-war protest marches.',
+          'The term refers specifically to the underground music and art scene that operated outside mainstream commercial media.',
+          'Counterculture described the effort by immigrant communities to preserve their own languages and traditions against Americanization.'
+        ],
         correctAnswer: 'A youth movement whose values and behavior differed sharply from mainstream American culture, especially on war, conformity, and freedom.',
-        explanation: 'The lesson defines the counterculture as a major break from mainstream norms and values.',
+        explanation: 'The counterculture was defined by what it rejected — consumer materialism, military conformity, political deference, and conventional career paths — as much as by what it proposed.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-EOC-Q11',
         text: 'How did the New Left differ from the Old Left?',
-        choices: ['It rejected communism and instead sought to reform American society by expanding democracy and citizen participation.', 'It focused entirely on factory labor and avoided issues such as campus protest, civil rights, and war.', 'It supported Soviet-style revolution and argued that democratic politics in the United States were beyond reform.', 'It opposed protest in principle and relied almost entirely on quiet court cases and legislative lobbying.'],
+        choices: [
+          'It rejected communism and instead sought to reform American society by expanding democracy and citizen participation.',
+          'The New Left was more focused on electoral politics while the Old Left had relied mainly on strikes and union organizing.',
+          'The New Left was exclusively a student movement while the Old Left had been primarily organized around industrial workers.',
+          'New Left activists were mainly based in the South while the Old Left had been concentrated in northeastern industrial cities.'
+        ],
         correctAnswer: 'It rejected communism and instead sought to reform American society by expanding democracy and citizen participation.',
-        explanation: 'The New Left was student-centered and reform-minded rather than communist in outlook.',
+        explanation: 'The Port Huron Statement explicitly distanced SDS from the Soviet Union and from the class-based politics of the Old Left — the New Left sought participatory democracy, not proletarian revolution.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-EOC-Q12',
-        text: 'Why was Berkeley’s Free Speech Movement important?',
-        choices: ['It became a landmark victory for student activism and free expression on college campuses.', 'It ended tuition at public universities nationwide and made college free for all students by the late 1960s.', 'It persuaded most student activists to abandon campus politics and join mainstream parties instead.', 'It created the first national law banning student organizations from recruiting members at public universities.'],
+        text: 'Why was Berkeley\'s Free Speech Movement important?',
+        choices: [
+          'It became a landmark victory for student activism and free expression on college campuses.',
+          'The movement was important mainly because it led to a federal law protecting political speech at all public universities.',
+          'Berkeley mattered mainly because it was the first campus where students successfully voted to end the military draft.',
+          'The Free Speech Movement was significant mainly because it inspired similar protests at Soviet and Eastern Bloc universities.'
+        ],
         correctAnswer: 'It became a landmark victory for student activism and free expression on college campuses.',
-        explanation: 'Berkeley symbolized the rise of student political activism and campus free speech battles.',
+        explanation: 'The 1964 Berkeley protests forced the University of California to recognize students\' right to political advocacy on campus — a precedent that spread across American higher education and emboldened student activism nationwide.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-EOC-Q13',
-        text: 'What does the term ‘generation gap’ describe in the 1960s?',
-        choices: ['A growing divide between many young people and their parents over values, war, authority, and culture.', 'A temporary decline in birthrates that reduced the number of teenagers entering high schools and colleges.', 'A legal separation between minors and adults that limited youth involvement in public life and protest.', 'A gap in schooling caused by older adults returning to college in greater numbers than young adults.'],
+        text: 'What does the term "generation gap" describe in the 1960s?',
+        choices: [
+          'A growing divide between many young people and their parents over values, war, authority, and culture.',
+          'The generation gap described the wage difference between baby boomers entering the workforce and their more experienced parents.',
+          'The term referred to the difference in life expectancy between Americans born before and after World War II.',
+          'It described the political divide between young urban Democrats and older suburban Republicans during the 1960s elections.'
+        ],
         correctAnswer: 'A growing divide between many young people and their parents over values, war, authority, and culture.',
-        explanation: 'The generation gap was one of the defining social features of the counterculture era.',
+        explanation: 'The generation gap was most visible in arguments over Vietnam, drugs, sexual behavior, and respect for authority — producing real family conflicts that reflected the decade\'s broader cultural fractures.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-EOC-Q14',
         text: 'Why did Woodstock become such a strong symbol of the 1960s counterculture?',
-        choices: ['It captured the scale, music, communal spirit, and anti-Establishment mood of youth culture at the end of the decade.', 'It was the first federally sponsored festival celebrating Johnson’s Great Society and support for the Vietnam War.', 'It marked the point when most hippies abandoned protest and accepted traditional careers and suburban family life.', 'It mattered mainly because it ended student activism on campuses and redirected youth into electoral politics.'],
+        choices: [
+          'It captured the scale, music, communal spirit, and anti-Establishment mood of youth culture at the end of the decade.',
+          'Woodstock was symbolically important mainly because it ended in violence that marked the collapse of the entire counterculture.',
+          'The festival became a symbol mainly because it was televised live and reached a global audience of hundreds of millions.',
+          'Woodstock mattered mainly as a political event — it launched the careers of several prominent anti-war Congressional candidates.'
+        ],
         correctAnswer: 'It captured the scale, music, communal spirit, and anti-Establishment mood of youth culture at the end of the decade.',
-        explanation: 'Woodstock became a lasting symbol of the values and style of the counterculture.',
+        explanation: 'Four days of music, rain, and peaceful community in August 1969 — with half a million people — seemed to many participants like a glimpse of the world the counterculture was trying to build.',
         standard: 'SS.912.A.7.9'
       },
       {
         id: '7A-EOC-Q15',
         text: 'Why did Truman first support France in Vietnam?',
-        choices: ['He saw the conflict mainly through Cold War containment and feared communist expansion in Asia.', 'He wanted to restore European colonial empires everywhere as a matter of principle after World War II.', 'He believed Ho Chi Minh would become a close democratic ally of the United States against the Soviet Union.', 'He expected Congress to authorize a full-scale American ground war in Indochina immediately after the French request.'],
+        choices: [
+          'He saw the conflict mainly through Cold War containment and feared communist expansion in Asia.',
+          'Truman supported France mainly because the two nations had a formal military alliance requiring mutual defense.',
+          'He backed France primarily to honor America\'s World War II debt to the French Resistance and Free French Forces.',
+          'Truman supported France mainly because American oil companies had major investments in French Indochina they needed protected.'
+        ],
         correctAnswer: 'He saw the conflict mainly through Cold War containment and feared communist expansion in Asia.',
-        explanation: 'Truman treated French Indochina as part of the wider Cold War struggle.',
+        explanation: 'The fall of China to communism in 1949 and the Korean War beginning in 1950 pushed Truman to view every communist movement in Asia as a domino — and Ho Chi Minh\'s Viet Minh as part of a Soviet-Chinese expansion plan.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.11'
       },
       {
         id: '7A-EOC-Q16',
         text: 'What was the domino theory?',
-        choices: ['The belief that if Vietnam fell to communism, other countries in Southeast Asia might fall one after another.', 'The belief that communist governments would collapse automatically if the United States avoided direct involvement in Asia.', 'The belief that France could retain Vietnam permanently as long as the United States continued sending military aid.', 'The belief that nuclear threats alone could end guerrilla warfare and stabilize South Vietnam without local political reform.'],
+        choices: [
+          'The belief that if Vietnam fell to communism, other countries in Southeast Asia might fall one after another.',
+          'A Cold War strategy that proposed knocking down one communist government at a time to gradually liberate Eastern Europe.',
+          'The theory that Soviet economic failures would cause communist states to collapse internally in a predictable sequence.',
+          'Eisenhower\'s prediction that massive nuclear retaliation would deter any conventional Soviet military attack in Europe.'
+        ],
         correctAnswer: 'The belief that if Vietnam fell to communism, other countries in Southeast Asia might fall one after another.',
-        explanation: 'Domino theory was one of the main strategic ideas used to justify deeper U.S. involvement in Vietnam.',
+        explanation: 'The domino theory provided the strategic rationale for American involvement in Vietnam — if one country fell, its neighbors would be vulnerable, making the entire region potentially a communist sphere of influence.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.11'
       },
       {
         id: '7A-EOC-Q17',
         text: 'What did the Geneva Accords do in 1954?',
-        choices: ['They temporarily divided Vietnam at the 17th parallel and called for future elections to reunify the country.', 'They recognized French colonial control over all Vietnam and placed U.S. advisers in charge of southern defenses.', 'They permanently created two nations in Vietnam with no expectation of future reunification elections.', 'They transferred North Vietnam to United Nations trusteeship and placed South Vietnam under direct U.S. occupation.'],
+        choices: [
+          'They temporarily divided Vietnam at the 17th parallel and called for future elections to reunify the country.',
+          'The Geneva Accords permanently recognized North and South Vietnam as two separate sovereign nations.',
+          'They formally ended the Korean War and established the armistice line that divided the Korean peninsula.',
+          'The accords granted Vietnam full independence from France while placing it under United Nations trusteeship for ten years.'
+        ],
         correctAnswer: 'They temporarily divided Vietnam at the 17th parallel and called for future elections to reunify the country.',
-        explanation: 'The Geneva settlement created a temporary division, not a permanent final settlement.',
+        explanation: 'The accords were meant to be temporary — but when the South Vietnamese government and its American backers blocked the 1956 reunification elections, the temporary line became a permanent front in the Cold War.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.11'
       },
       {
         id: '7A-EOC-Q18',
         text: 'How did Kennedy increase U.S. involvement in Vietnam?',
-        choices: ['He expanded the advisory mission significantly while avoiding a full-scale deployment of combat troops.', 'He withdrew American advisers and turned responsibility for the war entirely over to France and the United Nations.', 'He invaded North Vietnam immediately after the Bay of Pigs to show that he would not appear weak in the Cold War.', 'He accepted communist unification of Vietnam and relied only on naval deterrence in the Pacific to contain China.'],
+        choices: [
+          'He expanded the advisory mission significantly while avoiding a full-scale deployment of combat troops.',
+          'Kennedy increased involvement mainly by authorizing covert CIA bombing raids against North Vietnamese border supply routes.',
+          'He signed a formal mutual defense treaty with South Vietnam that legally committed the U.S. to its full military protection.',
+          'Kennedy expanded involvement mainly by providing South Vietnam with nuclear weapons to deter North Vietnamese attack.'
+        ],
         correctAnswer: 'He expanded the advisory mission significantly while avoiding a full-scale deployment of combat troops.',
-        explanation: 'Kennedy deepened involvement incrementally, which made later escalation more likely.',
+        explanation: 'Kennedy grew the U.S. advisory presence from under 1,000 to over 16,000 — a significant but still limited commitment that deepened American investment in South Vietnam\'s survival without triggering full-scale war.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7A-EOC-Q19',
         text: 'Why was the Gulf of Tonkin Resolution a major turning point?',
-        choices: ['It gave Johnson broad authority to expand U.S. military involvement without a formal declaration of war.', 'It required Congress to approve every bombing mission individually, slowing escalation in Vietnam.', 'It ended U.S. involvement by shifting military responsibility entirely to South Vietnam and its regional allies.', 'It forced North Vietnam to withdraw from the South in exchange for a temporary ceasefire and new national elections.'],
+        choices: [
+          'It gave Johnson broad authority to expand U.S. military involvement without a formal declaration of war.',
+          'The resolution required Congress to approve every specific military operation in Vietnam before it could be launched.',
+          'It formally ended American neutrality in the Vietnam War and transferred operational command to the United Nations.',
+          'The resolution was significant mainly because it authorized the deployment of nuclear weapons to bases in South Vietnam.'
+        ],
         correctAnswer: 'It gave Johnson broad authority to expand U.S. military involvement without a formal declaration of war.',
-        explanation: 'The resolution opened the door to much wider U.S. military action.',
+        explanation: 'Passed nearly unanimously in August 1964, the Gulf of Tonkin Resolution gave Johnson authority to "take all necessary measures" — a blank check he used to justify massive escalation without ever returning to Congress for a war declaration.',
         standard: 'SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7A-EOC-Q20',
         text: 'Why did Johnson launch Operation Rolling Thunder?',
-        choices: ['He hoped bombing would pressure North Vietnam, aid the South, and disrupt enemy supply and staging areas.', 'He intended to use nuclear weapons to end the war quickly before China could intervene directly in the conflict.', 'He was required by the Geneva Accords to support remaining French forces still fighting communist resistance in the North.', 'He wanted to punish the Soviet Union directly for supplying weapons to North Vietnam through Cuba and Berlin.'],
+        choices: [
+          'He hoped bombing would pressure North Vietnam, aid the South, and disrupt enemy supply and staging areas.',
+          'Rolling Thunder was launched mainly to test new American precision bombing technology in a live combat environment.',
+          'Johnson ordered the bombing mainly to retaliate for a North Vietnamese attack on a U.S. Air Force base in Thailand.',
+          'The operation was launched mainly to reassure South Vietnamese military leaders who threatened a coup without more American support.'
+        ],
         correctAnswer: 'He hoped bombing would pressure North Vietnam, aid the South, and disrupt enemy supply and staging areas.',
-        explanation: 'Rolling Thunder reflected Johnson’s belief that air power could strengthen South Vietnam and pressure the North.',
+        explanation: 'Rolling Thunder — a sustained bombing campaign from February 1965 to 1968 — reflected Johnson\'s belief that escalating air power would break Hanoi\'s will, but North Vietnam\'s resilience consistently confounded those expectations.',
         standard: 'SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7A-EOC-Q21',
         text: 'What was the difference between hawks and doves during the Vietnam War debate?',
-        choices: ['Hawks favored greater military escalation, while doves preferred negotiation or a more limited response.', 'Hawks wanted immediate withdrawal, while doves argued for expanding bombing and troop deployments across Indochina.', 'Hawks supported French colonial rule, while doves wanted Ho Chi Minh to govern all of Southeast Asia immediately.', 'Hawks were mostly antiwar students, while doves were military advisers who wanted a stronger bombing campaign.'],
+        choices: [
+          'Hawks favored greater military escalation, while doves preferred negotiation or a more limited response.',
+          'Hawks supported the use of nuclear weapons to end the war quickly, while doves wanted only conventional military operations.',
+          'Doves were mainly politicians who opposed the draft, while hawks were military officers who supported mandatory conscription.',
+          'The main difference was geographic — hawks came primarily from southern and western states while doves were northeastern liberals.'
+        ],
         correctAnswer: 'Hawks favored greater military escalation, while doves preferred negotiation or a more limited response.',
-        explanation: 'The hawk-dove divide became one of the defining political debates of the Vietnam era.',
+        explanation: 'The hawk-dove debate divided Americans, Congress, Johnson\'s own cabinet, and eventually the Democratic Party itself — with hawks arguing more force could win, and doves arguing the war was fundamentally unwinnable.',
         standard: 'SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7A-EOC-Q22',
         text: 'What best explains why U.S. involvement in Vietnam deepened under several presidents?',
-        choices: ['Each administration feared that withdrawal would damage U.S. credibility and encourage communist expansion elsewhere.', 'Each president had planned from the beginning to fight a massive ground war, and escalation unfolded exactly as intended.', 'Each administration responded mainly to public pressure, since most Americans demanded immediate war from the late 1940s onward.', 'Each president believed South Vietnam had already become stable enough to defeat communist forces without American support.'],
+        choices: [
+          'Each administration feared that withdrawal would damage U.S. credibility and encourage communist expansion elsewhere.',
+          'Each president personally believed in the strategic necessity of Vietnam and independently concluded escalation was essential.',
+          'Congress insisted on escalation in each administration, threatening to cut off all foreign aid if presidents pulled back.',
+          'Military commanders provided each president with false intelligence showing that one more escalation would produce victory.'
+        ],
         correctAnswer: 'Each administration feared that withdrawal would damage U.S. credibility and encourage communist expansion elsewhere.',
-        explanation: 'Containment and credibility concerns encouraged gradual but deepening commitment.',
+        explanation: 'The credibility trap — the fear that any American retreat would be seen as weakness by the Soviets, Chinese, and American allies everywhere — drove successive presidents to escalate rather than accept the political cost of withdrawal.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.11'
       },
       {
         id: '7A-EOC-Q23',
-        text: 'What broad pattern connects Kennedy’s and Johnson’s foreign policy decisions in this unit?',
-        choices: ['Both presidents tried to contain communism, but their decisions often deepened U.S. commitments and raised the risks of escalation.', 'Both presidents rejected containment and focused almost entirely on reducing U.S. involvement in world affairs.', 'Both presidents ended Cold War rivalry by relying mainly on treaties and avoiding military pressure or strategic competition.', 'Both presidents treated Asia as unimportant and concentrated only on domestic reform and civil rights at home.'],
+        text: 'What broad pattern connects Kennedy\'s and Johnson\'s foreign policy decisions in this unit?',
+        choices: [
+          'Both presidents tried to contain communism, but their decisions often deepened U.S. commitments and raised the risks of escalation.',
+          'Kennedy and Johnson actually shared a remarkably consistent and unified approach to the Vietnam conflict — both presidents privately and consistently preferred negotiated diplomatic settlements over any form of direct military action.',
+          'The two presidents had opposite foreign policies — Kennedy preferred engagement while Johnson favored isolation and deterrence.',
+          'Both presidents focused mainly on Europe and paid little attention to Vietnam until it became a domestic political problem.'
+        ],
         correctAnswer: 'Both presidents tried to contain communism, but their decisions often deepened U.S. commitments and raised the risks of escalation.',
-        explanation: 'From Cuba to Vietnam, both presidencies reflected the pressures and dangers of Cold War containment.',
+        explanation: 'Neither Kennedy nor Johnson wanted a big war in Vietnam, but each decision to deepen involvement — advisers, then bombing, then ground troops — made withdrawal harder and escalation more likely for the next president.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7A-EOC-Q24',
         text: 'How did the Great Society and the counterculture differ in their approach to change?',
-        choices: ['The Great Society worked mainly through federal reform, while the counterculture challenged values, lifestyle, and authority more broadly.', 'The Great Society rejected government action, while the counterculture focused almost entirely on passing legislation through Congress.', 'Both movements avoided questions of inequality and mainly concentrated on increasing military strength in the Cold War.', 'Both movements sought identical goals through identical methods, making them nearly impossible to distinguish historically.'],
+        choices: [
+          'The Great Society worked mainly through federal reform, while the counterculture challenged values, lifestyle, and authority more broadly.',
+          'The Great Society was primarily a cultural movement while the counterculture was mainly focused on electoral and legislative change.',
+          'The Great Society and the counterculture were in fact essentially identical in their fundamental approach — both movements sought to use the concentrated power of the federal government to completely transform American institutions from the top down.',
+          'The main difference was generational — Great Society programs targeted the elderly while the counterculture appealed to the young.'
+        ],
         correctAnswer: 'The Great Society worked mainly through federal reform, while the counterculture challenged values, lifestyle, and authority more broadly.',
-        explanation: 'One sought reform through policy; the other challenged mainstream culture and assumptions.',
+        explanation: 'Johnson\'s approach was top-down and institutional — pass laws, fund programs, change policy. The counterculture\'s approach was bottom-up and personal — change yourself, change your community, reject the system\'s premises entirely.',
         standard: 'SS.912.A.7.9 · SS.912.A.7.13'
       },
       {
         id: '7A-EOC-Q25',
         text: 'Which statement best captures the overall story of this unit?',
-        choices: ['The 1960s combined ambitious reform, cultural rebellion, Cold War pressure, and growing conflict over America’s role at home and abroad.', 'The decade was marked mainly by stability and consensus, with little disagreement over government, war, or social values.', 'Most important changes in the 1960s happened only in foreign policy, while domestic life and culture remained largely unchanged.', 'The unit shows that prosperity had solved most major problems before 1960, leaving few serious debates for later presidents.'],
-        correctAnswer: 'The 1960s combined ambitious reform, cultural rebellion, Cold War pressure, and growing conflict over America’s role at home and abroad.',
-        explanation: 'That arc ties together Kennedy, Johnson, the Great Society, the counterculture, and Vietnam.',
+        choices: [
+          'The 1960s combined ambitious reform, cultural rebellion, Cold War pressure, and growing conflict over America\'s role at home and abroad.',
+          'The 1960s were primarily defined by Cold War success, as America contained communism and defeated the Soviet Union economically.',
+          'The decade\'s main story was cultural — political events like Vietnam and the Great Society had little lasting impact on American life.',
+          'The 1960s were primarily a story of failure — every major reform and protest movement was defeated or reversed before the decade ended.'
+        ],
+        correctAnswer: 'The 1960s combined ambitious reform, cultural rebellion, Cold War pressure, and growing conflict over America\'s role at home and abroad.',
+        explanation: 'The unit\'s arc — Kennedy\'s idealism, Johnson\'s Great Society, the counterculture, and Vietnam\'s escalation — shows a decade in which extraordinary ambition and achievement coexisted with deepening division and disillusionment.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.9 · SS.912.A.7.11 · SS.912.A.7.13'
       },
     ]
