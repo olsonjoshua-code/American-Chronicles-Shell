@@ -1273,7 +1273,7 @@ window.addEventListener('DOMContentLoaded', function() {
           document.getElementById('welcome-gate').style.display = 'none';
           document.getElementById('welcome-gate').classList.remove('show');
           G = Object.assign({}, G || {}, { name: shell.name, period: shell.period || '', fromShell: true });
-          showMap();
+          afterLogin();
           return;
         }
       }
