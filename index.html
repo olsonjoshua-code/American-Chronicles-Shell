@@ -3085,7 +3085,7 @@ function printCourseCert(){
   // ── 2. STUDY / VOCAB (20%) ────────────────────────────
   // All decks that exist in DECK_MAP (standard units + themes + checkpoints)
   const allDeckIds=Object.keys(DECK_MAP);
-  const vocabScores=allDeckIds.map(uid=>S.vocabBestScore&&S.vocabBestScore[DECK_MAP[uid]]||null).filter(v=>v!==null);
+  const vocabScores=allDeckIds.map(uid=>{const v=S.vocabBestScore&&S.vocabBestScore[DECK_MAP[uid]];return(v!==undefined&&v!==null)?v:null;}).filter(v=>v!==null);
   const vocabAvg=vocabScores.length>0?vocabScores.reduce((a,v)=>a+v,0)/vocabScores.length:0;
   // Flashcard completion bonus: up to 10 pts added to vocab avg (each deck studied = 10/allDeckIds.length pts)
   const decksStudied=allDeckIds.filter(uid=>S.flashcardsStudied&&S.flashcardsStudied[DECK_MAP[uid]]).length;
@@ -3133,7 +3133,7 @@ function printCourseCert(){
     const isTheme=u.id.startsWith('theme_');
     const ut=calcTier(r.best_accuracy);
     const deckId=DECK_MAP[u.id]||null;
-    const vScore=deckId&&S.vocabBestScore?S.vocabBestScore[deckId]:null;
+    const vScore=(deckId&&S.vocabBestScore&&S.vocabBestScore[deckId]!==undefined)?S.vocabBestScore[deckId]:null;
     const fStudied=deckId&&S.flashcardsStudied?S.flashcardsStudied[deckId]:false;
     return`<tr${isTheme?' style="opacity:.88"':''}>
       <td style="padding:2px 6px;font-size:9px;color:#5a4520">${u.num}${isTheme?' <span style="font-size:7px;color:#8a6a2a">(½)</span>':''}</td>
