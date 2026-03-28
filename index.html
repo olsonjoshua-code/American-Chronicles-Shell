@@ -144,7 +144,7 @@ body::before{content:'';position:fixed;inset:0;
 .nav-btn:hover{border-color:var(--amber2);color:var(--amber)}.nav-btn.active{border-color:var(--amber);color:var(--amber);background:rgba(232,160,32,.06)}
 
 /* ── VIEWS ── */
-.view{display:none;padding:14px 20px 40px;max-width:1200px;margin:0 auto;width:100%}
+.view{display:none;padding:14px 10px 40px;max-width:1200px;margin:0 auto;width:100%}
 .view.active{display:block;animation:fadeIn .35s ease}
 
 /* ── TIMELINE ── */
@@ -324,6 +324,9 @@ body::before{content:'';position:fixed;inset:0;
 .ob-btns{display:flex;gap:8px}
 #help-btn{position:fixed;bottom:70px;right:16px;z-index:800;font-family:var(--bebas);font-size:12px;letter-spacing:2px;background:var(--bg2);border:1px solid var(--border2);color:var(--text3);padding:7px 14px;cursor:pointer;transition:all .2s}
 #help-btn:hover{border-color:var(--amber);color:var(--amber)}
+/* ── Course Trophy Floating Button ── */
+#course-cert-btn{position:fixed;bottom:110px;right:16px;z-index:800;font-family:var(--bebas);font-size:12px;letter-spacing:2px;background:var(--bg2);border:1px solid var(--gc2);color:var(--gc);padding:7px 14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+#course-cert-btn:hover{border-color:var(--gc);background:rgba(245,200,66,.08);box-shadow:0 0 14px rgba(245,200,66,.2)}
 .tc-power{color:#d07860;border-color:rgba(208,120,90,.4);background:rgba(208,120,90,.06)}
 .tc-freedom{color:#70b0e0;border-color:rgba(112,176,224,.4);background:rgba(112,176,224,.06)}
 .tc-economy{color:#80c880;border-color:rgba(128,200,128,.4);background:rgba(128,200,128,.06)}
@@ -349,9 +352,9 @@ body::before{content:'';position:fixed;inset:0;
 .hud-gold span{display:block;font-family:var(--bebas);font-size:15px;color:var(--gold)}
 
 /* teacher */
-#view-teacher{padding:24px 20px 56px;max-width:860px;margin:0 auto;width:100%}
+#view-teacher{padding:24px 10px 56px;max-width:860px;margin:0 auto;width:100%}
 .t-unit-row{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
-#view-story{padding:24px 20px 56px;max-width:740px;margin:0 auto;width:100%}
+#view-story{padding:24px 10px 56px;max-width:740px;margin:0 auto;width:100%}
 .story-entry{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--green);padding:14px 16px;margin-bottom:9px;display:flex;gap:12px;align-items:flex-start}
 .se-icon{font-size:26px;flex-shrink:0;margin-top:1px}
 .se-unit{font-family:var(--dm);font-size:8px;color:var(--text3);letter-spacing:2px;margin-bottom:2px}
@@ -680,7 +683,7 @@ body::before{content:'';position:fixed;inset:0;
   </div><!-- views-container -->
 
     <!-- ══ COLLECTIONS ARCHIVE VIEW (new) ══ -->
-    <div id="view-archive" class="view" style="max-width:900px;margin:0 auto;width:100%;padding:14px 20px 60px;">
+    <div id="view-archive" class="view" style="max-width:900px;margin:0 auto;width:100%;padding:14px 10px 60px;">
       <div class="archive-hero">
         <div style="font-family:var(--bebas);font-size:24px;color:var(--teal2);letter-spacing:3px;margin-bottom:4px;">Collections Archive</div>
         <div style="font-family:var(--crimson);font-size:13px;color:var(--text2);font-style:italic;">Badges and cards earned across all unit games. Everything carries back here permanently when you complete a unit.</div>
@@ -694,7 +697,7 @@ body::before{content:'';position:fixed;inset:0;
     </div>
 
     <!-- ══ GOLD WALLET VIEW (new) ══ -->
-    <div id="view-wallet" class="view" style="max-width:680px;margin:0 auto;width:100%;padding:14px 20px 60px;">
+    <div id="view-wallet" class="view" style="max-width:680px;margin:0 auto;width:100%;padding:14px 10px 60px;">
       <div class="wallet-hero">
         <div style="font-size:48px;filter:drop-shadow(0 0 14px rgba(245,200,66,.45));">🪙</div>
         <div>
@@ -753,6 +756,9 @@ body::before{content:'';position:fixed;inset:0;
 
 <!-- HELP BUTTON -->
 <button id="help-btn" onclick="openOnboarding()" title="How to use this course hub">❓ HELP</button>
+
+<!-- COURSE TROPHY CERTIFICATE BUTTON -->
+<button id="course-cert-btn" onclick="printCourseCert()" title="Print your Course Trophy Certificate">🏛️ COURSE CERT</button>
 
 <!-- WELCOME BACK CARD -->
 <div id="welcome-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:8900;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(5px);cursor:pointer" onclick="closeWelcome()">
@@ -2102,8 +2108,11 @@ function renderTimeline(){
       const statusBadge=st==='done'
         ?`<div class="unit-card-status-row"><div class="unit-status us-done">✓ Completed</div></div>`
         :`<div class="unit-card-status-row"><div class="unit-status us-play">▶ Play Now</div></div>`;
+      const tRow=_trophyData.find(r=>r.unit_id===u.id);
+      const tTier=tRow?calcTier(tRow.best_accuracy):'empty';
+      const trophyBadge=(tTier!=='empty')?`<div style="position:absolute;top:4px;right:4px;z-index:4;font-size:12px;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,.7))" title="${TIER_LABEL[tTier]}">${TIER_EMOJI[tTier]}</div>`:'';
       card.innerHTML=`<div class="unit-card-strip" style="background:${u.eraColor}"></div>
-        <div class="unit-card-art"><div class="unit-card-icon">${u.icon}</div><div class="unit-card-year">${u.years.split('–')[0]}</div></div>
+        <div class="unit-card-art">${trophyBadge}<div class="unit-card-icon">${u.icon}</div><div class="unit-card-year">${u.years.split('–')[0]}</div></div>
         <div class="unit-card-body"><div class="unit-card-num">${u.num}</div><div class="unit-card-title">${u.title}</div>
         ${statusBadge}</div>
         <div class="unit-card-prog"><div class="unit-card-prog-fill" style="width:${st==='done'?100:0}%"></div></div>`;
@@ -3006,6 +3015,94 @@ function printEOCShellCert(){
       <div><div class="sig-line"></div><div class="sig-name">${S.name}</div><div class="sig-title">STUDENT${S.period?' · PERIOD '+S.period:''}</div></div>
       <div><div class="sig-line"></div><div class="sig-name">Joshua Olson</div><div class="sig-title">U.S. HISTORY TEACHER</div></div>
       <div><div class="sig-line"></div><div class="sig-name">${date}</div><div class="sig-title">DATE COMPLETED</div></div>
+    </div>
+  </div>
+  <div class="np" style="text-align:center;margin-top:14px">
+    <button class="pbtn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    <button class="pbtn" onclick="window.close()" style="margin-left:9px;background:#5a4520;color:#faf7f0">✕ Close</button>
+  </div></body></html>`);w.document.close();
+}
+
+// ── COURSE TROPHY CERTIFICATE ────────────────────────
+// Grade = (avg accuracy of completed units) × (completion rate)
+// 50% complete at 100% acc = 50%. 100% complete at 80% acc = 80%.
+function printCourseCert(){
+  const totalUnits=UNIT_DATA.filter(u=>!u.isCampaign).length;
+  const completedRows=_trophyData.filter(r=>{const u=UNIT_DATA.find(x=>x.id===r.unit_id);return u&&!u.isCampaign;});
+  const completedCount=completedRows.length;
+  if(completedCount===0){notify('Complete at least one unit to print your Course Certificate!');return;}
+  const completionRate=completedCount/totalUnits;
+  const avgAccuracy=completedRows.reduce((a,r)=>a+(r.best_accuracy||0),0)/completedCount;
+  const courseGrade=Math.round(avgAccuracy*completionRate);
+  const tier=calcTier(courseGrade);
+  const tcRaw=TIER_COLOR[tier];
+  const tc=tcRaw.replace('var(--gold)','#ffd700').replace('var(--silver)','#c8c8d8').replace('var(--bronze)','#cd7f32').replace('var(--green2)','#38a050').replace('var(--red2)','#e04040').replace('var(--historian)','#e8d0ff').replace('var(--text3)','#584840');
+  const te=TIER_EMOJI[tier];
+  const tl=TIER_LABEL[tier];
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const completionPct=Math.round(completionRate*100);
+  const utColors={historian:'#e8d0ff',gold:'#ffd700',silver:'#c8c8d8',bronze:'#cd7f32',completed:'#38a050',tryagain:'#e04040',empty:'#584840'};
+  const unitRows=completedRows.map(r=>{
+    const u=UNIT_DATA.find(x=>x.id===r.unit_id);if(!u)return'';
+    const ut=calcTier(r.best_accuracy);
+    return`<tr><td style="padding:2px 6px;font-size:9px;color:#5a4520">${u.num}</td><td style="padding:2px 6px;font-size:9px;color:#1a1208">${u.title}</td><td style="padding:2px 6px;font-size:9px;color:${utColors[ut]};text-align:center">${TIER_EMOJI[ut]}</td><td style="padding:2px 6px;font-size:9px;color:${utColors[ut]};text-align:center;font-weight:700">${r.best_accuracy}%</td></tr>`;
+  }).join('');
+  const w=window.open('','_blank','width=960,height=760');
+  if(!w){notify('Allow popups to print your Course Certificate.');return;}
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Course Certificate</title>
+  <style>@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#faf7f0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;min-height:100vh;padding:20px;font-family:'Inter',sans-serif}
+  .cert{width:880px;background:#faf7f0;border:3px solid ${tc};padding:38px 52px 32px;position:relative;text-align:center;box-shadow:0 0 0 8px #faf7f0,0 0 0 11px ${tc},0 0 0 15px #faf7f0,0 0 0 17px #8a6a2a}
+  .eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.3em;color:#8a6a2a;margin-bottom:5px}
+  .main-title{font-family:'Cinzel Decorative',serif;font-size:22px;font-weight:700;color:#1a1208;letter-spacing:.1em;margin:6px 0;line-height:1.2}
+  .sub-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.18em;color:#8a6a2a;margin:3px 0 6px}
+  .divider{height:2px;background:linear-gradient(90deg,transparent,${tc},transparent);margin:11px auto;width:85%}
+  .student-name{font-family:'Cinzel Decorative',serif;font-size:30px;font-weight:700;color:#1a1208;margin:8px 0;letter-spacing:.05em}
+  .tier-badge{font-family:'Cinzel Decorative',serif;font-size:17px;color:${tc};letter-spacing:.1em;margin:8px 0}
+  .grade-val{font-size:44px;font-weight:900;color:${tc};font-family:'Cinzel Decorative',serif;line-height:1}
+  .grade-lbl{font-size:8px;letter-spacing:.15em;color:#8a6a2a;margin-top:3px;text-transform:uppercase}
+  .stat-val{font-size:18px;font-weight:700;color:#8a4820;font-family:'Cinzel Decorative',serif}
+  .unit-table{width:100%;border-collapse:collapse;margin-top:10px;text-align:left}
+  .unit-table th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.15em;color:#8a6a2a;padding:3px 6px;border-bottom:1px solid rgba(0,0,0,.12)}
+  .unit-table tr:nth-child(even) td{background:rgba(0,0,0,.025)}
+  .sigs{display:flex;justify-content:space-around;margin-top:14px;padding-top:10px;border-top:1px solid rgba(0,0,0,.2)}
+  .sig-line{width:155px;height:1px;background:#8a6a2a;margin:0 auto 4px}
+  .sig-name{font-family:'Cinzel',serif;font-size:11px;color:#1a1208;font-weight:700}
+  .sig-title{font-size:7.5px;color:#8a6a2a;letter-spacing:.08em}
+  .pbtn{margin-top:16px;padding:10px 26px;background:${tc};border:none;color:#1a1208;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.08em;cursor:pointer}
+  @media print{body{padding:0}.np{display:none!important}}</style></head><body>
+  <div class="cert">
+    <div class="eyebrow">AMERICAN CHRONICLES · U.S. HISTORY</div>
+    <div style="font-size:44px;margin:4px 0">🏛️</div>
+    <div class="main-title">Course Trophy Certificate</div>
+    <div class="sub-title">American History · 1861 to Present</div>
+    <div class="divider"></div>
+    <div style="font-size:11px;letter-spacing:.15em;color:#5a4520;margin:6px 0">This certifies that</div>
+    <div class="student-name">${S.name}</div>
+    <div style="font-size:11px;color:#5a4520;margin:5px 0;line-height:1.7;font-style:italic">has earned the following course standing in<br><strong style="font-style:normal;color:#1a1208">American Chronicles — U.S. History</strong></div>
+    <div style="font-size:30px;margin:8px 0">${te}</div>
+    <div class="tier-badge">${tl.toUpperCase()} — COURSE TROPHY</div>
+    <div style="display:inline-flex;align-items:center;gap:18px;margin:10px 0;padding:12px 28px;background:rgba(0,0,0,.03);border:1px solid rgba(0,0,0,.1)">
+      <div><div class="grade-val">${courseGrade}%</div><div class="grade-lbl">Course Grade</div></div>
+      <div style="width:1px;height:48px;background:rgba(0,0,0,.12)"></div>
+      <div style="display:flex;gap:18px">
+        <div><div class="stat-val">${completionPct}%</div><div class="grade-lbl">Completion</div></div>
+        <div><div class="stat-val">${Math.round(avgAccuracy)}%</div><div class="grade-lbl">Avg Accuracy</div></div>
+        <div><div class="stat-val">${completedCount}/${totalUnits}</div><div class="grade-lbl">Units Done</div></div>
+      </div>
+    </div>
+    <div style="font-family:'Inter',sans-serif;font-size:8.5px;color:#8a6a2a;font-style:italic;margin:6px 0">Course Grade = Avg Accuracy (${Math.round(avgAccuracy)}%) × Completion Rate (${completionPct}%) = ${courseGrade}%</div>
+    <div class="divider"></div>
+    <table class="unit-table">
+      <thead><tr><th>#</th><th>UNIT</th><th style="text-align:center">TROPHY</th><th style="text-align:center">ACCURACY</th></tr></thead>
+      <tbody>${unitRows}</tbody>
+    </table>
+    <div class="divider"></div>
+    <div class="sigs">
+      <div><div class="sig-line"></div><div class="sig-name">${S.name}</div><div class="sig-title">STUDENT${S.period?' · PERIOD '+S.period:''}</div></div>
+      <div><div class="sig-line"></div><div class="sig-name">Joshua Olson</div><div class="sig-title">U.S. HISTORY TEACHER</div></div>
+      <div><div class="sig-line"></div><div class="sig-name">${date}</div><div class="sig-title">DATE PRINTED</div></div>
     </div>
   </div>
   <div class="np" style="text-align:center;margin-top:14px">
