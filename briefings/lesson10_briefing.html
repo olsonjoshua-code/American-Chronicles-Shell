@@ -20,7 +20,7 @@
       --chip: rgba(127, 153, 184, 0.1);
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; -webkit-user-select: none; user-select: none; }
 
     html, body {
       min-height: 100%;
@@ -912,6 +912,35 @@
       if (current < slides.length - 1) {
         current += 1;
         renderSlide(current);
+      }
+    });
+
+
+    // ── Anti-copy security ─────────────────────────────────
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
+    // Disable text selection
+    document.addEventListener('selectstart', e => e.preventDefault());
+
+    // Disable copy / cut / paste
+    document.addEventListener('copy',  e => e.preventDefault());
+    document.addEventListener('cut',   e => e.preventDefault());
+    document.addEventListener('paste', e => e.preventDefault());
+
+    // Disable drag (prevents drag-to-copy)
+    document.addEventListener('dragstart', e => e.preventDefault());
+
+    // Block common keyboard shortcuts: Ctrl+C, Ctrl+A, Ctrl+S, Ctrl+U,
+    // Ctrl+P (print), F12 (devtools), Ctrl+Shift+I/J/C (devtools)
+    document.addEventListener('keydown', e => {
+      const ctrl = e.ctrlKey || e.metaKey;
+      if (ctrl && ['c','a','s','u','p'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+      }
+      if (e.key === 'F12') e.preventDefault();
+      if (ctrl && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
       }
     });
 
