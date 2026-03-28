@@ -46,7 +46,7 @@ body::before{content:'';position:fixed;inset:0;
   pointer-events:none;z-index:9999;}
 
 /* ── ROOT / LAYOUT ── */
-#root{max-width:640px;margin:0 auto;padding:0 16px 100px;min-height:100vh;position:relative;z-index:1;}
+#root{max-width:860px;margin:0 auto;padding:0 24px 100px;min-height:100vh;position:relative;z-index:1;}
 /* When HUD is visible, push content down so it isn't hidden behind the fixed bar */
 body.hud-active #root{padding-top:68px;}
 
@@ -86,7 +86,7 @@ body.hud-active #root{padding-top:68px;}
   border-bottom:1px solid var(--border2);border-left:1px solid var(--border2);border-right:1px solid var(--border2);
   padding:10px 14px;
   position:fixed;top:0;left:50%;transform:translateX(-50%);
-  width:100%;max-width:640px;
+  width:100%;max-width:860px;
   z-index:200;backdrop-filter:blur(12px);
   display:none;}
 .hud-inner{display:flex;align-items:center;gap:12px;}
@@ -170,7 +170,7 @@ body.hud-active #root{padding-top:68px;}
 #briefing-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);
   z-index:500;overflow-y:auto;padding:20px 16px 60px;}
 #briefing-modal.show{display:block;animation:fadeIn .3s ease;}
-.briefing-inner{max-width:560px;margin:0 auto;}
+.briefing-inner{max-width:760px;margin:0 auto;}
 .briefing-header{display:flex;align-items:flex-start;justify-content:space-between;
   gap:10px;margin-bottom:20px;padding-top:10px;}
 .briefing-eyebrow{font-family:var(--bebas);font-size:10px;color:var(--text3);
@@ -221,16 +221,16 @@ body.hud-active #root{padding-top:68px;}
 
 /* THE QUESTION — primary visual weight */
 .q-block{background:var(--bg2);border:1px solid var(--border2);
-  border-left:3px solid var(--gold);padding:20px 18px;margin-bottom:18px;}
+  border-left:3px solid var(--gold);padding:24px 22px;margin-bottom:18px;}
 .q-number{font-family:var(--bebas);font-size:10px;color:var(--text3);
   letter-spacing:3px;margin-bottom:8px;}
-.q-text{font-family:var(--playfair);font-size:clamp(15px,2.8vw,18px);
-  color:var(--cream);line-height:1.55;}
+.q-text{font-family:var(--playfair);font-size:clamp(16px,2.4vw,20px);
+  color:var(--cream);line-height:1.6;}
 
 /* Answer choices */
-.choices-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.choices-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
 .choice-btn{display:block;width:100%;background:var(--bg2);border:1px solid var(--border2);
-  color:var(--text);padding:14px 16px;cursor:pointer;text-align:left;
+  color:var(--text);padding:16px 20px;cursor:pointer;text-align:left;
   transition:all .2s;position:relative;overflow:hidden;}
 .choice-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
   background:var(--gold);transform:scaleY(0);transition:transform .2s;pointer-events:none;}
@@ -241,9 +241,9 @@ body.hud-active #root{padding-top:68px;}
 .choice-btn.incorrect{border-color:var(--red2)!important;background:rgba(128,16,16,.06)!important;opacity:.6;}
 .choice-btn.incorrect::before{background:var(--red2)!important;transform:scaleY(1)!important;}
 .choice-btn.answered{cursor:default;}
-.choice-letter{font-family:var(--bebas);font-size:13px;color:var(--gold2);
-  margin-right:10px;display:inline-block;width:20px;}
-.choice-text{font-family:var(--crimson);font-size:16px;line-height:1.4;}
+.choice-letter{font-family:var(--bebas);font-size:14px;color:var(--gold2);
+  margin-right:12px;display:inline-block;width:20px;}
+.choice-text{font-family:var(--crimson);font-size:17px;line-height:1.5;}
 
 /* Feedback */
 .feedback-panel{display:none;border-left:3px solid var(--gold);
@@ -894,9 +894,9 @@ const AC_HEADERS  = {'Content-Type':'application/json','apikey':AC_SUPA_KEY,'Aut
 
 const LESSONS = [
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // LESSON 51 — Into the Quagmire
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'lesson51',
     label: 'LESSON 51',
@@ -905,11 +905,11 @@ const LESSONS = [
     icon: '🌿',
     type: 'lesson',
     briefing: {
-      location: 'Vietnam and the United States',
+      location: 'Vietnam and the American Home Front',
       date: '1965–1968',
-      role: 'War correspondent',
+      role: 'war correspondent',
       text: 'Vietnam was supposed to be a limited war, but by the late 1960s it had become a grinding conflict with no clear path to victory. American troops fought an elusive enemy in unfamiliar terrain, while U.S. leaders insisted that progress was being made. Yet body counts rose, villages burned, and the war came into American living rooms through television. Your task is to explain why the war became so frustrating abroad—and so politically explosive at home.',
-      tags: []
+      tags: ['SS.912.A.6.14', 'SS.912.A.7.9', 'SS.912.A.7.10', 'SS.912.A.7.11']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
@@ -918,89 +918,139 @@ const LESSONS = [
       {
         id: '7B-L51-Q1',
         text: 'What was the main idea behind the U.S. strategy of war of attrition in Vietnam?',
-        choices: ['To wear down the enemy by inflicting heavy losses and making body count a major measure of success.', 'To avoid direct fighting by relying only on South Vietnamese troops and refusing to use American ground forces.', 'To seize North Vietnam quickly through one overwhelming invasion that would end the war in a single campaign.', 'To focus entirely on winning support in villages and avoid large-scale military operations against enemy forces.'],
+        choices: [
+          'To wear down the enemy by inflicting heavy losses and making body count a major measure of success.',
+          'To hold fixed defensive lines and protect population centers while waiting for North Vietnam to negotiate peace terms.',
+          'To rapidly seize Hanoi with overwhelming conventional force before North Vietnam could mobilize its full military strength.',
+          'To cut all supply routes and wait for the North Vietnamese economy to collapse under the pressure of economic isolation.'
+        ],
         correctAnswer: 'To wear down the enemy by inflicting heavy losses and making body count a major measure of success.',
-        explanation: 'War of attrition was built around wearing down the enemy through losses, with body count becoming a key military goal.',
+        explanation: 'General Westmoreland\'s attrition strategy assumed that killing enough enemy soldiers would break their will to fight — a miscalculation that failed to account for North Vietnam\'s ability to absorb enormous casualties and continue the war.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10'
       },
       {
         id: '7B-L51-Q2',
         text: 'Which combination best describes the main opposing forces in the Vietnam War during this period?',
-        choices: ['North Vietnamese Army troops and Viet Cong insurgents fought against South Vietnam’s ARVN with major U.S. support.', 'The Viet Minh and French colonial forces fought together against the Army of the Republic of Vietnam and American advisers.', 'The Soviet Union sent its own combat army into South Vietnam, where it fought directly against the U.S. Marines and Navy.', 'Chinese troops led the Viet Cong while the United States relied almost entirely on United Nations peacekeeping forces.'],
-        correctAnswer: 'North Vietnamese Army troops and Viet Cong insurgents fought against South Vietnam’s ARVN with major U.S. support.',
-        explanation: 'NVA troops joined Viet Cong insurgents, while the United States trained and supported ARVN.',
+        choices: [
+          'North Vietnamese Army troops and Viet Cong insurgents fought against South Vietnam\'s ARVN with major U.S. support.',
+          'Chinese and Soviet regular army units fought directly against American forces while North Vietnam played a supporting role.',
+          'The Viet Cong fought alone as a purely southern insurgency with no meaningful military support from North Vietnam.',
+          'South Korean and Australian forces provided most of the ground combat while American troops managed logistics and air power.'
+        ],
+        correctAnswer: 'North Vietnamese Army troops and Viet Cong insurgents fought against South Vietnam\'s ARVN with major U.S. support.',
+        explanation: 'The conflict combined a conventional war fought by the NVA with an insurgency by the southern Viet Cong guerrillas — against the Army of the Republic of Vietnam backed by massive American firepower, advisers, and combat troops.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.11'
       },
       {
         id: '7B-L51-Q3',
         text: 'Why did the United States use Agent Orange in Vietnam?',
-        choices: ['To strip away forest cover and expose enemy forces hiding in jungle vegetation.', 'To destroy enemy tanks and armored vehicles moving down paved roads toward Saigon.', 'To create smoke screens that protected American helicopters during rescues and medical evacuations.', 'To provide emergency medical treatment for civilians exposed to disease in refugee camps.'],
+        choices: [
+          'To strip away forest cover and expose enemy forces hiding in jungle vegetation.',
+          'Agent Orange was used mainly to destroy North Vietnamese rice crops and create food shortages among the civilian population.',
+          'It was deployed mainly to mark enemy positions with a bright color so American pilots could identify targets from the air.',
+          'The chemical was used primarily to clear land around American military bases to create defensive open perimeters.'
+        ],
         correctAnswer: 'To strip away forest cover and expose enemy forces hiding in jungle vegetation.',
-        explanation: 'Agent Orange was sprayed to clear vegetation and expose enemy positions.',
+        explanation: 'Operation Ranch Hand used Agent Orange to defoliate vast areas of jungle, denying the Viet Cong and NVA the cover they needed — but the herbicide also devastated civilian farmland and caused lasting health consequences for both Vietnamese and American veterans.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10'
       },
       {
         id: '7B-L51-Q4',
         text: 'Why did napalm become one of the most controversial weapons used in Vietnam?',
-        choices: ['It caused devastating fires that destroyed villages and injured or killed large numbers of civilians as well as enemy targets.', 'It was the first chemical weapon to be used by the United States since World War I trench warfare in Europe.', 'It was ineffective against guerrilla fighters, but it remained popular because it could not be photographed by journalists.', 'It was designed mainly to poison water supplies and force civilians to move into fortified urban resettlement camps.'],
+        choices: [
+          'It caused devastating fires that destroyed villages and injured or killed large numbers of civilians as well as enemy targets.',
+          'Napalm was controversial mainly because it was a nuclear weapon that violated international arms control treaties.',
+          'It became controversial mainly because American pilots frequently dropped it on their own forces by accident.',
+          'Napalm was controversial primarily because it was so expensive to produce that it quickly consumed most of the entire military operational budget.'s operational budget.'
+        ],
         correctAnswer: 'It caused devastating fires that destroyed villages and injured or killed large numbers of civilians as well as enemy targets.',
-        explanation: 'Napalm was jellied gasoline dropped in incendiary bombs that burned forests, buildings, and people.',
+        explanation: 'Photographs and film footage of napalm attacks — including the iconic image of a burned child fleeing a strike — put a human face on the war\'s civilian costs and intensified opposition to American tactics.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10'
       },
       {
         id: '7B-L51-Q5',
         text: 'Why did search-and-destroy tactics often undermine U.S. pacification efforts in South Vietnam?',
-        choices: ['They frequently wrecked villages and alienated civilians, making local people less likely to support the South Vietnamese government.', 'They were designed to protect farmland and homes, which made them too cautious to affect Viet Cong supply routes effectively.', 'They worked well militarily, but Congress cut funding before the strategy had enough time to defeat the insurgency completely.', 'They relied on ARVN alone, while U.S. officers focused almost entirely on negotiating cease-fires with local communist leaders.'],
+        choices: [
+          'They frequently wrecked villages and alienated civilians, making local people less likely to support the South Vietnamese government.',
+          'Search-and-destroy missions consumed so many resources that the U.S. military had no money left for reconstruction projects.',
+          'Search-and-destroy tactics failed mainly because American soldiers consistently refused to follow any orders requiring them to enter Vietnamese villages under any circumstances whatsoever.',
+          'They undermined pacification mainly because they forced the military to focus only on rural areas while cities were neglected.'
+        ],
         correctAnswer: 'They frequently wrecked villages and alienated civilians, making local people less likely to support the South Vietnamese government.',
-        explanation: 'Village destruction and bombing often turned civilians against U.S. goals rather than toward them.',
+        explanation: 'Destroying villages to deny them to the enemy often turned potential civilian supporters against the Saigon government, undermining the hearts-and-minds pacification campaign that was supposed to be the political complement to military operations.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10'
       },
       {
         id: '7B-L51-Q6',
         text: 'What was the credibility gap during the Vietnam War?',
-        choices: ['The growing mismatch between optimistic official claims about the war and the grim reality Americans saw in news reports.', 'The difference between American and Soviet military spending, which critics used to argue that Vietnam was too expensive.', 'The gap in battlefield skill between ARVN officers and the Viet Cong, which forced the United States to increase the draft.', 'The separation between Johnson’s foreign policy advisers and domestic reform supporters in the Democratic Party’s leadership.'],
+        choices: [
+          'The growing mismatch between optimistic official claims about the war and the grim reality Americans saw in news reports.',
+          'The credibility gap referred to the difference in military experience between American generals and the Vietnamese commanders they faced.',
+          'It described the widening gap between what the U.S. military needed to win and what Congress was willing to fund.',
+          'The term described the communication breakdown between frontline soldiers and the Pentagon leadership directing the war.'
+        ],
         correctAnswer: 'The growing mismatch between optimistic official claims about the war and the grim reality Americans saw in news reports.',
-        explanation: 'The credibility gap was the difference between the administration’s upbeat public assessments and reality.',
+        explanation: 'As Johnson and military officials kept claiming progress, television brought images of a brutal, stalemated conflict into American homes — the gap between official optimism and visible reality destroyed public trust in the government\'s honesty.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10'
       },
       {
         id: '7B-L51-Q7',
-        text: 'How did opposition to the Vietnam War grow during the late 1960s?',
-        choices: ['It expanded from smaller activist circles into a broader movement that included teach-ins, sit-ins, demonstrations, and public criticism by respected leaders.', 'It remained limited almost entirely to foreign policy experts, because students and ordinary citizens showed little interest in the war.', 'It declined after 1966 as television coverage convinced most Americans that the war was close to victory and worth the cost.', 'It focused mainly on supporting military escalation, because protesters believed Johnson’s limited-war strategy was too restrained.'],
+        text: 'How did the antiwar movement grow and change between the mid-1960s and 1968?',
+        choices: [
+          'It expanded from smaller activist circles into a broader movement that included teach-ins, sit-ins, demonstrations, and public criticism by respected leaders.',
+          'The movement grew mainly by winning support from southern conservatives who believed the war was unwinnable and too costly.',
+          'The antiwar movement grew and expanded its reach mainly by working exclusively through the Democratic Party, which officially endorsed complete and immediate withdrawal from Vietnam by 1966.',
+          'The movement grew mainly by focusing on congressional lobbying rather than public protests or acts of civil disobedience.'
+        ],
         correctAnswer: 'It expanded from smaller activist circles into a broader movement that included teach-ins, sit-ins, demonstrations, and public criticism by respected leaders.',
-        explanation: 'The antiwar movement spread from campuses and radical groups to prominent critics, helped by television coverage.',
+        explanation: 'What began as campus protests and small marches grew into a mass movement that included senators, veterans, civil rights leaders, and ordinary citizens — fundamentally changing the political cost of continuing the war.',
         standard: 'SS.912.A.7.9 · SS.912.A.7.10'
       },
       {
         id: '7B-L51-Q8',
         text: 'Why is Tinker v. Des Moines important in the history of Vietnam-era protest?',
-        choices: ['The Supreme Court ruled that students have First Amendment rights to symbolic speech, such as wearing black armbands to protest the war.', 'The Court allowed schools to ban all antiwar symbols, arguing that discipline and patriotism outweighed student expression.', 'It gave college students the constitutional right to occupy campus buildings whenever they objected to university policies or recruiters.', 'It required public schools to devote class time to antiwar teach-ins so students could debate foreign policy fairly.'],
+        choices: [
+          'The Supreme Court ruled that students have First Amendment rights to symbolic speech, such as wearing black armbands to protest the war.',
+          'Tinker v. Des Moines established clearly that universities and school administrators could legally suspend any student who participated in antiwar protest demonstrations on or near campus property.',
+          'Tinker v. Des Moines ruled that the government could legally ban all antiwar protests near military recruitment centers.',
+          'The decision was important mainly for ruling that newspapers could be censored when publishing stories about the war.'
+        ],
         correctAnswer: 'The Supreme Court ruled that students have First Amendment rights to symbolic speech, such as wearing black armbands to protest the war.',
-        explanation: 'The Supreme Court ruled in 1969 that students may engage in symbolic speech, using the Des Moines armband protest as the case.',
+        explanation: 'The 1969 Tinker ruling — "students do not shed their constitutional rights at the schoolhouse gate" — became a landmark protection for student political expression and remains foundational to student free speech law.',
         standard: 'SS.912.A.7.9 · SS.912.A.7.10'
       },
       {
         id: '7B-L51-Q9',
         text: 'Why did the Tet Offensive become such a turning point in American opinion about the war?',
-        choices: ['Although it was a military loss for communist forces, it shocked Americans and made many doubt official claims that victory was near.', 'It gave the Viet Cong complete control of South Vietnam within days, forcing the United States to negotiate immediate surrender terms.', 'It proved that pacification had succeeded in the countryside, which briefly restored confidence in Johnson’s handling of the war.', 'It ended television coverage of the war, allowing the administration to shape public opinion without contradiction for the first time.'],
+        choices: [
+          'Although it was a military loss for communist forces, it shocked Americans and made many doubt official claims that victory was near.',
+          'Tet was a turning point mainly because it resulted in a major American military defeat that cost thousands of U.S. lives in a single week.',
+          'The offensive changed opinion mainly because it proved that South Vietnam\'s army was capable of defending the country without American help.',
+          'It turned American opinion mainly by demonstrating that the war could be won quickly with one major escalation of bombing campaigns.'
+        ],
         correctAnswer: 'Although it was a military loss for communist forces, it shocked Americans and made many doubt official claims that victory was near.',
-        explanation: 'Tet was a military disaster for the communists but a psychological defeat for the United States because it undermined public trust.',
+        explanation: 'The coordinated attacks on over 100 cities and the assault on the U.S. Embassy in Saigon — coming after months of official optimism — shattered the credibility of those who said the war was nearly won and turned Walter Cronkite against the conflict.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7B-L51-Q10',
-        text: 'Why did Johnson’s handling of Vietnam ultimately destroy his presidency?',
-        choices: ['The gap between his optimistic public statements and the war’s grim reality eroded trust until he chose not to seek re-election.', 'He lost support mainly because he refused to escalate the war, making hawks and military leaders turn against his administration.', 'He was removed from office by Congress because he had violated the War Powers Act by deploying troops without proper authorization.', 'He lost the 1968 election in a landslide after antiwar Democrats refused to vote in the general election against Nixon.'],
-        correctAnswer: 'The gap between his optimistic public statements and the war’s grim reality eroded trust until he chose not to seek re-election.',
-        explanation: 'Johnson’s credibility collapsed as the war’s costs mounted and Tet exposed the distance between his claims and the facts.',
+        text: 'Why did Johnson\'s handling of Vietnam ultimately destroy his presidency?',
+        choices: [
+          'The gap between his optimistic public statements and the war\'s grim reality eroded trust until he chose not to seek re-election.',
+          'Johnson\'s presidency was destroyed mainly because Congress voted to cut off all military funding for the war in 1968.',
+          'He lost his presidency mainly because the Supreme Court ruled his Gulf of Tonkin actions were unconstitutional.',
+          'Johnson\'s presidency collapsed mainly because of a major military defeat that forced him to accept a humiliating ceasefire.'
+        ],
+        correctAnswer: 'The gap between his optimistic public statements and the war\'s grim reality eroded trust until he chose not to seek re-election.',
+        explanation: 'After years of promising light at the end of the tunnel, the Tet Offensive made Johnson\'s optimism untenable — his approval ratings collapsed, Gene McCarthy nearly beat him in New Hampshire, and he withdrew from the 1968 race.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.10'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // LESSON 52 — Peace with Honor
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'lesson52',
     label: 'LESSON 52',
@@ -1009,294 +1059,434 @@ const LESSONS = [
     icon: '🕊️',
     type: 'lesson',
     briefing: {
-      location: 'Washington D.C. and Vietnam',
+      location: 'Vietnam, Washington D.C., and Kent State',
       date: '1968–1975',
-      role: 'Political correspondent',
-      text: 'By 1968, the Vietnam War had become a crisis of trust as much as a military struggle. Nixon promised ‘peace with honor,’ but getting out of Vietnam proved as complicated as getting in. Troop levels fell, bombing widened, protest deepened, and new revelations made Americans question both the war and their government. Your task is to explain how the United States tried to leave Vietnam—and why the exit remained so bitter and divisive.',
-      tags: []
+      role: 'political analyst',
+      text: 'By 1968, the Vietnam War had become a crisis of trust as much as a military struggle. Nixon promised "peace with honor," but getting out of Vietnam proved as complicated as getting in. Troop levels fell, bombing widened, protest deepened, and new revelations made Americans question both the war and their government. Your task is to explain how the United States tried to leave Vietnam—and why the exit remained so bitter and divisive.',
+      tags: ['SS.912.A.6.14', 'SS.912.A.7.9', 'SS.912.A.7.10', 'SS.912.A.7.11']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Peace with Honor', cards: ['Vietnamization', 'Pentagon Papers'] },
+    rewards: { badge: 'Peace with Honor', cards: ['Pentagon Papers', 'War Powers Act'] },
     bank: [
       {
         id: '7B-L52-Q1',
-        text: 'What was the main goal of Nixon’s policy of Vietnamization?',
-        choices: ['To reduce American troop involvement by shifting more fighting responsibility to South Vietnamese forces.', 'To expand U.S. ground operations into North Vietnam until communist resistance collapsed completely.', 'To place the entire war under United Nations command while the United States withdrew from Asia altogether.', 'To replace South Vietnam’s government with a coalition including the Viet Cong before any peace talks began.'],
+        text: 'What was the main goal of Nixon\'s policy of Vietnamization?',
+        choices: [
+          'To reduce American troop involvement by shifting more fighting responsibility to South Vietnamese forces.',
+          'Vietnamization aimed mainly to increase the number of American combat troops until North Vietnam surrendered.',
+          'The policy was designed mainly to bring South Vietnamese soldiers to the United States for training before returning them.',
+          'Nixon\'s Vietnamization policy was primarily intended to replace all American ground troops with air power and bombing campaigns.'
+        ],
         correctAnswer: 'To reduce American troop involvement by shifting more fighting responsibility to South Vietnamese forces.',
-        explanation: 'Vietnamization aimed to let the United States withdraw gradually while building up ARVN to carry more of the war.',
+        explanation: 'Vietnamization was Nixon\'s strategy to withdraw American troops while building up South Vietnamese military capacity — reducing domestic political pressure while maintaining the appearance of honoring America\'s commitment to Saigon.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7B-L52-Q2',
-        text: 'Why did Nixon describe his Vietnam policy as seeking ‘peace with honor’?',
-        choices: ['He wanted to leave the war without appearing to accept defeat or abandon U.S. credibility in the Cold War.', 'He wanted an immediate and unconditional withdrawal, regardless of South Vietnam’s future after American troops left.', 'He planned to keep large U.S. combat forces in Vietnam permanently while reducing news coverage of the war at home.', 'He believed Congress had already ended the war legally, so his task was only to arrange transportation for U.S. troops.'],
+        text: 'Why did Nixon describe his Vietnam policy as seeking "peace with honor"?',
+        choices: [
+          'He wanted to leave the war without appearing to accept defeat or abandon U.S. credibility in the Cold War.',
+          'Nixon used the phrase mainly because he believed a full military victory was still achievable with the right strategy.',
+          'The phrase was chosen mainly to honor the American soldiers who had died rather than describe any specific policy goal.',
+          'He described it this way mainly to persuade Congress to authorize additional military funding for a final offensive push.'
+        ],
         correctAnswer: 'He wanted to leave the war without appearing to accept defeat or abandon U.S. credibility in the Cold War.',
-        explanation: 'Nixon tried to balance withdrawal with the fear that a visible defeat would damage American prestige and containment.',
+        explanation: 'Nixon needed a way out that didn\'t look like abandonment — "honor" was code for maintaining American prestige and reassuring allies that the United States would not simply cut and run from its commitments.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7B-L52-Q3',
         text: 'Why did the My Lai massacre have such a powerful effect on public opinion about the Vietnam War?',
-        choices: ['It exposed the killing of unarmed Vietnamese civilians by American troops and deepened moral outrage about the war.', 'It proved that the Viet Cong had fabricated atrocities to weaken support for Vietnamization and troop withdrawals.', 'It showed that ARVN had defeated communist forces without U.S. help, making continued American involvement seem unnecessary.', 'It revealed that North Vietnam had secretly accepted the Paris Peace terms years before they were announced publicly.'],
+        choices: [
+          'It exposed the killing of unarmed Vietnamese civilians by American troops and deepened moral outrage about the war.',
+          'My Lai had a powerful effect mainly because it resulted in the immediate court-martial and imprisonment of 50 American officers.',
+          'The massacre changed opinion mainly because it proved that North Vietnamese propaganda about American conduct was entirely accurate.',
+          'It affected opinion mainly by revealing that the South Vietnamese government had ordered American troops to commit the killings.'
+        ],
         correctAnswer: 'It exposed the killing of unarmed Vietnamese civilians by American troops and deepened moral outrage about the war.',
-        explanation: 'My Lai became a symbol of the war’s brutality and raised serious questions about military conduct and the human cost of the conflict.',
+        explanation: 'When reporter Seymour Hersh broke the story of hundreds of unarmed civilians killed at My Lai in 1968 — and then covered up for over a year — it forced Americans to confront the moral cost of the war in deeply uncomfortable ways.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10'
       },
       {
         id: '7B-L52-Q4',
         text: 'What did the Pentagon Papers reveal to the American public?',
-        choices: ['That government leaders had misled the public about the war’s origins, progress, and likelihood of success.', 'That the Supreme Court had secretly approved an undeclared war in Vietnam without congressional involvement.', 'That South Vietnam had already won the war militarily by the late 1960s, despite negative television coverage.', 'That the antiwar movement had been funded primarily by North Vietnam and coordinated from college campuses.'],
-        correctAnswer: 'That government leaders had misled the public about the war’s origins, progress, and likelihood of success.',
-        explanation: 'The Pentagon Papers intensified distrust by showing that officials had often said one thing publicly while believing another privately.',
+        choices: [
+          'That government leaders had misled the public about the war\'s origins, progress, and likelihood of success.',
+          'The Papers revealed mainly that the military had been winning the war consistently but politicians had blocked victory.',
+          'They proved that the Vietnam War had been secretly planned as a long-term permanent military occupation from the start.',
+          'The Pentagon Papers mainly revealed the locations of U.S. secret military bases throughout Southeast Asia.'
+        ],
+        correctAnswer: 'That government leaders had misled the public about the war\'s origins, progress, and likelihood of success.',
+        explanation: 'Daniel Ellsberg\'s leak of the classified Defense Department history showed that presidents from Truman through Johnson had systematically deceived the public — deepening the credibility crisis and accelerating the collapse of trust in government.',
         standard: 'SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7B-L52-Q5',
         text: 'Why did the Kent State shootings become a major turning point in the antiwar movement?',
-        choices: ['National Guardsmen killed student protesters, shocking the country and deepening anger over the war and government response.', 'Student demonstrators occupied the White House lawn, forcing Nixon to end all bombing in Vietnam immediately.', 'The shootings proved that antiwar protests had been violent from the start, causing public support for the movement to collapse.', 'Federal troops arrested the leaders of SDS, ending large-scale campus protest across the country in a single week.'],
+        choices: [
+          'National Guardsmen killed student protesters, shocking the country and deepening anger over the war and government response.',
+          'Kent State was a turning point mainly because students there successfully persuaded Congress to cut off Vietnam funding.',
+          'The shootings mattered mainly because they resulted in the largest student strike in American history, closing every university.',
+          'Kent State was significant mainly because it was the first time any American government had used violence against war protesters.'
+        ],
         correctAnswer: 'National Guardsmen killed student protesters, shocking the country and deepening anger over the war and government response.',
-        explanation: 'Kent State became one of the defining moments of domestic conflict over Vietnam because it brought the violence of the era home.',
+        explanation: 'The killing of four students at Kent State in May 1970 — after Nixon announced the invasion of Cambodia — triggered a nationwide student strike and symbolized for many the government\'s willingness to use lethal force against its own citizens.',
         standard: 'SS.912.A.7.9 · SS.912.A.7.10'
       },
       {
         id: '7B-L52-Q6',
         text: 'What did the Paris Peace Accords of 1973 accomplish?',
-        choices: ['They ended direct U.S. military involvement and arranged for the withdrawal of American forces from Vietnam.', 'They permanently guaranteed the independence of South Vietnam by requiring North Vietnam to disarm under U.N. supervision.', 'They reunified Vietnam under a coalition government supported equally by Saigon, Hanoi, and Washington.', 'They required the United States to send peacekeeping troops back into Vietnam if either side violated the ceasefire.'],
+        choices: [
+          'They ended direct U.S. military involvement and arranged for the withdrawal of American forces from Vietnam.',
+          'The Paris Accords permanently ended the Vietnam War with a negotiated peace that unified the country under a neutral government.',
+          'They accomplished mainly the release of all American prisoners of war in exchange for billions in reconstruction aid.',
+          'The accords accomplished mainly a formal ceasefire along the 17th parallel with both sides agreeing to hold new elections.'
+        ],
         correctAnswer: 'They ended direct U.S. military involvement and arranged for the withdrawal of American forces from Vietnam.',
-        explanation: 'The accords got the United States out of the war, but they did not secure a lasting peace for South Vietnam.',
+        explanation: 'The accords ended direct American military participation but left North Vietnamese troops in the South and set the stage for the fall of Saigon two years later — a face-saving exit more than a genuine peace.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7B-L52-Q7',
         text: 'Why did Congress pass the War Powers Act in 1973?',
-        choices: ['To limit the president’s ability to commit U.S. forces abroad without greater congressional oversight.', 'To give the president broader authority to escalate conflicts quickly before Congress could debate military action.', 'To place all future wars under the direct control of the Supreme Court rather than the executive branch.', 'To prevent student protests from interfering with wartime mobilization and military recruitment on college campuses.'],
-        correctAnswer: 'To limit the president’s ability to commit U.S. forces abroad without greater congressional oversight.',
-        explanation: 'The War Powers Act reflected backlash against presidential expansion of war-making authority during Vietnam.',
+        choices: [
+          'To limit the president\'s ability to commit U.S. forces abroad without greater congressional oversight.',
+          'The War Powers Act was passed mainly to give the president faster authority to respond to nuclear threats.',
+          'Congress passed it mainly to formalize the congressional authority that had been exercised during the Vietnam War.',
+          'It was passed mainly to require the president to consult with the United Nations before deploying any military forces.'
+        ],
+        correctAnswer: 'To limit the president\'s ability to commit U.S. forces abroad without greater congressional oversight.',
+        explanation: 'The War Powers Act required the president to notify Congress within 48 hours of deploying troops and limited military engagements to 60 days without congressional authorization — a direct response to the executive overreach of the Vietnam era.',
         standard: 'SS.912.A.7.10'
       },
       {
         id: '7B-L52-Q8',
         text: 'What did the fall of Saigon in 1975 demonstrate about the end of the Vietnam War?',
-        choices: ['South Vietnam could not survive once American military support ended, and communist forces ultimately reunified the country.', 'The Paris Peace Accords had created a stable two-state settlement that prevented either side from winning decisively.', 'The United States returned to full-scale combat to defend Saigon, reversing the withdrawal Nixon had begun years earlier.', 'North Vietnam accepted permanent division after Saigon fell, turning the conflict into a long frozen standoff like Korea.'],
+        choices: [
+          'South Vietnam could not survive once American military support ended, and communist forces ultimately reunified the country.',
+          'The fall proved that North Vietnam had always been willing to negotiate a genuine peace if the United States had agreed earlier.',
+          'It demonstrated mainly that the South Vietnamese army had been more capable than the American military ever acknowledged.',
+          'Saigon\'s fall showed mainly that the Paris Peace Accords had successfully established a stable ceasefire for two full years.'
+        ],
         correctAnswer: 'South Vietnam could not survive once American military support ended, and communist forces ultimately reunified the country.',
-        explanation: 'The fall of Saigon marked the final collapse of South Vietnam and the communist victory in the war.',
+        explanation: 'Despite Vietnamization and billions in American military aid, the South Vietnamese government collapsed within weeks of North Vietnam\'s final offensive — confirming that the war had achieved none of its stated objectives.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7B-L52-Q9',
         text: 'How did antiwar protest affect the politics of getting out of Vietnam?',
-        choices: ['It increased pressure on leaders to justify the war, reduce troop commitments, and explain why the conflict continued.', 'It had little effect because antiwar activism stayed isolated from media coverage, elections, and public debate.', 'It mostly strengthened support for escalation, since most protest groups demanded a larger invasion of North Vietnam.', 'It ended after 1968, allowing Nixon to pursue Vietnam policy with almost no public scrutiny or criticism.'],
+        choices: [
+          'It increased pressure on leaders to justify the war, reduce troop commitments, and explain why the conflict continued.',
+          'Antiwar protest had almost no effect because politicians ignored public opinion and followed military advice exclusively.',
+          'The protest movement mainly accelerated the war by causing Nixon to escalate bombing in order to appear strong domestically.',
+          'It affected politics mainly by giving the North Vietnamese confidence that they could win without any military action at all.'
+        ],
         correctAnswer: 'It increased pressure on leaders to justify the war, reduce troop commitments, and explain why the conflict continued.',
-        explanation: 'The antiwar movement shaped the public climate in which Nixon had to manage withdrawal, protest, and political trust.',
+        explanation: 'Mass protests, the Kent State killings, and congressional antiwar sentiment all created political costs for continuing the war — constraining what Nixon could do militarily and accelerating the pressure to find an exit.',
         standard: 'SS.912.A.7.9 · SS.912.A.7.10'
       },
       {
         id: '7B-L52-Q10',
         text: 'Why was getting out of Vietnam nearly as difficult politically as getting into it?',
-        choices: ['Leaders wanted to withdraw, but they also feared the consequences of looking weak, losing allies, or accepting visible defeat.', 'Congress had declared that withdrawal was unconstitutional, forcing every president to keep troops in Vietnam indefinitely.', 'The Soviet Union blocked all American troop movements, making it impossible for the United States to leave by sea or air.', 'Most Americans demanded a permanent occupation of Vietnam, leaving presidents with no political room for withdrawal.'],
+        choices: [
+          'Leaders wanted to withdraw, but they also feared the consequences of looking weak, losing allies, or accepting visible defeat.',
+          'Getting out was difficult mainly because military commanders insisted that victory was just weeks away if Congress provided more funds.',
+          'Withdrawal was politically difficult mainly because the American public consistently demanded that the military achieve total victory.',
+          'It was difficult politically mainly because South Vietnam had a formal veto over any American decision to withdraw its forces.'
+        ],
         correctAnswer: 'Leaders wanted to withdraw, but they also feared the consequences of looking weak, losing allies, or accepting visible defeat.',
-        explanation: 'The end of the war was shaped by the same Cold War credibility concerns that had deepened U.S. involvement in the first place.',
+        explanation: 'Every president who escalated in Vietnam did so partly for fear of the political cost of withdrawal — Nixon faced the same trap, and "peace with honor" was his attempt to find an exit that didn\'t look like the defeat it actually was.',
         standard: 'SS.912.A.7.10 · SS.912.A.7.11'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // LESSON 53 — The Rise and Fall of Richard Nixon
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'lesson53',
     label: 'LESSON 53',
     title: 'The Rise and Fall of Richard Nixon',
-    sub: 'Nixon’s Presidency · 1968–1974',
+    sub: 'Nixon\'s Presidency · 1968–1974',
     icon: '📰',
     type: 'lesson',
     briefing: {
-      location: 'Washington D.C.',
+      location: 'Washington D.C. and the World',
       date: '1968–1974',
-      role: 'Presidential historian',
-      text: 'Richard Nixon entered office promising order, restraint, and a new kind of leadership after the upheavals of the 1960s. He appealed to a ‘silent majority,’ reshaped foreign policy through détente and diplomacy, and accepted some government activism at home even while attacking liberal excess. But Nixon’s presidency ended not in triumph, but in scandal. Your task is to explain how one of the most consequential presidents of the era rose to power—and why he fell so dramatically.',
-      tags: []
+      role: 'investigative journalist',
+      text: 'Richard Nixon entered office promising order, restraint, and a new kind of leadership after the upheavals of the 1960s. He appealed to a "silent majority," reshaped foreign policy through détente and diplomacy, and accepted some government activism at home even while attacking liberal excess. But Nixon\'s presidency ended not in triumph, but in scandal. Your task is to explain how one of the most consequential presidents of the era rose to power—and why he fell so dramatically.',
+      tags: ['SS.912.A.7.4', 'SS.912.A.7.10', 'SS.912.A.7.11']
     },
     displayCount: 5,
     goldRules: { perCorrect: 20, completionBonus: 25, perfectBonus: 25 },
-    rewards: { badge: 'Nixon Era', cards: ['Richard Nixon', 'Watergate'] },
+    rewards: { badge: 'Nixon Falls', cards: ['Watergate', 'Opening to China'] },
     bank: [
       {
         id: '7B-L53-Q1',
-        text: 'Why did Nixon’s appeal to the ‘silent majority’ help him politically?',
-        choices: ['It spoke to Americans who disliked protest and disorder and wanted stability, patriotism, and a more conservative tone in politics.', 'It targeted college students and antiwar activists who believed the Democratic Party had become too cautious and establishment-minded.', 'It appealed mainly to labor radicals who wanted the federal government to nationalize major industries and end the draft at once.', 'It was aimed at southern segregationists alone, while Nixon ignored suburban and middle-class voters in the rest of the country.'],
+        text: 'Why did Nixon\'s appeal to the "silent majority" help him politically?',
+        choices: [
+          'It spoke to Americans who disliked protest and disorder and wanted stability, patriotism, and a more conservative tone in politics.',
+          'Nixon\'s silent majority appeal worked mainly because it promised those Americans an immediate and complete withdrawal of all U.S. forces from Vietnam within the first six months of his presidency.',
+          'Nixon\'s phrase appealed mainly to young Americans who felt excluded from the counterculture and wanted their own movement.',
+          'The appeal worked mainly by offering a generous economic package that included tax cuts for working-class families.'
+        ],
         correctAnswer: 'It spoke to Americans who disliked protest and disorder and wanted stability, patriotism, and a more conservative tone in politics.',
-        explanation: 'Nixon used the phrase to mobilize voters who felt alienated by protest, unrest, and the turbulence of the late 1960s.',
+        explanation: 'Nixon\'s silent majority speech in 1969 framed antiwar protesters as a loud minority opposed by a quiet, patriotic mainstream — validating the anxieties of millions of Americans who felt the country was coming apart and wanted order restored.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7B-L53-Q2',
-        text: 'What was the main idea behind Nixon’s New Federalism?',
-        choices: ['To shift more power and responsibility from Washington to state and local governments while keeping the federal system intact.', 'To centralize nearly all domestic policymaking in the White House so presidents could govern more efficiently during crises.', 'To abolish most federal social programs and return the United States to the limited-government style of the 1920s.', 'To replace Congress with regional planning boards that would manage welfare, education, and transportation policy.'],
+        text: 'What was the main idea behind Nixon\'s New Federalism?',
+        choices: [
+          'To shift more power and responsibility from Washington to state and local governments while keeping the federal system intact.',
+          'New Federalism was Nixon\'s plan to eliminate all federal social programs and return funding directly to individual citizens.',
+          'The policy aimed mainly to expand federal authority over local governments that were resisting school desegregation orders.',
+          'Nixon\'s New Federalism was primarily a foreign policy doctrine about sharing NATO defense responsibilities with European allies.'
+        ],
         correctAnswer: 'To shift more power and responsibility from Washington to state and local governments while keeping the federal system intact.',
-        explanation: 'New Federalism tried to decentralize parts of domestic governance without dismantling the federal government entirely.',
+        explanation: 'Revenue sharing and block grants were the tools of New Federalism — giving states money with fewer strings attached and reducing the centralizing tendency of Great Society programs without eliminating the federal commitment to domestic spending.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7B-L53-Q3',
         text: 'Why do the creation of the EPA and OSHA complicate the image of Nixon as a simple anti-government conservative?',
-        choices: ['They show that Nixon accepted significant federal action in areas such as environmental protection and workplace safety.', 'They prove that Nixon wanted to abolish most domestic regulation but was blocked by a hostile Supreme Court on every major issue.', 'They demonstrate that Nixon opposed business interests entirely and tried to nationalize major oil, chemical, and manufacturing firms.', 'They reveal that Congress created all major domestic policy in the 1970s without any presidential involvement or approval.'],
+        choices: [
+          'They show that Nixon accepted significant federal action in areas such as environmental protection and workplace safety.',
+          'The EPA and OSHA complicate his image mainly because they were actually created by Congress over Nixon\'s strong veto.',
+          'They complicate his image mainly by proving that Nixon was secretly a liberal who opposed his own party\'s platform.',
+          'These agencies complicate his legacy mainly because they immediately caused massive economic damage and business closures.'
+        ],
         correctAnswer: 'They show that Nixon accepted significant federal action in areas such as environmental protection and workplace safety.',
-        explanation: 'Nixon’s record was more complicated than simple anti-government rhetoric suggests because he signed important regulatory reforms.',
+        explanation: 'Nixon\'s domestic record included wage and price controls, the EPA, OSHA, and expanded social spending — revealing a pragmatic approach to governance that contradicted simple labels and reflected the political realities of a Democratic Congress.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7B-L53-Q4',
-        text: 'What was détente in Nixon’s foreign policy?',
-        choices: ['A relaxation of tensions with major communist powers through diplomacy, negotiation, and strategic cooperation.', 'A policy of expanding the Vietnam War until the Soviet Union and China agreed to withdraw from all Asian affairs.', 'A doctrine that rejected diplomacy and relied instead on nuclear threats to force communist states into submission.', 'A program for removing all American troops from overseas alliances and ending long-term commitments in Europe and Asia.'],
+        text: 'What was détente in Nixon\'s foreign policy?',
+        choices: [
+          'A relaxation of tensions with major communist powers through diplomacy, negotiation, and strategic cooperation.',
+          'Détente was Nixon\'s policy of threatening nuclear strikes against any communist nation that expanded its military forces.',
+          'The term described a formal military alliance between the United States and China against the Soviet Union.',
+          'Détente referred mainly to Nixon\'s strategy of using economic sanctions to weaken communist governments gradually.'
+        ],
         correctAnswer: 'A relaxation of tensions with major communist powers through diplomacy, negotiation, and strategic cooperation.',
-        explanation: 'Détente referred to Nixon and Kissinger’s effort to reduce Cold War tensions, especially with the Soviet Union and China.',
+        explanation: 'Nixon and Kissinger\'s realpolitik approach abandoned the ideological rigidity of earlier Cold War strategy — engaging the Soviets and Chinese directly, seeking agreements and stability rather than confrontation.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7B-L53-Q5',
-        text: 'Why was Nixon’s opening to China such a major diplomatic breakthrough?',
-        choices: ['It reshaped Cold War politics by improving relations with a major communist power and increasing pressure on the Soviet Union.', 'It ended the Vietnam War immediately because China withdrew support for North Vietnam as soon as Nixon visited Beijing.', 'It created a formal military alliance between the United States and China against the Soviet Union and North Korea.', 'It led the United States to abandon Taiwan instantly and recognize only one-party communist rule in all of East Asia.'],
+        text: 'Why was Nixon\'s opening to China such a major diplomatic breakthrough?',
+        choices: [
+          'It reshaped Cold War politics by improving relations with a major communist power and increasing pressure on the Soviet Union.',
+          'The China opening was significant mainly because it ended twenty years of open military conflict between the two nations.',
+          'Nixon\'s visit mattered mainly because China agreed to immediately stop all military aid to North Vietnam as a condition.',
+          'Nixon\'s opening to China was a breakthrough mainly because China and the United States immediately formed a comprehensive formal military alliance specifically directed against Soviet power worldwide.'
+        ],
         correctAnswer: 'It reshaped Cold War politics by improving relations with a major communist power and increasing pressure on the Soviet Union.',
-        explanation: 'The China opening was important because it changed the triangular balance of Cold War diplomacy.',
+        explanation: 'Nixon\'s 1972 visit to China — unthinkable just years earlier — exploited the Sino-Soviet split to give the United States leverage with both communist powers, reshaping the triangular diplomacy of the Cold War.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7B-L53-Q6',
         text: 'What was the significance of the SALT I agreement?',
-        choices: ['It marked a major attempt by the United States and the Soviet Union to limit parts of the nuclear arms race.', 'It eliminated all strategic nuclear weapons and began the complete dismantling of both superpowers’ missile systems.', 'It created NATO control over Soviet nuclear forces in exchange for Western access to East Berlin and Eastern Europe.', 'It forced China and the Soviet Union to sign a joint defense pact with the United States against smaller communist states.'],
+        choices: [
+          'It marked a major attempt by the United States and the Soviet Union to limit parts of the nuclear arms race.',
+          'SALT I was significant mainly because it eliminated all nuclear weapons in Europe and the Pacific as part of the deal.',
+          'The agreement mattered mainly because it required both nations to share nuclear technology to prevent accidental war.',
+          'SALT I was significant mainly as a failed agreement — both sides refused to ratify it and the arms race continued unchanged.'
+        ],
         correctAnswer: 'It marked a major attempt by the United States and the Soviet Union to limit parts of the nuclear arms race.',
-        explanation: 'SALT I fit the larger policy of détente by showing that the superpowers could negotiate limits in strategic competition.',
+        explanation: 'SALT I capped the number of strategic nuclear weapons each side could deploy — the first formal agreement to limit nuclear arsenals and a cornerstone of the détente relationship that Nixon and Brezhnev built.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7B-L53-Q7',
         text: 'Why was stagflation such a troubling economic problem in the 1970s?',
-        choices: ['It combined inflation and economic stagnation, creating a situation that challenged older assumptions about how the economy worked.', 'It meant that prices were falling sharply while wages and industrial output rose quickly, confusing both workers and consumers.', 'It described a temporary farm crisis only, with little effect on cities, industry, or the national political mood.', 'It resulted mainly from Great Society welfare programs and disappeared once the Vietnam War came to an official end.'],
+        choices: [
+          'It combined inflation and economic stagnation, creating a situation that challenged older assumptions about how the economy worked.',
+          'Stagflation was troubling mainly because it caused the complete and permanent collapse of the American stock market, which wiped out the retirement savings of virtually all Americans simultaneously.',
+          'The problem was troubling mainly because it proved that all the economic policies of the New Deal had been fundamentally wrong.',
+          'Stagflation was troubling mainly because economists had no name for it and refused to acknowledge it was actually happening.'
+        ],
         correctAnswer: 'It combined inflation and economic stagnation, creating a situation that challenged older assumptions about how the economy worked.',
-        explanation: 'Stagflation was especially difficult because it brought together problems that policymakers did not expect to happen at the same time.',
+        explanation: 'Keynesian economics assumed inflation and unemployment moved in opposite directions — stagflation, where both rose simultaneously, broke that model and left policymakers without the tools to address either problem without worsening the other.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7B-L53-Q8',
         text: 'How did the energy crisis affect American life during the Nixon era?',
-        choices: ['It exposed U.S. vulnerability to oil supply shocks and contributed to inflation, shortages, and public anxiety about the economy.', 'It mainly affected military planning overseas and had little visible impact on everyday life or prices at home.', 'It solved inflation by reducing consumer demand and quickly restoring confidence in the long-term strength of the economy.', 'It encouraged Americans to abandon cars almost overnight and return to railroads as the nation’s primary form of transportation.'],
+        choices: [
+          'It exposed U.S. vulnerability to oil supply shocks and contributed to inflation, shortages, and public anxiety about the economy.',
+          'The oil crisis mainly benefited American consumers by dramatically and permanently reducing gasoline prices to their lowest levels in decades through a new government price control program.',
+          'It affected life mainly by causing millions of Americans to permanently switch from cars to public transportation systems.',
+          'The energy crisis mainly affected oil-producing states and had little impact on the economy or daily life in most regions.'
+        ],
         correctAnswer: 'It exposed U.S. vulnerability to oil supply shocks and contributed to inflation, shortages, and public anxiety about the economy.',
-        explanation: 'The energy crisis helped deepen the pessimism and instability of the 1970s economy.',
+        explanation: 'The 1973 OPEC oil embargo triggered gasoline shortages, long lines at gas stations, and soaring energy prices — revealing how dependent American prosperity was on foreign oil and accelerating the stagflation that plagued the decade.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7B-L53-Q9',
         text: 'Why did Watergate become such a serious constitutional and political crisis?',
-        choices: ['It revealed not just a break-in, but a broader pattern of abuse of power, cover-up, and obstruction linked to the presidency.', 'It centered mainly on campaign finance paperwork errors that were serious politically but had no connection to presidential conduct.', 'It proved that Nixon had personally ordered military action in Cambodia without consulting Congress or the Joint Chiefs of Staff.', 'It was caused by the Supreme Court’s refusal to recognize executive privilege in foreign affairs and treaty negotiations.'],
+        choices: [
+          'It revealed not just a break-in, but a broader pattern of abuse of power, cover-up, and obstruction linked to the presidency.',
+          'Watergate was serious mainly because it involved the theft of classified nuclear weapons documents from the Democratic offices.',
+          'The crisis was constitutional mainly because Nixon tried to suspend the 1972 elections after the break-in was discovered.',
+          'It became serious mainly because several Supreme Court justices were implicated in the cover-up alongside Nixon\'s staff.'
+        ],
         correctAnswer: 'It revealed not just a break-in, but a broader pattern of abuse of power, cover-up, and obstruction linked to the presidency.',
-        explanation: 'Watergate became a constitutional crisis because it exposed misuse of presidential power and efforts to hide wrongdoing.',
+        explanation: 'The cover-up — hush money payments, obstruction of FBI investigations, firing the special prosecutor — proved far more damaging than the original crime, raising fundamental questions about whether the president was above the law.',
         standard: 'SS.912.A.7.10'
       },
       {
         id: '7B-L53-Q10',
-        text: 'Why is Nixon’s legacy often described as both significant and deeply damaged?',
-        choices: ['He reshaped foreign policy and domestic government in important ways, but Watergate destroyed trust and forced his resignation.', 'He accomplished very little as president, so his reputation depends almost entirely on the dramatic circumstances of his departure.', 'He is remembered mostly for the Great Society, which overshadowed both détente and the Vietnam War during his presidency.', 'He left office voluntarily at the height of his popularity, making Watergate seem less important than later economic developments.'],
+        text: 'Why is Nixon\'s legacy often described as both significant and deeply damaged?',
+        choices: [
+          'He reshaped foreign policy and domestic government in important ways, but Watergate destroyed trust and forced his resignation.',
+          'Nixon\'s legacy is mixed mainly because historians disagree about whether his economic policies helped or hurt the middle class.',
+          'His legacy is complicated mainly because most of his domestic legislation was immediately repealed after he left office.',
+          'Nixon\'s legacy is contested mainly because his foreign policy achievements were later found to have been exaggerated for political effect.'
+        ],
         correctAnswer: 'He reshaped foreign policy and domestic government in important ways, but Watergate destroyed trust and forced his resignation.',
-        explanation: 'Nixon’s presidency mattered greatly, but Watergate permanently shaped how Americans remembered his time in office.',
+        explanation: 'The opening to China, SALT I, and détente were genuine strategic achievements — but Watergate made Nixon the only president to resign in disgrace, permanently overshadowing his record and reinforcing cynicism about government.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.10'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
+  // ==================================================
   // UNIT 7B CAPSTONE — The Me Decade
-  // ══════════════════════════════════════════════════
+  // ==================================================
   {
     id: 'capstone',
     label: 'UNIT 7B CAPSTONE',
     title: 'The Me Decade',
     sub: 'Politics and Society in the 1970s · 1970s',
-    icon: '🩰',
+    icon: '🪩',
     type: 'capstone',
     briefing: {
-      location: 'United States',
+      location: 'America in the 1970s',
       date: '1970s',
-      role: 'Magazine journalist',
-      text: 'The Vietnam War is winding down, Nixon is gone, and Americans are trying to understand what kind of country they have become. Some celebrate new freedoms, environmental awareness, and cultural experimentation. Others see inflation, oil shocks, distrust, and national drift. Tom Wolfe calls it the ‘Me Decade,’ but the label only captures part of the story. Your task is to explain how the 1970s combined self-focus, reform, uncertainty, and global crisis into one uneasy era.',
-      tags: []
+      role: 'cultural historian',
+      text: 'The 1970s are harder to define than the 1960s. The great crusades have faded. Watergate has poisoned trust in government. OPEC has exposed America\'s economic vulnerability. The Rustbelt is hollowing out. Carter struggles with hostages in Iran. And yet: the environment is being protected, disco fills the dance floors, and Americans are arguing about what comes next. Your task is to explain the decade\'s contradictions — its anxieties, its reforms, and its search for meaning.',
+      tags: ['SS.912.A.7.11', 'SS.912.A.7.12', 'SS.912.A.7.14']
     },
     displayCount: 5,
     goldRules: { perCorrect: 25, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Me Decade', cards: ['Jimmy Carter', 'Camp David Accords'] },
+    rewards: { badge: 'The Me Decade', cards: ['Camp David Accords', 'Iran Hostage Crisis'] },
     bank: [
       {
         id: '7B-CAP-Q1',
-        text: 'Why did the label ‘Me Decade’ stick to the 1970s?',
-        choices: ['It suggested that many Americans had turned away from the collective reform idealism of the 1960s toward personal fulfillment and self-focus.', 'It described a decade in which Americans abandoned consumer culture entirely and devoted themselves mainly to collective sacrifice.', 'It referred to a national program that encouraged young people to serve in public agencies instead of pursuing private careers.', 'It meant that most political debates disappeared, leaving Americans united around one widely shared national purpose.'],
+        text: 'Why did the label "Me Decade" stick to the 1970s?',
+        choices: [
+          'It suggested that many Americans had turned away from the collective reform idealism of the 1960s toward personal fulfillment and self-focus.',
+          'The label stuck mainly because polling showed that most Americans voted primarily on the basis of their own personal financial interests.',
+          'The Me Decade label described the period mainly as one of economic selfishness and greed when corporations consistently refused to share their enormous profits with workers or local communities.',
+          'The label was applied mainly because 1970s politicians consistently prioritized personal gain over the public interest in every decision.'
+        ],
         correctAnswer: 'It suggested that many Americans had turned away from the collective reform idealism of the 1960s toward personal fulfillment and self-focus.',
-        explanation: 'Tom Wolfe argued that the drive for large-scale social change gave way in the 1970s to a stronger emphasis on the self.',
+        explanation: 'Tom Wolfe\'s 1976 essay captured a cultural shift — from the collective idealism of civil rights and antiwar movements toward self-help culture, therapy, est, encounter groups, and personal spiritual seeking.',
         standard: 'SS.912.A.7.12'
       },
       {
         id: '7B-CAP-Q2',
         text: 'Why was the bicentennial celebration in 1976 historically important?',
-        choices: ['It gave many Americans a renewed sense of national pride, even as others used it to reflect on how far the nation still fell short of its ideals.', 'It marked the final end of antiwar protest and convinced most Americans that Vietnam had restored confidence in government.', 'It created a permanent federal holiday honoring Nixon’s foreign policy and the opening to China during the early 1970s.', 'It ended public debate over the meaning of the 1970s by replacing cultural conflict with universal patriotic agreement.'],
+        choices: [
+          'It gave many Americans a renewed sense of national pride, even as others used it to reflect on how far the nation still fell short of its ideals.',
+          'The bicentennial was historically important mainly because it marked the formal and permanent end of all remaining legal racial discrimination anywhere in the United States.',
+          'It was important mainly because it produced a constitutional amendment that extended the Bill of Rights to all state governments.',
+          'The celebration was significant mainly because it produced the largest voter turnout in American presidential election history.'
+        ],
         correctAnswer: 'It gave many Americans a renewed sense of national pride, even as others used it to reflect on how far the nation still fell short of its ideals.',
-        explanation: 'The bicentennial brought relief and pride for many, but also led others to question whether the nation still lived up to its founding ideals.',
+        explanation: 'Coming after Vietnam, Watergate, and the energy crisis, the bicentennial offered a moment of national reflection — some Americans celebrated the nation\'s founding ideals while others asked whether those ideals had truly been honored.',
         standard: 'SS.912.A.7.12'
       },
       {
         id: '7B-CAP-Q3',
         text: 'Why did OPEC play such an important role in shaping the American economy during the 1970s?',
-        choices: ['Its oil policies exposed U.S. dependence on global energy markets and helped trigger inflation, shortages, and economic anxiety.', 'Its decisions ended foreign dependence on oil by rapidly increasing domestic drilling and lowering energy prices across the United States.', 'Its embargo had little effect because the United States had already shifted almost entirely away from petroleum before 1973.', 'Its pricing policies affected only Europe and Japan, while the United States remained insulated from major energy disruptions.'],
+        choices: [
+          'Its oil policies exposed U.S. dependence on global energy markets and helped trigger inflation, shortages, and economic anxiety.',
+          'OPEC was important mainly because it provided the United States with a reliable cheap supply of oil that fueled economic growth.',
+          'The organization shaped the American economy mainly by investing its oil profits in U.S. factories and creating thousands of jobs.',
+          'OPEC mattered mainly because it convinced Congress to permanently end all U.S. oil imports and develop domestic energy sources.'
+        ],
         correctAnswer: 'Its oil policies exposed U.S. dependence on global energy markets and helped trigger inflation, shortages, and economic anxiety.',
-        explanation: 'Oil shocks became central to 1970s economic instability and public frustration.',
+        explanation: 'The 1973 Arab oil embargo and subsequent OPEC price increases produced gas lines, heating fuel shortages, and contributed directly to the stagflation that plagued the decade — revealing how vulnerable the American economy was to foreign energy decisions.',
         standard: 'SS.912.A.7.12 · SS.912.A.7.14'
       },
       {
         id: '7B-CAP-Q4',
-        text: 'What does the term ‘Rustbelt’ suggest about the economic changes of the 1970s?',
-        choices: ['Older industrial regions faced decline as factories closed or weakened, producing job loss and long-term regional hardship.', 'The nation’s oldest manufacturing centers prospered most in the 1970s because foreign competition had almost no effect on American labor.', 'It referred to a farming crisis only, centered on soil depletion and crop failure in the rural Midwest and Great Plains.', 'It described the rapid growth of steel and auto production in the South, where new factories replaced northern industrial centers.'],
+        text: 'What does the term "Rustbelt" suggest about the economic changes of the 1970s?',
+        choices: [
+          'Older industrial regions faced decline as factories closed or weakened, producing job loss and long-term regional hardship.',
+          'The Rustbelt describes the environmental damage to rivers and soil caused by decades of unregulated industrial pollution.',
+          'The term suggests mainly that older cities were physically deteriorating because governments refused to fund basic infrastructure.',
+          'Rustbelt refers mainly to the decline of the agricultural sector in midwestern states as farming became less profitable.'
+        ],
         correctAnswer: 'Older industrial regions faced decline as factories closed or weakened, producing job loss and long-term regional hardship.',
-        explanation: 'Rustbelt points to the weakening of older industrial regions during a period of global competition and economic transition.',
+        explanation: 'As manufacturing shifted overseas and the energy crisis squeezed industrial production, cities like Detroit, Pittsburgh, and Cleveland lost factories, jobs, and population — a deindustrialization that devastated working-class communities.',
         standard: 'SS.912.A.7.12 · SS.912.A.7.14'
       },
       {
         id: '7B-CAP-Q5',
         text: 'What does the growth of environmentalism in the 1970s reveal about the decade?',
-        choices: ['Even amid economic and political troubles, many Americans pushed for reforms that protected health, resources, and quality of life.', 'Environmental issues disappeared from politics because inflation and energy shortages made conservation seem unimportant.', 'The federal government abandoned environmental regulation in favor of leaving all pollution control to private industry.', 'Environmental activism focused only on preserving wilderness and had little connection to public health or daily life.'],
+        choices: [
+          'Even amid economic and political troubles, many Americans pushed for reforms that protected health, resources, and quality of life.',
+          'Environmentalism in the 1970s mainly shows that most Americans were willing to sacrifice economic growth to protect nature.',
+          'The growth of environmentalism mainly reveals that the entire decade of the 1970s was primarily characterized by broad progressive political activism across virtually every area of American society.',
+          'It shows mainly that the energy crisis convinced Americans to permanently reduce their consumption of natural resources.'
+        ],
         correctAnswer: 'Even amid economic and political troubles, many Americans pushed for reforms that protected health, resources, and quality of life.',
-        explanation: 'Earth Day, the Clean Water Act, and the Safe Drinking Water Act show that reform energy continued in environmental policy.',
+        explanation: 'Despite stagflation and political cynicism, the 1970s produced the Clean Air Act, Clean Water Act, Endangered Species Act, and Earth Day — demonstrating that reform energy persisted even when the grand idealism of the 1960s had faded.',
         standard: 'SS.912.A.7.12'
       },
       {
         id: '7B-CAP-Q6',
-        text: 'Why were the Camp David Accords considered Carter’s greatest foreign policy achievement?',
-        choices: ['They created a framework for peace between Egypt and Israel, with Egypt becoming the first Arab state to recognize Israel formally.', 'They ended Soviet influence in the Middle East by forcing Moscow to withdraw all military aid from Egypt and Syria.', 'They created a permanent Palestinian state and resolved every major territorial dispute left from the 1973 Yom Kippur War.', 'They brought Iran and Iraq into a formal alliance with the United States against terrorism and oil embargoes in the Persian Gulf.'],
+        text: 'Why were the Camp David Accords considered Carter\'s greatest foreign policy achievement?',
+        choices: [
+          'They created a framework for peace between Egypt and Israel, with Egypt becoming the first Arab state to recognize Israel formally.',
+          'The Camp David Accords were Carter\'s greatest achievement mainly because they ended the OPEC oil embargo against the United States.',
+          'They were considered his greatest achievement mainly because they secured the release of all American hostages held in Iran.',
+          'The accords mattered mainly because they produced a mutual defense treaty between the United States and both Egypt and Israel.'
+        ],
         correctAnswer: 'They created a framework for peace between Egypt and Israel, with Egypt becoming the first Arab state to recognize Israel formally.',
-        explanation: 'Camp David was Carter’s greatest foreign policy success because it produced a framework for peace between Egypt and Israel.',
+        explanation: 'Carter personally brokered thirteen days of negotiations between Sadat and Begin at Camp David in 1978 — producing the Egypt-Israel Peace Treaty of 1979, a landmark that reshaped Middle Eastern politics for decades.',
         standard: 'SS.912.A.7.11'
       },
       {
         id: '7B-CAP-Q7',
         text: 'Why did the Iran hostage crisis damage Carter politically at home?',
-        choices: ['It made many Americans see the United States as weak and Carter as unable to protect national prestige or resolve the crisis effectively.', 'It was viewed mainly as a diplomatic success because the hostages were rescued quickly and returned before the next election year.', 'It strengthened détente by creating a common U.S.-Iranian front against Soviet influence in Afghanistan and the Persian Gulf.', 'It had little impact on public opinion because most Americans were more focused on disco, the bicentennial, and lifestyle trends.'],
+        choices: [
+          'It made many Americans see the United States as weak and Carter as unable to protect national prestige or resolve the crisis effectively.',
+          'The crisis damaged Carter mainly because it proved he had secretly approved the Shah\'s repressive government for years.',
+          'The Iran hostage crisis hurt Carter politically mainly because Congress formally blamed him personally for all of the CIA\'s policies that had originally caused the Iranian revolution to occur.',
+          'The hostage crisis damaged Carter mainly because he spent the entire crisis on vacation and refused to return to Washington.'
+        ],
         correctAnswer: 'It made many Americans see the United States as weak and Carter as unable to protect national prestige or resolve the crisis effectively.',
-        explanation: 'Many Americans treated Carter’s inability to free the hostages as evidence that the United States was losing power and influence.',
+        explanation: 'The 444-day ordeal — including the failed rescue mission Operation Eagle Claw — became a nightly symbol of American impotence, and the hostages were finally released on Reagan\'s inauguration day, maximizing Carter\'s humiliation.',
         standard: 'SS.912.A.7.11 · SS.912.A.7.12'
       },
       {
         id: '7B-CAP-Q8',
         text: 'What broad theme ties together SALT II troubles, the Soviet invasion of Afghanistan, the Iran hostage crisis, and Three Mile Island?',
-        choices: ['They deepened the 1970s mood of uncertainty by making Americans feel less secure about foreign policy, energy, and technological progress.', 'They restored confidence in government and convinced most Americans that the crises of Vietnam and Watergate had finally been overcome.', 'They proved that détente had permanently stabilized the Cold War and reduced the need for future military or diplomatic competition.', 'They encouraged Americans to trust experts more fully because every major challenge of the decade was handled efficiently and successfully.'],
-        correctAnswer: 'They deepened the 1970s mood of uncertainty by making Americans feel less secure about foreign policy, energy, and technological progress.',
-        explanation: 'Taken together, these crises reinforced the broader lesson theme: the 1970s were marked by insecurity as well as self-focus.',
+        choices: [
+          'All four events contributed to a widespread sense that America\'s power and confidence had limits that the government could not easily fix.',
+          'All four showed mainly that Carter was personally incompetent and that any other president would have handled them successfully.',
+          'The common theme is that all four were caused directly by the energy crisis and the economic decline of the late 1970s.',
+          'All four events were part of a coordinated Soviet strategy to weaken American influence and hasten communist global expansion.'
+        ],
+        correctAnswer: 'All four events contributed to a widespread sense that America\'s power and confidence had limits that the government could not easily fix.',
+        explanation: 'The failed SALT II ratification, Soviet aggression in Afghanistan, Iranian hostage-taking, and a nuclear accident at home all fed a pervasive national malaise — a crisis of confidence that Carter himself identified in his famous "crisis of the American spirit" speech.',
         standard: 'SS.912.A.7.11 · SS.912.A.7.12'
       },
     ]
   },
 
-  // ══════════════════════════════════════════════════
-  // EOC REVIEW — EOC Practice Quiz
-  // ══════════════════════════════════════════════════
+  // ==================================================
+  // EOC REVIEW — Vietnam and the 1970s
+  // ==================================================
   {
     id: 'eoc',
     label: 'EOC REVIEW',
@@ -1305,214 +1495,339 @@ const LESSONS = [
     icon: '📋',
     type: 'eoc',
     briefing: {
-      location: 'Unit 7B Review',
-      date: '1965–1980',
-      role: 'Historian in training',
-      text: 'You have completed the major missions of the Vietnam and 1970s unit. Now review the full story: why the war became a quagmire, how the United States tried to leave Vietnam, Nixon’s rise and collapse, and the uneasy political and cultural mood of the 1970s. Expect questions from across the whole unit.',
-      tags: []
+      location: 'Vietnam and the 1970s Review',
+      date: '',
+      role: 'state exam coach',
+      text: 'You have completed the major missions of the Vietnam and 1970s unit. Now review the full story: why the war became a quagmire, how the United States tried to leave Vietnam, Nixon\'s rise and collapse, and the uneasy political and cultural mood of the 1970s. Expect questions from across the whole unit.',
+      tags: ['SS.912.A.6.14', 'SS.912.A.7.4', 'SS.912.A.7.9', 'SS.912.A.7.10', 'SS.912.A.7.11', 'SS.912.A.7.12', 'SS.912.A.7.14']
     },
     displayCount: 15,
     goldRules: { perCorrect: 15, completionBonus: 50, perfectBonus: 50 },
-    rewards: { badge: 'Vietnam and the 1970s Complete', cards: ['Vietnamization', 'Watergate', 'Camp David'] },
+    rewards: { badge: 'Vietnam & 1970s Mastery', cards: ['Nixon Resignation', 'Détente'] },
     bank: [
       {
         id: '7B-EOC-Q1',
         text: 'What was the main idea behind the U.S. strategy of war of attrition in Vietnam?',
-        choices: ['To wear down communist forces through heavy losses and use body count as a key measure of military progress.', 'To avoid large battles entirely and let South Vietnamese troops fight the war without American support or advisers.', 'To invade North Vietnam quickly with overwhelming force and force an immediate surrender in one major campaign.', 'To focus only on village reform programs and avoid air power, bombing, and large-scale combat operations.'],
+        choices: [
+          'To wear down communist forces through heavy losses and use body count as a key measure of military progress.',
+          'To hold fixed defensive positions along the Vietnamese border and prevent any movement of communist troops southward.',
+          'To seize major North Vietnamese cities rapidly and force Hanoi to negotiate before losing its key population centers.',
+          'To blockade all North Vietnamese ports completely and cut off all supplies entering the country from Soviet and Chinese ships.'
+        ],
         correctAnswer: 'To wear down communist forces through heavy losses and use body count as a key measure of military progress.',
-        explanation: 'Attrition relied on the belief that the enemy could be worn down through casualties, even without clear territorial conquest.',
+        explanation: 'Attrition strategy assumed that if enough enemy troops were killed, North Vietnam\'s will to fight would break — a miscalculation that ignored Hanoi\'s ability to absorb enormous losses and continue the war indefinitely.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10'
       },
       {
         id: '7B-EOC-Q2',
         text: 'What was the credibility gap during the Vietnam War?',
-        choices: ['The growing difference between optimistic official statements and the harsher reality Americans saw in news coverage and reports.', 'The military gap between American and Soviet nuclear power, which critics said made Vietnam impossible to defend properly.', 'The difference between Army and Navy strategy, which caused confusion over who should control Pacific operations.', 'The legal gap between declarations of war and peace treaties, which prevented Congress from funding combat operations.'],
+        choices: [
+          'The growing difference between optimistic official statements and the harsher reality Americans saw in news coverage and reports.',
+          'The gap between the military capabilities of the United States and those of North Vietnam at the start of the conflict.',
+          'The credibility gap referred to the difference between what Congress had authorized in the Gulf of Tonkin Resolution and what Johnson actually did militarily in the years that followed.',
+          'The growing divide between what civilian and military leaders believed about the likelihood of winning the war quickly.'
+        ],
         correctAnswer: 'The growing difference between optimistic official statements and the harsher reality Americans saw in news coverage and reports.',
-        explanation: 'As the war dragged on, many Americans no longer trusted official claims that victory was near.',
+        explanation: 'As officials kept claiming progress in Vietnam, television brought the war\'s brutality and frustration into American homes — the gap between official optimism and visible reality became one of the defining features of the era.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10'
       },
       {
         id: '7B-EOC-Q3',
         text: 'Why did the Tet Offensive change public opinion about the Vietnam War?',
-        choices: ['Even though communist forces suffered heavily, the offensive made many Americans doubt official claims that the war was being won.', 'It ended the war immediately by forcing the United States to sign a peace treaty within days of the attacks.', 'It proved that pacification had succeeded and restored widespread confidence in Johnson’s war policy after months of doubt.', 'It showed that ARVN could defeat the North on its own, making future American troop withdrawals politically easy.'],
+        choices: [
+          'Even though communist forces suffered heavily, the offensive made many Americans doubt official claims that the war was being won.',
+          'The Tet Offensive changed American public opinion mainly because the U.S. military suffered its largest and most catastrophic single-battle defeat of the entire Vietnam War during the attacks.',
+          'The offensive changed opinion mainly because it resulted in North Vietnam capturing and holding Saigon for several weeks.',
+          'It changed opinion mainly because it proved that South Vietnamese forces could defend the country without American support.'
+        ],
         correctAnswer: 'Even though communist forces suffered heavily, the offensive made many Americans doubt official claims that the war was being won.',
-        explanation: 'Tet was psychologically devastating in the United States because it contradicted official optimism.',
+        explanation: 'The scale and boldness of the Tet attacks — on over 100 cities, including the U.S. Embassy — shattered the official narrative of progress and turned key opinion leaders including Walter Cronkite against the war.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7B-EOC-Q4',
         text: 'How did the antiwar movement affect public life in the late 1960s and early 1970s?',
-        choices: ['It expanded public debate through teach-ins, demonstrations, and criticism from students, intellectuals, and national leaders.', 'It remained too small to matter and had little connection to media coverage, elections, or broader public opinion.', 'It mainly supported military escalation because most protesters believed the war effort had been too limited and cautious.', 'It disappeared after 1966, allowing Johnson and Nixon to pursue Vietnam policy without major domestic resistance.'],
+        choices: [
+          'It expanded public debate through teach-ins, demonstrations, and criticism from students, intellectuals, and national leaders.',
+          'The antiwar movement had almost no political effect because most elected officials completely ignored all protests and demonstrations.',
+          'It affected public life mainly by convincing the military to end the draft and switch to an all-volunteer army immediately.',
+          'The movement affected life mainly by pushing most Americans to actively support the war in reaction to the protesters\' tactics.'
+        ],
         correctAnswer: 'It expanded public debate through teach-ins, demonstrations, and criticism from students, intellectuals, and national leaders.',
-        explanation: 'Antiwar protest helped make Vietnam one of the most divisive public issues of the era.',
+        explanation: 'From Moratorium marches of hundreds of thousands to respected politicians like Eugene McCarthy and Robert Kennedy opposing the war, the antiwar movement transformed the political landscape and made continuation of the war increasingly costly.',
         standard: 'SS.912.A.7.9 · SS.912.A.7.10'
       },
       {
         id: '7B-EOC-Q5',
-        text: 'What was Nixon’s policy of Vietnamization designed to do?',
-        choices: ['Reduce U.S. troop involvement by shifting more of the fighting burden to South Vietnamese forces.', 'Expand American combat operations until North Vietnam collapsed under the pressure of U.S. invasion.', 'Transfer the war to the United Nations so that no single nation would control military strategy in Southeast Asia.', 'Create a coalition government between South Vietnam and the Viet Cong before any American withdrawal began.'],
+        text: 'What was Nixon\'s policy of Vietnamization designed to do?',
+        choices: [
+          'Reduce U.S. troop involvement by shifting more of the fighting burden to South Vietnamese forces.',
+          'Vietnamization was designed mainly to dramatically increase the number of American ground combat troops in the country.',
+          'The policy was intended mainly to replace all military operations with economic aid and diplomatic pressure on the North.',
+          'Vietnamization aimed mainly to persuade North Vietnam to accept a permanent division of the country at the 17th parallel.'
+        ],
         correctAnswer: 'Reduce U.S. troop involvement by shifting more of the fighting burden to South Vietnamese forces.',
-        explanation: 'Vietnamization was Nixon’s attempt to withdraw U.S. troops without appearing to abandon South Vietnam.',
+        explanation: 'Nixon gradually drew down American troop levels while providing more weapons, training, and financial support to the ARVN — trying to maintain American commitment while removing the most visible and politically costly element: American casualties.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7B-EOC-Q6',
-        text: 'Why did the My Lai massacre deepen opposition to the Vietnam War?',
-        choices: ['It exposed the killing of Vietnamese civilians by American troops and raised moral doubts about the war’s conduct.', 'It proved that antiwar activists had fabricated atrocity stories to weaken support for Nixon’s withdrawal strategy.', 'It showed that communist forces had surrendered in large numbers, making continued bombing seem unnecessary and wasteful.', 'It revealed that the Pentagon had secretly won the war years earlier but continued fighting for political reasons.'],
-        correctAnswer: 'It exposed the killing of Vietnamese civilians by American troops and raised moral doubts about the war’s conduct.',
-        explanation: 'My Lai became a symbol of the brutality and moral damage of the war.',
+        text: 'Why did the My Lai massacre affect public opinion about the war?',
+        choices: [
+          'It exposed the killing of Vietnamese civilians by American troops and raised moral doubts about the war\'s conduct.',
+          'My Lai changed opinion mainly because it resulted in the court-martial of every officer in the responsible unit.',
+          'The massacre affected opinion mainly because it proved that the Viet Cong had deliberately trapped American troops.',
+          'It mainly deepened public support for the war by revealing how brutal the enemy\'s civilian support network actually was.'
+        ],
+        correctAnswer: 'It exposed the killing of Vietnamese civilians by American troops and raised moral doubts about the war\'s conduct.',
+        explanation: 'The revelation that American soldiers had killed hundreds of unarmed villagers — and that the military had tried to suppress the story — forced a national reckoning with the moral cost of the war.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10'
       },
       {
         id: '7B-EOC-Q7',
         text: 'What did the Pentagon Papers reveal?',
-        choices: ['That officials had often misled the public about the war’s progress, origins, and chances of success.', 'That Congress had secretly declared war years earlier but hidden the documents from the public and press.', 'That the Soviet Union controlled ARVN through covert funding channels inside South Vietnam’s military leadership.', 'That antiwar organizations were directed by North Vietnam through underground cells on American college campuses.'],
-        correctAnswer: 'That officials had often misled the public about the war’s progress, origins, and chances of success.',
-        explanation: 'The Pentagon Papers intensified distrust in government by exposing contradictions between public claims and private assessments.',
+        choices: [
+          'That officials had often misled the public about the war\'s progress, origins, and chances of success.',
+          'The papers revealed mainly that the military had been winning the war for years but politicians had suppressed the good news.',
+          'They revealed mainly a secret plan to use nuclear weapons against North Vietnam that Eisenhower had prepared in 1954.',
+          'The Pentagon Papers primarily revealed the locations of all U.S. military bases and operations throughout Southeast Asia.'
+        ],
+        correctAnswer: 'That officials had often misled the public about the war\'s progress, origins, and chances of success.',
+        explanation: 'The classified Defense Department history showed that multiple administrations had deceived the public about prospects for success, the origins of the conflict, and the true nature of the commitment — accelerating the collapse of trust in government.',
         standard: 'SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7B-EOC-Q8',
         text: 'Why were the Kent State shootings such a major moment in the history of protest?',
-        choices: ['National Guardsmen killed student protesters, bringing the violence of the era home and intensifying the antiwar movement.', 'Student protesters occupied the Capitol and forced Congress to repeal the Gulf of Tonkin Resolution immediately afterward.', 'The incident proved that campus protest had become too violent for public sympathy, causing the antiwar movement to collapse.', 'The shootings led Nixon to end all bombing campaigns and announce a complete troop withdrawal the same week.'],
+        choices: [
+          'National Guardsmen killed student protesters, bringing the violence of the era home and intensifying the antiwar movement.',
+          'Kent State mattered mainly because students there voted to permanently end all ROTC and military recruitment on campuses.',
+          'The shootings were major mainly because they resulted in Congress immediately cutting off funding for the Cambodia invasion.',
+          'Kent State was significant mainly as the moment when the antiwar movement finally achieved majority public support.'
+        ],
         correctAnswer: 'National Guardsmen killed student protesters, bringing the violence of the era home and intensifying the antiwar movement.',
-        explanation: 'Kent State shocked the country and became one of the most powerful symbols of domestic division over Vietnam.',
+        explanation: 'The killing of four students protesting Nixon\'s Cambodia invasion triggered a nationwide student strike at hundreds of campuses, and the image of dead students on an American campus became an icon of the era\'s divisions.',
         standard: 'SS.912.A.7.9 · SS.912.A.7.10'
       },
       {
         id: '7B-EOC-Q9',
         text: 'What did the Paris Peace Accords accomplish in 1973?',
-        choices: ['They ended direct U.S. military involvement and arranged for the withdrawal of American forces from Vietnam.', 'They permanently secured South Vietnam’s survival by requiring North Vietnam to disarm under international inspection.', 'They reunified Vietnam under a coalition government approved by both Saigon and Hanoi before U.S. withdrawal.', 'They committed the United States to return militarily if either side violated the ceasefire terms after 1973.'],
+        choices: [
+          'They ended direct U.S. military involvement and arranged for the withdrawal of American forces from Vietnam.',
+          'The Paris Accords produced a permanent peace that unified Vietnam under a neutral coalition government within two years.',
+          'They accomplished mainly a formal partition of Vietnam into two permanently separate and internationally recognized states.',
+          'The accords accomplished mainly the full withdrawal of all North Vietnamese troops from South Vietnam simultaneously.'
+        ],
         correctAnswer: 'They ended direct U.S. military involvement and arranged for the withdrawal of American forces from Vietnam.',
-        explanation: 'The accords got the United States out of the war, but they did not secure South Vietnam permanently.',
+        explanation: 'The accords got American troops out but left North Vietnamese forces in the South — Kissinger and Nixon knew the agreement was fragile, but it gave the administration a face-saving exit from a war that had become politically untenable.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7B-EOC-Q10',
         text: 'Why did Congress pass the War Powers Act?',
-        choices: ['To limit presidential war-making authority and require greater congressional involvement in future military commitments.', 'To give the president broader emergency powers so wars could be fought without delays caused by congressional debate.', 'To transfer all military command decisions from the White House to the Supreme Court during overseas conflicts.', 'To prohibit antiwar demonstrations during wartime and strengthen executive authority over the draft and National Guard.'],
+        choices: [
+          'To limit presidential war-making authority and require greater congressional involvement in future military commitments.',
+          'Congress passed the War Powers Act mainly to give the president substantially faster and more flexible legal authority to respond to unexpected nuclear threats originating from foreign powers.',
+          'The act was passed mainly to formalize the war powers that Congress had exercised throughout the Vietnam War.',
+          'It was passed mainly to require Senate confirmation for every senior military appointment made by the president.'
+        ],
         correctAnswer: 'To limit presidential war-making authority and require greater congressional involvement in future military commitments.',
-        explanation: 'The act reflected congressional backlash against the expansion of presidential power during Vietnam.',
+        explanation: 'The Vietnam War had been fought under a resolution rather than a declaration of war — the War Powers Act attempted to restore congressional authority by requiring presidential notification and limiting unauthorized deployments to 60 days.',
         standard: 'SS.912.A.7.10'
       },
       {
         id: '7B-EOC-Q11',
         text: 'What did the fall of Saigon in 1975 show about the end of the Vietnam War?',
-        choices: ['South Vietnam could not survive once American support ended, and communist forces ultimately reunified the country.', 'The Paris settlement had created a stable two-state peace that held even after U.S. troops withdrew from the region.', 'The United States returned to full-scale combat to save South Vietnam and prevent communist reunification of the country.', 'North Vietnam accepted a frozen partition like Korea, turning the conflict into a long stalemate rather than a final victory.'],
+        choices: [
+          'South Vietnam could not survive once American support ended, and communist forces ultimately reunified the country.',
+          'The fall showed mainly that the Paris Peace Accords had successfully achieved their stated goal of stable self-governance.',
+          'It showed mainly that South Vietnam\'s military had been capable of defending itself but chose to surrender voluntarily.',
+          'Saigon\'s fall showed mainly that China and the Soviet Union had directly invaded South Vietnam with their own forces.'
+        ],
         correctAnswer: 'South Vietnam could not survive once American support ended, and communist forces ultimately reunified the country.',
-        explanation: 'Saigon’s fall marked the final communist victory and the collapse of South Vietnam.',
+        explanation: 'The chaotic evacuation of the American embassy confirmed what critics of the war had long argued — that the South Vietnamese government had never achieved the popular legitimacy or military strength to survive without American support.',
         standard: 'SS.912.A.6.14 · SS.912.A.7.10 · SS.912.A.7.11'
       },
       {
         id: '7B-EOC-Q12',
-        text: 'Why was Nixon’s appeal to the ‘silent majority’ politically effective?',
-        choices: ['It spoke to Americans who wanted order, stability, and a backlash against protest, disorder, and rapid social change.', 'It targeted mainly antiwar students and campus activists who felt both parties had become too hawkish and traditional.', 'It appealed only to southern segregationists and ignored suburban and middle-class voters across the rest of the country.', 'It was aimed mostly at organized labor radicals who wanted the government to nationalize major industries after Vietnam.'],
+        text: 'Why was Nixon\'s appeal to the "silent majority" politically effective?',
+        choices: [
+          'It spoke to Americans who wanted order, stability, and a backlash against protest, disorder, and rapid social change.',
+          'The appeal worked mainly because Nixon promised those Americans immediate withdrawal from Vietnam without any further casualties.',
+          'It was effective mainly because it offered the silent majority a generous economic platform of tax cuts and wage increases.',
+          'Nixon\'s appeal worked mainly because the silent majority was the largest demographic group in every American city and region.'
+        ],
         correctAnswer: 'It spoke to Americans who wanted order, stability, and a backlash against protest, disorder, and rapid social change.',
-        explanation: 'Nixon mobilized voters who felt alienated by the turbulence of the late 1960s.',
+        explanation: 'Millions of Americans were exhausted and alarmed by the upheavals of the 1960s — Nixon gave them a political voice and an identity, defining them against the protesters and framing himself as their champion.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7B-EOC-Q13',
-        text: 'What was the main goal of Nixon’s New Federalism?',
-        choices: ['To shift more responsibility from Washington to state and local governments while preserving the federal system.', 'To centralize most domestic policy decisions in the White House so presidents could govern more efficiently.', 'To eliminate nearly all domestic programs and restore a minimal federal government modeled on the 1920s.', 'To replace Congress with regional governing boards that would manage transportation, education, and welfare.'],
+        text: 'What was the main goal of Nixon\'s New Federalism?',
+        choices: [
+          'To shift more responsibility from Washington to state and local governments while preserving the federal system.',
+          'New Federalism aimed mainly to eliminate all federal social spending and return power entirely to the private sector.',
+          'The policy\'s main goal was to expand federal authority over states that were resisting civil rights enforcement orders.',
+          'Nixon\'s New Federalism was mainly a foreign policy initiative designed to share NATO defense burdens with European allies.'
+        ],
         correctAnswer: 'To shift more responsibility from Washington to state and local governments while preserving the federal system.',
-        explanation: 'New Federalism tried to decentralize authority without dismantling federal governance.',
+        explanation: 'Revenue sharing gave states and localities federal money with fewer conditions — reducing Great Society centralization while keeping federal spending levels, reflecting Nixon\'s pragmatic rather than ideological conservatism.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7B-EOC-Q14',
-        text: 'What do the creation of the EPA and OSHA suggest about Nixon’s presidency?',
-        choices: ['He accepted significant federal action in areas such as environmental regulation and workplace safety despite conservative rhetoric.', 'He rejected all domestic regulation, but Congress created these agencies without any presidential involvement or approval.', 'He tried to nationalize American industry directly, making environmental and labor oversight part of a larger socialist program.', 'He created both agencies only after resigning, when Ford asked him to complete unfinished domestic reform legislation.'],
+        text: 'What do the creation of the EPA and OSHA suggest about Nixon\'s presidency?',
+        choices: [
+          'He accepted significant federal action in areas such as environmental regulation and workplace safety despite conservative rhetoric.',
+          'The EPA and OSHA were created over Nixon\'s strong veto, showing that Congress controlled domestic policy during this period.',
+          'The creation of the EPA and OSHA suggests mainly that Nixon was secretly a committed liberal Democrat who had strategically joined the Republican Party solely for personal political advancement.',
+          'They suggest mainly that Nixon\'s presidency was entirely focused on domestic policy rather than Cold War foreign affairs.'
+        ],
         correctAnswer: 'He accepted significant federal action in areas such as environmental regulation and workplace safety despite conservative rhetoric.',
-        explanation: 'Nixon’s domestic record was more complex than a simple anti-government image would suggest.',
+        explanation: 'Nixon\'s domestic record — EPA, OSHA, wage and price controls, expanded social spending — reflected the political reality of governing with a Democratic Congress and showed that his conservatism was pragmatic rather than ideological.',
         standard: 'SS.912.A.7.4'
       },
       {
         id: '7B-EOC-Q15',
         text: 'What was détente?',
-        choices: ['A relaxation of tensions with communist powers through diplomacy, negotiation, and strategic cooperation.', 'A doctrine that rejected diplomacy and relied entirely on nuclear threats to force communist retreat everywhere.', 'A withdrawal from overseas alliances so the United States could focus exclusively on domestic reform and economic policy.', 'A secret agreement between the United States and China to divide Southeast Asia into permanent spheres of influence.'],
+        choices: [
+          'A relaxation of tensions with communist powers through diplomacy, negotiation, and strategic cooperation.',
+          'Détente was Nixon\'s strategy of threatening massive nuclear strikes against any communist nation that expanded its military.',
+          'The term described a formal military alliance between the United States, China, and Western Europe against the Soviet Union.',
+          'Détente referred mainly to the policy of using economic sanctions and trade restrictions to weaken communist governments.'
+        ],
         correctAnswer: 'A relaxation of tensions with communist powers through diplomacy, negotiation, and strategic cooperation.',
-        explanation: 'Détente defined Nixon and Kissinger’s effort to reduce Cold War tensions with the Soviet Union and China.',
+        explanation: 'Nixon and Kissinger\'s realpolitik abandoned ideological confrontation in favor of practical management of great-power relations — seeking agreements that reduced the risk of nuclear war and created stability through engagement.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7B-EOC-Q16',
-        text: 'Why was Nixon’s opening to China so important?',
-        choices: ['It changed Cold War diplomacy by improving relations with China and putting pressure on the Soviet Union.', 'It ended the Vietnam War immediately by persuading China to withdraw all support for North Vietnam.', 'It created a permanent military alliance between the United States and China against the Soviet Union and North Korea.', 'It required the United States to abandon Taiwan overnight and recognize Chinese control across all East Asia.'],
+        text: 'Why was Nixon\'s opening to China so important?',
+        choices: [
+          'It changed Cold War diplomacy by improving relations with China and putting pressure on the Soviet Union.',
+          'The opening to China was important mainly because it ended the Korean War and normalized relations on the peninsula.',
+          'Nixon\'s visit mattered mainly because China agreed to immediately end all military support for North Vietnam.',
+          'It was important mainly because China and the United States signed a formal military alliance against the Soviet Union.'
+        ],
         correctAnswer: 'It changed Cold War diplomacy by improving relations with China and putting pressure on the Soviet Union.',
-        explanation: 'Opening to China reshaped the triangular balance of Cold War power.',
+        explanation: 'By exploiting the Sino-Soviet split, Nixon transformed the Cold War from a bilateral contest into a more complex three-way relationship — giving the United States leverage with both communist powers simultaneously.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7B-EOC-Q17',
         text: 'What was the significance of SALT I?',
-        choices: ['It was a major attempt by the United States and the Soviet Union to limit part of the nuclear arms race.', 'It ended all strategic nuclear weapons and began immediate dismantling of both superpowers’ missile systems.', 'It placed Soviet nuclear forces under NATO oversight in exchange for Western access to Eastern Europe.', 'It forced China, the Soviet Union, and the United States into a three-way military alliance against smaller communist states.'],
+        choices: [
+          'It was a major attempt by the United States and the Soviet Union to limit part of the nuclear arms race.',
+          'SALT I was significant mainly because it completely eliminated all nuclear weapons from Europe and the Pacific.',
+          'The agreement mattered mainly because it required both nations to share nuclear technology to prevent accidents.',
+          'SALT I was significant mainly because the Senate refused to ratify it, showing that arms control was politically impossible.'
+        ],
         correctAnswer: 'It was a major attempt by the United States and the Soviet Union to limit part of the nuclear arms race.',
-        explanation: 'SALT I fit the broader policy of détente by demonstrating negotiated restraint in strategic competition.',
+        explanation: 'The 1972 SALT I agreements capped intercontinental ballistic missiles and submarine-launched missiles — the first binding nuclear arms limitation agreements, demonstrating that superpower competition could be managed through negotiation.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.11'
       },
       {
         id: '7B-EOC-Q18',
         text: 'Why did Watergate become such a serious constitutional crisis?',
-        choices: ['It exposed a larger pattern of abuse of power, cover-up, and obstruction tied to the presidency, not just a single burglary.', 'It centered only on campaign bookkeeping mistakes and had no meaningful connection to presidential conduct or authority.', 'It was caused mainly by Nixon’s decision to open relations with China, which angered both parties in Congress.', 'It proved that Congress had illegally declared war in Vietnam, forcing the Supreme Court to investigate executive privilege.'],
+        choices: [
+          'It exposed a larger pattern of abuse of power, cover-up, and obstruction tied to the presidency, not just a single burglary.',
+          'Watergate was serious mainly because the break-in involved the theft of nuclear weapons secrets from a Democratic senator.',
+          'The crisis was constitutional mainly because Nixon tried to suspend the 1972 elections after the break-in was discovered.',
+          'It became serious mainly because the Supreme Court justices were personally implicated in the cover-up alongside Nixon\'s staff.'
+        ],
         correctAnswer: 'It exposed a larger pattern of abuse of power, cover-up, and obstruction tied to the presidency, not just a single burglary.',
-        explanation: 'Watergate undermined trust because it revealed misuse of presidential power and efforts to hide it.',
+        explanation: 'The Saturday Night Massacre, the hush money payments, and the secret taping system all revealed an administration willing to use the power of the presidency to obstruct justice — raising the fundamental constitutional question of presidential accountability.',
         standard: 'SS.912.A.7.10'
       },
       {
         id: '7B-EOC-Q19',
-        text: 'Why is Nixon’s legacy often seen as both important and deeply damaged?',
-        choices: ['He made major changes in foreign and domestic policy, but Watergate destroyed trust and forced him from office.', 'He achieved very little as president, so his reputation depends almost entirely on the drama of his resignation.', 'He is remembered mainly for the Great Society, which overshadowed both détente and the politics of the early 1970s.', 'He left office at the height of public approval, making Watergate seem less important than later economic troubles.'],
+        text: 'Why is Nixon\'s legacy often seen as both important and deeply damaged?',
+        choices: [
+          'He made major changes in foreign and domestic policy, but Watergate destroyed trust and forced him from office.',
+          'Nixon\'s legacy is mixed mainly because historians disagree sharply over whether his economic policies helped or harmed America.',
+          'His legacy is complicated mainly because all of his major domestic legislation was immediately repealed after his resignation.',
+          'Nixon\'s legacy is contested mainly because his foreign policy achievements were later proven to be exaggerated fabrications.'
+        ],
         correctAnswer: 'He made major changes in foreign and domestic policy, but Watergate destroyed trust and forced him from office.',
-        explanation: 'Nixon mattered greatly, but Watergate permanently shaped how Americans judged his presidency.',
+        explanation: 'The opening to China, SALT I, détente, the EPA, and OSHA are genuine achievements — but Nixon remains the only president to resign, and Watergate defined a generation\'s cynicism about government that persists today.',
         standard: 'SS.912.A.7.4 · SS.912.A.7.10'
       },
       {
         id: '7B-EOC-Q20',
-        text: 'Why did many writers describe the 1970s as the ‘Me Decade’?',
-        choices: ['They believed many Americans had shifted away from collective reform and toward personal fulfillment and self-focus.', 'They believed the country had become unified around one shared national purpose after the upheavals of the 1960s.', 'They were describing a federal service campaign that encouraged Americans to spend a year working in public agencies.', 'They meant that the decade’s main political issue was whether people should use first names instead of formal titles.'],
+        text: 'Why did many writers describe the 1970s as the "Me Decade"?',
+        choices: [
+          'They believed many Americans had shifted away from collective reform and toward personal fulfillment and self-focus.',
+          'Writers used the term mainly because Americans in the 1970s were more politically engaged than in any previous decade.',
+          'The phrase described the decade mainly because economic prosperity allowed Americans to focus on luxury and consumer goods.',
+          'It was applied mainly because the Me Decade saw the largest expansion of government social programs in American history.'
+        ],
         correctAnswer: 'They believed many Americans had shifted away from collective reform and toward personal fulfillment and self-focus.',
-        explanation: 'The phrase captured a perceived turn from public idealism to private concerns.',
+        explanation: 'After the political upheavals of the 1960s, many Americans turned inward — to self-help movements, therapy, est, yoga, and personal spiritual seeking — a shift that critics saw as a retreat from civic engagement.',
         standard: 'SS.912.A.7.12'
       },
       {
         id: '7B-EOC-Q21',
         text: 'Why was the energy crisis such a major problem in the 1970s?',
-        choices: ['Oil shocks exposed U.S. dependence on global energy markets and worsened inflation, shortages, and public anxiety.', 'It mainly affected Europe and Japan, while the United States remained largely protected from supply and price disruptions.', 'It solved inflation by reducing consumer demand and restoring public confidence in the national economy.', 'It was limited mostly to farming states and had little impact on urban transportation, prices, or political debate.'],
+        choices: [
+          'Oil shocks exposed U.S. dependence on global energy markets and worsened inflation, shortages, and public anxiety.',
+          'The energy crisis was major mainly because it completely shut down American manufacturing for two full years.',
+          'It was a major problem mainly because nuclear power plant accidents destroyed confidence in the most important energy source.',
+          'The crisis was serious mainly because it proved the United States had already run out of all its domestic oil reserves.'
+        ],
         correctAnswer: 'Oil shocks exposed U.S. dependence on global energy markets and worsened inflation, shortages, and public anxiety.',
-        explanation: 'Energy shortages became one of the clearest symbols of the troubled 1970s economy.',
+        explanation: 'OPEC\'s 1973 embargo and the 1979 price spike revealed how deeply American prosperity depended on cheap imported oil — triggering gas lines, home heating shortages, and economic anxiety that fed the decade\'s broader sense of crisis.',
         standard: 'SS.912.A.7.12 · SS.912.A.7.14'
       },
       {
         id: '7B-EOC-Q22',
-        text: 'What does the term ‘Rustbelt’ suggest about the 1970s economy?',
-        choices: ['Older industrial regions suffered decline, job loss, and factory closures as economic conditions changed.', 'The nation’s old manufacturing centers grew strongest in the 1970s because foreign competition had little impact.', 'It referred mainly to agricultural collapse in rural states rather than to manufacturing or urban regions.', 'It described the rapid spread of heavy industry through the South, where new factories replaced all northern production.'],
+        text: 'What does the term "Rustbelt" suggest about the 1970s economy?',
+        choices: [
+          'Older industrial regions suffered decline, job loss, and factory closures as economic conditions changed.',
+          'The Rustbelt describes the widespread environmental pollution that corroded bridges and infrastructure across the country.',
+          'The term suggests mainly that all American manufacturing moved to southern states in search of lower wages and taxes.',
+          'Rustbelt refers mainly to the decline of the agricultural sector across the Plains states as farming became unprofitable.'
+        ],
         correctAnswer: 'Older industrial regions suffered decline, job loss, and factory closures as economic conditions changed.',
-        explanation: 'Rustbelt decline became part of the broader sense of economic unease in the 1970s.',
+        explanation: 'The Rustbelt — stretching from the Great Lakes to Pennsylvania — saw factories close, unemployment surge, and cities shrink as manufacturing moved to the Sunbelt or overseas, marking the beginning of deindustrialization.',
         standard: 'SS.912.A.7.12 · SS.912.A.7.14'
       },
       {
         id: '7B-EOC-Q23',
         text: 'Why were the Camp David Accords such an important foreign policy achievement for Carter?',
-        choices: ['They created a framework for peace between Egypt and Israel and made Egypt the first Arab state to recognize Israel.', 'They ended Soviet influence in the Middle East by forcing Moscow to withdraw all support from Egypt and Syria.', 'They created a Palestinian state immediately and resolved every major territorial issue left from earlier Arab-Israeli wars.', 'They brought Iran and Iraq into a formal alliance with the United States against terrorism and oil embargoes.'],
+        choices: [
+          'They created a framework for peace between Egypt and Israel and made Egypt the first Arab state to recognize Israel.',
+          'The accords were important mainly because they produced a mutual defense treaty between the United States and both nations.',
+          'Carter\'s achievement mattered mainly because the accords finally ended the long-running Palestinian refugee crisis.',
+          'They were important mainly because the agreement ended the OPEC oil embargo against the United States permanently.'
+        ],
         correctAnswer: 'They created a framework for peace between Egypt and Israel and made Egypt the first Arab state to recognize Israel.',
-        explanation: 'Camp David stands as Carter’s greatest diplomatic success.',
+        explanation: 'Carter\'s thirteen days of personal diplomacy at Camp David in 1978 produced a peace treaty between the most powerful Arab state and Israel — still the most significant Arab-Israeli peace agreement in the region\'s modern history.',
         standard: 'SS.912.A.7.11'
       },
       {
         id: '7B-EOC-Q24',
         text: 'Why did the Iran hostage crisis hurt Carter politically?',
-        choices: ['It made many Americans feel the United States looked weak and that Carter could not resolve a major foreign crisis effectively.', 'It was widely seen as a diplomatic triumph because the hostages were rescued quickly and returned long before the election.', 'It strengthened détente by bringing Iran and the United States into closer cooperation against Soviet influence in the region.', 'It had little effect on public opinion because Americans were far more focused on lifestyle and cultural issues than foreign affairs.'],
+        choices: [
+          'It made many Americans feel the United States looked weak and that Carter could not resolve a major foreign crisis effectively.',
+          'The crisis hurt Carter mainly because he secretly approved the Iranian revolution and was blamed when it turned hostile.',
+          'It hurt him politically mainly because the failed rescue mission caused the deaths of over a hundred American soldiers.',
+          'The Iran hostage crisis damaged Carter mainly because he raised income taxes significantly to fund the failed rescue operation without ever obtaining any formal congressional authorization.'
+        ],
         correctAnswer: 'It made many Americans feel the United States looked weak and that Carter could not resolve a major foreign crisis effectively.',
-        explanation: 'The prolonged hostage crisis damaged Carter’s image of competence and national strength.',
+        explanation: 'The 444-day ordeal — played out nightly on American television — became a powerful symbol of American impotence in the world, and Carter\'s inability to free the hostages defined his presidency\'s final year.',
         standard: 'SS.912.A.7.11 · SS.912.A.7.12'
       },
       {
         id: '7B-EOC-Q25',
         text: 'Which statement best captures the overall story of this unit?',
-        choices: ['The era combined military frustration, political scandal, economic instability, and a broader sense of uncertainty about America’s direction.', 'The unit shows a steady period of consensus and confidence, with Vietnam, Watergate, and the economy causing only minor disruption.', 'Most of the unit is about cultural trends alone, while foreign policy and presidential power play only a very limited role.', 'The period was defined mainly by successful reform and restored trust in government after the conflicts of the 1960s.'],
-        correctAnswer: 'The era combined military frustration, political scandal, economic instability, and a broader sense of uncertainty about America’s direction.',
-        explanation: 'Vietnam, Watergate, stagflation, and international crises all fed a wider mood of instability in the 1970s.',
+        choices: [
+          'Vietnam and the 1970s left the United States more divided, more skeptical of government, and searching for a new direction.',
+          'The period shows mainly that strong presidential leadership can overcome any crisis, as Nixon\'s foreign policy triumphs proved.',
+          'The unit\'s central story is that the antiwar movement successfully prevented the United States from winning the Vietnam War.',
+          'The period was mainly one of economic growth and international success that was only briefly interrupted by Watergate.'
+        ],
+        correctAnswer: 'Vietnam and the 1970s left the United States more divided, more skeptical of government, and searching for a new direction.',
+        explanation: 'From the credibility gap through Watergate to the Iran hostage crisis, the period produced a profound erosion of trust in government and institutions — setting the stage for the conservative backlash and Reagan revolution that followed.',
         standard: 'SS.912.A.7.10 · SS.912.A.7.11 · SS.912.A.7.12 · SS.912.A.7.14'
       },
     ]
@@ -2595,17 +2910,17 @@ function showLoginGate() {
 
 const HIST_CARDS = {
   mcnamara:    {icon:'📊', name:'Robert McNamara',       role:'Secretary of Defense · 1961–1968',
-    desc:'Architect of escalation who later admitted the war was unwinnable. His reliance on body counts and statistical management symbolized the gap between Washington’s confidence and reality on the ground.', unlockLesson:'lesson51'},
+    desc:'Architect of escalation who later admitted the war was unwinnable. His reliance on body counts and statistical management symbolized the gap between Washington\'s confidence and reality on the ground.', unlockLesson:'lesson51'},
   westmoreland:{icon:'🪖', name:'Gen. William Westmoreland', role:'U.S. Commander in Vietnam · 1964–1968',
     desc:'Led U.S. forces in Vietnam and championed attrition warfare. His optimistic briefings clashed with the reality of the Tet Offensive, which shattered public trust in official accounts of the war.', unlockLesson:'lesson51'},
   cronkite:    {icon:'📺', name:'Walter Cronkite',        role:'CBS News · "Most Trusted Man in America"',
-    desc:'His 1968 editorial declaring Vietnam a stalemate reportedly led LBJ to say: "If I’ve lost Cronkite, I’ve lost Middle America." Television brought the war home in a way no previous conflict had allowed.', unlockLesson:'lesson51'},
+    desc:'His 1968 editorial declaring Vietnam a stalemate reportedly led LBJ to say: "If I\'ve lost Cronkite, I\'ve lost Middle America." Television brought the war home in a way no previous conflict had allowed.', unlockLesson:'lesson51'},
   nixon:       {icon:'🇺🇸', name:'Richard Nixon',          role:'37th President · 1969–1974',
     desc:'Opened relations with China, pursued détente with the Soviet Union, and ended U.S. involvement in Vietnam. Then destroyed his presidency through the Watergate cover-up, becoming the only president ever to resign.', unlockLesson:'lesson52'},
   kissinger:   {icon:'🕊️', name:'Henry Kissinger',        role:'National Security Adviser · Secretary of State',
-    desc:'The architect of Nixon’s foreign policy. Managed détente, the China opening, and negotiated the Paris Peace Accords. His realpolitik approach was praised and criticized in equal measure.', unlockLesson:'lesson52'},
+    desc:'The architect of Nixon\'s foreign policy. Managed détente, the China opening, and negotiated the Paris Peace Accords. His realpolitik approach was praised and criticized in equal measure.', unlockLesson:'lesson52'},
   woodward:    {icon:'📰', name:'Bob Woodward & Carl Bernstein', role:'Washington Post · Watergate Reporters',
-    desc:'Their dogged reporting on the Watergate break-in ultimately led to Nixon’s resignation. Their work became a landmark in American investigative journalism and shaped how the press covered government misconduct.', unlockLesson:'lesson53'},
+    desc:'Their dogged reporting on the Watergate break-in ultimately led to Nixon\'s resignation. Their work became a landmark in American investigative journalism and shaped how the press covered government misconduct.', unlockLesson:'lesson53'},
   carter:      {icon:'🥜', name:'Jimmy Carter',           role:'39th President · 1977–1981',
     desc:'Symbolized both the idealism and the frustrations of the late 1970s. His presidency was defined by the energy crisis, inflation, the Camp David Accords, and the Iran hostage crisis that consumed his final year.', unlockLesson:'capstone'},
 };
