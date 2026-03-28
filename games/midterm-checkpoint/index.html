@@ -149,11 +149,11 @@ input{-webkit-user-select:text!important;user-select:text!important;}
 (function(){
   try{
     var s=localStorage.getItem('ac_shell_state');
-    if(!s){console.log('REDIRECT 1: no shell state'); window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');return;}
+    if(!s){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');return;}
     var p=JSON.parse(s);
     // Just need a real name — setupDone may not be set with Google auth
-    if(!p||!p.name||p.name==='Guest'){console.log('REDIRECT 2: no name or guest, p='+JSON.stringify(p)); window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');return;}
-  }catch(e){console.log('REDIRECT 3: catch error: '+e.message); window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');}
+    if(!p||!p.name||p.name==='Guest'){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');return;}
+  }catch(e){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');}
 })();
 </script>
 </head>
@@ -1272,6 +1272,7 @@ window.addEventListener('DOMContentLoaded', function() {
         var shell = JSON.parse(shellRaw);
         if (shell && shell.name && shell.name !== 'Guest') {
           G = Object.assign({}, G || {}, { name: shell.name, period: shell.period || '', fromShell: true });
+          normalizeG();
           hasSession = true;
         }
       } catch(se) {}
@@ -1280,7 +1281,7 @@ window.addEventListener('DOMContentLoaded', function() {
       afterLogin();
     } else {
       // No shell session — redirect to shell to login with Google
-      console.log('REDIRECT 4: no session in DOMContentLoaded'); window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/';
+      window.location.href = 'https://olsonjoshua-code.github.io/American-Chronicles-Shell/';
     }
   } catch(e) {
     // Show error visibly if JS fails
