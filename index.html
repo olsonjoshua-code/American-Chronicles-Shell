@@ -110,7 +110,7 @@ body::before{content:'';position:fixed;inset:0;
 .ld-bar-fill{height:100%;background:linear-gradient(90deg,var(--amber2),var(--amber3));transition:width .25s;width:0}
 
 /* ── TITLE ── */
-#title-screen{min-height:100vh;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem}
+#title-screen{position:fixed;inset:0;z-index:200;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 1rem;overflow-y:auto;}
 .title-logo{font-family:var(--bebas);font-size:clamp(44px,8vw,72px);color:var(--amber);letter-spacing:6px;text-shadow:0 0 60px rgba(232,160,32,.4),4px 4px 0 rgba(0,0,0,.5);line-height:1;margin-bottom:6px}
 .title-sub{font-family:var(--playfair);font-size:15px;color:var(--text2);font-style:italic;margin-bottom:8px}
 .title-badge{display:inline-block;background:rgba(232,160,32,.07);border:1px solid var(--amber2);color:var(--amber);font-family:var(--dm);font-size:9px;padding:5px 14px;letter-spacing:2px;margin-bottom:1.8rem;text-transform:uppercase}
@@ -450,7 +450,7 @@ body::before{content:'';position:fixed;inset:0;
 </div>
 
 <!-- CONTINUE AS screen -->
-<div id="continue-screen" style="display:none;padding:2rem 1rem;max-width:420px;margin:0 auto;text-align:center">
+<div id="continue-screen" style="display:none;position:fixed;inset:0;z-index:200;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;padding:2rem 1rem;overflow-y:auto;"><div style="max-width:420px;width:100%;text-align:center">
   <div style="font-family:var(--bebas);font-size:28px;color:var(--amber);letter-spacing:3px;margin-bottom:4px">Welcome Back</div>
   <div style="font-family:var(--dm);font-size:10px;color:var(--text3);margin-bottom:24px">Continue where you left off, or start fresh.</div>
   <div id="continue-card" style="background:var(--bg2);border:1.5px solid var(--amber);padding:20px;margin-bottom:14px;cursor:pointer;transition:all .2s" onclick="continueAsStudent()" onmouseenter="this.style.boxShadow='0 0 20px rgba(232,160,32,.3)'" onmouseleave="this.style.boxShadow='none'">
@@ -461,7 +461,7 @@ body::before{content:'';position:fixed;inset:0;
     <div style="font-family:var(--bebas);font-size:14px;letter-spacing:2px;color:var(--amber)">▶ CONTINUE AS THIS STUDENT</div>
   </div>
   <button class="btn full" onclick="showSetupScreen()" style="border-color:var(--border2);color:var(--text3);font-size:11px"><span>Not you? Start fresh</span></button>
-</div>
+</div></div>
 
 <!-- SETUP -->
 <div id="setup-screen">
@@ -1942,7 +1942,7 @@ function showContinueScreen(){
   document.getElementById('shell').style.display='none';
   const sc=document.getElementById('continue-screen');
   if(!sc)return;
-  sc.style.display='block';
+  sc.style.display='flex';
   // Populate the card
   document.getElementById('continue-name').textContent=S.name||'';
   const periodLabel=S.period==='guest'?'Guest':S.period?'Period '+S.period:'';
@@ -1982,6 +1982,7 @@ function showSetupScreen(){
   if(hint){hint.innerHTML='Enter your first and last name — e.g. <strong>Joshua Olson</strong>';hint.style.color='';}
   const prev=document.getElementById('name-preview');if(prev)prev.textContent='—';
   document.getElementById('title-screen').style.display='none';
+  document.getElementById('continue-screen').style.display='none';
   document.getElementById('setup-screen').style.display='flex';
   buildStarterGrid();
   buildPeriodGrid();
