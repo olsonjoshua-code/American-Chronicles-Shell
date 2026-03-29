@@ -602,7 +602,7 @@ body::before{content:'';position:fixed;inset:0;
           <div style="position:absolute;top:0;right:0;width:80px;height:100%;background:linear-gradient(90deg,transparent,rgba(72,120,208,.05));pointer-events:none"></div>
         </div>
         <!-- EOC Practice -->
-        <div id="eoc-practice-card" onclick="try{localStorage.setItem('ac_shell_state',JSON.stringify(S));}catch(e){}localStorage.setItem('ac_shell_url',location.href);window.location.href='https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/practice%20EOC/index.html'" style="flex:1;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(160,40,40,.18) 0%,rgba(20,16,13,.95) 60%);border:1.5px solid #d06040;padding:10px 14px;display:flex;align-items:center;gap:10px;transition:all .2s" onmouseenter="this.style.boxShadow='0 0 30px rgba(208,96,64,.35)';this.style.borderColor='#ff8060'" onmouseleave="this.style.boxShadow='none';this.style.borderColor='#d06040'">
+        <div id="eoc-practice-card" onclick="try{localStorage.setItem('ac_shell_state',JSON.stringify(S));}catch(e){}localStorage.setItem('ac_shell_url',location.href);localStorage.setItem('ac_returning_from_game','1');window.location.href='https://olsonjoshua-code.github.io/American-Chronicles-Shell/games/practice%20EOC/index.html'" style="flex:1;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(160,40,40,.18) 0%,rgba(20,16,13,.95) 60%);border:1.5px solid #d06040;padding:10px 14px;display:flex;align-items:center;gap:10px;transition:all .2s" onmouseenter="this.style.boxShadow='0 0 30px rgba(208,96,64,.35)';this.style.borderColor='#ff8060'" onmouseleave="this.style.boxShadow='none';this.style.borderColor='#d06040'">
           <div style="font-size:20px;flex-shrink:0;filter:drop-shadow(0 0 8px rgba(208,96,64,.5))">📝</div>
           <div style="flex:1;min-width:0">
             <div style="font-family:var(--bebas);font-size:9px;color:#d06040;letter-spacing:3px">EOC PRACTICE TEST</div>
@@ -1922,16 +1922,20 @@ async function boot(){
   document.getElementById('loading-screen').style.display='none';
   renderTitleArt();
 
-  if(S.setupDone && !S.isGuest && S.name){
-    // Has a saved local profile — show Continue As screen
-    // Also try to pull latest progress from Supabase in the background
-    showContinueScreen();
-    if(S.fullName&&S.period){
-      const fresh=await loadProfileByName(S.fullName,S.period);
-      if(fresh)applyStudentProfile(fresh);
+  let returningFromGame = false;
+  try{
+    if(localStorage.getItem('ac_returning_from_game')){
+      returningFromGame = true;
+      localStorage.removeItem('ac_returning_from_game');
     }
+  }catch(e){}
+
+  loadS();
+
+  if(S.setupDone && !S.isGuest && S.name){
+    // Always go straight to shell — no confirmation needed on return
+    enterShell();
   } else {
-    // No local profile — show title screen
     document.getElementById('title-screen').style.display='flex';
   }
 }
@@ -1981,6 +1985,8 @@ function showSetupScreen(){
     setupDone:false,gold:0,xp:0,goldEarned:0,goldSpent:0,goldBestRun:0,goldLedger:[],
     vocabPassed:{},vocabBestScore:{},vocabFirstPass:{},flashcardsStudied:{},
     unitBadges:{},unitCards:{}};
+  // Also wipe localStorage so the old student's data can't be reloaded
+  try{localStorage.removeItem(SHELL_KEY);}catch(e){}
   const ni=document.getElementById('name-input');
   if(ni){ni.value='';ni.style.borderColor='';}
   const hint=document.getElementById('name-hint');
@@ -2025,7 +2031,9 @@ function _returnFromGame(){
   } catch(e) {}
   return false;
 }
-function enterShell(){document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name)syncFromSupabase();}}else{if(!S.isGuest&&S.name)syncFromSupabase();}}
+function enterShell(){
+  try{sessionStorage.setItem('ac_shell_active','1');}catch(e){}
+  document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name)syncFromSupabase();}}else{if(!S.isGuest&&S.name)syncFromSupabase();}}
 
 // ── SETUP ─────────────────────────────────────────────
 const STARTERS=CHARS.filter(c=>c.unlockMethod==='free');
@@ -2124,13 +2132,11 @@ async function confirmProfile(){
   S.name=displayName;
   S.fullName=fullName;
   S.isGuest=false; S.setupDone=true;
-  // Check if this student already has a profile in Supabase (returning on new device)
-  const existing=await loadProfileByName(fullName, S.period);
-  if(existing){
-    applyStudentProfile(existing);
-    // Keep the display name we just derived in case it changed
-    S.name=displayName;
-  }
+  // Only restore from Supabase if this is a genuinely returning student on a new device.
+  // We detect this by checking if they have prior unit results — a brand-new student won't.
+  // We do NOT applyStudentProfile here unconditionally, because that would load a different
+  // student's data if names collide or if a teacher is testing with a recycled name.
+  // Instead we check for existing results AFTER saving, during syncFromSupabase.
   saveS();
   saveProfileByName();
   // Always show tutorial for a newly created profile
@@ -2437,7 +2443,18 @@ function launchRPG(){
   if(!u)return;
   try{localStorage.setItem('ac_shell_state',JSON.stringify(S));}catch(e){}
   localStorage.setItem('ac_shell_url','https://olsonjoshua-code.github.io/American-Chronicles-Shell/');
+  localStorage.setItem('ac_returning_from_game','1');
+  try{sessionStorage.removeItem('ac_shell_active');}catch(e){}
   window.location.href=u.url;
+}
+
+// Shared helper for all unit game launches — always sets the return flag
+function launchUnit(url){
+  try{localStorage.setItem('ac_shell_state',JSON.stringify(S));}catch(e){}
+  localStorage.setItem('ac_shell_url','https://olsonjoshua-code.github.io/American-Chronicles-Shell/');
+  localStorage.setItem('ac_returning_from_game','1');
+  try{sessionStorage.removeItem('ac_shell_active');}catch(e){}
+  window.location.href=url;
 }
 
 // Mini RPG card for the course-intro bar (far right of the header stripe)
@@ -2597,8 +2614,8 @@ function buildStudyBlock(u){
     <div class="vocab-status-row">${vocabLabel}</div>
     <div class="vocab-status-row">${studyLabel}</div>
     ${briefingUrl?`<a href="${briefingUrl}" target="_blank" style="text-decoration:none;display:block"><button class="btn full amber-dim sm"><span>📋 Open Briefing</span></button></a>`:''}
-    <a href="${studyUrl}" target="_blank" style="text-decoration:none;display:block"><button class="btn full teal sm" onclick="markStudied('${deckId}')"><span>🃏 Study Flashcards</span></button></a>
-    <button class="btn full ${passed?'green':'blue'} sm" onclick="launchVocabQuiz('${deckId}')" style="width:100%"><span>${passed?'↺ Retake Vocab Check':'⚡ Take Vocab Check'}</span></button>
+    <button class="btn full teal sm" onclick="launchFlashcards('${deckId}','study')"><span>🃏 Study Flashcards</span></button>
+    <button class="btn full ${passed?'green':'blue'} sm" onclick="launchFlashcards('${deckId}','quiz')"><span>${passed?'↺ Retake Vocab Check':'⚡ Take Vocab Check'}</span></button>
     <div style="font-family:var(--dm);font-size:8px;color:var(--text3);margin-top:2px;line-height:1.6">Complete the Vocab Check to earn <span style="color:var(--gold)">🪙 Gold</span>. Rewards require 60%+ to qualify.</div>
   </div>`;
 }
@@ -2609,11 +2626,18 @@ function markStudied(deckId){
   saveS();
 }
 
+function launchFlashcards(deckId, mode){
+  try{localStorage.setItem(SHELL_KEY,JSON.stringify(S));}catch(e){}
+  try{localStorage.setItem('ac_shell_url','https://olsonjoshua-code.github.io/American-Chronicles-Shell/');}catch(e){}
+  try{localStorage.setItem('ac_returning_from_game','1');}catch(e){}
+  // Clear the shell-active flag so a fresh open after return shows Continue screen correctly
+  try{sessionStorage.removeItem('ac_shell_active');}catch(e){}
+  if(mode==='study')markStudied(deckId);
+  window.location.href=`${FC_BASE}?deck=${encodeURIComponent(deckId)}&mode=${mode}&from=hub`;
+}
+
 function launchVocabQuiz(deckId){
-  // Open quiz in a new tab — result comes back via localStorage polling
-  const url=`${FC_BASE}?deck=${encodeURIComponent(deckId)}&mode=quiz&from=hub`;
-  window.open(url,'_blank');
-  _pollVocabResult(deckId);
+  launchFlashcards(deckId,'quiz');
 }
 
 function _pollVocabResult(deckId){
@@ -2651,11 +2675,11 @@ function buildLaunchArea(u,st){
   const area=document.getElementById('pv-launch');
   const studyBlock=buildStudyBlock(u);
   if(st==='done'){
-    area.innerHTML=`<div style="text-align:center;padding:8px 0"><div style="font-size:26px;margin-bottom:3px">✅</div><div style="font-family:var(--bebas);font-size:12px;color:var(--green2);letter-spacing:2px">Completed</div></div>${u.url?`<button class="btn full green" onclick="try{localStorage.setItem('ac_shell_state',JSON.stringify(S));}catch(e){}localStorage.setItem('ac_shell_url',location.href);window.location.href='${u.url}'" style="margin-top:5px"><span>↺ Replay ${u.num}</span></button>`:''}<button class="btn full" onclick="showView('trophies');closePreview();" style="border-color:var(--gold);color:var(--gold);margin-top:5px"><span>🏆 View Trophy</span></button>${studyBlock}`;
+    area.innerHTML=`<div style="text-align:center;padding:8px 0"><div style="font-size:26px;margin-bottom:3px">✅</div><div style="font-family:var(--bebas);font-size:12px;color:var(--green2);letter-spacing:2px">Completed</div></div>${u.url?`<button class="btn full green" onclick="launchUnit('${u.url}')" style="margin-top:5px"><span>↺ Replay ${u.num}</span></button>`:''}<button class="btn full" onclick="showView('trophies');closePreview();" style="border-color:var(--gold);color:var(--gold);margin-top:5px"><span>🏆 View Trophy</span></button>${studyBlock}`;
   }
   else if(u.url){
     const label='▶ Launch '+u.num;
-    area.innerHTML=`<button class="btn full" onclick="try{localStorage.setItem('ac_shell_state',JSON.stringify(S));}catch(e){}localStorage.setItem('ac_shell_url',location.href);window.location.href='${u.url}'" style="font-size:16px;padding:17px;letter-spacing:3px;border-width:2px;box-shadow:0 0 28px rgba(232,160,32,.22)"><span>${label}</span></button>${studyBlock}`;
+    area.innerHTML=`<button class="btn full" onclick="launchUnit('${u.url}')" style="font-size:16px;padding:17px;letter-spacing:3px;border-width:2px;box-shadow:0 0 28px rgba(232,160,32,.22)"><span>${label}</span></button>${studyBlock}`;
   }
   else{
     area.innerHTML=`<div style="background:var(--bg3);border:1px dashed var(--border2);padding:16px;text-align:center"><div style="font-family:var(--bebas);font-size:13px;color:var(--text3);letter-spacing:3px">COMING SOON</div></div>${studyBlock}`;
