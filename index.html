@@ -3161,7 +3161,7 @@ async function renderTrophyRoom(){
       fetch(SUPA_URL+'/rest/v1/ac_results?on_conflict=name,period,unit_id',{
         method:'POST',
         headers:{...SUPA_H,'Prefer':'resolution=merge-duplicates'},
-        body:JSON.stringify({name:S.name,period:(S.isTeacher||IS_TEACHER)?'teacher':(S.period||''),unit_id:'eoc_practice',
+        body:JSON.stringify({name:S.name,period:S.period&&S.period!==''?S.period:(S.isTeacher||IS_TEACHER||S.name==='Mr. Olson'?'teacher':''),unit_id:'eoc_practice',
           best_score:Math.round(S.eocBest*15),
           best_accuracy:S.eocBest,
           attempts:1,cards:0,
