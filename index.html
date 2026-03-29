@@ -3187,6 +3187,30 @@ async function renderTrophyRoom(){
     </div>
   </div>`;
 
+  // ── RPG TROPHY ───────────────────────────────────────
+  const rpgRow=rmap['unit_ac_rpg'];
+  const rpgTier=rpgRow?calcTier(rpgRow.best_accuracy):'empty';
+  const rpgTc=TIER_COLOR[rpgTier],rpgTe=TIER_EMOJI[rpgTier],rpgTl=TIER_LABEL[rpgTier];
+  const rpgGrey=rpgTier==='empty';
+  const rpgMedalColor=rpgGrey?'var(--border)':rpgTc;
+  const rpgIdx=unitCards.length+1;
+  const rpgCard=`<div class="trophy-card tier-${rpgTier}" style="animation:floatIn .3s ease ${rpgIdx*.04}s both;border:2px solid ${rpgGrey?'var(--border2)':rpgTc};grid-column:1/-1;display:flex;align-items:center;gap:20px;padding:20px;position:relative;overflow:hidden;${!rpgGrey?'box-shadow:0 0 30px rgba(200,160,32,.15)':''}">
+    ${!rpgGrey?`<div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,${rpgTc},transparent);opacity:.6"></div>`:''}
+    <div style="flex-shrink:0;text-align:center">
+      <div style="width:70px;height:70px;border-radius:50%;background:var(--bg2);border:3px solid ${rpgMedalColor};display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 6px;${rpgTier==='historian'?'animation:historianShimmer 3s infinite':''}">${rpgGrey?'⚔️':rpgTe}</div>
+      ${!rpgGrey?`<div style="font-family:var(--bebas);font-size:10px;letter-spacing:1.5px;color:${rpgTc}">${rpgTl}</div>`:''}
+    </div>
+    <div style="flex:1">
+      <div style="font-family:var(--bebas);font-size:10px;color:var(--gold);letter-spacing:4px;margin-bottom:3px">⚔️ CAMPAIGN MODE · MOST VALUABLE</div>
+      <div style="font-family:var(--playfair);font-size:20px;color:var(--cream);font-style:italic;margin-bottom:4px">American Chronicles RPG</div>
+      <div style="font-family:var(--crimson);font-size:13px;color:var(--text2);font-style:italic;margin-bottom:8px;line-height:1.5">The ultimate course review — 18 chapters, 5 theme campaigns, and the EOC Final Challenge. The most comprehensive test of U.S. history mastery.</div>
+      ${rpgRow
+        ?`<div class="trophy-stats" style="margin-bottom:8px">Accuracy: <strong style="color:${rpgTc}">${rpgRow.best_accuracy}%</strong> &nbsp; Score: <strong>${rpgRow.best_score?.toLocaleString()||0}</strong></div>
+          <div style="font-family:var(--bebas);font-size:11px;color:${rpgTc};letter-spacing:2px">${rpgTl} HISTORIAN</div>`
+        :`<div style="font-family:var(--dm);font-size:9px;color:var(--text3);font-style:italic">Complete the RPG Campaign to earn the ultimate trophy</div>`}
+    </div>
+  </div>`;
+
   // ── VOCAB MEDALS SECTION ─────────────────────────────
   const VOCAB_DECKS=[
     {id:'unit1_civil_war_reconstruction',      label:'Unit 1',      title:'Civil War & Reconstruction'},
@@ -3241,7 +3265,7 @@ async function renderTrophyRoom(){
     </div>
   </div>`;
 
-  grid.innerHTML = unitCards.join('') + eocCard + vocabSection;
+  grid.innerHTML = unitCards.join('') + eocCard + rpgCard + vocabSection;
 
   await renderLeaderboard();
 }
