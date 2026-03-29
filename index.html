@@ -1933,8 +1933,13 @@ async function boot(){
   loadS();
 
   if(S.setupDone && !S.isGuest && S.name){
-    // Always go straight to shell — no confirmation needed on return
-    enterShell();
+    if(returningFromGame){
+      // Coming back mid-session from a unit game or flashcards — skip straight in
+      enterShell();
+    } else {
+      // Fresh page load by a returning student — show "Continue as" confirmation
+      showContinueScreen();
+    }
   } else {
     document.getElementById('title-screen').style.display='flex';
   }
