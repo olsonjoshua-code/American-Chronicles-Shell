@@ -1916,6 +1916,7 @@ async function boot(){
 function showContinueScreen(){
   document.getElementById('title-screen').style.display='none';
   document.getElementById('setup-screen').style.display='none';
+  document.getElementById('shell').style.display='none';
   const sc=document.getElementById('continue-screen');
   if(!sc)return;
   sc.style.display='block';
@@ -1936,6 +1937,9 @@ function showContinueScreen(){
 }
 
 async function continueAsStudent(){
+  // Hide continue screen first
+  const sc=document.getElementById('continue-screen');
+  if(sc)sc.style.display='none';
   // Pull latest from Supabase then enter
   if(S.fullName&&S.period){
     const fresh=await loadProfileByName(S.fullName,S.period);
