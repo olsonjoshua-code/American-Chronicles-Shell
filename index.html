@@ -3147,17 +3147,21 @@ function printCourseCert(){
   const totalUnits=standardUnits.length; // shown as X/13 in note
 
   // ── 2. STUDY / VOCAB (20%) ────────────────────────────
-  // All decks that exist in DECK_MAP (standard units + themes + checkpoints)
+  // Same logic as unit games: avg score × completion rate, so untaken quizzes penalise grade.
+  // vocabSum / totalDecks gives a score that accounts for all untaken decks as 0.
   const allDeckIds=Object.keys(DECK_MAP);
+  const totalDecks=allDeckIds.length;
   const vocabScores=allDeckIds.map(uid=>{const v=S.vocabBestScore&&S.vocabBestScore[DECK_MAP[uid]];return(v!==undefined&&v!==null)?v:null;}).filter(v=>v!==null);
-  const vocabAvg=vocabScores.length>0?vocabScores.reduce((a,v)=>a+v,0)/vocabScores.length:0;
-  // Flashcard completion bonus: up to 10 pts added to vocab avg (each deck studied = 10/allDeckIds.length pts)
+  const vocabQuizCount=vocabScores.length;
+  // Sum of attempted scores divided by TOTAL decks (not just attempted) — untaken = 0
+  const vocabSum=vocabScores.reduce((a,v)=>a+v,0);
+  const vocabAvg=totalDecks>0?vocabSum/totalDecks:0;
+  // Flashcard completion bonus: up to 10 pts (each deck studied = 10/totalDecks pts)
   const decksStudied=allDeckIds.filter(uid=>S.flashcardsStudied&&S.flashcardsStudied[DECK_MAP[uid]]).length;
-  const flashcardBonus=Math.round((decksStudied/allDeckIds.length)*10);
+  const flashcardBonus=Math.round((decksStudied/totalDecks)*10);
   const studyScore=Math.min(100,Math.round(vocabAvg)+flashcardBonus);
-  // If student has done flashcards but no vocab quizzes, count flashcard completion at 50 base
-  const studyScoreFinal=vocabScores.length===0&&decksStudied>0?Math.round((decksStudied/allDeckIds.length)*50):studyScore;
-  const studyAttempted=vocabScores.length>0||decksStudied>0;
+  const studyScoreFinal=studyScore;
+  const studyAttempted=vocabQuizCount>0||decksStudied>0;
 
   // ── 3. EOC PRACTICE (15%) ─────────────────────────────
   const eocScore=S.eocBest||0;
@@ -3212,7 +3216,7 @@ function printCourseCert(){
   // ── COMPONENT SUMMARY ROWS ────────────────────────────
   const compRows=[
     {label:'Unit Games + Themes',weight:'50%',score:unitScore,note:`${completedCount}/${totalUnits} units · ${completedThemeCount}/5 themes (½ wt ea) · avg ${Math.round(avgUnitAccuracy)}% × ${Math.round(completionRate*100)}% completion`,attempted:true},
-    {label:'Study (Vocab + Flashcards)',weight:'20%',score:studyScoreFinal,note:`${vocabScores.length} quiz${vocabScores.length!==1?'zes':''},  ${decksStudied} deck${decksStudied!==1?'s':''} studied · +${flashcardBonus}pt flashcard bonus`,attempted:studyAttempted},
+    {label:'Study (Vocab + Flashcards)',weight:'20%',score:studyScoreFinal,note:`${vocabQuizCount}/${totalDecks} quizzes taken · ${decksStudied}/${totalDecks} decks studied · +${flashcardBonus}pt flashcard bonus`,attempted:studyAttempted},
     {label:'EOC Practice Test',weight:'15%',score:eocScore,note:eocAttempted?`Best accuracy: ${eocScore}%`:'Not yet attempted — worth 15%',attempted:eocAttempted},
     {label:'RPG Campaign',weight:'10%',score:rpgScore,note:rpgAttempted?`Best accuracy: ${rpgScore}%`:'Not yet attempted — worth 10%',attempted:rpgAttempted},
     {label:'Midterm Checkpoint',weight:'5%',score:midtermScore,note:midtermAttempted?`Best accuracy: ${midtermScore}%`:'Not yet attempted — worth 5%',attempted:midtermAttempted},
