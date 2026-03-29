@@ -117,7 +117,7 @@ body::before{content:'';position:fixed;inset:0;
 .title-banner{position:relative;width:100%;max-width:680px;height:200px;overflow:hidden;border:1px solid var(--border2);margin-bottom:1.8rem}
 
 /* ── SETUP ── */
-#setup-screen{display:none;padding:2rem 1rem;max-width:480px;margin:0 auto}
+#setup-screen{display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:var(--bg);padding:2rem;overflow-y:auto;z-index:100}
 .char-preview-wrap{text-align:center;padding:22px 20px;background:var(--bg2);border:1px solid var(--border);margin-bottom:1.2rem}
 .starter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px}
 .starter-opt{background:var(--bg2);border:1.5px solid var(--border);cursor:pointer;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 6px}
@@ -465,23 +465,39 @@ body::before{content:'';position:fixed;inset:0;
 
 <!-- SETUP -->
 <div id="setup-screen">
-  <div style="font-family:var(--bebas);font-size:24px;color:var(--amber);letter-spacing:3px;margin-bottom:4px">Create Your Profile</div>
-  <div style="font-family:var(--dm);font-size:10px;color:var(--text3);margin-bottom:16px;text-align:center">Pick your character, enter your name, and select your class period.</div>
-  <div class="char-preview-wrap">
-    <div id="setup-avatar" style="margin:0 auto 10px"></div>
-    <div style="font-family:var(--playfair);font-size:18px;color:var(--text3);font-style:italic" id="setup-name-disp"></div>
-    <div style="font-family:var(--dm);font-size:10px;color:var(--teal);letter-spacing:1px;margin-top:3px" id="setup-sub">Curious Citizen</div>
+  <div style="max-width:900px;width:100%;margin:0 auto">
+    <div style="font-family:var(--bebas);font-size:28px;color:var(--amber);letter-spacing:3px;margin-bottom:2px;text-align:center">Create Your Profile</div>
+    <div style="font-family:var(--dm);font-size:10px;color:var(--text3);margin-bottom:20px;text-align:center;letter-spacing:.5px">Pick your character, enter your name, and select your class period.</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start">
+
+      <!-- LEFT: Character -->
+      <div>
+        <div class="char-preview-wrap" style="margin-bottom:14px">
+          <div id="setup-avatar" style="margin:0 auto 10px"></div>
+          <div style="font-family:var(--playfair);font-size:18px;color:var(--text3);font-style:italic" id="setup-name-disp"></div>
+          <div style="font-family:var(--dm);font-size:10px;color:var(--teal);letter-spacing:1px;margin-top:3px" id="setup-sub">Curious Citizen</div>
+        </div>
+        <div class="sh" style="font-size:13px;margin-bottom:9px">Choose Your Character</div>
+        <div class="starter-grid" id="starter-grid"></div>
+      </div>
+
+      <!-- RIGHT: Name + Period + Submit -->
+      <div>
+        <div class="sh" style="font-size:13px;margin-bottom:8px">Your Full Name</div>
+        <input id="name-input" type="text" class="name-input" placeholder="First and last name" oninput="liveFormatName(this)" autocomplete="off" spellcheck="false" maxlength="60">
+        <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:4px" id="name-hint">Enter your first and last name — e.g. <strong>Joshua Olson</strong></div>
+        <div style="font-family:var(--bebas);font-size:13px;color:var(--amber);letter-spacing:1px;margin-bottom:18px">Display name: <span id="name-preview" style="color:var(--cream)">—</span></div>
+
+        <div class="sh" style="font-size:13px;margin-bottom:10px">Class Period</div>
+        <div id="period-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:4px"></div>
+        <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:20px">So your teacher can find your progress.</div>
+
+        <button class="btn full green" onclick="confirmProfile()"><span>Save & Enter American Chronicles →</span></button>
+      </div>
+
+    </div>
   </div>
-  <div class="sh" style="font-size:13px;margin-bottom:9px">Choose Your Character</div>
-  <div class="starter-grid" id="starter-grid"></div>
-  <div class="sh" style="font-size:13px;margin:13px 0 8px">Your Full Name</div>
-  <input id="name-input" type="text" class="name-input" placeholder="First and last name" oninput="liveFormatName(this)" autocomplete="off" spellcheck="false" maxlength="60">
-  <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:4px" id="name-hint">Enter your first and last name — e.g. <strong>Joshua Olson</strong></div>
-  <div style="font-family:var(--bebas);font-size:13px;color:var(--amber);letter-spacing:1px;margin-bottom:10px">Display name: <span id="name-preview" style="color:var(--cream)">—</span></div>
-  <div class="sh" style="font-size:13px;margin:13px 0 8px">Class Period</div>
-  <div id="period-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:4px"></div>
-  <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-top:3px">So your teacher can find your progress.</div>
-  <button class="btn full green" onclick="confirmProfile()" style="margin-top:18px"><span>Save & Enter American Chronicles →</span></button>
 </div>
 
 <!-- SHELL -->
@@ -1556,7 +1572,8 @@ const ERAS=[
   {name:'Civil War & Reconstruction',years:'1861–1877',units:['unit1'],color:'#8b4513'},
   {name:'Gilded Age & Progressive',years:'1865–1920',units:['unit2a','unit2b'],color:'#7a5a10'},
   {name:'Empire & WWI',years:'1898–1920',units:['unit3a','unit3b'],color:'#1a4a7a'},
-  {name:'Boom & Bust',years:'1920–1933',units:['unit4a','eoc_midterm'],color:'#5a3a0a'},
+  {name:'Boom & Bust',years:'1920–1933',units:['unit4a'],color:'#5a3a0a'},
+  {name:'Midterm',years:'1861–1929',units:['eoc_midterm'],color:'#4878d0'},
   {name:'New Deal & WWII',years:'1933–1945',units:['unit4b','unit5a'],color:'#2a3a1a'},
   {name:'Cold War & Civil Rights',years:'1945–1968',units:['unit5b','unit6','unit7a'],color:'#7a2010'},
   {name:'Vietnam & Watergate',years:'1965–1975',units:['unit7b'],color:'#1a2a1a'},
@@ -1965,7 +1982,7 @@ function showSetupScreen(){
   if(hint){hint.innerHTML='Enter your first and last name — e.g. <strong>Joshua Olson</strong>';hint.style.color='';}
   const prev=document.getElementById('name-preview');if(prev)prev.textContent='—';
   document.getElementById('title-screen').style.display='none';
-  document.getElementById('setup-screen').style.display='block';
+  document.getElementById('setup-screen').style.display='flex';
   buildStarterGrid();
   buildPeriodGrid();
   previewSetup();
@@ -1988,7 +2005,7 @@ function renderTitleArt(){
 // ── TITLE ACTIONS ─────────────────────────────────────
 function toggleTeacherBox(){const b=document.getElementById('teacher-box'),l=document.getElementById('teacher-toggle-lbl');const open=b.style.display!=='block';b.style.display=open?'block':'none';l.textContent=open?'Cancel':'Teacher Login';if(open)document.getElementById('teacher-input').focus();}
 function submitTeacher(){const inp=document.getElementById('teacher-input'),err=document.getElementById('teacher-err');if(inp.value.trim().toLowerCase()===TEACHER_PWD){IS_TEACHER=true;S.isTeacher=true;S.name=S.name||'Mr. Olson';S.setupDone=true;saveS();inp.value='';document.getElementById('teacher-box').style.display='none';enterShell();}else{err.textContent='Incorrect code.';inp.value='';}}
-function startNewProfile(){document.getElementById('title-screen').style.display='none';const ss=document.getElementById('setup-screen');ss.style.display='block';buildStarterGrid();buildPeriodGrid();previewSetup();}
+function startNewProfile(){document.getElementById('title-screen').style.display='none';const ss=document.getElementById('setup-screen');ss.style.display='flex';buildStarterGrid();buildPeriodGrid();previewSetup();}
 function _returnFromGame(){
   // Returns true if we just came back from a unit game (suppress welcome card)
   try {
@@ -2285,15 +2302,17 @@ function refreshEOCPracticeCard(){
 function renderTimeline(){
   const inner=document.getElementById('tl-inner');if(!inner)return;
   inner.querySelectorAll('.unit-card,.tl-conn,.tl-div').forEach(e=>e.remove());
-  const NW=190,CW=28,DW=6,PAD=20;let x=PAD,doneX=PAD,eraSegs=[];let first=true;
-  ERAS.forEach(era=>{
+  const NW=190,CW=28,PAD=20;let x=PAD,doneX=PAD;let first=true;
+  // Track which era each card belongs to for bar rendering
+  const eraCardMap=[]; // {eraIdx, cardEl}
+
+  ERAS.forEach((era,eraIdx)=>{
     const units=era.units.map(uid=>UNIT_DATA.find(u=>u.id===uid)).filter(Boolean);if(!units.length)return;
-    if(!first){const d=document.createElement('div');d.className='tl-div';inner.appendChild(d);x+=DW+4;}first=false;
-    const eraStartX=x;
+    if(!first){const d=document.createElement('div');d.className='tl-div';inner.appendChild(d);}first=false;
     units.forEach((u,idx)=>{
-      if(idx>0){const co=document.createElement('div');const ps=unitStatus(units[idx-1].id);co.className='tl-conn'+(ps==='done'?' done':'');co.innerHTML='<div class="tl-conn-line"></div>';inner.appendChild(co);x+=CW;}
+      if(idx>0){const co=document.createElement('div');const ps=unitStatus(units[idx-1].id);co.className='tl-conn'+(ps==='done'?' done':'');co.innerHTML='<div class="tl-conn-line"></div>';inner.appendChild(co);}
       const st=unitStatus(u.id);
-      const card=document.createElement('div');card.className=`unit-card view ${st}`;card.setAttribute('data-uid',u.id);card.onclick=()=>openPreview(u.id);
+      const card=document.createElement('div');card.className=`unit-card view ${st}`;card.setAttribute('data-uid',u.id);card.setAttribute('data-era',eraIdx);card.onclick=()=>openPreview(u.id);
       const statusBadge=st==='done'
         ?`<div class="unit-card-status-row"><div class="unit-status us-done">✓ Completed</div></div>`
         :`<div class="unit-card-status-row"><div class="unit-status us-play">▶ Play Now</div></div>`;
@@ -2305,28 +2324,47 @@ function renderTimeline(){
         <div class="unit-card-body"><div class="unit-card-num">${u.num}</div><div class="unit-card-title">${u.title}</div>
         ${statusBadge}${trophyBadge}</div>
         <div class="unit-card-prog"><div class="unit-card-prog-fill" style="width:${st==='done'?100:0}%"></div></div>`;
-      inner.appendChild(card);if(st==='done')doneX=x+NW;x+=NW;
+      inner.appendChild(card);
+      eraCardMap.push({eraIdx,era,card});
+      if(st==='done')doneX=card.offsetLeft+NW;
     });
-    eraSegs.push({name:era.name,years:era.years,startX:eraStartX,endX:x,color:era.color});x+=20;
   });
-  inner.style.width=(x+PAD)+'px';
+
   const sf=document.getElementById('tl-spine-done');if(sf)sf.style.width=Math.max(0,doneX-PAD)+'px';
-  // era bar — each seg spans its cards + the gap after it (DW+4+20=30px) except the last
-  const ebi=document.getElementById('era-bar-inner');
-  if(ebi){
-    ebi.innerHTML='';ebi.style.width=(x+PAD)+'px';
-    const sp=document.createElement('div');sp.style.cssText=`width:${PAD}px;flex-shrink:0`;ebi.appendChild(sp);
-    eraSegs.forEach((s,i)=>{
-      const w=(s.endX-s.startX)+(i<eraSegs.length-1?(DW+4+20):0);
-      const el=document.createElement('div');el.className='era-seg';
-      el.style.cssText=`width:${w}px;background:${s.color}ee;border-left:3px solid ${s.color}`;
-      el.textContent=s.name.toUpperCase()+' · '+s.years;
+
+  // Build era bar from actual card positions after layout
+  requestAnimationFrame(()=>{
+    const ebi=document.getElementById('era-bar-inner');
+    const track=document.getElementById('tl-track');
+    if(!ebi||!track)return;
+    ebi.innerHTML='';
+    // Group cards by era
+    const eraGroups={};
+    eraCardMap.forEach(({eraIdx,era,card})=>{
+      if(!eraGroups[eraIdx])eraGroups[eraIdx]={era,cards:[]};
+      eraGroups[eraIdx].cards.push(card);
+    });
+    const totalW=inner.scrollWidth;
+    ebi.style.width=totalW+'px';
+    Object.values(eraGroups).forEach((group,i,arr)=>{
+      const firstCard=group.cards[0];
+      const lastCard=group.cards[group.cards.length-1];
+      const startX=firstCard.offsetLeft;
+      const nextGroup=arr[i+1];
+      const endX=nextGroup?nextGroup.cards[0].offsetLeft:lastCard.offsetLeft+lastCard.offsetWidth;
+      const w=endX-startX;
+      const el=document.createElement('div');
+      el.className='era-seg';
+      el.style.cssText=`position:absolute;left:${startX}px;width:${w}px;background:${group.era.color}ee;border-left:3px solid ${group.era.color}`;
+      el.textContent=group.era.name.toUpperCase()+' · '+group.era.years;
       ebi.appendChild(el);
     });
-  }
-  initDrag();initMinimap(x+PAD);
-  refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();
+    ebi.style.position='relative';
+    initMinimap(totalW);
+  });
 
+  initDrag();
+  refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();
   renderCampaignRPG();
   renderHubRPGMini();
 }
@@ -2432,7 +2470,7 @@ function renderHubRPGMini(){
   }
 }
 
-function syncEraBar(){const t=document.getElementById('tl-track');const ebi=document.getElementById('era-bar-inner');if(t&&ebi)ebi.style.transform=`translateX(-${t.scrollLeft}px)`;}
+function syncEraBar(){const t=document.getElementById('tl-track');const ebi=document.getElementById('era-bar-inner');if(t&&ebi)ebi.style.left=`-${t.scrollLeft}px`;}
 function initDrag(){const t=document.getElementById('tl-track');if(!t||t._d)return;t._d=true;let down=false,sx,sl;t.addEventListener('mousedown',e=>{down=true;sx=e.pageX-t.offsetLeft;sl=t.scrollLeft;t.style.cursor='grabbing';});window.addEventListener('mouseup',()=>{down=false;if(t)t.style.cursor='grab';});t.addEventListener('mousemove',e=>{if(!down)return;e.preventDefault();t.scrollLeft=sl-(e.pageX-t.offsetLeft-sx);syncEraBar();});t.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){e.preventDefault();t.scrollLeft+=e.deltaY*1.2;syncEraBar();}},{passive:false});let ts;t.addEventListener('touchstart',e=>{ts=e.touches[0].clientX;});t.addEventListener('touchmove',e=>{if(!ts)return;t.scrollLeft+=ts-e.touches[0].clientX;ts=e.touches[0].clientX;syncEraBar();});t.addEventListener('scroll',syncEraBar,{passive:true});}
 
 function initMinimap(tw){
@@ -2454,7 +2492,7 @@ function initMinimap(tw){
     if(mmr)mmr.textContent=S.unitsCompleted.length+'/'+total+' units';
     // Sync era bar to match scroll position
     const ebi=document.getElementById('era-bar-inner');
-    if(ebi)ebi.style.transform=`translateX(-${track.scrollLeft}px)`;
+    if(ebi)ebi.style.left=`-${track.scrollLeft}px`;
   }
   track.addEventListener('scroll',upd,{passive:true});
   mmt.addEventListener('click',e=>{
