@@ -27,7 +27,7 @@
   --dm:'DM Sans',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:var(--crimson);min-height:100vh;overflow:hidden;
+body{background:var(--bg);color:var(--text);font-family:var(--crimson);min-height:100vh;overflow-x:hidden;overflow-y:auto;
   border:4px solid var(--border);
   background-image:radial-gradient(ellipse at 15% 10%,rgba(232,160,32,.06) 0%,transparent 55%),radial-gradient(ellipse at 85% 90%,rgba(192,48,48,.04) 0%,transparent 55%);}
 body::before{content:'';position:fixed;inset:0;
@@ -127,7 +127,7 @@ body::before{content:'';position:fixed;inset:0;
 .name-input:focus{border-color:var(--amber)}.name-input::placeholder{color:var(--text3)}
 
 /* ── HUD ── */
-#shell{display:none;min-height:100vh;flex-direction:column;margin:12px;border:1px solid var(--border2);border-radius:2px;overflow:hidden}
+#shell{display:none;min-height:100vh;flex-direction:column;margin:12px;border:1px solid var(--border2);border-radius:2px;overflow-y:auto;overflow-x:hidden}
 #shell.active{display:flex}
 #hud{background:linear-gradient(180deg,rgba(13,10,8,.98),rgba(20,16,13,.95));border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:300;backdrop-filter:blur(12px)}
 .hud-inner{display:flex;align-items:center;gap:14px;padding:7px 20px;width:100%}
@@ -1974,8 +1974,13 @@ async function continueAsStudent(){
 }
 
 function showSetupScreen(){
-  // Clear name input for fresh entry (not coming from Google)
-  S.name='';
+  // Full state reset — wipe previous student's data completely
+  S={name:'',avatar:'scholar_f',period:'',isGuest:false,isTeacher:false,
+    unitsCompleted:[],badgesEarned:[],
+    unlocked:CHARS.filter(c=>c.unlockMethod==='free').map(c=>c.id),
+    setupDone:false,gold:0,xp:0,goldEarned:0,goldSpent:0,goldBestRun:0,goldLedger:[],
+    vocabPassed:{},vocabBestScore:{},vocabFirstPass:{},flashcardsStudied:{},
+    unitBadges:{},unitCards:{}};
   const ni=document.getElementById('name-input');
   if(ni){ni.value='';ni.style.borderColor='';}
   const hint=document.getElementById('name-hint');
