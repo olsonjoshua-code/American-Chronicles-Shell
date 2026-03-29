@@ -428,10 +428,9 @@ body::before{content:'';position:fixed;inset:0;
 
   <div style="display:flex;flex-direction:column;align-items:center;gap:10px;max-width:300px;margin:0 auto">
 
-    <!-- Google Sign-In button -->
-    <button class="btn full" id="btn-google-login" onclick="signInWithGoogle()" style="border-color:var(--amber);color:var(--amber);display:flex;align-items:center;justify-content:center;gap:10px">
-      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20H24v8h11.3C33.6 33.1 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34.2 6.5 29.4 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 20-8 20-20 0-1.3-.1-2.7-.4-4z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 16 19 13 24 13c3 0 5.8 1.1 7.9 3l5.7-5.7C34.2 6.5 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5L31.8 34c-2.1 1.5-4.8 2-7.8 2-5.2 0-9.6-3-11.3-7.3l-6.6 5.1C9.5 39.5 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20H24v8h11.3c-.9 2.5-2.6 4.5-4.8 5.9L37 38.9C41.2 35.1 44 30.1 44 24c0-1.3-.1-2.7-.4-4z"/></svg>
-      <span>Sign in with Google</span>
+    <!-- Student entry button -->
+    <button class="btn full" onclick="showSetupScreen()" style="border-color:var(--amber);color:var(--amber);font-size:16px;padding:16px 28px;letter-spacing:3px">
+      <span>▶ Enter as Student</span>
     </button>
 
     <div id="login-status" style="font-family:var(--dm);font-size:10px;color:var(--text3);min-height:14px;text-align:center"></div>
@@ -447,10 +446,10 @@ body::before{content:'';position:fixed;inset:0;
   <div style="margin-top:2.5rem;font-family:var(--dm);font-size:9px;color:var(--text3);letter-spacing:1px;line-height:2;text-align:center">CREATED BY JOSHUA OLSON · BREVARD COUNTY, FL<br><span style="opacity:.55">© 2026 Joshua Olson · All Rights Reserved</span></div>
 </div>
 
-<!-- SETUP (first-time profile after Google login) -->
+<!-- SETUP -->
 <div id="setup-screen">
-  <div style="font-family:var(--bebas);font-size:24px;color:var(--amber);letter-spacing:3px;margin-bottom:4px">One-Time Setup</div>
-  <div style="font-family:var(--dm);font-size:10px;color:var(--text3);margin-bottom:16px;text-align:center">This only happens once — your profile saves to your account.</div>
+  <div style="font-family:var(--bebas);font-size:24px;color:var(--amber);letter-spacing:3px;margin-bottom:4px">Create Your Profile</div>
+  <div style="font-family:var(--dm);font-size:10px;color:var(--text3);margin-bottom:16px;text-align:center">Pick your character, enter your name, and select your class period.</div>
   <div class="char-preview-wrap">
     <div id="setup-avatar" style="margin:0 auto 10px"></div>
     <div style="font-family:var(--playfair);font-size:18px;color:var(--cream);font-style:italic" id="setup-name-disp">Historian</div>
@@ -1864,6 +1863,12 @@ async function boot(){
 }
 
 function showSetupScreen(){
+  // Clear name input for fresh entry (not coming from Google)
+  S.name='';
+  const ni=document.getElementById('name-input');
+  if(ni){ni.value='';ni.style.borderColor='';}
+  const hint=document.getElementById('name-hint');
+  if(hint){hint.innerHTML='Enter your first name and last initial — e.g. <strong>Joshua O.</strong>';hint.style.color='';}
   document.getElementById('title-screen').style.display='none';
   document.getElementById('setup-screen').style.display='block';
   buildStarterGrid();
