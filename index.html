@@ -2386,21 +2386,25 @@ function launchVocabQuiz(deckId){
     _pollVocabResult(deckId);
     return;
   }
-  // Watch the popup: if it navigates back to the shell URL, close it instead
+  // Watch the popup: if it navigates back to the shell URL, close it instead.
+  // Delay start by 3s so the popup has time to load the quiz before we check its URL.
   const shellHref=location.href.split('?')[0];
   const shellOrigin=location.origin;
-  const watchIv=setInterval(()=>{
-    try{
-      if(popup.closed){clearInterval(watchIv);return;}
-      const ph=popup.location.href;
-      if(ph&&(ph.startsWith(shellHref)||ph===shellOrigin+'/'||ph.includes('American-Chronicles-Shell/index'))){
-        popup.close();
-        clearInterval(watchIv);
+  let watchIv;
+  setTimeout(()=>{
+    watchIv=setInterval(()=>{
+      try{
+        if(popup.closed){clearInterval(watchIv);return;}
+        const ph=popup.location.href;
+        if(ph&&(ph.startsWith(shellHref)||ph===shellOrigin+'/'||ph.includes('American-Chronicles-Shell/index'))){
+          popup.close();
+          clearInterval(watchIv);
+        }
+      }catch(e){
+        // Cross-origin blocked — popup still on quiz page, fine
       }
-    }catch(e){
-      // Cross-origin blocked — popup still on quiz page, fine
-    }
-  },500);
+    },1000);
+  },3000);
   // Also poll localStorage in case browser strips window.opener cross-origin
   _pollVocabResult(deckId);
 }
