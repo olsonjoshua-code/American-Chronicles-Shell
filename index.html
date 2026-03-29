@@ -325,7 +325,7 @@ body::before{content:'';position:fixed;inset:0;
 #onboard-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-top:1px solid var(--border)}
 .ob-step{font-family:var(--bebas);font-size:11px;color:var(--text3);letter-spacing:2px}
 .ob-btns{display:flex;gap:8px}
-#help-btn{display:none}
+#help-btn{display:none}/* help-btn shown via JS after shell loads */
 #course-cert-btn{display:none!important}
 /* ── Course Trophy Floating Button ── */
 #course-cert-btn{position:fixed;bottom:110px;right:16px;z-index:800;font-family:var(--bebas);font-size:12px;letter-spacing:2px;background:var(--bg2);border:1px solid var(--gc2);color:var(--gc);padding:7px 14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
@@ -2128,6 +2128,8 @@ async function confirmProfile(){
   }
   saveS();
   saveProfileByName();
+  // Always show tutorial for a newly created profile
+  try{localStorage.removeItem(OB_KEY);}catch(e){}
   enterShell();
 }
 function enterGuest(){S.name='Guest';S.isGuest=true;S.setupDone=false;enterShell();}
