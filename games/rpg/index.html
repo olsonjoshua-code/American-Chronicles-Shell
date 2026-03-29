@@ -57,7 +57,7 @@ body::after{
   background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
   background-size:40px 40px;}
 
-#root{max-width:600px;margin:0 auto;padding:16px;padding-bottom:80px;min-height:100vh;position:relative;z-index:1;}
+#root{max-width:860px;margin:0 auto;padding:16px;padding-bottom:80px;min-height:100vh;position:relative;z-index:1;}
 
 /* ── SCREENS ── */
 .screen{display:none;}.screen.active{display:block;animation:fadeIn .3s ease;}#trivia-screen{position:relative;z-index:2;}
@@ -107,7 +107,7 @@ body::after{
 .hud-stat span{display:block;color:var(--gold);font-size:13px;margin-top:1px;font-weight:600;}
 
 /* ── BOTTOM NAV ── */
-#bottom-nav{background:rgba(7,9,12,.97);border-top:1px solid var(--border2);padding:6px 8px;display:none;grid-template-columns:repeat(5,1fr);gap:4px;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:600px;z-index:200;backdrop-filter:blur(10px);}
+#bottom-nav{background:rgba(7,9,12,.97);border-top:1px solid var(--border2);padding:6px 8px;display:none;grid-template-columns:repeat(5,1fr);gap:4px;position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:860px;z-index:200;backdrop-filter:blur(10px);}
 .bn-btn span:last-child{font-family:var(--orb);font-size:7px;letter-spacing:.05em;}
 .bn-btn{font-family:var(--orb);font-size:7px;letter-spacing:.05em;background:transparent;border:none;color:var(--text3);padding:8px 4px;cursor:pointer;text-align:center;transition:all .2s;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:2px;}
 .bn-btn.active{color:var(--gold);}.bn-btn.active .bn-icon{font-size:18px;display:block;filter:drop-shadow(0 0 5px rgba(200,160,32,.5));}
@@ -878,6 +878,8 @@ z-index:1;}
       <div class="cp-stat"><div class="cp-stat-val" id="hs-acc">&nbsp;</div><div class="cp-stat-lbl">ACC%</div></div>
     </div>
   </div>
+  <!-- Return to Hub -->
+  <button onclick="returnToShell()" style="display:block;width:100%;margin-bottom:12px;background:transparent;border:1px solid var(--teal2);color:var(--teal2);font-family:var(--orb);font-size:9px;letter-spacing:.12em;padding:11px;cursor:pointer;text-align:center;transition:all .2s;text-transform:uppercase;" onmouseover="this.style.background='rgba(26,170,144,.1)'" onmouseout="this.style.background='transparent'">← Return to American Chronicles Hub</button>
   <!-- Current Objective -->
   <div id="ops-objective-panel"></div>
   <!-- Campaign Map -->
@@ -3986,6 +3988,7 @@ function notifyShellComplete(){
   if(typeof unlockRpgChar==='function')unlockRpgChar('historian_prime');
   checkThemeCharUnlocks&&checkThemeCharUnlocks('eoc_final');try{const r=localStorage.getItem(SHELL_KEY);if(!r)return;const s=JSON.parse(r);if(!s.unitsCompleted)s.unitsCompleted=[];if(!s.unitsCompleted.includes(SHELL_UNIT_ID))s.unitsCompleted.push(SHELL_UNIT_ID);localStorage.setItem(SHELL_KEY,JSON.stringify(s));}catch(e){}}
 function returnToShell(complete=false){
+  try{localStorage.setItem('ac_returning_from_game','1');}catch(e){}
   const url=SHELL_URL+(complete?'?complete='+SHELL_UNIT_ID:'');
   window.location.href=url;
 }
