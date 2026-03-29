@@ -459,9 +459,8 @@ body::before{content:'';position:fixed;inset:0;
   <div class="sh" style="font-size:13px;margin-bottom:9px">Choose Your Character</div>
   <div class="starter-grid" id="starter-grid"></div>
   <div class="sh" style="font-size:13px;margin:13px 0 8px">Your Display Name</div>
-  <div style="background:var(--bg2);border:1.5px solid var(--border2);padding:12px 16px;font-family:var(--playfair);font-size:16px;font-style:italic;color:var(--cream);margin-bottom:4px" id="name-display">—</div>
-  <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:10px">Set from your Google account · First name + last initial</div>
-  <input id="name-input" type="hidden">
+  <input id="name-input" type="text" class="name-input" placeholder="e.g. Joshua O." oninput="liveFormatName(this)" autocomplete="off" spellcheck="false" maxlength="40">
+  <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:10px" id="name-hint">Enter your first name and last initial — e.g. <strong>Joshua O.</strong></div>
   <div class="sh" style="font-size:13px;margin:13px 0 8px">Class Period</div>
   <div id="period-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:4px"></div>
   <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-top:3px">So your teacher can find your progress.</div>
@@ -1849,6 +1848,9 @@ async function boot(){
       const ni = document.getElementById('name-input');
       if(ni){ ni.value = S.name; }
       showSetupScreen();
+      // Reset hint styling in case of re-entry
+      const hint=document.getElementById('name-hint');
+      if(hint){hint.textContent='Enter your first name and last initial — e.g. Joshua O.';hint.style.color='';}
     }
   } else if(S.setupDone && !S.isGuest){
     // Has local session (returned from unit game, same device) — go straight in
@@ -1916,21 +1918,55 @@ function pickAvatar(id,el){S.avatar=id;document.querySelectorAll('.starter-opt')
 function pickPeriod(p){S.period=p;buildPeriodGrid();previewSetup();}
 function previewSetup(){
   const n=S.name||'Historian';
-  const nd=document.getElementById('name-display');
-  if(nd)nd.textContent=n;
   const ni=document.getElementById('name-input');
-  if(ni)ni.value=n;
+  if(ni&&document.activeElement!==ni)ni.value=n;
   document.getElementById('setup-avatar').innerHTML=getChar(S.avatar).svg().replace(/width="\d+"/,'width="80"').replace(/height="\d+"/,'height="80"');
   document.getElementById('setup-name-disp').textContent=n;
   document.getElementById('setup-sub').textContent=S.period==='guest'?'Guest Player':(S.period?`Curious Citizen · Period ${S.period}`:'Curious Citizen');
 }
+function liveFormatName(el){
+  // As they type, auto-capitalize first letter of each word
+  const pos=el.selectionStart;
+  el.value=el.value.replace(/(?:^|\s)\S/g,c=>c.toUpperCase());
+  try{el.setSelectionRange(pos,pos);}catch(e){}
+  S.name=el.value.trim();
+  previewSetup();
+}
+function _validateName(raw){
+  const n=raw.trim();
+  if(!n)return'Enter your name.';
+  const parts=n.split(/\s+/);
+  if(parts.length<2)return'Include your last initial — e.g. Joshua O.';
+  const first=parts[0];
+  const last=parts[parts.length-1];
+  if(first.length<2)return'First name must be at least 2 letters.';
+  // Last part must be a single letter optionally followed by a period
+  if(!/^[A-Za-z]\.?$/.test(last))return'Last initial should be a single letter — e.g. O. or O';
+  // Block obvious fake names: all same letter, keyboard runs, common placeholders
+  const alpha=first.replace(/[^a-zA-Z]/g,'').toLowerCase();
+  if(/^(.)\1+$/.test(alpha))return'Please enter your real first name.';
+  if(/^(asdf|qwer|zxcv|aaaa|bbbb|test|fake|none|null|user|player|anon)/i.test(alpha))return'Please enter your real first name.';
+  if(first.length>1&&!/[aeiou]/i.test(alpha))return'Please enter your real first name.';
+  return null; // valid
+}
 async function confirmProfile(){
-  const n=S.name||(document.getElementById('name-input').value.trim());
-  if(!n){alert('Could not get your name from Google. Please try again.');return;}
+  const raw=document.getElementById('name-input').value.trim();
+  const err=_validateName(raw);
+  if(err){
+    const hint=document.getElementById('name-hint');
+    if(hint){hint.textContent=err;hint.style.color='var(--red2)';}
+    document.getElementById('name-input').style.borderColor='var(--red2)';
+    return;
+  }
+  // Format: capitalize each word, ensure last initial has period
+  const parts=raw.trim().split(/\s+/);
+  const first=parts[0][0].toUpperCase()+parts[0].slice(1).toLowerCase();
+  const lastRaw=parts[parts.length-1].replace('.','');
+  const last=lastRaw[0].toUpperCase()+'.';
+  const formatted=first+' '+last;
   if(!S.period){alert('Select your class period.');return;}
-  S.name=n; S.isGuest=false; S.setupDone=true;
+  S.name=formatted; S.isGuest=false; S.setupDone=true;
   saveS();
-  // Save to DB so it follows them across devices
   await saveProfileToDB();
   enterShell();
 }
@@ -2377,35 +2413,9 @@ function markStudied(deckId){
 }
 
 function launchVocabQuiz(deckId){
-  // Open quiz in a popup so window.opener is set and postMessage works
+  // Open quiz in a new tab — result comes back via localStorage polling
   const url=`${FC_BASE}?deck=${encodeURIComponent(deckId)}&mode=quiz&from=hub`;
-  const popup=window.open(url,'vocab_quiz','width=900,height=700,scrollbars=yes,resizable=yes');
-  if(!popup){
-    // Popup blocked — fall back to new tab and poll localStorage for result
-    window.open(url,'_blank');
-    _pollVocabResult(deckId);
-    return;
-  }
-  // Watch the popup: if it navigates back to the shell URL, close it instead.
-  // Delay start by 3s so the popup has time to load the quiz before we check its URL.
-  const shellHref=location.href.split('?')[0];
-  const shellOrigin=location.origin;
-  let watchIv;
-  setTimeout(()=>{
-    watchIv=setInterval(()=>{
-      try{
-        if(popup.closed){clearInterval(watchIv);return;}
-        const ph=popup.location.href;
-        if(ph&&(ph.startsWith(shellHref)||ph===shellOrigin+'/'||ph.includes('American-Chronicles-Shell/index'))){
-          popup.close();
-          clearInterval(watchIv);
-        }
-      }catch(e){
-        // Cross-origin blocked — popup still on quiz page, fine
-      }
-    },1000);
-  },3000);
-  // Also poll localStorage in case browser strips window.opener cross-origin
+  window.open(url,'_blank');
   _pollVocabResult(deckId);
 }
 
