@@ -457,9 +457,10 @@ body::before{content:'';position:fixed;inset:0;
   </div>
   <div class="sh" style="font-size:13px;margin-bottom:9px">Choose Your Character</div>
   <div class="starter-grid" id="starter-grid"></div>
-  <div class="sh" style="font-size:13px;margin:13px 0 8px">Your Display Name</div>
-  <input id="name-input" type="text" class="name-input" placeholder="e.g. Joshua O." oninput="liveFormatName(this)" autocomplete="off" spellcheck="false" maxlength="40">
-  <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:10px" id="name-hint">Enter your first name and last initial — e.g. <strong>Joshua O.</strong></div>
+  <div class="sh" style="font-size:13px;margin:13px 0 8px">Your Full Name</div>
+  <input id="name-input" type="text" class="name-input" placeholder="e.g. Joshua Olson" oninput="liveFormatName(this)" autocomplete="off" spellcheck="false" maxlength="60">
+  <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:4px" id="name-hint">Enter your first and last name — e.g. <strong>Joshua Olson</strong></div>
+  <div style="font-family:var(--bebas);font-size:13px;color:var(--amber);letter-spacing:1px;margin-bottom:10px">Display name: <span id="name-preview" style="color:var(--cream)">—</span></div>
   <div class="sh" style="font-size:13px;margin:13px 0 8px">Class Period</div>
   <div id="period-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:4px"></div>
   <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-top:3px">So your teacher can find your progress.</div>
@@ -1868,7 +1869,8 @@ function showSetupScreen(){
   const ni=document.getElementById('name-input');
   if(ni){ni.value='';ni.style.borderColor='';}
   const hint=document.getElementById('name-hint');
-  if(hint){hint.innerHTML='Enter your first name and last initial — e.g. <strong>Joshua O.</strong>';hint.style.color='';}
+  if(hint){hint.innerHTML='Enter your first and last name — e.g. <strong>Joshua Olson</strong>';hint.style.color='';}
+  const prev=document.getElementById('name-preview');if(prev)prev.textContent='—';
   document.getElementById('title-screen').style.display='none';
   document.getElementById('setup-screen').style.display='block';
   buildStarterGrid();
@@ -1929,31 +1931,58 @@ function previewSetup(){
   document.getElementById('setup-name-disp').textContent=n;
   document.getElementById('setup-sub').textContent=S.period==='guest'?'Guest Player':(S.period?`Curious Citizen · Period ${S.period}`:'Curious Citizen');
 }
+// Derive display name from full name, expanding last initial to avoid duplicates
+// existingNames = array of display names already in use for this period
+function _deriveDisplayName(fullName, existingNames=[]){
+  const parts=fullName.trim().split(/\s+/);
+  const first=parts[0][0].toUpperCase()+parts[0].slice(1).toLowerCase();
+  const last=parts.length>1?parts[parts.length-1]:'';
+  if(!last)return first;
+  // Start with first letter of last name, expand until unique
+  for(let len=1;len<=last.length;len++){
+    const candidate=first+' '+last.slice(0,len).replace(/[^a-zA-Z]/g,'')[0].toUpperCase()+
+      last.slice(1,len).toLowerCase()+'.';
+    if(!existingNames.includes(candidate))return candidate;
+  }
+  // Full last name as fallback
+  return first+' '+last[0].toUpperCase()+last.slice(1).toLowerCase();
+}
+
 function liveFormatName(el){
-  // As they type, auto-capitalize first letter of each word
+  // Auto-capitalize first letter of each word as they type
   const pos=el.selectionStart;
   el.value=el.value.replace(/(?:^|\s)\S/g,c=>c.toUpperCase());
   try{el.setSelectionRange(pos,pos);}catch(e){}
-  S.name=el.value.trim();
+  // Update display name preview
+  const preview=document.getElementById('name-preview');
+  if(preview){
+    const parts=el.value.trim().split(/\s+/);
+    if(parts.length>=2&&parts[0].length>=2&&parts[parts.length-1].length>=1){
+      preview.textContent=_deriveDisplayName(el.value.trim());
+    } else {
+      preview.textContent='—';
+    }
+  }
   previewSetup();
 }
+
 function _validateName(raw){
   const n=raw.trim();
-  if(!n)return'Enter your name.';
+  if(!n)return'Enter your full name.';
   const parts=n.split(/\s+/);
-  if(parts.length<2)return'Include your last initial — e.g. Joshua O.';
+  if(parts.length<2)return'Include your last name — e.g. Joshua Olson';
   const first=parts[0];
   const last=parts[parts.length-1];
   if(first.length<2)return'First name must be at least 2 letters.';
-  // Last part must be a single letter optionally followed by a period
-  if(!/^[A-Za-z]\.?$/.test(last))return'Last initial should be a single letter — e.g. O. or O';
-  // Block obvious fake names: all same letter, keyboard runs, common placeholders
+  if(last.length<1)return'Include your last name.';
+  // Block obvious fake names
   const alpha=first.replace(/[^a-zA-Z]/g,'').toLowerCase();
-  if(/^(.)\1+$/.test(alpha))return'Please enter your real first name.';
-  if(/^(asdf|qwer|zxcv|aaaa|bbbb|test|fake|none|null|user|player|anon)/i.test(alpha))return'Please enter your real first name.';
-  if(first.length>1&&!/[aeiou]/i.test(alpha))return'Please enter your real first name.';
-  return null; // valid
+  if(/^(.)+$/.test(alpha))return'Please enter your real name.';
+  if(/^(asdf|qwer|zxcv|aaaa|bbbb|test|fake|none|null|user|player|anon)/i.test(alpha))return'Please enter your real name.';
+  if(first.length>1&&!/[aeiou]/i.test(alpha))return'Please enter your real name.';
+  return null;
 }
+
 async function confirmProfile(){
   const raw=document.getElementById('name-input').value.trim();
   const err=_validateName(raw);
@@ -1963,14 +1992,24 @@ async function confirmProfile(){
     document.getElementById('name-input').style.borderColor='var(--red2)';
     return;
   }
-  // Format: capitalize each word, ensure last initial has period
-  const parts=raw.trim().split(/\s+/);
-  const first=parts[0][0].toUpperCase()+parts[0].slice(1).toLowerCase();
-  const lastRaw=parts[parts.length-1].replace('.','');
-  const last=lastRaw[0].toUpperCase()+'.';
-  const formatted=first+' '+last;
   if(!S.period){alert('Select your class period.');return;}
-  S.name=formatted; S.isGuest=false; S.setupDone=true;
+  // Format full name cleanly
+  const parts=raw.trim().split(/\s+/);
+  const firstName=parts[0][0].toUpperCase()+parts[0].slice(1).toLowerCase();
+  const lastName=parts[parts.length-1][0].toUpperCase()+parts[parts.length-1].slice(1).toLowerCase();
+  const fullName=firstName+' '+lastName;
+  // Check for duplicate display names in same period and expand last initial if needed
+  let displayName=firstName; // fallback if no last name
+  try{
+    const existing=await sfetch(`/rest/v1/ac_profiles?period=eq.${encodeURIComponent(S.period)}&select=name`);
+    const existingNames=Array.isArray(existing)?existing.map(r=>r.name).filter(n=>n!==fullName):[];
+    displayName=_deriveDisplayName(fullName,existingNames);
+  }catch(e){
+    displayName=_deriveDisplayName(fullName,[]);
+  }
+  S.name=displayName;
+  S.fullName=fullName; // store full name for uniqueness
+  S.isGuest=false; S.setupDone=true;
   saveS();
   await saveProfileToDB();
   enterShell();
