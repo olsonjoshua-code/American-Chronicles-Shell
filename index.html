@@ -2031,9 +2031,60 @@ function _returnFromGame(){
   } catch(e) {}
   return false;
 }
+// ── SESSION TRACKING ──────────────────────────────────
+let _sessionStart = null;
+
+async function logSessionStart(){
+  if(S.isGuest||IS_TEACHER||!S.name)return;
+  _sessionStart = Date.now();
+  try{
+    await fetch(SUPA_URL+'/rest/v1/ac_sessions',{
+      method:'POST',
+      headers:{...SUPA_H,'Prefer':'return=minimal'},
+      body:JSON.stringify({
+        student_name: S.name,
+        full_name:    S.fullName||S.name,
+        period:       S.period||'',
+        session_start: new Date(_sessionStart).toISOString(),
+        session_end:   null,
+        minutes:       null,
+        exit_to:       null
+      })
+    });
+  }catch(e){}
+}
+
+async function logSessionEnd(exitTo=''){
+  if(!_sessionStart||S.isGuest||IS_TEACHER||!S.name)return;
+  const mins=Math.round((Date.now()-_sessionStart)/60000);
+  if(mins<1)return; // ignore sub-minute sessions
+  try{
+    // Find the most recent open session for this student and close it
+    const rows=await sfetch(`/rest/v1/ac_sessions?student_name=eq.${encodeURIComponent(S.name)}&session_end=is.null&order=session_start.desc&limit=1&select=id`);
+    if(Array.isArray(rows)&&rows[0]?.id){
+      await fetch(SUPA_URL+'/rest/v1/ac_sessions?id=eq.'+rows[0].id,{
+        method:'PATCH',
+        headers:{...SUPA_H,'Prefer':'return=minimal'},
+        body:JSON.stringify({
+          session_end: new Date().toISOString(),
+          minutes: mins,
+          exit_to: exitTo
+        })
+      });
+    }
+  }catch(e){}
+  _sessionStart=null;
+}
+
+// Close session when navigating away
+window.addEventListener('beforeunload',()=>{ if(_sessionStart)logSessionEnd('unload'); });
+
 function enterShell(){
   try{sessionStorage.setItem('ac_shell_active','1');}catch(e){}
-  document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name)syncFromSupabase();}}else{if(!S.isGuest&&S.name)syncFromSupabase();}}
+  document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name)syncFromSupabase();}}else{if(!S.isGuest&&S.name)syncFromSupabase();}
+  // Start tracking this session
+  setTimeout(()=>logSessionStart(), 1000);
+}
 
 // ── SETUP ─────────────────────────────────────────────
 const STARTERS=CHARS.filter(c=>c.unlockMethod==='free');
@@ -2454,7 +2505,8 @@ function launchUnit(url){
   localStorage.setItem('ac_shell_url','https://olsonjoshua-code.github.io/American-Chronicles-Shell/');
   localStorage.setItem('ac_returning_from_game','1');
   try{sessionStorage.removeItem('ac_shell_active');}catch(e){}
-  window.location.href=url;
+  const u=UNIT_DATA.find(x=>x.url===url);
+  logSessionEnd(u?u.title:'unit_game').then(()=>{ window.location.href=url; });
 }
 
 // Mini RPG card for the course-intro bar (far right of the header stripe)
@@ -2630,10 +2682,11 @@ function launchFlashcards(deckId, mode){
   try{localStorage.setItem(SHELL_KEY,JSON.stringify(S));}catch(e){}
   try{localStorage.setItem('ac_shell_url','https://olsonjoshua-code.github.io/American-Chronicles-Shell/');}catch(e){}
   try{localStorage.setItem('ac_returning_from_game','1');}catch(e){}
-  // Clear the shell-active flag so a fresh open after return shows Continue screen correctly
   try{sessionStorage.removeItem('ac_shell_active');}catch(e){}
   if(mode==='study')markStudied(deckId);
-  window.location.href=`${FC_BASE}?deck=${encodeURIComponent(deckId)}&mode=${mode}&from=hub`;
+  logSessionEnd('flashcards:'+mode+':'+deckId).then(()=>{
+    window.location.href=`${FC_BASE}?deck=${encodeURIComponent(deckId)}&mode=${mode}&from=hub`;
+  });
 }
 
 function launchVocabQuiz(deckId){
@@ -3690,15 +3743,137 @@ async function renderTeacherView(){
   const ul=document.getElementById('teacher-units');
   ul.innerHTML=UNIT_DATA.filter(u=>u.url).map(u=>`<div class="t-unit-row"><div style="font-size:20px;flex-shrink:0">${u.icon}</div><div style="flex:1;min-width:140px"><div style="font-family:var(--playfair);font-size:12px;color:var(--cream)">${u.num} — ${u.title}</div><div style="font-family:var(--dm);font-size:8px;color:var(--text3)">${u.years}</div></div><a href="${u.url}" target="_blank" style="text-decoration:none"><button class="btn xs teal"><span>▶ Open</span></button></a></div>`).join('');
   const re=document.getElementById('teacher-results');re.innerHTML='<div style="font-family:var(--dm);font-size:10px;color:var(--text3)">Loading…</div>';
-  const all=await sfetch('/rest/v1/ac_results?select=*&order=updated_at.desc&limit=500');
+  const [all, profiles, sessions]=await Promise.all([
+    sfetch('/rest/v1/ac_results?select=*&order=updated_at.desc&limit=500'),
+    sfetch('/rest/v1/ac_student_profiles?select=display_name,full_name,period,vocab_passed,units_completed,gold,updated_at'),
+    sfetch('/rest/v1/ac_sessions?select=student_name,period,minutes&limit=5000')
+  ]);
   if(!all?.length){re.innerHTML='<div style="font-family:var(--dm);font-size:10px;color:var(--text3);font-style:italic;padding:12px">No results yet.</div>';return;}
+
+  // Session totals per student
+  const sessSm={};
+  (sessions||[]).forEach(s=>{
+    if(!s.minutes)return;
+    const k=s.student_name+'|'+(s.period||'');
+    if(!sessSm[k])sessSm[k]=0;
+    sessSm[k]+=s.minutes;
+  });
+
+  // Vocab lookup
+  const vocabLookup={};
+  (profiles||[]).forEach(p=>{
+    try{const vp=JSON.parse(p.vocab_passed||'{}');vocabLookup[p.display_name+'|'+p.period]=Object.values(vp).filter(Boolean).length;}catch(e){}
+  });
+
   const sm={};all.forEach(r=>{const k=r.name+'|'+r.period;if(!sm[k])sm[k]={name:r.name,period:r.period,units:[],score:0};sm[k].units.push(r);sm[k].score+=r.best_score||0;});
   const sts=Object.values(sm).sort((a,b)=>b.score-a.score);
-  re.innerHTML=`<table class="lb-table"><thead><tr><th>STUDENT</th><th>PD</th><th>UNITS</th><th>SCORE</th><th>GOLDS</th><th>HISTORIANS</th><th>CARDS</th></tr></thead><tbody>${sts.map(s=>`<tr><td style="font-family:var(--playfair);font-size:12px;color:var(--cream)">${s.name}</td><td style="color:var(--text3);font-size:10px">${s.period?'Pd '+s.period:'—'}</td><td style="color:var(--teal2)">${s.units.length}</td><td style="color:var(--amber);font-weight:600">${s.score.toLocaleString()}</td><td style="color:var(--gold)">${s.units.filter(u=>u.best_accuracy>=90).length}</td><td style="color:var(--historian)">${s.units.filter(u=>u.best_accuracy===100).length}</td><td style="color:var(--text2)">${s.units.reduce((a,u)=>a+(u.cards||0),0)}</td></tr>`).join('')}</tbody></table>`;
+
+  re.innerHTML=`
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+      <div style="font-family:var(--dm);font-size:9px;color:var(--text3)">${sts.length} students · ${all.length} unit results</div>
+      <button class="btn xs green" onclick="exportCSV()"><span>⬇ Export CSV</span></button>
+    </div>
+    <table class="lb-table"><thead><tr><th>STUDENT</th><th>PD</th><th>UNITS</th><th>SCORE</th><th>GOLDS</th><th>HISTORIANS</th><th>VOCAB</th><th>AVG ACC</th><th>⏱ MINS</th></tr></thead><tbody>${sts.map(s=>{
+      const k=s.name+'|'+s.period;
+      const avgAcc=s.units.length?Math.round(s.units.reduce((a,u)=>a+(u.best_accuracy||0),0)/s.units.length):0;
+      const vocab=vocabLookup[k]||0;
+      const mins=sessSm[k]||0;
+      return`<tr>
+        <td style="font-family:var(--playfair);font-size:12px;color:var(--cream)">${s.name}</td>
+        <td style="color:var(--text3);font-size:10px">${s.period?'Pd '+s.period:'—'}</td>
+        <td style="color:var(--teal2)">${s.units.length}</td>
+        <td style="color:var(--amber);font-weight:600">${s.score.toLocaleString()}</td>
+        <td style="color:var(--gold)">${s.units.filter(u=>u.best_accuracy>=90).length}</td>
+        <td style="color:var(--historian)">${s.units.filter(u=>u.best_accuracy===100).length}</td>
+        <td style="color:var(--teal2)">${vocab}</td>
+        <td style="color:var(--text2)">${avgAcc}%</td>
+        <td style="color:var(--green2)">${mins>0?mins+' min':'—'}</td>
+      </tr>`;
+    }).join('')}</tbody></table>`;
   try{const n=document.getElementById('teacher-notes');if(n)n.value=localStorage.getItem('ac_teacher_notes')||'';}catch(e){}
 }
-function saveNotes(){try{localStorage.setItem('ac_teacher_notes',document.getElementById('teacher-notes').value);}catch(e){}}
 
+async function exportCSV(){
+  notify('Building export…');
+  const [all, profiles, sessions]=await Promise.all([
+    sfetch('/rest/v1/ac_results?select=*&order=name.asc,period.asc&limit=2000'),
+    sfetch('/rest/v1/ac_student_profiles?select=*'),
+    sfetch('/rest/v1/ac_sessions?select=student_name,period,minutes,session_start,exit_to&order=session_start.asc&limit=5000')
+  ]);
+
+  // Build session summary per student
+  const sessionSm={};
+  (sessions||[]).forEach(s=>{
+    if(!s.minutes)return;
+    const k=s.student_name+'|'+(s.period||'');
+    if(!sessionSm[k])sessionSm[k]={total_minutes:0,session_count:0,last_seen:''};
+    sessionSm[k].total_minutes+=s.minutes;
+    sessionSm[k].session_count++;
+    if(s.session_start>sessionSm[k].last_seen)sessionSm[k].last_seen=s.session_start;
+  });
+
+  // Build per-student summary
+  const sm={};
+  (all||[]).forEach(r=>{
+    const k=r.name+'|'+(r.period||'');
+    if(!sm[k])sm[k]={name:r.name,period:r.period||'',units_completed:0,total_score:0,avg_accuracy:0,gold_trophies:0,historian_trophies:0,unit_scores:{},attempts_total:0};
+    sm[k].units_completed++;
+    sm[k].total_score+=r.best_score||0;
+    sm[k].avg_accuracy+=r.best_accuracy||0;
+    sm[k].attempts_total+=r.attempts||1;
+    if(r.best_accuracy>=90)sm[k].gold_trophies++;
+    if(r.best_accuracy===100)sm[k].historian_trophies++;
+    sm[k].unit_scores[r.unit_id]=r.best_accuracy||0;
+  });
+
+  const profileLookup={};
+  (profiles||[]).forEach(p=>{profileLookup[p.display_name+'|'+(p.period||'')]=p;});
+
+  const unitIds=UNIT_DATA.filter(u=>!u.isCampaign).map(u=>u.id);
+
+  const headers=[
+    'Student Name','Full Name','Period',
+    'Units Completed','Total Score','Avg Accuracy %',
+    'Gold Trophies','Historian Trophies','Vocab Medals','Gold Earned',
+    'Total Minutes in Hub','Session Count','Avg Min Per Session','Last Seen',
+    'Avg Attempts Per Unit',
+    ...unitIds.map(id=>{const u=UNIT_DATA.find(x=>x.id===id);return(u?.num||id)+' Accuracy'})
+  ];
+
+  const rows=Object.values(sm).sort((a,b)=>{
+    if(a.period!==b.period)return String(a.period).localeCompare(String(b.period));
+    return a.name.localeCompare(b.name);
+  }).map(s=>{
+    const k=s.name+'|'+s.period;
+    const prof=profileLookup[k]||{};
+    const sess=sessionSm[k]||{total_minutes:0,session_count:0,last_seen:''};
+    let vocabCount=0;
+    try{const vp=JSON.parse(prof.vocab_passed||'{}');vocabCount=Object.values(vp).filter(Boolean).length;}catch(e){}
+    const avgAcc=s.units_completed>0?Math.round(s.avg_accuracy/s.units_completed):0;
+    const avgAttempts=s.units_completed>0?(s.attempts_total/s.units_completed).toFixed(1):0;
+    const avgMinPerSession=sess.session_count>0?Math.round(sess.total_minutes/sess.session_count):0;
+    const lastSeen=sess.last_seen?new Date(sess.last_seen).toLocaleDateString('en-US'):'';
+    return[
+      s.name, prof.full_name||s.name, s.period||'',
+      s.units_completed, s.total_score, avgAcc,
+      s.gold_trophies, s.historian_trophies, vocabCount, prof.gold||0,
+      sess.total_minutes, sess.session_count, avgMinPerSession, lastSeen,
+      avgAttempts,
+      ...unitIds.map(id=>s.unit_scores[id]!==undefined?s.unit_scores[id]:'')
+    ];
+  });
+
+  const csv=[headers,...rows].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  const date=new Date().toISOString().slice(0,10);
+  a.download=`american-chronicles-export-${date}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  notify('✅ CSV exported!');
+}
 // ── UTILS ─────────────────────────────────────────────
 function notify(msg){const n=document.createElement('div');n.className='notif';n.textContent=msg;document.body.appendChild(n);setTimeout(()=>n.remove(),3200);}
 // onUnitComplete wired via message listener above
