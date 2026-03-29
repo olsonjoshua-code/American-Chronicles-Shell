@@ -3244,17 +3244,17 @@ async function renderTrophyRoom(){
     const tc=TIER_COLOR[tier],te=TIER_EMOJI[tier],tl=TIER_LABEL[tier];
     const grey=tier==='empty';
     const mc=grey?'var(--border)':tc;
-    return `<div style="background:var(--bg2);border:1px solid ${grey?'var(--border)':tc};display:flex;align-items:center;gap:10px;padding:8px 10px;animation:floatIn .3s ease ${idx*.03}s both">
-      <div style="width:32px;height:32px;border-radius:50%;background:var(--bg3);border:2px solid ${mc};display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0">${grey?'🎖️':te}</div>
+    return `<div style="background:${grey?'var(--bg)':'var(--bg2)'};border:1px solid ${grey?'var(--border)':tc};display:flex;align-items:center;gap:10px;padding:8px 10px;animation:floatIn .3s ease ${idx*.03}s both;opacity:${grey?'.4':'1'}">
+      <div style="width:32px;height:32px;border-radius:50%;background:${grey?'rgba(255,255,255,.03)':'var(--bg3)'};border:2px solid ${mc};display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;filter:${grey?'grayscale(1)':'none'}">${grey?'🎖️':te}</div>
       <div style="flex:1;min-width:0">
         <div style="font-family:var(--dm);font-size:7px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase">${deck.label}</div>
-        <div style="font-family:var(--playfair);font-size:11px;color:var(--cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${deck.title}</div>
+        <div style="font-family:var(--playfair);font-size:11px;color:${grey?'var(--text3)':'var(--cream)'};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${deck.title}</div>
       </div>
       <div style="text-align:right;flex-shrink:0">
         ${score!==null
           ?`<div style="font-family:var(--bebas);font-size:14px;color:${tc}">${score}%</div>
             <div style="font-family:var(--dm);font-size:7px;color:${tc};letter-spacing:.5px">${tl}</div>`
-          :`<div style="font-family:var(--dm);font-size:8px;color:var(--text3);font-style:italic">Not taken</div>`}
+          :`<div style="font-family:var(--dm);font-size:8px;color:var(--text3);font-style:italic">—</div>`}
       </div>
     </div>`;
   });
