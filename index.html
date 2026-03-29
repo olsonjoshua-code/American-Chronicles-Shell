@@ -1933,13 +1933,8 @@ async function boot(){
   loadS();
 
   if(S.setupDone && !S.isGuest && S.name){
-    if(returningFromGame){
-      // Coming back mid-session from a unit game or flashcards — skip straight in
-      enterShell();
-    } else {
-      // Fresh page load by a returning student — show "Continue as" confirmation
-      showContinueScreen();
-    }
+    // Always go straight to shell — no confirmation needed on return
+    enterShell();
   } else {
     document.getElementById('title-screen').style.display='flex';
   }
@@ -2173,6 +2168,24 @@ async function syncFromSupabase(){
   let changed=false;
   rows.forEach(r=>{if(!S.unitsCompleted.includes(r.unit_id)&&r.best_accuracy>=60){S.unitsCompleted.push(r.unit_id);changed=true;}});
   awardBadges();checkUnlocks();
+  // Also pull gold from profile so it's always current on login
+  if(S.fullName&&S.period){
+    try{
+      const fresh=await loadProfileByName(S.fullName,S.period);
+      if(fresh){
+        const freshGold=fresh.gold||0;
+        if(freshGold>=(S.gold||0)){
+          S.gold=freshGold;
+          S.goldEarned=Math.max(S.goldEarned||0,fresh.gold_earned||0);
+          S.goldSpent=fresh.gold_spent||0;
+          S.goldBestRun=fresh.gold_best_run||0;
+          try{const gl=JSON.parse(fresh.gold_ledger||'[]');if(Array.isArray(gl)&&gl.length)S.goldLedger=gl;}catch(e){}
+          updateHUDGold();
+          changed=true;
+        }
+      }
+    }catch(e){}
+  }
   if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();
   // Refresh new views if they are currently open
   const activeView=document.querySelector('.view.active');
