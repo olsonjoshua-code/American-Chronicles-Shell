@@ -2021,7 +2021,37 @@ function renderTitleArt(){
 
 // ── TITLE ACTIONS ─────────────────────────────────────
 function toggleTeacherBox(){const b=document.getElementById('teacher-box'),l=document.getElementById('teacher-toggle-lbl');const open=b.style.display!=='block';b.style.display=open?'block':'none';l.textContent=open?'Cancel':'Teacher Login';if(open)document.getElementById('teacher-input').focus();}
-function submitTeacher(){const inp=document.getElementById('teacher-input'),err=document.getElementById('teacher-err');if(inp.value.trim().toLowerCase()===TEACHER_PWD){IS_TEACHER=true;S.isTeacher=true;S.name=S.name||'Mr. Olson';S.setupDone=true;saveS();inp.value='';document.getElementById('teacher-box').style.display='none';enterShell();}else{err.textContent='Incorrect code.';inp.value='';}}
+async function submitTeacher(){
+  const inp=document.getElementById('teacher-input'),err=document.getElementById('teacher-err');
+  if(inp.value.trim().toLowerCase()===TEACHER_PWD){
+    IS_TEACHER=true;S.isTeacher=true;S.name=S.name||'Mr. Olson';S.setupDone=true;
+    inp.value='';document.getElementById('teacher-box').style.display='none';
+    try{
+      const rows=await sfetch('/rest/v1/ac_profiles?period=eq.teacher&name=eq.Mr.%20Olson&select=*');
+      if(Array.isArray(rows)&&rows[0]){
+        const p=rows[0];
+        S.gold=p.gold||0;
+        S.goldEarned=p.gold_earned||0;
+        S.goldSpent=p.gold_spent||0;
+        S.goldBestRun=p.gold_best_run||0;
+        try{const gl=JSON.parse(p.gold_ledger||'[]');if(Array.isArray(gl))S.goldLedger=gl;}catch(e){}
+        try{const uc=JSON.parse(p.units_completed||'[]');if(Array.isArray(uc))S.unitsCompleted=uc;}catch(e){}
+        try{const be=JSON.parse(p.badges_earned||'[]');if(Array.isArray(be))S.badgesEarned=be;}catch(e){}
+        try{const ul=JSON.parse(p.unlocked||'[]');if(Array.isArray(ul)&&ul.length)S.unlocked=ul;}catch(e){}
+        try{const ub=JSON.parse(p.unit_badges||'{}');S.unitBadges=ub;}catch(e){}
+        try{const vp=JSON.parse(p.vocab_passed||'{}');S.vocabPassed=vp;}catch(e){}
+        try{const vbs=JSON.parse(p.vocab_best_score||'{}');
+          if(vbs._eoc_pct!=null){S.eocBest=vbs._eoc_pct;delete vbs._eoc_pct;}
+          if(vbs._eoc_scale!=null){S.eocBestScale=vbs._eoc_scale;delete vbs._eoc_scale;}
+          S.vocabBestScore=vbs;}catch(e){}
+        try{const fs=JSON.parse(p.flashcards_studied||'{}');S.flashcardsStudied=fs;}catch(e){}
+        S.avatar=p.avatar||S.avatar;
+      }
+    }catch(e){}
+    saveS();
+    enterShell();
+  }else{err.textContent='Incorrect code.';inp.value='';}
+}
 function startNewProfile(){document.getElementById('title-screen').style.display='none';const ss=document.getElementById('setup-screen');ss.style.display='flex';buildStarterGrid();buildPeriodGrid();previewSetup();}
 function _returnFromGame(){
   // Returns true if we just came back from a unit game (suppress welcome card)
@@ -2173,6 +2203,24 @@ async function syncFromSupabase(){
   let changed=false;
   rows.forEach(r=>{if(!S.unitsCompleted.includes(r.unit_id)&&r.best_accuracy>=60){S.unitsCompleted.push(r.unit_id);changed=true;}});
   awardBadges();checkUnlocks();
+  // Pull gold from profile so it's always current on login
+  if(S.fullName&&S.period){
+    try{
+      const fresh=await loadProfileByName(S.fullName,S.period);
+      if(fresh){
+        const freshGold=fresh.gold||0;
+        if(freshGold>=(S.gold||0)){
+          S.gold=freshGold;
+          S.goldEarned=Math.max(S.goldEarned||0,fresh.gold_earned||0);
+          S.goldSpent=fresh.gold_spent||0;
+          S.goldBestRun=fresh.gold_best_run||0;
+          try{const gl=JSON.parse(fresh.gold_ledger||'[]');if(Array.isArray(gl)&&gl.length)S.goldLedger=gl;}catch(e){}
+          updateHUDGold();
+          changed=true;
+        }
+      }
+    }catch(e){}
+  }
   if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();
   // Refresh new views if they are currently open
   const activeView=document.querySelector('.view.active');
