@@ -2235,7 +2235,7 @@ window.addEventListener('beforeunload',()=>{ if(_sessionStart)logSessionEnd('unl
 
 function enterShell(){
   try{sessionStorage.setItem('ac_shell_active','1');}catch(e){}
-  document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name)syncFromSupabase();}}else{if(!S.isGuest&&S.name)syncFromSupabase();}
+  document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();renderVocabMedals();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name)syncFromSupabase();}}else{if(!S.isGuest&&S.name)syncFromSupabase();}
   // Start tracking this session
   setTimeout(()=>logSessionStart(), 1000);
 }
@@ -2904,6 +2904,7 @@ function _pollVocabResult(deckId){
       if(d.gold){S.gold=(S.gold||0)+d.gold;awardGold(d.gold,'Vocab Check',deckId,true);}
       saveS();
       updateHUDGold();
+      renderVocabMedals();
       notify(`✅ Vocab Check recorded: ${d.score}%${d.passed?' — Passed!':''}`);
     }catch(e){}
   },2000);
@@ -2943,6 +2944,7 @@ window.addEventListener('message',e=>{
     if(x){S.xp=(S.xp||0)+x;notify(`⭐ +${x} XP earned!`);}
     saveS();
     updateHUDGold();
+    renderVocabMedals();
   }
   if(e.data?.type==='unitComplete'&&e.data.unitId)onUnitComplete(e.data.unitId);
 });
