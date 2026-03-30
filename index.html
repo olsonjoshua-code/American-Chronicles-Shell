@@ -215,8 +215,8 @@ body::before{content:'';position:fixed;inset:0;
 .trophy-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(164px,1fr));gap:12px;margin-bottom:28px}
 
 /* ── Vocab Medal Section ── */
-.vocab-medal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:28px}
-.vocab-medal-card{background:var(--bg2);border:1px solid var(--border);padding:10px 8px 10px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;position:relative;transition:all .2s;cursor:default}
+.vocab-medal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:28px}
+.vocab-medal-card{background:var(--bg2);border:1px solid var(--border);padding:8px 6px 8px;display:flex;flex-direction:row;align-items:center;gap:8px;text-align:left;position:relative;transition:all .2s;cursor:default}
 .vocab-medal-card.empty{opacity:.38}
 .vocab-medal-card.earned{border-color:rgba(128,96,200,.5)}
 .vocab-medal-card.earned:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.5)}
@@ -225,10 +225,12 @@ body::before{content:'';position:fixed;inset:0;
 .vocab-medal-card.tier-silver{border-color:rgba(200,200,216,.4)}
 .vocab-medal-card.tier-bronze{border-color:rgba(205,127,50,.45)}
 .vocab-medal-card.tier-passed{border-color:rgba(56,160,80,.4)}
+.vocab-medal-info{display:flex;flex-direction:column;gap:2px;min-width:0}
 .vocab-medal-unit{font-family:var(--dm);font-size:7px;color:var(--text3);letter-spacing:2px;text-transform:uppercase}
 .vocab-medal-title{font-family:var(--playfair);font-size:9px;color:var(--cream);line-height:1.3}
 .vocab-medal-score{font-family:var(--bebas);font-size:15px}
 .vocab-medal-lbl{font-family:var(--dm);font-size:7px;letter-spacing:1px}
+@media(max-width:700px){.vocab-medal-grid{grid-template-columns:repeat(2,1fr)}}
 
 .trophy-card{background:var(--bg2);border:1px solid var(--border);text-align:center;position:relative;overflow:hidden;transition:all .22s;cursor:default}
 .trophy-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.5)}
@@ -3394,12 +3396,9 @@ function renderVocabMedals(){
   const grid=document.getElementById('vocab-medal-grid');
   if(!grid)return;
 
-  // Only standard units with a deck — exclude midterm, EOC practice, and themes
+  // Standard units + themes + midterm — exclude EOC practice only
   const medalUnits=UNIT_DATA.filter(u=>
     !u.isCampaign &&
-    !u.isCheckpoint &&
-    !u.id.startsWith('theme_') &&
-    u.id!=='eoc_midterm' &&
     u.id!=='eoc_practice' &&
     DECK_MAP[u.id]
   );
@@ -3416,26 +3415,19 @@ function renderVocabMedals(){
   function medalSVG(m, score){
     const star = m.tier==='perfect'
       ? `<text x="32" y="37" text-anchor="middle" font-size="13" fill="${m.ringA}" opacity=".9">★</text>` : '';
-    return `<svg viewBox="0 0 64 72" width="56" height="63" xmlns="http://www.w3.org/2000/svg">
-      <!-- ribbon left -->
+    return `<svg viewBox="0 0 64 72" width="40" height="45" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
       <rect x="22" y="0" width="9" height="22" rx="2" fill="${m.ribbon}" opacity=".9" transform="rotate(-12,26,11)"/>
-      <!-- ribbon right -->
       <rect x="33" y="0" width="9" height="22" rx="2" fill="${m.ribbon}" opacity=".75" transform="rotate(12,38,11)"/>
-      <!-- outer ring -->
       <circle cx="32" cy="42" r="24" fill="${m.ringB}"/>
-      <!-- inner ring -->
       <circle cx="32" cy="42" r="20" fill="${m.color}"/>
-      <!-- face -->
       <circle cx="32" cy="42" r="16" fill="${m.ringB}" opacity=".35"/>
-      <!-- score text -->
       <text x="32" y="46" text-anchor="middle" font-family="'Bebas Neue',sans-serif" font-size="14" fill="#fff" opacity=".95">${score}%</text>
       ${star}
     </svg>`;
   }
 
-  // Empty card SVG — matches the greyed-out trophy card look
   function emptySVG(){
-    return `<svg viewBox="0 0 64 72" width="56" height="63" xmlns="http://www.w3.org/2000/svg">
+    return `<svg viewBox="0 0 64 72" width="40" height="45" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
       <rect x="22" y="0" width="9" height="22" rx="2" fill="#5c4030" opacity=".5" transform="rotate(-12,26,11)"/>
       <rect x="33" y="0" width="9" height="22" rx="2" fill="#5c4030" opacity=".4" transform="rotate(12,38,11)"/>
       <circle cx="32" cy="42" r="24" fill="#3a2a1a"/>
@@ -3455,12 +3447,14 @@ function renderVocabMedals(){
 
     return`<div class="vocab-medal-card ${tierClass}" style="animation:floatIn .3s ease ${idx*.03}s both">
       ${hasMedal ? medalSVG(m, score) : emptySVG()}
-      <div class="vocab-medal-unit">${u.num}</div>
-      <div class="vocab-medal-title" style="${hasMedal?'':'color:var(--text3)'}">${u.title}</div>
-      ${hasMedal
-        ?`<div class="vocab-medal-lbl" style="color:${m.color};letter-spacing:1px">${m.label}</div>`
-        :`<div class="vocab-medal-lbl" style="color:var(--text3)">Not yet passed</div>`
-      }
+      <div class="vocab-medal-info">
+        <div class="vocab-medal-unit">${u.num}</div>
+        <div class="vocab-medal-title" style="${hasMedal?'':'color:var(--text3)'}">${u.title}</div>
+        ${hasMedal
+          ?`<div class="vocab-medal-lbl" style="color:${m.color};letter-spacing:1px">${m.label}</div>`
+          :`<div class="vocab-medal-lbl" style="color:var(--text3)">Not passed</div>`
+        }
+      </div>
     </div>`;
   });
   grid.innerHTML=cards.join('');
