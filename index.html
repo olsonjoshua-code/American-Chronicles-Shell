@@ -745,6 +745,28 @@ body::before{content:'';position:fixed;inset:0;
   <button class="btn sm" onclick="resetProfile()" style="border-color:var(--border2);color:var(--text3);font-size:9px"><span>↺ Reset Profile</span></button>
   <button class="btn sm" onclick="signOut()" style="border-color:var(--red2);color:var(--red2);font-size:9px"><span>⇥ Sign Out</span></button>
 </div>
+
+      <!-- In-shell teacher login -->
+      <div id="profile-teacher-login" style="margin-top:22px;border-top:1px solid var(--border2);padding-top:16px">
+        <div class="sh" style="font-size:13px;margin-bottom:10px">Teacher Access</div>
+        <div id="profile-teacher-step1">
+          <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:7px">Select your name to access the dashboard.</div>
+          <div id="profile-teacher-list" style="display:flex;flex-direction:column;gap:5px;margin-bottom:6px">
+            <div style="font-family:var(--dm);font-size:9px;color:var(--text3)">Loading…</div>
+          </div>
+        </div>
+        <div id="profile-teacher-step2" style="display:none">
+          <div id="profile-teacher-selected-lbl" style="font-family:var(--bebas);font-size:14px;color:var(--teal2);letter-spacing:2px;margin-bottom:6px"></div>
+          <input id="profile-teacher-input" type="password" maxlength="24"
+            style="font-family:var(--bebas);font-size:15px;letter-spacing:3px;background:var(--bg2);border:1.5px solid var(--teal);color:var(--cream);padding:9px;width:100%;outline:none;text-align:center;text-transform:uppercase;margin-bottom:6px"
+            placeholder="ENTER YOUR CODE" onkeydown="if(event.key==='Enter')submitTeacherFromProfile()">
+          <div style="display:flex;gap:6px">
+            <button class="btn sm" onclick="profileTeacherBack()" style="border-color:var(--border2);color:var(--text3);flex:0 0 auto"><span>← Back</span></button>
+            <button class="btn full teal" onclick="submitTeacherFromProfile()"><span>Log In →</span></button>
+          </div>
+        </div>
+        <div id="profile-teacher-err" style="font-family:var(--dm);font-size:10px;color:var(--red2);min-height:14px;margin-top:4px"></div>
+      </div>
     </div>
 
     <!-- STORY VIEW -->
@@ -2142,6 +2164,75 @@ function teacherBackToList(){
   document.getElementById('teacher-err').textContent='';
 }
 
+// ── IN-SHELL TEACHER LOGIN (Profile view) ─────────────
+async function loadProfileTeacherPanel(){
+  // Hide panel if already a teacher
+  const panel=document.getElementById('profile-teacher-login');
+  if(!panel)return;
+  if(IS_TEACHER){panel.style.display='none';return;}
+  panel.style.display='block';
+  document.getElementById('profile-teacher-step1').style.display='block';
+  document.getElementById('profile-teacher-step2').style.display='none';
+  document.getElementById('profile-teacher-err').textContent='';
+  const list=document.getElementById('profile-teacher-list');
+  const teachers=await loadTeacherList();
+  if(!teachers.length){
+    list.innerHTML='<div style="font-family:var(--dm);font-size:9px;color:var(--text3)">No teachers found.</div>';
+    return;
+  }
+  list.innerHTML=teachers.map(t=>`
+    <div onclick="profileSelectTeacher('${t.id}','${t.display_name.replace(/'/g,"\\'")}' )"
+      style="background:var(--bg2);border:1.5px solid var(--border2);color:var(--cream);font-family:var(--playfair);font-size:13px;padding:9px 14px;cursor:pointer;transition:all .15s;font-style:italic"
+      onmouseenter="this.style.borderColor='var(--teal)'" onmouseleave="this.style.borderColor='var(--border2)'">
+      ${t.display_name}
+    </div>`).join('');
+}
+
+function profileSelectTeacher(id, name){
+  _selectedTeacherId=id;
+  document.getElementById('profile-teacher-step1').style.display='none';
+  document.getElementById('profile-teacher-step2').style.display='block';
+  document.getElementById('profile-teacher-selected-lbl').textContent='Welcome, '+name;
+  document.getElementById('profile-teacher-input').value='';
+  document.getElementById('profile-teacher-err').textContent='';
+  document.getElementById('profile-teacher-input').focus();
+}
+
+function profileTeacherBack(){
+  _selectedTeacherId=null;
+  document.getElementById('profile-teacher-step1').style.display='block';
+  document.getElementById('profile-teacher-step2').style.display='none';
+  document.getElementById('profile-teacher-err').textContent='';
+}
+
+async function submitTeacherFromProfile(){
+  const inp=document.getElementById('profile-teacher-input');
+  const err=document.getElementById('profile-teacher-err');
+  const code=inp.value.trim();
+  if(!code){err.textContent='Enter your code.';return;}
+  if(!_selectedTeacherId){err.textContent='Select your name first.';return;}
+  err.textContent='Verifying…';
+  try{
+    const rows=await sfetch(`/rest/v1/ac_teachers?id=eq.${_selectedTeacherId}&code=ilike.${encodeURIComponent(code)}&select=id,display_name,periods`);
+    if(!Array.isArray(rows)||!rows[0]){
+      err.textContent='Incorrect code. Try again.';
+      inp.value='';
+      return;
+    }
+    const teacher=rows[0];
+    IS_TEACHER=true;
+    _currentTeacher={id:teacher.id,name:teacher.display_name,periods:teacher.periods||[]};
+    S.isTeacher=true;
+    saveS();
+    inp.value='';
+    document.getElementById('nav-teacher').style.display='inline-block';
+    document.getElementById('profile-teacher-login').style.display='none';
+    showView('teacher');
+  }catch(e){
+    err.textContent='Login failed. Check connection.';
+  }
+}
+
 async function submitTeacher(){
   const inp=document.getElementById('teacher-input');
   const err=document.getElementById('teacher-err');
@@ -2481,7 +2572,7 @@ function showView(v){
   if(v==='trophies')renderTrophyRoom();
   if(v==='characters')renderCharRoom();
   if(v==='teacher')renderTeacherView();
-  if(v==='profile'){refreshProfile();renderBadges();}
+  if(v==='profile'){refreshProfile();renderBadges();loadProfileTeacherPanel();}
   if(v==='archive')renderArchive();
   if(v==='wallet')renderWallet();
 }
