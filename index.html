@@ -127,7 +127,7 @@ body::before{content:'';position:fixed;inset:0;
 .name-input:focus{border-color:var(--amber)}.name-input::placeholder{color:var(--text3)}
 
 /* ── HUD ── */
-#shell{display:none;min-height:100vh;flex-direction:column;margin:12px;border:1px solid var(--border2);border-radius:2px;overflow-y:auto;overflow-x:hidden}
+#shell{display:none;min-height:100vh;flex-direction:column;margin:12px;border:1px solid var(--border2);border-radius:2px;overflow-y:auto;overflow-x:clip}
 #shell.active{display:flex}
 #hud{background:linear-gradient(180deg,rgba(13,10,8,.98),rgba(20,16,13,.95));border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:300;backdrop-filter:blur(12px)}
 .hud-inner{display:flex;align-items:center;gap:14px;padding:7px 20px;width:100%}
@@ -147,7 +147,7 @@ body::before{content:'';position:fixed;inset:0;
 .nav-btn:hover{color:var(--amber);border-bottom-color:rgba(232,160,32,.4)}.nav-btn.active{color:var(--amber);border-bottom-color:var(--amber);background:rgba(232,160,32,.04)}
 
 /* ── VIEWS ── */
-.view{display:none;padding:10px 0 40px;width:100%}
+.view{display:none;padding:10px 0 40px;width:100%;min-width:0}
 .view.active{display:block;animation:fadeIn .35s ease}
 
 /* ── TIMELINE ── */
@@ -582,7 +582,7 @@ body::before{content:'';position:fixed;inset:0;
 
     <!-- TIMELINE VIEW -->
     <div id="view-timeline" class="view active">
-      <div class="course-intro">
+      <div class="course-intro" style="margin:0 10px 10px">
         <div style="font-size:34px;flex-shrink:0">🏛️</div>
         <div style="flex:1"><div style="font-family:var(--bebas);font-size:10px;color:var(--text3);letter-spacing:3px;margin-bottom:4px">OVERARCHING COURSE QUESTION</div>
           <div class="course-q">"What does it mean to be an American — and who gets to decide?"</div>
@@ -602,7 +602,7 @@ body::before{content:'';position:fixed;inset:0;
         </div>
       </div>
       <!-- themes -->
-      <div style="margin-top:14px">
+      <div style="margin:14px 10px 0">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
           <div style="font-family:var(--bebas);font-size:9px;color:var(--text3);letter-spacing:3px">FIVE RECURRING THEMES</div>
           <div style="flex:1;height:1px;background:var(--border)"></div>
@@ -639,7 +639,7 @@ body::before{content:'';position:fixed;inset:0;
       </div>
 
       <!-- midterm & eoc checkpoint cards -->
-      <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+      <div style="margin:8px 10px 10px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
         <div id="midterm-card" onclick="openPreview('eoc_midterm')" style="cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(40,80,160,.18) 0%,rgba(20,16,13,.95) 60%);border:1.5px solid var(--blue2);padding:10px 14px;display:flex;align-items:center;gap:12px;transition:all .2s" onmouseenter="this.style.boxShadow='0 0 20px rgba(72,120,208,.25)'" onmouseleave="this.style.boxShadow='none'">
           <div style="font-size:22px;flex-shrink:0">📋</div>
           <div style="flex:1;min-width:0">
