@@ -128,8 +128,11 @@ body::before{content:'';position:fixed;inset:0;
 .name-input:focus{border-color:var(--amber)}.name-input::placeholder{color:var(--text3)}
 
 /* ── HUD ── */
-#shell{display:none;min-height:100vh;flex-direction:column;margin:12px;border:1px solid var(--border2);border-radius:2px;overflow-x:hidden}
+#shell{display:none;height:100vh;flex-direction:column;align-items:stretch;margin:12px;border:1px solid var(--border2);border-radius:2px;overflow:hidden}
 #shell.active{display:flex}
+#views-container{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;}
+#view-timeline{display:none;flex-direction:column;padding:10px 0 0;height:100%;}
+#view-timeline.active{display:flex;animation:fadeIn .35s ease}
 #hud{background:linear-gradient(180deg,rgba(13,10,8,.98),rgba(20,16,13,.95));border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:300;backdrop-filter:blur(12px)}
 .hud-inner{display:flex;align-items:center;gap:14px;padding:7px 20px;width:100%}
 .hud-row1{display:contents}
@@ -148,28 +151,30 @@ body::before{content:'';position:fixed;inset:0;
 .nav-btn:hover{color:var(--amber);border-bottom-color:rgba(232,160,32,.4)}.nav-btn.active{color:var(--amber);border-bottom-color:var(--amber);background:rgba(232,160,32,.04)}
 
 /* ── VIEWS ── */
-#views-container{flex:1;min-height:0;padding:0 10px;}
+#views-container{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;}
 .view{display:none;padding:10px 0 40px;width:100%}
 .view.active{display:block;animation:fadeIn .35s ease}
+#view-timeline{display:none;flex-direction:column;padding:10px 0 0;height:100%;}
+#view-timeline.active{display:flex;animation:fadeIn .35s ease}
+#tl-outer{flex:1;border:1px solid var(--border2);background:var(--bg2);user-select:none;position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:320px;}
 
 /* ── TIMELINE ── */
 .course-intro{background:var(--bg2);border:1px solid var(--border2);border-left:3px solid var(--amber);padding:10px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px}
 .course-q{font-family:var(--playfair);font-size:14px;color:var(--cream);font-style:italic;line-height:1.4}
-#tl-outer{border:1px solid var(--border2);background:var(--bg2);user-select:none;position:relative;overflow:hidden}
 #era-bar{height:26px;background:var(--bg2);border-bottom:1px solid var(--border2);position:absolute;top:0;left:0;right:0;z-index:10;pointer-events:none;overflow:hidden;}
 #era-bar-inner{display:flex;height:100%;white-space:nowrap;position:absolute;top:0;left:0;}
 .era-seg{display:inline-flex;align-items:center;padding:0 12px;font-family:var(--bebas);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.8);white-space:nowrap;border-right:1px solid rgba(255,255,255,.12);flex-shrink:0}
-#tl-track{overflow-x:auto;overflow-y:hidden;cursor:grab;padding-bottom:8px;padding-top:26px;}
+#tl-track{overflow-x:auto;overflow-y:hidden;cursor:grab;padding-top:26px;flex:1;}
 #tl-track:active{cursor:grabbing}
 #tl-track::-webkit-scrollbar{height:4px}::-webkit-scrollbar-thumb{background:var(--border2)}
-#tl-inner{display:flex;align-items:flex-start;padding:12px 20px 0;position:relative;min-height:280px}
-#tl-spine{position:absolute;top:136px;left:0;right:0;height:2px;background:var(--border);pointer-events:none;z-index:0}
-#tl-spine-done{position:absolute;top:136px;left:20px;height:2px;background:linear-gradient(90deg,var(--amber2),var(--amber3));width:0;transition:width .8s;pointer-events:none;z-index:1}
-.tl-conn{width:28px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:calc(136px - 1px);position:relative;z-index:2}
+#tl-inner{display:inline-flex;align-items:stretch;padding:12px 20px;position:relative;min-height:100%;}
+#tl-spine{position:absolute;top:50%;left:0;right:0;height:2px;background:var(--border);pointer-events:none;z-index:0;transform:translateY(-50%)}
+#tl-spine-done{position:absolute;top:50%;left:20px;height:2px;background:linear-gradient(90deg,var(--amber2),var(--amber3));width:0;transition:width .8s;pointer-events:none;z-index:1;transform:translateY(-50%)}
+.tl-conn{width:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:2;}
 .tl-conn-line{width:28px;height:2px;background:var(--border);position:relative}
 .tl-conn-line::after{content:'';position:absolute;right:-1px;top:50%;transform:translateY(-50%);border-left:6px solid var(--border);border-top:3px solid transparent;border-bottom:3px solid transparent}
 .tl-conn.done .tl-conn-line{background:var(--amber2)}.tl-conn.done .tl-conn-line::after{border-left-color:var(--amber2)}
-.tl-div{width:2px;height:16px;background:var(--border2);flex-shrink:0;align-self:flex-end;margin-bottom:calc(136px - 8px);position:relative;z-index:2}
+.tl-div{width:2px;background:var(--border2);flex-shrink:0;align-self:stretch;position:relative;z-index:2}
 
 .unit-card{flex-shrink:0;width:230px;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:all .2s;position:relative;overflow:hidden;display:flex;flex-direction:column;z-index:2}
 .unit-card::after{content:'';position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;background:var(--bg2);border:2px solid var(--border2);z-index:3}
@@ -179,7 +184,7 @@ body::before{content:'';position:fixed;inset:0;
 .unit-card.selected{border-color:var(--amber)!important;box-shadow:0 0 20px rgba(232,160,32,.4)!important;transform:translateY(-4px)!important}
 .unit-card.done{border-color:var(--green)}
 .unit-card-strip{height:3px;width:100%}
-.unit-card-art{width:100%;height:100px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.unit-card-art{width:100%;height:80px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
 .unit-card-icon{font-size:44px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.7))}
 .unit-card-year{position:absolute;bottom:4px;right:6px;font-family:var(--bebas);font-size:10px;color:rgba(240,232,216,.35);letter-spacing:1px}
 .unit-card-body{padding:10px 11px 11px;flex:1;display:flex;flex-direction:column;position:relative}
@@ -641,7 +646,7 @@ body::before{content:'';position:fixed;inset:0;
       </div>
 
       <!-- midterm & eoc checkpoint cards -->
-      <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+      <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;padding-bottom:12px">
         <div id="midterm-card" onclick="openPreview('eoc_midterm')" style="cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(40,80,160,.18) 0%,rgba(20,16,13,.95) 60%);border:1.5px solid var(--blue2);padding:10px 14px;display:flex;align-items:center;gap:12px;transition:all .2s" onmouseenter="this.style.boxShadow='0 0 20px rgba(72,120,208,.25)'" onmouseleave="this.style.boxShadow='none'">
           <div style="font-size:22px;flex-shrink:0">📋</div>
           <div style="flex:1;min-width:0">
@@ -2658,7 +2663,7 @@ function renderTimeline(){
     units.forEach((u,idx)=>{
       if(idx>0){const co=document.createElement('div');const ps=unitStatus(units[idx-1].id);co.className='tl-conn'+(ps==='done'?' done':'');co.innerHTML='<div class="tl-conn-line"></div>';inner.appendChild(co);}
       const st=unitStatus(u.id);
-      const card=document.createElement('div');card.className=`unit-card view ${st}`;card.setAttribute('data-uid',u.id);card.setAttribute('data-era',eraIdx);card.onclick=()=>openPreview(u.id);
+      const card=document.createElement('div');card.className=`unit-card ${st}`;card.setAttribute('data-uid',u.id);card.setAttribute('data-era',eraIdx);card.onclick=()=>openPreview(u.id);
       const statusBadge=st==='done'
         ?`<div class="unit-card-status-row"><div class="unit-status us-done">✓ Completed</div></div>`
         :`<div class="unit-card-status-row"><div class="unit-status us-play">▶ Play Now</div></div>`;
@@ -2706,8 +2711,7 @@ function renderTimeline(){
       const firstCard=group.cards[0];
       const lastCard=group.cards[group.cards.length-1];
       const startX=firstCard.offsetLeft;
-      const nextGroup=arr[i+1];
-      const endX=nextGroup?nextGroup.cards[0].offsetLeft:lastCard.offsetLeft+lastCard.offsetWidth;
+      const endX=lastCard.offsetLeft+lastCard.offsetWidth;
       const w=endX-startX;
       const el=document.createElement('div');
       el.className='era-seg';
