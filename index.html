@@ -128,8 +128,9 @@ body::before{content:'';position:fixed;inset:0;
 .name-input:focus{border-color:var(--amber)}.name-input::placeholder{color:var(--text3)}
 
 /* ── HUD ── */
-#shell{display:none;flex-direction:column;margin:12px;border:1px solid var(--border2);border-radius:2px;overflow-x:hidden}
+#shell{display:none;flex-direction:column;margin:12px;border:1px solid var(--border2);border-radius:2px;overflow-x:hidden;padding-bottom:16px}
 #shell.active{display:flex}
+#views-container{width:100%;min-width:0}
 #hud{background:linear-gradient(180deg,rgba(13,10,8,.98),rgba(20,16,13,.95));border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:300;backdrop-filter:blur(12px)}
 .hud-inner{display:flex;align-items:center;gap:14px;padding:7px 20px;width:100%}
 .hud-row1{display:contents}
@@ -148,7 +149,7 @@ body::before{content:'';position:fixed;inset:0;
 .nav-btn:hover{color:var(--amber);border-bottom-color:rgba(232,160,32,.4)}.nav-btn.active{color:var(--amber);border-bottom-color:var(--amber);background:rgba(232,160,32,.04)}
 
 /* ── VIEWS ── */
-.view{display:none;padding:10px 0 20px;width:100%}
+.view{display:none;padding:10px 10px 20px;width:100%}
 .view.active{display:block;animation:fadeIn .35s ease}
 #tl-outer{border:1px solid var(--border2);background:var(--bg2);user-select:none;position:relative;overflow:hidden;}
 
@@ -170,7 +171,7 @@ body::before{content:'';position:fixed;inset:0;
 .tl-conn.done .tl-conn-line{background:var(--amber2)}.tl-conn.done .tl-conn-line::after{border-left-color:var(--amber2)}
 .tl-div{width:2px;height:16px;background:var(--border2);flex-shrink:0;align-self:flex-end;margin-bottom:calc(122px - 8px);position:relative;z-index:2}
 
-.unit-card{flex-shrink:0;width:230px;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:all .2s;position:relative;overflow:hidden;display:flex;flex-direction:column;z-index:2}
+.unit-card{flex-shrink:0;width:230px;align-self:flex-start;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:all .2s;position:relative;overflow:hidden;display:flex;flex-direction:column;z-index:2}
 .unit-card::after{content:'';position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;background:var(--bg2);border:2px solid var(--border2);z-index:3}
 .unit-card.done::after{border-color:var(--green);background:var(--green)}
 .unit-card.inprogress::after{border-color:var(--teal2)}
