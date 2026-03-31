@@ -127,10 +127,11 @@ body::before{content:'';position:fixed;inset:0;
 .name-input:focus{border-color:var(--amber)}.name-input::placeholder{color:var(--text3)}
 
 /* ── HUD ── */
-#shell{display:none;flex-direction:column;margin:12px;border:1px solid var(--border2);border-radius:2px;overflow-x:hidden;padding-bottom:16px;}
-#shell.active{display:flex}
+#shell{display:none;margin:12px;margin-top:0;border:1px solid var(--border2);border-top:none;border-radius:0 0 2px 2px;overflow-x:hidden;padding-bottom:16px;}
+#shell.active{display:block}
 #views-container{width:100%;}
-#hud{width:100%;background:linear-gradient(180deg,rgba(13,10,8,.98),rgba(20,16,13,.95));border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:300;backdrop-filter:blur(12px);box-sizing:border-box;}
+#hud{display:none;width:calc(100% - 24px);margin:12px 12px 0 12px;background:linear-gradient(180deg,rgba(13,10,8,.98),rgba(20,16,13,.95));border:1px solid var(--border2);border-bottom:1px solid var(--border2);position:sticky;top:0;z-index:300;backdrop-filter:blur(12px);box-sizing:border-box;}
+#hud.active{display:block}
 .hud-inner{display:flex;align-items:center;gap:14px;padding:7px 20px;width:100%}
 .hud-row1{display:contents}
 .hud-row2{display:contents}
@@ -544,41 +545,41 @@ body::before{content:'';position:fixed;inset:0;
   </div>
 </div>
 
-<!-- SHELL -->
-<div id="shell">
-  <div id="hud">
-    <div class="hud-inner">
-      <div class="hud-row1">
-        <div class="hud-avatar" id="hud-avatar" onclick="showView('profile')" title="Profile"></div>
-        <div class="hud-info">
-          <div class="hud-name" id="hud-name">Historian</div>
-          <div class="hud-rank" id="hud-rank">Curious Citizen</div>
-          <div class="hud-bar"><div class="hud-bar-fill" id="hud-bar-fill" style="width:0%"></div></div>
-        </div>
-        <div class="hud-stats">
-          <div class="hud-stat">UNITS<span id="hstat-units">0</span></div>
-          <div class="hud-stat">TROPHIES<span id="hstat-trophies">0</span></div>
-          <div class="hud-stat">EOC<span id="hstat-eoc">—</span></div>
-          <div class="hud-stat">DONE<span id="hstat-pct">0%</span></div>
-          <div class="hud-stat gold-stat">🪙 GOLD<span id="hstat-gold">0</span></div>
-        </div>
+<!-- HUD (outside shell, fixed to top of shell border) -->
+<div id="hud">
+  <div class="hud-inner">
+    <div class="hud-row1">
+      <div class="hud-avatar" id="hud-avatar" onclick="showView('profile')" title="Profile"></div>
+      <div class="hud-info">
+        <div class="hud-name" id="hud-name">Historian</div>
+        <div class="hud-rank" id="hud-rank">Curious Citizen</div>
+        <div class="hud-bar"><div class="hud-bar-fill" id="hud-bar-fill" style="width:0%"></div></div>
       </div>
-      <div class="hud-row2">
-        <div class="hud-nav">
-          <button class="nav-btn active" id="nav-timeline" onclick="showView('timeline')">🗺 Timeline</button>
-          <button class="nav-btn" id="nav-trophies" onclick="showView('trophies')">🏆 Trophies</button>
-          <button class="nav-btn" id="nav-characters" onclick="showView('characters')">🎭 Characters</button>
-          <button class="nav-btn" id="nav-profile" onclick="showView('profile')">👤 Profile</button>
-          <button class="nav-btn" id="nav-teacher" onclick="showView('teacher')" style="display:none;color:var(--teal)">📊 Dashboard</button>
-          <!-- Hidden nav items — still navigable via JS but not shown in bar -->
-          <button class="nav-btn" id="nav-archive" onclick="showView('archive')" style="display:none">🃏 Collection</button>
-          <button class="nav-btn" id="nav-wallet" onclick="showView('wallet')" style="display:none">🪙 Gold</button>
-          <button class="nav-btn" id="nav-story" onclick="showView('story')" style="display:none">📜 Story</button>
-        </div>
+      <div class="hud-stats">
+        <div class="hud-stat">UNITS<span id="hstat-units">0</span></div>
+        <div class="hud-stat">TROPHIES<span id="hstat-trophies">0</span></div>
+        <div class="hud-stat">EOC<span id="hstat-eoc">—</span></div>
+        <div class="hud-stat">DONE<span id="hstat-pct">0%</span></div>
+        <div class="hud-stat gold-stat">🪙 GOLD<span id="hstat-gold">0</span></div>
+      </div>
+    </div>
+    <div class="hud-row2">
+      <div class="hud-nav">
+        <button class="nav-btn active" id="nav-timeline" onclick="showView('timeline')">🗺 Timeline</button>
+        <button class="nav-btn" id="nav-trophies" onclick="showView('trophies')">🏆 Trophies</button>
+        <button class="nav-btn" id="nav-characters" onclick="showView('characters')">🎭 Characters</button>
+        <button class="nav-btn" id="nav-profile" onclick="showView('profile')">👤 Profile</button>
+        <button class="nav-btn" id="nav-teacher" onclick="showView('teacher')" style="display:none;color:var(--teal)">📊 Dashboard</button>
+        <button class="nav-btn" id="nav-archive" onclick="showView('archive')" style="display:none">🃏 Collection</button>
+        <button class="nav-btn" id="nav-wallet" onclick="showView('wallet')" style="display:none">🪙 Gold</button>
+        <button class="nav-btn" id="nav-story" onclick="showView('story')" style="display:none">📜 Story</button>
       </div>
     </div>
   </div>
+</div>
 
+<!-- SHELL -->
+<div id="shell">
   <div id="views-container">
 
     <!-- TIMELINE VIEW -->
@@ -2039,7 +2040,7 @@ async function boot(){
 function showContinueScreen(){
   document.getElementById('title-screen').style.display='none';
   document.getElementById('setup-screen').style.display='none';
-  document.getElementById('shell').style.display='none';
+  document.getElementById('shell').style.display='none';document.getElementById('hud').style.display='none';
   const sc=document.getElementById('continue-screen');
   if(!sc)return;
   sc.style.display='flex';
@@ -2331,7 +2332,7 @@ window.addEventListener('beforeunload',()=>{ if(_sessionStart)logSessionEnd('unl
 
 function enterShell(){
   try{sessionStorage.setItem('ac_shell_active','1');}catch(e){}
-  document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='flex';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();renderVocabMedals();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name)syncFromSupabase();}}else{if(!S.isGuest&&S.name)syncFromSupabase();}
+  document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='block';document.getElementById('hud').style.display='block';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();renderVocabMedals();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name)syncFromSupabase();}}else{if(!S.isGuest&&S.name)syncFromSupabase();}
   // Start tracking this session
   setTimeout(()=>logSessionStart(), 1000);
 }
