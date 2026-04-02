@@ -1686,7 +1686,9 @@ function rateCard(rating, e) {
 function startQuiz() {
   hideAll();
   document.getElementById('quiz-screen').style.display = 'block';
-  quizQuestions = shuffleArray([...currentDeck.quiz]);
+  const shuffled = shuffleArray([...currentDeck.quiz]);
+  const count = Math.floor(Math.random() * 6) + 15; // 15–20 inclusive
+  quizQuestions = shuffled.slice(0, count);
   quizIndex     = 0;
   quizScore     = 0;
   quizAnswers   = [];
