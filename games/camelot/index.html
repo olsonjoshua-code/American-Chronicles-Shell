@@ -483,6 +483,36 @@ body.hud-active #root{padding-top:68px;}
   }catch(e){window.location.replace('https://olsonjoshua-code.github.io/American-Chronicles-Shell/');}
 })();
 </script>
+
+<!-- ═══════════════════════════════════════════════
+     AC ENGAGEMENT TRACKING MODULE v1.0
+═══════════════════════════════════════════════ -->
+<script>
+(function(){
+  const _SUPA_URL = 'https://dnmrwglrcvlbamzhlzlx.supabase.co';
+  const _SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRubXJ3Z2xyY3ZsYmFtemhsemx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NjA2OTEsImV4cCI6MjA4OTQzNjY5MX0.jEIM-dGgB0cUS0A6w31LJ5AK9QDCS_UqdVnPrb8dlXM';
+  const _SUPA_H   = {'Content-Type':'application/json','apikey':_SUPA_KEY,'Authorization':'Bearer '+_SUPA_KEY};
+  function _getStudent(){
+    try{ const s=JSON.parse(localStorage.getItem('ac_shell_state')||'{}'); return{name:s.name||'',period:s.period||''}; }catch(e){return{name:'',period:''};}
+  }
+  window._acEngQueue = window._acEngQueue || [];
+  window.acLogEvent = function(eventType, unitId, deckId, data, durationSeconds){
+    const st=_getStudent(); if(!st.name)return;
+    window._acEngQueue.push({student_name:st.name,period:st.period,event_type:eventType,unit_id:unitId||null,deck_id:deckId||null,data:data||null,duration_seconds:durationSeconds||null,created_at:new Date().toISOString()});
+  };
+  async function _flush(){
+    if(!window._acEngQueue.length)return;
+    const batch=window._acEngQueue.splice(0);
+    try{ await fetch(_SUPA_URL+'/rest/v1/ac_engagement',{method:'POST',headers:{..._SUPA_H,'Prefer':'return=minimal'},body:JSON.stringify(batch)}); }catch(e){}
+  }
+  setInterval(_flush,15000);
+  window.addEventListener('beforeunload',()=>{
+    if(!window._acEngQueue.length)return;
+    navigator.sendBeacon(_SUPA_URL+'/rest/v1/ac_engagement',new Blob([JSON.stringify(window._acEngQueue)],{type:'application/json'}));
+  });
+  window.acFlushEngagement=_flush;
+})();
+</script>
 </head>
 <body>
 
@@ -1964,6 +1994,12 @@ let momentum = 0;
 let streak = 0;
 let answeredCurrent = false;
 
+// ── ENGAGEMENT TRACKING VARS ──
+let _briefingOpenTime = null;
+let _lessonStartTime  = null;
+let _questionStartTime = null;
+
+
 // ════════════════════════════════════════════
 // GOLD WALLET — reads/writes the shared shell state
 // The shell is the single source of truth for gold.
@@ -2320,16 +2356,36 @@ function openBriefing(lessonId) {
 
   document.getElementById('briefing-modal').classList.add('show');
   window.scrollTo(0, 0);
+  _briefingOpenTime = Date.now();
+  acLogEvent('briefing_opened', 'unit7a', null, {
+    lesson_id:    lesson.id,
+    lesson_label: lesson.label,
+    lesson_title: lesson.title
+  }, null);
 }
 
 function closeBriefing() {
   document.getElementById('briefing-modal').classList.remove('show');
+  if (_briefingOpenTime) {
+    const briefSecs = Math.round((Date.now() - _briefingOpenTime) / 1000);
+    acLogEvent('briefing_closed_no_play', 'unit7a', null, {
+      lesson_id:    activeLesson ? activeLesson.id : null,
+      lesson_label: activeLesson ? activeLesson.label : null
+    }, briefSecs);
+    _briefingOpenTime = null;
+  }
   activeLesson = null;
 }
 
 function proceedToQuestions() {
   if (!activeLesson) return;
   document.getElementById('briefing-modal').classList.remove('show');
+  const briefSecs = _briefingOpenTime ? Math.round((Date.now() - _briefingOpenTime) / 1000) : null;
+  acLogEvent('briefing_proceeded', 'unit7a', null, {
+    lesson_id:    activeLesson.id,
+    lesson_label: activeLesson.label
+  }, briefSecs);
+  _briefingOpenTime = null;
   startLesson(activeLesson);
 }
 
@@ -2348,12 +2404,20 @@ function startLesson(lesson) {
   momentum = 0;
   streak = 0;
   answeredCurrent = false;
-
+  _lessonStartTime = Date.now();
+  _questionStartTime = Date.now();
+  acLogEvent('lesson_started', 'unit7a', null, {
+    lesson_id:    lesson.id,
+    lesson_label: lesson.label,
+    lesson_title: lesson.title,
+    question_count: activeQueue.length
+  }, null);
   showQuestionScreen();
   renderQuestion();
 }
 
 function renderQuestion() {
+  _questionStartTime = Date.now();
   if (activeQIdx >= activeQueue.length) {
     finishLesson();
     return;
@@ -2437,6 +2501,16 @@ function selectChoice(btn) {
   if (!isCorrect) btn.classList.add('incorrect');
 
   sessionTotal++;
+  const _qSecs = _questionStartTime ? Math.round((Date.now() - _questionStartTime) / 1000) : null;
+  acLogEvent('question_answered', 'unit7a', null, {
+    lesson_id:    activeLesson.id,
+    lesson_label: activeLesson.label,
+    question_id:  activeQueue[activeQIdx] ? activeQueue[activeQIdx].id : null,
+    question_num: activeQIdx + 1,
+    total:        activeQueue.length,
+    correct:      isCorrect,
+    time_seconds: _qSecs
+  }, _qSecs);
   const rules = activeLesson.goldRules || GOLD_RULES[activeLesson.type] || GOLD_RULES.lesson;
 
   if (isCorrect) {
@@ -2493,6 +2567,19 @@ function updateMomentumDisplay() {
 function finishLesson() {
   const acc = sessionTotal > 0 ? Math.round(sessionCorrect / sessionTotal * 100) : 0;
   const tier = calcTier(acc);
+  const lessonSecs = _lessonStartTime ? Math.round((Date.now() - _lessonStartTime) / 1000) : null;
+  acLogEvent('lesson_completed', 'unit7a', null, {
+    lesson_id:    activeLesson.id,
+    lesson_label: activeLesson.label,
+    lesson_title: activeLesson.title,
+    correct:      sessionCorrect,
+    total:        sessionTotal,
+    accuracy:     acc,
+    score:        sessionScore,
+    tier:         tier.label
+  }, lessonSecs);
+  acFlushEngagement && acFlushEngagement();
+  _lessonStartTime = null;
   const rules = activeLesson.goldRules || GOLD_RULES[activeLesson.type] || GOLD_RULES.lesson;
 
   // ── Gold bonuses ─────────────────────────────────────
@@ -2788,7 +2875,37 @@ function printCertificate() {
     .footer{font-size:10px;color:#888;margin-top:14px;border-top:1px solid #ddd;padding-top:10px}
     .pbtn{margin-top:16px;padding:10px 24px;background:#c83020;border:none;color:#fff;font-family:'Cinzel',serif;font-size:12px;cursor:pointer;letter-spacing:.06em}
     @media print{.pbtn{display:none}}
-  </style></head><body>
+  </style>
+<!-- ═══════════════════════════════════════════════
+     AC ENGAGEMENT TRACKING MODULE v1.0
+═══════════════════════════════════════════════ -->
+<script>
+(function(){
+  const _SUPA_URL = 'https://dnmrwglrcvlbamzhlzlx.supabase.co';
+  const _SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRubXJ3Z2xyY3ZsYmFtemhsemx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NjA2OTEsImV4cCI6MjA4OTQzNjY5MX0.jEIM-dGgB0cUS0A6w31LJ5AK9QDCS_UqdVnPrb8dlXM';
+  const _SUPA_H   = {'Content-Type':'application/json','apikey':_SUPA_KEY,'Authorization':'Bearer '+_SUPA_KEY};
+  function _getStudent(){
+    try{ const s=JSON.parse(localStorage.getItem('ac_shell_state')||'{}'); return{name:s.name||'',period:s.period||''}; }catch(e){return{name:'',period:''};}
+  }
+  window._acEngQueue = window._acEngQueue || [];
+  window.acLogEvent = function(eventType, unitId, deckId, data, durationSeconds){
+    const st=_getStudent(); if(!st.name)return;
+    window._acEngQueue.push({student_name:st.name,period:st.period,event_type:eventType,unit_id:unitId||null,deck_id:deckId||null,data:data||null,duration_seconds:durationSeconds||null,created_at:new Date().toISOString()});
+  };
+  async function _flush(){
+    if(!window._acEngQueue.length)return;
+    const batch=window._acEngQueue.splice(0);
+    try{ await fetch(_SUPA_URL+'/rest/v1/ac_engagement',{method:'POST',headers:{..._SUPA_H,'Prefer':'return=minimal'},body:JSON.stringify(batch)}); }catch(e){}
+  }
+  setInterval(_flush,15000);
+  window.addEventListener('beforeunload',()=>{
+    if(!window._acEngQueue.length)return;
+    navigator.sendBeacon(_SUPA_URL+'/rest/v1/ac_engagement',new Blob([JSON.stringify(window._acEngQueue)],{type:'application/json'}));
+  });
+  window.acFlushEngagement=_flush;
+})();
+</script>
+</head><body>
   <div class="cert">
     <div style="font-size:10px;letter-spacing:.3em;color:#888;font-family:'Cinzel',serif">AMERICAN CHRONICLES · U.S. HISTORY</div>
     <div style="font-size:40px;margin:10px 0">${tier.icon}</div>
