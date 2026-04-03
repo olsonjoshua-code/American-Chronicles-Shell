@@ -799,6 +799,22 @@ body::before{content:'';position:fixed;inset:0;
         <div class="sh" style="font-size:14px;margin-bottom:10px">Class Results</div>
         <div id="teacher-results"></div>
       </div>
+      <!-- Test Score Entry -->
+      <div style="background:var(--bg2);border:1px solid var(--border2);padding:16px;margin-bottom:14px">
+        <div class="sh" style="font-size:14px;margin-bottom:4px">Unit Test Scores</div>
+        <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:14px;letter-spacing:.5px">Enter student test scores as a percentage. Scores post to the leaderboard automatically.</div>
+        <!-- Unit selector + entry form -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:flex-end">
+          <div>
+            <div style="font-family:var(--bebas);font-size:9px;letter-spacing:2px;color:var(--text3);margin-bottom:4px">UNIT</div>
+            <select id="test-unit-select" style="font-family:var(--dm);font-size:11px;background:var(--bg3);border:1px solid var(--border2);color:var(--text);padding:7px 10px;outline:none;cursor:pointer;min-width:220px">
+              <option value="">— Select a unit —</option>
+            </select>
+          </div>
+          <button class="btn sm teal" onclick="loadTestScoreEntry()"><span>Load Students</span></button>
+        </div>
+        <div id="test-score-entry"></div>
+      </div>
       <div style="background:var(--bg2);border:1px solid var(--border2);padding:16px">
         <div class="sh" style="font-size:14px;margin-bottom:10px">Roster Notes</div>
         <textarea id="teacher-notes" oninput="saveNotes()" placeholder="Class notes…" style="width:100%;min-height:130px;background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-family:var(--crimson);font-size:14px;line-height:1.6;padding:11px;outline:none;resize:vertical;transition:border-color .2s" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--border2)'"></textarea>
@@ -3684,10 +3700,11 @@ async function renderLeaderboard(){
   (all||[]).forEach(r=>{
     const isT=r.is_teacher||r.period==='teacher';
     const isVocab=r.unit_id&&r.unit_id.startsWith('vocab_');
+    const isTest=r.unit_id&&r.unit_id.startsWith('test_');
     const k=isT?'__teacher__'+r.name:r.name+'|'+r.period;
     if(!sm[k])sm[k]={name:r.name,period:isT?'':r.period,score:0,units:0,golds:0,cards:0,vocab:0,is_teacher:isT};
     sm[k].score+=r.best_score||0;
-    if(!isVocab){sm[k].units++;if(r.best_accuracy>=90)sm[k].golds++;}
+    if(!isVocab&&!isTest){sm[k].units++;if(r.best_accuracy>=90)sm[k].golds++;}
     sm[k].cards+=r.cards||0;
     if(isT)sm[k].is_teacher=true;
   });
@@ -4250,7 +4267,7 @@ async function renderTeacherView(){
     const k=p.display_name+'|'+p.period;
     if(!sm[k])sm[k]={name:p.display_name,period:p.period,units:[],score:0};
   });
-  all.forEach(r=>{const k=r.name+'|'+r.period;if(!sm[k])sm[k]={name:r.name,period:r.period,units:[],score:0};if(!r.unit_id||!r.unit_id.startsWith('vocab_'))sm[k].units.push(r);sm[k].score+=r.best_score||0;});
+  all.forEach(r=>{const k=r.name+'|'+r.period;if(!sm[k])sm[k]={name:r.name,period:r.period,units:[],score:0};if(!r.unit_id||(!r.unit_id.startsWith('vocab_')&&!r.unit_id.startsWith('test_')))sm[k].units.push(r);sm[k].score+=r.best_score||0;});
   const sts=Object.values(sm).sort((a,b)=>b.score-a.score);
 
   re.innerHTML=`
@@ -4277,6 +4294,7 @@ async function renderTeacherView(){
       </tr>`;
     }).join('')}</tbody></table>`;
   try{const n=document.getElementById('teacher-notes');if(n)n.value=localStorage.getItem('ac_teacher_notes')||'';}catch(e){}
+  buildTestUnitSelect();
 }
 
 
@@ -4372,6 +4390,28 @@ async function openStudentProfile(name, period){
         </tr>`;
       }).join('')}</tbody>
     </table>`;
+  }
+
+  // Test scores section
+  const testResults = unitResults.filter(r => r.unit_id && r.unit_id.startsWith('test_'));
+  const spTestEl = document.getElementById('sp-test');
+  if(spTestEl){
+    if(!testResults.length){
+      spTestEl.innerHTML = '<div style="font-family:var(--dm);font-size:10px;color:var(--text3);font-style:italic;padding:6px 0">No test scores entered yet.</div>';
+    } else {
+      spTestEl.innerHTML = `<table class="lb-table" style="font-size:11px;">
+        <thead><tr><th>UNIT</th><th>TEST SCORE</th><th>LEADERBOARD PTS</th></tr></thead>
+        <tbody>${testResults.map(r => {
+          const u = UNIT_DATA.find(x => 'test_'+x.id === r.unit_id) || {};
+          const tc = r.best_accuracy>=90?'var(--gold)':r.best_accuracy>=80?'var(--green2)':r.best_accuracy>=70?'var(--amber)':'var(--red2)';
+          return `<tr>
+            <td style="font-family:var(--playfair);color:var(--cream)">${u.icon||'📝'} ${u.num||r.unit_id} — ${u.title||''}</td>
+            <td style="color:${tc};font-weight:600">${r.best_accuracy}%</td>
+            <td style="color:var(--amber)">${(r.best_score||0).toLocaleString()} pts</td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table>`;
+    }
   }
 }
 
@@ -4552,6 +4592,154 @@ async function dashboardDeleteStudent(name, period){
     notify('✅ Removed: '+name);
     renderTeacherView(); // refresh the dashboard
   }catch(e){notify('Error removing student');}
+}
+
+
+// ════════════════════════════════════════════
+// TEST SCORE ENTRY & LEADERBOARD INTEGRATION
+// ════════════════════════════════════════════
+
+function buildTestUnitSelect(){
+  const sel = document.getElementById('test-unit-select');
+  if(!sel) return;
+  const units = UNIT_DATA.filter(u => u.url && !u.isCampaign);
+  sel.innerHTML = '<option value="">— Select a unit —</option>' +
+    units.map(u => `<option value="${u.id}">${u.num} — ${u.title}</option>`).join('');
+}
+
+async function loadTestScoreEntry(){
+  const unitId = document.getElementById('test-unit-select').value;
+  if(!unitId){ notify('Please select a unit first.'); return; }
+  const el = document.getElementById('test-score-entry');
+  el.innerHTML = '<div style="font-family:var(--dm);font-size:10px;color:var(--text3);padding:8px 0">Loading students…</div>';
+
+  const [existing, profiles] = await Promise.all([
+    sfetch('/rest/v1/ac_results?unit_id=eq.test_'+unitId+'&select=name,period,best_accuracy&order=name.asc'),
+    sfetch('/rest/v1/ac_student_profiles?select=display_name,period&order=period.asc,display_name.asc')
+  ]);
+
+  const scoreMap = {};
+  (existing||[]).forEach(r => { scoreMap[r.name+'|'+r.period] = r.best_accuracy; });
+
+  const students = (profiles||[]).filter(p =>
+    p.display_name && p.period && p.period !== 'guest' && p.period !== 'teacher' && p.period !== ''
+  );
+
+  if(!students.length){
+    el.innerHTML = '<div style="font-family:var(--dm);font-size:10px;color:var(--text3);font-style:italic;padding:8px 0">No students found.</div>';
+    return;
+  }
+
+  const byPeriod = {};
+  students.forEach(s => {
+    if(!byPeriod[s.period]) byPeriod[s.period] = [];
+    byPeriod[s.period].push(s);
+  });
+
+  const unit = UNIT_DATA.find(u => u.id === unitId);
+  let html = `<div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:12px;letter-spacing:.5px">
+    Scores for: <span style="color:var(--amber)">${unit ? unit.num+' — '+unit.title : unitId}</span>
+    &nbsp;·&nbsp; Enter as percentage 0–100. Leave blank to skip.
+  </div>`;
+
+  Object.keys(byPeriod).sort().forEach(period => {
+    html += `<div style="font-family:var(--bebas);font-size:10px;letter-spacing:2px;color:var(--teal2);margin:10px 0 6px">PERIOD ${period}</div>`;
+    html += `<table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
+      <thead><tr>
+        <th style="font-family:var(--bebas);font-size:9px;letter-spacing:1px;color:var(--text3);padding:5px 8px;border-bottom:1px solid var(--border2);text-align:left;width:40%">STUDENT</th>
+        <th style="font-family:var(--bebas);font-size:9px;letter-spacing:1px;color:var(--text3);padding:5px 8px;border-bottom:1px solid var(--border2);text-align:left;width:25%">TEST SCORE %</th>
+        <th style="font-family:var(--bebas);font-size:9px;letter-spacing:1px;color:var(--text3);padding:5px 8px;border-bottom:1px solid var(--border2);text-align:left">STATUS</th>
+      </tr></thead><tbody>`;
+    byPeriod[period].forEach(s => {
+      const key = s.display_name+'|'+s.period;
+      const prev = scoreMap[key];
+      const statusColor = prev != null ? 'var(--green2)' : 'var(--text3)';
+      const statusText  = prev != null ? '✅ '+prev+'% saved' : 'Not entered';
+      html += `<tr>
+        <td style="font-family:var(--playfair);font-size:12px;color:var(--cream);padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.03)">${s.display_name}</td>
+        <td style="padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.03)">
+          <input type="number" min="0" max="100" step="1"
+            id="ts_${key}"
+            data-name="${s.display_name}" data-period="${s.period}"
+            placeholder="${prev != null ? prev : '—'}"
+            style="width:80px;font-family:var(--dm);font-size:12px;background:var(--bg3);border:1px solid var(--border2);color:var(--cream);padding:5px 8px;outline:none;text-align:center"
+            onfocus="this.style.borderColor='var(--amber)'" onblur="this.style.borderColor='var(--border2)'">
+        </td>
+        <td id="ts_status_${key}" style="font-family:var(--dm);font-size:9px;color:${statusColor};padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.03)">${statusText}</td>
+      </tr>`;
+    });
+    html += '</tbody></table>';
+  });
+
+  html += `<div style="display:flex;gap:8px;margin-top:14px;align-items:center">
+    <button class="btn green" onclick="saveAllTestScores('${unitId}')"><span>💾 Save All Scores</span></button>
+    <div id="test-save-status" style="font-family:var(--dm);font-size:9px;color:var(--text3)"></div>
+  </div>`;
+
+  el.innerHTML = html;
+}
+
+async function saveAllTestScores(unitId){
+  const inputs = document.querySelectorAll('#test-score-entry input[type=number]');
+  const statusEl = document.getElementById('test-save-status');
+  statusEl.textContent = 'Saving…';
+
+  const toSave = [];
+  inputs.forEach(inp => {
+    const val = inp.value.trim();
+    if(val === '') return;
+    const pct = Math.min(100, Math.max(0, Math.round(parseFloat(val))));
+    if(isNaN(pct)) return;
+    toSave.push({
+      name:          inp.dataset.name,
+      period:        inp.dataset.period,
+      unit_id:       'test_'+unitId,
+      best_score:    testPctToPoints(pct),
+      best_accuracy: pct,
+      trophy:        pct >= 90 ? 'gold' : pct >= 80 ? 'silver' : pct >= 70 ? 'bronze' : pct >= 60 ? 'completed' : 'tryagain',
+      attempts:      1,
+      updated_at:    new Date().toISOString()
+    });
+  });
+
+  if(!toSave.length){ statusEl.textContent = 'Nothing to save.'; return; }
+
+  let saved = 0, errors = 0;
+  for(const row of toSave){
+    try{
+      // Check if existing — keep higher score
+      const existing = await sfetch('/rest/v1/ac_results?name=eq.'+encodeURIComponent(row.name)+'&period=eq.'+encodeURIComponent(row.period)+'&unit_id=eq.'+encodeURIComponent(row.unit_id)+'&select=best_accuracy,attempts');
+      const prev = existing && existing[0];
+      if(prev){
+        row.best_score    = Math.max(row.best_score, testPctToPoints(prev.best_accuracy||0));
+        row.best_accuracy = Math.max(row.best_accuracy, prev.best_accuracy||0);
+        row.attempts      = (prev.attempts||0) + 1;
+      }
+      await fetch(SUPA_URL+'/rest/v1/ac_results?on_conflict=name,period,unit_id',{
+        method:'POST',
+        headers:{...SUPA_H,'Prefer':'resolution=merge-duplicates'},
+        body: JSON.stringify(row)
+      });
+      // Update status cell
+      const key = row.name+'|'+row.period;
+      const cell = document.getElementById('ts_status_'+key);
+      if(cell){ cell.textContent = '✅ '+row.best_accuracy+'% saved'; cell.style.color='var(--green2)'; }
+      saved++;
+    }catch(e){ errors++; }
+  }
+
+  statusEl.textContent = saved+' saved' + (errors ? ', '+errors+' errors' : '') + ' — leaderboard updated.';
+  notify('✅ '+saved+' test scores saved!');
+}
+
+function testPctToPoints(pct){
+  // Scale test % to leaderboard points — 100% = 500pts, 80% = 300pts, 60% = 150pts
+  if(pct >= 100) return 500;
+  if(pct >= 90)  return Math.round(300 + ((pct-90)/10)*200);
+  if(pct >= 80)  return Math.round(150 + ((pct-80)/10)*150);
+  if(pct >= 70)  return Math.round(75  + ((pct-70)/10)*75);
+  if(pct >= 60)  return Math.round(25  + ((pct-60)/10)*50);
+  return Math.round(pct * 0.4); // below 60 gets minimal points
 }
 
 async function exportCSV(){
@@ -4784,7 +4972,9 @@ function closeWelcome(){
       <div style="font-family:var(--bebas);font-size:13px;letter-spacing:2px;color:var(--amber);border-bottom:1px solid var(--border2);padding-bottom:5px;margin-bottom:10px;">UNIT GAMES</div>
       <div id="sp-units" style="margin-bottom:18px;"></div>
       <div style="font-family:var(--bebas);font-size:13px;letter-spacing:2px;color:var(--amber);border-bottom:1px solid var(--border2);padding-bottom:5px;margin-bottom:10px;">VOCAB QUIZZES</div>
-      <div id="sp-vocab" style="margin-bottom:8px;"></div>
+      <div id="sp-vocab" style="margin-bottom:18px;"></div>
+      <div style="font-family:var(--bebas);font-size:13px;letter-spacing:2px;color:var(--amber);border-bottom:1px solid var(--border2);padding-bottom:5px;margin-bottom:10px;">UNIT TEST SCORES</div>
+      <div id="sp-test" style="margin-bottom:8px;"></div>
     </div>
     <!-- Engagement tab -->
     <div id="sp-panel-engagement" style="display:none;padding:16px 18px;">
