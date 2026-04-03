@@ -4272,7 +4272,7 @@ async function renderTeacherView(){
         <td style="color:var(--teal2)">${vocab}</td>
         <td style="color:var(--text2)">${avgAcc}%</td>
         <td style="color:var(--green2)">${mins>0?mins+' min':'—'}</td>
-        <td onclick="event.stopPropagation()"><button onclick="dashboardDeleteStudent(\'${s.name.replace(/\'/g,\"\\\'\")}\',\'${s.period||\'\'}\')" style="font-family:var(--bebas);font-size:9px;background:transparent;border:1px solid var(--red2);color:var(--red2);padding:3px 8px;cursor:pointer;letter-spacing:1px;">✕ REMOVE</button></td>
+        <td onclick="event.stopPropagation()"><button class="dash-del-btn" data-name="${s.name}" data-period="${s.period||''}" style="font-family:var(--bebas);font-size:9px;background:transparent;border:1px solid var(--red2);color:var(--red2);padding:3px 8px;cursor:pointer;letter-spacing:1px;">✕ REMOVE</button></td>
       </tr>`;
     }).join('')}</tbody></table>`;
   try{const n=document.getElementById('teacher-notes');if(n)n.value=localStorage.getItem('ac_teacher_notes')||'';}catch(e){}
@@ -4365,6 +4365,16 @@ function closeStudentProfile(){
   document.getElementById('student-profile-overlay').style.display='none';
 }
 
+
+// Delegated click handler for dashboard delete buttons
+document.addEventListener('click', e=>{
+  const btn = e.target.closest('.dash-del-btn');
+  if(!btn) return;
+  e.stopPropagation();
+  const name = btn.dataset.name;
+  const period = btn.dataset.period;
+  dashboardDeleteStudent(name, period);
+});
 
 async function dashboardDeleteStudent(name, period){
   if(!confirm('Remove "'+name+'" (Period '+period+') completely?\nThis deletes their results, profile, and sessions and cannot be undone.'))return;
