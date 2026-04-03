@@ -796,7 +796,15 @@ body::before{content:'';position:fixed;inset:0;
         <div id="teacher-units"></div>
       </div>
       <div style="background:var(--bg2);border:1px solid var(--border2);padding:16px;margin-bottom:14px">
-        <div class="sh" style="font-size:14px;margin-bottom:10px">Class Results</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+          <div class="sh" style="font-size:14px;margin-bottom:0">Class Results</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <button class="btn sm green" onclick="exportCSV()"><span>⬇ Research Export (All Students)</span></button>
+          </div>
+        </div>
+        <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:12px;letter-spacing:.3px">
+          Export includes all students across all periods — game scores, test scores, engagement data, vocab, sessions. Includes blank EOC column for your manual entry after state testing.
+        </div>
         <div id="teacher-results"></div>
       </div>
       <!-- Test Score Entry -->
@@ -4791,14 +4799,15 @@ function testPctToPoints(pct){
 }
 
 async function exportCSV(){
-  notify('Building export…');
-  const [all, profiles, sessions]=await Promise.all([
-    sfetch('/rest/v1/ac_results?select=*&order=name.asc,period.asc&limit=2000'),
+  notify('Building research export… this may take a moment.');
+  const [all, profiles, sessions, engagement]=await Promise.all([
+    sfetch('/rest/v1/ac_results?select=*&order=name.asc,period.asc&limit=5000'),
     sfetch('/rest/v1/ac_student_profiles?select=*'),
-    sfetch('/rest/v1/ac_sessions?select=student_name,period,minutes,session_start,exit_to&order=session_start.asc&limit=5000')
+    sfetch('/rest/v1/ac_sessions?select=student_name,period,minutes,session_start&order=session_start.asc&limit=10000'),
+    sfetch('/rest/v1/ac_engagement?select=student_name,period,event_type,unit_id,deck_id,duration_seconds,data&limit=20000')
   ]);
 
-  // Build session summary per student
+  // ── Session summary ──────────────────────────────────
   const sessionSm={};
   (sessions||[]).forEach(s=>{
     if(!s.minutes)return;
@@ -4809,54 +4818,138 @@ async function exportCSV(){
     if(s.session_start>sessionSm[k].last_seen)sessionSm[k].last_seen=s.session_start;
   });
 
-  // Build per-student summary
+  // ── Engagement summary ──────────────────────────────
+  const engSm={};
+  (engagement||[]).forEach(e=>{
+    const k=e.student_name+'|'+(e.period||'');
+    if(!engSm[k])engSm[k]={
+      briefing_time_secs:0, briefing_opens:0, briefings_read_fully:0,
+      study_sessions:0, cards_flipped:0, study_time_secs:0,
+      quiz_attempts:0, quiz_time_secs:0,
+      hub_time_secs:0
+    };
+    const s=e.duration_seconds||0;
+    const d=e.data||{};
+    switch(e.event_type){
+      case 'briefing_opened':    engSm[k].briefing_opens++; break;
+      case 'briefing_closed':
+      case 'briefing_proceeded': engSm[k].briefing_time_secs+=s; if(d.read_fully)engSm[k].briefings_read_fully++; break;
+      case 'study_completed':    engSm[k].study_sessions++; engSm[k].study_time_secs+=s; engSm[k].cards_flipped+=(d.cards_flipped||0); break;
+      case 'quiz_completed':     engSm[k].quiz_attempts++; engSm[k].quiz_time_secs+=s; break;
+      case 'hub_session_end':    engSm[k].hub_time_secs+=s; break;
+    }
+  });
+
+  // ── Game results summary ─────────────────────────────
   const sm={};
+  // Seed from profiles so all students appear even with no game data
+  (profiles||[]).forEach(p=>{
+    if(!p.display_name||!p.period||p.period==='guest'||p.period==='teacher')return;
+    const k=p.display_name+'|'+p.period;
+    if(!sm[k])sm[k]={name:p.display_name,period:p.period,units_completed:0,total_score:0,
+      avg_accuracy:0,gold_trophies:0,historian_trophies:0,
+      unit_scores:{},vocab_scores:{},test_scores:{},attempts_total:0};
+  });
   (all||[]).forEach(r=>{
     const k=r.name+'|'+(r.period||'');
-    if(!sm[k])sm[k]={name:r.name,period:r.period||'',units_completed:0,total_score:0,avg_accuracy:0,gold_trophies:0,historian_trophies:0,unit_scores:{},attempts_total:0};
-    sm[k].units_completed++;
+    if(!sm[k])sm[k]={name:r.name,period:r.period||'',units_completed:0,total_score:0,
+      avg_accuracy:0,gold_trophies:0,historian_trophies:0,
+      unit_scores:{},vocab_scores:{},test_scores:{},attempts_total:0};
+    if(r.unit_id.startsWith('vocab_')){
+      sm[k].vocab_scores[r.unit_id.replace('vocab_','')]=r.best_accuracy||0;
+    } else if(r.unit_id.startsWith('test_')){
+      sm[k].test_scores[r.unit_id.replace('test_','')]=r.best_accuracy||0;
+    } else {
+      sm[k].units_completed++;
+      sm[k].avg_accuracy+=r.best_accuracy||0;
+      sm[k].gold_trophies+=(r.best_accuracy>=90?1:0);
+      sm[k].historian_trophies+=(r.best_accuracy===100?1:0);
+      sm[k].attempts_total+=r.attempts||1;
+      sm[k].unit_scores[r.unit_id]=r.best_accuracy||0;
+    }
     sm[k].total_score+=r.best_score||0;
-    sm[k].avg_accuracy+=r.best_accuracy||0;
-    sm[k].attempts_total+=r.attempts||1;
-    if(r.best_accuracy>=90)sm[k].gold_trophies++;
-    if(r.best_accuracy===100)sm[k].historian_trophies++;
-    sm[k].unit_scores[r.unit_id]=r.best_accuracy||0;
   });
 
   const profileLookup={};
   (profiles||[]).forEach(p=>{profileLookup[p.display_name+'|'+(p.period||'')]=p;});
 
-  const unitIds=UNIT_DATA.filter(u=>!u.isCampaign).map(u=>u.id);
+  const unitIds=UNIT_DATA.filter(u=>!u.isCampaign&&!u.id.startsWith('theme_')&&u.id!=='eoc_midterm').map(u=>u.id);
+  const themeIds=UNIT_DATA.filter(u=>u.id.startsWith('theme_')).map(u=>u.id);
 
+  // ── Headers ──────────────────────────────────────────
   const headers=[
+    // Identity
     'Student Name','Full Name','Period',
-    'Units Completed','Total Score','Avg Accuracy %',
-    'Gold Trophies','Historian Trophies','Vocab Medals','Gold Earned',
-    'Total Minutes in Hub','Session Count','Avg Min Per Session','Last Seen',
-    'Avg Attempts Per Unit',
-    ...unitIds.map(id=>{const u=UNIT_DATA.find(x=>x.id===id);return(u?.num||id)+' Accuracy'})
+    // Game performance
+    'Units Completed','Total Score','Game Avg Accuracy %',
+    'Gold Trophies (90%+)','Historian Trophies (100%)',
+    // Vocab
+    'Vocab Quizzes Passed','Vocab Avg Score %',
+    // Test scores
+    'Test Scores Entered','Test Avg %',
+    // EOC
+    'EOC Practice Score %','EOC Practice Scale Score',
+    // Engagement
+    'Hub Sessions','Total Hub Minutes',
+    'Briefings Opened','Briefings Read Fully','Total Briefing Minutes',
+    'Flashcard Study Sessions','Total Cards Flipped','Total Study Minutes',
+    'Vocab Quiz Attempts','Total Quiz Minutes',
+    // Session data
+    'Avg Min Per Session','Last Seen',
+    // Per-unit game accuracy
+    ...unitIds.map(id=>{const u=UNIT_DATA.find(x=>x.id===id);return(u?.num||id)+' Game %'}),
+    // Per-unit test scores
+    ...unitIds.map(id=>{const u=UNIT_DATA.find(x=>x.id===id);return(u?.num||id)+' Test %'}),
+    // Theme games
+    ...themeIds.map(id=>{const u=UNIT_DATA.find(x=>x.id===id);return(u?.title||id)+' Game %'}),
+    // EOC column for manual entry
+    'EOC Score % (enter manually)',
   ];
 
-  const rows=Object.values(sm).sort((a,b)=>{
+  const rows=Object.values(sm).filter(s=>s.period&&s.period!=='teacher').sort((a,b)=>{
     if(a.period!==b.period)return String(a.period).localeCompare(String(b.period));
     return a.name.localeCompare(b.name);
   }).map(s=>{
     const k=s.name+'|'+s.period;
     const prof=profileLookup[k]||{};
     const sess=sessionSm[k]||{total_minutes:0,session_count:0,last_seen:''};
-    let vocabCount=0;
-    try{const vp=JSON.parse(prof.vocab_passed||'{}');vocabCount=Object.values(vp).filter(Boolean).length;}catch(e){}
-    const avgAcc=s.units_completed>0?Math.round(s.avg_accuracy/s.units_completed):0;
-    const avgAttempts=s.units_completed>0?(s.attempts_total/s.units_completed).toFixed(1):0;
-    const avgMinPerSession=sess.session_count>0?Math.round(sess.total_minutes/sess.session_count):0;
+    const eng=engSm[k]||{briefing_time_secs:0,briefing_opens:0,briefings_read_fully:0,study_sessions:0,cards_flipped:0,study_time_secs:0,quiz_attempts:0,quiz_time_secs:0,hub_time_secs:0};
+
+    // Vocab
+    let vocabPassed=0, vocabSum=0, vocabCount=0;
+    try{const vp=JSON.parse(prof.vocab_passed||'{}');vocabPassed=Object.values(vp).filter(Boolean).length;}catch(e){}
+    try{const vbs=JSON.parse(prof.vocab_best_score||'{}');Object.entries(vbs).forEach(([k,v])=>{if(!k.startsWith('_')&&v!=null){vocabSum+=v;vocabCount++;}});}catch(e){}
+    const vocabAvg=vocabCount>0?Math.round(vocabSum/vocabCount):'';
+
+    // Test scores
+    const testVals=Object.values(s.test_scores).filter(v=>v!=null);
+    const testAvg=testVals.length?Math.round(testVals.reduce((a,v)=>a+v,0)/testVals.length):'';
+
+    // EOC
+    let eocBest='', eocScale='';
+    try{const vbs=JSON.parse(prof.vocab_best_score||'{}');if(vbs._eoc_pct!=null)eocBest=vbs._eoc_pct;if(vbs._eoc_scale!=null)eocScale=vbs._eoc_scale;}catch(e){}
+
+    const gameAvg=s.units_completed>0?Math.round(s.avg_accuracy/s.units_completed):'';
+    const avgAttempts=s.units_completed>0?(s.attempts_total/s.units_completed).toFixed(1):'';
+    const avgMinPerSession=sess.session_count>0?Math.round(sess.total_minutes/sess.session_count):'';
     const lastSeen=sess.last_seen?new Date(sess.last_seen).toLocaleDateString('en-US'):'';
+
     return[
-      s.name, prof.full_name||s.name, s.period||'',
-      s.units_completed, s.total_score, avgAcc,
-      s.gold_trophies, s.historian_trophies, vocabCount, prof.gold||0,
-      sess.total_minutes, sess.session_count, avgMinPerSession, lastSeen,
-      avgAttempts,
-      ...unitIds.map(id=>s.unit_scores[id]!==undefined?s.unit_scores[id]:'')
+      s.name, prof.full_name||s.name, s.period,
+      s.units_completed, s.total_score, gameAvg,
+      s.gold_trophies, s.historian_trophies,
+      vocabPassed, vocabAvg,
+      testVals.length, testAvg,
+      eocBest, eocScale,
+      sess.session_count, sess.total_minutes,
+      eng.briefing_opens, eng.briefings_read_fully, Math.round(eng.briefing_time_secs/60),
+      eng.study_sessions, eng.cards_flipped, Math.round(eng.study_time_secs/60),
+      eng.quiz_attempts, Math.round(eng.quiz_time_secs/60),
+      avgMinPerSession, lastSeen,
+      ...unitIds.map(id=>s.unit_scores[id]!==undefined?s.unit_scores[id]:''),
+      ...unitIds.map(id=>s.test_scores[id]!==undefined?s.test_scores[id]:''),
+      ...themeIds.map(id=>s.unit_scores[id]!==undefined?s.unit_scores[id]:''),
+      '', // EOC Score — blank for manual entry
     ];
   });
 
@@ -4866,10 +4959,10 @@ async function exportCSV(){
   const a=document.createElement('a');
   a.href=url;
   const date=new Date().toISOString().slice(0,10);
-  a.download=`american-chronicles-export-${date}.csv`;
+  a.download=`american-chronicles-research-export-${date}.csv`;
   a.click();
   URL.revokeObjectURL(url);
-  notify('✅ CSV exported!');
+  notify('✅ Research export ready! '+rows.length+' students.');
 }
 // ── UTILS ─────────────────────────────────────────────
 function notify(msg){const n=document.createElement('div');n.className='notif';n.textContent=msg;document.body.appendChild(n);setTimeout(()=>n.remove(),3200);}
