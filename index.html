@@ -2600,12 +2600,35 @@ function shellEOCLevel(score15){
   return{level:1,label:'Level 1',color:'var(--red2)'};
 }
 function calcCumulativeEOC(){
-  // Average best_accuracy across all completed units, mapped to /15
-  if(!_trophyData.length)return null;
-  const completed=_trophyData.filter(r=>r.best_accuracy>=60);
-  if(!completed.length)return null;
-  const avgAcc=completed.reduce((a,r)=>a+(r.best_accuracy||0),0)/completed.length;
-  return Math.round((avgAcc/100)*15);
+  // Game scores (unit games only — exclude vocab_ and test_ rows)
+  const gameRows = _trophyData.filter(r =>
+    r.best_accuracy >= 60 &&
+    r.unit_id &&
+    !r.unit_id.startsWith('vocab_') &&
+    !r.unit_id.startsWith('test_')
+  );
+  // Test scores
+  const testRows = _trophyData.filter(r =>
+    r.unit_id && r.unit_id.startsWith('test_') && r.best_accuracy != null
+  );
+
+  if(!gameRows.length && !testRows.length) return null;
+
+  // Weight: game accuracy 60%, test scores 40% (if tests exist)
+  let score = 0;
+  if(gameRows.length && testRows.length){
+    const gameAvg = gameRows.reduce((a,r)=>a+(r.best_accuracy||0),0)/gameRows.length;
+    const testAvg = testRows.reduce((a,r)=>a+(r.best_accuracy||0),0)/testRows.length;
+    const combined = (gameAvg * 0.60) + (testAvg * 0.40);
+    score = Math.round((combined/100)*15);
+  } else if(gameRows.length){
+    const gameAvg = gameRows.reduce((a,r)=>a+(r.best_accuracy||0),0)/gameRows.length;
+    score = Math.round((gameAvg/100)*15);
+  } else {
+    const testAvg = testRows.reduce((a,r)=>a+(r.best_accuracy||0),0)/testRows.length;
+    score = Math.round((testAvg/100)*15);
+  }
+  return score;
 }
 
 function updateHUD(){
@@ -3966,14 +3989,30 @@ function printCourseCert(){
   const midtermScore=midtermRow?midtermRow.best_accuracy:0;
   const midtermAttempted=!!midtermRow;
 
+  // ── 6. UNIT TEST SCORES (25% if entered, redistributed if not) ────────────
+  const testRows=_trophyData.filter(r=>r.unit_id&&r.unit_id.startsWith('test_'));
+  const testAvg=testRows.length?Math.round(testRows.reduce((a,r)=>a+(r.best_accuracy||0),0)/testRows.length):null;
+  const testAttempted=testRows.length>0;
+
   // ── WEIGHTED COMPOSITE GRADE ──────────────────────────
-  const courseGrade=Math.round(
-    unitScore        * 0.50 +
-    studyScoreFinal  * 0.20 +
-    eocScore         * 0.15 +
-    rpgScore         * 0.10 +
-    midtermScore     * 0.05
-  );
+  // If test scores entered: unit 40%, test 25%, vocab 15%, eoc 10%, rpg 5%, midterm 5%
+  // If no test scores yet:  unit 50%, vocab 20%, eoc 15%, rpg 10%, midterm 5%
+  const courseGrade = testAttempted
+    ? Math.round(
+        unitScore       * 0.40 +
+        testAvg         * 0.25 +
+        studyScoreFinal * 0.15 +
+        eocScore        * 0.10 +
+        rpgScore        * 0.05 +
+        midtermScore    * 0.05
+      )
+    : Math.round(
+        unitScore        * 0.50 +
+        studyScoreFinal  * 0.20 +
+        eocScore         * 0.15 +
+        rpgScore         * 0.10 +
+        midtermScore     * 0.05
+      );
 
   const tier=calcTier(courseGrade);
   const tcRaw=TIER_COLOR[tier];
@@ -3999,16 +4038,19 @@ function printCourseCert(){
       <td style="padding:2px 6px;font-size:9px;color:${utColors[ut]};text-align:center;font-weight:700">${r.best_accuracy}%</td>
       <td style="padding:2px 6px;font-size:9px;text-align:center;color:${vScore!==null?'#38a050':'#a09080'}">${vScore!==null?vScore+'%':'—'}</td>
       <td style="padding:2px 6px;font-size:9px;text-align:center">${fStudied?'✅':'—'}</td>
+      <td style="padding:2px 6px;font-size:9px;text-align:center;color:${(()=>{const tr=_trophyData.find(x=>x.unit_id==='test_'+u.id);return tr?'#8a4820':'#a09080';})()};font-weight:600">${(()=>{const tr=_trophyData.find(x=>x.unit_id==='test_'+u.id);return tr?tr.best_accuracy+'%':'—';})()}</td>
     </tr>`;
   }).join('');
 
   // ── COMPONENT SUMMARY ROWS ────────────────────────────
+  const useTestWeight = testAttempted;
   const compRows=[
-    {label:'Unit Games + Themes',weight:'50%',score:unitScore,note:`${completedCount}/${totalUnits} units · ${completedThemeCount}/5 themes (½ wt ea) · avg ${Math.round(avgUnitAccuracy)}% × ${Math.round(completionRate*100)}% completion`,attempted:true},
-    {label:'Study (Vocab + Flashcards)',weight:'20%',score:studyScoreFinal,note:`${vocabQuizCount}/${totalDecks} quizzes taken · ${decksStudied}/${totalDecks} decks studied · +${flashcardBonus}pt flashcard bonus`,attempted:studyAttempted},
-    {label:'EOC Practice Test',weight:'15%',score:eocScore,note:eocAttempted?`Best accuracy: ${eocScore}%`:'Not yet attempted — worth 15%',attempted:eocAttempted},
-    {label:'RPG Campaign',weight:'10%',score:rpgScore,note:rpgAttempted?`Best accuracy: ${rpgScore}%`:'Not yet attempted — worth 10%',attempted:rpgAttempted},
-    {label:'Midterm Checkpoint',weight:'5%',score:midtermScore,note:midtermAttempted?`Best accuracy: ${midtermScore}%`:'Not yet attempted — worth 5%',attempted:midtermAttempted},
+    {label:'Unit Games + Themes',      weight:useTestWeight?'40%':'50%', score:unitScore,     note:`${completedCount}/${totalUnits} units · ${completedThemeCount}/5 themes (½ wt ea) · avg ${Math.round(avgUnitAccuracy)}% × ${Math.round(completionRate*100)}% completion`,attempted:true},
+    {label:'Unit Test Scores',          weight:useTestWeight?'25%':'—',   score:testAvg||0,    note:testAttempted?`${testRows.length} test${testRows.length>1?'s':''} entered · avg ${testAvg}%`:'No test scores entered yet — worth 25% when added',attempted:testAttempted},
+    {label:'Study (Vocab + Flashcards)',weight:useTestWeight?'15%':'20%', score:studyScoreFinal,note:`${vocabQuizCount}/${totalDecks} quizzes taken · ${decksStudied}/${totalDecks} decks studied · +${flashcardBonus}pt flashcard bonus`,attempted:studyAttempted},
+    {label:'EOC Practice Test',         weight:useTestWeight?'10%':'15%', score:eocScore,      note:eocAttempted?`Best accuracy: ${eocScore}%`:'Not yet attempted',attempted:eocAttempted},
+    {label:'RPG Campaign',              weight:useTestWeight?'5%':'10%',  score:rpgScore,      note:rpgAttempted?`Best accuracy: ${rpgScore}%`:'Not yet attempted',attempted:rpgAttempted},
+    {label:'Midterm Checkpoint',        weight:'5%',                      score:midtermScore,  note:midtermAttempted?`Best accuracy: ${midtermScore}%`:'Not yet attempted',attempted:midtermAttempted},
   ].map(c=>`<tr>
     <td style="padding:3px 8px;font-size:9px;color:#1a1208;font-weight:600">${c.label}</td>
     <td style="padding:3px 8px;font-size:9px;color:#8a6a2a;text-align:center">${c.weight}</td>
@@ -4082,7 +4124,7 @@ function printCourseCert(){
     <div class="divider"></div>
     <div class="section-label">UNIT GAME HISTORY</div>
     <table class="unit-table">
-      <thead><tr><th>#</th><th>UNIT</th><th style="text-align:center">TROPHY</th><th style="text-align:center">GAME %</th><th style="text-align:center">VOCAB %</th><th style="text-align:center">CARDS</th></tr></thead>
+      <thead><tr><th>#</th><th>UNIT</th><th style="text-align:center">TROPHY</th><th style="text-align:center">GAME %</th><th style="text-align:center">VOCAB %</th><th style="text-align:center">CARDS</th><th style="text-align:center">TEST %</th></tr></thead>
       <tbody>${unitRows}</tbody>
     </table>
     <div class="divider"></div>
