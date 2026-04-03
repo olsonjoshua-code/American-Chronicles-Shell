@@ -2573,6 +2573,8 @@ async function syncFromSupabase(){
       S.unitsCompleted.push(r.unit_id);changed=true;
     }
   });
+  // Always refresh HUD after sync so EOC rating reflects loaded data
+  updateHUD();
   awardBadges();checkUnlocks();
   if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();
   // Refresh new views if they are currently open
