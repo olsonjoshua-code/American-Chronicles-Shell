@@ -805,5 +805,104 @@
 
     renderSlide(current);
   </script>
+
+<!-- ═══════════════════════════════════════════════
+     AC ENGAGEMENT TRACKING MODULE v1.0
+     Reads student from ac_shell_state localStorage
+     Batches writes to Supabase ac_engagement table
+═══════════════════════════════════════════════ -->
+<script>
+(function(){
+  const _SUPA_URL = 'https://dnmrwglrcvlbamzhlzlx.supabase.co';
+  const _SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRubXJ3Z2xyY3ZsYmFtemhsemx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NjA2OTEsImV4cCI6MjA4OTQzNjY5MX0.jEIM-dGgB0cUS0A6w31LJ5AK9QDCS_UqdVnPrb8dlXM';
+  const _SUPA_H   = {'Content-Type':'application/json','apikey':_SUPA_KEY,'Authorization':'Bearer '+_SUPA_KEY};
+
+  // Read student identity from shell localStorage
+  function _getStudent(){
+    try{
+      const s = JSON.parse(localStorage.getItem('ac_shell_state')||'{}');
+      return { name: s.name||'', period: s.period||'' };
+    }catch(e){ return {name:'',period:''}; }
+  }
+
+  // Event queue — batched every 10s or on page unload
+  window._acEngQueue = window._acEngQueue || [];
+
+  window.acLogEvent = function(eventType, unitId, deckId, data, durationSeconds){
+    const st = _getStudent();
+    if(!st.name) return; // don't log guests or unauthenticated
+    window._acEngQueue.push({
+      student_name:     st.name,
+      period:           st.period,
+      event_type:       eventType,
+      unit_id:          unitId   || null,
+      deck_id:          deckId   || null,
+      data:             data     || null,
+      duration_seconds: durationSeconds || null,
+      created_at:       new Date().toISOString()
+    });
+  };
+
+  async function _flushEngQueue(){
+    if(!window._acEngQueue.length) return;
+    const batch = window._acEngQueue.splice(0);
+    try{
+      await fetch(_SUPA_URL+'/rest/v1/ac_engagement',{
+        method:'POST',
+        headers:{..._SUPA_H,'Prefer':'return=minimal'},
+        body: JSON.stringify(batch)
+      });
+    }catch(e){ console.log('Engagement flush failed',e); }
+  }
+
+  // Flush every 15 seconds
+  setInterval(_flushEngQueue, 15000);
+
+  // Flush on page unload using sendBeacon for reliability
+  window.addEventListener('beforeunload', ()=>{
+    if(!window._acEngQueue.length) return;
+    const st = _getStudent();
+    navigator.sendBeacon(
+      _SUPA_URL+'/rest/v1/ac_engagement',
+      new Blob([JSON.stringify(window._acEngQueue)], {type:'application/json'})
+    );
+  });
+
+  // Expose flush for manual calls
+  window.acFlushEngagement = _flushEngQueue;
+})();
+</script>
+
+<script>
+// ── BRIEFING ENGAGEMENT TRACKING ──
+(function(){
+  const _pageId   = "lesson48_great_society".replace(/[^a-z0-9]/gi,'_').toLowerCase();
+  const _unitId   = 'unit7a';
+  const _opened   = Date.now();
+  let   _maxScroll = 0;
+
+  // Track scroll depth
+  window.addEventListener('scroll', function(){
+    const pct = Math.round((window.scrollY + window.innerHeight) / document.body.scrollHeight * 100);
+    if(pct > _maxScroll) _maxScroll = Math.min(pct, 100);
+  }, {passive:true});
+
+  // Log open event
+  window.addEventListener('DOMContentLoaded', function(){
+    acLogEvent('briefing_opened', _unitId, null, {page: _pageId}, null);
+    acFlushEngagement && acFlushEngagement();
+  });
+
+  // Log time + scroll on exit
+  window.addEventListener('beforeunload', function(){
+    const secs = Math.round((Date.now() - _opened) / 1000);
+    acLogEvent('briefing_closed', _unitId, null, {
+      page:        _pageId,
+      scroll_pct:  _maxScroll,
+      read_fully:  _maxScroll >= 80
+    }, secs);
+  });
+})();
+</script>
 </body>
 </html>
