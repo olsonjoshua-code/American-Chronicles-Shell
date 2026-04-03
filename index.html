@@ -4220,13 +4220,23 @@ function teacherLogout(){IS_TEACHER=false;S.isTeacher=false;saveS();document.get
 async function renderTeacherView(){
   const ul=document.getElementById('teacher-units');
   ul.innerHTML=UNIT_DATA.filter(u=>u.url).map(u=>`<div class="t-unit-row"><div style="font-size:20px;flex-shrink:0">${u.icon}</div><div style="flex:1;min-width:140px"><div style="font-family:var(--playfair);font-size:12px;color:var(--cream)">${u.num} — ${u.title}</div><div style="font-family:var(--dm);font-size:8px;color:var(--text3)">${u.years}</div></div><a href="${u.url}" target="_blank" style="text-decoration:none"><button class="btn xs teal"><span>▶ Open</span></button></a></div>`).join('');
-  const re=document.getElementById('teacher-results');re.innerHTML='<div style="font-family:var(--dm);font-size:10px;color:var(--text3)">Loading…</div>';
-  const [all, profiles, sessions]=await Promise.all([
-    sfetch('/rest/v1/ac_results?select=*&order=updated_at.desc&limit=500'),
-    sfetch('/rest/v1/ac_student_profiles?select=display_name,full_name,period,vocab_passed,units_completed,gold,updated_at'),
-    sfetch('/rest/v1/ac_sessions?select=student_name,period,minutes&limit=5000')
-  ]);
-  if(!all?.length&&!profiles?.length){re.innerHTML='<div style="font-family:var(--dm);font-size:10px;color:var(--text3);font-style:italic;padding:12px">No results yet.</div>';return;}
+  const re=document.getElementById('teacher-results');
+  re.innerHTML='<div style="font-family:var(--dm);font-size:10px;color:var(--text3)">Loading…</div>';
+  let all, profiles, sessions;
+  try{
+    [all, profiles, sessions]=await Promise.all([
+      sfetch('/rest/v1/ac_results?select=name,period,unit_id,best_score,best_accuracy,attempts,updated_at&order=updated_at.desc&limit=500'),
+      sfetch('/rest/v1/ac_student_profiles?select=display_name,full_name,period,vocab_passed,units_completed,gold,updated_at'),
+      sfetch('/rest/v1/ac_sessions?select=student_name,period,minutes&limit=5000')
+    ]);
+  }catch(err){
+    re.innerHTML='<div style="font-family:var(--dm);font-size:10px;color:var(--red2);padding:12px">Error: '+err.message+'</div>';
+    return;
+  }
+  if(!all?.length&&!profiles?.length){
+    re.innerHTML='<div style="font-family:var(--dm);font-size:10px;color:var(--text3);font-style:italic;padding:12px">No results yet.</div>';
+    return;
+  }
 
   // Session totals per student
   const sessSm={};
