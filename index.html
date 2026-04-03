@@ -2332,6 +2332,10 @@ async function logSessionEnd(exitTo=''){
 window.addEventListener('beforeunload',()=>{ if(_sessionStart)logSessionEnd('unload'); });
 
 function enterShell(){
+  _hubSessionStart = Date.now();
+  setTimeout(()=>{
+    if(S.name&&!S.isGuest) acLogEvent('hub_session_start','shell',null,{period:S.period},null);
+  }, 1000);
   try{sessionStorage.setItem('ac_shell_active','1');}catch(e){}
   document.getElementById('title-screen').style.display='none';document.getElementById('setup-screen').style.display='none';document.getElementById('shell').style.display='block';document.getElementById('hud').style.display='block';updateHUD();if(IS_TEACHER){document.getElementById('nav-teacher').style.display='inline-block';showView('teacher');}else showView('timeline');requestAnimationFrame(()=>{renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();renderVocabMedals();});if(!IS_TEACHER&&!S.isGuest){const seen=_obSeen();if(!seen){if(!S.isGuest&&S.name)syncFromSupabase();setTimeout(()=>openOnboarding(),600);}else{if(!S.isGuest&&S.name)syncFromSupabase();}}else{if(!S.isGuest&&S.name)syncFromSupabase();}
   // Start tracking this session
@@ -2571,6 +2575,7 @@ function updateHUD(){
 
 // ── VIEWS ─────────────────────────────────────────────
 function showView(v){
+  if(S.name&&!S.isGuest) acLogEvent('view_changed','shell',null,{view:v},null);
   document.querySelectorAll('.view').forEach(el=>el.classList.remove('active'));
   const el=document.getElementById('view-'+v);if(el){el.classList.add('active');}
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -2797,7 +2802,12 @@ function launchUnit(url){
   localStorage.setItem('ac_returning_from_game','1');
   try{sessionStorage.removeItem('ac_shell_active');}catch(e){}
   const u=UNIT_DATA.find(x=>x.url===url);
-  logSessionEnd(u?u.title:'unit_game').then(()=>{ window.location.href=url; });
+  acLogEvent('unit_launched','unit7a',null,{
+    unit_id:    u?u.id:null,
+    unit_title: u?u.title:null,
+    url:        url
+  },null);
+  acFlushEngagement().then(()=>logSessionEnd(u?u.title:'unit_game')).then(()=>{ window.location.href=url; });
 }
 
 // Mini RPG card for the course-intro bar (far right of the header stripe)
