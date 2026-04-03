@@ -171,6 +171,36 @@ body::before{content:'';position:fixed;inset:0;
 /* notification */
 .notif{position:fixed;bottom:80px;right:16px;background:var(--bg2);border:1px solid var(--amber2);border-left:3px solid var(--amber);color:var(--amber);font-family:var(--bebas);font-size:12px;letter-spacing:2px;padding:10px 16px;z-index:9999;animation:fadeUp .3s ease;max-width:280px}
 </style>
+
+<!-- ═══════════════════════════════════════════════
+     AC ENGAGEMENT TRACKING MODULE v1.0
+═══════════════════════════════════════════════ -->
+<script>
+(function(){
+  const _SUPA_URL = 'https://dnmrwglrcvlbamzhlzlx.supabase.co';
+  const _SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRubXJ3Z2xyY3ZsYmFtemhsemx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NjA2OTEsImV4cCI6MjA4OTQzNjY5MX0.jEIM-dGgB0cUS0A6w31LJ5AK9QDCS_UqdVnPrb8dlXM';
+  const _SUPA_H   = {'Content-Type':'application/json','apikey':_SUPA_KEY,'Authorization':'Bearer '+_SUPA_KEY};
+  function _getStudent(){
+    try{ const s=JSON.parse(localStorage.getItem('ac_shell_state')||'{}'); return{name:s.name||'',period:s.period||''}; }catch(e){return{name:'',period:''};}
+  }
+  window._acEngQueue = window._acEngQueue || [];
+  window.acLogEvent = function(eventType, unitId, deckId, data, durationSeconds){
+    const st=_getStudent(); if(!st.name)return;
+    window._acEngQueue.push({student_name:st.name,period:st.period,event_type:eventType,unit_id:unitId||null,deck_id:deckId||null,data:data||null,duration_seconds:durationSeconds||null,created_at:new Date().toISOString()});
+  };
+  async function _flush(){
+    if(!window._acEngQueue.length)return;
+    const batch=window._acEngQueue.splice(0);
+    try{ await fetch(_SUPA_URL+'/rest/v1/ac_engagement',{method:'POST',headers:{..._SUPA_H,'Prefer':'return=minimal'},body:JSON.stringify(batch)}); }catch(e){}
+  }
+  setInterval(_flush,15000);
+  window.addEventListener('beforeunload',()=>{
+    if(!window._acEngQueue.length)return;
+    navigator.sendBeacon(_SUPA_URL+'/rest/v1/ac_engagement',new Blob([JSON.stringify(window._acEngQueue)],{type:'application/json'}));
+  });
+  window.acFlushEngagement=_flush;
+})();
+</script>
 </head>
 <body>
 <div id="app">
@@ -1478,6 +1508,14 @@ let quizScore     = 0;
 let quizAnswers   = [];       // {correct, chosen, q}
 let quizAnswered  = false;
 
+// ── ENGAGEMENT TRACKING VARS ──
+let _studySessionStart = null;
+let _studyCardsFlipped = 0;
+let _cardFrontTime = null;
+let _quizSessionStart = null;
+let _questionStartTime = null;
+
+
 // Shell state (shared with hub)
 let S = {};
 
@@ -1613,6 +1651,9 @@ function updateModeToggle() {
 //  STUDY MODE
 // ══════════════════════════════════════════════════════
 function startStudy() {
+  _studySessionStart = Date.now();
+  _studyCardsFlipped = 0;
+  acLogEvent('study_started', 'unit7a', currentDeck ? currentDeck.id : null, {deck: currentDeck ? currentDeck.title : ''}, null);
   hideAll();
   document.getElementById('study-screen').style.display = 'block';
   studyCards = [...currentDeck.flashcards];
@@ -1629,6 +1670,7 @@ function startStudy() {
 }
 
 function renderCard() {
+  _cardFrontTime = Date.now();
   const card = studyCards[studyIndex];
   if (!card) return;
 
@@ -1655,10 +1697,32 @@ function renderCard() {
 }
 
 function flipCard() {
+  _studyCardsFlipped++;
+  const dwellSecs = _cardFrontTime ? Math.round((Date.now() - _cardFrontTime) / 1000) : null;
+  acLogEvent('card_flipped', 'unit7a', currentDeck ? currentDeck.id : null, {
+    card_id: studyCards[studyIndex] ? studyCards[studyIndex].id : null,
+    term: studyCards[studyIndex] ? studyCards[studyIndex].term : null,
+    dwell_seconds: dwellSecs
+  }, dwellSecs);
+  _cardFrontTime = null;
   isFlipped = !isFlipped;
   document.getElementById('flashcard').classList.toggle('flipped', isFlipped);
 }
-function nextCard() { if (studyIndex < studyCards.length - 1) { studyIndex++; renderCard(); } }
+function nextCard() {
+  if (studyIndex < studyCards.length - 1) {
+    studyIndex++;
+    renderCard();
+  } else {
+    // Reached end of deck
+    const secs = _studySessionStart ? Math.round((Date.now() - _studySessionStart) / 1000) : null;
+    acLogEvent('study_completed', 'unit7a', currentDeck ? currentDeck.id : null, {
+      cards_flipped: _studyCardsFlipped,
+      total_cards: studyCards.length,
+      deck: currentDeck ? currentDeck.title : ''
+    }, secs);
+    acFlushEngagement && acFlushEngagement();
+  }
+}
 function prevCard() { if (studyIndex > 0) { studyIndex--; renderCard(); } }
 function shuffleCards() {
   studyCards = [...studyCards].sort(() => Math.random() - .5);
@@ -1685,6 +1749,9 @@ function rateCard(rating, e) {
 // ══════════════════════════════════════════════════════
 function startQuiz() {
   hideAll();
+  _quizSessionStart = Date.now();
+  _questionStartTime = Date.now();
+  acLogEvent('quiz_started', 'unit7a', currentDeck ? currentDeck.id : null, {deck: currentDeck ? currentDeck.title : '', total_questions: currentDeck ? currentDeck.quiz.length : 0}, null);
   document.getElementById('quiz-screen').style.display = 'block';
   const shuffled = shuffleArray([...currentDeck.quiz]);
   const count = Math.floor(Math.random() * 6) + 15; // 15–20 inclusive
@@ -1697,6 +1764,7 @@ function startQuiz() {
 }
 
 function renderQuestion() {
+  _questionStartTime = Date.now();
   const q = quizQuestions[quizIndex];
   if (!q) return;
 
@@ -1746,6 +1814,15 @@ function selectAnswer(chosen, correct, el) {
   if (isCorrect) quizScore++;
 
   quizAnswers.push({ correct: isCorrect, chosen, correctIdx: correct, q });
+  const _qSecs = _questionStartTime ? Math.round((Date.now() - _questionStartTime) / 1000) : null;
+  acLogEvent('quiz_question', 'unit7a', currentDeck ? currentDeck.id : null, {
+    question_id:  q.id,
+    question:     q.question,
+    correct:      isCorrect,
+    time_seconds: _qSecs,
+    question_num: quizIndex + 1,
+    total:        quizQuestions.length
+  }, _qSecs);
 
   // Feedback
   const fb = document.getElementById('quiz-feedback');
@@ -1779,6 +1856,17 @@ function showResults() {
   const d = currentDeck;
   const total = quizQuestions.length;
   const pct = Math.round((quizScore / total) * 100);
+  const _quizSecs = _quizSessionStart ? Math.round((Date.now() - _quizSessionStart) / 1000) : null;
+  acLogEvent('quiz_completed', 'unit7a', d ? d.id : null, {
+    deck:          d ? d.title : '',
+    score_pct:     pct,
+    correct:       quizScore,
+    total:         total,
+    passed:        pct >= 60,
+    full_reward:   pct >= 80,
+    questions:     quizAnswers.map(a=>({id:a.q.id, correct:a.correct}))
+  }, _quizSecs);
+  acFlushEngagement && acFlushEngagement();
   const threshold = d.reward.masteryThreshold || 0.8;
   const passed = pct >= 60;
   const fullReward = pct >= Math.round(threshold * 100);
@@ -1956,7 +2044,37 @@ function printVocabCert(deckTitle, pct, correct, total) {
     .footer{font-size:9px;color:#aaa;margin-top:14px;border-top:1px solid #e0d8c8;padding-top:10px;letter-spacing:.05em}
     .pbtn{margin-top:16px;padding:10px 26px;background:${gradeColor};border:none;color:#1a1208;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.08em;cursor:pointer}
     @media print{body{padding:0}.np{display:none!important}}
-  </style></head><body>
+  </style>
+<!-- ═══════════════════════════════════════════════
+     AC ENGAGEMENT TRACKING MODULE v1.0
+═══════════════════════════════════════════════ -->
+<script>
+(function(){
+  const _SUPA_URL = 'https://dnmrwglrcvlbamzhlzlx.supabase.co';
+  const _SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRubXJ3Z2xyY3ZsYmFtemhsemx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NjA2OTEsImV4cCI6MjA4OTQzNjY5MX0.jEIM-dGgB0cUS0A6w31LJ5AK9QDCS_UqdVnPrb8dlXM';
+  const _SUPA_H   = {'Content-Type':'application/json','apikey':_SUPA_KEY,'Authorization':'Bearer '+_SUPA_KEY};
+  function _getStudent(){
+    try{ const s=JSON.parse(localStorage.getItem('ac_shell_state')||'{}'); return{name:s.name||'',period:s.period||''}; }catch(e){return{name:'',period:''};}
+  }
+  window._acEngQueue = window._acEngQueue || [];
+  window.acLogEvent = function(eventType, unitId, deckId, data, durationSeconds){
+    const st=_getStudent(); if(!st.name)return;
+    window._acEngQueue.push({student_name:st.name,period:st.period,event_type:eventType,unit_id:unitId||null,deck_id:deckId||null,data:data||null,duration_seconds:durationSeconds||null,created_at:new Date().toISOString()});
+  };
+  async function _flush(){
+    if(!window._acEngQueue.length)return;
+    const batch=window._acEngQueue.splice(0);
+    try{ await fetch(_SUPA_URL+'/rest/v1/ac_engagement',{method:'POST',headers:{..._SUPA_H,'Prefer':'return=minimal'},body:JSON.stringify(batch)}); }catch(e){}
+  }
+  setInterval(_flush,15000);
+  window.addEventListener('beforeunload',()=>{
+    if(!window._acEngQueue.length)return;
+    navigator.sendBeacon(_SUPA_URL+'/rest/v1/ac_engagement',new Blob([JSON.stringify(window._acEngQueue)],{type:'application/json'}));
+  });
+  window.acFlushEngagement=_flush;
+})();
+</script>
+</head><body>
   <div class="cert">
     <div class="eyebrow">AMERICAN CHRONICLES · U.S. HISTORY · VOCABULARY ASSESSMENT</div>
     <div class="icon">📚</div>
