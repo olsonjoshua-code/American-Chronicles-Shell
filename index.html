@@ -3054,7 +3054,11 @@ window.addEventListener('message',async e=>{
     // Push vocab result to ac_results so it appears on the leaderboard
     if(!S.isGuest&&S.name&&score!==undefined){
       const vocabUnitId='vocab_'+deckId;
-      const vocabScore=Math.round((score/100)*500); // convert pct to a 0-500 point score
+      // Scale vocab to roughly one lesson's worth of points:
+      // 80% pass threshold → ~80pts, 90% → ~120pts, 100% → 150pts
+      const vocabScore = score < 80 ? Math.round(score * 0.5)
+        : score === 100 ? 150
+        : Math.round(80 + ((score - 80) / 20) * 70);
       try{
         const existing=await sfetch('/rest/v1/ac_results?name=eq.'+encodeURIComponent(S.name)+'&period=eq.'+encodeURIComponent(S.period||'')+'&unit_id=eq.'+encodeURIComponent(vocabUnitId)+'&select=best_score,best_accuracy,attempts');
         const prev=existing&&existing[0];
