@@ -1139,6 +1139,7 @@ let _teacherDashPeriod='all'; // current period filter in teacher dashboard
 let _trophyData=[];
 let _charCat='all';
 let _lbPeriod='all';
+let _lbSts=[];
 
 // ── TIER SYSTEM ───────────────────────────────────────
 function calcTier(acc){if(acc===100)return'historian';if(acc>=90)return'gold';if(acc>=80)return'silver';if(acc>=70)return'bronze';if(acc>=60)return'completed';return'tryagain';}
@@ -3571,7 +3572,7 @@ async function renderLeaderboard(){
   document.getElementById('lb-sync').textContent='Loading class results…';
   const [all, profiles] = await Promise.all([
     sfetch('/rest/v1/ac_results?select=name,period,unit_id,best_score,best_accuracy,cards&order=best_score.desc&limit=400'),
-    sfetch('/rest/v1/ac_student_profiles?select=display_name,period,vocab_passed')
+    sfetch('/rest/v1/ac_profiles?select=name,period,vocab_passed')
   ]);
 
   // Build vocab count lookup keyed by "name|period"
@@ -3580,7 +3581,7 @@ async function renderLeaderboard(){
     try{
       const vp=JSON.parse(p.vocab_passed||'{}');
       const count=Object.values(vp).filter(Boolean).length;
-      vocabLookup[p.display_name+'|'+p.period]=count;
+      vocabLookup[(p.name||p.display_name)+'|'+p.period]=count;
     }catch(e){}
   });
 
@@ -3600,12 +3601,12 @@ async function renderLeaderboard(){
     sm[k].vocab = vocabLookup[k] || 0;
   });
 
-  const sts=Object.values(sm).sort((a,b)=>b.score-a.score);
-  const periods=[...new Set(sts.filter(s=>s.period&&!s.is_teacher&&s.period!=='teacher'&&s.period!=='guest').map(s=>String(s.period)))].sort((a,b)=>+a-+b);
+  _lbSts=Object.values(sm).sort((a,b)=>b.score-a.score);
+  const periods=[...new Set(_lbSts.filter(s=>s.period&&!s.is_teacher&&s.period!=='teacher'&&s.period!=='guest').map(s=>String(s.period)))].sort((a,b)=>+a-+b);
   const tabs=document.getElementById('lb-tabs');
-  tabs.innerHTML=[{k:'all',l:'All'},...periods.map(p=>({k:p,l:'Pd '+p}))].map(t=>`<button class="lb-tab ${_lbPeriod===t.k?'active':''}" onclick="setLbPeriod('${t.k}',${JSON.stringify(sts)})">${t.l}</button>`).join('');
-  drawLbTable(sts,_lbPeriod);
-  document.getElementById('lb-sync').textContent=sts.length+' students · auto-synced from games';
+  tabs.innerHTML=[{k:'all',l:'All'},...periods.map(p=>({k:p,l:'Pd '+p}))].map(t=>`<button class="lb-tab ${_lbPeriod===t.k?'active':''}" onclick="setLbPeriod('${t.k}')">${t.l}</button>`).join('');
+  drawLbTable(_lbSts,_lbPeriod);
+  document.getElementById('lb-sync').textContent=_lbSts.filter(s=>!s.is_teacher).length+' students · auto-synced from games';
 }
 
 let _shellLBDeleteUnlocked=false;
@@ -3631,7 +3632,7 @@ async function shellLBDelete(name,period){
   }catch(e){notify('Error removing entry');}
 }
 
-function setLbPeriod(p,sts){_lbPeriod=p;document.querySelectorAll('.lb-tab').forEach(b=>{b.classList.toggle('active',b.textContent.replace('Pd ','')===p||p==='all'&&b.textContent==='All');});drawLbTable(sts,p);}
+function setLbPeriod(p){_lbPeriod=p;document.querySelectorAll('.lb-tab').forEach(b=>{b.classList.toggle('active',b.textContent.replace('Pd ','')===p||p==='all'&&b.textContent==='All');});drawLbTable(_lbSts,p);}
 
 function drawLbTable(sts,period){
   const el=document.getElementById('lb-content');
