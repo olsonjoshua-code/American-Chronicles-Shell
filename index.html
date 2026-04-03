@@ -3032,7 +3032,7 @@ function buildLaunchArea(u,st){
 }
 
 // ── Listen for vocab reward messages from flashcard page ──
-window.addEventListener('message',e=>{
+window.addEventListener('message',async e=>{
   if(e.data?.type==='vocabReward'&&e.data.deckId){
     const{deckId,gold:g,xp:x,score,passed}=e.data;
     // Clear localStorage result key so the poller doesn't double-award
