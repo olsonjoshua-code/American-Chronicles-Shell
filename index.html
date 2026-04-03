@@ -4226,7 +4226,7 @@ async function renderTeacherView(){
     sfetch('/rest/v1/ac_student_profiles?select=display_name,full_name,period,vocab_passed,units_completed,gold,updated_at'),
     sfetch('/rest/v1/ac_sessions?select=student_name,period,minutes&limit=5000')
   ]);
-  if(!all?.length){re.innerHTML='<div style="font-family:var(--dm);font-size:10px;color:var(--text3);font-style:italic;padding:12px">No results yet.</div>';return;}
+  if(!all?.length&&!profiles?.length){re.innerHTML='<div style="font-family:var(--dm);font-size:10px;color:var(--text3);font-style:italic;padding:12px">No results yet.</div>';return;}
 
   // Session totals per student
   const sessSm={};
