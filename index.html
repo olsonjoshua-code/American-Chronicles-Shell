@@ -3630,10 +3630,11 @@ async function renderLeaderboard(){
   // Then layer in actual game scores from ac_results
   (all||[]).forEach(r=>{
     const isT=r.is_teacher||r.period==='teacher';
+    const isVocab=r.unit_id&&r.unit_id.startsWith('vocab_');
     const k=isT?'__teacher__'+r.name:r.name+'|'+r.period;
     if(!sm[k])sm[k]={name:r.name,period:isT?'':r.period,score:0,units:0,golds:0,cards:0,vocab:0,is_teacher:isT};
-    sm[k].score+=r.best_score||0;sm[k].units++;
-    if(r.best_accuracy>=90)sm[k].golds++;
+    sm[k].score+=r.best_score||0;
+    if(!isVocab){sm[k].units++;if(r.best_accuracy>=90)sm[k].golds++;}
     sm[k].cards+=r.cards||0;
     if(isT)sm[k].is_teacher=true;
   });
@@ -4249,7 +4250,7 @@ async function renderTeacherView(){
     const k=p.display_name+'|'+p.period;
     if(!sm[k])sm[k]={name:p.display_name,period:p.period,units:[],score:0};
   });
-  all.forEach(r=>{const k=r.name+'|'+r.period;if(!sm[k])sm[k]={name:r.name,period:r.period,units:[],score:0};sm[k].units.push(r);sm[k].score+=r.best_score||0;});
+  all.forEach(r=>{const k=r.name+'|'+r.period;if(!sm[k])sm[k]={name:r.name,period:r.period,units:[],score:0};if(!r.unit_id||!r.unit_id.startsWith('vocab_'))sm[k].units.push(r);sm[k].score+=r.best_score||0;});
   const sts=Object.values(sm).sort((a,b)=>b.score-a.score);
 
   re.innerHTML=`
@@ -4272,7 +4273,7 @@ async function renderTeacherView(){
         <td style="color:var(--teal2)">${vocab}</td>
         <td style="color:var(--text2)">${avgAcc}%</td>
         <td style="color:var(--green2)">${mins>0?mins+' min':'—'}</td>
-        <td onclick="event.stopPropagation()"><button class="dash-del-btn" data-name="${s.name}" data-period="${s.period||''}" style="font-family:var(--bebas);font-size:9px;background:transparent;border:1px solid var(--red2);color:var(--red2);padding:3px 8px;cursor:pointer;letter-spacing:1px;">✕ REMOVE</button></td>
+        <td onclick="event.stopPropagation()">${(()=>{const _k='del_'+i;window._dashDelRegistry[_k]={name:s.name,period:s.period||''};return'<button onclick="window._dashDelClick(\''+_k+'\',event)" style="font-family:var(--bebas);font-size:9px;background:transparent;border:1px solid var(--red2);color:var(--red2);padding:3px 8px;cursor:pointer;letter-spacing:1px;">✕ REMOVE</button>';})()}</td>
       </tr>`;
     }).join('')}</tbody></table>`;
   try{const n=document.getElementById('teacher-notes');if(n)n.value=localStorage.getItem('ac_teacher_notes')||'';}catch(e){}
@@ -4307,27 +4308,32 @@ async function openStudentProfile(name, period){
   try { vocabBestScore = JSON.parse(prof.vocab_best_score || '{}'); } catch(e){}
   const vocabCount = Object.values(vocabPassed).filter(Boolean).length;
 
-  // Summary stats
-  const totalScore = unitResults.reduce((a,r) => a + (r.best_score||0), 0);
-  const avgAcc = unitResults.length ? Math.round(unitResults.reduce((a,r) => a + (r.best_accuracy||0), 0) / unitResults.length) : 0;
-  const golds = unitResults.filter(r => r.best_accuracy >= 90).length;
+  // Split results — real unit games vs vocab quiz results
+  const gameResults = unitResults.filter(r => !r.unit_id.startsWith('vocab_'));
+  const vocabResults = unitResults.filter(r => r.unit_id.startsWith('vocab_'));
+
+  // Summary stats (unit games only)
+  const totalScore = gameResults.reduce((a,r) => a + (r.best_score||0), 0);
+  const avgAcc = gameResults.length ? Math.round(gameResults.reduce((a,r) => a + (r.best_accuracy||0), 0) / gameResults.length) : 0;
+  const golds = gameResults.filter(r => r.best_accuracy >= 90).length;
+  const vocabCount = Object.values(vocabPassed).filter(Boolean).length;
   document.getElementById('sp-stats').innerHTML = [
-    {v: unitResults.length, l: 'UNITS DONE'},
+    {v: gameResults.length, l: 'UNITS DONE'},
     {v: totalScore.toLocaleString(), l: 'TOTAL SCORE'},
     {v: avgAcc + '%', l: 'AVG ACCURACY'},
-    {v: golds, l: 'GOLD+ TROPHIES'},
+    {v: vocabCount, l: 'VOCAB PASSED'},
   ].map(s => `<div style="background:var(--bg3);border:1px solid var(--border);padding:10px;text-align:center;">
     <div style="font-family:var(--bebas);font-size:22px;color:var(--amber)">${s.v}</div>
     <div style="font-family:var(--dm);font-size:8px;color:var(--text3);letter-spacing:1px;margin-top:2px">${s.l}</div>
   </div>`).join('');
 
   // Unit games table
-  if(!unitResults.length){
+  if(!gameResults.length){
     document.getElementById('sp-units').innerHTML = '<div style="font-family:var(--dm);font-size:10px;color:var(--text3);font-style:italic;padding:6px 0">No unit games completed yet.</div>';
   } else {
     document.getElementById('sp-units').innerHTML = `<table class="lb-table" style="font-size:11px;">
       <thead><tr><th>UNIT</th><th>BEST SCORE</th><th>ACCURACY</th><th>ATTEMPTS</th><th>TROPHY</th></tr></thead>
-      <tbody>${unitResults.map(r => {
+      <tbody>${gameResults.map(r => {
         const u = UNIT_DATA.find(x => x.id === r.unit_id) || {};
         const tier = calcTier(r.best_accuracy||0);
         const tc = TIER_COLOR[tier];
@@ -4342,19 +4348,28 @@ async function openStudentProfile(name, period){
     </table>`;
   }
 
-  // Vocab quizzes
-  const vocabDecks = Object.entries(vocabPassed);
-  if(!vocabDecks.length){
+  // Vocab quizzes — merge profile data with ac_results vocab rows for best picture
+  const vocabFromResults = {};
+  vocabResults.forEach(r => {
+    const deckId = r.unit_id.replace('vocab_','');
+    vocabFromResults[deckId] = r;
+  });
+  const allVocabDecks = [...new Set([...Object.keys(vocabPassed), ...Object.keys(vocabFromResults)])];
+  if(!allVocabDecks.length){
     document.getElementById('sp-vocab').innerHTML = '<div style="font-family:var(--dm);font-size:10px;color:var(--text3);font-style:italic;padding:6px 0">No vocab quizzes completed yet.</div>';
   } else {
     document.getElementById('sp-vocab').innerHTML = `<table class="lb-table" style="font-size:11px;">
-      <thead><tr><th>DECK</th><th>STATUS</th><th>BEST SCORE</th></tr></thead>
-      <tbody>${vocabDecks.map(([deckId, passed]) => {
-        const best = vocabBestScore[deckId];
+      <thead><tr><th>DECK</th><th>STATUS</th><th>BEST SCORE</th><th>ATTEMPTS</th></tr></thead>
+      <tbody>${allVocabDecks.map(deckId => {
+        const passed = vocabPassed[deckId];
+        const best = vocabBestScore[deckId] || vocabFromResults[deckId]?.best_accuracy;
+        const attempts = vocabFromResults[deckId]?.attempts || '—';
+        const label = deckId.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
         return `<tr>
-          <td style="font-family:var(--playfair);color:var(--cream)">${deckId.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}</td>
-          <td style="color:${passed?'var(--green2)':'var(--text3)'}">${passed ? '✅ Passed' : '⬜ Not passed'}</td>
-          <td style="color:var(--amber)">${best != null ? best + '%' : '—'}</td>
+          <td style="font-family:var(--playfair);color:var(--cream)">${label}</td>
+          <td style="color:${passed?'var(--green2)':'var(--amber)'}">${passed ? '✅ Passed' : '🔄 Attempted'}</td>
+          <td style="color:var(--amber);font-weight:600">${best != null ? best + '%' : '—'}</td>
+          <td style="color:var(--text3)">${attempts}</td>
         </tr>`;
       }).join('')}</tbody>
     </table>`;
@@ -4366,15 +4381,13 @@ function closeStudentProfile(){
 }
 
 
-// Delegated click handler for dashboard delete buttons
-document.addEventListener('click', e=>{
-  const btn = e.target.closest('.dash-del-btn');
-  if(!btn) return;
+// Global registry for dashboard delete — avoids all inline escaping issues
+window._dashDelRegistry = {};
+window._dashDelClick = function(key, e){
   e.stopPropagation();
-  const name = btn.dataset.name;
-  const period = btn.dataset.period;
+  const {name, period} = window._dashDelRegistry[key];
   dashboardDeleteStudent(name, period);
-});
+};
 
 async function dashboardDeleteStudent(name, period){
   if(!confirm('Remove "'+name+'" (Period '+period+') completely?\nThis deletes their results, profile, and sessions and cannot be undone.'))return;
