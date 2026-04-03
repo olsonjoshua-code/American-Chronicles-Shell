@@ -1134,6 +1134,44 @@ let _teacherList = []; // [{id, display_name, periods}]
 let _selectedTeacherId = null; // which teacher is being logged into
 const SHELL_KEY='ac_shell_state';
 let _hubSessionStart=Date.now();let _acEngQueue=[];
+
+// ── ENGAGEMENT TRACKING FUNCTIONS ────────────────────
+function acLogEvent(eventType, unitId, deckId, data, durationSeconds){
+  if(!S||!S.name||S.isGuest)return;
+  _acEngQueue.push({
+    student_name:     S.name,
+    period:           S.period||'',
+    event_type:       eventType,
+    unit_id:          unitId||null,
+    deck_id:          deckId||null,
+    data:             data||null,
+    duration_seconds: durationSeconds||null,
+    created_at:       new Date().toISOString()
+  });
+}
+
+async function acFlushEngagement(){
+  if(!_acEngQueue.length)return;
+  const batch=_acEngQueue.splice(0);
+  try{
+    await fetch(SUPA_URL+'/rest/v1/ac_engagement',{
+      method:'POST',
+      headers:{...SUPA_H,'Prefer':'return=minimal'},
+      body:JSON.stringify(batch)
+    });
+  }catch(e){ console.log('Engagement flush failed',e); }
+}
+
+setInterval(acFlushEngagement,15000);
+
+window.addEventListener('beforeunload',()=>{
+  const hubSecs=Math.round((Date.now()-_hubSessionStart)/1000);
+  acLogEvent('hub_session_end','shell',null,{view:'shell'},hubSecs);
+  if(!_acEngQueue.length)return;
+  navigator.sendBeacon(SUPA_URL+'/rest/v1/ac_engagement',
+    new Blob([JSON.stringify(_acEngQueue)],{type:'application/json'}));
+});
+// ─────────────────────────────────────────────────────
 let IS_TEACHER=false;
 let _currentTeacher=null; // {id, name, periods} set on teacher login
 let _teacherDashPeriod='all'; // current period filter in teacher dashboard
