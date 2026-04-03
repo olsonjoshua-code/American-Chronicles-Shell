@@ -3051,6 +3051,29 @@ window.addEventListener('message',e=>{
     saveS();
     updateHUDGold();
     renderVocabMedals();
+    // Push vocab result to ac_results so it appears on the leaderboard
+    if(!S.isGuest&&S.name&&score!==undefined){
+      const vocabUnitId='vocab_'+deckId;
+      const vocabScore=Math.round((score/100)*500); // convert pct to a 0-500 point score
+      try{
+        const existing=await sfetch('/rest/v1/ac_results?name=eq.'+encodeURIComponent(S.name)+'&period=eq.'+encodeURIComponent(S.period||'')+'&unit_id=eq.'+encodeURIComponent(vocabUnitId)+'&select=best_score,best_accuracy,attempts');
+        const prev=existing&&existing[0];
+        await fetch(SUPA_URL+'/rest/v1/ac_results?on_conflict=name,period,unit_id',{
+          method:'POST',
+          headers:{...SUPA_H,'Prefer':'resolution=merge-duplicates'},
+          body:JSON.stringify({
+            name:S.name,
+            period:S.period||'',
+            unit_id:vocabUnitId,
+            best_score:Math.max(vocabScore,prev?prev.best_score||0:0),
+            best_accuracy:Math.max(score,prev?prev.best_accuracy||0:0),
+            trophy:score>=80?'gold':score>=60?'silver':'tryagain',
+            attempts:(prev?prev.attempts||0:0)+1,
+            updated_at:new Date().toISOString()
+          })
+        });
+      }catch(err){console.log('Vocab result push failed',err);}
+    }
   }
   if(e.data?.type==='unitComplete'&&e.data.unitId)onUnitComplete(e.data.unitId);
 });
