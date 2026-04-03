@@ -1133,6 +1133,7 @@ function applyProfileFromDB(profile){
 let _teacherList = []; // [{id, display_name, periods}]
 let _selectedTeacherId = null; // which teacher is being logged into
 const SHELL_KEY='ac_shell_state';
+let _hubSessionStart=Date.now();let _acEngQueue=[];
 let IS_TEACHER=false;
 let _currentTeacher=null; // {id, name, periods} set on teacher login
 let _teacherDashPeriod='all'; // current period filter in teacher dashboard
@@ -2332,7 +2333,7 @@ async function logSessionEnd(exitTo=''){
 window.addEventListener('beforeunload',()=>{ if(_sessionStart)logSessionEnd('unload'); });
 
 function enterShell(){
-  _hubSessionStart = Date.now();
+  if(typeof _hubSessionStart !== 'undefined') _hubSessionStart = Date.now();
   setTimeout(()=>{
     if(S.name&&!S.isGuest) acLogEvent('hub_session_start','shell',null,{period:S.period},null);
   }, 1000);
