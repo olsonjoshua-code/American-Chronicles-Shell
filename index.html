@@ -4265,10 +4265,10 @@ async function renderTeacherView(){
 
   re.innerHTML=`
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
-      <div style="font-family:var(--dm);font-size:9px;color:var(--text3)">${sts.length} students · ${all.length} unit results</div>
+      <div style="font-family:var(--dm);font-size:9px;color:var(--text3)">${sts.length} students · ${(all||[]).filter(r=>!r.unit_id||!r.unit_id.startsWith('vocab_')).length} unit results</div>
       <button class="btn xs green" onclick="exportCSV()"><span>⬇ Export CSV</span></button>
     </div>
-    <table class="lb-table"><thead><tr><th>STUDENT</th><th>PD</th><th>UNITS</th><th>SCORE</th><th>GOLDS</th><th>HISTORIANS</th><th>VOCAB</th><th>AVG ACC</th><th>⏱ MINS</th><th></th></tr></thead><tbody>${sts.map(s=>{
+    <table class="lb-table"><thead><tr><th>STUDENT</th><th>PD</th><th>UNITS</th><th>SCORE</th><th>GOLDS</th><th>HISTORIANS</th><th>VOCAB</th><th>AVG ACC</th><th>⏱ MINS</th><th></th></tr></thead><tbody>${sts.map((s,i)=>{
       const k=s.name+'|'+s.period;
       const avgAcc=s.units.length?Math.round(s.units.reduce((a,u)=>a+(u.best_accuracy||0),0)/s.units.length):0;
       const vocab=vocabLookup[k]||0;
