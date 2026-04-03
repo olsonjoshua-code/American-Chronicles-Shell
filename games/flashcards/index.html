@@ -2046,35 +2046,6 @@ function printVocabCert(deckTitle, pct, correct, total) {
     .pbtn{margin-top:16px;padding:10px 26px;background:${gradeColor};border:none;color:#1a1208;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.08em;cursor:pointer}
     @media print{body{padding:0}.np{display:none!important}}
   </style>
-<!-- ═══════════════════════════════════════════════
-     AC ENGAGEMENT TRACKING MODULE v1.0
-═══════════════════════════════════════════════ -->
-<script>
-(function(){
-  const _SUPA_URL = 'https://dnmrwglrcvlbamzhlzlx.supabase.co';
-  const _SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRubXJ3Z2xyY3ZsYmFtemhsemx4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4NjA2OTEsImV4cCI6MjA4OTQzNjY5MX0.jEIM-dGgB0cUS0A6w31LJ5AK9QDCS_UqdVnPrb8dlXM';
-  const _SUPA_H   = {'Content-Type':'application/json','apikey':_SUPA_KEY,'Authorization':'Bearer '+_SUPA_KEY};
-  function _getStudent(){
-    try{ const s=JSON.parse(localStorage.getItem('ac_shell_state')||'{}'); return{name:s.name||'',period:s.period||''}; }catch(e){return{name:'',period:''};}
-  }
-  window._acEngQueue = window._acEngQueue || [];
-  window.acLogEvent = function(eventType, unitId, deckId, data, durationSeconds){
-    const st=_getStudent(); if(!st.name)return;
-    window._acEngQueue.push({student_name:st.name,period:st.period,event_type:eventType,unit_id:unitId||null,deck_id:deckId||null,data:data||null,duration_seconds:durationSeconds||null,created_at:new Date().toISOString()});
-  };
-  async function _flush(){
-    if(!window._acEngQueue.length)return;
-    const batch=window._acEngQueue.splice(0);
-    try{ await fetch(_SUPA_URL+'/rest/v1/ac_engagement',{method:'POST',headers:{..._SUPA_H,'Prefer':'return=minimal'},body:JSON.stringify(batch)}); }catch(e){}
-  }
-  setInterval(_flush,15000);
-  window.addEventListener('beforeunload',()=>{
-    if(!window._acEngQueue.length)return;
-    navigator.sendBeacon(_SUPA_URL+'/rest/v1/ac_engagement',new Blob([JSON.stringify(window._acEngQueue)],{type:'application/json'}));
-  });
-  window.acFlushEngagement=_flush;
-})();
-</script>
 </head><body>
   <div class="cert">
     <div class="eyebrow">AMERICAN CHRONICLES · U.S. HISTORY · VOCABULARY ASSESSMENT</div>
