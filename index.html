@@ -4316,7 +4316,6 @@ async function openStudentProfile(name, period){
   const totalScore = gameResults.reduce((a,r) => a + (r.best_score||0), 0);
   const avgAcc = gameResults.length ? Math.round(gameResults.reduce((a,r) => a + (r.best_accuracy||0), 0) / gameResults.length) : 0;
   const golds = gameResults.filter(r => r.best_accuracy >= 90).length;
-  const vocabCount = Object.values(vocabPassed).filter(Boolean).length;
   document.getElementById('sp-stats').innerHTML = [
     {v: gameResults.length, l: 'UNITS DONE'},
     {v: totalScore.toLocaleString(), l: 'TOTAL SCORE'},
