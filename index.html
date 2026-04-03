@@ -2555,11 +2555,16 @@ async function resetProfile(){
 
 // ── SUPABASE SYNC ─────────────────────────────────────
 async function syncFromSupabase(){
-  const rows=await sfetch(`/rest/v1/ac_results?name=eq.${encodeURIComponent(S.name)}&select=unit_id,best_accuracy,cards`);
+  const rows=await sfetch(`/rest/v1/ac_results?name=eq.${encodeURIComponent(S.name)}&select=unit_id,best_accuracy,best_score,cards`);
   if(!Array.isArray(rows))return;
   _trophyData=rows;
   let changed=false;
-  rows.forEach(r=>{if(!S.unitsCompleted.includes(r.unit_id)&&r.best_accuracy>=60){S.unitsCompleted.push(r.unit_id);changed=true;}});
+  rows.forEach(r=>{
+    // Only add real unit games to unitsCompleted — not vocab or test rows
+    if(!r.unit_id.startsWith('vocab_')&&!r.unit_id.startsWith('test_')&&!S.unitsCompleted.includes(r.unit_id)&&r.best_accuracy>=60){
+      S.unitsCompleted.push(r.unit_id);changed=true;
+    }
+  });
   awardBadges();checkUnlocks();
   if(changed){saveS();updateHUD();renderTimeline();refreshProfile();renderBadges();renderStory();refreshMidtermCard();refreshEOCPracticeCard();refreshEOCPracticeCard();
   // Refresh new views if they are currently open
@@ -4775,13 +4780,14 @@ async function saveAllTestScores(unitId){
 }
 
 function testPctToPoints(pct){
-  // Scale test % to leaderboard points — 100% = 500pts, 80% = 300pts, 60% = 150pts
-  if(pct >= 100) return 500;
-  if(pct >= 90)  return Math.round(300 + ((pct-90)/10)*200);
-  if(pct >= 80)  return Math.round(150 + ((pct-80)/10)*150);
-  if(pct >= 70)  return Math.round(75  + ((pct-70)/10)*75);
+  // Scale test % to match roughly one strong unit game
+  // 100% = 600pts, 90% = 450pts, 80% = 300pts, 70% = 175pts, 60% = 75pts
+  if(pct >= 100) return 600;
+  if(pct >= 90)  return Math.round(300 + ((pct-90)/10)*300);
+  if(pct >= 80)  return Math.round(175 + ((pct-80)/10)*125);
+  if(pct >= 70)  return Math.round(75  + ((pct-70)/10)*100);
   if(pct >= 60)  return Math.round(25  + ((pct-60)/10)*50);
-  return Math.round(pct * 0.4); // below 60 gets minimal points
+  return Math.round(pct * 0.5);
 }
 
 async function exportCSV(){
