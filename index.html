@@ -3570,12 +3570,13 @@ function renderVocabMedals(){
 
 async function renderLeaderboard(){
   document.getElementById('lb-sync').textContent='Loading class results…';
-  const [all, profiles] = await Promise.all([
+  const [all, profiles, studentProfiles] = await Promise.all([
     sfetch('/rest/v1/ac_results?select=name,period,unit_id,best_score,best_accuracy,cards&order=best_score.desc&limit=400'),
-    sfetch('/rest/v1/ac_profiles?select=name,period,vocab_passed')
+    sfetch('/rest/v1/ac_profiles?select=name,period,vocab_passed'),
+    sfetch('/rest/v1/ac_student_profiles?select=display_name,period,vocab_passed')
   ]);
 
-  // Build vocab count lookup keyed by "name|period"
+  // Build vocab count lookup keyed by "name|period" — check both profile tables
   const vocabLookup={};
   (profiles||[]).forEach(p=>{
     try{
@@ -3584,8 +3585,26 @@ async function renderLeaderboard(){
       vocabLookup[(p.name||p.display_name)+'|'+p.period]=count;
     }catch(e){}
   });
+  (studentProfiles||[]).forEach(p=>{
+    try{
+      const vp=JSON.parse(p.vocab_passed||'{}');
+      const count=Object.values(vp).filter(Boolean).length;
+      const k=p.display_name+'|'+p.period;
+      // Only set if higher (don't overwrite a better score from ac_profiles)
+      if(!vocabLookup[k]||count>vocabLookup[k]) vocabLookup[k]=count;
+    }catch(e){}
+  });
 
   const sm={};
+
+  // First seed ALL known students from ac_student_profiles so vocab-only students appear
+  (studentProfiles||[]).forEach(p=>{
+    if(!p.display_name||!p.period||p.period==='guest'||p.period==='teacher') return;
+    const k=p.display_name+'|'+p.period;
+    if(!sm[k]) sm[k]={name:p.display_name,period:p.period,score:0,units:0,golds:0,cards:0,vocab:0,is_teacher:false};
+  });
+
+  // Then layer in actual game scores from ac_results
   (all||[]).forEach(r=>{
     const isT=r.is_teacher||r.period==='teacher';
     const k=isT?'__teacher__'+r.name:r.name+'|'+r.period;
