@@ -2034,6 +2034,10 @@ const RANKS=[
   {min:8,label:'American Archivist'},{min:11,label:'Master Historian'},
 ];
 
+// ── ACTIVE UNITS — only these are playable right now ──
+// All other unit cards will be grayed out and non-clickable.
+const ACTIVE_UNITS = ['unit6', 'unit7a'];
+
 const BADGES=[
   {id:'first_unit',icon:'🌟',name:'First Chapter'},
   {id:'unit1',icon:'⚔️',name:'A House Divided'},{id:'unit2a',icon:'🚂',name:'Boomtown Nation'},
@@ -2757,10 +2761,15 @@ function renderTimeline(){
     units.forEach((u,idx)=>{
       if(idx>0){const co=document.createElement('div');const ps=unitStatus(units[idx-1].id);co.className='tl-conn'+(ps==='done'?' done':'');co.innerHTML='<div class="tl-conn-line"></div>';inner.appendChild(co);}
       const st=unitStatus(u.id);
-      const card=document.createElement('div');card.className=`unit-card ${st}`;card.setAttribute('data-uid',u.id);card.setAttribute('data-era',eraIdx);card.onclick=()=>openPreview(u.id);
-      const statusBadge=st==='done'
-        ?`<div class="unit-card-status-row"><div class="unit-status us-done">✓ Completed</div></div>`
-        :`<div class="unit-card-status-row"><div class="unit-status us-play">▶ Play Now</div></div>`;
+      const isLocked = !ACTIVE_UNITS.includes(u.id);
+      const card=document.createElement('div');card.className=`unit-card ${st}`;card.setAttribute('data-uid',u.id);card.setAttribute('data-era',eraIdx);
+      if(!isLocked){card.onclick=()=>openPreview(u.id);}
+      else{card.style.cssText='opacity:0.35;filter:grayscale(0.85);cursor:not-allowed;pointer-events:none;';}
+      const statusBadge=isLocked
+        ?`<div class="unit-card-status-row"><div class="unit-status" style="color:var(--text3);border-color:var(--border);background:rgba(0,0,0,.2)">🔒 Locked</div></div>`
+        :st==='done'
+          ?`<div class="unit-card-status-row"><div class="unit-status us-done">✓ Completed</div></div>`
+          :`<div class="unit-card-status-row"><div class="unit-status us-play">▶ Play Now</div></div>`;
       const tRow=_trophyData.find(r=>r.unit_id===u.id);
       const tTier=tRow?calcTier(tRow.best_accuracy):'empty';
       const trophyBadge=(tTier!=='empty')?`<div style="position:absolute;bottom:5px;right:6px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,.8))" title="${TIER_LABEL[tTier]}">${TIER_EMOJI[tTier]}</div>`:'';
@@ -3122,6 +3131,15 @@ function _pollVocabResult(deckId){
 function buildLaunchArea(u,st){
   const area=document.getElementById('pv-launch');
   const studyBlock=buildStudyBlock(u);
+  // Block locked units from launching
+  if(!ACTIVE_UNITS.includes(u.id) && !u.isCheckpoint && !u.isCampaign){
+    area.innerHTML=`<div style="background:var(--bg3);border:1px solid var(--border2);padding:18px;text-align:center">
+      <div style="font-size:28px;margin-bottom:6px">🔒</div>
+      <div style="font-family:var(--bebas);font-size:14px;color:var(--text3);letter-spacing:3px;margin-bottom:4px">Unit Locked</div>
+      <div style="font-family:var(--dm);font-size:10px;color:var(--text3);line-height:1.6">Finish Unit 6 — Civil Rights and Unit 7A — Camelot first. More units will open soon!</div>
+    </div>${studyBlock}`;
+    return;
+  }
   if(st==='done'){
     area.innerHTML=`<div style="text-align:center;padding:8px 0"><div style="font-size:26px;margin-bottom:3px">✅</div><div style="font-family:var(--bebas);font-size:12px;color:var(--green2);letter-spacing:2px">Completed</div></div>${u.url?`<button class="btn full green" onclick="launchUnit('${u.url}')" style="margin-top:5px"><span>↺ Replay ${u.num}</span></button>`:''}<button class="btn full" onclick="showView('trophies');closePreview();" style="border-color:var(--gold);color:var(--gold);margin-top:5px"><span>🏆 View Trophy</span></button>${studyBlock}`;
   }
