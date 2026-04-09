@@ -504,7 +504,7 @@ body::before{content:'';position:fixed;inset:0;
 <div id="setup-screen">
   <div style="max-width:900px;width:100%;margin:0 auto">
     <div style="font-family:var(--bebas);font-size:28px;color:var(--amber);letter-spacing:3px;margin-bottom:2px;text-align:center">Create Your Profile</div>
-    <div style="font-family:var(--dm);font-size:10px;color:var(--text3);margin-bottom:20px;text-align:center;letter-spacing:.5px">Pick your character, enter your name, choose your teacher and period.</div>
+    <div style="font-family:var(--dm);font-size:10px;color:var(--text3);margin-bottom:20px;text-align:center;letter-spacing:.5px">Pick your character, enter your name, and choose your class period.</div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start">
 
@@ -526,13 +526,7 @@ body::before{content:'';position:fixed;inset:0;
         <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:4px" id="name-hint">Enter your first and last name — e.g. <strong>Richard Nixon</strong></div>
         <div style="font-family:var(--bebas);font-size:13px;color:var(--amber);letter-spacing:1px;margin-bottom:18px">Display name: <span id="name-preview" style="color:var(--cream)">—</span></div>
 
-        <div class="sh" style="font-size:13px;margin-bottom:10px">Your Teacher</div>
-        <div id="teacher-select-grid" style="display:flex;flex-direction:column;gap:5px;margin-bottom:4px">
-          <div style="font-family:var(--dm);font-size:9px;color:var(--text3);padding:6px">Loading teachers…</div>
-        </div>
-        <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:16px">Select your teacher first, then your period.</div>
-
-        <div id="period-section" style="display:none">
+        <div id="period-section">
           <div class="sh" style="font-size:13px;margin-bottom:10px">Class Period</div>
           <div id="period-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:4px"></div>
           <div style="font-family:var(--dm);font-size:9px;color:var(--text3);margin-bottom:20px">So your teacher can find your progress.</div>
@@ -2156,11 +2150,8 @@ function showSetupScreen(){
   document.getElementById('title-screen').style.display='none';
   document.getElementById('continue-screen').style.display='none';
   document.getElementById('setup-screen').style.display='flex';
-  // Hide period section until teacher is picked
-  const sec=document.getElementById('period-section');
-  if(sec) sec.style.display='none';
   buildStarterGrid();
-  buildTeacherSelectGrid();
+  buildPeriodGrid();
   previewSetup();
 }
 
@@ -2515,7 +2506,6 @@ async function confirmProfile(){
     return;
   }
   if(!S.period){alert('Select your class period.');return;}
-  if(!S.teacherId&&S.period!=='guest'){alert('Select your teacher first.');return;}
   // Format full name cleanly
   const parts=raw.trim().split(/\s+/);
   const firstName=parts[0][0].toUpperCase()+parts[0].slice(1).toLowerCase();
